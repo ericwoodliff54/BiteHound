@@ -1,11 +1,17 @@
-// RecallRadar Service Worker
-const CACHE_NAME = 'recallradar-v3';
+const CACHE_NAME = 'recall-radar-v6';
+const ASSETS = [
+  './index.html',
+  './manifest.json',
+  './icon-192.png',
+  './icon-512.png',
+  './apple-touch-icon.png',
+  './favicon.png'
+];
+
 self.addEventListener('install', (e) => {
-  self.skipWaiting();
+  e.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));
 });
-self.addEventListener('activate', (e) => {
-  e.waitUntil(clients.claim());
-});
+
 self.addEventListener('fetch', (e) => {
-  // Let network handle or pass through
+  e.respondWith(caches.match(e.request).then((res) => res || fetch(e.request)));
 });
