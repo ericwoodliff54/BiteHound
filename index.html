@@ -94,7 +94,7 @@
             </button>
           </div>
           <!-- Recommended Tagline -->
-          <p class="text-[11px] text-slate-400">Recalls, Gluten & Allergen Guard</p>
+          <p class="text-xs sm:text-sm font-medium text-slate-300">Recalls, Gluten & Allergen Guard</p>
         </div>
       </div>
 
@@ -102,10 +102,10 @@
       <button 
         type="button" 
         id="installGuideBtn" 
-        class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white transition shadow-sm text-xs font-semibold"
+        class="flex items-center gap-2 px-3.5 py-2 min-h-[44px] rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition shadow-sm text-xs sm:text-sm font-bold active:scale-95"
         title="Install app on iPhone or Android"
       >
-        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
         </svg>
         <span>Install App</span>
@@ -130,62 +130,62 @@
   <main class="flex-1 max-w-xl w-full mx-auto p-4 space-y-4">
 
     <!-- 5 Clean Navigation Tabs -->
-    <nav class="bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800 grid grid-cols-5 gap-1 shadow-md text-center sticky top-16 z-20 backdrop-blur-md">
+    <nav class="bg-slate-900/95 p-1.5 rounded-2xl border border-slate-800 grid grid-cols-5 gap-1.5 shadow-lg text-center sticky top-16 z-20 backdrop-blur-md">
       <button 
         type="button" 
         id="tabScanner" 
-        class="py-2.5 px-1 rounded-xl text-[11px] font-semibold flex flex-col items-center justify-center gap-1 transition bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 text-white shadow-md shadow-blue-950/40 active:scale-95"
+        class="py-3 px-1 min-h-[58px] rounded-xl text-xs font-bold flex flex-col items-center justify-center gap-1.5 transition bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 text-white shadow-md shadow-blue-950/40 active:scale-95"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
         </svg>
-        <span>Barcode Scanner</span>
+        <span class="leading-tight">Scanner</span>
       </button>
 
       <button 
         type="button" 
         id="tabManual" 
-        class="py-2.5 px-1 rounded-xl text-[11px] font-medium text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center gap-1 transition active:scale-95"
+        class="py-3 px-1 min-h-[58px] rounded-xl text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
         </svg>
-        <span>Manual UPC Entry</span>
+        <span class="leading-tight">UPC Key</span>
       </button>
 
       <button 
         type="button" 
         id="tabAllergens" 
-        class="py-2.5 px-1 rounded-xl text-[11px] font-medium text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center gap-1 transition active:scale-95 relative"
+        class="py-3 px-1 min-h-[58px] rounded-xl text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95 relative"
       >
-        <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
         </svg>
-        <span>Allergens</span>
+        <span class="leading-tight">Allergens</span>
       </button>
 
       <button 
         type="button" 
         id="tabBulletins" 
-        class="py-2.5 px-1 rounded-xl text-[11px] font-medium text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center gap-1 transition active:scale-95"
+        class="py-3 px-1 min-h-[58px] rounded-xl text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
         </svg>
-        <span>Live Recalls</span>
+        <span class="leading-tight">Recalls</span>
       </button>
 
       <button 
         type="button" 
         id="tabCustomize" 
-        class="py-2.5 px-1 rounded-xl text-[11px] font-medium text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center gap-1 transition active:scale-95"
+        class="py-3 px-1 min-h-[58px] rounded-xl text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95"
       >
-        <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
         </svg>
-        <span>Settings</span>
+        <span class="leading-tight">Settings</span>
       </button>
     </nav>
 
@@ -343,7 +343,7 @@
               <div class="flex items-center gap-1.5 flex-wrap">
                 <!-- Take Photo Button (Direct device camera capture) -->
                 <label for="profileCameraInput" class="cursor-pointer px-3.5 py-2.5 min-h-[42px] rounded-xl bg-emerald-600/30 hover:bg-emerald-600/50 text-emerald-300 border border-emerald-500/40 text-xs font-bold flex items-center gap-1.5 transition active:scale-95 shadow-sm">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
                   </svg>
@@ -353,7 +353,7 @@
 
                 <!-- Upload Photo Button (Photo library / files) -->
                 <label for="profilePhotoInput" class="cursor-pointer px-3.5 py-2.5 min-h-[42px] rounded-xl bg-sky-600/30 hover:bg-sky-600/50 text-sky-300 border border-sky-500/40 text-xs font-bold flex items-center gap-1.5 transition active:scale-95 shadow-sm">
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                   </svg>
                   <span>Upload Photo</span>
@@ -540,36 +540,36 @@
               <span class="w-0.5 h-full bg-sky-400/50 rounded-sm"></span>
               <span class="w-1.5 h-full bg-sky-400/90 rounded-sm"></span>
             </div>
-            <span class="text-[10px] font-mono tracking-widest text-sky-300 font-semibold mt-1">ALIGN BARCODE HERE</span>
+            <span class="text-xs font-mono tracking-wider text-sky-300 font-bold mt-1">ALIGN BARCODE HERE</span>
           </div>
 
-          <p class="font-display font-semibold text-xs text-slate-200">Point phone camera at grocery barcode</p>
-          <p class="text-[11px] text-slate-400 max-w-xs mt-1">Tap "Start Camera Scanner" or search by brand below</p>
+          <p class="font-display font-bold text-sm sm:text-base text-slate-100">Point phone camera at grocery barcode</p>
+          <p class="text-xs sm:text-sm text-slate-300 max-w-xs mt-1">Tap "Start Camera Scanner" or search brand below</p>
         </div>
       </div>
 
       <!-- Controls (Camera, Flashlight, Photo) -->
-      <div class="flex gap-2">
+      <div class="flex gap-2.5">
         <button 
           type="button" 
           id="toggleCameraBtn" 
-          class="flex-1 min-h-[48px] bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-3 px-4 rounded-xl shadow-lg shadow-blue-950/50 transition flex items-center justify-center gap-2 text-xs active:scale-[0.98]"
+          class="flex-1 min-h-[54px] bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-2xl shadow-lg shadow-blue-950/50 transition flex items-center justify-center gap-2.5 text-sm sm:text-base active:scale-[0.98]"
         >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
-          <span id="cameraBtnText">Start Camera</span>
+          <span id="cameraBtnText">Start Camera Scanner</span>
         </button>
 
         <!-- Flashlight / Torch Toggle -->
         <button 
           type="button" 
           id="toggleTorchBtn" 
-          class="shrink-0 min-h-[48px] px-4 bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium rounded-xl transition flex items-center justify-center gap-1.5 text-xs border border-slate-700/80 active:scale-[0.98]"
+          class="shrink-0 min-h-[54px] px-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-100 font-bold transition flex items-center justify-center gap-2 text-sm border border-slate-700 active:scale-[0.98] shadow-sm"
           title="Toggle camera flashlight for dim supermarket aisles"
         >
-          <svg id="torchIcon" class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg id="torchIcon" class="w-5 h-5 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
           </svg>
           <span id="torchBtnText">Flashlight</span>
@@ -624,7 +624,7 @@
             type="text" 
             id="brandSearchInput" 
             placeholder="e.g. Boar's Head, carrots, spinach, chips..."
-            class="w-full min-h-[46px] pl-10 pr-10 py-2.5 rounded-xl border border-slate-700 bg-slate-950 text-white text-xs placeholder:text-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+            class="w-full min-h-[50px] pl-11 pr-10 py-3 rounded-xl border border-slate-700 bg-slate-950 text-white text-sm placeholder:text-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
           >
           <div class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -689,7 +689,7 @@
             <!-- Upload UPC Button next to Manual UPC Entry -->
             <label 
               for="barcodeFileInput" 
-              class="cursor-pointer shrink-0 min-h-[48px] px-3.5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold border border-slate-700 flex items-center justify-center gap-1.5 text-xs transition active:scale-95 shadow-sm"
+              class="cursor-pointer shrink-0 min-h-[52px] px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold border border-slate-700 flex items-center justify-center gap-2 text-xs sm:text-sm transition active:scale-95 shadow-sm"
               title="Upload photo of a product barcode"
             >
               <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -708,7 +708,7 @@
         <button 
           type="submit" 
           id="checkBtn" 
-          class="w-full min-h-[48px] bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-3.5 px-4 rounded-xl shadow-lg shadow-blue-950/50 transition flex items-center justify-center gap-2 active:scale-[0.98] text-xs"
+          class="w-full min-h-[54px] bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-blue-950/50 transition flex items-center justify-center gap-2 active:scale-[0.98] text-sm sm:text-base"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -759,12 +759,11 @@
       </div>
 
 <!-- Quick Action Controls -->
-      <div class="flex items-center justify-between text-xs pt-0.5 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/80">
-        <span class="text-slate-400 text-[11px]">Tap items below to check or uncheck:</span>
-        <div class="flex items-center gap-2">
-          <button type="button" id="selectAllergensBtn" class="text-[11px] text-sky-400 hover:text-sky-300 font-semibold transition min-h-[32px] px-1.5">Check All</button>
-          <span class="text-slate-600">•</span>
-          <button type="button" id="resetAllergensBtn" class="text-[11px] text-slate-400 hover:text-rose-400 font-medium transition min-h-[32px] px-1.5">Clear All Allergen Checks</button>
+      <div class="flex items-center justify-between bg-slate-900/90 p-3 rounded-2xl border border-slate-800 shadow-sm gap-2">
+        <span class="text-xs sm:text-sm font-medium text-slate-300">Tap to toggle guardrails:</span>
+        <div class="flex items-center gap-2 shrink-0">
+          <button type="button" id="selectAllergensBtn" class="text-xs font-bold text-sky-300 hover:text-white bg-sky-950/60 border border-sky-500/40 hover:bg-sky-900/60 px-3.5 py-2 rounded-xl transition min-h-[42px] flex items-center justify-center shadow-sm active:scale-95">Check All</button>
+          <button type="button" id="resetAllergensBtn" class="text-xs font-bold text-slate-300 hover:text-rose-300 bg-slate-800 border border-slate-700 hover:bg-slate-700 px-3.5 py-2 rounded-xl transition min-h-[42px] flex items-center justify-center shadow-sm active:scale-95">Clear All</button>
         </div>
       </div>
 
@@ -789,7 +788,7 @@
           <p class="text-xs text-slate-400">Filter alerts by your home state and favorite supermarket chain</p>
         </div>
         <button id="refreshFeedBtn" class="text-xs text-sky-400 hover:text-sky-300 font-medium flex items-center gap-1 transition px-2 py-1 min-h-[36px]">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
           </svg>
           <span>Refresh</span>
@@ -809,7 +808,7 @@
             <label for="stateFilterSelect" class="block text-[11px] text-slate-400 mb-1">State / Distribution Area</label>
             <select 
               id="stateFilterSelect" 
-              class="w-full bg-slate-900 border border-slate-700 text-slate-100 rounded-lg p-2 text-xs outline-none focus:border-blue-500"
+              class="w-full min-h-[48px] bg-slate-900 border border-slate-700 text-slate-100 rounded-xl p-3 text-sm font-medium outline-none focus:border-blue-500 shadow-sm"
             >
               <option value="ALL" selected>All States (Nationwide)</option>
               <option value="OH">Ohio (OH)</option>
@@ -828,7 +827,7 @@
             <label for="storeFilterSelect" class="block text-[11px] text-slate-400 mb-1">Supermarket Chain</label>
             <select 
               id="storeFilterSelect" 
-              class="w-full bg-slate-900 border border-slate-700 text-slate-100 rounded-lg p-2 text-xs outline-none focus:border-blue-500"
+              class="w-full min-h-[48px] bg-slate-900 border border-slate-700 text-slate-100 rounded-xl p-3 text-sm font-medium outline-none focus:border-blue-500 shadow-sm"
             >
               <option value="ALL" selected>All Supermarkets</option>
               <option value="Kroger">Kroger</option>
@@ -881,7 +880,7 @@
         <button 
           type="button" 
           id="openPaywallBtn" 
-          class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5"
+          class="w-full min-h-[52px] py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-sm shadow-md transition active:scale-[0.98] flex items-center justify-center gap-2"
         >
           <span>View SafeBite Plus Plans ($1.99/mo or $14.99/yr)</span>
         </button>
@@ -905,7 +904,7 @@
             <span class="font-semibold text-slate-200 block">Scan Sounds & Audio Tones</span>
             <span class="text-[11px] text-slate-400">Play beeps on scan and audio alerts on recall hazards</span>
           </div>
-          <button type="button" id="prefSoundBtn" class="min-h-[40px] px-3.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold active:scale-95">Enabled</button>
+          <button type="button" id="prefSoundBtn" class="min-h-[46px] px-4 py-2 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-sm font-bold active:scale-95 shadow-sm">Enabled</button>
         </div>
 
         <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800">
@@ -913,7 +912,7 @@
             <span class="font-semibold text-slate-200 block">Tactile Vibration (Haptics)</span>
             <span class="text-[11px] text-slate-400">Vibrate phone when a barcode is recognized or hazard detected</span>
           </div>
-          <button type="button" id="prefHapticBtn" class="min-h-[40px] px-3.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold active:scale-95">Enabled</button>
+          <button type="button" id="prefHapticBtn" class="min-h-[46px] px-4 py-2 rounded-xl bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-sm font-bold active:scale-95 shadow-sm">Enabled</button>
         </div>
       </div>
 
@@ -932,9 +931,9 @@
           <button 
             type="button" 
             id="settingsSyncNowBtn" 
-            class="w-full py-2.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs transition active:scale-[0.98] flex items-center justify-center gap-1.5"
+            class="w-full min-h-[50px] py-3.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm transition active:scale-[0.98] flex items-center justify-center gap-2 shadow-md"
           >
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
             </svg>
             <span>Sync Newest FDA Data Now</span>
@@ -3168,13 +3167,14 @@
           : 'bg-slate-950/60 border-slate-800 hover:border-slate-700';
 
         const lockIcon = !isPlusActive ? `
-          <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1 shrink-0">
-            🔒 PLUS
+          <span class="text-xs font-bold px-3 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center gap-1.5 shrink-0 shadow-sm">
+            <span>🔒</span>
+            <span>PLUS</span>
           </span>
         ` : `
-          <div class="w-6 h-6 rounded-lg flex items-center justify-center transition ${isChecked ? 'bg-blue-600 text-white font-bold' : 'border border-slate-700 bg-slate-900 text-transparent'}">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+          <div class="w-8 h-8 rounded-xl flex items-center justify-center transition shrink-0 ${isChecked ? 'bg-blue-600 text-white shadow-md' : 'border-2 border-slate-700 bg-slate-900 text-transparent'}">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
             </svg>
           </div>
         `;
@@ -3182,14 +3182,14 @@
         return `
           <button 
             type="button" 
-            class="allergen-toggle-btn min-h-[52px] p-3 rounded-xl border text-left flex items-center justify-between transition active:scale-[0.99] ${activeBg}"
+            class="allergen-toggle-btn min-h-[64px] p-3.5 rounded-2xl border text-left flex items-center justify-between transition active:scale-[0.99] ${activeBg} gap-3"
             data-id="${opt.id}"
           >
-            <div class="flex items-center gap-3">
-              <span class="text-xl">${opt.icon}</span>
-              <div>
-                <span class="font-bold text-xs text-slate-100 block leading-tight">${opt.name}</span>
-                <span class="text-[11px] text-slate-400 block">${opt.desc}</span>
+            <div class="flex items-center gap-3.5 min-w-0">
+              <span class="text-3xl shrink-0">${opt.icon}</span>
+              <div class="min-w-0">
+                <span class="font-bold text-sm sm:text-base text-white block leading-tight">${opt.name}</span>
+                <span class="text-xs sm:text-sm text-slate-300 block truncate mt-0.5">${opt.desc}</span>
               </div>
             </div>
             ${lockIcon}
