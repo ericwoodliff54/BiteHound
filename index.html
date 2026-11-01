@@ -113,6 +113,19 @@
     </div>
   </header>
 
+  <!-- Social & In-App Browser Warning Banner (Guides Instagram/FB/Messenger users to Safari/Chrome) -->
+  <div id="inAppBrowserBanner" class="hidden bg-amber-500/20 border-b border-amber-500/40 text-amber-200 text-xs px-4 py-2.5 flex items-center justify-between gap-3 shadow-md z-40 sticky top-16">
+    <div class="flex items-center gap-2">
+      <span class="text-base shrink-0">⚠️</span>
+      <span class="leading-tight">
+        <strong>In-App Browser Detected:</strong> Social apps (Instagram, Facebook, Messenger) restrict live barcode cameras. Tap <strong>•••</strong> and choose <strong>"Open in Safari"</strong> or <strong>"Open in Chrome"</strong> for full scanner access.
+      </span>
+    </div>
+    <button type="button" id="dismissInAppBannerBtn" class="shrink-0 p-1 text-amber-300 hover:text-white rounded-lg bg-amber-500/20 text-xs font-bold px-2" title="Dismiss">
+      ✕
+    </button>
+  </div>
+
   <!-- Main Container -->
   <main class="flex-1 max-w-xl w-full mx-auto p-4 space-y-4">
 
@@ -1562,6 +1575,22 @@
       } catch (e) {}
     }
 
+    // In-App Browser Detector (Instagram, Facebook, Messenger, TikTok, Snapchat webviews)
+    function checkInAppBrowser() {
+      try {
+        const ua = navigator.userAgent || navigator.vendor || window.opera || '';
+        const isInApp = /FBAN|FBAV|Instagram|Line|Twitter|Snapchat|MicroMessenger|musical_ly|BytedanceWebview/i.test(ua);
+        const inAppBanner = document.getElementById('inAppBrowserBanner');
+        const dismissBtn = document.getElementById('dismissInAppBannerBtn');
+        if (isInApp && inAppBanner) {
+          inAppBanner.classList.remove('hidden');
+          if (dismissBtn) {
+            dismissBtn.addEventListener('click', () => inAppBanner.classList.add('hidden'));
+          }
+        }
+      } catch (e) {}
+    }
+
     const togglePromoBtn = document.getElementById('togglePromoBtn');
     const promoInputContainer = document.getElementById('promoInputContainer');
     const promoCodeInput = document.getElementById('promoCodeInput');
@@ -2036,6 +2065,16 @@
             throw (lastCameraErr || fallbackErr);
           }
         }
+
+        // Ensure iOS Safari playsinline is strictly applied
+        try {
+          const v = document.querySelector('#reader video');
+          if (v) {
+            v.setAttribute('playsinline', 'true');
+            v.setAttribute('webkit-playsinline', 'true');
+            v.setAttribute('muted', 'true');
+          }
+        } catch (e) {}
 
         isCameraRunning = true;
         isCameraPaused = false;
@@ -3846,6 +3885,7 @@
     updateOnlineStatus();
     checkDisclaimerStatus();
     checkFamilyAccessUrl();
+    checkInAppBrowser();
     updateSyncUI();
     syncStoreReadyRecalls(false);
 
