@@ -413,7 +413,7 @@
         <div class="flex items-center gap-2.5 min-w-0 pr-2">
           <span id="syncIndicatorDot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0 shadow-sm shadow-emerald-400/50"></span>
           <div class="min-w-0">
-            <span id="syncStatusTitle" class="font-bold text-slate-200 block text-[11px] truncate">FDA Wire: Initializing...</span>
+            <span id="syncStatusTitle" class="font-bold text-slate-200 block text-[11px] truncate">FDA Wire: Synced & Active</span>
             <span id="syncStatusSub" class="text-[10px] text-slate-400 block truncate">Pre-syncing active federal recalls for offline shopping</span>
           </div>
         </div>
@@ -426,7 +426,7 @@
           <svg id="syncIconSvg" class="w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
           </svg>
-          <span id="syncBtnText">Sync for Store</span>
+          <span id="syncBtnText">Sync for Newest Data</span>
         </button>
       </div>
 
@@ -2970,7 +2970,7 @@
 
       if (isOnline) {
         syncIndicatorDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0 shadow-sm shadow-emerald-400/50";
-        syncStatusTitle.textContent = `🟢 FDA Wire Synced • ${timeStr}`;
+        syncStatusTitle.textContent = `FDA Wire Synced • ${timeStr}`;
         syncStatusSub.textContent = count > 0 
           ? `${count} active recalls cached for offline supermarket scanning`
           : `Live government wire active • Ready for store sync`;
@@ -2980,7 +2980,7 @@
         }
       } else {
         syncIndicatorDot.className = "w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0";
-        syncStatusTitle.textContent = `📶 Offline Store Mode (FDA Cached: ${timeStr})`;
+        syncStatusTitle.textContent = `Offline Store Mode (FDA Cached: ${timeStr})`;
         syncStatusSub.textContent = count > 0
           ? `Scanning against ${count} cached recalls with zero cell signal`
           : `Offline • Scanning against bundled high-risk recall database`;
@@ -3067,7 +3067,7 @@
         updateSyncUI();
       } finally {
         if (syncIconSvg) syncIconSvg.classList.remove('animate-spin');
-        if (syncBtnText) syncBtnText.textContent = "Sync for Store";
+        if (syncBtnText) syncBtnText.textContent = "Sync for Newest Data";
       }
     }
 
