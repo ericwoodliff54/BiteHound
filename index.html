@@ -32,20 +32,33 @@
     }
     .font-display { font-family: 'Space Grotesk', sans-serif; }
 
-    /* Clean camera container without duplicate borders */
+    /* Synchronized camera viewport: eliminates zoom cropping and reticle coordinate offset */
     #reader {
       border: none !important;
+      width: 100% !important;
+      height: 100% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      background: #000;
     }
     #reader video {
       border-radius: 0.875rem;
-      object-fit: cover !important;
+      object-fit: contain !important; /* Shows full camera sensor feed with zero hidden off-screen scanning */
+      width: 100% !important;
+      height: 100% !important;
+      max-height: 350px !important;
     }
     #reader__scan_region {
       border-radius: 0.75rem;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
     }
     #reader__scan_region > div {
       border-color: #38bdf8 !important;
       border-radius: 0.75rem;
+      box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.42); /* Focuses attention inside the exact optical decode area */
     }
     #reader__dashboard {
       display: none !important;
@@ -530,7 +543,7 @@
         </button>
       </div>
 
-<div class="relative bg-black rounded-2xl overflow-hidden aspect-video flex flex-col items-center justify-center border-2 border-slate-800 shadow-2xl">
+<div class="relative bg-black rounded-2xl overflow-hidden min-h-[260px] sm:min-h-[290px] max-h-[350px] flex flex-col items-center justify-center border-2 border-slate-800 shadow-2xl">
         <div id="reader" class="w-full h-full"></div>
 
         <!-- Barcode Graphic Target in Viewfinder (shown only when camera is paused) -->
@@ -1859,14 +1872,17 @@
           html5QrCode = new Html5Qrcode("reader");
         }
 
-        // Universal mobile-compatible barcode configuration
+        // Optical-matched barcode configuration (synchronized with visible screen coordinates)
         const config = {
           fps: 15,
-          qrbox: (w, h) => ({
-            width: Math.floor(Math.min(w * 0.88, 330)),
-            height: Math.floor(Math.min(h * 0.60, 180))
-          }),
-          aspectRatio: 1.777778
+          qrbox: (w, h) => {
+            const boxWidth = Math.floor(Math.min(w * 0.78, 280));
+            const boxHeight = Math.floor(Math.min(h * 0.50, 140));
+            return {
+              width: Math.max(200, boxWidth),
+              height: Math.max(100, boxHeight)
+            };
+          }
         };
 
         // Try standard environment (rear-facing) camera first
