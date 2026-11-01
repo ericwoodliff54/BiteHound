@@ -603,58 +603,40 @@
       </form>
     </section>
 
-    <!-- SECTION 3: ALLERGENS PANEL (PLUS TIER UPSELL BANNER & TICK BOXES) -->
+    <!-- SECTION 3: ALLERGENS PANEL (FOCUSED CHECK / UNCHECK GUARDRAIL SECTION) -->
     <section id="allergensPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4 hidden">
-      
-      <!-- RecallRadar Plus Upsell Teaser Card -->
-      <div class="p-4 rounded-2xl bg-gradient-to-br from-amber-950/40 via-slate-900 to-slate-950 border border-amber-500/40 shadow-lg space-y-2.5">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <span class="text-lg">⭐</span>
-            <div>
-              <span class="text-xs font-bold text-amber-300 block">RecallRadar Plus</span>
-              <span class="text-[11px] text-slate-400 block">Gluten & Personalized Dietary Guardrails</span>
-            </div>
-          </div>
-          <span id="plusActiveBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40">
-            Free Preview
-          </span>
-        </div>
-        <p class="text-[11px] text-slate-300 leading-relaxed">
-          While federal recall scanning is 100% free forever, **Plus** automatically flags hidden Gluten, Dairy, Peanuts, and allergens when shopping.
-        </p>
-        <button 
-          type="button" 
-          id="openPaywallBtn" 
-          class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5"
-        >
-          <span>View RecallRadar Plus Plans ($1.25/mo or $9.99 Lifetime)</span>
-        </button>
-      </div>
-
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
         <div>
           <h2 class="font-display text-sm font-bold text-slate-100 flex items-center gap-2">
-            <span>🛡️ Personal Allergen & Gluten Guardrails</span>
+            <span>🛡️ Dietary Allergens & Gluten Guardrails</span>
           </h2>
-          <p class="text-xs text-slate-400 mt-0.5">Tick any ingredients you want flagged during your shopping trip.</p>
+          <p class="text-xs text-slate-400 mt-0.5">Check any ingredients you want flagged in amber/yellow when scanning.</p>
         </div>
-        <span id="activeAllergensBadge" class="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-500/20 text-sky-300 border border-blue-500/30">
+        <span id="activeAllergensBadge" class="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-500/20 text-sky-300 border border-blue-500/30 shrink-0">
           0 Active
         </span>
       </div>
 
-      <!-- Allergen Tick Box Grid (Defaults to all unchecked) -->
+      <!-- Quick Action Controls -->
+      <div class="flex items-center justify-between text-xs pt-0.5 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/80">
+        <span class="text-slate-400 text-[11px]">Tap items below to check or uncheck:</span>
+        <div class="flex items-center gap-2">
+          <button type="button" id="selectAllergensBtn" class="text-[11px] text-sky-400 hover:text-sky-300 font-semibold transition min-h-[32px] px-1.5">Check All</button>
+          <span class="text-slate-600">•</span>
+          <button type="button" id="resetAllergensBtn" class="text-[11px] text-slate-400 hover:text-rose-400 font-medium transition min-h-[32px] px-1.5">Clear All Allergen Checks</button>
+        </div>
+      </div>
+
+      <!-- Allergen Tick Box Grid (FDA Big 9 + Gluten, Corn & Sulfites) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1" id="allergenCheckboxesContainer"></div>
 
-      <div class="pt-2">
-        <button 
-          type="button" 
-          id="resetAllergensBtn" 
-          class="w-full py-2.5 px-3 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-slate-300 text-xs font-medium transition"
-        >
-          Clear All Allergen Checks
-        </button>
+      <!-- Persistent Auto-Save Confirmation -->
+      <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
+        <span class="flex items-center gap-1.5 text-emerald-400 font-medium">
+          <span>✓</span>
+          <span>Guardrails auto-save to device memory</span>
+        </span>
+        <span class="text-slate-500 font-mono text-[10px]">FDA Big 9 Compliant</span>
       </div>
     </section>
 
@@ -736,6 +718,32 @@
           <span>⚙️ Settings & Preferences</span>
         </h2>
         <p class="text-xs text-slate-400 mt-0.5">Control audio alerts, haptic feedback, brand watchlists, and offline updates.</p>
+      </div>
+
+      <!-- RECALLRADAR PLUS MEMBERSHIP SETTINGS -->
+      <div class="p-3.5 rounded-xl bg-gradient-to-br from-amber-950/40 via-slate-900 to-slate-950 border border-amber-500/40 shadow-lg space-y-2.5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-base">⭐</span>
+            <div>
+              <span class="text-xs font-bold text-amber-300 block">RecallRadar Plus</span>
+              <span class="text-[10px] text-slate-400 block">Gluten & Personalized Dietary Guardrails</span>
+            </div>
+          </div>
+          <span id="plusActiveBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40">
+            Free Preview
+          </span>
+        </div>
+        <p class="text-[11px] text-slate-300 leading-relaxed">
+          Federal recall scanning is 100% free forever. Plus adds automated allergen guardrail detection when shopping.
+        </p>
+        <button 
+          type="button" 
+          id="openPaywallBtn" 
+          class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5"
+        >
+          <span>View RecallRadar Plus Plans ($1.25/mo or $9.99 Lifetime)</span>
+        </button>
       </div>
 
       <!-- BRAND WATCHLIST TRAY -->
@@ -943,15 +951,19 @@
       } catch (e) {}
     }
 
-    // Allergen Options
+    // Allergen Options (Full FDA Big 9 + Gluten, Corn & Sulfites)
     const ALLERGEN_OPTIONS = [
-      { id: 'gluten', name: 'Gluten / Wheat', icon: '🌾', desc: 'Wheat, barley, rye, malt, flour' },
-      { id: 'dairy', name: 'Dairy / Milk', icon: '🥛', desc: 'Milk, whey, cheese, butter' },
-      { id: 'peanuts', name: 'Peanuts', icon: '🥜', desc: 'Peanut butter, peanut oil' },
-      { id: 'treenuts', name: 'Tree Nuts', icon: '🌰', desc: 'Almonds, cashews, walnuts' },
-      { id: 'soy', name: 'Soy', icon: '🌿', desc: 'Soy lecithin, edamame, tofu' },
-      { id: 'eggs', name: 'Eggs', icon: '🥚', desc: 'Egg whites, yolk, albumin' },
-      { id: 'shellfish', name: 'Shellfish', icon: '🦐', desc: 'Shrimp, crab, lobster' }
+      { id: 'gluten', name: 'Gluten / Wheat', icon: '🌾', desc: 'Wheat, barley, rye, malt, flour, semolina' },
+      { id: 'dairy', name: 'Dairy / Milk', icon: '🥛', desc: 'Milk, whey, lactose, casein, cheese, butter' },
+      { id: 'peanuts', name: 'Peanuts', icon: '🥜', desc: 'Peanut butter, peanut flour, peanut oil' },
+      { id: 'treenuts', name: 'Tree Nuts', icon: '🌰', desc: 'Almonds, cashews, walnuts, pecans, pistachios' },
+      { id: 'soy', name: 'Soy', icon: '🌿', desc: 'Soy lecithin, soybeans, tofu, edamame' },
+      { id: 'eggs', name: 'Eggs', icon: '🥚', desc: 'Egg whites, yolk, albumin, mayonnaise' },
+      { id: 'shellfish', name: 'Crustacean Shellfish', icon: '🦐', desc: 'Shrimp, crab, lobster, prawns, crawfish' },
+      { id: 'fish', name: 'Fish (Finfish)', icon: '🐟', desc: 'Salmon, tuna, cod, tilapia, halibut, anchovies' },
+      { id: 'sesame', name: 'Sesame', icon: '🌱', desc: 'Sesame seeds, tahini, sesame oil, benne' },
+      { id: 'corn', name: 'Corn', icon: '🌽', desc: 'Cornstarch, corn syrup, corn meal, dextrose' },
+      { id: 'sulfites', name: 'Sulfites', icon: '🍷', desc: 'Sulfur dioxide, sodium bisulfite, dried fruit' }
     ];
 
     let userAllergens = [];
@@ -1398,6 +1410,13 @@
       const isScanTab = (activeTab === 'scanner' || activeTab === 'manual');
       historySection.classList.toggle('hidden', !isScanTab);
 
+      // Scanned barcode card ONLY displays on Scanner and Manual tabs - completely hidden on Allergens page!
+      if (!isScanTab) {
+        resultContainer.classList.add('hidden');
+      } else if (resultContainer.innerHTML.trim() !== '') {
+        resultContainer.classList.remove('hidden');
+      }
+
       if (activeTab === 'allergens') renderAllergensTab();
       if (activeTab === 'bulletins') renderBulletins();
       if (activeTab === 'customize') renderCustomizeTab();
@@ -1838,8 +1857,20 @@
               if (/egg|albumin|yolk|mayonnaise/.test(combinedFoodText)) {
                 if (!detectedAllergenIds.includes('eggs')) detectedAllergenIds.push('eggs');
               }
-              if (/shrimp|crab|lobster|prawn|clam|mussel|oyster|scallop/.test(combinedFoodText)) {
+              if (/shrimp|crab|lobster|prawn|clam|mussel|oyster|scallop|crustacean/.test(combinedFoodText)) {
                 if (!detectedAllergenIds.includes('shellfish')) detectedAllergenIds.push('shellfish');
+              }
+              if (/fish|finfish|salmon|tuna|cod|tilapia|halibut|pollock|anchov|trout|haddock|sardine/.test(combinedFoodText)) {
+                if (!detectedAllergenIds.includes('fish')) detectedAllergenIds.push('fish');
+              }
+              if (/sesame|tahini|benne|sesamum/.test(combinedFoodText)) {
+                if (!detectedAllergenIds.includes('sesame')) detectedAllergenIds.push('sesame');
+              }
+              if (/corn|cornstarch|corn syrup|maize|dextrose/.test(combinedFoodText)) {
+                if (!detectedAllergenIds.includes('corn')) detectedAllergenIds.push('corn');
+              }
+              if (/sulfite|sulphite|sulfur dioxide|bisulfite|metabisulfite/.test(combinedFoodText)) {
+                if (!detectedAllergenIds.includes('sulfites')) detectedAllergenIds.push('sulfites');
               }
             }
           }
@@ -2319,11 +2350,6 @@
           triggerHaptic([30]);
           const id = btn.getAttribute('data-id');
 
-          if (!isPlusActive && userAllergens.length >= 1 && !userAllergens.includes(id)) {
-            openPaywall();
-            return;
-          }
-
           if (userAllergens.includes(id)) {
             userAllergens = userAllergens.filter(x => x !== id);
           } else {
@@ -2335,6 +2361,20 @@
           sound.playScanBeep();
           renderAllergensTab();
         });
+      });
+    }
+
+    
+    const selectAllergensBtn = document.getElementById('selectAllergensBtn');
+    if (selectAllergensBtn) {
+      selectAllergensBtn.addEventListener('click', () => {
+        triggerHaptic([40]);
+        userAllergens = ALLERGEN_OPTIONS.map(o => o.id);
+        try {
+          localStorage.setItem('recall_radar_allergens', JSON.stringify(userAllergens));
+        } catch (e) {}
+        sound.playScanBeep();
+        renderAllergensTab();
       });
     }
 
