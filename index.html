@@ -176,51 +176,6 @@
       </button>
     </nav>
 
-    <!-- IN-APP PWA / INSTALL MODAL SHEET -->
-    <div id="installModal" class="hidden bg-slate-900/95 rounded-2xl p-5 border border-sky-500/40 shadow-2xl space-y-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-lg bg-blue-600/30 border border-blue-500/40 flex items-center justify-center text-sky-400">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-            </svg>
-          </div>
-          <div>
-            <h3 class="font-display text-sm font-bold text-white">Install on iPhone or Android</h3>
-            <p class="text-[11px] text-slate-400">Launch fullscreen on your phone like a native App Store app</p>
-          </div>
-        </div>
-        <button id="closeInstallModalBtn" class="text-xs text-slate-400 hover:text-white p-1">✕</button>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-2">
-          <div class="flex items-center gap-1.5 text-slate-200 font-bold">
-            <span>🤖 Android (Chrome Browser)</span>
-          </div>
-          <p class="text-[11px] text-slate-300">If "Install app" is unavailable, tap <span class="text-sky-300 font-bold">Create shortcut</span> (or <span class="text-sky-300 font-bold">Add to Home screen</span>):</p>
-          <ol class="list-decimal list-inside space-y-1.5 text-slate-400 text-[11px] leading-relaxed">
-            <li>In Chrome, tap the <span class="text-white font-bold">three dots (⋮)</span> in the top right.</li>
-            <li>Tap <span class="text-sky-300 font-semibold">Create shortcut</span> (or <span class="text-sky-300 font-semibold">Add to Home screen</span>).</li>
-            <li>Check <span class="text-white">"Open as window"</span> and tap <span class="text-white font-semibold">Add</span>.</li>
-          </ol>
-        </div>
-
-        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-2">
-          <div class="flex items-center gap-1.5 text-slate-200 font-bold">
-            <span>🍏 Apple iOS (Safari)</span>
-          </div>
-          <ol class="list-decimal list-inside space-y-1.5 text-slate-400 text-[11px] leading-relaxed">
-            <li>Open this page in Safari.</li>
-            <li>Tap the <span class="text-white font-medium">Share</span> icon (square with arrow ↑).</li>
-            <li>Scroll down and tap <span class="text-sky-300 font-semibold">Add to Home Screen</span>.</li>
-            <li>Tap <span class="text-white font-medium">Add</span> in the top right.</li>
-          </ol>
-        </div>
-      </div>
-      <p class="text-[10px] text-slate-500 text-center">Once added, SafeBite runs in fullscreen mode without any browser URL bars.</p>
-    </div>
-
     <!-- SAFEBITE PLUS IN-APP PAYWALL MODAL SHEET -->
     <div id="plusPaywallModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
       <div class="bg-slate-900 border-2 border-amber-500/50 max-w-md w-full rounded-3xl p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto relative animate-in fade-in zoom-in-95 duration-200">
@@ -1497,8 +1452,6 @@
     const historySection = document.getElementById('historySection');
     
     const installGuideBtn = document.getElementById('installGuideBtn');
-    const installModal = document.getElementById('installModal');
-    const closeInstallModalBtn = document.getElementById('closeInstallModalBtn');
 
     const toggleCameraBtn = document.getElementById('toggleCameraBtn');
     const toggleTorchBtn = document.getElementById('toggleTorchBtn');
@@ -1722,15 +1675,60 @@
       updateSelectedPlanUI();
     }
 
-    // Install Modal
-    installGuideBtn.addEventListener('click', () => {
-      triggerHaptic([30]);
-      installModal.classList.toggle('hidden');
+    // Direct Native PWA Install Prompt (Prompts immediately without instruction modals)
+    let deferredInstallPrompt = null;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      if (installGuideBtn) installGuideBtn.classList.remove('hidden');
     });
 
-    closeInstallModalBtn.addEventListener('click', () => {
-      installModal.classList.add('hidden');
+    window.addEventListener('appinstalled', () => {
+      showCustomizeToast("🎉 SafeBite installed to your device!");
+      if (installGuideBtn) installGuideBtn.classList.add('hidden');
+      deferredInstallPrompt = null;
     });
+
+    // Hide install button if app is already running in standalone/installed mode
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+      if (installGuideBtn) installGuideBtn.classList.add('hidden');
+    }
+
+    if (installGuideBtn) {
+      installGuideBtn.addEventListener('click', async () => {
+        triggerHaptic([30]);
+
+        // 1. If native beforeinstallprompt event is ready, launch direct OS install prompt!
+        if (deferredInstallPrompt) {
+          deferredInstallPrompt.prompt();
+          const { outcome } = await deferredInstallPrompt.userChoice;
+          if (outcome === 'accepted') {
+            showCustomizeToast("🎉 Installing SafeBite to your device...");
+            installGuideBtn.classList.add('hidden');
+          }
+          deferredInstallPrompt = null;
+          return;
+        }
+
+        // 2. If app is already installed
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+          showCustomizeToast("✓ SafeBite is already installed on your device!");
+          installGuideBtn.classList.add('hidden');
+          return;
+        }
+
+        // 3. Apple iOS Safari check (Apple blocks programmatic prompts, guide user directly to Share sheet)
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        if (isIOS) {
+          showCustomizeToast("📱 On iPhone: Tap Share (square with arrow ↑) at bottom, then tap 'Add to Home Screen'.");
+          return;
+        }
+
+        // 4. Fallback for Chromium browsers if prompt was already handled
+        showCustomizeToast("To install, tap your browser's menu (⋮) > 'Install app' or 'Add to Home screen'.");
+      });
+    }
 
     // Navigation Switcher (5 Tabs)
     function setNavTab(activeTab) {
