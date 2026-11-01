@@ -414,7 +414,29 @@
       </div>
 
       <!-- Clean Viewfinder Box: single library-managed targeting box, zero overlapping duplicate reticles -->
-      <div class="relative bg-black rounded-2xl overflow-hidden aspect-video flex flex-col items-center justify-center border-2 border-slate-800 shadow-2xl">
+            <!-- Store-Ready FDA Auto-Sync Bar -->
+      <div id="syncStatusCard" class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs transition">
+        <div class="flex items-center gap-2.5 min-w-0 pr-2">
+          <span id="syncIndicatorDot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0 shadow-sm shadow-emerald-400/50"></span>
+          <div class="min-w-0">
+            <span id="syncStatusTitle" class="font-bold text-slate-200 block text-[11px] truncate">FDA Wire: Initializing...</span>
+            <span id="syncStatusSub" class="text-[10px] text-slate-400 block truncate">Pre-syncing active federal recalls for offline shopping</span>
+          </div>
+        </div>
+        <button 
+          type="button" 
+          id="syncNowBtn" 
+          class="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600/40 text-sky-300 border border-blue-500/40 text-[11px] font-semibold transition active:scale-95"
+          title="Download freshest FDA recall bulletins for offline supermarket use"
+        >
+          <svg id="syncIconSvg" class="w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+          </svg>
+          <span id="syncBtnText">Sync for Store</span>
+        </button>
+      </div>
+
+<div class="relative bg-black rounded-2xl overflow-hidden aspect-video flex flex-col items-center justify-center border-2 border-slate-800 shadow-2xl">
         <div id="reader" class="w-full h-full"></div>
 
         <!-- Barcode Graphic Target in Viewfinder (shown only when camera is paused) -->
@@ -1049,7 +1071,17 @@
     }
     checkPlusStatus();
 
-    // Product Database
+        // Store-Ready Offline FDA Cache State
+    let cachedFDARecalls = [];
+    let lastSyncTimestamp = null;
+    try {
+      const savedRecalls = localStorage.getItem('safebite_cached_recalls');
+      if (savedRecalls) cachedFDARecalls = JSON.parse(savedRecalls);
+      const savedTime = localStorage.getItem('safebite_last_sync_time');
+      if (savedTime) lastSyncTimestamp = parseInt(savedTime, 10);
+    } catch (e) {}
+
+// Product Database
     const RECALL_DATABASE = {
       "011110815462": {
         isRecalled: true,
@@ -1344,6 +1376,14 @@
     const toggleTorchBtn = document.getElementById('toggleTorchBtn');
     const torchBtnText = document.getElementById('torchBtnText');
     const cameraBtnText = document.getElementById('cameraBtnText');
+    const syncStatusCard = document.getElementById('syncStatusCard');
+    const syncIndicatorDot = document.getElementById('syncIndicatorDot');
+    const syncStatusTitle = document.getElementById('syncStatusTitle');
+    const syncStatusSub = document.getElementById('syncStatusSub');
+    const syncNowBtn = document.getElementById('syncNowBtn');
+    const syncIconSvg = document.getElementById('syncIconSvg');
+    const syncBtnText = document.getElementById('syncBtnText');
+
     const cameraStatusBadge = document.getElementById('cameraStatusBadge');
     const cameraPlaceholder = document.getElementById('cameraPlaceholder');
     const barcodeFileInput = document.getElementById('barcodeFileInput');
@@ -2039,12 +2079,37 @@
         let detectedAllergenIds = [];
         let ingredientsSummary = "";
 
-        // 1. Check local pre-indexed recall database (handles known recalls, offline mode, fast matches)
+        // 1. Check local pre-indexed recall database and Store-Ready cached FDA list
         if (recallRecord) {
           productName = recallRecord.product;
           brandName = recallRecord.brand;
           isRecalled = recallRecord.isRecalled;
           if (recallRecord.allergens) detectedAllergenIds.push(...recallRecord.allergens);
+        } else if (cachedFDARecalls && cachedFDARecalls.length > 0) {
+          // Check locally cached FDA wire records (works with ZERO cell reception)
+          const match = cachedFDARecalls.find(item => {
+            if (item.upcs && item.upcs.includes(code)) return true;
+            if (item.raw && item.raw.includes(code)) return true;
+            return false;
+          });
+
+          if (match) {
+            isRecalled = true;
+            recallRecord = {
+              product: match.product,
+              brand: match.brand,
+              hazard: match.reason,
+              action: "Do not consume. Return to retailer for a full refund or discard immediately.",
+              severity: match.severity,
+              recallDate: match.date,
+              agency: "openFDA Wire (Store-Ready Cache)",
+              isRecalled: true,
+              stores: [],
+              allergens: []
+            };
+            productName = match.product;
+            brandName = match.brand;
+          }
         }
 
         // 2. Query Open Food Facts for Product Identity, Brand & Allergen Profile (with 3.5s timeout)
@@ -2903,16 +2968,138 @@
       }).join('');
     }
 
-    function updateOnlineStatus() {
-      if (!connectionBadge) return;
-      if (navigator.onLine) {
-        connectionBadge.textContent = "Online Wire";
-        connectionBadge.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+    // Store-Ready Auto-Sync Engine: Caches latest FDA recall bulletins for offline supermarket use
+    function formatSyncTime(ts) {
+      if (!ts) return "Initial Bundle";
+      const d = new Date(ts);
+      const now = new Date();
+      const isToday = d.toDateString() === now.toDateString();
+      const timeStr = d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+      return isToday ? `Today at ${timeStr}` : `${d.toLocaleDateString([], { month: 'short', day: 'numeric' })} at ${timeStr}`;
+    }
+
+    function updateSyncUI() {
+      if (!syncStatusTitle) return;
+
+      const isOnline = navigator.onLine;
+      const count = cachedFDARecalls.length;
+      const timeStr = formatSyncTime(lastSyncTimestamp);
+
+      if (isOnline) {
+        syncIndicatorDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0 shadow-sm shadow-emerald-400/50";
+        syncStatusTitle.textContent = `🟢 FDA Wire Synced • ${timeStr}`;
+        syncStatusSub.textContent = count > 0 
+          ? `${count} active recalls cached for offline supermarket scanning`
+          : `Live government wire active • Ready for store sync`;
+        if (connectionBadge) {
+          connectionBadge.textContent = "Online Wire";
+          connectionBadge.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+        }
       } else {
-        connectionBadge.textContent = "Offline Mode";
-        connectionBadge.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30";
+        syncIndicatorDot.className = "w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0";
+        syncStatusTitle.textContent = `📶 Offline Store Mode (FDA Cached: ${timeStr})`;
+        syncStatusSub.textContent = count > 0
+          ? `Scanning against ${count} cached recalls with zero cell signal`
+          : `Offline • Scanning against bundled high-risk recall database`;
+        if (connectionBadge) {
+          connectionBadge.textContent = "Offline Mode";
+          connectionBadge.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30";
+        }
       }
-      connectionBadge.classList.remove('hidden');
+      if (connectionBadge) connectionBadge.classList.remove('hidden');
+    }
+
+    async function syncStoreReadyRecalls(forceManual = false) {
+      if (!navigator.onLine) {
+        updateSyncUI();
+        if (forceManual) {
+          triggerHaptic([40, 40]);
+          showCustomizeToast("📶 Device is offline (Airplane Mode). Reconnect to Wi-Fi or cellular to download newest notices.");
+        }
+        return;
+      }
+
+      // If auto-sync and synced in the last 20 minutes, don't re-fetch unnecessarily
+      if (!forceManual && lastSyncTimestamp && (Date.now() - lastSyncTimestamp < 20 * 60 * 1000)) {
+        updateSyncUI();
+        return;
+      }
+
+      if (syncIconSvg) syncIconSvg.classList.add('animate-spin');
+      if (syncBtnText) syncBtnText.textContent = "Syncing...";
+
+      try {
+        const ctrl = new AbortController();
+        const timeout = setTimeout(() => ctrl.abort(), 6500);
+        const res = await fetch('https://api.fda.gov/food/enforcement.json?limit=150&sort=recall_initiation_date:desc', { signal: ctrl.signal });
+        clearTimeout(timeout);
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.results && data.results.length > 0) {
+            const parsed = [];
+            for (const r of data.results) {
+              const textBlob = `${r.code_info || ''} ${r.product_description || ''}`;
+              const upcMatches = textBlob.match(/\b\d{10,14}\b/g) || [];
+
+              let fdaDate = "Recent Notice";
+              if (r.recall_initiation_date && r.recall_initiation_date.length === 8) {
+                const y = r.recall_initiation_date.slice(0, 4);
+                const m = r.recall_initiation_date.slice(4, 6);
+                const d = r.recall_initiation_date.slice(6, 8);
+                fdaDate = `${m}/${d}/${y}`;
+              }
+
+              parsed.push({
+                id: r.recall_number || Math.random().toString(),
+                product: r.product_description || 'Grocery Item',
+                brand: r.recalling_firm || 'Food Brand',
+                reason: r.reason_for_recall || 'Federal health and safety recall notice.',
+                severity: r.classification || 'Class I Alert',
+                date: fdaDate,
+                status: r.status || 'Ongoing',
+                upcs: upcMatches,
+                raw: (r.product_description + ' ' + r.recalling_firm + ' ' + (r.code_info || '')).toLowerCase()
+              });
+            }
+
+            cachedFDARecalls = parsed;
+            lastSyncTimestamp = Date.now();
+            try {
+              localStorage.setItem('safebite_cached_recalls', JSON.stringify(cachedFDARecalls));
+              localStorage.setItem('safebite_last_sync_time', lastSyncTimestamp.toString());
+            } catch (e) {}
+
+            updateSyncUI();
+
+            if (forceManual) {
+              triggerHaptic([50, 40, 50]);
+              sound.playClearChime();
+              showCustomizeToast(`✓ FDA Wire Synced! ${parsed.length} active recalls cached for offline shopping.`);
+            }
+          }
+        }
+      } catch (err) {
+        console.warn("FDA Auto-sync fallback to local cache:", err);
+        updateSyncUI();
+      } finally {
+        if (syncIconSvg) syncIconSvg.classList.remove('animate-spin');
+        if (syncBtnText) syncBtnText.textContent = "Sync for Store";
+      }
+    }
+
+    if (syncNowBtn) {
+      syncNowBtn.addEventListener('click', () => {
+        triggerHaptic([30]);
+        syncStoreReadyRecalls(true);
+      });
+    }
+
+    function updateOnlineStatus() {
+      updateSyncUI();
+      if (navigator.onLine) {
+        syncStoreReadyRecalls(false);
+      }
     }
     window.addEventListener('online', updateOnlineStatus);
     window.addEventListener('offline', updateOnlineStatus);
@@ -2977,6 +3164,9 @@
     updatePlusUI();
     updateOnlineStatus();
     checkDisclaimerStatus();
+    updateSyncUI();
+    syncStoreReadyRecalls(false);
+
 
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
