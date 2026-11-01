@@ -1,11 +1,11 @@
-const CACHE_NAME = 'recall-radar-v7';
+const CACHE_NAME = 'safebite-v1';
 const ASSETS = [
-  './index.html?v=2',
-  './manifest.json?v=2',
-  './icon-192.png?v=2',
-  './icon-512.png?v=2',
-  './apple-touch-icon.png?v=2',
-  './favicon.png?v=2'
+  './index.html?app=safebite',
+  './manifest.json?v=3',
+  './icon-192.png?v=3',
+  './icon-512.png?v=3',
+  './apple-touch-icon.png?v=3',
+  './favicon.png?v=3'
 ];
 
 self.addEventListener('install', (e) => {
