@@ -955,8 +955,7 @@
         </button>
       </div>
 
-      <div id="customizeToast" class="hidden text-xs p-3 rounded-xl border border-sky-500/30 bg-blue-950/50 text-sky-200"></div>
-          <!-- Version Tag -->
+                <!-- Version Tag -->
       <div class="pt-2 text-center">
         <p class="text-[11px] text-slate-500 font-mono">SafeBite v1.2 • Offline Engine & App Up to Date</p>
       </div>
@@ -984,6 +983,35 @@
   <footer class="py-4 text-center text-xs text-slate-500 border-t border-slate-900 mt-auto pb-8">
     SafeBite • Food Recalls, Gluten & Allergen Guard
   </footer>
+
+  <!-- INSTALL HELP MODAL SHEET (Shown if browser requires manual tap or on iPhone) -->
+  <div id="installHelpModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border-2 border-sky-500/50 max-w-sm w-full rounded-3xl p-5 shadow-2xl space-y-4 relative animate-in fade-in zoom-in-95 duration-200">
+      <button type="button" id="closeInstallHelpBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-full bg-slate-800 text-xs">
+        ✕
+      </button>
+
+      <div class="flex items-center gap-3 border-b border-slate-800 pb-3 pr-6">
+        <div class="w-10 h-10 rounded-2xl bg-sky-500/20 border border-sky-500/40 flex items-center justify-center text-xl shrink-0">
+          📲
+        </div>
+        <div>
+          <h3 class="font-display text-sm font-bold text-white leading-tight">Install SafeBite</h3>
+          <p class="text-[11px] text-slate-400">Add to home screen for fullscreen use</p>
+        </div>
+      </div>
+
+      <!-- Device Specific Dynamic Content -->
+      <div id="installOsContent" class="space-y-2 text-xs"></div>
+
+      <button type="button" id="dismissInstallHelpBtn" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 text-white font-bold text-xs shadow-md transition active:scale-95">
+        Got It
+      </button>
+    </div>
+  </div>
+
+  <!-- Global Floating Toast Notification (Visible on all tabs) -->
+  <div id="customizeToast" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-sm w-[90%] text-center text-xs font-semibold px-4 py-3 rounded-2xl border-2 border-sky-400 bg-slate-900/95 text-sky-100 shadow-2xl backdrop-blur-md"></div>
 
   <script>
     // Audio Feedback Synthesizer
@@ -1675,8 +1703,12 @@
       updateSelectedPlanUI();
     }
 
-    // Direct Native PWA Install Prompt (Prompts immediately without instruction modals)
+    // Direct Native PWA Install Prompt & Immediate Fallback Modal
     let deferredInstallPrompt = null;
+    const installHelpModal = document.getElementById('installHelpModal');
+    const closeInstallHelpBtn = document.getElementById('closeInstallHelpBtn');
+    const dismissInstallHelpBtn = document.getElementById('dismissInstallHelpBtn');
+    const installOsContent = document.getElementById('installOsContent');
 
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
@@ -1687,12 +1719,20 @@
     window.addEventListener('appinstalled', () => {
       showCustomizeToast("🎉 SafeBite installed to your device!");
       if (installGuideBtn) installGuideBtn.classList.add('hidden');
+      if (installHelpModal) installHelpModal.classList.add('hidden');
       deferredInstallPrompt = null;
     });
 
     // Hide install button if app is already running in standalone/installed mode
     if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
       if (installGuideBtn) installGuideBtn.classList.add('hidden');
+    }
+
+    if (closeInstallHelpBtn) {
+      closeInstallHelpBtn.addEventListener('click', () => installHelpModal.classList.add('hidden'));
+    }
+    if (dismissInstallHelpBtn) {
+      dismissInstallHelpBtn.addEventListener('click', () => installHelpModal.classList.add('hidden'));
     }
 
     if (installGuideBtn) {
@@ -1718,15 +1758,57 @@
           return;
         }
 
-        // 3. Apple iOS Safari check (Apple blocks programmatic prompts, guide user directly to Share sheet)
+        // 3. Fallback: Show tailored, immediate modal so user always gets visual response
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-        if (isIOS) {
-          showCustomizeToast("📱 On iPhone: Tap Share (square with arrow ↑) at bottom, then tap 'Add to Home Screen'.");
-          return;
+        const isAndroid = /Android/.test(navigator.userAgent);
+
+        if (installOsContent) {
+          if (isIOS) {
+            installOsContent.innerHTML = `
+              <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+                <div class="flex items-center gap-2 font-bold text-sky-300">
+                  <span>🍏</span>
+                  <span>iPhone / iPad (Safari)</span>
+                </div>
+                <p class="text-[11px] text-slate-300 leading-relaxed">
+                  1. Tap the <strong>Share button (square with arrow ↑)</strong> at the bottom of Safari.<br>
+                  2. Scroll down and tap <strong>"Add to Home Screen"</strong>.<br>
+                  3. Tap <strong>"Add"</strong> in the top right corner!
+                </p>
+              </div>
+            `;
+          } else if (isAndroid) {
+            installOsContent.innerHTML = `
+              <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+                <div class="flex items-center gap-2 font-bold text-sky-300">
+                  <span>🤖</span>
+                  <span>Android (Chrome Browser)</span>
+                </div>
+                <p class="text-[11px] text-slate-300 leading-relaxed">
+                  1. Tap Chrome's menu icon <strong>(three dots ⋮ in the top right corner)</strong>.<br>
+                  2. Tap <strong>"Install app"</strong> (or <strong>"Add to Home screen"</strong>).<br>
+                  3. If already installed earlier, open <strong>SafeBite</strong> directly from your App Drawer!
+                </p>
+              </div>
+            `;
+          } else {
+            installOsContent.innerHTML = `
+              <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+                <div class="flex items-center gap-2 font-bold text-sky-300">
+                  <span>💻</span>
+                  <span>Desktop Browser</span>
+                </div>
+                <p class="text-[11px] text-slate-300 leading-relaxed">
+                  Click the <strong>Install icon (monitor with down arrow)</strong> in your browser's address bar to install SafeBite as an app.
+                </p>
+              </div>
+            `;
+          }
         }
 
-        // 4. Fallback for Chromium browsers if prompt was already handled
-        showCustomizeToast("To install, tap your browser's menu (⋮) > 'Install app' or 'Add to Home screen'.");
+        if (installHelpModal) {
+          installHelpModal.classList.remove('hidden');
+        }
       });
     }
 
