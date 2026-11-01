@@ -476,7 +476,7 @@
     </div>
 
     <!-- RESULTS DISPLAY AREA (Reveals above scanner for seamless mobile view) -->
-    <section id="resultContainer" class="hidden transition-all duration-300 mb-4"></section>
+    <section id="resultContainer" class="hidden transition-all duration-300 mb-4 scroll-mt-36"></section>
 
     <!-- SECTION 1: SCANNER PANEL WITH CLEAN SINGLE RETICLE (NO LASER, NO DUPLICATE FRAMES) -->
     <section id="scannerPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4">
@@ -513,6 +513,16 @@
 
 <div class="relative bg-black rounded-2xl overflow-hidden min-h-[260px] sm:min-h-[290px] max-h-[350px] flex flex-col items-center justify-center border-2 border-slate-800 shadow-2xl">
         <div id="reader" class="w-full h-full"></div>
+
+        <!-- Sleek Scan Success Viewfinder Overlay (Replaces awkward frozen snapshot) -->
+        <div id="cameraScanSuccessOverlay" class="hidden absolute inset-0 bg-slate-950/85 backdrop-blur-md flex flex-col items-center justify-center text-center p-5 z-20 transition-all duration-300">
+          <div class="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-emerald-300 text-3xl mb-2.5 shadow-lg shadow-emerald-950/60 animate-in zoom-in-75 duration-200">
+            ✓
+          </div>
+          <span class="text-base font-bold text-white tracking-wide">Barcode Captured!</span>
+          <span id="scannedSuccessCode" class="text-xs font-mono text-emerald-300 font-bold bg-emerald-950/80 border border-emerald-500/40 px-3.5 py-1.5 rounded-full mt-1.5 shadow-sm"></span>
+          <span class="text-xs text-slate-300 mt-2">Product & safety details loaded below</span>
+        </div>
 
         <!-- Barcode Graphic Target in Viewfinder (shown only when camera is paused) -->
         <div id="cameraPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-slate-950/95">
@@ -2108,6 +2118,9 @@
       }
       html5QrCode = null;
 
+      const camOverlay = document.getElementById('cameraScanSuccessOverlay');
+      if (camOverlay) camOverlay.classList.add('hidden');
+
       cameraBtnText.textContent = "Start Camera";
       toggleCameraBtn.classList.replace('from-slate-700', 'from-blue-600');
       toggleCameraBtn.classList.replace('to-slate-800', 'to-blue-500');
@@ -2156,6 +2169,13 @@
             html5QrCode.pause(true);
             isCameraPaused = true;
           }
+          // Show sleek frosted success overlay over camera viewport (hides awkward frozen frame)
+          const camOverlay = document.getElementById('cameraScanSuccessOverlay');
+          const camCodeBadge = document.getElementById('scannedSuccessCode');
+          if (camOverlay && camCodeBadge) {
+            camCodeBadge.textContent = "UPC: " + code;
+            camOverlay.classList.remove('hidden');
+          }
           cameraBtnText.textContent = "Scan Next Barcode";
           toggleCameraBtn.classList.replace('from-slate-700', 'from-blue-600');
           toggleCameraBtn.classList.replace('to-slate-800', 'to-blue-500');
@@ -2177,12 +2197,14 @@
       lastScannedCode = null;
       lastScanTimestamp = 0;
 
-      // 2. Hide result container & clear manual input
+      // 2. Hide result container & clear manual input and camera success overlay
       resultContainer.classList.add('hidden');
       resultContainer.innerHTML = '';
       upcInput.value = '';
       clearBtn.classList.add('hidden');
       hideScannerMessage();
+      const camOverlay = document.getElementById('cameraScanSuccessOverlay');
+      if (camOverlay) camOverlay.classList.add('hidden');
 
       // 3. Ensure Scanner tab is active & scroll scanner viewport to top
       setNavTab('scanner');
@@ -2380,7 +2402,13 @@
             </div>
           </div>
         `;
-        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        setTimeout(() => {
+          const navOffset = 135;
+          const rect = resultContainer.getBoundingClientRect();
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const targetY = scrollTop + rect.top - navOffset;
+          window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+        }, 40);
 
         let productName = `Retail Grocery Item (${code})`;
         let brandName = "Grocery Brand";
@@ -2973,8 +3001,12 @@
 
       attachScanNextListeners();
       setTimeout(() => {
-        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 50);
+        const navOffset = 135; // Accounts for combined sticky header (56px) + sticky nav (64px) + margin
+        const rect = resultContainer.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const targetY = scrollTop + rect.top - navOffset;
+        window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+      }, 60);
     }
 
     function renderAllergensTab() {
