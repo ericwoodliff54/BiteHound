@@ -45,8 +45,7 @@
       animation: pulseGlow 2s ease-in-out infinite;
     }
 
-    /* Touch target comfort */
-    button, label, input {
+    button, label, input, select {
       touch-action: manipulation;
     }
   </style>
@@ -74,7 +73,7 @@
         <div>
           <div class="flex items-center gap-2">
             <h1 class="font-display font-bold text-slate-100 text-lg tracking-tight">RecallRadar</h1>
-            <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-blue-500/20 text-sky-300 border border-blue-500/30">Live Safe</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-blue-500/20 text-sky-300 border border-blue-500/30">Step 11 Live</span>
           </div>
           <p class="text-[11px] text-slate-400">Grocery Safety & UPC Scanner</p>
         </div>
@@ -98,14 +97,14 @@
   <!-- Main Container -->
   <main class="flex-1 max-w-xl w-full mx-auto p-4 space-y-4">
 
-    <!-- 4 Focused Navigation Tabs -->
-    <nav class="bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800 grid grid-cols-4 gap-1 shadow-md text-center sticky top-16 z-20 backdrop-blur-md">
+    <!-- 5 Clean Navigation Tabs -->
+    <nav class="bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800 grid grid-cols-5 gap-1 shadow-md text-center sticky top-16 z-20 backdrop-blur-md">
       <button 
         type="button" 
         id="tabScanner" 
-        class="py-2.5 px-1 rounded-xl text-xs font-semibold flex flex-col items-center justify-center gap-1 transition bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 text-white shadow-md shadow-blue-950/40 active:scale-95"
+        class="py-2 px-1 rounded-xl text-[11px] font-semibold flex flex-col items-center justify-center gap-1 transition bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 text-white shadow-md shadow-blue-950/40 active:scale-95"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
         </svg>
@@ -115,9 +114,9 @@
       <button 
         type="button" 
         id="tabManual" 
-        class="py-2.5 px-1 rounded-xl text-xs font-medium text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center gap-1 transition active:scale-95"
+        class="py-2 px-1 rounded-xl text-[11px] font-medium text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center gap-1 transition active:scale-95"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
         </svg>
         <span>Manual UPC Entry</span>
@@ -126,9 +125,9 @@
       <button 
         type="button" 
         id="tabAllergens" 
-        class="py-2.5 px-1 rounded-xl text-xs font-medium text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center gap-1 transition active:scale-95"
+        class="py-2 px-1 rounded-xl text-[11px] font-medium text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center gap-1 transition active:scale-95"
       >
-        <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
         </svg>
         <span>Allergens</span>
@@ -137,12 +136,24 @@
       <button 
         type="button" 
         id="tabBulletins" 
-        class="py-2.5 px-1 rounded-xl text-xs font-medium text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center gap-1 transition active:scale-95"
+        class="py-2 px-1 rounded-xl text-[11px] font-medium text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center gap-1 transition active:scale-95"
       >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
         </svg>
         <span>Live Recalls</span>
+      </button>
+
+      <button 
+        type="button" 
+        id="tabCustomize" 
+        class="py-2 px-1 rounded-xl text-[11px] font-medium text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center gap-1 transition active:scale-95"
+      >
+        <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+        </svg>
+        <span>Customize</span>
       </button>
     </nav>
 
@@ -190,7 +201,7 @@
       </div>
     </div>
 
-    <!-- SECTION 1: SCANNER PANEL -->
+    <!-- SECTION 1: SCANNER PANEL WITH BRAND SEARCH -->
     <section id="scannerPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4">
       <div class="flex items-center justify-between">
         <div>
@@ -198,7 +209,7 @@
             <span>Scan Product Barcode</span>
             <span class="w-2 h-2 rounded-full bg-sky-400 pulse-glow"></span>
           </h2>
-          <p class="text-xs text-slate-400">Center the grocery UPC barcode inside the viewfinder</p>
+          <p class="text-xs text-slate-400">Scan packaging or search by brand name below</p>
         </div>
         <span id="cameraStatusBadge" class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700/80">
           Camera Ready
@@ -212,13 +223,11 @@
         <!-- Barcode Graphic Target in Viewfinder -->
         <div id="cameraPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-slate-950/95">
           <div class="relative w-48 h-28 mb-3 flex flex-col items-center justify-center bg-slate-900/90 rounded-xl border border-sky-500/40 p-3 shadow-inner">
-            <!-- Reticles -->
             <div class="absolute -top-1 -left-1 w-3.5 h-3.5 border-t-2 border-l-2 border-sky-400"></div>
             <div class="absolute -top-1 -right-1 w-3.5 h-3.5 border-t-2 border-r-2 border-sky-400"></div>
             <div class="absolute -bottom-1 -left-1 w-3.5 h-3.5 border-b-2 border-l-2 border-sky-400"></div>
             <div class="absolute -bottom-1 -right-1 w-3.5 h-3.5 border-b-2 border-r-2 border-sky-400"></div>
 
-            <!-- Stylized Barcode Graphic -->
             <div class="w-full flex items-center justify-center gap-1 h-14 px-2 py-1 bg-slate-950/60 rounded border border-slate-800/80">
               <span class="w-1 h-full bg-sky-400/90 rounded-sm"></span>
               <span class="w-0.5 h-full bg-sky-400/60 rounded-sm"></span>
@@ -241,7 +250,7 @@
           </div>
 
           <p class="font-display font-semibold text-xs text-slate-200">Point phone camera at grocery barcode</p>
-          <p class="text-[11px] text-slate-400 max-w-xs mt-1">Tap "Start Camera Scanner" to begin scanning or upload a photo</p>
+          <p class="text-[11px] text-slate-400 max-w-xs mt-1">Tap "Start Camera Scanner" or search by brand below</p>
         </div>
 
         <!-- Laser Reticles -->
@@ -281,6 +290,53 @@
         </label>
       </div>
 
+      <!-- BRAND & PRODUCT NAME SEARCH BAR -->
+      <div class="pt-3 border-t border-slate-800/80 space-y-2.5">
+        <div class="flex items-center justify-between">
+          <label for="brandSearchInput" class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <span>Or Search by Brand / Product Name</span>
+          </label>
+          <span class="text-[10px] text-slate-500">Torn or missing barcode?</span>
+        </div>
+
+        <div class="relative">
+          <input 
+            type="text" 
+            id="brandSearchInput" 
+            placeholder="e.g. Boar's Head, carrots, spinach, chips..."
+            class="w-full min-h-[46px] pl-10 pr-10 py-2.5 rounded-xl border border-slate-700 bg-slate-950 text-white text-xs placeholder:text-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+          >
+          <div class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+          </div>
+          <button 
+            type="button" 
+            id="clearSearchBtn" 
+            class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs px-1.5 py-0.5 rounded hidden"
+            aria-label="Clear search input"
+          >
+            ✕
+          </button>
+        </div>
+
+        <!-- Quick Keyword Search Pills -->
+        <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
+          <span class="text-[10px] text-slate-500">Quick searches:</span>
+          <button type="button" class="search-chip px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] border border-slate-700/80 transition" data-query="spinach">Spinach</button>
+          <button type="button" class="search-chip px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] border border-slate-700/80 transition" data-query="carrots">Carrots</button>
+          <button type="button" class="search-chip px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] border border-slate-700/80 transition" data-query="turkey">Turkey</button>
+          <button type="button" class="search-chip px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] border border-slate-700/80 transition" data-query="chips">Chips</button>
+          <button type="button" class="search-chip px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] border border-slate-700/80 transition" data-query="peanut">Peanut</button>
+        </div>
+
+        <div id="searchResultsBox" class="hidden space-y-2 pt-1 max-h-60 overflow-y-auto"></div>
+      </div>
+
       <div id="scannerMessage" class="hidden text-xs p-3 rounded-xl border border-blue-500/30 bg-blue-950/40 text-blue-200"></div>
     </section>
 
@@ -288,7 +344,7 @@
     <section id="manualPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4 hidden">
       <div>
         <h2 class="font-display text-sm font-bold text-slate-100">Manual UPC Entry</h2>
-        <p class="text-xs text-slate-400">Type the 12-digit number found below any grocery barcode or test using the sample items.</p>
+        <p class="text-xs text-slate-400">Type or paste barcodes with or without hyphens and spaces.</p>
       </div>
 
       <form id="upcForm" class="space-y-3">
@@ -299,8 +355,7 @@
               type="text" 
               id="upcInput" 
               inputmode="numeric" 
-              pattern="[0-9]*" 
-              placeholder="e.g. 011110815462" 
+              placeholder="e.g. 0-11110-81546-2 or 011110815462" 
               class="w-full min-h-[48px] px-4 py-3.5 rounded-xl border border-slate-700 bg-slate-950 text-white font-mono text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition placeholder:text-slate-600"
               required
             >
@@ -313,6 +368,10 @@
               Clear
             </button>
           </div>
+          <p class="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
+            <span class="text-sky-400 font-bold">✓</span>
+            <span>Hyphens, spaces, and dashes are automatically cleaned and accepted.</span>
+          </p>
         </div>
 
         <button 
@@ -342,14 +401,11 @@
         </span>
       </div>
 
-      <!-- Allergen Tick Box Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1" id="allergenCheckboxesContainer">
-        <!-- Rendered dynamically as friendly tick-box rows -->
-      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1" id="allergenCheckboxesContainer"></div>
 
       <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800 text-xs text-slate-400 space-y-1">
         <p class="font-semibold text-slate-300">How allergen guardrails work:</p>
-        <p>When you scan any grocery barcode, RecallRadar compares the ingredients against your ticked allergens. If an item contains a checked allergen, an amber warning badge appears—even if the item has no federal recall.</p>
+        <p>When you scan any grocery barcode or search a product, RecallRadar compares the ingredients against your ticked allergens. If an item contains a checked allergen, an amber warning badge appears—even if the item has no federal recall.</p>
       </div>
 
       <div class="pt-2">
@@ -364,11 +420,11 @@
     </section>
 
     <!-- SECTION 4: LIVE RECALL BULLETINS PANEL -->
-    <section id="bulletinsPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-3 hidden">
+    <section id="bulletinsPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4 hidden">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="font-display text-sm font-bold text-slate-100">National Recall Wire</h2>
-          <p class="text-xs text-slate-400">Recent active FDA & USDA enforcement alerts</p>
+          <h2 class="font-display text-base font-bold text-slate-100">National & Local Recall Wire</h2>
+          <p class="text-xs text-slate-400">Filter alerts by your home state and favorite supermarket chain</p>
         </div>
         <button id="refreshFeedBtn" class="text-xs text-sky-400 hover:text-sky-300 font-medium flex items-center gap-1 transition px-2 py-1 min-h-[36px]">
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -378,73 +434,155 @@
         </button>
       </div>
 
+      <!-- Regional & Retailer Filter Bar -->
+      <div class="p-3.5 rounded-xl bg-slate-950/90 border border-slate-800 space-y-2.5">
+        <span class="text-xs font-bold text-sky-300 flex items-center gap-1.5 uppercase tracking-wider">
+          <span>📍</span>
+          <span>Regional & Store Filter</span>
+        </span>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+          <div>
+            <label for="stateFilterSelect" class="block text-[11px] text-slate-400 mb-1">State / Distribution Area</label>
+            <select 
+              id="stateFilterSelect" 
+              class="w-full bg-slate-900 border border-slate-700 text-slate-100 rounded-lg p-2 text-xs outline-none focus:border-blue-500"
+            >
+              <option value="ALL">All States (Nationwide)</option>
+              <option value="OH" selected>Ohio (OH) - Local Area</option>
+              <option value="PA">Pennsylvania (PA)</option>
+              <option value="MI">Michigan (MI)</option>
+              <option value="IL">Illinois (IL)</option>
+              <option value="CA">California (CA)</option>
+              <option value="TX">Texas (TX)</option>
+              <option value="FL">Florida (FL)</option>
+              <option value="NY">New York (NY)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="storeFilterSelect" class="block text-[11px] text-slate-400 mb-1">Supermarket Chain</label>
+            <select 
+              id="storeFilterSelect" 
+              class="w-full bg-slate-900 border border-slate-700 text-slate-100 rounded-lg p-2 text-xs outline-none focus:border-blue-500"
+            >
+              <option value="ALL">All Supermarkets</option>
+              <option value="Kroger">Kroger</option>
+              <option value="Giant Eagle">Giant Eagle</option>
+              <option value="Meijer">Meijer</option>
+              <option value="Walmart">Walmart</option>
+              <option value="Aldi">Aldi</option>
+              <option value="Target">Target</option>
+              <option value="Trader Joe's">Trader Joe's</option>
+              <option value="Whole Foods">Whole Foods</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <span id="filteredCountNotice" class="text-[11px] text-sky-400 font-medium">Filtering active for Ohio...</span>
+          <button type="button" id="clearRegionalFilterBtn" class="text-[11px] text-slate-400 hover:text-white underline">Reset Filters</button>
+        </div>
+      </div>
+
       <div id="bulletinFeedList" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
     </section>
 
-    <!-- QUICK DEMO SAMPLES TRAY -->
-    <section id="demoSamplesSection" class="bg-slate-900/60 rounded-2xl p-4 border border-slate-800/80">
-      <div class="flex items-center justify-between mb-2.5">
-        <span class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
-          <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          Quick Test Samples
-        </span>
-        <span class="text-[11px] text-slate-500">Tap to test recall & allergen triggers</span>
+    <!-- SECTION 5: CUSTOMIZE PANEL (RESTORED WITH SOUNDS, HAPTICS & WATCHLIST) -->
+    <section id="customizePanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4 hidden">
+      <div class="border-b border-slate-800 pb-3">
+        <h2 class="font-display text-base font-bold text-slate-100 flex items-center gap-2">
+          <span>⚙️ Practical Settings & Preferences</span>
+        </h2>
+        <p class="text-xs text-slate-400 mt-0.5">Customize sound alerts, haptic feedback, brand watchlists, and app updates.</p>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-        <button 
-          type="button" 
-          class="demo-btn min-h-[52px] p-2.5 text-left rounded-xl border border-rose-500/30 bg-rose-950/30 hover:bg-rose-900/40 transition group active:scale-95"
-          data-upc="011110815462"
-        >
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] font-bold uppercase text-rose-400">Recalled</span>
-            <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
-          </div>
-          <span class="block text-xs font-semibold text-slate-200 mt-1 truncate group-hover:text-white">Baby Spinach</span>
-          <span class="block text-[10px] text-rose-300/80">Salmonella</span>
-        </button>
 
-        <button 
-          type="button" 
-          class="demo-btn min-h-[52px] p-2.5 text-left rounded-xl border border-amber-500/30 bg-amber-950/30 hover:bg-amber-900/40 transition group active:scale-95"
-          data-upc="028400070560"
-        >
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] font-bold uppercase text-amber-400">Recalled</span>
-            <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-          </div>
-          <span class="block text-xs font-semibold text-slate-200 mt-1 truncate group-hover:text-white">Wavy Chips</span>
-          <span class="block text-[10px] text-amber-300/80">Milk Whey</span>
-        </button>
+      <!-- STEP 11 FEATURE: BRAND WATCHLIST TRAY -->
+      <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-amber-300 flex items-center gap-1.5 uppercase tracking-wider">
+            <span>⭐</span>
+            <span>Brand & Food Watchlist (Step 11)</span>
+          </span>
+          <span id="watchlistCountBadge" class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 font-bold">2 Brands</span>
+        </div>
+        <p class="text-[11px] text-slate-400">Add household brands you buy regularly. RecallRadar will proactively check them for new notices:</p>
 
-        <button 
-          type="button" 
-          class="demo-btn min-h-[52px] p-2.5 text-left rounded-xl border border-emerald-500/30 bg-emerald-950/30 hover:bg-emerald-900/40 transition group active:scale-95"
-          data-upc="041220789451"
-        >
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] font-bold uppercase text-emerald-400">Clear</span>
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-          </div>
-          <span class="block text-xs font-semibold text-slate-200 mt-1 truncate group-hover:text-white">Whole Milk</span>
-          <span class="block text-[10px] text-emerald-300/80">Verified</span>
-        </button>
+        <!-- Add to Watchlist Form -->
+        <div class="flex gap-2">
+          <input 
+            type="text" 
+            id="newWatchlistBrandInput" 
+            placeholder="Add brand (e.g. Horizon, Chobani, Boar's Head)..." 
+            class="flex-1 bg-slate-900 border border-slate-700 text-slate-100 rounded-lg px-3 py-2 text-xs outline-none focus:border-blue-500"
+          >
+          <button 
+            type="button" 
+            id="addWatchlistBtn" 
+            class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-3 py-2 rounded-lg text-xs transition"
+          >
+            + Add
+          </button>
+        </div>
 
+        <!-- Watchlist Items Grid -->
+        <div id="watchlistContainer" class="flex flex-wrap gap-1.5 pt-1">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+
+      <!-- Sound & Haptic Options -->
+      <div class="space-y-2 text-xs">
+        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Audio & Vibration</h3>
+
+        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800">
+          <div>
+            <span class="font-semibold text-slate-200 block">Scan Sounds & Audio Tones</span>
+            <span class="text-[11px] text-slate-400">Play beeps on scan and audio alerts on recall hazards</span>
+          </div>
+          <button type="button" id="prefSoundBtn" class="min-h-[40px] px-3.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold active:scale-95">Enabled</button>
+        </div>
+
+        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-950 border border-slate-800">
+          <div>
+            <span class="font-semibold text-slate-200 block">Tactile Vibration (Haptics)</span>
+            <span class="text-[11px] text-slate-400">Vibrate phone when a barcode is recognized or hazard detected</span>
+          </div>
+          <button type="button" id="prefHapticBtn" class="min-h-[40px] px-3.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold active:scale-95">Enabled</button>
+        </div>
+      </div>
+
+      <!-- App Updates & Mobile PWA Sync -->
+      <div class="pt-3 border-t border-slate-800 space-y-2">
+        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Mobile App Updates</h3>
+        <div class="p-3.5 rounded-xl bg-blue-950/40 border border-blue-500/30 text-xs space-y-2">
+          <p class="text-[11px] text-slate-300">Installed on your phone? When you update your GitHub repository, mobile browsers pull the newest version on launch.</p>
+          <button 
+            type="button" 
+            id="forceReloadBtn" 
+            class="w-full py-2.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs transition active:scale-[0.98] flex items-center justify-center gap-1.5"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+            </svg>
+            <span>Force Check for App Updates</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Reset Settings -->
+      <div class="pt-2">
         <button 
           type="button" 
-          class="demo-btn min-h-[52px] p-2.5 text-left rounded-xl border border-indigo-500/30 bg-indigo-950/30 hover:bg-indigo-900/40 transition group active:scale-95"
-          data-upc="051000140228"
+          id="resetAllDataBtn" 
+          class="w-full min-h-[44px] py-2.5 px-3 rounded-xl border border-rose-500/30 bg-rose-950/20 hover:bg-rose-900/30 text-rose-300 text-xs font-medium transition active:scale-[0.98]"
         >
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] font-bold uppercase text-indigo-400">Clear</span>
-            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
-          </div>
-          <span class="block text-xs font-semibold text-slate-200 mt-1 truncate group-hover:text-white">Almond Bar</span>
-          <span class="block text-[10px] text-indigo-300/80">Tree Nuts / Peanut</span>
+          Reset All Saved History & Settings
         </button>
       </div>
+
+      <!-- Toast Feedback -->
+      <div id="customizeToast" class="hidden text-xs p-3 rounded-xl border border-sky-500/30 bg-blue-950/50 text-sky-200"></div>
     </section>
 
     <!-- RESULTS DISPLAY AREA -->
@@ -462,7 +600,7 @@
         <button id="clearHistoryBtn" class="text-[11px] text-slate-400 hover:text-rose-400 transition min-h-[36px] px-2">Clear History</button>
       </div>
       <div id="historyList" class="space-y-2">
-        <p class="text-xs text-slate-500 italic py-2 text-center">No scans recorded yet. Align a barcode or tap a quick test sample.</p>
+        <p class="text-xs text-slate-500 italic py-2 text-center">No scans recorded yet. Align a barcode or search a brand above.</p>
       </div>
     </section>
 
@@ -528,16 +666,15 @@
 
     const sound = new SoundEngine();
 
-    // Haptic feedback trigger for iOS & Android devices
+    // Haptic feedback trigger
+    let hapticsEnabled = true;
     function triggerHaptic(pattern = [60]) {
+      if (!hapticsEnabled) return;
       try {
-        if (navigator.vibrate) {
-          navigator.vibrate(pattern);
-        }
+        if (navigator.vibrate) navigator.vibrate(pattern);
       } catch (e) {}
     }
 
-    // Available Allergen Guardrails
     const ALLERGEN_OPTIONS = [
       { id: 'dairy', name: 'Dairy / Milk', icon: '🥛', desc: 'Milk, whey, cheese, butter' },
       { id: 'peanuts', name: 'Peanuts', icon: '🥜', desc: 'Peanut butter, peanut oil' },
@@ -548,13 +685,17 @@
       { id: 'shellfish', name: 'Shellfish', icon: '🦐', desc: 'Shrimp, crab, lobster' }
     ];
 
-    // State for Allergens
     let userAllergens = ['dairy'];
     try {
       const savedAllergens = localStorage.getItem('recall_radar_allergens');
-      if (savedAllergens) {
-        userAllergens = JSON.parse(savedAllergens);
-      }
+      if (savedAllergens) userAllergens = JSON.parse(savedAllergens);
+    } catch (e) {}
+
+    // STEP 11: Brand Watchlist State
+    let userWatchlist = ['Boar\'s Head', 'Horizon Organic'];
+    try {
+      const savedWatchlist = localStorage.getItem('recall_radar_watchlist');
+      if (savedWatchlist) userWatchlist = JSON.parse(savedWatchlist);
     } catch (e) {}
 
     // Product Database
@@ -570,6 +711,8 @@
         severity: "Class I (High Risk)",
         agency: "FDA",
         tag: "Bacterial Hazard",
+        states: ['ALL'],
+        stores: ['Kroger', 'Giant Eagle', 'Meijer', 'Walmart', 'Target'],
         allergens: []
       },
       "028400070560": {
@@ -583,6 +726,8 @@
         severity: "Class II (Moderate)",
         agency: "FDA",
         tag: "Allergen Alert",
+        states: ['ALL'],
+        stores: ['Walmart', 'Target', 'Aldi', 'Kroger'],
         allergens: ['dairy']
       },
       "041220789451": {
@@ -601,6 +746,7 @@
       }
     };
 
+    // National & Regional Bulletins
     const NATIONAL_BULLETINS = [
       {
         id: "REC-2026-904",
@@ -609,7 +755,9 @@
         date: "Oct 28, 2026",
         agency: "FDA",
         reason: "E. Coli O121 risk in multi-pound retail bags",
-        severity: "Class I"
+        severity: "Class I",
+        states: ['ALL'],
+        stores: ['Kroger', 'Giant Eagle', 'Walmart', 'Target', 'Meijer', 'Aldi']
       },
       {
         id: "REC-2026-882",
@@ -617,8 +765,10 @@
         brand: "DeliPrime Provisions",
         date: "Oct 22, 2026",
         agency: "USDA-FSIS",
-        reason: "Listeria monocytogenes detection during routine inspection",
-        severity: "Class I"
+        reason: "Listeria monocytogenes detection in pre-packaged deli cuts",
+        severity: "Class I",
+        states: ['OH', 'PA', 'MI', 'IL'],
+        stores: ['Giant Eagle', 'Kroger', 'Meijer']
       },
       {
         id: "REC-2026-871",
@@ -627,18 +777,28 @@
         date: "Oct 15, 2026",
         agency: "FDA",
         reason: "Potential metal fragment contamination from packaging line",
-        severity: "Class II"
+        severity: "Class II",
+        states: ['ALL'],
+        stores: ['Walmart', 'Target', 'Aldi']
+      },
+      {
+        id: "REC-2026-855",
+        title: "Classic Caesar Salad Bowl Kit",
+        brand: "FreshField Bistro",
+        date: "Oct 09, 2026",
+        agency: "FDA",
+        reason: "Undeclared egg and anchovy dressing allergen",
+        severity: "Class II",
+        states: ['OH', 'PA', 'NY'],
+        stores: ['Giant Eagle', 'Trader Joe\'s', 'Kroger']
       }
     ];
 
-    // State
     let scanHistory = [];
     try {
       const saved = localStorage.getItem('recall_radar_history');
       if (saved) scanHistory = JSON.parse(saved);
-    } catch (e) {
-      console.warn('Storage unavailable', e);
-    }
+    } catch (e) {}
 
     let html5QrCode = null;
     let isCameraRunning = false;
@@ -648,13 +808,14 @@
     const tabManual = document.getElementById('tabManual');
     const tabAllergens = document.getElementById('tabAllergens');
     const tabBulletins = document.getElementById('tabBulletins');
+    const tabCustomize = document.getElementById('tabCustomize');
 
     const scannerPanel = document.getElementById('scannerPanel');
     const manualPanel = document.getElementById('manualPanel');
     const allergensPanel = document.getElementById('allergensPanel');
     const bulletinsPanel = document.getElementById('bulletinsPanel');
+    const customizePanel = document.getElementById('customizePanel');
 
-    const demoSamplesSection = document.getElementById('demoSamplesSection');
     const historySection = document.getElementById('historySection');
 
     const installGuideBtn = document.getElementById('installGuideBtn');
@@ -669,22 +830,43 @@
     const barcodeFileInput = document.getElementById('barcodeFileInput');
     const scannerMessage = document.getElementById('scannerMessage');
 
+    // Brand / Product Search
+    const brandSearchInput = document.getElementById('brandSearchInput');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    const searchResultsBox = document.getElementById('searchResultsBox');
+    const searchChips = document.querySelectorAll('.search-chip');
+
+    // State & Store Filter Elements
+    const stateFilterSelect = document.getElementById('stateFilterSelect');
+    const storeFilterSelect = document.getElementById('storeFilterSelect');
+    const filteredCountNotice = document.getElementById('filteredCountNotice');
+    const clearRegionalFilterBtn = document.getElementById('clearRegionalFilterBtn');
+
     const upcForm = document.getElementById('upcForm');
     const upcInput = document.getElementById('upcInput');
     const clearBtn = document.getElementById('clearBtn');
     const resultContainer = document.getElementById('resultContainer');
     const historyList = document.getElementById('historyList');
     const clearHistoryBtn = document.getElementById('clearHistoryBtn');
-    const demoBtns = document.querySelectorAll('.demo-btn');
     const bulletinFeedList = document.getElementById('bulletinFeedList');
     const refreshFeedBtn = document.getElementById('refreshFeedBtn');
 
-    // Allergens Tab Elements
     const allergenCheckboxesContainer = document.getElementById('allergenCheckboxesContainer');
     const activeAllergensBadge = document.getElementById('activeAllergensBadge');
     const resetAllergensBtn = document.getElementById('resetAllergensBtn');
 
-    // Install Modal Handlers
+    // Customize & Watchlist Elements (Step 11)
+    const watchlistContainer = document.getElementById('watchlistContainer');
+    const watchlistCountBadge = document.getElementById('watchlistCountBadge');
+    const newWatchlistBrandInput = document.getElementById('newWatchlistBrandInput');
+    const addWatchlistBtn = document.getElementById('addWatchlistBtn');
+    const prefSoundBtn = document.getElementById('prefSoundBtn');
+    const prefHapticBtn = document.getElementById('prefHapticBtn');
+    const forceReloadBtn = document.getElementById('forceReloadBtn');
+    const resetAllDataBtn = document.getElementById('resetAllDataBtn');
+    const customizeToast = document.getElementById('customizeToast');
+
+    // Install Modal
     installGuideBtn.addEventListener('click', () => {
       triggerHaptic([30]);
       installModal.classList.toggle('hidden');
@@ -694,34 +876,37 @@
       installModal.classList.add('hidden');
     });
 
-    // Navigation Switcher
+    // Navigation Switcher (5 Tabs)
     function setNavTab(activeTab) {
       triggerHaptic([30]);
-      const activeClass = 'py-2.5 px-1 rounded-xl text-xs font-semibold flex flex-col items-center justify-center gap-1 transition bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 text-white shadow-md shadow-blue-950/40 active:scale-95';
-      const inactiveClass = 'py-2.5 px-1 rounded-xl text-xs font-medium text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center gap-1 transition active:scale-95';
+      const activeClass = 'py-2 px-1 rounded-xl text-[11px] font-semibold flex flex-col items-center justify-center gap-1 transition bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 text-white shadow-md shadow-blue-950/40 active:scale-95';
+      const inactiveClass = 'py-2 px-1 rounded-xl text-[11px] font-medium text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center gap-1 transition active:scale-95';
 
       tabScanner.className = (activeTab === 'scanner') ? activeClass : inactiveClass;
       tabManual.className = (activeTab === 'manual') ? activeClass : inactiveClass;
       tabAllergens.className = (activeTab === 'allergens') ? activeClass : inactiveClass;
       tabBulletins.className = (activeTab === 'bulletins') ? activeClass : inactiveClass;
+      tabCustomize.className = (activeTab === 'customize') ? activeClass : inactiveClass;
 
       scannerPanel.classList.toggle('hidden', activeTab !== 'scanner');
       manualPanel.classList.toggle('hidden', activeTab !== 'manual');
       allergensPanel.classList.toggle('hidden', activeTab !== 'allergens');
       bulletinsPanel.classList.toggle('hidden', activeTab !== 'bulletins');
+      customizePanel.classList.toggle('hidden', activeTab !== 'customize');
 
       const isScanTab = (activeTab === 'scanner' || activeTab === 'manual');
-      demoSamplesSection.classList.toggle('hidden', !isScanTab);
       historySection.classList.toggle('hidden', !isScanTab);
 
       if (activeTab === 'allergens') renderAllergensTab();
       if (activeTab === 'bulletins') renderBulletins();
+      if (activeTab === 'customize') renderCustomizeTab();
     }
 
     tabScanner.addEventListener('click', () => setNavTab('scanner'));
     tabManual.addEventListener('click', () => setNavTab('manual'));
     tabAllergens.addEventListener('click', () => setNavTab('allergens'));
     tabBulletins.addEventListener('click', () => setNavTab('bulletins'));
+    tabCustomize.addEventListener('click', () => setNavTab('customize'));
 
     // Camera Handlers
     toggleCameraBtn.addEventListener('click', () => {
@@ -829,7 +1014,126 @@
       processUPC(code);
     }
 
-    // Input handlers
+    // Brand & Product Search
+    brandSearchInput.addEventListener('input', () => {
+      const query = brandSearchInput.value.trim().toLowerCase();
+      clearSearchBtn.classList.toggle('hidden', query === '');
+      performBrandSearch(query);
+    });
+
+    clearSearchBtn.addEventListener('click', () => {
+      brandSearchInput.value = '';
+      clearSearchBtn.classList.add('hidden');
+      searchResultsBox.classList.add('hidden');
+      brandSearchInput.focus();
+    });
+
+    searchChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        triggerHaptic([30]);
+        const q = chip.getAttribute('data-query');
+        brandSearchInput.value = q;
+        clearSearchBtn.classList.remove('hidden');
+        performBrandSearch(q);
+      });
+    });
+
+    function performBrandSearch(query) {
+      if (!query || query.length < 2) {
+        searchResultsBox.classList.add('hidden');
+        return;
+      }
+
+      searchResultsBox.classList.remove('hidden');
+
+      const upcMatches = Object.values(RECALL_DATABASE).filter(item => {
+        const text = `${item.brand} ${item.product} ${item.hazard || ''}`.toLowerCase();
+        return text.includes(query);
+      });
+
+      const bulletinMatches = NATIONAL_BULLETINS.filter(item => {
+        const text = `${item.brand} ${item.title} ${item.reason}`.toLowerCase();
+        return text.includes(query);
+      });
+
+      if (upcMatches.length === 0 && bulletinMatches.length === 0) {
+        searchResultsBox.innerHTML = `
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-400 text-center">
+            <span class="text-emerald-400 font-semibold block mb-0.5">No Active Recalls Found</span>
+            <span>No current alerts matched "${query}". Check product expiration & packaging integrity.</span>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+
+      upcMatches.forEach(item => {
+        const isRecalled = item.isRecalled;
+        const badgeColor = isRecalled ? 'bg-rose-500/20 text-rose-300 border-rose-500/30' : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
+        const label = isRecalled ? 'RECALLED' : 'CLEARED';
+
+        html += `
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-blue-500/50 transition cursor-pointer search-result-item" data-upc="${item.upc}">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-[10px] font-bold px-1.5 py-0.2 rounded border ${badgeColor}">${label}</span>
+              <span class="text-[10px] text-slate-500 font-mono">UPC: ${item.upc}</span>
+            </div>
+            <h4 class="text-xs font-bold text-slate-100">${item.product}</h4>
+            <p class="text-[11px] text-slate-400">${item.brand}</p>
+            ${item.hazard ? `<p class="text-[11px] text-rose-300 mt-1 leading-tight">${item.hazard}</p>` : ''}
+          </div>
+        `;
+      });
+
+      bulletinMatches.forEach(item => {
+        html += `
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-blue-500/50 transition">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-[10px] font-bold px-1.5 py-0.2 rounded border bg-rose-500/20 text-rose-300 border-rose-500/30">${item.severity} ALERT</span>
+              <span class="text-[10px] text-slate-500 font-mono">${item.date} • ${item.agency}</span>
+            </div>
+            <h4 class="text-xs font-bold text-slate-100">${item.title}</h4>
+            <p class="text-[11px] text-slate-400">${item.brand}</p>
+            <p class="text-[11px] text-rose-300/90 mt-1 leading-tight">${item.reason}</p>
+          </div>
+        `;
+      });
+
+      searchResultsBox.innerHTML = html;
+
+      document.querySelectorAll('.search-result-item').forEach(el => {
+        el.addEventListener('click', () => {
+          const upc = el.getAttribute('data-upc');
+          if (upc) {
+            triggerHaptic([30]);
+            upcInput.value = upc;
+            clearBtn.classList.remove('hidden');
+            processUPC(upc);
+          }
+        });
+      });
+    }
+
+    // State & Store Filter Handlers
+    stateFilterSelect.addEventListener('change', () => {
+      triggerHaptic([30]);
+      renderBulletins();
+    });
+
+    storeFilterSelect.addEventListener('change', () => {
+      triggerHaptic([30]);
+      renderBulletins();
+    });
+
+    clearRegionalFilterBtn.addEventListener('click', () => {
+      triggerHaptic([30]);
+      stateFilterSelect.value = 'OH';
+      storeFilterSelect.value = 'ALL';
+      renderBulletins();
+    });
+
+    // Input handlers with Auto-Sanitization for Hyphens and Spaces
     upcInput.addEventListener('input', () => {
       clearBtn.classList.toggle('hidden', upcInput.value.trim() === '');
     });
@@ -841,23 +1145,18 @@
       upcInput.focus();
     });
 
-    // Quick demo buttons
-    demoBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        triggerHaptic([40]);
-        const upc = btn.getAttribute('data-upc');
-        upcInput.value = upc;
-        clearBtn.classList.remove('hidden');
-        processUPC(upc);
-      });
-    });
-
     upcForm.addEventListener('submit', (e) => {
       e.preventDefault();
       triggerHaptic([40]);
-      const code = upcInput.value.trim();
-      if (!code) return;
-      processUPC(code);
+      const rawCode = upcInput.value.trim();
+      if (!rawCode) return;
+      
+      const cleanCode = rawCode.replace(/\D/g, '');
+      if (cleanCode.length < 6) {
+        showScannerMessage("Please enter a valid retail barcode number (typically 12 digits).");
+        return;
+      }
+      processUPC(cleanCode);
     });
 
     clearHistoryBtn.addEventListener('click', () => {
@@ -877,7 +1176,7 @@
 
     // Verification Logic
     function processUPC(rawCode) {
-      const code = rawCode.replace(/\D/g, '');
+      const code = String(rawCode).replace(/\D/g, '');
       if (!code) return;
 
       const record = RECALL_DATABASE[code];
@@ -907,6 +1206,7 @@
           date: record.recallDate,
           agency: record.agency,
           tag: record.tag,
+          stores: record.stores,
           triggeredAllergens: triggeredNames,
           time: timestamp
         };
@@ -973,6 +1273,13 @@
           </div>
         ` : '';
 
+        const storeTag = (data.stores && data.stores.length > 0) ? `
+          <div class="flex justify-between border-b border-slate-800/80 pb-2">
+            <span class="text-slate-400">Sold At Stores:</span>
+            <span class="font-semibold text-sky-300 text-right">${data.stores.join(', ')}</span>
+          </div>
+        ` : '';
+
         cardHtml = `
           <div class="rounded-2xl border-2 border-rose-500 bg-gradient-to-b from-rose-950/80 via-slate-900 to-slate-900 p-5 shadow-2xl shadow-rose-950/60 transition-all">
             <div class="flex items-center justify-between mb-3.5">
@@ -1007,6 +1314,7 @@
                 <span class="text-slate-400">UPC Code:</span>
                 <span class="font-mono text-rose-300 font-bold">${data.upc}</span>
               </div>
+              ${storeTag}
               <div class="pt-1">
                 <span class="font-bold text-rose-400 block mb-0.5">Health Hazard / Contaminant:</span>
                 <p class="text-slate-300 leading-relaxed">${data.details}</p>
@@ -1130,7 +1438,6 @@
       resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    // Allergens Tab Rendering with Clear Tick Boxes
     function renderAllergensTab() {
       activeAllergensBadge.textContent = `${userAllergens.length} Active`;
 
@@ -1154,7 +1461,6 @@
               </div>
             </div>
             
-            <!-- Styled Tick Box -->
             <div class="w-6 h-6 rounded-lg flex items-center justify-center transition ${isChecked ? 'bg-blue-600 text-white font-bold' : 'border border-slate-700 bg-slate-900 text-transparent'}">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
@@ -1192,7 +1498,113 @@
       renderAllergensTab();
     });
 
-    // History and Bulletins
+    // STEP 11: Customize & Brand Watchlist Logic
+    function renderCustomizeTab() {
+      // Sound button state
+      prefSoundBtn.textContent = sound.enabled ? 'Enabled' : 'Muted';
+      prefSoundBtn.className = sound.enabled 
+        ? 'min-h-[40px] px-3.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold active:scale-95'
+        : 'min-h-[40px] px-3.5 py-1.5 rounded-lg bg-slate-800 text-slate-400 border border-slate-700 font-medium active:scale-95';
+
+      // Haptic button state
+      prefHapticBtn.textContent = hapticsEnabled ? 'Enabled' : 'Disabled';
+      prefHapticBtn.className = hapticsEnabled 
+        ? 'min-h-[40px] px-3.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold active:scale-95'
+        : 'min-h-[40px] px-3.5 py-1.5 rounded-lg bg-slate-800 text-slate-400 border border-slate-700 font-medium active:scale-95';
+
+      // Watchlist render
+      watchlistCountBadge.textContent = `${userWatchlist.length} Brands`;
+
+      if (userWatchlist.length === 0) {
+        watchlistContainer.innerHTML = '<p class="text-xs text-slate-500 italic py-1">No brands added to your watchlist yet. Type a brand above to monitor it.</p>';
+        return;
+      }
+
+      watchlistContainer.innerHTML = userWatchlist.map((brand, idx) => {
+        // Check if brand currently has an alert
+        const hasAlert = NATIONAL_BULLETINS.some(b => b.brand.toLowerCase().includes(brand.toLowerCase())) ||
+                         Object.values(RECALL_DATABASE).some(r => r.isRecalled && r.brand.toLowerCase().includes(brand.toLowerCase()));
+
+        return `
+          <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border ${hasAlert ? 'bg-rose-500/20 border-rose-500/40 text-rose-300' : 'bg-slate-900 border-slate-800 text-slate-200'} text-xs">
+            <span>${hasAlert ? '⚠️' : '⭐'}</span>
+            <span class="font-medium">${brand}</span>
+            <button type="button" class="remove-brand-btn text-slate-500 hover:text-rose-400 ml-1 p-0.5" data-idx="${idx}" title="Remove brand">✕</button>
+          </div>
+        `;
+      }).join('');
+
+      document.querySelectorAll('.remove-brand-btn').forEach(b => {
+        b.addEventListener('click', () => {
+          triggerHaptic([30]);
+          const idx = parseInt(b.getAttribute('data-idx'));
+          userWatchlist.splice(idx, 1);
+          saveWatchlist();
+          renderCustomizeTab();
+        });
+      });
+    }
+
+    addWatchlistBtn.addEventListener('click', () => {
+      triggerHaptic([30]);
+      const brand = newWatchlistBrandInput.value.trim();
+      if (!brand) return;
+      if (!userWatchlist.includes(brand)) {
+        userWatchlist.push(brand);
+        saveWatchlist();
+      }
+      newWatchlistBrandInput.value = '';
+      sound.playScanBeep();
+      renderCustomizeTab();
+    });
+
+    function saveWatchlist() {
+      try {
+        localStorage.setItem('recall_radar_watchlist', JSON.stringify(userWatchlist));
+      } catch (e) {}
+    }
+
+    prefSoundBtn.addEventListener('click', () => {
+      triggerHaptic([30]);
+      sound.enabled = !sound.enabled;
+      if (sound.enabled) sound.playScanBeep();
+      renderCustomizeTab();
+    });
+
+    prefHapticBtn.addEventListener('click', () => {
+      hapticsEnabled = !hapticsEnabled;
+      triggerHaptic([40]);
+      renderCustomizeTab();
+    });
+
+    forceReloadBtn.addEventListener('click', () => {
+      triggerHaptic([40]);
+      showCustomizeToast("Checking for updates and reloading application...");
+      setTimeout(() => {
+        window.location.reload();
+      }, 700);
+    });
+
+    resetAllDataBtn.addEventListener('click', () => {
+      triggerHaptic([60]);
+      userAllergens = ['dairy'];
+      userWatchlist = ['Boar\'s Head', 'Horizon Organic'];
+      scanHistory = [];
+      try {
+        localStorage.clear();
+      } catch (e) {}
+      renderHistory();
+      renderCustomizeTab();
+      sound.playScanBeep();
+      showCustomizeToast("All history, watchlist, and settings have been reset.");
+    });
+
+    function showCustomizeToast(msg) {
+      customizeToast.textContent = msg;
+      customizeToast.classList.remove('hidden');
+      setTimeout(() => customizeToast.classList.add('hidden'), 4000);
+    }
+
     function addToHistory(item) {
       scanHistory.unshift(item);
       if (scanHistory.length > 8) scanHistory.pop();
@@ -1204,7 +1616,7 @@
 
     function renderHistory() {
       if (scanHistory.length === 0) {
-        historyList.innerHTML = '<p class="text-xs text-slate-500 italic py-2 text-center">No scans recorded yet. Align a barcode or tap a quick test sample.</p>';
+        historyList.innerHTML = '<p class="text-xs text-slate-500 italic py-2 text-center">No scans recorded yet. Align a barcode or search a brand above.</p>';
         return;
       }
 
@@ -1237,26 +1649,61 @@
       }).join('');
     }
 
+    // State & Store Filter Logic
     function renderBulletins() {
-      bulletinFeedList.innerHTML = NATIONAL_BULLETINS.map(b => `
-        <div class="p-3 rounded-xl border border-slate-800 bg-slate-950/70 hover:border-slate-700 transition">
-          <div class="flex items-center justify-between mb-1">
-            <span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-blue-500/20 text-sky-300 border border-blue-500/30">
-              ${b.severity}
-            </span>
-            <span class="text-[10px] text-slate-500 font-mono">${b.date} • ${b.agency}</span>
+      const selectedState = stateFilterSelect.value;
+      const selectedStore = storeFilterSelect.value;
+
+      const filtered = NATIONAL_BULLETINS.filter(item => {
+        const matchesState = (selectedState === 'ALL') || 
+                             (item.states.includes('ALL')) || 
+                             (item.states.includes(selectedState));
+
+        const matchesStore = (selectedStore === 'ALL') || 
+                             (item.stores && item.stores.includes(selectedStore));
+
+        return matchesState && matchesStore;
+      });
+
+      const stateName = stateFilterSelect.options[stateFilterSelect.selectedIndex].text;
+      const storeName = storeFilterSelect.options[storeFilterSelect.selectedIndex].text;
+      filteredCountNotice.textContent = `Showing ${filtered.length} active bulletin notices for ${stateName.split(' - ')[0]} • ${storeName}`;
+
+      if (filtered.length === 0) {
+        bulletinFeedList.innerHTML = `
+          <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-center text-xs text-slate-400 space-y-1">
+            <span class="text-emerald-400 font-bold block text-sm">✓ No Active Recalls Found</span>
+            <span>There are currently zero active FDA/USDA food recalls matching your selected store (${storeName}) in ${stateName.split(' - ')[0]}.</span>
           </div>
-          <h4 class="text-xs font-bold text-slate-100">${b.title}</h4>
-          <p class="text-[11px] text-slate-400 mb-1">${b.brand}</p>
-          <p class="text-[11px] text-slate-300/90 leading-tight">${b.reason}</p>
-        </div>
-      `).join('');
+        `;
+        return;
+      }
+
+      bulletinFeedList.innerHTML = filtered.map(b => {
+        const storeTags = b.stores ? b.stores.map(s => `<span class="px-1.5 py-0.2 rounded bg-slate-800 text-slate-300 text-[10px]">${s}</span>`).join(' ') : '';
+        const regionText = b.states.includes('ALL') ? 'Nationwide Distribution' : `Affected: ${b.states.join(', ')}`;
+
+        return `
+          <div class="p-3.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:border-slate-700 transition space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-blue-500/20 text-sky-300 border border-blue-500/30">
+                ${b.severity} ALERT
+              </span>
+              <span class="text-[10px] text-slate-500 font-mono">${b.date} • ${b.agency}</span>
+            </div>
+            <h4 class="text-xs font-bold text-slate-100">${b.title}</h4>
+            <p class="text-[11px] text-slate-400">${b.brand} • <span class="text-sky-300 font-medium">${regionText}</span></p>
+            <p class="text-[11px] text-rose-300/90 leading-tight">${b.reason}</p>
+            ${storeTags ? `<div class="pt-1 flex flex-wrap gap-1 items-center"><span class="text-[10px] text-slate-500">Retailers:</span> ${storeTags}</div>` : ''}
+          </div>
+        `;
+      }).join('');
     }
 
-    // Initial setup
     renderHistory();
     renderBulletins();
     renderAllergensTab();
+    renderCustomizeTab();
   </script>
 </body>
 </html>
