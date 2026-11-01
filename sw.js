@@ -1,11 +1,11 @@
-const CACHE_NAME = 'safebite-v2';
+const CACHE_NAME = 'safebite-v5';
 const ASSETS = [
   './index.html?app=safebite',
-  './manifest.json?v=3',
-  './icon-192.png?v=3',
-  './icon-512.png?v=3',
-  './apple-touch-icon.png?v=3',
-  './favicon.png?v=3'
+  './manifest.json?v=5',
+  './icon-192.png?v=5',
+  './icon-512.png?v=5',
+  './apple-touch-icon.png?v=5',
+  './favicon.png?v=5'
 ];
 
 self.addEventListener('install', (e) => {
