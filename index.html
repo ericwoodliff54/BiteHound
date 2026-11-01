@@ -381,6 +381,9 @@
       </div>
     </div>
 
+    <!-- RESULTS DISPLAY AREA (Reveals above scanner for seamless mobile view) -->
+    <section id="resultContainer" class="hidden transition-all duration-300 mb-4"></section>
+
     <!-- SECTION 1: SCANNER PANEL WITH CLEAN SINGLE RETICLE (NO LASER, NO DUPLICATE FRAMES) -->
     <section id="scannerPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4">
       <div class="flex items-center justify-between">
@@ -473,6 +476,37 @@
           <input type="file" id="barcodeFileInput" accept="image/*" class="hidden">
         </label>
       </div>
+
+        <!-- Difficult Barcode Tips Drawer (Cans, Curved Bottles, Wrinkly Bags) -->
+        <div class="pt-1">
+          <button 
+            type="button" 
+            id="toggleScanTipsBtn" 
+            class="w-full py-2 px-3 rounded-xl bg-slate-950/70 border border-slate-800 text-[11px] text-sky-300 hover:text-sky-200 transition flex items-center justify-between active:scale-[0.99]"
+          >
+            <span class="flex items-center gap-1.5 font-medium">
+              <span>💡</span>
+              <span>Scanning Cans or Wrinkly Bags? View 3 Tips</span>
+            </span>
+            <span id="scanTipsArrow" class="text-xs text-slate-500">▼</span>
+          </button>
+          
+          <div id="scanTipsDrawer" class="hidden mt-2 p-3.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2">
+            <div class="flex items-start gap-2">
+              <span class="text-amber-400 font-bold">1.</span>
+              <p><strong class="text-white">Turn Cans Vertically:</strong> Rotate cans so barcode lines run up-and-down rather than wrapping around the curve. This prevents distortion.</p>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-amber-400 font-bold">2.</span>
+              <p><strong class="text-white">Flatten Wrinkled Bags:</strong> Pull the bag taut with two fingers or rest it against your grocery cart to straighten wavy barcode bars.</p>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-amber-400 font-bold">3.</span>
+              <p><strong class="text-white">Angle Away from Glare:</strong> Tilt shiny metal or glossy plastic 15° away from overhead lights, or tap <strong>Flashlight</strong> to even out contrast.</p>
+            </div>
+          </div>
+        </div>
+
 
       <!-- BRAND & PRODUCT NAME SEARCH BAR -->
       <div class="pt-3 border-t border-slate-800/80 space-y-2.5">
@@ -812,8 +846,6 @@
       <div id="customizeToast" class="hidden text-xs p-3 rounded-xl border border-sky-500/30 bg-blue-950/50 text-sky-200"></div>
     </section>
 
-    <!-- RESULTS DISPLAY AREA -->
-    <section id="resultContainer" class="hidden transition-all duration-300"></section>
 
     <!-- SCAN HISTORY LOG -->
     <section id="historySection" class="bg-slate-900/70 rounded-2xl p-4 border border-slate-800">
@@ -1416,12 +1448,12 @@
 
     function updateTorchUI(isOn) {
       if (isOn) {
-        torchBtnText.textContent = "Torch On";
+        torchBtnText.textContent = "Flashlight On";
         toggleTorchBtn.classList.replace('bg-slate-800', 'bg-amber-500/20');
         toggleTorchBtn.classList.replace('text-slate-200', 'text-amber-300');
         toggleTorchBtn.classList.add('border-amber-500/50');
       } else {
-        torchBtnText.textContent = "Flashlight";
+        torchBtnText.textContent = "Flashlight Off";
         toggleTorchBtn.classList.replace('bg-amber-500/20', 'bg-slate-800');
         toggleTorchBtn.classList.replace('text-amber-300', 'text-slate-200');
         toggleTorchBtn.classList.remove('border-amber-500/50');
@@ -1454,18 +1486,24 @@
         cameraStatusBadge.textContent = "Starting...";
         cameraStatusBadge.className = "text-[11px] font-semibold px-2.5 py-1 rounded-full bg-blue-500/20 text-sky-300 border border-blue-500/30";
 
-        // Clean single targeting viewfinder setup without duplicate overlapping borders
+        // High-performance barcode reader optimized for flat boxes, curved cans & flexible bags
         const config = {
-          fps: 10,
+          fps: 20, // Doubled scan rate for responsive curved/motion reads
           qrbox: (w, h) => ({
-            width: Math.floor(Math.min(w * 0.8, 300)),
-            height: Math.floor(Math.min(h * 0.65, 180))
+            width: Math.floor(Math.min(w * 0.88, 340)), // Wider scan window for curved UPCs
+            height: Math.floor(Math.min(h * 0.60, 190))
           }),
-          aspectRatio: 1.777778
+          aspectRatio: 1.777778,
+          experimentalFeatures: {
+            useBarCodeDetectorIfSupported: true // Native hardware-accelerated ML BarcodeDetector
+          }
         };
 
         await html5QrCode.start(
-          { facingMode: "environment" },
+          { 
+            facingMode: "environment",
+            focusMode: "continuous"
+          },
           config,
           (decodedText) => onBarcodeDetected(decodedText),
           () => {}
@@ -1853,13 +1891,19 @@
                   const desc = (item.product_description || '').toLowerCase();
                   const firm = (item.recalling_firm || '').toLowerCase();
                   const codeInfo = (item.code_info || '').toLowerCase();
-                  const prodWords = productName.toLowerCase().split(/\s+/).filter(w => w.length > 3);
-                  
-                  const hasCode = codeInfo.includes(code) || desc.includes(code);
-                  const hasProdMatch = prodWords.some(w => desc.includes(w));
-                  const hasBrandMatch = firm.includes(brandName.toLowerCase()) || desc.includes(brandName.toLowerCase());
 
-                  if (hasCode || (hasBrandMatch && (hasProdMatch || desc.includes('carrot')))) {
+                  // 1. Definite UPC match in FDA code info or product description
+                  const hasCode = codeInfo.includes(code) || desc.includes(code);
+
+                  // 2. High-precision distinctive product line matching (filters out generic words like 'chocolate', 'bar', 'snack')
+                  const genericFoodTerms = new Set(['chocolate', 'candy', 'snack', 'snacks', 'organic', 'whole', 'slices', 'pack', 'package', 'food', 'mini', 'minis', 'classic', 'original', 'sweet', 'flavor', 'treat', 'butter', 'finger', 'crisp', 'bars', 'drink', 'sauce', 'cheese', 'white', 'fresh', 'water', 'roast', 'bites']);
+                  const specificProdWords = productName.toLowerCase().split(/\s+/).filter(w => w.length >= 4 && !genericFoodTerms.has(w));
+                  
+                  const hasSpecificProdTitle = specificProdWords.length > 0 && specificProdWords.some(w => desc.includes(w));
+                  const hasBrandMatch = (brandName.length >= 3 && brandName !== 'Grocery Brand') && (firm.includes(brandName.toLowerCase()) || desc.includes(brandName.toLowerCase()));
+
+                  // Never match parent company on generic words (e.g., Nestle or Ferrero chocolate bar)
+                  if (hasCode || (hasBrandMatch && hasSpecificProdTitle)) {
                     isRecalled = true;
                     
                     let fdaDateStr = "Official FDA Archive";
@@ -1980,7 +2024,7 @@
       }
     }
 
-    // Display Result with Prominent Product Name Hero & Gentle Scroll
+    // Display Result with Prominent Product Name Hero, Recall Date & Scan Next Button
     function displayResult(data) {
       resultContainer.classList.remove('hidden');
 
@@ -2009,7 +2053,7 @@
               <p class="text-xs text-slate-300 mt-0.5">${data.brand} • <span class="font-mono text-slate-400">UPC: ${data.upc}</span></p>
             </div>
 
-            <div class="flex items-center justify-between mb-3.5 bg-rose-950/90 p-3 rounded-xl border border-rose-800/60">
+            <div class="flex items-center justify-between mb-3 bg-rose-950/90 p-3 rounded-xl border border-rose-800/60">
               <div class="flex items-center gap-2.5">
                 <div class="w-8 h-8 rounded-lg bg-rose-600 text-white flex items-center justify-center font-bold">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2026,6 +2070,15 @@
               </span>
             </div>
 
+            <!-- Prominent Recall Issue Date -->
+            <div class="flex items-center justify-between bg-rose-950/60 px-3.5 py-2 rounded-xl border border-rose-800/50 mb-3 text-xs">
+              <span class="text-rose-300 font-semibold flex items-center gap-1.5">
+                <span>📅</span>
+                <span>Official Recall Date:</span>
+              </span>
+              <span class="font-bold text-white font-mono">${data.date || 'Active Public Notice'}</span>
+            </div>
+
             <div class="space-y-2.5 text-xs text-slate-200 bg-slate-950/70 rounded-xl p-4 border border-rose-900/40">
               ${storeTag}
               <div class="pt-0.5">
@@ -2038,41 +2091,65 @@
               </div>
               ${allergenBadge}
             </div>
+
+            <!-- Instant Scan Next Barcode Action Button -->
+            <button 
+              type="button" 
+              class="scan-next-item-btn w-full mt-3.5 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 text-white font-bold text-xs shadow-lg shadow-blue-950/50 transition active:scale-[0.98] flex items-center justify-center gap-2"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <span>📷 Scan Next Item</span>
+            </button>
           </div>
         `;
-      } else if (data.status === 'allergen_alert') {
+      } else if (data.status === 'allergen_warning' || data.status === 'allergen_alert') {
+        // High-visibility Amber / Yellow Guardrail Alert Card
         cardHtml = `
-          <div class="rounded-2xl border-2 border-amber-500 bg-gradient-to-b from-amber-950/70 via-slate-900 to-slate-900 p-5 shadow-2xl shadow-amber-950/50 transition-all">
+          <div class="rounded-2xl border-2 border-amber-400 bg-gradient-to-b from-amber-950/80 via-slate-900 to-slate-900 p-5 shadow-2xl shadow-amber-950/60 transition-all">
             <div class="border-b border-amber-900/50 pb-3 mb-3.5">
               <span class="text-[10px] font-mono tracking-widest text-amber-300 uppercase font-bold block mb-1">SCANNED PRODUCT IDENTIFIED</span>
               <h3 class="font-display text-lg font-bold text-white leading-tight">${data.productName}</h3>
               <p class="text-xs text-slate-300 mt-0.5">${data.brand} • <span class="font-mono text-slate-400">UPC: ${data.upc}</span></p>
             </div>
 
-            <div class="flex items-center justify-between mb-3.5 bg-amber-950/90 p-3 rounded-xl border border-amber-800/60">
+            <div class="flex items-center justify-between mb-3 bg-amber-950/90 p-3 rounded-xl border border-amber-500/50">
               <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-amber-500 text-slate-950 flex items-center justify-center font-bold">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-                  </svg>
+                <div class="w-8 h-8 rounded-lg bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-base">
+                  ⚠️
                 </div>
                 <div>
-                  <span class="text-[10px] uppercase font-bold text-amber-400 block">Personal Sensitivity</span>
-                  <span class="text-sm font-bold text-white">${data.title}</span>
+                  <span class="text-[10px] uppercase font-bold text-amber-400 block">Personal Dietary Alert</span>
+                  <span class="text-sm font-bold text-amber-200">${data.title}</span>
                 </div>
               </div>
               <span class="text-[10px] font-mono text-emerald-300 bg-emerald-950/60 px-2 py-1 rounded-md border border-emerald-800/60">
-                No Recalls
+                No Federal Recall
               </span>
             </div>
 
-            <div class="space-y-2.5 text-xs text-slate-200 bg-slate-950/70 rounded-xl p-4 border border-amber-900/40">
-              <div class="p-3 bg-amber-500/15 border border-amber-500/30 rounded-lg text-amber-200 font-medium leading-relaxed">
-                ⚠️ Contains your active dietary guardrail: <span class="font-bold underline">${data.triggeredAllergens.join(', ')}</span>.
+            <div class="space-y-2.5 text-xs text-slate-200 bg-slate-950/80 rounded-xl p-4 border border-amber-500/40">
+              <div class="p-3 bg-amber-500/20 border border-amber-500/40 rounded-lg text-amber-200 font-semibold leading-relaxed flex items-center gap-2">
+                <span class="text-base">⚠️</span>
+                <span>Contains your guarded allergen: <span class="font-bold underline text-white">${data.triggeredAllergens.join(', ')}</span></span>
               </div>
               <p class="text-slate-300 pt-0.5 leading-relaxed">${data.details}</p>
               ${data.ingredients ? `<p class="text-[11px] text-slate-400 border-t border-slate-800/80 pt-2"><span class="font-semibold text-slate-300">Detected Ingredients:</span> ${data.ingredients.slice(0, 160)}...</p>` : ''}
             </div>
+
+            <!-- Instant Scan Next Barcode Action Button -->
+            <button 
+              type="button" 
+              class="scan-next-item-btn w-full mt-3.5 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 text-white font-bold text-xs shadow-lg shadow-blue-950/50 transition active:scale-[0.98] flex items-center justify-center gap-2"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <span>📷 Scan Next Item</span>
+            </button>
           </div>
         `;
       } else {
@@ -2105,6 +2182,18 @@
               <p class="text-emerald-300 leading-relaxed">${data.details}</p>
               ${data.ingredients ? `<p class="text-[11px] text-slate-400 border-t border-slate-800 pt-1.5"><span class="font-semibold text-slate-300">Ingredients Checked:</span> ${data.ingredients.slice(0, 160)}...</p>` : ''}
             </div>
+
+            <!-- Instant Scan Next Barcode Action Button -->
+            <button 
+              type="button" 
+              class="scan-next-item-btn w-full mt-3.5 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 text-white font-bold text-xs shadow-lg shadow-blue-950/50 transition active:scale-[0.98] flex items-center justify-center gap-2"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <span>📷 Scan Next Item</span>
+            </button>
           </div>
         `;
       }
@@ -2124,9 +2213,10 @@
         resultContainer.innerHTML = cardHtml + microNotice;
       }
 
+      attachScanNextListeners();
       setTimeout(() => {
-        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 100);
+        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
     }
 
     function renderAllergensTab() {
@@ -2414,6 +2504,32 @@
     }
     window.addEventListener('online', updateOnlineStatus);
     window.addEventListener('offline', updateOnlineStatus);
+
+    // Scan Tips Drawer Toggle
+    const toggleScanTipsBtn = document.getElementById('toggleScanTipsBtn');
+    const scanTipsDrawer = document.getElementById('scanTipsDrawer');
+    const scanTipsArrow = document.getElementById('scanTipsArrow');
+
+    if (toggleScanTipsBtn && scanTipsDrawer) {
+      toggleScanTipsBtn.addEventListener('click', () => {
+        triggerHaptic([30]);
+        const isHidden = scanTipsDrawer.classList.toggle('hidden');
+        if (scanTipsArrow) scanTipsArrow.textContent = isHidden ? '▼' : '▲';
+      });
+    }
+
+    // Attach event listeners to all dynamic "Scan Next Item" buttons
+    function attachScanNextListeners() {
+      document.querySelectorAll('.scan-next-item-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          triggerHaptic([40]);
+          resultContainer.classList.add('hidden');
+          setNavTab('scanner');
+          startCamera();
+        });
+      });
+    }
+
     // Food Safety & Legal Disclaimer Logic
     function checkDisclaimerStatus() {
       try {
