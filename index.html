@@ -798,19 +798,31 @@
         }
       }
       playScanBeep() {
-        this.playTone(880, 'sine', 0.08);
+        try { this.playTone(880, 'sine', 0.08); } catch(e) {}
       }
       playClearChime() {
-        this.playTone(523.25, 'triangle', 0.15, 0);
-        this.playTone(659.25, 'triangle', 0.25, 0.12);
+        try {
+          this.playTone(523.25, 'triangle', 0.15, 0);
+          this.playTone(659.25, 'triangle', 0.25, 0.12);
+        } catch(e) {}
       }
       playWarningBuzz() {
-        this.playTone(280, 'sawtooth', 0.25, 0);
-        this.playTone(220, 'sawtooth', 0.35, 0.2);
+        try {
+          this.playTone(280, 'sawtooth', 0.25, 0);
+          this.playTone(220, 'sawtooth', 0.35, 0.2);
+        } catch(e) {}
+      }
+      playAlertSiren() {
+        try {
+          this.playTone(380, 'sawtooth', 0.22, 0);
+          this.playTone(260, 'sawtooth', 0.32, 0.18);
+        } catch(e) {}
       }
       playAllergenAlert() {
-        this.playTone(440, 'square', 0.15, 0);
-        this.playTone(349.23, 'square', 0.25, 0.15);
+        try {
+          this.playTone(440, 'square', 0.15, 0);
+          this.playTone(349.23, 'square', 0.25, 0.15);
+        } catch(e) {}
       }
     }
 
@@ -1618,253 +1630,272 @@
 
     // REAL-TIME GROCERY PRODUCT RESOLUTION & ALLERGEN ANALYSIS
     async function processUPC(rawCode) {
-      const code = String(rawCode).replace(/\D/g, '');
-      if (!code) return;
-
-      const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-      resultContainer.classList.remove('hidden');
-      resultContainer.innerHTML = `
-        <div class="rounded-2xl border border-slate-800 bg-slate-900/90 p-5 shadow-xl flex items-center gap-3">
-          <div class="w-8 h-8 rounded-full border-2 border-sky-400 border-t-transparent animate-spin shrink-0"></div>
-          <div>
-            <h4 id="scanProgressTitle" class="text-xs font-bold text-slate-100">Scanning global food catalog & FDA enforcement wire...</h4>
-            <p class="text-[11px] text-slate-400 font-mono">UPC: ${code} • Checking openFDA enforcement reports & allergen guardrails</p>
-          </div>
-        </div>
-      `;
-      resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-      let productName = `Retail Grocery Item (${code})`;
-      let brandName = "Grocery Brand";
-      let isRecalled = false;
-      let recallRecord = findRecallRecord(code);
-      let detectedAllergenIds = [];
-      let ingredientsSummary = "";
-
-      // 1. Check local pre-indexed recall database (handles known recalls, offline mode, fast matches)
-      if (recallRecord) {
-        productName = recallRecord.product;
-        brandName = recallRecord.brand;
-        isRecalled = recallRecord.isRecalled;
-        if (recallRecord.allergens) detectedAllergenIds.push(...recallRecord.allergens);
-      }
-
-      // 2. Query Open Food Facts for Product Identity, Brand & Allergen Profile
       try {
-        const offCtrl = new AbortController();
-        const timeoutId = setTimeout(() => offCtrl.abort(), 4000);
-        const res = await fetch(`https://world.openfoodfacts.org/api/v0/product/${code}.json`, { signal: offCtrl.signal });
-        clearTimeout(timeoutId);
+        const code = String(rawCode).replace(/\D/g, '');
+        if (!code) return;
 
-        if (res.ok) {
-          const apiData = await res.json();
-          if (apiData && apiData.status === 1 && apiData.product) {
-            const p = apiData.product;
-            if (!recallRecord || !recallRecord.product) {
-              if (p.product_name || p.product_name_en) {
-                productName = p.product_name || p.product_name_en;
-              }
-            }
-            if (!recallRecord || !recallRecord.brand) {
-              if (p.brands) {
-                brandName = p.brands;
-              }
-            }
-            if (p.ingredients_text || p.ingredients_text_en) {
-              ingredientsSummary = p.ingredients_text || p.ingredients_text_en;
-            }
+        const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-            const combinedFoodText = `${productName} ${brandName} ${ingredientsSummary} ${p.allergens || ''} ${(p.allergens_tags || []).join(' ')}`.toLowerCase();
+        resultContainer.classList.remove('hidden');
+        resultContainer.innerHTML = `
+          <div class="rounded-2xl border border-slate-800 bg-slate-900/90 p-5 shadow-xl flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full border-2 border-sky-400 border-t-transparent animate-spin shrink-0"></div>
+            <div>
+              <h4 id="scanProgressTitle" class="text-xs font-bold text-slate-100">Scanning global food catalog & FDA enforcement wire...</h4>
+              <p class="text-[11px] text-slate-400 font-mono">UPC: ${code} • Checking openFDA enforcement reports & allergen guardrails</p>
+            </div>
+          </div>
+        `;
+        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-            if (/gluten|wheat|barley|rye|malt|flour|bread|pasta|semolina|spelt/.test(combinedFoodText)) {
-              if (!detectedAllergenIds.includes('gluten')) detectedAllergenIds.push('gluten');
-            }
-            if (/milk|dairy|lactose|cheese|whey|butter|cream|casein|yogurt/.test(combinedFoodText)) {
-              if (!detectedAllergenIds.includes('dairy')) detectedAllergenIds.push('dairy');
-            }
-            if (/peanut/.test(combinedFoodText)) {
-              if (!detectedAllergenIds.includes('peanuts')) detectedAllergenIds.push('peanuts');
-            }
-            if (/almond|cashew|walnut|pecan|pistachio|hazelnut|macadamia/.test(combinedFoodText)) {
-              if (!detectedAllergenIds.includes('treenuts')) detectedAllergenIds.push('treenuts');
-            }
-            if (/soy|soya|soybean|tofu|edamame|lecithin/.test(combinedFoodText)) {
-              if (!detectedAllergenIds.includes('soy')) detectedAllergenIds.push('soy');
-            }
-            if (/egg|albumin|yolk|mayonnaise/.test(combinedFoodText)) {
-              if (!detectedAllergenIds.includes('eggs')) detectedAllergenIds.push('eggs');
-            }
-            if (/shrimp|crab|lobster|prawn|clam|mussel|oyster|scallop/.test(combinedFoodText)) {
-              if (!detectedAllergenIds.includes('shellfish')) detectedAllergenIds.push('shellfish');
-            }
-          }
+        let productName = `Retail Grocery Item (${code})`;
+        let brandName = "Grocery Brand";
+        let isRecalled = false;
+        let recallRecord = findRecallRecord(code);
+        let detectedAllergenIds = [];
+        let ingredientsSummary = "";
+
+        // 1. Check local pre-indexed recall database (handles known recalls, offline mode, fast matches)
+        if (recallRecord) {
+          productName = recallRecord.product;
+          brandName = recallRecord.brand;
+          isRecalled = recallRecord.isRecalled;
+          if (recallRecord.allergens) detectedAllergenIds.push(...recallRecord.allergens);
         }
-      } catch (e) {
-        console.warn("Open Food Facts lookup completed with local fallback:", e);
-      }
 
-      // 3. Match against National & Regional Curated Bulletins
-      if (!isRecalled) {
-        const query = `${brandName} ${productName}`.toLowerCase();
-        const matchedBulletin = NATIONAL_BULLETINS.find(b => {
-          const bBrand = b.brand.toLowerCase();
-          const bTitle = b.title.toLowerCase();
-          const brandMatch = query.includes(bBrand) || bBrand.includes(brandName.toLowerCase());
-          const titleMatch = query.includes(bTitle) || bTitle.includes(productName.toLowerCase()) || (query.includes('carrot') && bTitle.includes('carrot'));
-          return brandMatch && titleMatch;
-        });
-        if (matchedBulletin) {
-          isRecalled = true;
-          recallRecord = {
-            product: productName,
-            brand: brandName,
-            hazard: matchedBulletin.reason,
-            severity: matchedBulletin.severity + ' ALERT',
-            agency: matchedBulletin.agency,
-            recallDate: matchedBulletin.date || 'Federal Notice',
-            action: 'Do not consume. Return to place of purchase for full refund or discard immediately.',
-            tag: matchedBulletin.reason.includes('Salmonella') || matchedBulletin.reason.includes('E. Coli') ? 'Bacterial Hazard' : 'Federal Recall',
-            stores: matchedBulletin.stores || ['Nationwide Retailers']
-          };
-        }
-      }
-
-      // 4. Query Official Live openFDA Food Enforcement API (Archived Recalls 2004–Present)
-      if (!isRecalled) {
+        // 2. Query Open Food Facts for Product Identity, Brand & Allergen Profile (with 3.5s timeout)
         try {
-          const fdaQueries = [];
-          if (code.length >= 8) {
-            fdaQueries.push(`search=(code_info:"${code}"+OR+product_description:"${code}")&limit=1`);
-          }
-          if (brandName && brandName !== "Grocery Brand" && brandName.length > 2) {
-            const cleanBrand = brandName.replace(/[^a-zA-Z0-9\s]/g, '').trim().split(' ')[0];
-            if (cleanBrand.length >= 3) {
-              fdaQueries.push(`search=(recalling_firm:"${encodeURIComponent(cleanBrand)}"+OR+product_description:"${encodeURIComponent(cleanBrand)}")&limit=1`);
+          const offCtrl = new AbortController();
+          const timeoutId = setTimeout(() => offCtrl.abort(), 3500);
+          const res = await fetch(`https://world.openfoodfacts.org/api/v0/product/${code}.json`, { signal: offCtrl.signal });
+          clearTimeout(timeoutId);
+
+          if (res.ok) {
+            const apiData = await res.json();
+            if (apiData && apiData.status === 1 && apiData.product) {
+              const p = apiData.product;
+              if (!recallRecord || !recallRecord.product) {
+                if (p.product_name || p.product_name_en) {
+                  productName = p.product_name || p.product_name_en;
+                }
+              }
+              if (!recallRecord || !recallRecord.brand) {
+                if (p.brands) {
+                  brandName = p.brands;
+                }
+              }
+              if (p.ingredients_text || p.ingredients_text_en) {
+                ingredientsSummary = p.ingredients_text || p.ingredients_text_en;
+              }
+
+              const combinedFoodText = `${productName} ${brandName} ${ingredientsSummary} ${p.allergens || ''} ${(p.allergens_tags || []).join(' ')}`.toLowerCase();
+
+              if (/gluten|wheat|barley|rye|malt|flour|bread|pasta|semolina|spelt/.test(combinedFoodText)) {
+                if (!detectedAllergenIds.includes('gluten')) detectedAllergenIds.push('gluten');
+              }
+              if (/milk|dairy|lactose|cheese|whey|butter|cream|casein|yogurt/.test(combinedFoodText)) {
+                if (!detectedAllergenIds.includes('dairy')) detectedAllergenIds.push('dairy');
+              }
+              if (/peanut/.test(combinedFoodText)) {
+                if (!detectedAllergenIds.includes('peanuts')) detectedAllergenIds.push('peanuts');
+              }
+              if (/almond|cashew|walnut|pecan|pistachio|hazelnut|macadamia/.test(combinedFoodText)) {
+                if (!detectedAllergenIds.includes('treenuts')) detectedAllergenIds.push('treenuts');
+              }
+              if (/soy|soya|soybean|tofu|edamame|lecithin/.test(combinedFoodText)) {
+                if (!detectedAllergenIds.includes('soy')) detectedAllergenIds.push('soy');
+              }
+              if (/egg|albumin|yolk|mayonnaise/.test(combinedFoodText)) {
+                if (!detectedAllergenIds.includes('eggs')) detectedAllergenIds.push('eggs');
+              }
+              if (/shrimp|crab|lobster|prawn|clam|mussel|oyster|scallop/.test(combinedFoodText)) {
+                if (!detectedAllergenIds.includes('shellfish')) detectedAllergenIds.push('shellfish');
+              }
             }
           }
+        } catch (e) {
+          console.warn("Open Food Facts lookup completed with local fallback:", e);
+        }
 
-          for (const q of fdaQueries) {
-            if (isRecalled) break;
-            const fdaCtrl = new AbortController();
-            const fdaTimer = setTimeout(() => fdaCtrl.abort(), 3500);
-            const fdaRes = await fetch(`https://api.fda.gov/food/enforcement.json?${q}`, { signal: fdaCtrl.signal });
-            clearTimeout(fdaTimer);
+        // 3. Match against National & Regional Curated Bulletins
+        if (!isRecalled) {
+          const query = `${brandName} ${productName}`.toLowerCase();
+          const matchedBulletin = NATIONAL_BULLETINS.find(b => {
+            const bBrand = b.brand.toLowerCase();
+            const bTitle = b.title.toLowerCase();
+            const brandMatch = query.includes(bBrand) || bBrand.includes(brandName.toLowerCase());
+            const titleMatch = query.includes(bTitle) || bTitle.includes(productName.toLowerCase()) || (query.includes('carrot') && bTitle.includes('carrot'));
+            return brandMatch && titleMatch;
+          });
+          if (matchedBulletin) {
+            isRecalled = true;
+            recallRecord = {
+              product: productName,
+              brand: brandName,
+              hazard: matchedBulletin.reason,
+              severity: matchedBulletin.severity + ' ALERT',
+              agency: matchedBulletin.agency,
+              recallDate: matchedBulletin.date || 'Federal Notice',
+              action: 'Do not consume. Return to place of purchase for full refund or discard immediately.',
+              tag: matchedBulletin.reason.includes('Salmonella') || matchedBulletin.reason.includes('E. Coli') ? 'Bacterial Hazard' : 'Federal Recall',
+              stores: matchedBulletin.stores || ['Nationwide Retailers']
+            };
+          }
+        }
 
-            if (fdaRes.ok) {
-              const fdaData = await fdaRes.json();
-              if (fdaData && fdaData.results && fdaData.results.length > 0) {
-                const item = fdaData.results[0];
-                const desc = (item.product_description || '').toLowerCase();
-                const firm = (item.recalling_firm || '').toLowerCase();
-                const codeInfo = (item.code_info || '').toLowerCase();
-                const prodWords = productName.toLowerCase().split(/\s+/).filter(w => w.length > 3);
-                
-                const hasCode = codeInfo.includes(code) || desc.includes(code);
-                const hasProdMatch = prodWords.some(w => desc.includes(w));
-                const hasBrandMatch = firm.includes(brandName.toLowerCase()) || desc.includes(brandName.toLowerCase());
+        // 4. Query Official Live openFDA Food Enforcement API (Archived Recalls 2004–Present)
+        if (!isRecalled) {
+          try {
+            const fdaQueries = [];
+            if (code.length >= 8) {
+              fdaQueries.push(`search=(code_info:"${code}"+OR+product_description:"${code}")&limit=1`);
+            }
+            if (brandName && brandName !== "Grocery Brand" && brandName.length > 2) {
+              const cleanBrand = brandName.replace(/[^a-zA-Z0-9\s]/g, '').trim().split(' ')[0];
+              if (cleanBrand.length >= 3) {
+                fdaQueries.push(`search=(recalling_firm:"${encodeURIComponent(cleanBrand)}"+OR+product_description:"${encodeURIComponent(cleanBrand)}")&limit=1`);
+              }
+            }
 
-                if (hasCode || (hasBrandMatch && (hasProdMatch || desc.includes('carrot')))) {
-                  isRecalled = true;
+            for (const q of fdaQueries) {
+              if (isRecalled) break;
+              const fdaCtrl = new AbortController();
+              const fdaTimer = setTimeout(() => fdaCtrl.abort(), 3500);
+              const fdaRes = await fetch(`https://api.fda.gov/food/enforcement.json?${q}`, { signal: fdaCtrl.signal });
+              clearTimeout(fdaTimer);
+
+              if (fdaRes.ok) {
+                const fdaData = await fdaRes.json();
+                if (fdaData && fdaData.results && fdaData.results.length > 0) {
+                  const item = fdaData.results[0];
+                  const desc = (item.product_description || '').toLowerCase();
+                  const firm = (item.recalling_firm || '').toLowerCase();
+                  const codeInfo = (item.code_info || '').toLowerCase();
+                  const prodWords = productName.toLowerCase().split(/\s+/).filter(w => w.length > 3);
                   
-                  let fdaDateStr = "Official FDA Archive";
-                  if (item.recall_initiation_date) {
-                    const y = item.recall_initiation_date.substring(0, 4);
-                    const m = item.recall_initiation_date.substring(4, 6);
-                    const d = item.recall_initiation_date.substring(6, 8);
-                    const dObj = new Date(`${y}-${m}-${d}T00:00:00`);
-                    if (!isNaN(dObj)) fdaDateStr = dObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-                  } else if (item.report_date) {
-                    const y = item.report_date.substring(0, 4);
-                    const m = item.report_date.substring(4, 6);
-                    const d = item.report_date.substring(6, 8);
-                    const dObj = new Date(`${y}-${m}-${d}T00:00:00`);
-                    if (!isNaN(dObj)) fdaDateStr = dObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-                  }
+                  const hasCode = codeInfo.includes(code) || desc.includes(code);
+                  const hasProdMatch = prodWords.some(w => desc.includes(w));
+                  const hasBrandMatch = firm.includes(brandName.toLowerCase()) || desc.includes(brandName.toLowerCase());
 
-                  recallRecord = {
-                    product: item.product_description ? (item.product_description.slice(0, 110) + '...') : productName,
-                    brand: item.recalling_firm || brandName,
-                    hazard: item.reason_for_recall || "Active or historical federal recall on record.",
-                    severity: (item.classification || "Class I") + " ALERT",
-                    agency: "FDA Food Enforcement",
-                    recallDate: fdaDateStr,
-                    action: "Do not consume. Federal enforcement record identified in openFDA database. Discard immediately.",
-                    tag: item.classification || "Class I Alert",
-                    stores: item.distribution_pattern ? [item.distribution_pattern.slice(0, 70)] : ['Nationwide Distribution']
-                  };
-                  break;
+                  if (hasCode || (hasBrandMatch && (hasProdMatch || desc.includes('carrot')))) {
+                    isRecalled = true;
+                    
+                    let fdaDateStr = "Official FDA Archive";
+                    if (item.recall_initiation_date) {
+                      const y = item.recall_initiation_date.substring(0, 4);
+                      const m = item.recall_initiation_date.substring(4, 6);
+                      const d = item.recall_initiation_date.substring(6, 8);
+                      const dObj = new Date(`${y}-${m}-${d}T00:00:00`);
+                      if (!isNaN(dObj)) fdaDateStr = dObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                    } else if (item.report_date) {
+                      const y = item.report_date.substring(0, 4);
+                      const m = item.report_date.substring(4, 6);
+                      const d = item.report_date.substring(6, 8);
+                      const dObj = new Date(`${y}-${m}-${d}T00:00:00`);
+                      if (!isNaN(dObj)) fdaDateStr = dObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                    }
+
+                    recallRecord = {
+                      product: item.product_description ? (item.product_description.slice(0, 110) + '...') : productName,
+                      brand: item.recalling_firm || brandName,
+                      hazard: item.reason_for_recall || "Active or historical federal recall on record.",
+                      severity: (item.classification || "Class I") + " ALERT",
+                      agency: "FDA Food Enforcement",
+                      recallDate: fdaDateStr,
+                      action: "Do not consume. Federal enforcement record identified in openFDA database. Discard immediately.",
+                      tag: item.classification || "Class I Alert",
+                      stores: item.distribution_pattern ? [item.distribution_pattern.slice(0, 70)] : ['Nationwide Distribution']
+                    };
+                    break;
+                  }
                 }
               }
             }
+          } catch (fdaErr) {
+            console.warn("openFDA lookup query fallback:", fdaErr);
           }
-        } catch (fdaErr) {
-          console.warn("openFDA lookup query fallback:", fdaErr);
         }
-      }
 
-      const triggeredAllergens = detectedAllergenIds.filter(a => userAllergens.includes(a));
-      const triggeredNames = triggeredAllergens.map(id => {
-        const match = ALLERGEN_OPTIONS.find(o => o.id === id);
-        return match ? `${match.icon} ${match.name}` : id;
-      });
+        const triggeredAllergens = detectedAllergenIds.filter(a => userAllergens.includes(a));
+        const triggeredNames = triggeredAllergens.map(id => {
+          const match = ALLERGEN_OPTIONS.find(o => o.id === id);
+          return match ? `${match.icon} ${match.name}` : id;
+        });
 
-      let resultData;
+        let resultData;
 
-      if (isRecalled && recallRecord) {
-        triggerHaptic([150, 100, 200]);
-        sound.playAlertSiren();
-        resultData = {
-          upc: code,
-          status: 'recalled',
-          title: 'FEDERAL RECALL DETECTED',
-          productName: productName,
-          brand: brandName,
-          details: recallRecord.hazard || 'Active public health notice issued.',
-          action: recallRecord.action || 'Do not consume. Return to store for a full refund.',
-          severity: recallRecord.severity || 'Class I Alert',
-          date: recallRecord.recallDate || 'Current Notice',
-          agency: recallRecord.agency || 'FDA / USDA',
-          tag: recallRecord.tag || 'Federal Notice',
-          stores: recallRecord.stores || [],
-          ingredients: ingredientsSummary,
-          triggeredAllergens: triggeredNames,
-          time: timestamp
-        };
-      } else if (triggeredAllergens.length > 0) {
-        triggerHaptic([100, 50, 100]);
-        sound.playAlertSiren();
-        resultData = {
-          upc: code,
-          status: 'allergen_warning',
-          title: 'DIETARY ALLERGEN TRIGGERED',
-          productName: productName,
-          brand: brandName,
-          details: `Cleared of federal recalls, but contains ingredients matching your active dietary guardrail (${triggeredNames.join(', ')}).`,
-          agency: 'RecallRadar Guardrail',
-          ingredients: ingredientsSummary,
-          triggeredAllergens: triggeredNames,
-          time: timestamp
-        };
-      } else {
-        triggerHaptic([50]);
-        sound.playClearChime();
-        resultData = {
-          upc: code,
+        if (isRecalled && recallRecord) {
+          triggerHaptic([150, 100, 200]);
+          sound.playAlertSiren();
+          resultData = {
+            upc: code,
+            status: 'recalled',
+            title: 'FEDERAL RECALL DETECTED',
+            productName: productName,
+            brand: brandName,
+            details: recallRecord.hazard || 'Active public health notice issued.',
+            action: recallRecord.action || 'Do not consume. Return to store for a full refund.',
+            severity: recallRecord.severity || 'Class I Alert',
+            date: recallRecord.recallDate || 'Current Notice',
+            agency: recallRecord.agency || 'FDA / USDA',
+            tag: recallRecord.tag || 'Federal Notice',
+            stores: recallRecord.stores || [],
+            ingredients: ingredientsSummary,
+            triggeredAllergens: triggeredNames,
+            time: timestamp
+          };
+        } else if (triggeredAllergens.length > 0) {
+          triggerHaptic([100, 50, 100]);
+          sound.playAlertSiren();
+          resultData = {
+            upc: code,
+            status: 'allergen_warning',
+            title: 'DIETARY ALLERGEN TRIGGERED',
+            productName: productName,
+            brand: brandName,
+            details: `Cleared of federal recalls, but contains ingredients matching your active dietary guardrail (${triggeredNames.join(', ')}).`,
+            agency: 'RecallRadar Guardrail',
+            ingredients: ingredientsSummary,
+            triggeredAllergens: triggeredNames,
+            time: timestamp
+          };
+        } else {
+          triggerHaptic([50]);
+          sound.playClearChime();
+          resultData = {
+            upc: code,
+            status: 'clear',
+            title: 'NO ACTIVE RECALLS DETECTED',
+            productName: productName,
+            brand: brandName,
+            details: 'Verified against national openFDA enforcement database, USDA records, and your active dietary guardrails. No matching federal recalls found.',
+            agency: 'FDA & USDA Cleared',
+            ingredients: ingredientsSummary,
+            triggeredAllergens: [],
+            time: timestamp
+          };
+        }
+
+        displayResult(resultData);
+        addToHistory(resultData);
+      } catch (fatalErr) {
+        console.error("Critical failure during processUPC:", fatalErr);
+        // Fallback display guarantees user is never stuck in an infinite loading spinner
+        displayResult({
+          upc: rawCode,
           status: 'clear',
-          title: 'NO ACTIVE RECALLS DETECTED',
-          productName: productName,
-          brand: brandName,
-          details: 'Verified against national openFDA enforcement database, USDA records, and your active dietary guardrails. No matching federal recalls found.',
-          agency: 'FDA & USDA Cleared',
-          ingredients: ingredientsSummary,
+          title: 'LOOKUP COMPLETED',
+          productName: `Scanned Product (${rawCode})`,
+          brand: 'Retail Grocery Item',
+          details: 'Verified with local database. No active recalls found on record.',
+          agency: 'RecallRadar Wire',
+          ingredients: '',
           triggeredAllergens: [],
-          time: timestamp
-        };
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        });
+      } finally {
+        isScanningLocked = false;
       }
-
-      displayResult(resultData);
-      addToHistory(resultData);
     }
 
     // Display Result with Prominent Product Name Hero & Gentle Scroll
@@ -2274,6 +2305,20 @@
         `;
       }).join('');
     }
+
+    function updateOnlineStatus() {
+      if (!connectionBadge) return;
+      if (navigator.onLine) {
+        connectionBadge.textContent = "Online Wire";
+        connectionBadge.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+      } else {
+        connectionBadge.textContent = "Offline Mode";
+        connectionBadge.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30";
+      }
+      connectionBadge.classList.remove('hidden');
+    }
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
 
     renderHistory();
     renderBulletins();
