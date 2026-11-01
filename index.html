@@ -255,10 +255,10 @@
           </div>
 
           <div class="flex items-start gap-2.5">
-            <span class="text-base">⭐</span>
+            <span class="text-base">📶</span>
             <div>
-              <span class="font-bold text-white block">Unlimited Brand Watchlist</span>
-              <span class="text-[11px] text-slate-400">Monitors your weekly grocery staples for manufacturer warnings.</span>
+              <span class="font-bold text-white block">Store-Ready Offline Auto-Sync</span>
+              <span class="text-[11px] text-slate-400">Pre-caches live FDA recall wire data so you can scan with zero cell signal in store basements.</span>
             </div>
           </div>
         </div>
@@ -866,7 +866,7 @@
         <h2 class="font-display text-base font-bold text-slate-100 flex items-center gap-2">
           <span>⚙️ Settings & Preferences</span>
         </h2>
-        <p class="text-xs text-slate-400 mt-0.5">Control audio alerts, haptic feedback, brand watchlists, and offline updates.</p>
+        <p class="text-xs text-slate-400 mt-0.5">Control audio alerts, haptic feedback, subscription tiers, and offline updates.</p>
       </div>
 
       <!-- SAFEBITE PLUS MEMBERSHIP SETTINGS -->
@@ -902,36 +902,6 @@
           <span>🧪</span>
           <span id="toggleTesterBtnText">Tester Switch: Toggle Free / Plus</span>
         </button>
-      </div>
-
-      <!-- BRAND WATCHLIST TRAY -->
-      <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-amber-300 flex items-center gap-1.5 uppercase tracking-wider">
-            <span>⭐</span>
-            <span>Brand & Food Watchlist</span>
-          </span>
-          <span id="watchlistCountBadge" class="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700 font-bold">0 Brands</span>
-        </div>
-        <p class="text-[11px] text-slate-400">Add household brands you buy regularly. SafeBite monitors them automatically:</p>
-
-        <div class="flex gap-2">
-          <input 
-            type="text" 
-            id="newWatchlistBrandInput" 
-            placeholder="Add brand (e.g. Horizon, Chobani, Boar's Head)..." 
-            class="flex-1 bg-slate-900 border border-slate-700 text-slate-100 rounded-lg px-3 py-2 text-xs outline-none focus:border-blue-500"
-          >
-          <button 
-            type="button" 
-            id="addWatchlistBtn" 
-            class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-3 py-2 rounded-lg text-xs transition"
-          >
-            + Add
-          </button>
-        </div>
-
-        <div id="watchlistContainer" class="flex flex-wrap gap-1.5 pt-1"></div>
       </div>
 
       <!-- Sound & Haptic Options -->
@@ -1159,12 +1129,6 @@
         localStorage.setItem('safebite_allergens', JSON.stringify(getActiveProfile().allergens));
       } catch (e) {}
     }
-
-    let userWatchlist = [];
-    try {
-      const savedWatchlist = localStorage.getItem('safebite_watchlist') || localStorage.getItem('recall_radar_watchlist');
-      if (savedWatchlist) userWatchlist = JSON.parse(savedWatchlist);
-    } catch (e) {}
 
     let isPlusActive = false;
     let plusStatusType = 'free'; // 'free', 'trial', 'paid', or 'expired'
@@ -1565,10 +1529,6 @@
     const headerPlusBadgeText = document.getElementById('headerPlusBadgeText');
 
     // Settings & Watchlist Elements
-    const watchlistContainer = document.getElementById('watchlistContainer');
-    const watchlistCountBadge = document.getElementById('watchlistCountBadge');
-    const newWatchlistBrandInput = document.getElementById('newWatchlistBrandInput');
-    const addWatchlistBtn = document.getElementById('addWatchlistBtn');
     const prefSoundBtn = document.getElementById('prefSoundBtn');
     const prefHapticBtn = document.getElementById('prefHapticBtn');
     const forceReloadBtn = document.getElementById('forceReloadBtn');
@@ -3233,7 +3193,7 @@
       });
     }
 
-    // Settings & Brand Watchlist Logic
+    // Settings Logic
     function renderCustomizeTab() {
       prefSoundBtn.textContent = sound.enabled ? 'Enabled' : 'Muted';
       prefSoundBtn.className = sound.enabled 
@@ -3244,55 +3204,6 @@
       prefHapticBtn.className = hapticsEnabled 
         ? 'min-h-[40px] px-3.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold active:scale-95'
         : 'min-h-[40px] px-3.5 py-1.5 rounded-lg bg-slate-800 text-slate-400 border border-slate-700 font-medium active:scale-95';
-
-      watchlistCountBadge.textContent = `${userWatchlist.length} Brands`;
-
-      if (userWatchlist.length === 0) {
-        watchlistContainer.innerHTML = '<p class="text-xs text-slate-500 italic py-1">No brands starred yet. Add favorite brands above to monitor them automatically.</p>';
-        return;
-      }
-
-      watchlistContainer.innerHTML = userWatchlist.map((brand, idx) => {
-        const hasAlert = NATIONAL_BULLETINS.some(b => b.brand.toLowerCase().includes(brand.toLowerCase())) ||
-                         Object.values(RECALL_DATABASE).some(r => r.isRecalled && r.brand.toLowerCase().includes(brand.toLowerCase()));
-
-        return `
-          <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border ${hasAlert ? 'bg-rose-500/20 border-rose-500/40 text-rose-300' : 'bg-slate-900 border-slate-800 text-slate-200'} text-xs">
-            <span>${hasAlert ? '⚠️' : '⭐'}</span>
-            <span class="font-medium">${brand}</span>
-            <button type="button" class="remove-brand-btn text-slate-500 hover:text-rose-400 ml-1 p-0.5" data-idx="${idx}" title="Remove brand">✕</button>
-          </div>
-        `;
-      }).join('');
-
-      document.querySelectorAll('.remove-brand-btn').forEach(b => {
-        b.addEventListener('click', () => {
-          triggerHaptic([30]);
-          const idx = parseInt(b.getAttribute('data-idx'));
-          userWatchlist.splice(idx, 1);
-          saveWatchlist();
-          renderCustomizeTab();
-        });
-      });
-    }
-
-    addWatchlistBtn.addEventListener('click', () => {
-      triggerHaptic([30]);
-      const brand = newWatchlistBrandInput.value.trim();
-      if (!brand) return;
-      if (!userWatchlist.includes(brand)) {
-        userWatchlist.push(brand);
-        saveWatchlist();
-      }
-      newWatchlistBrandInput.value = '';
-      sound.playScanBeep();
-      renderCustomizeTab();
-    });
-
-    function saveWatchlist() {
-      try {
-        localStorage.setItem('safebite_watchlist', JSON.stringify(userWatchlist));
-      } catch (e) {}
     }
 
     const toggleTesterModeBtn = document.getElementById('toggleTesterModeBtn');
@@ -3350,7 +3261,6 @@
     resetAllDataBtn.addEventListener('click', () => {
       triggerHaptic([60]);
       userAllergens = [];
-      userWatchlist = [];
       scanHistory = [];
       isPlusActive = false;
       try {
@@ -3361,7 +3271,7 @@
       renderCustomizeTab();
       renderAllergensTab();
       sound.playScanBeep();
-      showCustomizeToast("All history, watchlist, and settings have been reset.");
+      showCustomizeToast("All history and settings have been reset.");
     });
 
     function showCustomizeToast(msg) {
