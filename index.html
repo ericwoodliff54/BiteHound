@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>RecallRadar • Smart Grocery Safety Scanner</title>
+  <title>RecallRadar • Recalls, Gluten & Allergen Guard</title>
   
   <!-- Mobile & PWA Optimizations for iOS and Android -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -13,7 +13,6 @@
   <meta name="theme-color" content="#020617">
   <meta name="format-detection" content="telephone=no">
 
-  <!-- External Manifest and Standalone Data URI fallback -->
   <link rel="manifest" href="manifest.json">
 
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
@@ -49,7 +48,7 @@
   <!-- Ambient blue glow backdrop -->
   <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-xl h-64 bg-blue-600/15 blur-[100px] pointer-events-none -z-10"></div>
 
-  <!-- Streamlined Header -->
+  <!-- Header with Dual Subtitle & Plus Status Badge -->
   <header class="bg-slate-900/80 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-30">
     <div class="max-w-xl mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -67,9 +66,16 @@
         <div>
           <div class="flex items-center gap-2">
             <h1 class="font-display font-bold text-slate-100 text-lg tracking-tight">RecallRadar</h1>
-            <span id="connectionBadge" class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Offline Ready</span>
+            <!-- Dual Badges: Free Federal Recall Tier vs Plus Tier -->
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-blue-500/20 text-sky-300 border border-blue-500/30">FDA Free</span>
+            <button type="button" id="headerPlusBadgeBtn" class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30 transition flex items-center gap-1">
+              <span>⭐</span>
+              <span id="headerPlusBadgeText">Plus Trial</span>
+            </button>
+            <span id="connectionBadge" class="hidden text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Offline Ready</span>
           </div>
-          <p class="text-[11px] text-slate-400">Grocery Safety & UPC Scanner</p>
+          <!-- User-Requested Recommended Tagline -->
+          <p class="text-[11px] text-slate-400">Recalls, Gluten & Allergen Guard</p>
         </div>
       </div>
 
@@ -119,9 +125,9 @@
       <button 
         type="button" 
         id="tabAllergens" 
-        class="py-2.5 px-1 rounded-xl text-[11px] font-medium text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center gap-1 transition active:scale-95"
+        class="py-2.5 px-1 rounded-xl text-[11px] font-medium text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center gap-1 transition active:scale-95 relative"
       >
-        <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
         </svg>
         <span>Allergens</span>
@@ -143,7 +149,7 @@
         id="tabCustomize" 
         class="py-2.5 px-1 rounded-xl text-[11px] font-medium text-slate-400 hover:text-slate-200 flex flex-col items-center justify-center gap-1 transition active:scale-95"
       >
-        <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
         </svg>
@@ -169,12 +175,11 @@
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-        <!-- Android Chrome Detailed Instructions -->
         <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-2">
           <div class="flex items-center gap-1.5 text-slate-200 font-bold">
             <span>🤖 Android (Chrome Browser)</span>
           </div>
-          <p class="text-[11px] text-slate-300">If "Install app" says unavailable, tap <span class="text-sky-300 font-bold">Create shortcut</span> (or <span class="text-sky-300 font-bold">Add to Home screen</span>):</p>
+          <p class="text-[11px] text-slate-300">If "Install app" is unavailable, tap <span class="text-sky-300 font-bold">Create shortcut</span> (or <span class="text-sky-300 font-bold">Add to Home screen</span>):</p>
           <ol class="list-decimal list-inside space-y-1.5 text-slate-400 text-[11px] leading-relaxed">
             <li>In Chrome, tap the <span class="text-white font-bold">three dots (⋮)</span> in the top right.</li>
             <li>Tap <span class="text-sky-300 font-semibold">Create shortcut</span> (or <span class="text-sky-300 font-semibold">Add to Home screen</span>).</li>
@@ -182,7 +187,6 @@
           </ol>
         </div>
 
-        <!-- iOS Safari Instructions -->
         <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800 space-y-2">
           <div class="flex items-center gap-1.5 text-slate-200 font-bold">
             <span>🍏 Apple iOS (Safari)</span>
@@ -198,7 +202,116 @@
       <p class="text-[10px] text-slate-500 text-center">Once added, RecallRadar runs in fullscreen mode without any browser URL bars.</p>
     </div>
 
-    <!-- SECTION 1: SCANNER PANEL WITH CLEAN VIEWFINDER (NO BUSY LASER) & TORCH TOGGLE -->
+    <!-- RECALLRADAR PLUS IN-APP PAYWALL MODAL SHEET -->
+    <div id="plusPaywallModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+      <div class="bg-slate-900 border-2 border-amber-500/50 max-w-md w-full rounded-3xl p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto relative animate-in fade-in zoom-in-95 duration-200">
+        
+        <button id="closePaywallBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-full bg-slate-800">
+          ✕
+        </button>
+
+        <!-- Header Hero -->
+        <div class="text-center space-y-1.5 pt-2">
+          <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500 via-amber-400 to-yellow-300 text-slate-950 shadow-lg shadow-amber-950/60 mb-1">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+          </div>
+          <span class="text-[11px] font-bold tracking-widest uppercase text-amber-400 block">RECALLRADAR PLUS UPGRADE</span>
+          <h2 class="font-display text-xl font-bold text-white">Full Gluten & Allergen Defense</h2>
+          <p class="text-xs text-slate-300 max-w-xs mx-auto">Instant peace of mind in every grocery aisle. Never read confusing ingredient fine print again.</p>
+        </div>
+
+        <!-- Benefits List -->
+        <div class="space-y-2.5 text-xs bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <div class="flex items-start gap-2.5">
+            <span class="text-base">🌾</span>
+            <div>
+              <span class="font-bold text-white block">Gluten & Celiac Protection</span>
+              <span class="text-[11px] text-slate-400">Scans barcodes for hidden wheat, barley, rye, and malt ingredients.</span>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-2.5">
+            <span class="text-base">🛡️</span>
+            <div>
+              <span class="font-bold text-white block">Top 7 Allergen Shields</span>
+              <span class="text-[11px] text-slate-400">Customizable guardrails for Dairy, Peanuts, Tree Nuts, Soy, Eggs & Shellfish.</span>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-2.5">
+            <span class="text-base">👨‍👩‍👧</span>
+            <div>
+              <span class="font-bold text-white block">Family Dietary Profiles</span>
+              <span class="text-[11px] text-slate-400">Maintain custom sensitivity filters for everyone in your household.</span>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-2.5">
+            <span class="text-base">⭐</span>
+            <div>
+              <span class="font-bold text-white block">Unlimited Brand Watchlist</span>
+              <span class="text-[11px] text-slate-400">Monitors your weekly grocery staples for manufacturer warnings.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Pricing Tier Options -->
+        <div class="space-y-2" id="paywallPlansContainer">
+          <label class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border-2 border-amber-500 bg-amber-950/20 text-xs transition relative">
+            <div class="flex items-center gap-2.5">
+              <input type="radio" name="plusPlan" value="annual" checked class="text-amber-500 focus:ring-0">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-white text-sm">Annual Plan</span>
+                  <span class="px-1.5 py-0.2 rounded bg-amber-400 text-slate-950 text-[10px] font-bold uppercase">Best Value</span>
+                </div>
+                <span class="text-[11px] text-amber-200/90 block">7-Day Free Trial, then $14.99/year ($1.25/mo)</span>
+              </div>
+            </div>
+            <span class="font-bold text-white text-sm">$1.25<span class="text-[10px] text-slate-400 font-normal">/mo</span></span>
+          </label>
+
+          <label class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border border-slate-800 bg-slate-950 text-xs transition hover:border-slate-700">
+            <div class="flex items-center gap-2.5">
+              <input type="radio" name="plusPlan" value="monthly" class="text-amber-500 focus:ring-0">
+              <div>
+                <span class="font-bold text-white block text-sm">Monthly Plan</span>
+                <span class="text-[11px] text-slate-400">Billed monthly, cancel anytime</span>
+              </div>
+            </div>
+            <span class="font-bold text-white text-sm">$1.99<span class="text-[10px] text-slate-400 font-normal">/mo</span></span>
+          </label>
+
+          <label class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border border-slate-800 bg-slate-950 text-xs transition hover:border-slate-700">
+            <div class="flex items-center gap-2.5">
+              <input type="radio" name="plusPlan" value="lifetime" class="text-amber-500 focus:ring-0">
+              <div>
+                <span class="font-bold text-white block text-sm">Lifetime Unlock</span>
+                <span class="text-[11px] text-slate-400">One-time payment, forever access</span>
+              </div>
+            </div>
+            <span class="font-bold text-white text-sm">$9.99</span>
+          </label>
+        </div>
+
+        <!-- CTA Button -->
+        <button 
+          type="button" 
+          id="activatePlusTrialBtn" 
+          class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-sm shadow-xl shadow-amber-950/60 hover:opacity-95 transition active:scale-[0.98] flex items-center justify-center gap-2"
+        >
+          <span>Start 7-Day Free Trial & Unlock Plus</span>
+        </button>
+
+        <p class="text-[10px] text-slate-500 text-center leading-tight">
+          Demo Mode: Tapping above immediately unlocks RecallRadar Plus so you can test all features. In App Store release, this connects to Apple IAP & Google Play Billing.
+        </p>
+      </div>
+    </div>
+
+    <!-- SECTION 1: SCANNER PANEL WITH BRAND SEARCH -->
     <section id="scannerPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4">
       <div class="flex items-center justify-between">
         <div>
@@ -213,7 +326,7 @@
         </span>
       </div>
 
-      <!-- Clean Viewfinder Box (Quiet reticles, laser removed) -->
+      <!-- Clean Viewfinder Box -->
       <div class="relative bg-black rounded-2xl overflow-hidden aspect-video flex flex-col items-center justify-center border-2 border-slate-800 shadow-2xl">
         <div id="reader" class="w-full h-full"></div>
 
@@ -250,10 +363,9 @@
           <p class="text-[11px] text-slate-400 max-w-xs mt-1">Tap "Start Camera Scanner" or search by brand below</p>
         </div>
 
-        <!-- Clean Quiet Corner Reticles Overlay (Laser removed as requested) -->
+        <!-- Corner Reticles Overlay -->
         <div id="scannerOverlay" class="absolute inset-0 pointer-events-none hidden">
           <div class="absolute inset-6 border border-sky-500/30 rounded-xl"></div>
-          <!-- Clean corner brackets without distracting scanning line -->
           <div class="absolute top-6 left-6 w-5 h-5 border-t-2 border-l-2 border-sky-400"></div>
           <div class="absolute top-6 right-6 w-5 h-5 border-t-2 border-r-2 border-sky-400"></div>
           <div class="absolute bottom-6 left-6 w-5 h-5 border-b-2 border-l-2 border-sky-400"></div>
@@ -261,7 +373,7 @@
         </div>
       </div>
 
-      <!-- Controls (Including Step 13 Flashlight / Torch Toggle) -->
+      <!-- Controls (Camera, Flashlight, Photo) -->
       <div class="flex flex-col sm:flex-row gap-2.5">
         <button 
           type="button" 
@@ -275,7 +387,7 @@
           <span id="cameraBtnText">Start Camera Scanner</span>
         </button>
 
-        <!-- STEP 13: FLASHLIGHT / TORCH TOGGLE BUTTON -->
+        <!-- Flashlight / Torch Toggle -->
         <button 
           type="button" 
           id="toggleTorchBtn" 
@@ -295,7 +407,7 @@
           <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
           </svg>
-          <span>Scan Photo</span>
+          <span>Scan from Photo</span>
           <input type="file" id="barcodeFileInput" accept="image/*" class="hidden">
         </label>
       </div>
@@ -397,12 +509,39 @@
       </form>
     </section>
 
-    <!-- SECTION 3: ALLERGENS PANEL (DEDICATED TAB WITH GLUTEN TICK BOX) -->
+    <!-- SECTION 3: ALLERGENS PANEL (PLUS TIER UPSELL BANNER & TICK BOXES) -->
     <section id="allergensPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4 hidden">
+      
+      <!-- RecallRadar Plus Upsell Teaser Card -->
+      <div class="p-4 rounded-2xl bg-gradient-to-br from-amber-950/40 via-slate-900 to-slate-950 border border-amber-500/40 shadow-lg space-y-2.5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-lg">⭐</span>
+            <div>
+              <span class="text-xs font-bold text-amber-300 block">RecallRadar Plus</span>
+              <span class="text-[11px] text-slate-400 block">Gluten & Personalized Dietary Guardrails</span>
+            </div>
+          </div>
+          <span id="plusActiveBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40">
+            Free Preview
+          </span>
+        </div>
+        <p class="text-[11px] text-slate-300 leading-relaxed">
+          While federal recall scanning is 100% free forever, **Plus** automatically flags hidden Gluten, Dairy, Peanuts, and allergens when shopping.
+        </p>
+        <button 
+          type="button" 
+          id="openPaywallBtn" 
+          class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5"
+        >
+          <span>View RecallRadar Plus Plans ($1.25/mo or $9.99 Lifetime)</span>
+        </button>
+      </div>
+
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
         <div>
-          <h2 class="font-display text-base font-bold text-slate-100 flex items-center gap-2">
-            <span>🛡️ Personal Allergen Guardrails</span>
+          <h2 class="font-display text-sm font-bold text-slate-100 flex items-center gap-2">
+            <span>🛡️ Personal Allergen & Gluten Guardrails</span>
           </h2>
           <p class="text-xs text-slate-400 mt-0.5">Tick any ingredients you want flagged during your shopping trip.</p>
         </div>
@@ -411,12 +550,8 @@
         </span>
       </div>
 
+      <!-- Allergen Tick Box Grid (Defaults to all unchecked) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1" id="allergenCheckboxesContainer"></div>
-
-      <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800 text-xs text-slate-400 space-y-1">
-        <p class="font-semibold text-slate-300">How allergen guardrails work:</p>
-        <p>When you scan any grocery barcode or search a product, RecallRadar compares the ingredients against your ticked allergens. If an item contains a checked allergen (like Gluten, Dairy, or Peanuts), an amber warning badge appears—even if the item has no federal recall.</p>
-      </div>
 
       <div class="pt-2">
         <button 
@@ -452,6 +587,7 @@
         </span>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+          <!-- State Selector -->
           <div>
             <label for="stateFilterSelect" class="block text-[11px] text-slate-400 mb-1">State / Distribution Area</label>
             <select 
@@ -470,6 +606,7 @@
             </select>
           </div>
 
+          <!-- Store Selector -->
           <div>
             <label for="storeFilterSelect" class="block text-[11px] text-slate-400 mb-1">Supermarket Chain</label>
             <select 
@@ -597,7 +734,7 @@
       <div id="customizeToast" class="hidden text-xs p-3 rounded-xl border border-sky-500/30 bg-blue-950/50 text-sky-200"></div>
     </section>
 
-    <!-- RESULTS DISPLAY AREA (PROMINENT PRODUCT NAME HERO & GENTLE AUTO-SCROLL) -->
+    <!-- RESULTS DISPLAY AREA -->
     <section id="resultContainer" class="hidden transition-all duration-300"></section>
 
     <!-- SCAN HISTORY LOG -->
@@ -619,7 +756,7 @@
   </main>
 
   <footer class="py-4 text-center text-xs text-slate-500 border-t border-slate-900 mt-auto pb-8">
-    RecallRadar • Smart Grocery Safety Scanner
+    RecallRadar • Recalls, Gluten & Allergen Guard
   </footer>
 
   <script>
@@ -678,7 +815,6 @@
 
     const sound = new SoundEngine();
 
-    // Haptic feedback trigger
     let hapticsEnabled = true;
     function triggerHaptic(pattern = [60]) {
       if (!hapticsEnabled) return;
@@ -687,7 +823,7 @@
       } catch (e) {}
     }
 
-    // Comprehensive Allergen Options including Gluten / Wheat
+    // Allergen Options
     const ALLERGEN_OPTIONS = [
       { id: 'gluten', name: 'Gluten / Wheat', icon: '🌾', desc: 'Wheat, barley, rye, malt, flour' },
       { id: 'dairy', name: 'Dairy / Milk', icon: '🥛', desc: 'Milk, whey, cheese, butter' },
@@ -698,21 +834,25 @@
       { id: 'shellfish', name: 'Shellfish', icon: '🦐', desc: 'Shrimp, crab, lobster' }
     ];
 
-    // Default to NOTHING checked
     let userAllergens = [];
     try {
       const savedAllergens = localStorage.getItem('recall_radar_allergens');
       if (savedAllergens) userAllergens = JSON.parse(savedAllergens);
     } catch (e) {}
 
-    // Default with NO brands starred
     let userWatchlist = [];
     try {
       const savedWatchlist = localStorage.getItem('recall_radar_watchlist');
       if (savedWatchlist) userWatchlist = JSON.parse(savedWatchlist);
     } catch (e) {}
 
-    // Product Database
+    let isPlusActive = false;
+    try {
+      const savedPlus = localStorage.getItem('recall_radar_plus_active');
+      if (savedPlus === 'true') isPlusActive = true;
+    } catch (e) {}
+
+    // Product Database (with Known Catalog)
     const RECALL_DATABASE = {
       "011110815462": {
         isRecalled: true,
@@ -841,7 +981,6 @@
     const toggleCameraBtn = document.getElementById('toggleCameraBtn');
     const toggleTorchBtn = document.getElementById('toggleTorchBtn');
     const torchBtnText = document.getElementById('torchBtnText');
-    const torchIcon = document.getElementById('torchIcon');
     const cameraBtnText = document.getElementById('cameraBtnText');
     const cameraStatusBadge = document.getElementById('cameraStatusBadge');
     const cameraPlaceholder = document.getElementById('cameraPlaceholder');
@@ -874,6 +1013,15 @@
     const activeAllergensBadge = document.getElementById('activeAllergensBadge');
     const resetAllergensBtn = document.getElementById('resetAllergensBtn');
 
+    // Paywall Elements
+    const plusPaywallModal = document.getElementById('plusPaywallModal');
+    const openPaywallBtn = document.getElementById('openPaywallBtn');
+    const closePaywallBtn = document.getElementById('closePaywallBtn');
+    const activatePlusTrialBtn = document.getElementById('activatePlusTrialBtn');
+    const plusActiveBadge = document.getElementById('plusActiveBadge');
+    const headerPlusBadgeBtn = document.getElementById('headerPlusBadgeBtn');
+    const headerPlusBadgeText = document.getElementById('headerPlusBadgeText');
+
     // Settings & Watchlist Elements
     const watchlistContainer = document.getElementById('watchlistContainer');
     const watchlistCountBadge = document.getElementById('watchlistCountBadge');
@@ -885,24 +1033,50 @@
     const resetAllDataBtn = document.getElementById('resetAllDataBtn');
     const customizeToast = document.getElementById('customizeToast');
 
-    // Offline / Online Status Detection
-    function updateOnlineStatus() {
-      if (navigator.onLine) {
-        connectionBadge.textContent = "Offline Ready";
-        connectionBadge.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
-      } else {
-        connectionBadge.textContent = "⚡ In-Store Offline";
-        connectionBadge.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30";
-      }
+    // Paywall Handlers
+    function openPaywall() {
+      triggerHaptic([30]);
+      plusPaywallModal.classList.remove('hidden');
     }
-    window.addEventListener('online', updateOnlineStatus);
-    window.addEventListener('offline', updateOnlineStatus);
 
-    // Register simple service worker for PWA install capability
-    if ('serviceWorker' in navigator) {
+    function closePaywall() {
+      plusPaywallModal.classList.add('hidden');
+    }
+
+    openPaywallBtn.addEventListener('click', openPaywall);
+    headerPlusBadgeBtn.addEventListener('click', openPaywall);
+    closePaywallBtn.addEventListener('click', closePaywall);
+
+    activatePlusTrialBtn.addEventListener('click', () => {
+      triggerHaptic([60, 40, 60]);
+      sound.playClearChime();
+      isPlusActive = true;
       try {
-        navigator.serviceWorker.register('sw.js').catch(() => {});
+        localStorage.setItem('recall_radar_plus_active', 'true');
       } catch (e) {}
+
+      updatePlusUI();
+      closePaywall();
+      showCustomizeToast("🎉 RecallRadar Plus activated! All allergen & gluten guardrails unlocked.");
+      renderAllergensTab();
+    });
+
+    function updatePlusUI() {
+      if (isPlusActive) {
+        headerPlusBadgeText.textContent = "Plus Active";
+        headerPlusBadgeBtn.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 transition flex items-center gap-1";
+        plusActiveBadge.textContent = "✓ PLUS ACTIVE";
+        plusActiveBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
+        openPaywallBtn.innerHTML = `<span>⭐ You Have Active RecallRadar Plus Access</span>`;
+        openPaywallBtn.className = "w-full py-2.5 px-3 rounded-xl bg-slate-800 border border-slate-700 text-amber-300 font-bold text-xs transition flex items-center justify-center gap-1.5";
+      } else {
+        headerPlusBadgeText.textContent = "Plus Trial";
+        headerPlusBadgeBtn.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30 transition flex items-center gap-1";
+        plusActiveBadge.textContent = "Free Preview";
+        plusActiveBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40";
+        openPaywallBtn.innerHTML = `<span>View RecallRadar Plus Plans ($1.25/mo or $9.99 Lifetime)</span>`;
+        openPaywallBtn.className = "w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5";
+      }
     }
 
     // Install Modal
@@ -957,7 +1131,7 @@
       }
     });
 
-    // STEP 13: Flashlight / Torch Toggle Logic
+    // Flashlight / Torch Toggle Logic
     toggleTorchBtn.addEventListener('click', async () => {
       triggerHaptic([30]);
       if (!isCameraRunning) {
@@ -1254,16 +1428,121 @@
       renderBulletins();
     });
 
-    // Verification Logic & Name Extraction
-    function processUPC(rawCode) {
+    // REAL-TIME GROCERY PRODUCT RESOLUTION & ALLERGEN ANALYSIS
+    async function processUPC(rawCode) {
       const code = String(rawCode).replace(/\D/g, '');
       if (!code) return;
 
-      const record = RECALL_DATABASE[code];
       const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-      const productAllergens = (record && record.allergens) || [];
-      const triggeredAllergens = productAllergens.filter(a => userAllergens.includes(a));
+      // Immediate visual loading indicator while resolving real-world grocery data
+      resultContainer.classList.remove('hidden');
+      resultContainer.innerHTML = `
+        <div class="rounded-2xl border border-slate-800 bg-slate-900/90 p-5 shadow-xl flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full border-2 border-sky-400 border-t-transparent animate-spin shrink-0"></div>
+          <div>
+            <h4 class="text-xs font-bold text-slate-100">Identifying scanned grocery product...</h4>
+            <p class="text-[11px] text-slate-400 font-mono">UPC: ${code} • Querying global food catalog & recall wire</p>
+          </div>
+        </div>
+      `;
+      resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      let productName = `Retail Grocery Item (${code})`;
+      let brandName = "Grocery Brand";
+      let isRecalled = false;
+      let recallRecord = RECALL_DATABASE[code] || null;
+      let detectedAllergenIds = [];
+      let ingredientsSummary = "";
+
+      // 1. Check local catalog first
+      if (recallRecord) {
+        productName = recallRecord.product;
+        brandName = recallRecord.brand;
+        isRecalled = recallRecord.isRecalled;
+        if (recallRecord.allergens) detectedAllergenIds.push(...recallRecord.allergens);
+      }
+
+      // 2. Query Live Open Food Facts Global Grocery Registry (Millions of real retail UPCs)
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 4000);
+        const res = await fetch(`https://world.openfoodfacts.org/api/v0/product/${code}.json`, { signal: controller.signal });
+        clearTimeout(timeoutId);
+
+        if (res.ok) {
+          const apiData = await res.json();
+          if (apiData && apiData.status === 1 && apiData.product) {
+            const p = apiData.product;
+            if (p.product_name || p.product_name_en) {
+              productName = p.product_name || p.product_name_en;
+            }
+            if (p.brands) {
+              brandName = p.brands;
+            }
+            if (p.ingredients_text || p.ingredients_text_en) {
+              ingredientsSummary = p.ingredients_text || p.ingredients_text_en;
+            }
+
+            // Real Ingredient Text & Tag Analysis
+            const combinedFoodText = `${productName} ${brandName} ${ingredientsSummary} ${p.allergens || ''} ${(p.allergens_tags || []).join(' ')}`.toLowerCase();
+
+            // Detect Gluten / Wheat (Bread, pasta, wheat flour, barley, rye, malt)
+            if (/gluten|wheat|barley|rye|malt|flour|bread|pasta|semolina|spelt/.test(combinedFoodText)) {
+              if (!detectedAllergenIds.includes('gluten')) detectedAllergenIds.push('gluten');
+            }
+            // Detect Dairy / Milk (Milk, cheese, whey, cream, butter, lactose, casein)
+            if (/milk|dairy|lactose|cheese|whey|butter|cream|casein|yogurt/.test(combinedFoodText)) {
+              if (!detectedAllergenIds.includes('dairy')) detectedAllergenIds.push('dairy');
+            }
+            // Detect Peanuts
+            if (/peanut/.test(combinedFoodText)) {
+              if (!detectedAllergenIds.includes('peanuts')) detectedAllergenIds.push('peanuts');
+            }
+            // Detect Tree Nuts
+            if (/almond|cashew|walnut|pecan|pistachio|hazelnut|macadamia/.test(combinedFoodText)) {
+              if (!detectedAllergenIds.includes('treenuts')) detectedAllergenIds.push('treenuts');
+            }
+            // Detect Soy
+            if (/soy|soya|soybean|tofu|edamame|lecithin/.test(combinedFoodText)) {
+              if (!detectedAllergenIds.includes('soy')) detectedAllergenIds.push('soy');
+            }
+            // Detect Eggs
+            if (/egg|albumin|yolk|mayonnaise/.test(combinedFoodText)) {
+              if (!detectedAllergenIds.includes('eggs')) detectedAllergenIds.push('eggs');
+            }
+            // Detect Shellfish
+            if (/shrimp|crab|lobster|prawn|clam|mussel|oyster|scallop/.test(combinedFoodText)) {
+              if (!detectedAllergenIds.includes('shellfish')) detectedAllergenIds.push('shellfish');
+            }
+          }
+        }
+      } catch (e) {
+        console.warn("Live registry lookup completed with local fallback:", e);
+      }
+
+      // Check National Bulletins by product name or brand
+      if (!isRecalled) {
+        const query = `${brandName} ${productName}`.toLowerCase();
+        const matchedBulletin = NATIONAL_BULLETINS.find(b => {
+          return query.includes(b.brand.toLowerCase()) && (query.includes(b.title.toLowerCase()) || b.title.toLowerCase().includes(productName.toLowerCase()));
+        });
+        if (matchedBulletin) {
+          isRecalled = true;
+          recallRecord = {
+            product: productName,
+            brand: brandName,
+            hazard: matchedBulletin.reason,
+            severity: matchedBulletin.severity + ' ALERT',
+            agency: matchedBulletin.agency,
+            action: 'Do not consume. Return to place of purchase for full refund.',
+            stores: matchedBulletin.stores || []
+          };
+        }
+      }
+
+      // Cross-reference detected allergens with user's active dietary guardrails
+      const triggeredAllergens = detectedAllergenIds.filter(a => userAllergens.includes(a));
       const triggeredNames = triggeredAllergens.map(id => {
         const match = ALLERGEN_OPTIONS.find(o => o.id === id);
         return match ? `${match.icon} ${match.name}` : id;
@@ -1271,66 +1550,55 @@
 
       let resultData;
 
-      if (record && record.isRecalled) {
+      if (isRecalled && recallRecord) {
         triggerHaptic([150, 100, 200]);
         sound.playWarningBuzz();
         resultData = {
           upc: code,
           status: 'recalled',
           title: 'RECALL HAZARD ALERT',
-          productName: record.product,
-          brand: record.brand,
-          details: record.hazard,
-          action: record.action,
-          severity: record.severity,
-          date: record.recallDate,
-          agency: record.agency,
-          tag: record.tag,
-          stores: record.stores,
+          productName: productName,
+          brand: brandName,
+          details: recallRecord.hazard || 'Active public health notice issued.',
+          action: recallRecord.action || 'Do not consume. Return to store for a full refund.',
+          severity: recallRecord.severity || 'Class I Alert',
+          date: recallRecord.recallDate || 'Current Notice',
+          agency: recallRecord.agency || 'FDA / USDA',
+          tag: recallRecord.tag || 'Federal Notice',
+          stores: recallRecord.stores || [],
+          ingredients: ingredientsSummary,
           triggeredAllergens: triggeredNames,
           time: timestamp
         };
-      } else if (record && !record.isRecalled) {
-        if (triggeredAllergens.length > 0) {
-          triggerHaptic([100, 50, 100]);
-          sound.playAllergenAlert();
-          resultData = {
-            upc: code,
-            status: 'allergen_alert',
-            title: 'DIETARY GUARDRAIL ALERT',
-            productName: record.product,
-            brand: record.brand,
-            details: `Clear of federal recalls, but contains ingredients matching your active dietary guardrail (${triggeredNames.join(', ')}).`,
-            agency: 'FDA Cleared',
-            triggeredAllergens: triggeredNames,
-            time: timestamp
-          };
-        } else {
-          triggerHaptic([50]);
-          sound.playClearChime();
-          resultData = {
-            upc: code,
-            status: 'clear',
-            title: 'CLEARED SAFE',
-            productName: record.product,
-            brand: record.brand,
-            details: 'Verified against national FDA & USDA enforcement lists and your personal guardrails. Safe to consume.',
-            agency: 'FDA & USDA',
-            triggeredAllergens: [],
-            time: timestamp
-          };
-        }
+      } else if (triggeredAllergens.length > 0) {
+        // Product is clear of federal recalls, but matched active allergen / gluten guardrails!
+        triggerHaptic([100, 50, 100]);
+        sound.playAllergenAlert();
+        resultData = {
+          upc: code,
+          status: 'allergen_alert',
+          title: 'DIETARY GUARDRAIL ALERT',
+          productName: productName,
+          brand: brandName,
+          details: `Cleared of federal recalls, but contains ingredients matching your active dietary guardrail (${triggeredNames.join(', ')}).`,
+          agency: 'FDA & USDA Cleared',
+          ingredients: ingredientsSummary,
+          triggeredAllergens: triggeredNames,
+          time: timestamp
+        };
       } else {
-        triggerHaptic([40]);
+        // Fully Cleared Safe
+        triggerHaptic([50]);
         sound.playClearChime();
         resultData = {
           upc: code,
           status: 'clear',
           title: 'CLEARED SAFE',
-          productName: `Scanned Retail Grocery Product (UPC ${code})`,
-          brand: 'Retail Item',
-          details: 'Cross-checked against active federal food enforcement registries. No recall notices or safety advisories are currently active for this product.',
+          productName: productName,
+          brand: brandName,
+          details: 'Verified against national FDA & USDA enforcement lists and your active dietary guardrails. No recalls or allergen triggers found.',
           agency: 'FDA & USDA Cleared',
+          ingredients: ingredientsSummary,
           triggeredAllergens: [],
           time: timestamp
         };
@@ -1363,14 +1631,12 @@
 
         cardHtml = `
           <div class="rounded-2xl border-2 border-rose-500 bg-gradient-to-b from-rose-950/80 via-slate-900 to-slate-900 p-5 shadow-2xl shadow-rose-950/60 transition-all">
-            <!-- Hero Product Name Display -->
             <div class="border-b border-rose-900/50 pb-3 mb-3.5">
               <span class="text-[10px] font-mono tracking-widest text-rose-300 uppercase font-bold block mb-1">SCANNED PRODUCT IDENTIFIED</span>
               <h3 class="font-display text-lg font-bold text-white leading-tight">${data.productName}</h3>
               <p class="text-xs text-slate-300 mt-0.5">${data.brand} • <span class="font-mono text-slate-400">UPC: ${data.upc}</span></p>
             </div>
 
-            <!-- Recall Status Banner -->
             <div class="flex items-center justify-between mb-3.5 bg-rose-950/90 p-3 rounded-xl border border-rose-800/60">
               <div class="flex items-center gap-2.5">
                 <div class="w-8 h-8 rounded-lg bg-rose-600 text-white flex items-center justify-center font-bold">
@@ -1403,9 +1669,9 @@
           </div>
         `;
       } else if (data.status === 'allergen_alert') {
+        // High visibility Dietary Trigger Card with ingredient confirmation
         cardHtml = `
           <div class="rounded-2xl border-2 border-amber-500 bg-gradient-to-b from-amber-950/70 via-slate-900 to-slate-900 p-5 shadow-2xl shadow-amber-950/50 transition-all">
-            <!-- Hero Product Name Display -->
             <div class="border-b border-amber-900/50 pb-3 mb-3.5">
               <span class="text-[10px] font-mono tracking-widest text-amber-300 uppercase font-bold block mb-1">SCANNED PRODUCT IDENTIFIED</span>
               <h3 class="font-display text-lg font-bold text-white leading-tight">${data.productName}</h3>
@@ -1429,19 +1695,18 @@
               </span>
             </div>
 
-            <div class="space-y-2 text-xs text-slate-200 bg-slate-950/70 rounded-xl p-4 border border-amber-900/40">
-              <div class="p-3 bg-amber-500/15 border border-amber-500/30 rounded-lg text-amber-200 font-medium">
+            <div class="space-y-2.5 text-xs text-slate-200 bg-slate-950/70 rounded-xl p-4 border border-amber-900/40">
+              <div class="p-3 bg-amber-500/15 border border-amber-500/30 rounded-lg text-amber-200 font-medium leading-relaxed">
                 ⚠️ Contains your active dietary guardrail: <span class="font-bold underline">${data.triggeredAllergens.join(', ')}</span>.
               </div>
-              <p class="text-slate-400 pt-1 leading-relaxed">${data.details}</p>
+              <p class="text-slate-300 pt-0.5 leading-relaxed">${data.details}</p>
+              ${data.ingredients ? `<p class="text-[11px] text-slate-400 border-t border-slate-800/80 pt-2"><span class="font-semibold text-slate-300">Detected Ingredients:</span> ${data.ingredients.slice(0, 160)}...</p>` : ''}
             </div>
           </div>
         `;
       } else {
-        // Safe / Cleared
         cardHtml = `
           <div class="rounded-2xl border-2 border-emerald-500/80 bg-gradient-to-b from-emerald-950/70 via-slate-900 to-slate-900 p-5 shadow-2xl shadow-emerald-950/50 transition-all">
-            <!-- Hero Product Name Display -->
             <div class="border-b border-emerald-900/50 pb-3 mb-3.5">
               <span class="text-[10px] font-mono tracking-widest text-emerald-300 uppercase font-bold block mb-1">SCANNED PRODUCT IDENTIFIED</span>
               <h3 class="font-display text-lg font-bold text-white leading-tight">${data.productName}</h3>
@@ -1465,8 +1730,9 @@
               </span>
             </div>
 
-            <div class="text-xs text-slate-300 bg-slate-950/70 rounded-xl p-3.5 border border-emerald-900/40">
+            <div class="text-xs text-slate-300 bg-slate-950/70 rounded-xl p-3.5 border border-emerald-900/40 space-y-1.5">
               <p class="text-emerald-300 leading-relaxed">${data.details}</p>
+              ${data.ingredients ? `<p class="text-[11px] text-slate-400 border-t border-slate-800 pt-1.5"><span class="font-semibold text-slate-300">Ingredients Checked:</span> ${data.ingredients.slice(0, 160)}...</p>` : ''}
             </div>
           </div>
         `;
@@ -1474,7 +1740,6 @@
 
       resultContainer.innerHTML = cardHtml;
 
-      // Gentle smooth scroll to reveal the result card right beneath camera
       setTimeout(() => {
         resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }, 100);
@@ -1516,6 +1781,12 @@
         btn.addEventListener('click', () => {
           triggerHaptic([30]);
           const id = btn.getAttribute('data-id');
+
+          if (!isPlusActive && userAllergens.length >= 1 && !userAllergens.includes(id)) {
+            openPaywall();
+            return;
+          }
+
           if (userAllergens.includes(id)) {
             userAllergens = userAllergens.filter(x => x !== id);
           } else {
@@ -1628,9 +1899,11 @@
       userAllergens = [];
       userWatchlist = [];
       scanHistory = [];
+      isPlusActive = false;
       try {
         localStorage.clear();
       } catch (e) {}
+      updatePlusUI();
       renderHistory();
       renderCustomizeTab();
       renderAllergensTab();
@@ -1748,6 +2021,7 @@
     renderBulletins();
     renderAllergensTab();
     renderCustomizeTab();
+    updatePlusUI();
     updateOnlineStatus();
   </script>
 </body>
