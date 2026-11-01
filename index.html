@@ -1966,7 +1966,11 @@
           }
         };
 
-        // Try standard environment (rear-facing) camera first
+        // Multi-tier Camera Starter (Handles Samsung Galaxy Z Flip/Fold multi-lens hardware & standard devices)
+        let cameraStarted = false;
+        let lastCameraErr = null;
+
+        // Strategy 1: Try standard environment (rear-facing) camera
         try {
           await html5QrCode.start(
             { facingMode: "environment" },
@@ -1974,14 +1978,63 @@
             (decodedText) => onBarcodeDetected(decodedText),
             () => {}
           );
+          cameraStarted = true;
         } catch (firstErr) {
-          console.warn("Back camera constraint failed, falling back to default camera:", firstErr);
-          await html5QrCode.start(
-            { facingMode: "user" },
-            config,
-            (decodedText) => onBarcodeDetected(decodedText),
-            () => {}
-          );
+          console.warn("Strategy 1 (facingMode: environment) failed:", firstErr);
+          lastCameraErr = firstErr;
+        }
+
+        // Strategy 2: Enumerate hardware cameras directly (solves Samsung Galaxy Z Flip/Fold dual-screen sensor routing)
+        if (!cameraStarted) {
+          try {
+            const cameras = await Html5Qrcode.getCameras();
+            if (cameras && cameras.length > 0) {
+              // Prefer rear/back camera if labeled, otherwise pick the last camera (typically primary rear on Samsung)
+              const backCam = cameras.find(c => /back|rear|environment|main|0/i.test(c.label || '')) || cameras[cameras.length - 1] || cameras[0];
+              await html5QrCode.start(
+                backCam.id,
+                config,
+                (decodedText) => onBarcodeDetected(decodedText),
+                () => {}
+              );
+              cameraStarted = true;
+            }
+          } catch (camListErr) {
+            console.warn("Strategy 2 (hardware camera enumeration) failed:", camListErr);
+            lastCameraErr = camListErr;
+          }
+        }
+
+        // Strategy 3: Front/user camera fallback
+        if (!cameraStarted) {
+          try {
+            await html5QrCode.start(
+              { facingMode: "user" },
+              config,
+              (decodedText) => onBarcodeDetected(decodedText),
+              () => {}
+            );
+            cameraStarted = true;
+          } catch (userErr) {
+            console.warn("Strategy 3 (facingMode: user) failed:", userErr);
+            lastCameraErr = userErr;
+          }
+        }
+
+        // Strategy 4: Fallback with no constraints
+        if (!cameraStarted) {
+          try {
+            await html5QrCode.start(
+              {},
+              config,
+              (decodedText) => onBarcodeDetected(decodedText),
+              () => {}
+            );
+            cameraStarted = true;
+          } catch (fallbackErr) {
+            console.error("Strategy 4 (unconstrained start) failed:", fallbackErr);
+            throw (lastCameraErr || fallbackErr);
+          }
         }
 
         isCameraRunning = true;
