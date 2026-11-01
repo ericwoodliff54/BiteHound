@@ -413,13 +413,23 @@
           </div>
         </div>
 
-        <button 
-          type="button" 
-          id="saveNewProfileBtn" 
-          class="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 via-indigo-600 to-blue-600 hover:opacity-95 text-white font-bold text-xs shadow-lg shadow-blue-950/50 transition active:scale-[0.98] flex items-center justify-center gap-1.5"
-        >
-          <span id="saveProfileBtnText">Save Profile</span>
-        </button>
+        <div class="space-y-2 pt-1">
+          <button 
+            type="button" 
+            id="saveNewProfileBtn" 
+            class="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 via-indigo-600 to-blue-600 hover:opacity-95 text-white font-bold text-xs shadow-lg shadow-blue-950/50 transition active:scale-[0.98] flex items-center justify-center gap-1.5"
+          >
+            <span id="saveProfileBtnText">Save Profile</span>
+          </button>
+
+          <button 
+            type="button" 
+            id="deleteProfileModalBtn" 
+            class="hidden w-full py-2.5 rounded-xl border border-rose-500/30 bg-rose-950/30 hover:bg-rose-900/40 text-rose-300 font-semibold text-xs transition active:scale-[0.98] flex items-center justify-center gap-1.5"
+          >
+            <span>🗑️ Remove This Family Member</span>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -931,12 +941,22 @@
         <div class="p-3.5 rounded-xl bg-blue-950/40 border border-blue-500/30 text-xs space-y-2">
           <div class="flex items-center justify-between">
             <span class="font-bold text-sky-200">Offline Caching Status:</span>
-            <span class="text-emerald-400 font-semibold flex items-center gap-1">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              Active (Works in basements)
+            <span id="settingsOfflineStatus" class="text-emerald-400 font-semibold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span>Active (Works in basements)</span>
             </span>
           </div>
           <p class="text-[11px] text-slate-300">All databases, search indices, and guardrails are cached locally in your phone's memory so scanning works even with zero cellular signal.</p>
+          <button 
+            type="button" 
+            id="settingsSyncNowBtn" 
+            class="w-full py-2.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs transition active:scale-[0.98] flex items-center justify-center gap-1.5"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+            </svg>
+            <span>Sync Newest FDA Data Now</span>
+          </button>
           <button 
             type="button" 
             id="forceReloadBtn" 
@@ -3036,6 +3056,8 @@
     let selectedAvatarIcon = '👤';
     let selectedProfilePhoto = null;
 
+    const deleteProfileModalBtn = document.getElementById('deleteProfileModalBtn');
+
     function openProfileModal(profileIdToEdit = null) {
       currentEditingProfileId = profileIdToEdit;
 
@@ -3046,17 +3068,60 @@
         newProfileNameInput.value = p.name;
         selectedAvatarIcon = p.icon || '👤';
         selectedProfilePhoto = p.photo || null;
+        if (deleteProfileModalBtn) {
+          if (profileIdToEdit !== 'me' && familyProfiles.length > 1) {
+            deleteProfileModalBtn.classList.remove('hidden');
+          } else {
+            deleteProfileModalBtn.classList.add('hidden');
+          }
+        }
       } else {
         if (profileModalTitle) profileModalTitle.textContent = "Add Family Member";
         if (saveProfileBtnText) saveProfileBtnText.textContent = "Save Profile & Customize Allergens";
         newProfileNameInput.value = '';
         selectedAvatarIcon = '👧';
         selectedProfilePhoto = null;
+        if (deleteProfileModalBtn) deleteProfileModalBtn.classList.add('hidden');
       }
 
       updateAvatarDisplayAndOptions();
       addProfileModal.classList.remove('hidden');
       setTimeout(() => newProfileNameInput.focus(), 100);
+    }
+
+    let pendingDeleteConfirm = false;
+
+    if (deleteProfileModalBtn) {
+      deleteProfileModalBtn.addEventListener('click', () => {
+        if (!currentEditingProfileId || currentEditingProfileId === 'me') return;
+        const p = familyProfiles.find(x => x.id === currentEditingProfileId);
+        const name = p ? p.name : 'this family member';
+
+        if (!pendingDeleteConfirm) {
+          pendingDeleteConfirm = true;
+          deleteProfileModalBtn.innerHTML = `<span>⚠️ Tap Again to Confirm Deletion</span>`;
+          deleteProfileModalBtn.className = "w-full py-2.5 rounded-xl border border-rose-500 bg-rose-600 text-white font-bold text-xs transition active:scale-[0.98] flex items-center justify-center gap-1.5 animate-pulse";
+          setTimeout(() => {
+            pendingDeleteConfirm = false;
+            if (deleteProfileModalBtn) {
+              deleteProfileModalBtn.innerHTML = `<span>🗑️ Remove This Family Member</span>`;
+              deleteProfileModalBtn.className = "w-full py-2.5 rounded-xl border border-rose-500/30 bg-rose-950/30 hover:bg-rose-900/40 text-rose-300 font-semibold text-xs transition active:scale-[0.98] flex items-center justify-center gap-1.5";
+            }
+          }, 4000);
+          return;
+        }
+
+        // Second tap confirms deletion
+        pendingDeleteConfirm = false;
+        triggerHaptic([60, 40]);
+        familyProfiles = familyProfiles.filter(x => x.id !== currentEditingProfileId);
+        activeProfileId = 'me';
+        saveFamilyProfiles();
+        closeAddProfileModal();
+        renderAllergensTab();
+        sound.playScanBeep();
+        showCustomizeToast(`✓ ${name}'s profile has been removed.`);
+      });
     }
 
     function closeAddProfileModal() {
@@ -3396,19 +3461,58 @@
       const isOnline = navigator.onLine;
       const count = cachedFDARecalls.length;
       const timeStr = formatSyncTime(lastSyncTimestamp);
+      const settingsOfflineStatus = document.getElementById('settingsOfflineStatus');
+
+      // Calculate age of sync
+      const now = Date.now();
+      const ageMs = lastSyncTimestamp ? (now - lastSyncTimestamp) : Infinity;
+      const oneDayMs = 24 * 60 * 60 * 1000;
+      const threeDaysMs = 72 * 60 * 60 * 1000;
+
+      let freshness = 'fresh'; // 'fresh' (<24h), 'stale' (24h-72h), 'outdated' (>72h)
+      if (ageMs > threeDaysMs || !lastSyncTimestamp) {
+        freshness = 'outdated';
+      } else if (ageMs > oneDayMs) {
+        freshness = 'stale';
+      }
 
       if (isOnline) {
-        syncIndicatorDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0 shadow-sm shadow-emerald-400/50";
-        syncStatusTitle.textContent = `FDA Wire Synced • ${timeStr}`;
-        syncStatusSub.textContent = count > 0 
-          ? `${count} active recalls cached for offline supermarket scanning`
-          : `Live government wire active • Ready for store sync`;
+        if (freshness === 'fresh') {
+          syncIndicatorDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0 shadow-sm shadow-emerald-400/50";
+          syncStatusTitle.textContent = `FDA Wire: Up to Date • ${timeStr}`;
+          syncStatusSub.textContent = count > 0 
+            ? `${count} active recalls cached for offline supermarket scanning`
+            : `Live government wire active • Ready for store sync`;
+          if (settingsOfflineStatus) {
+            settingsOfflineStatus.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span><span class="text-emerald-400 font-semibold">Up to Date (${timeStr})</span>`;
+          }
+        } else if (freshness === 'stale') {
+          syncIndicatorDot.className = "w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0 shadow-sm shadow-amber-400/50";
+          const daysOld = Math.floor(ageMs / oneDayMs);
+          syncStatusTitle.textContent = `FDA Wire: Stale • Synced ${daysOld}d ago (${timeStr})`;
+          syncStatusSub.textContent = `Tap "Sync for Newest Data" to refresh active recall list`;
+          if (settingsOfflineStatus) {
+            settingsOfflineStatus.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-400"></span><span class="text-amber-300 font-semibold">Stale (${daysOld}d old • Re-sync recommended)</span>`;
+          }
+        } else {
+          syncIndicatorDot.className = "w-2.5 h-2.5 rounded-full bg-rose-500 shrink-0 animate-pulse shadow-sm shadow-rose-500/50";
+          const daysOld = lastSyncTimestamp ? Math.floor(ageMs / oneDayMs) : '3+';
+          syncStatusTitle.textContent = `FDA Wire: Outdated • Synced ${daysOld}d ago`;
+          syncStatusSub.textContent = `⚠️ Tap "Sync for Newest Data" before grocery shopping`;
+          if (settingsOfflineStatus) {
+            settingsOfflineStatus.innerHTML = `<span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span><span class="text-rose-400 font-semibold">Outdated (${daysOld}d old • Action needed)</span>`;
+          }
+        }
       } else {
+        // Offline Store Mode
         syncIndicatorDot.className = "w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0";
         syncStatusTitle.textContent = `Offline Store Mode (FDA Cached: ${timeStr})`;
         syncStatusSub.textContent = count > 0
           ? `Scanning against ${count} cached recalls with zero cell signal`
           : `Offline • Scanning against bundled high-risk recall database`;
+        if (settingsOfflineStatus) {
+          settingsOfflineStatus.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-400"></span><span class="text-amber-300 font-semibold">Offline Mode (Cached: ${timeStr})</span>`;
+        }
       }
     }
 
@@ -3493,6 +3597,14 @@
 
     if (syncNowBtn) {
       syncNowBtn.addEventListener('click', () => {
+        triggerHaptic([30]);
+        syncStoreReadyRecalls(true);
+      });
+    }
+
+    const settingsSyncNowBtn = document.getElementById('settingsSyncNowBtn');
+    if (settingsSyncNowBtn) {
+      settingsSyncNowBtn.addEventListener('click', () => {
         triggerHaptic([30]);
         syncStoreReadyRecalls(true);
       });
