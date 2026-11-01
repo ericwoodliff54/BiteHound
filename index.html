@@ -79,7 +79,6 @@
               <span>⭐</span>
               <span id="headerPlusBadgeText">Plus Trial</span>
             </button>
-            <span id="connectionBadge" class="hidden text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Offline Ready</span>
           </div>
           <!-- Recommended Tagline -->
           <p class="text-[11px] text-slate-400">Recalls, Gluten & Allergen Guard</p>
@@ -307,7 +306,28 @@
           <span id="activatePlusTrialBtnText">Start 3-Day Free Trial (then $14.99/yr)</span>
         </button>
 
-        <p class="text-[10px] text-slate-500 text-center leading-tight">
+        <!-- Family & Tester Access Pass Redeemer -->
+        <div class="pt-1 pb-1 text-center">
+          <button type="button" id="togglePromoBtn" class="text-[11px] text-slate-400 hover:text-amber-300 underline transition">
+            Have a family access pass or tester code?
+          </button>
+          <div id="promoInputContainer" class="hidden mt-2.5 flex items-center justify-center gap-1.5">
+            <input 
+              type="text" 
+              id="promoCodeInput" 
+              placeholder="e.g. FAMILY" 
+              class="px-3 py-2 rounded-xl border border-slate-700 bg-slate-950 text-white text-xs uppercase font-mono tracking-wider outline-none focus:border-amber-400 text-center w-40"
+              maxlength="15"
+            >
+            <button 
+              type="button" 
+              id="redeemPromoBtn" 
+              class="px-3.5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-95"
+            >
+              Unlock
+            </button>
+          </div>
+        </div><p class="text-[10px] text-slate-500 text-center leading-tight">
           Demo Mode: Tapping above immediately unlocks SafeBite Plus so you can test all features. In App Store release, this connects to Apple IAP & Google Play Billing.
         </p>
       </div>
@@ -1437,8 +1457,7 @@
     const customizePanel = document.getElementById('customizePanel');
 
     const historySection = document.getElementById('historySection');
-    const connectionBadge = document.getElementById('connectionBadge');
-
+    
     const installGuideBtn = document.getElementById('installGuideBtn');
     const installModal = document.getElementById('installModal');
     const closeInstallModalBtn = document.getElementById('closeInstallModalBtn');
@@ -1510,6 +1529,60 @@
     const customizeToast = document.getElementById('customizeToast');
 
     // Paywall Handlers
+        // Family VIP Link (?vip=family) & Promo Code Redeemer
+    function checkFamilyAccessUrl() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const code = (params.get('vip') || params.get('promo') || params.get('code') || '').toLowerCase();
+        if (code === 'family' || code === 'tester' || code === 'vip') {
+          isPlusActive = true;
+          plusStatusType = 'paid';
+          localStorage.setItem('safebite_plus_active', 'paid');
+          updatePlusUI();
+          renderAllergensTab();
+          setTimeout(() => {
+            showCustomizeToast("🎉 Family VIP Access Unlocked! SafeBite Plus is active.");
+          }, 600);
+        }
+      } catch (e) {}
+    }
+
+    const togglePromoBtn = document.getElementById('togglePromoBtn');
+    const promoInputContainer = document.getElementById('promoInputContainer');
+    const promoCodeInput = document.getElementById('promoCodeInput');
+    const redeemPromoBtn = document.getElementById('redeemPromoBtn');
+
+    if (togglePromoBtn && promoInputContainer) {
+      togglePromoBtn.addEventListener('click', () => {
+        promoInputContainer.classList.toggle('hidden');
+        if (!promoInputContainer.classList.contains('hidden') && promoCodeInput) {
+          setTimeout(() => promoCodeInput.focus(), 100);
+        }
+      });
+    }
+
+    if (redeemPromoBtn && promoCodeInput) {
+      redeemPromoBtn.addEventListener('click', () => {
+        const inputCode = promoCodeInput.value.trim().toUpperCase();
+        if (inputCode === 'FAMILY' || inputCode === 'TESTER' || inputCode === 'VIP' || inputCode === 'SAFEBITE') {
+          triggerHaptic([60, 40, 60]);
+          sound.playClearChime();
+          isPlusActive = true;
+          plusStatusType = 'paid';
+          try {
+            localStorage.setItem('safebite_plus_active', 'paid');
+          } catch (e) {}
+          updatePlusUI();
+          closePaywall();
+          renderAllergensTab();
+          showCustomizeToast("🎉 Family VIP Access Unlocked! Full SafeBite Plus active.");
+        } else {
+          triggerHaptic([40, 40]);
+          showCustomizeToast("Invalid code. Please check with the app creator.");
+        }
+      });
+    }
+
     function openPaywall() {
       triggerHaptic([30]);
       plusPaywallModal.classList.remove('hidden');
@@ -3194,7 +3267,7 @@
       return isToday ? `Today at ${timeStr}` : `${d.toLocaleDateString([], { month: 'short', day: 'numeric' })} at ${timeStr}`;
     }
 
-    function updateSyncUI() {
+            function updateSyncUI() {
       if (!syncStatusTitle) return;
 
       const isOnline = navigator.onLine;
@@ -3207,22 +3280,13 @@
         syncStatusSub.textContent = count > 0 
           ? `${count} active recalls cached for offline supermarket scanning`
           : `Live government wire active • Ready for store sync`;
-        if (connectionBadge) {
-          connectionBadge.textContent = "Online Wire";
-          connectionBadge.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
-        }
       } else {
         syncIndicatorDot.className = "w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0";
         syncStatusTitle.textContent = `Offline Store Mode (FDA Cached: ${timeStr})`;
         syncStatusSub.textContent = count > 0
           ? `Scanning against ${count} cached recalls with zero cell signal`
           : `Offline • Scanning against bundled high-risk recall database`;
-        if (connectionBadge) {
-          connectionBadge.textContent = "Offline Mode";
-          connectionBadge.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30";
-        }
       }
-      if (connectionBadge) connectionBadge.classList.remove('hidden');
     }
 
     async function syncStoreReadyRecalls(forceManual = false) {
@@ -3380,6 +3444,7 @@
     updatePlusUI();
     updateOnlineStatus();
     checkDisclaimerStatus();
+    checkFamilyAccessUrl();
     updateSyncUI();
     syncStoreReadyRecalls(false);
 
