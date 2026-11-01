@@ -1,11 +1,11 @@
-const CACHE_NAME = 'safebite-v5';
+const CACHE_NAME = 'safebite-scanner-v6';
 const ASSETS = [
-  './index.html?app=safebite',
-  './manifest.json?v=5',
-  './icon-192.png?v=5',
-  './icon-512.png?v=5',
-  './apple-touch-icon.png?v=5',
-  './favicon.png?v=5'
+  './index.html?app=safebite_scanner',
+  './manifest.json?v=6',
+  './icon-192.png?v=6',
+  './icon-512.png?v=6',
+  './apple-touch-icon.png?v=6',
+  './favicon.png?v=6'
 ];
 
 self.addEventListener('install', (e) => {
@@ -32,7 +32,7 @@ self.addEventListener('fetch', (e) => {
             return networkRes;
           });
         })
-        .catch(() => caches.match('./index.html?app=safebite') || caches.match(e.request))
+        .catch(() => caches.match('./index.html?app=safebite_scanner') || caches.match(e.request))
     );
     return;
   }
