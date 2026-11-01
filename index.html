@@ -1486,28 +1486,33 @@
         cameraStatusBadge.textContent = "Starting...";
         cameraStatusBadge.className = "text-[11px] font-semibold px-2.5 py-1 rounded-full bg-blue-500/20 text-sky-300 border border-blue-500/30";
 
-        // High-performance barcode reader optimized for flat boxes, curved cans & flexible bags
+        // Universal mobile-compatible barcode configuration
         const config = {
-          fps: 20, // Doubled scan rate for responsive curved/motion reads
+          fps: 15,
           qrbox: (w, h) => ({
-            width: Math.floor(Math.min(w * 0.88, 340)), // Wider scan window for curved UPCs
-            height: Math.floor(Math.min(h * 0.60, 190))
+            width: Math.floor(Math.min(w * 0.88, 330)),
+            height: Math.floor(Math.min(h * 0.60, 180))
           }),
-          aspectRatio: 1.777778,
-          experimentalFeatures: {
-            useBarCodeDetectorIfSupported: true // Native hardware-accelerated ML BarcodeDetector
-          }
+          aspectRatio: 1.777778
         };
 
-        await html5QrCode.start(
-          { 
-            facingMode: "environment",
-            focusMode: "continuous"
-          },
-          config,
-          (decodedText) => onBarcodeDetected(decodedText),
-          () => {}
-        );
+        // Try standard environment (rear-facing) camera first
+        try {
+          await html5QrCode.start(
+            { facingMode: "environment" },
+            config,
+            (decodedText) => onBarcodeDetected(decodedText),
+            () => {}
+          );
+        } catch (firstErr) {
+          console.warn("Back camera constraint failed, falling back to default camera:", firstErr);
+          await html5QrCode.start(
+            { facingMode: "user" },
+            config,
+            (decodedText) => onBarcodeDetected(decodedText),
+            () => {}
+          );
+        }
 
         isCameraRunning = true;
         cameraBtnText.textContent = "Stop Camera";
@@ -1519,8 +1524,15 @@
       } catch (err) {
         console.error("Camera access error:", err);
         cameraStatusBadge.textContent = "Camera Restricted";
-        cameraStatusBadge.className = "text-[11px] font-semibold px-2.5 py-1 rounded-full bg-blue-500/20 text-sky-300 border border-blue-500/30";
-        showScannerMessage("Live camera streaming is restricted in this browser frame. You can scan by uploading a photo with 'Scan from Photo' or use the Manual UPC tab!");
+        cameraStatusBadge.className = "text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30";
+        
+        let helpMsg = "Live camera access was restricted or denied.";
+        if (err && (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError')) {
+          helpMsg = "Camera permission was denied. Tap the lock/tune icon in your browser address bar to allow Camera access, then tap Start Camera again.";
+        } else {
+          helpMsg = "Camera could not be started. Check browser permissions, or use 'Scan Photo' / 'Manual UPC'!";
+        }
+        showScannerMessage(helpMsg);
       }
     }
 
