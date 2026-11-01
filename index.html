@@ -399,18 +399,12 @@
 
     <!-- SECTION 1: SCANNER PANEL WITH CLEAN SINGLE RETICLE (NO LASER, NO DUPLICATE FRAMES) -->
     <section id="scannerPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4">
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="font-display text-sm font-bold text-slate-100 flex items-center gap-2">
-            <span>Scan Product Barcode</span>
-            <span class="w-2 h-2 rounded-full bg-sky-400 pulse-glow"></span>
-          </h2>
-          <!-- Clean tagline without "quiet reticles" -->
-          <p class="text-xs text-slate-400">Scan any grocery barcode or search by brand</p>
-        </div>
-        <span id="cameraStatusBadge" class="text-[11px] font-semibold px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700/80">
-          Camera Ready
-        </span>
+      <div>
+        <h2 class="font-display text-sm font-bold text-slate-100 flex items-center gap-2">
+          <span>Scan Product Barcode</span>
+          <span class="w-2 h-2 rounded-full bg-sky-400 pulse-glow"></span>
+        </h2>
+        <p class="text-xs text-slate-400 mt-0.5">Scan any grocery barcode or search by brand</p>
       </div>
 
       <!-- Clean Viewfinder Box: single library-managed targeting box, zero overlapping duplicate reticles -->
@@ -474,7 +468,7 @@
       </div>
 
       <!-- Controls (Camera, Flashlight, Photo) -->
-      <div class="flex flex-col sm:flex-row gap-2.5">
+      <div class="flex gap-2">
         <button 
           type="button" 
           id="toggleCameraBtn" 
@@ -484,14 +478,14 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
-          <span id="cameraBtnText">Start Camera Scanner</span>
+          <span id="cameraBtnText">Start Camera</span>
         </button>
 
         <!-- Flashlight / Torch Toggle -->
         <button 
           type="button" 
           id="toggleTorchBtn" 
-          class="min-h-[48px] px-3.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium rounded-xl transition flex items-center justify-center gap-1.5 text-xs border border-slate-700/80 active:scale-[0.98]"
+          class="shrink-0 min-h-[48px] px-4 bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium rounded-xl transition flex items-center justify-center gap-1.5 text-xs border border-slate-700/80 active:scale-[0.98]"
           title="Toggle camera flashlight for dim supermarket aisles"
         >
           <svg id="torchIcon" class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -499,20 +493,9 @@
           </svg>
           <span id="torchBtnText">Flashlight</span>
         </button>
-
-        <label 
-          for="barcodeFileInput" 
-          class="cursor-pointer min-h-[48px] bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 text-xs border border-slate-700/80 active:scale-[0.98]"
-        >
-          <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-          </svg>
-          <span>Scan Photo</span>
-          <input type="file" id="barcodeFileInput" accept="image/*" class="hidden">
-        </label>
       </div>
 
-        <!-- Difficult Barcode Tips Drawer (Cans, Curved Bottles, Wrinkly Bags) -->
+      <!-- Difficult Barcode Tips Drawer (Cans, Curved Bottles, Wrinkly Bags) -->
         <div class="pt-1">
           <button 
             type="button" 
@@ -603,27 +586,41 @@
       <form id="upcForm" class="space-y-3">
         <div>
           <label for="upcInput" class="block text-xs font-medium text-slate-300 mb-1.5">UPC Barcode Number</label>
-          <div class="relative">
-            <input 
-              type="text" 
-              id="upcInput" 
-              inputmode="numeric" 
-              placeholder="e.g. 0-11110-81546-2 or 011110815462" 
-              class="w-full min-h-[48px] px-4 py-3.5 rounded-xl border border-slate-700 bg-slate-950 text-white font-mono text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition placeholder:text-slate-600"
-              required
+          <div class="flex items-center gap-2">
+            <div class="relative flex-1">
+              <input 
+                type="text" 
+                id="upcInput" 
+                inputmode="numeric" 
+                placeholder="e.g. 0-11110-81546-2 or 011110815462" 
+                class="w-full min-h-[48px] px-4 py-3.5 rounded-xl border border-slate-700 bg-slate-950 text-white font-mono text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition placeholder:text-slate-600"
+              >
+              <button 
+                type="button" 
+                id="clearBtn" 
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs font-medium px-2 py-1 bg-slate-800 rounded-lg hidden min-h-[36px]"
+                aria-label="Clear input"
+              >
+                Clear
+              </button>
+            </div>
+
+            <!-- Upload UPC Button next to Manual UPC Entry -->
+            <label 
+              for="barcodeFileInput" 
+              class="cursor-pointer shrink-0 min-h-[48px] px-3.5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold border border-slate-700 flex items-center justify-center gap-1.5 text-xs transition active:scale-95 shadow-sm"
+              title="Upload photo of a product barcode"
             >
-            <button 
-              type="button" 
-              id="clearBtn" 
-              class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs font-medium px-2 py-1 bg-slate-800 rounded-lg hidden min-h-[36px]"
-              aria-label="Clear input"
-            >
-              Clear
-            </button>
+              <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              <span>Upload UPC</span>
+              <input type="file" id="barcodeFileInput" accept="image/*" class="hidden">
+            </label>
           </div>
-          <p class="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
+          <p class="text-[11px] text-slate-500 mt-1.5 flex items-center gap-1">
             <span class="text-sky-400 font-bold">✓</span>
-            <span>Hyphens, spaces, and dashes are automatically cleaned and accepted.</span>
+            <span>Type barcode digits or tap <strong>Upload UPC</strong> to detect from an image.</span>
           </p>
         </div>
 
@@ -1009,8 +1006,8 @@
       { id: 'treenuts', name: 'Tree Nuts', icon: '🌰', desc: 'Almonds, cashews, walnuts, pecans, pistachios' },
       { id: 'soy', name: 'Soy', icon: '🌿', desc: 'Soy lecithin, soybeans, tofu, edamame' },
       { id: 'eggs', name: 'Eggs', icon: '🥚', desc: 'Egg whites, yolk, albumin, mayonnaise' },
-      { id: 'shellfish', name: 'Crustacean Shellfish', icon: '🦐', desc: 'Shrimp, crab, lobster, prawns, crawfish' },
-      { id: 'fish', name: 'Fish (Finfish)', icon: '🐟', desc: 'Salmon, tuna, cod, tilapia, halibut, anchovies' },
+      { id: 'shellfish', name: 'Shellfish', icon: '🦐', desc: 'Shrimp, crab, lobster, prawns, crawfish' },
+      { id: 'fish', name: 'Fish', icon: '🐟', desc: 'Salmon, tuna, cod, tilapia, halibut, anchovies' },
       { id: 'sesame', name: 'Sesame', icon: '🌱', desc: 'Sesame seeds, tahini, sesame oil, benne' },
       { id: 'corn', name: 'Corn', icon: '🌽', desc: 'Cornstarch, corn syrup, corn meal, dextrose' },
       { id: 'sulfites', name: 'Sulfites', icon: '🍷', desc: 'Sulfur dioxide, sodium bisulfite, dried fruit' }
@@ -1384,8 +1381,7 @@
     const syncIconSvg = document.getElementById('syncIconSvg');
     const syncBtnText = document.getElementById('syncBtnText');
 
-    const cameraStatusBadge = document.getElementById('cameraStatusBadge');
-    const cameraPlaceholder = document.getElementById('cameraPlaceholder');
+        const cameraPlaceholder = document.getElementById('cameraPlaceholder');
     const barcodeFileInput = document.getElementById('barcodeFileInput');
     const scannerMessage = document.getElementById('scannerMessage');
 
@@ -1682,8 +1678,6 @@
           if (typeof html5QrCode.resume === 'function') {
             html5QrCode.resume();
             isCameraPaused = false;
-            cameraStatusBadge.textContent = "Scanning Live";
-            cameraStatusBadge.className = "text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 animate-pulse";
             cameraBtnText.textContent = "Stop Camera";
             toggleCameraBtn.classList.replace('from-blue-600', 'from-slate-700');
             toggleCameraBtn.classList.replace('to-blue-500', 'to-slate-800');
@@ -1709,9 +1703,6 @@
         if (!html5QrCode) {
           html5QrCode = new Html5Qrcode("reader");
         }
-
-        cameraStatusBadge.textContent = "Starting...";
-        cameraStatusBadge.className = "text-[11px] font-semibold px-2.5 py-1 rounded-full bg-blue-500/20 text-sky-300 border border-blue-500/30";
 
         // Universal mobile-compatible barcode configuration
         const config = {
@@ -1746,13 +1737,9 @@
         cameraBtnText.textContent = "Stop Camera";
         toggleCameraBtn.classList.replace('from-blue-600', 'from-slate-700');
         toggleCameraBtn.classList.replace('to-blue-500', 'to-slate-800');
-        cameraStatusBadge.textContent = "Scanning Live";
-        cameraStatusBadge.className = "text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 animate-pulse";
         cameraPlaceholder.classList.add('hidden');
       } catch (err) {
         console.error("Camera access error:", err);
-        cameraStatusBadge.textContent = "Camera Restricted";
-        cameraStatusBadge.className = "text-[11px] font-semibold px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30";
         
         let helpMsg = "Live camera access was restricted or denied.";
         if (err && (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError')) {
@@ -1789,8 +1776,6 @@
       cameraBtnText.textContent = "Start Camera";
       toggleCameraBtn.classList.replace('from-slate-700', 'from-blue-600');
       toggleCameraBtn.classList.replace('to-slate-800', 'to-blue-500');
-      cameraStatusBadge.textContent = "Camera Paused";
-      cameraStatusBadge.className = "text-[11px] font-semibold px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700/80";
       cameraPlaceholder.classList.remove('hidden');
     }
 
@@ -1800,12 +1785,14 @@
       const file = e.target.files[0];
       try {
         if (!html5QrCode) html5QrCode = new Html5Qrcode("reader");
-        showScannerMessage("Analyzing barcode photo...");
+        showScannerMessage("Analyzing uploaded barcode photo...");
         const decodedText = await html5QrCode.scanFile(file, true);
         hideScannerMessage();
+        e.target.value = '';
         onBarcodeDetected(decodedText);
       } catch (err) {
-        showScannerMessage("Could not resolve a standard UPC in that photo. Ensure good lighting or enter the UPC manually.");
+        e.target.value = '';
+        showScannerMessage("Could not detect a standard barcode in that image. Ensure crisp focus or enter digits manually.");
       }
     });
 
@@ -1834,8 +1821,6 @@
             html5QrCode.pause(true);
             isCameraPaused = true;
           }
-          cameraStatusBadge.textContent = "Product Captured";
-          cameraStatusBadge.className = "text-[11px] font-semibold px-2.5 py-1 rounded-full bg-blue-500/20 text-sky-300 border border-blue-500/30";
           cameraBtnText.textContent = "Scan Next Barcode";
           toggleCameraBtn.classList.replace('from-slate-700', 'from-blue-600');
           toggleCameraBtn.classList.replace('to-slate-800', 'to-blue-500');
@@ -1875,8 +1860,6 @@
             html5QrCode.resume();
             isCameraPaused = false;
           }
-          cameraStatusBadge.textContent = "Scanning Live";
-          cameraStatusBadge.className = "text-[11px] font-semibold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 animate-pulse";
           cameraBtnText.textContent = "Stop Camera";
           toggleCameraBtn.classList.replace('from-blue-600', 'from-slate-700');
           toggleCameraBtn.classList.replace('to-blue-500', 'to-slate-800');
