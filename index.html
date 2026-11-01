@@ -881,6 +881,15 @@
         >
           <span>View SafeBite Plus Plans ($1.99/mo or $14.99/yr)</span>
         </button>
+        <button 
+          type="button" 
+          id="toggleTesterModeBtn" 
+          class="w-full py-1.5 px-3 rounded-lg border border-slate-800 hover:border-slate-700 bg-slate-950/60 text-slate-400 hover:text-amber-300 text-[10px] font-mono transition flex items-center justify-center gap-1.5"
+          title="Quickly test how the app looks for free vs paid users"
+        >
+          <span>🧪</span>
+          <span id="toggleTesterBtnText">Tester Switch: Toggle Free / Plus</span>
+        </button>
       </div>
 
       <!-- BRAND WATCHLIST TRAY -->
@@ -1680,6 +1689,7 @@
     });
 
     function updatePlusUI() {
+      if (toggleTesterBtnText) { toggleTesterBtnText.textContent = isPlusActive ? '🧪 Developer: Switch to Free User Mode' : '🧪 Developer: Switch to Plus Active Mode'; }
       checkPlusStatus();
 
       if (plusStatusType === 'paid') {
@@ -3258,6 +3268,37 @@
       try {
         localStorage.setItem('safebite_watchlist', JSON.stringify(userWatchlist));
       } catch (e) {}
+    }
+
+    const toggleTesterModeBtn = document.getElementById('toggleTesterModeBtn');
+    const toggleTesterBtnText = document.getElementById('toggleTesterBtnText');
+
+    if (toggleTesterModeBtn) {
+      toggleTesterModeBtn.addEventListener('click', () => {
+        triggerHaptic([40]);
+        if (isPlusActive) {
+          isPlusActive = false;
+          plusStatusType = 'free';
+          try {
+            localStorage.removeItem('safebite_plus_active');
+            localStorage.removeItem('safebite_trial_start');
+          } catch (e) {}
+          updatePlusUI();
+          renderAllergensTab();
+          sound.playScanBeep();
+          showCustomizeToast("🧪 Switched to Free Mode! You are now viewing the app as a free user.");
+        } else {
+          isPlusActive = true;
+          plusStatusType = 'paid';
+          try {
+            localStorage.setItem('safebite_plus_active', 'paid');
+          } catch (e) {}
+          updatePlusUI();
+          renderAllergensTab();
+          sound.playClearChime();
+          showCustomizeToast("🧪 Switched to Plus Active! You are now viewing the full paid tier.");
+        }
+      });
     }
 
     prefSoundBtn.addEventListener('click', () => {
