@@ -1,5 +1,5 @@
 {
-  "name": "SafeBite Scanner - Food Recalls, Gluten & Allergen Guard",
+  "name": "SafeBite Scanner - Active Recalls, Gluten & Allergen Guard",
   "short_name": "SafeBite Scanner",
   "id": "safebite-scanner-pwa",
   "start_url": "./index.html?app=safebite_scanner",

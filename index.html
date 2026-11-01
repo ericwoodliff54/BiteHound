@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>SafeBite Scanner • Food Recalls, Gluten & Allergen Guard</title>
+  <title>SafeBite Scanner • Active Active Recalls, Gluten & Allergen Guard</title>
   
   <!-- Mobile & PWA Optimizations for iOS and Android -->
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -96,7 +96,7 @@
             </button>
           </div>
           <!-- Recommended Tagline -->
-          <p class="text-[11px] sm:text-xs font-medium text-slate-300 truncate max-w-[150px] sm:max-w-none">Recalls, Gluten & Allergen Guard</p>
+          <p class="text-[11px] sm:text-xs font-medium text-slate-300 truncate max-w-[150px] sm:max-w-none">Active Recalls, Gluten & Allergen Guard</p>
         </div>
       </div>
 
@@ -175,7 +175,7 @@
         <svg class="w-5 h-5 sm:w-6 sm:h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
         </svg>
-        <span class="leading-tight">Recalls</span>
+        <span class="leading-tight">Active Recalls</span>
       </button>
 
       <button 
@@ -626,7 +626,7 @@
             <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
-            <span>Or Search by Brand / Product Name</span>
+            <span>Search by Brand / Product Name</span>
           </label>
           <span class="text-[10px] text-slate-500">Torn barcode?</span>
         </div>
@@ -788,8 +788,8 @@
     <section id="bulletinsPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4 hidden">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="font-display text-base font-bold text-slate-100">National & Local Recall Wire</h2>
-          <p class="text-xs text-slate-400">Filter alerts by your home state and favorite supermarket chain</p>
+          <h2 class="font-display text-base font-bold text-slate-100">Active Recalls</h2>
+          <p class="text-xs text-slate-400">Live FDA & USDA federal recall wire filtered by state and supermarket</p>
         </div>
         <button id="refreshFeedBtn" class="text-xs text-sky-400 hover:text-sky-300 font-medium flex items-center gap-1 transition px-2 py-1 min-h-[36px]">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1015,7 +1015,7 @@
   </main>
 
   <footer class="py-4 text-center text-xs text-slate-500 border-t border-slate-900 mt-auto pb-8">
-    SafeBite Scanner • Food Recalls, Gluten & Allergen Guard
+    SafeBite Scanner • Food Active Recalls, Gluten & Allergen Guard
   </footer>
 
   <!-- INSTALL HELP MODAL SHEET (Shown if browser requires manual tap or on iPhone) -->
@@ -2404,10 +2404,24 @@
       renderHistory();
     });
 
-    refreshFeedBtn.addEventListener('click', () => {
+    refreshFeedBtn.addEventListener('click', async () => {
       triggerHaptic([30]);
       sound.playScanBeep();
-      renderBulletins();
+
+      const refreshIcon = refreshFeedBtn.querySelector('svg');
+      if (refreshIcon) refreshIcon.classList.add('animate-spin');
+      const refreshText = refreshFeedBtn.querySelector('span');
+      if (refreshText) refreshText.textContent = "Syncing...";
+
+      try {
+        await syncStoreReadyRecalls(true);
+      } catch (err) {
+        console.warn("Live wire refresh error:", err);
+      } finally {
+        if (refreshIcon) refreshIcon.classList.remove('animate-spin');
+        if (refreshText) refreshText.textContent = "Refresh";
+        renderBulletins();
+      }
     });
 
     // REAL-TIME GROCERY PRODUCT RESOLUTION & ALLERGEN ANALYSIS
@@ -3652,16 +3666,34 @@
         return matchesState && matchesStore;
       });
 
-      const stateName = stateFilterSelect.options[stateFilterSelect.selectedIndex].text;
-      const storeName = storeFilterSelect.options[storeFilterSelect.selectedIndex].text;
-      
-      if (selectedState === 'ALL' && selectedStore === 'ALL') {
-        filteredCountNotice.textContent = `Showing all ${filtered.length} nationwide recall notices`;
-      } else {
-        filteredCountNotice.textContent = `Showing ${filtered.length} notice(s) for ${stateName.split(' - ')[0]} • ${storeName}`;
+      // Filter live synced openFDA cached enforcement reports
+      let fdaFiltered = [];
+      if (cachedFDARecalls && cachedFDARecalls.length > 0) {
+        fdaFiltered = cachedFDARecalls.filter(item => {
+          if (selectedStore !== 'ALL') {
+            if (!item.raw.includes(selectedStore.toLowerCase())) return false;
+          }
+          if (selectedState !== 'ALL') {
+            const stLower = selectedState.toLowerCase();
+            const isNationwide = item.raw.includes('nationwide') || item.raw.includes('all states');
+            const mentionsState = item.raw.includes(' ' + stLower) || item.raw.includes(',' + stLower) || item.raw.includes(',' + selectedState);
+            return isNationwide || mentionsState;
+          }
+          return true;
+        });
       }
 
-      if (filtered.length === 0) {
+      const stateName = stateFilterSelect.options[stateFilterSelect.selectedIndex].text;
+      const storeName = storeFilterSelect.options[storeFilterSelect.selectedIndex].text;
+      const totalCount = filtered.length + fdaFiltered.length;
+      
+      if (selectedState === 'ALL' && selectedStore === 'ALL') {
+        filteredCountNotice.textContent = `Showing ${totalCount} active notices (${filtered.length} priority retail alerts + ${fdaFiltered.length} FDA wire reports)`;
+      } else {
+        filteredCountNotice.textContent = `Showing ${totalCount} active notice(s) for ${stateName.split(' - ')[0]} • ${storeName}`;
+      }
+
+      if (totalCount === 0) {
         bulletinFeedList.innerHTML = `
           <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-center text-xs text-slate-400 space-y-1">
             <span class="text-emerald-400 font-bold block text-sm">✓ No Active Recalls Found</span>
@@ -3671,15 +3703,15 @@
         return;
       }
 
-      bulletinFeedList.innerHTML = filtered.map(b => {
+      const priorityHtml = filtered.map(b => {
         const storeTags = b.stores ? b.stores.map(s => `<span class="px-1.5 py-0.2 rounded bg-slate-800 text-slate-300 text-[10px]">${s}</span>`).join(' ') : '';
         const regionText = b.states.includes('ALL') ? 'Nationwide Distribution' : `Affected: ${b.states.join(', ')}`;
 
         return `
-          <div class="p-3.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:border-slate-700 transition space-y-1.5">
+          <div class="p-3.5 rounded-xl border border-rose-900/40 bg-slate-950/80 hover:border-slate-700 transition space-y-1.5 shadow-sm">
             <div class="flex items-center justify-between">
-              <span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-blue-500/20 text-sky-300 border border-blue-500/30">
-                ${b.severity} ALERT
+              <span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                ${b.severity} PRIORITY ALERT
               </span>
               <span class="text-[10px] text-slate-500 font-mono">${b.date} • ${b.agency}</span>
             </div>
@@ -3690,6 +3722,24 @@
           </div>
         `;
       }).join('');
+
+      const fdaHtml = fdaFiltered.slice(0, 30).map(f => {
+        return `
+          <div class="p-3 rounded-xl border border-slate-800/80 bg-slate-950/60 hover:border-slate-700 transition space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-blue-500/20 text-sky-300 border border-blue-500/30">
+                ${f.severity || 'Class I'} • FDA Live Wire
+              </span>
+              <span class="text-[10px] text-slate-500 font-mono">${f.date}</span>
+            </div>
+            <h4 class="text-xs font-semibold text-slate-200 line-clamp-1">${f.product}</h4>
+            <p class="text-[11px] text-slate-400 font-medium">${f.brand}</p>
+            <p class="text-[11px] text-amber-200/80 leading-tight line-clamp-2">${f.reason}</p>
+          </div>
+        `;
+      }).join('');
+
+      bulletinFeedList.innerHTML = priorityHtml + (fdaHtml ? `<div class="pt-2 pb-1 text-[10px] font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5"><span>📡</span><span>Live Federal Enforcement Feed (${fdaFiltered.length} reports)</span></div>` + fdaHtml : '');
     }
 
     // Store-Ready Auto-Sync Engine: Caches latest FDA recall bulletins for offline supermarket use
@@ -3728,7 +3778,7 @@
           syncIndicatorDot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0 shadow-sm shadow-emerald-400/50";
           syncStatusTitle.textContent = `FDA Wire: Up to Date • ${timeStr}`;
           syncStatusSub.textContent = count > 0 
-            ? `${count} active recalls cached for offline supermarket scanning`
+            ? `${count} recent federal recalls cached for offline supermarket scanning`
             : `Live government wire active • Ready for store sync`;
           if (settingsOfflineStatus) {
             settingsOfflineStatus.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span><span class="text-emerald-400 font-semibold">Up to Date (${timeStr})</span>`;
@@ -3829,7 +3879,7 @@
             if (forceManual) {
               triggerHaptic([50, 40, 50]);
               sound.playClearChime();
-              showCustomizeToast(`✓ FDA Wire Synced! ${parsed.length} active recalls cached for offline shopping.`);
+              showCustomizeToast(`✓ FDA Wire Synced! ${parsed.length} recent federal recalls cached for offline shopping.`);
             }
           }
         }
