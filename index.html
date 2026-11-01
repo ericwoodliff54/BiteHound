@@ -273,14 +273,14 @@
               <div>
                 <div class="flex items-center gap-2">
                   <span class="font-bold text-white text-sm">Annual Membership</span>
-                  <span class="px-1.5 py-0.5 rounded bg-amber-400 text-slate-950 text-[10px] font-bold uppercase tracking-wider">Save 50%</span>
+                  <span class="px-1.5 py-0.5 rounded bg-amber-400 text-slate-950 text-[10px] font-bold uppercase tracking-wider">Save 37% • Best Value</span>
                 </div>
-                <span class="text-[11px] text-amber-200/90 block">3-Day Free Trial, then $11.99/yr (~$0.99/mo)</span>
+                <span class="text-[11px] text-amber-200/90 block">3-Day Free Trial, then $14.99/yr (~$1.25/mo)</span>
               </div>
             </div>
             <div class="text-right">
-              <span class="font-bold text-white text-sm">$0.99<span class="text-[10px] text-slate-400 font-normal">/mo</span></span>
-              <span class="text-[10px] text-slate-400 block font-mono">$11.99 billed/yr</span>
+              <span class="font-bold text-white text-sm">$1.25<span class="text-[10px] text-slate-400 font-normal">/mo</span></span>
+              <span class="text-[10px] text-slate-400 block font-mono">$14.99 billed/yr</span>
             </div>
           </label>
 
@@ -290,7 +290,7 @@
               <input type="radio" name="plusPlan" value="monthly" class="text-amber-500 focus:ring-0">
               <div>
                 <span class="font-bold text-white block text-sm">Monthly Plan</span>
-                <span class="text-[11px] text-slate-400">3-Day Free Trial, then $1.99/mo</span>
+                <span class="text-[11px] text-slate-400">3-Day Free Trial, then $1.99/month</span>
               </div>
             </div>
             <div class="text-right">
@@ -298,33 +298,13 @@
               <span class="text-[10px] text-slate-400 block">Cancel anytime</span>
             </div>
           </label>
-
-          <!-- Lifetime Plan -->
-          <label id="planLabelLifetime" class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border border-slate-800 bg-slate-950 text-xs transition hover:border-slate-700">
-            <div class="flex items-center gap-2.5">
-              <input type="radio" name="plusPlan" value="lifetime" class="text-amber-500 focus:ring-0">
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="font-bold text-white block text-sm">Lifetime VIP Pass</span>
-                  <span class="px-1.5 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/40 text-[9px] font-bold uppercase">No Subscription</span>
-                </div>
-                <span class="text-[11px] text-slate-400">Pay once, protect your family forever</span>
-              </div>
-            </div>
-            <div class="text-right">
-              <span class="font-bold text-white text-sm">$24.99</span>
-              <span class="text-[10px] text-emerald-400 block font-semibold">One-time pay</span>
-            </div>
-          </label>
-        </div>
-
-        <!-- Dynamic CTA Button -->
+        </div><!-- Dynamic CTA Button -->
         <button 
           type="button" 
           id="activatePlusTrialBtn" 
           class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-sm shadow-xl shadow-amber-950/60 hover:opacity-95 transition active:scale-[0.98] flex items-center justify-center gap-2"
         >
-          <span id="activatePlusTrialBtnText">Start 3-Day Free Trial (then $11.99/yr)</span>
+          <span id="activatePlusTrialBtnText">Start 3-Day Free Trial (then $14.99/yr)</span>
         </button>
 
         <p class="text-[10px] text-slate-500 text-center leading-tight">
@@ -333,7 +313,59 @@
       </div>
     </div>
 
-    <!-- FOOD SAFETY & LEGAL DISCLAIMER MODAL SHEET -->
+        <!-- ADD FAMILY MEMBER MODAL SHEET -->
+    <div id="addProfileModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+      <div class="bg-slate-900 border-2 border-sky-500/50 max-w-sm w-full rounded-3xl p-5 shadow-2xl space-y-4 relative animate-in fade-in zoom-in-95 duration-200">
+        <button type="button" id="closeAddProfileModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-full bg-slate-800 text-xs">
+          ✕
+        </button>
+
+        <div class="flex items-center gap-3 border-b border-slate-800 pb-3 pr-6">
+          <div class="w-10 h-10 rounded-2xl bg-sky-500/20 border border-sky-500/40 flex items-center justify-center text-xl shrink-0">
+            👨‍👩‍👧
+          </div>
+          <div>
+            <h3 class="font-display text-sm font-bold text-white leading-tight">Add Family Member</h3>
+            <p class="text-[11px] text-slate-400">Personalize sensitivity guardrails for your household</p>
+          </div>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          <div>
+            <label for="newProfileNameInput" class="block text-slate-300 font-medium mb-1.5">Family Member Name</label>
+            <input 
+              type="text" 
+              id="newProfileNameInput" 
+              placeholder="e.g. Emma, Leo, Mom, Dad" 
+              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-950 text-white outline-none focus:border-sky-400 font-medium text-sm"
+              maxlength="20"
+            >
+          </div>
+
+          <div>
+            <label class="block text-slate-300 font-medium mb-1.5">Choose Avatar</label>
+            <div class="flex gap-2" id="avatarSelector">
+              <button type="button" class="avatar-option w-10 h-10 rounded-xl border-2 border-sky-400 bg-sky-500/20 text-xl flex items-center justify-center transition" data-icon="👧">👧</button>
+              <button type="button" class="avatar-option w-10 h-10 rounded-xl border border-slate-800 bg-slate-950 text-xl flex items-center justify-center transition" data-icon="👦">👦</button>
+              <button type="button" class="avatar-option w-10 h-10 rounded-xl border border-slate-800 bg-slate-950 text-xl flex items-center justify-center transition" data-icon="👩">👩</button>
+              <button type="button" class="avatar-option w-10 h-10 rounded-xl border border-slate-800 bg-slate-950 text-xl flex items-center justify-center transition" data-icon="👨">👨</button>
+              <button type="button" class="avatar-option w-10 h-10 rounded-xl border border-slate-800 bg-slate-950 text-xl flex items-center justify-center transition" data-icon="👶">👶</button>
+              <button type="button" class="avatar-option w-10 h-10 rounded-xl border border-slate-800 bg-slate-950 text-xl flex items-center justify-center transition" data-icon="👤">👤</button>
+            </div>
+          </div>
+        </div>
+
+        <button 
+          type="button" 
+          id="saveNewProfileBtn" 
+          class="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 via-indigo-600 to-blue-600 hover:opacity-95 text-white font-bold text-xs shadow-lg shadow-blue-950/50 transition active:scale-[0.98] flex items-center justify-center gap-1.5"
+        >
+          <span>Save Profile & Customize Allergens</span>
+        </button>
+      </div>
+    </div>
+
+<!-- FOOD SAFETY & LEGAL DISCLAIMER MODAL SHEET -->
     <div id="safetyDisclaimerModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
       <div class="bg-slate-900 border-2 border-sky-500/50 max-w-lg w-full rounded-3xl p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto relative animate-in fade-in zoom-in-95 duration-200">
         
@@ -664,7 +696,19 @@
         </button>
       </div>
 
-      <!-- Quick Action Controls -->
+            <!-- Family Dietary Profiles Switcher -->
+      <div class="space-y-2 pt-1 pb-1">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+            <span>👨‍👩‍👧</span>
+            <span>Family Profiles</span>
+          </span>
+          <span id="activeProfileNotice" class="text-[10px] text-slate-400">Editing: Me</span>
+        </div>
+        <div class="flex items-center gap-2 overflow-x-auto pb-1" id="familyProfilesBar"></div>
+      </div>
+
+<!-- Quick Action Controls -->
       <div class="flex items-center justify-between text-xs pt-0.5 bg-slate-950/60 p-2.5 rounded-xl border border-slate-800/80">
         <span class="text-slate-400 text-[11px]">Tap items below to check or uncheck:</span>
         <div class="flex items-center gap-2">
@@ -789,7 +833,7 @@
           id="openPaywallBtn" 
           class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5"
         >
-          <span>View SafeBite Plus Plans ($1.99/mo, $11.99/yr or $24.99 Lifetime)</span>
+          <span>View SafeBite Plus Plans ($1.99/mo or $14.99/yr)</span>
         </button>
       </div>
 
@@ -1013,11 +1057,41 @@
       { id: 'sulfites', name: 'Sulfites', icon: '🍷', desc: 'Sulfur dioxide, sodium bisulfite, dried fruit' }
     ];
 
-    let userAllergens = [];
+        // Family Profiles & Active Allergen State
+    let familyProfiles = [
+      { id: 'me', name: 'Me', icon: '👤', allergens: [] }
+    ];
+    let activeProfileId = 'me';
+
     try {
-      const savedAllergens = localStorage.getItem('safebite_allergens') || localStorage.getItem('recall_radar_allergens');
-      if (savedAllergens) userAllergens = JSON.parse(savedAllergens);
+      const savedProfiles = localStorage.getItem('safebite_family_profiles');
+      if (savedProfiles) {
+        familyProfiles = JSON.parse(savedProfiles);
+      } else {
+        const savedLegacy = localStorage.getItem('safebite_allergens') || localStorage.getItem('recall_radar_allergens');
+        if (savedLegacy) {
+          familyProfiles[0].allergens = JSON.parse(savedLegacy);
+        }
+      }
+      const savedActive = localStorage.getItem('safebite_active_profile_id');
+      if (savedActive && familyProfiles.some(p => p.id === savedActive)) {
+        activeProfileId = savedActive;
+      }
     } catch (e) {}
+
+    function getActiveProfile() {
+      return familyProfiles.find(p => p.id === activeProfileId) || familyProfiles[0];
+    }
+
+    let userAllergens = getActiveProfile().allergens || [];
+
+    function saveFamilyProfiles() {
+      try {
+        localStorage.setItem('safebite_family_profiles', JSON.stringify(familyProfiles));
+        localStorage.setItem('safebite_active_profile_id', activeProfileId);
+        localStorage.setItem('safebite_allergens', JSON.stringify(getActiveProfile().allergens));
+      } catch (e) {}
+    }
 
     let userWatchlist = [];
     try {
@@ -1460,7 +1534,7 @@
       const selected = document.querySelector('input[name="plusPlan"]:checked')?.value || 'annual';
       const activatePlusTrialBtnText = document.getElementById('activatePlusTrialBtnText');
 
-      ['annual', 'monthly', 'lifetime'].forEach(p => {
+      ['annual', 'monthly'].forEach(p => {
         const lbl = document.getElementById('planLabel' + p.charAt(0).toUpperCase() + p.slice(1));
         if (lbl) {
           if (p === selected) {
@@ -1472,16 +1546,14 @@
       });
 
       if (activatePlusTrialBtnText) {
-        if (selected === 'lifetime') {
-          activatePlusTrialBtnText.textContent = "Unlock Lifetime SafeBite Plus ($24.99)";
-        } else if (selected === 'monthly') {
+        if (selected === 'monthly') {
           activatePlusTrialBtnText.textContent = plusStatusType === 'expired' 
             ? "Subscribe for $1.99/month" 
             : "Start 3-Day Free Trial (then $1.99/mo)";
         } else {
           activatePlusTrialBtnText.textContent = plusStatusType === 'expired' 
-            ? "Subscribe for $11.99/year" 
-            : "Start 3-Day Free Trial (then $11.99/yr)";
+            ? "Subscribe for $14.99/year" 
+            : "Start 3-Day Free Trial (then $14.99/yr)";
         }
       }
     }
@@ -1493,26 +1565,15 @@
     activatePlusTrialBtn.addEventListener('click', () => {
       triggerHaptic([60, 40, 60]);
       sound.playClearChime();
-      
-      const selected = document.querySelector('input[name="plusPlan"]:checked')?.value || 'annual';
 
-      if (selected === 'lifetime') {
-        isPlusActive = true;
-        plusStatusType = 'paid';
-        try {
-          localStorage.setItem('safebite_plus_active', 'paid');
-        } catch (e) {}
-        showCustomizeToast("🎉 Lifetime SafeBite Plus unlocked! Forever protection active.");
-      } else {
-        isPlusActive = true;
-        plusStatusType = 'trial';
-        trialDaysRemaining = 3;
-        try {
-          localStorage.setItem('safebite_plus_active', 'trial');
-          localStorage.setItem('safebite_trial_start', Date.now().toString());
-        } catch (e) {}
-        showCustomizeToast("🎉 3-Day Free Trial activated! All allergen & gluten guardrails unlocked.");
-      }
+      isPlusActive = true;
+      plusStatusType = 'trial';
+      trialDaysRemaining = 3;
+      try {
+        localStorage.setItem('safebite_plus_active', 'trial');
+        localStorage.setItem('safebite_trial_start', Date.now().toString());
+      } catch (e) {}
+      showCustomizeToast("🎉 3-Day Free Trial activated! All family profiles & allergen guardrails unlocked.");
 
       updatePlusUI();
       closePaywall();
@@ -1541,14 +1602,14 @@
         headerPlusBadgeBtn.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30 transition flex items-center gap-1";
         plusActiveBadge.textContent = "Trial Expired";
         plusActiveBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40";
-        openPaywallBtn.innerHTML = `<span>Upgrade to SafeBite Plus ($1.99/mo or $11.99/yr)</span>`;
+        openPaywallBtn.innerHTML = `<span>Upgrade to SafeBite Plus ($1.99/mo or $14.99/yr)</span>`;
         openPaywallBtn.className = "w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5";
       } else {
         headerPlusBadgeText.textContent = "3-Day Trial";
         headerPlusBadgeBtn.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30 transition flex items-center gap-1";
         plusActiveBadge.textContent = "Free Tier";
         plusActiveBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700";
-        openPaywallBtn.innerHTML = `<span>Start 3-Day Trial ($11.99/yr or $24.99 Lifetime)</span>`;
+        openPaywallBtn.innerHTML = `<span>Start 3-Day Free Trial ($14.99/yr or $1.99/mo)</span>`;
         openPaywallBtn.className = "w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5";
       }
       updateSelectedPlanUI();
@@ -2305,14 +2366,23 @@
         }
 
         checkPlusStatus();
-        let triggeredAllergens = [];
-        let triggeredNames = [];
+        let triggeredFamilyMatches = [];
+
         if (isPlusActive) {
-          triggeredAllergens = detectedAllergenIds.filter(a => userAllergens.includes(a));
-          triggeredNames = triggeredAllergens.map(id => {
-            const match = ALLERGEN_OPTIONS.find(o => o.id === id);
-            return match ? `${match.icon} ${match.name}` : id;
-          });
+          for (const prof of familyProfiles) {
+            const matches = (prof.allergens || []).filter(a => detectedAllergenIds.includes(a));
+            if (matches.length > 0) {
+              const names = matches.map(id => {
+                const opt = ALLERGEN_OPTIONS.find(o => o.id === id);
+                return opt ? `${opt.icon} ${opt.name}` : id;
+              });
+              triggeredFamilyMatches.push({
+                name: prof.name,
+                icon: prof.icon || '👤',
+                allergens: names
+              });
+            }
+          }
         }
 
         let resultData;
@@ -2337,19 +2407,20 @@
             triggeredAllergens: triggeredNames,
             time: timestamp
           };
-        } else if (triggeredAllergens.length > 0) {
+        } else if (triggeredFamilyMatches.length > 0) {
           triggerHaptic([100, 50, 100]);
           sound.playAlertSiren();
           resultData = {
             upc: code,
             status: 'allergen_warning',
-            title: 'DIETARY ALLERGEN TRIGGERED',
+            title: `Family Allergen Alert: ${triggeredFamilyMatches.map(m => m.name).join(', ')}`,
             productName: productName,
             brand: brandName,
-            details: `Cleared of federal recalls, but contains ingredients matching your active dietary guardrail (${triggeredNames.join(', ')}).`,
+            details: `Cleared of federal recalls, but matches dietary sensitivities for: ${triggeredFamilyMatches.map(m => `${m.icon} ${m.name} (${m.allergens.join(', ')})`).join('; ')}.`,
             agency: 'SafeBite Guardrail',
             ingredients: ingredientsSummary,
-            triggeredAllergens: triggeredNames,
+            triggeredAllergens: Array.from(new Set(triggeredFamilyMatches.flatMap(m => m.allergens))),
+            familyMatches: triggeredFamilyMatches,
             time: timestamp
           };
         } else if (terminatedNotice) {
@@ -2513,9 +2584,26 @@
             </div>
 
             <div class="space-y-2.5 text-xs text-slate-200 bg-slate-950/80 rounded-xl p-4 border border-amber-500/40">
-              <div class="p-3 bg-amber-500/20 border border-amber-500/40 rounded-lg text-amber-200 font-semibold leading-relaxed flex items-center gap-2">
-                <span class="text-base">⚠️</span>
-                <span>Contains your guarded allergen: <span class="font-bold underline text-white">${data.triggeredAllergens.join(', ')}</span></span>
+              <div class="p-3 bg-amber-500/20 border border-amber-500/40 rounded-xl text-amber-200 font-semibold leading-relaxed flex flex-col gap-2">
+                <div class="flex items-center gap-2 font-bold text-amber-300 text-xs">
+                  <span class="text-base">⚠️</span>
+                  <span>Unsafe for Household Members:</span>
+                </div>
+                ${data.familyMatches && data.familyMatches.length > 0 ? `
+                  <div class="space-y-1.5 pt-0.5">
+                    ${data.familyMatches.map(m => `
+                      <div class="flex items-center justify-between bg-amber-950/70 px-2.5 py-1.5 rounded-lg border border-amber-500/30 text-xs">
+                        <span class="font-bold text-white flex items-center gap-1.5">
+                          <span>${m.icon}</span>
+                          <span>${m.name}</span>
+                        </span>
+                        <span class="font-semibold text-rose-300">Contains: ${m.allergens.join(', ')}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                ` : `
+                  <span>Contains guarded allergen: <span class="font-bold underline text-white">${data.triggeredAllergens.join(', ')}</span></span>
+                `}
               </div>
               <p class="text-slate-300 pt-0.5 leading-relaxed">${data.details}</p>
               ${data.ingredients ? `<p class="text-[11px] text-slate-400 border-t border-slate-800/80 pt-2"><span class="font-semibold text-slate-300">Detected Ingredients:</span> ${data.ingredients.slice(0, 160)}...</p>` : ''}
@@ -2567,7 +2655,7 @@
                 <div class="mt-2 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-emerald-400">
                   <span class="flex items-center gap-1.5">
                     <span>✓</span>
-                    <span>Allergen Guard: Clear of your active guardrails</span>
+                    <span>Allergen Guard: Clear for all family profiles (${familyProfiles.map(p => p.name).join(", ")})</span>
                   </span>
                   <span class="font-bold text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/30">Plus Active</span>
                 </div>
@@ -2627,17 +2715,26 @@
       const allergensPlusBannerTitle = document.getElementById('allergensPlusBannerTitle');
       const allergensPlusBannerSub = document.getElementById('allergensPlusBannerSub');
       const unlockAllergensBannerBtn = document.getElementById('unlockAllergensBannerBtn');
+      const activeProfileNotice = document.getElementById('activeProfileNotice');
+      const familyProfilesBar = document.getElementById('familyProfilesBar');
+
+      const currentProfile = getActiveProfile();
+      userAllergens = currentProfile.allergens || [];
+
+      if (activeProfileNotice) {
+        activeProfileNotice.textContent = `Editing: ${currentProfile.icon || '👤'} ${currentProfile.name}`;
+      }
 
       if (isPlusActive) {
-        activeAllergensBadge.textContent = `${userAllergens.length} Active`;
+        activeAllergensBadge.textContent = `${userAllergens.length} Active (${currentProfile.name})`;
         activeAllergensBadge.className = "text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0";
         if (allergensPlusBanner) {
           allergensPlusBanner.className = "p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between gap-3";
           allergensPlusBannerTitle.innerHTML = "<span>✓</span> SafeBite Plus Active";
           allergensPlusBannerTitle.className = "text-xs font-bold text-emerald-300 flex items-center gap-1.5";
           allergensPlusBannerSub.textContent = plusStatusType === 'trial' 
-            ? `3-Day Free Trial active (${trialDaysRemaining} day${trialDaysRemaining === 1 ? '' : 's'} remaining). All 14 allergen guardrails unlocked.`
-            : "All 14 allergen & gluten guardrails unlocked.";
+            ? `3-Day Free Trial active (${trialDaysRemaining} day${trialDaysRemaining === 1 ? '' : 's'} remaining). Family profiles & all 14 allergens unlocked.`
+            : `All 14 allergen guardrails & family profiles active.`;
           unlockAllergensBannerBtn.classList.add('hidden');
         }
       } else {
@@ -2648,10 +2745,79 @@
           allergensPlusBannerTitle.innerHTML = "<span>⭐</span> SafeBite Plus Required";
           allergensPlusBannerTitle.className = "text-xs font-bold text-amber-300 flex items-center gap-1.5";
           allergensPlusBannerSub.textContent = plusStatusType === 'expired'
-            ? "Your 3-day trial has ended. Subscribe to Plus to re-enable allergen guardrails."
-            : "Start your 3-day free trial (no card needed) to enable custom allergen & gluten alerts.";
+            ? "Your 3-day trial has ended. Subscribe to Plus to re-enable family profiles & allergen guardrails."
+            : "Start your 3-day free trial (no card needed) to unlock family dietary profiles & allergen alerts.";
           unlockAllergensBannerBtn.classList.remove('hidden');
           unlockAllergensBannerBtn.textContent = plusStatusType === 'expired' ? "Upgrade to Plus" : "Start 3-Day Trial";
+        }
+      }
+
+      // Render Family Profiles Bar
+      if (familyProfilesBar) {
+        familyProfilesBar.innerHTML = familyProfiles.map(p => {
+          const isActive = p.id === activeProfileId;
+          const activeStyle = isActive 
+            ? 'bg-blue-600 border-blue-400 text-white font-bold shadow-md shadow-blue-950/40' 
+            : 'bg-slate-950/80 border-slate-800 text-slate-300 hover:border-slate-700';
+          const count = (p.allergens || []).length;
+          const deleteBtn = (p.id !== 'me' && familyProfiles.length > 1) 
+            ? `<button type="button" class="delete-profile-btn ml-1 text-slate-400 hover:text-rose-400 p-0.5" data-del="${p.id}" title="Remove ${p.name}">✕</button>` 
+            : '';
+
+          return `
+            <div class="shrink-0 flex items-center rounded-xl border text-xs transition ${activeStyle}">
+              <button type="button" class="select-profile-btn flex items-center gap-1.5 px-3 py-1.5" data-id="${p.id}">
+                <span>${p.icon || '👤'}</span>
+                <span>${p.name}</span>
+                <span class="text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? 'bg-blue-800 text-blue-200' : 'bg-slate-800 text-slate-400'}">${count}</span>
+              </button>
+              ${deleteBtn ? `<div class="pr-2">${deleteBtn}</div>` : ''}
+            </div>
+          `;
+        }).join('') + `
+          <button type="button" id="addNewProfileBtn" class="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-dashed border-slate-700 bg-slate-950/40 text-sky-400 hover:text-sky-300 hover:border-sky-500/60 text-xs font-semibold transition active:scale-95">
+            <span>➕</span>
+            <span>Add Member</span>
+          </button>
+        `;
+
+        // Switch profile click
+        document.querySelectorAll('.select-profile-btn').forEach(b => {
+          b.addEventListener('click', () => {
+            triggerHaptic([30]);
+            activeProfileId = b.getAttribute('data-id');
+            saveFamilyProfiles();
+            renderAllergensTab();
+          });
+        });
+
+        // Delete profile click
+        document.querySelectorAll('.delete-profile-btn').forEach(b => {
+          b.addEventListener('click', (e) => {
+            e.stopPropagation();
+            triggerHaptic([40]);
+            const delId = b.getAttribute('data-del');
+            familyProfiles = familyProfiles.filter(p => p.id !== delId);
+            if (activeProfileId === delId) activeProfileId = 'me';
+            saveFamilyProfiles();
+            sound.playScanBeep();
+            renderAllergensTab();
+          });
+        });
+
+        // Add Member button
+        const addBtn = document.getElementById('addNewProfileBtn');
+        if (addBtn) {
+          addBtn.addEventListener('click', () => {
+            if (!isPlusActive) {
+              triggerHaptic([40, 40]);
+              openPaywall();
+              showCustomizeToast("⭐ SafeBite Plus required to add family profiles.");
+              return;
+            }
+            triggerHaptic([30]);
+            openAddProfileModal();
+          });
         }
       }
 
@@ -2702,14 +2868,16 @@
           triggerHaptic([30]);
           const id = btn.getAttribute('data-id');
 
-          if (userAllergens.includes(id)) {
-            userAllergens = userAllergens.filter(x => x !== id);
+          const prof = getActiveProfile();
+          if (!prof.allergens) prof.allergens = [];
+
+          if (prof.allergens.includes(id)) {
+            prof.allergens = prof.allergens.filter(x => x !== id);
           } else {
-            userAllergens.push(id);
+            prof.allergens.push(id);
           }
-          try {
-            localStorage.setItem('safebite_allergens', JSON.stringify(userAllergens));
-          } catch (e) {}
+          userAllergens = prof.allergens;
+          saveFamilyProfiles();
           sound.playScanBeep();
           renderAllergensTab();
         });
@@ -2726,10 +2894,10 @@
           return;
         }
         triggerHaptic([40]);
-        userAllergens = ALLERGEN_OPTIONS.map(o => o.id);
-        try {
-          localStorage.setItem('safebite_allergens', JSON.stringify(userAllergens));
-        } catch (e) {}
+        const prof = getActiveProfile();
+        prof.allergens = ALLERGEN_OPTIONS.map(o => o.id);
+        userAllergens = prof.allergens;
+        saveFamilyProfiles();
         sound.playScanBeep();
         renderAllergensTab();
       });
@@ -2737,13 +2905,78 @@
 
     resetAllergensBtn.addEventListener('click', () => {
       triggerHaptic([40]);
+      const prof = getActiveProfile();
+      prof.allergens = [];
       userAllergens = [];
-      try {
-        localStorage.setItem('safebite_allergens', JSON.stringify([]));
-      } catch (e) {}
+      saveFamilyProfiles();
       sound.playScanBeep();
       renderAllergensTab();
     });
+
+    // Add Family Member Modal Handlers
+    const addProfileModal = document.getElementById('addProfileModal');
+    const closeAddProfileModalBtn = document.getElementById('closeAddProfileModalBtn');
+    const newProfileNameInput = document.getElementById('newProfileNameInput');
+    const saveNewProfileBtn = document.getElementById('saveNewProfileBtn');
+    let selectedAvatarIcon = '👧';
+
+    function openAddProfileModal() {
+      newProfileNameInput.value = '';
+      selectedAvatarIcon = '👧';
+      updateAvatarOptionsUI();
+      addProfileModal.classList.remove('hidden');
+      setTimeout(() => newProfileNameInput.focus(), 100);
+    }
+
+    function closeAddProfileModal() {
+      addProfileModal.classList.add('hidden');
+    }
+
+    if (closeAddProfileModalBtn) {
+      closeAddProfileModalBtn.addEventListener('click', closeAddProfileModal);
+    }
+
+    function updateAvatarOptionsUI() {
+      document.querySelectorAll('.avatar-option').forEach(btn => {
+        const icon = btn.getAttribute('data-icon');
+        if (icon === selectedAvatarIcon) {
+          btn.className = "avatar-option w-10 h-10 rounded-xl border-2 border-sky-400 bg-sky-500/20 text-xl flex items-center justify-center transition";
+        } else {
+          btn.className = "avatar-option w-10 h-10 rounded-xl border border-slate-800 bg-slate-950 text-xl flex items-center justify-center transition";
+        }
+      });
+    }
+
+    document.querySelectorAll('.avatar-option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        selectedAvatarIcon = btn.getAttribute('data-icon');
+        updateAvatarOptionsUI();
+      });
+    });
+
+    if (saveNewProfileBtn) {
+      saveNewProfileBtn.addEventListener('click', () => {
+        const name = newProfileNameInput.value.trim();
+        if (!name) {
+          showCustomizeToast("Please enter a name for the family member.");
+          return;
+        }
+        triggerHaptic([50]);
+        sound.playClearChime();
+        const newId = 'prof_' + Date.now();
+        familyProfiles.push({
+          id: newId,
+          name: name,
+          icon: selectedAvatarIcon,
+          allergens: []
+        });
+        activeProfileId = newId;
+        saveFamilyProfiles();
+        closeAddProfileModal();
+        renderAllergensTab();
+        showCustomizeToast(`🎉 ${name}'s profile added! Check their allergens below.`);
+      });
+    }
 
     // Settings & Brand Watchlist Logic
     function renderCustomizeTab() {
