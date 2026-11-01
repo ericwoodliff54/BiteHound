@@ -641,15 +641,7 @@
           </button>
         </div>
 
-        <!-- Quick Keyword Search Pills -->
-        <div class="flex flex-wrap items-center gap-1.5 pt-0.5">
-          <span class="text-[10px] text-slate-500">Quick searches:</span>
-          <button type="button" class="search-chip px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] border border-slate-700/80 transition" data-query="spinach">Spinach</button>
-          <button type="button" class="search-chip px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] border border-slate-700/80 transition" data-query="carrots">Carrots</button>
-          <button type="button" class="search-chip px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] border border-slate-700/80 transition" data-query="turkey">Turkey</button>
-          <button type="button" class="search-chip px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] border border-slate-700/80 transition" data-query="chips">Chips</button>
-          <button type="button" class="search-chip px-2 py-0.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] border border-slate-700/80 transition" data-query="peanut">Peanut</button>
-        </div>
+
 
         <div id="searchResultsBox" class="hidden space-y-2 pt-1 max-h-60 overflow-y-auto"></div>
       </div>
@@ -2232,15 +2224,7 @@
       brandSearchInput.focus();
     });
 
-    searchChips.forEach(chip => {
-      chip.addEventListener('click', () => {
-        triggerHaptic([30]);
-        const q = chip.getAttribute('data-query');
-        brandSearchInput.value = q;
-        clearSearchBtn.classList.remove('hidden');
-        performBrandSearch(q);
-      });
-    });
+// Quick search chips removed
 
     function performBrandSearch(query) {
       if (!query || query.length < 2) {
