@@ -1875,6 +1875,8 @@
           }
         }
 
+        let terminatedNotice = null;
+
         // 4. Query Official Live openFDA Food Enforcement API (Archived Recalls 2004–Present)
         if (!isRecalled) {
           try {
@@ -1903,6 +1905,23 @@
                   const desc = (item.product_description || '').toLowerCase();
                   const firm = (item.recalling_firm || '').toLowerCase();
                   const codeInfo = (item.code_info || '').toLowerCase();
+                  const fdaStatus = (item.status || '').toLowerCase();
+                  const isTerminatedOrCompleted = fdaStatus.includes('terminated') || fdaStatus.includes('completed');
+
+                  let fdaDateStr = "Official FDA Archive";
+                  if (item.recall_initiation_date) {
+                    const y = item.recall_initiation_date.substring(0, 4);
+                    const m = item.recall_initiation_date.substring(4, 6);
+                    const d = item.recall_initiation_date.substring(6, 8);
+                    const dObj = new Date(`${y}-${m}-${d}T00:00:00`);
+                    if (!isNaN(dObj)) fdaDateStr = dObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                  } else if (item.report_date) {
+                    const y = item.report_date.substring(0, 4);
+                    const m = item.report_date.substring(4, 6);
+                    const d = item.report_date.substring(6, 8);
+                    const dObj = new Date(`${y}-${m}-${d}T00:00:00`);
+                    if (!isNaN(dObj)) fdaDateStr = dObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                  }
 
                   // 1. Definite UPC match in FDA code info or product description
                   const hasCode = codeInfo.includes(code) || desc.includes(code);
@@ -1914,37 +1933,56 @@
                   const hasSpecificProdTitle = specificProdWords.length > 0 && specificProdWords.some(w => desc.includes(w));
                   const hasBrandMatch = (brandName.length >= 3 && brandName !== 'Grocery Brand') && (firm.includes(brandName.toLowerCase()) || desc.includes(brandName.toLowerCase()));
 
-                  // Never match parent company on generic words (e.g., Nestle or Ferrero chocolate bar)
-                  if (hasCode || (hasBrandMatch && hasSpecificProdTitle)) {
-                    isRecalled = true;
-                    
-                    let fdaDateStr = "Official FDA Archive";
-                    if (item.recall_initiation_date) {
-                      const y = item.recall_initiation_date.substring(0, 4);
-                      const m = item.recall_initiation_date.substring(4, 6);
-                      const d = item.recall_initiation_date.substring(6, 8);
-                      const dObj = new Date(`${y}-${m}-${d}T00:00:00`);
-                      if (!isNaN(dObj)) fdaDateStr = dObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-                    } else if (item.report_date) {
-                      const y = item.report_date.substring(0, 4);
-                      const m = item.report_date.substring(4, 6);
-                      const d = item.report_date.substring(6, 8);
-                      const dObj = new Date(`${y}-${m}-${d}T00:00:00`);
-                      if (!isNaN(dObj)) fdaDateStr = dObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                  if (hasCode) {
+                    if (isTerminatedOrCompleted) {
+                      terminatedNotice = {
+                        date: fdaDateStr,
+                        reason: item.reason_for_recall || "Past voluntary recall officially resolved.",
+                        agency: "FDA Terminated & Resolved",
+                        product: item.product_description ? (item.product_description.slice(0, 95) + '...') : productName
+                      };
+                    } else {
+                      isRecalled = true;
+                      recallRecord = {
+                        product: item.product_description ? (item.product_description.slice(0, 110) + '...') : productName,
+                        brand: item.recalling_firm || brandName,
+                        hazard: item.reason_for_recall || "Active public health notice issued.",
+                        severity: (item.classification || "Class I") + " ALERT",
+                        agency: "FDA Food Enforcement",
+                        recallDate: fdaDateStr,
+                        action: "Do not consume. Active federal recall on record. Discard immediately.",
+                        tag: item.classification || "Class I Alert",
+                        stores: item.distribution_pattern ? [item.distribution_pattern.slice(0, 70)] : ['Nationwide Distribution']
+                      };
+                      break;
                     }
-
-                    recallRecord = {
-                      product: item.product_description ? (item.product_description.slice(0, 110) + '...') : productName,
-                      brand: item.recalling_firm || brandName,
-                      hazard: item.reason_for_recall || "Active or historical federal recall on record.",
-                      severity: (item.classification || "Class I") + " ALERT",
-                      agency: "FDA Food Enforcement",
-                      recallDate: fdaDateStr,
-                      action: "Do not consume. Federal enforcement record identified in openFDA database. Discard immediately.",
-                      tag: item.classification || "Class I Alert",
-                      stores: item.distribution_pattern ? [item.distribution_pattern.slice(0, 70)] : ['Nationwide Distribution']
-                    };
-                    break;
+                  } else if (hasBrandMatch && hasSpecificProdTitle) {
+                    if (isTerminatedOrCompleted) {
+                      terminatedNotice = {
+                        date: fdaDateStr,
+                        reason: item.reason_for_recall || "Past voluntary recall officially resolved.",
+                        agency: "FDA Terminated & Resolved",
+                        product: item.product_description ? (item.product_description.slice(0, 95) + '...') : productName
+                      };
+                    } else {
+                      // Only mark active recall if the specific variety strictly matches (e.g. sandwich vs biscuit)
+                      const isExactLineMatch = (productName.toLowerCase().includes('sandwich') === desc.includes('sandwich'));
+                      if (isExactLineMatch) {
+                        isRecalled = true;
+                        recallRecord = {
+                          product: item.product_description ? (item.product_description.slice(0, 110) + '...') : productName,
+                          brand: item.recalling_firm || brandName,
+                          hazard: item.reason_for_recall || "Active public health notice issued.",
+                          severity: (item.classification || "Class I") + " ALERT",
+                          agency: "FDA Food Enforcement",
+                          recallDate: fdaDateStr,
+                          action: "Check package lot numbers. Federal notice issued on matching product line.",
+                          tag: item.classification || "Class I Alert",
+                          stores: item.distribution_pattern ? [item.distribution_pattern.slice(0, 70)] : ['Nationwide Distribution']
+                        };
+                        break;
+                      }
+                    }
                   }
                 }
               }
@@ -1995,6 +2033,21 @@
             agency: 'RecallRadar Guardrail',
             ingredients: ingredientsSummary,
             triggeredAllergens: triggeredNames,
+            time: timestamp
+          };
+        } else if (terminatedNotice) {
+          triggerHaptic([50]);
+          sound.playClearChime();
+          resultData = {
+            upc: code,
+            status: 'clear',
+            title: 'NO ACTIVE RECALLS (PAST RECALL TERMINATED)',
+            productName: productName,
+            brand: brandName,
+            details: `Verified against official FDA records. A past voluntary recall on this product line (${terminatedNotice.date}) was officially TERMINATED & COMPLETED by the FDA. Current store inventory is unaffected and cleared.`,
+            agency: 'FDA Terminated & Resolved',
+            ingredients: ingredientsSummary,
+            triggeredAllergens: [],
             time: timestamp
           };
         } else {
