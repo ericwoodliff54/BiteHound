@@ -265,51 +265,66 @@
         </div>
 
         <!-- Interactive Pricing Tier Options -->
-        <div class="space-y-2" id="paywallPlansContainer">
-          <label class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border-2 border-amber-500 bg-amber-950/20 text-xs transition relative">
+        <div class="space-y-2.5" id="paywallPlansContainer">
+          <!-- Annual Plan (Best Value) -->
+          <label id="planLabelAnnual" class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border-2 border-amber-500 bg-amber-950/30 text-xs transition relative">
             <div class="flex items-center gap-2.5">
               <input type="radio" name="plusPlan" value="annual" checked class="text-amber-500 focus:ring-0">
               <div>
                 <div class="flex items-center gap-2">
-                  <span class="font-bold text-white text-sm">Annual Plan</span>
-                  <span class="px-1.5 py-0.2 rounded bg-amber-400 text-slate-950 text-[10px] font-bold uppercase">Best Value</span>
+                  <span class="font-bold text-white text-sm">Annual Membership</span>
+                  <span class="px-1.5 py-0.5 rounded bg-amber-400 text-slate-950 text-[10px] font-bold uppercase tracking-wider">Save 50%</span>
                 </div>
-                <span class="text-[11px] text-amber-200/90 block">7-Day Free Trial, then $14.99/year ($1.25/mo)</span>
+                <span class="text-[11px] text-amber-200/90 block">3-Day Free Trial, then $11.99/yr (~$0.99/mo)</span>
               </div>
             </div>
-            <span class="font-bold text-white text-sm">$1.25<span class="text-[10px] text-slate-400 font-normal">/mo</span></span>
+            <div class="text-right">
+              <span class="font-bold text-white text-sm">$0.99<span class="text-[10px] text-slate-400 font-normal">/mo</span></span>
+              <span class="text-[10px] text-slate-400 block font-mono">$11.99 billed/yr</span>
+            </div>
           </label>
 
-          <label class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border border-slate-800 bg-slate-950 text-xs transition hover:border-slate-700">
+          <!-- Monthly Plan -->
+          <label id="planLabelMonthly" class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border border-slate-800 bg-slate-950 text-xs transition hover:border-slate-700">
             <div class="flex items-center gap-2.5">
               <input type="radio" name="plusPlan" value="monthly" class="text-amber-500 focus:ring-0">
               <div>
                 <span class="font-bold text-white block text-sm">Monthly Plan</span>
-                <span class="text-[11px] text-slate-400">Billed monthly, cancel anytime</span>
+                <span class="text-[11px] text-slate-400">3-Day Free Trial, then $1.99/mo</span>
               </div>
             </div>
-            <span class="font-bold text-white text-sm">$1.99<span class="text-[10px] text-slate-400 font-normal">/mo</span></span>
+            <div class="text-right">
+              <span class="font-bold text-white text-sm">$1.99<span class="text-[10px] text-slate-400 font-normal">/mo</span></span>
+              <span class="text-[10px] text-slate-400 block">Cancel anytime</span>
+            </div>
           </label>
 
-          <label class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border border-slate-800 bg-slate-950 text-xs transition hover:border-slate-700">
+          <!-- Lifetime Plan -->
+          <label id="planLabelLifetime" class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border border-slate-800 bg-slate-950 text-xs transition hover:border-slate-700">
             <div class="flex items-center gap-2.5">
               <input type="radio" name="plusPlan" value="lifetime" class="text-amber-500 focus:ring-0">
               <div>
-                <span class="font-bold text-white block text-sm">Lifetime Unlock</span>
-                <span class="text-[11px] text-slate-400">One-time payment, forever access</span>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-white block text-sm">Lifetime VIP Pass</span>
+                  <span class="px-1.5 py-0.5 rounded bg-sky-500/20 text-sky-300 border border-sky-500/40 text-[9px] font-bold uppercase">No Subscription</span>
+                </div>
+                <span class="text-[11px] text-slate-400">Pay once, protect your family forever</span>
               </div>
             </div>
-            <span class="font-bold text-white text-sm">$9.99</span>
+            <div class="text-right">
+              <span class="font-bold text-white text-sm">$24.99</span>
+              <span class="text-[10px] text-emerald-400 block font-semibold">One-time pay</span>
+            </div>
           </label>
         </div>
 
-        <!-- CTA Button -->
+        <!-- Dynamic CTA Button -->
         <button 
           type="button" 
           id="activatePlusTrialBtn" 
           class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-sm shadow-xl shadow-amber-950/60 hover:opacity-95 transition active:scale-[0.98] flex items-center justify-center gap-2"
         >
-          <span>Start 7-Day Free Trial & Unlock Plus</span>
+          <span id="activatePlusTrialBtnText">Start 3-Day Free Trial (then $11.99/yr)</span>
         </button>
 
         <p class="text-[10px] text-slate-500 text-center leading-tight">
@@ -610,11 +625,24 @@
           <h2 class="font-display text-sm font-bold text-slate-100 flex items-center gap-2">
             <span>🛡️ Dietary Allergens & Gluten Guardrails</span>
           </h2>
-          <p class="text-xs text-slate-400 mt-0.5">Check any ingredients you want flagged in amber/yellow when scanning.</p>
+          <p class="text-xs text-slate-400 mt-0.5">Personalized allergen guardrails require SafeBite Plus.</p>
         </div>
-        <span id="activeAllergensBadge" class="text-xs font-bold px-2.5 py-1 rounded-full bg-blue-500/20 text-sky-300 border border-blue-500/30 shrink-0">
-          0 Active
+        <span id="activeAllergensBadge" class="text-xs font-bold px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 shrink-0">
+          Locked (Plus)
         </span>
+      </div>
+
+      <!-- Plus Status & Trial Banner -->
+      <div id="allergensPlusBanner" class="p-3.5 rounded-2xl bg-gradient-to-r from-amber-500/20 via-amber-400/10 to-yellow-500/20 border border-amber-500/40 flex items-center justify-between gap-3">
+        <div>
+          <span id="allergensPlusBannerTitle" class="text-xs font-bold text-amber-300 flex items-center gap-1.5">
+            <span>⭐</span> SafeBite Plus Required
+          </span>
+          <p id="allergensPlusBannerSub" class="text-[11px] text-slate-300">Start your 3-day free trial (no card needed) to enable custom allergen & gluten alerts.</p>
+        </div>
+        <button type="button" id="unlockAllergensBannerBtn" class="shrink-0 px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-950 font-bold text-xs shadow-md shadow-amber-950/40 hover:opacity-95 transition active:scale-95">
+          Start 3-Day Trial
+        </button>
       </div>
 
       <!-- Quick Action Controls -->
@@ -742,7 +770,7 @@
           id="openPaywallBtn" 
           class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5"
         >
-          <span>View SafeBite Plus Plans ($1.25/mo or $9.99 Lifetime)</span>
+          <span>View SafeBite Plus Plans ($1.99/mo, $11.99/yr or $24.99 Lifetime)</span>
         </button>
       </div>
 
@@ -979,10 +1007,47 @@
     } catch (e) {}
 
     let isPlusActive = false;
-    try {
-      const savedPlus = localStorage.getItem('safebite_plus_active') || localStorage.getItem('recall_radar_plus_active');
-      if (savedPlus === 'true') isPlusActive = true;
-    } catch (e) {}
+    let plusStatusType = 'free'; // 'free', 'trial', 'paid', or 'expired'
+    let trialDaysRemaining = 0;
+
+    function checkPlusStatus() {
+      try {
+        const savedPlus = localStorage.getItem('safebite_plus_active');
+        const trialStart = localStorage.getItem('safebite_trial_start');
+
+        if (savedPlus === 'paid' || savedPlus === 'true') {
+          isPlusActive = true;
+          plusStatusType = 'paid';
+          trialDaysRemaining = 0;
+          return;
+        }
+
+        if (savedPlus === 'trial' && trialStart) {
+          const elapsedMs = Date.now() - parseInt(trialStart, 10);
+          const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000;
+          if (elapsedMs < THREE_DAYS_MS) {
+            isPlusActive = true;
+            plusStatusType = 'trial';
+            trialDaysRemaining = Math.max(1, Math.ceil((THREE_DAYS_MS - elapsedMs) / (24 * 60 * 60 * 1000)));
+            return;
+          } else {
+            isPlusActive = false;
+            plusStatusType = 'expired';
+            trialDaysRemaining = 0;
+            return;
+          }
+        }
+
+        isPlusActive = false;
+        plusStatusType = 'free';
+        trialDaysRemaining = 0;
+      } catch (e) {
+        isPlusActive = false;
+        plusStatusType = 'free';
+        trialDaysRemaining = 0;
+      }
+    }
+    checkPlusStatus();
 
     // Product Database
     const RECALL_DATABASE = {
@@ -1348,36 +1413,109 @@
     headerPlusBadgeBtn.addEventListener('click', openPaywall);
     closePaywallBtn.addEventListener('click', closePaywall);
 
+    document.addEventListener('click', (e) => {
+      if (e.target && (e.target.id === 'unlockAllergensBannerBtn' || e.target.closest('.open-paywall-trigger'))) {
+        e.preventDefault();
+        openPaywall();
+      }
+    });
+
+    function updateSelectedPlanUI() {
+      const selected = document.querySelector('input[name="plusPlan"]:checked')?.value || 'annual';
+      const activatePlusTrialBtnText = document.getElementById('activatePlusTrialBtnText');
+
+      ['annual', 'monthly', 'lifetime'].forEach(p => {
+        const lbl = document.getElementById('planLabel' + p.charAt(0).toUpperCase() + p.slice(1));
+        if (lbl) {
+          if (p === selected) {
+            lbl.className = "cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border-2 border-amber-500 bg-amber-950/30 text-xs transition relative";
+          } else {
+            lbl.className = "cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border border-slate-800 bg-slate-950 text-xs transition hover:border-slate-700";
+          }
+        }
+      });
+
+      if (activatePlusTrialBtnText) {
+        if (selected === 'lifetime') {
+          activatePlusTrialBtnText.textContent = "Unlock Lifetime SafeBite Plus ($24.99)";
+        } else if (selected === 'monthly') {
+          activatePlusTrialBtnText.textContent = plusStatusType === 'expired' 
+            ? "Subscribe for $1.99/month" 
+            : "Start 3-Day Free Trial (then $1.99/mo)";
+        } else {
+          activatePlusTrialBtnText.textContent = plusStatusType === 'expired' 
+            ? "Subscribe for $11.99/year" 
+            : "Start 3-Day Free Trial (then $11.99/yr)";
+        }
+      }
+    }
+
+    document.querySelectorAll('input[name="plusPlan"]').forEach(r => {
+      r.addEventListener('change', updateSelectedPlanUI);
+    });
+
     activatePlusTrialBtn.addEventListener('click', () => {
       triggerHaptic([60, 40, 60]);
       sound.playClearChime();
-      isPlusActive = true;
-      try {
-        localStorage.setItem('safebite_plus_active', 'true');
-      } catch (e) {}
+      
+      const selected = document.querySelector('input[name="plusPlan"]:checked')?.value || 'annual';
+
+      if (selected === 'lifetime') {
+        isPlusActive = true;
+        plusStatusType = 'paid';
+        try {
+          localStorage.setItem('safebite_plus_active', 'paid');
+        } catch (e) {}
+        showCustomizeToast("🎉 Lifetime SafeBite Plus unlocked! Forever protection active.");
+      } else {
+        isPlusActive = true;
+        plusStatusType = 'trial';
+        trialDaysRemaining = 3;
+        try {
+          localStorage.setItem('safebite_plus_active', 'trial');
+          localStorage.setItem('safebite_trial_start', Date.now().toString());
+        } catch (e) {}
+        showCustomizeToast("🎉 3-Day Free Trial activated! All allergen & gluten guardrails unlocked.");
+      }
 
       updatePlusUI();
       closePaywall();
-      showCustomizeToast("🎉 SafeBite Plus activated! All allergen & gluten guardrails unlocked.");
       renderAllergensTab();
     });
 
     function updatePlusUI() {
-      if (isPlusActive) {
+      checkPlusStatus();
+
+      if (plusStatusType === 'paid') {
         headerPlusBadgeText.textContent = "Plus Active";
         headerPlusBadgeBtn.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 transition flex items-center gap-1";
         plusActiveBadge.textContent = "✓ PLUS ACTIVE";
         plusActiveBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
-        openPaywallBtn.innerHTML = `<span>⭐ You Have Active SafeBite Plus Access</span>`;
+        openPaywallBtn.innerHTML = `<span>⭐ SafeBite Plus Active (Lifetime VIP)</span>`;
         openPaywallBtn.className = "w-full py-2.5 px-3 rounded-xl bg-slate-800 border border-slate-700 text-amber-300 font-bold text-xs transition flex items-center justify-center gap-1.5";
-      } else {
-        headerPlusBadgeText.textContent = "Plus Trial";
+      } else if (plusStatusType === 'trial') {
+        headerPlusBadgeText.textContent = `Trial (${trialDaysRemaining}d)`;
         headerPlusBadgeBtn.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30 transition flex items-center gap-1";
-        plusActiveBadge.textContent = "Free Preview";
+        plusActiveBadge.textContent = `TRIAL (${trialDaysRemaining}D LEFT)`;
         plusActiveBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40";
-        openPaywallBtn.innerHTML = `<span>View SafeBite Plus Plans ($1.25/mo or $9.99 Lifetime)</span>`;
+        openPaywallBtn.innerHTML = `<span>⭐ 3-Day Trial Active (${trialDaysRemaining}d left) • View Plans</span>`;
+        openPaywallBtn.className = "w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5";
+      } else if (plusStatusType === 'expired') {
+        headerPlusBadgeText.textContent = "Trial Ended";
+        headerPlusBadgeBtn.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30 transition flex items-center gap-1";
+        plusActiveBadge.textContent = "Trial Expired";
+        plusActiveBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40";
+        openPaywallBtn.innerHTML = `<span>Upgrade to SafeBite Plus ($1.99/mo or $11.99/yr)</span>`;
+        openPaywallBtn.className = "w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5";
+      } else {
+        headerPlusBadgeText.textContent = "3-Day Trial";
+        headerPlusBadgeBtn.className = "text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30 transition flex items-center gap-1";
+        plusActiveBadge.textContent = "Free Tier";
+        plusActiveBadge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700";
+        openPaywallBtn.innerHTML = `<span>Start 3-Day Trial ($11.99/yr or $24.99 Lifetime)</span>`;
         openPaywallBtn.className = "w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5";
       }
+      updateSelectedPlanUI();
     }
 
     // Install Modal
@@ -2118,11 +2256,16 @@
           }
         }
 
-        const triggeredAllergens = detectedAllergenIds.filter(a => userAllergens.includes(a));
-        const triggeredNames = triggeredAllergens.map(id => {
-          const match = ALLERGEN_OPTIONS.find(o => o.id === id);
-          return match ? `${match.icon} ${match.name}` : id;
-        });
+        checkPlusStatus();
+        let triggeredAllergens = [];
+        let triggeredNames = [];
+        if (isPlusActive) {
+          triggeredAllergens = detectedAllergenIds.filter(a => userAllergens.includes(a));
+          triggeredNames = triggeredAllergens.map(id => {
+            const match = ALLERGEN_OPTIONS.find(o => o.id === id);
+            return match ? `${match.icon} ${match.name}` : id;
+          });
+        }
 
         let resultData;
 
@@ -2369,9 +2512,28 @@
               </span>
             </div>
 
-            <div class="text-xs text-slate-300 bg-slate-950/70 rounded-xl p-3.5 border border-emerald-900/40 space-y-1.5">
+            <div class="text-xs text-slate-300 bg-slate-950/70 rounded-xl p-3.5 border border-emerald-900/40 space-y-2">
               <p class="text-emerald-300 leading-relaxed">${data.details}</p>
               ${data.ingredients ? `<p class="text-[11px] text-slate-400 border-t border-slate-800 pt-1.5"><span class="font-semibold text-slate-300">Ingredients Checked:</span> ${data.ingredients.slice(0, 160)}...</p>` : ''}
+              ${isPlusActive ? `
+                <div class="mt-2 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-emerald-400">
+                  <span class="flex items-center gap-1.5">
+                    <span>✓</span>
+                    <span>Allergen Guard: Clear of your active guardrails</span>
+                  </span>
+                  <span class="font-bold text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/30">Plus Active</span>
+                </div>
+              ` : `
+                <div class="mt-2 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px]">
+                  <span class="text-slate-400 flex items-center gap-1.5">
+                    <span>🔒</span>
+                    <span>Allergen & Gluten Guard: <strong class="text-amber-300">Locked</strong></span>
+                  </span>
+                  <button type="button" class="open-paywall-trigger px-2.5 py-1 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-[10px] transition shrink-0">
+                    Unlock Plus
+                  </button>
+                </div>
+              `}
             </div>
 
             <!-- Instant Scan Next Barcode Action Button -->
@@ -2411,13 +2573,57 @@
     }
 
     function renderAllergensTab() {
-      activeAllergensBadge.textContent = `${userAllergens.length} Active`;
+      checkPlusStatus();
+
+      const allergensPlusBanner = document.getElementById('allergensPlusBanner');
+      const allergensPlusBannerTitle = document.getElementById('allergensPlusBannerTitle');
+      const allergensPlusBannerSub = document.getElementById('allergensPlusBannerSub');
+      const unlockAllergensBannerBtn = document.getElementById('unlockAllergensBannerBtn');
+
+      if (isPlusActive) {
+        activeAllergensBadge.textContent = `${userAllergens.length} Active`;
+        activeAllergensBadge.className = "text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0";
+        if (allergensPlusBanner) {
+          allergensPlusBanner.className = "p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between gap-3";
+          allergensPlusBannerTitle.innerHTML = "<span>✓</span> SafeBite Plus Active";
+          allergensPlusBannerTitle.className = "text-xs font-bold text-emerald-300 flex items-center gap-1.5";
+          allergensPlusBannerSub.textContent = plusStatusType === 'trial' 
+            ? `3-Day Free Trial active (${trialDaysRemaining} day${trialDaysRemaining === 1 ? '' : 's'} remaining). All 14 allergen guardrails unlocked.`
+            : "All 14 allergen & gluten guardrails unlocked.";
+          unlockAllergensBannerBtn.classList.add('hidden');
+        }
+      } else {
+        activeAllergensBadge.textContent = "Locked (Plus)";
+        activeAllergensBadge.className = "text-xs font-bold px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 shrink-0";
+        if (allergensPlusBanner) {
+          allergensPlusBanner.className = "p-3.5 rounded-2xl bg-gradient-to-r from-amber-500/20 via-amber-400/10 to-yellow-500/20 border border-amber-500/40 flex items-center justify-between gap-3";
+          allergensPlusBannerTitle.innerHTML = "<span>⭐</span> SafeBite Plus Required";
+          allergensPlusBannerTitle.className = "text-xs font-bold text-amber-300 flex items-center gap-1.5";
+          allergensPlusBannerSub.textContent = plusStatusType === 'expired'
+            ? "Your 3-day trial has ended. Subscribe to Plus to re-enable allergen guardrails."
+            : "Start your 3-day free trial (no card needed) to enable custom allergen & gluten alerts.";
+          unlockAllergensBannerBtn.classList.remove('hidden');
+          unlockAllergensBannerBtn.textContent = plusStatusType === 'expired' ? "Upgrade to Plus" : "Start 3-Day Trial";
+        }
+      }
 
       allergenCheckboxesContainer.innerHTML = ALLERGEN_OPTIONS.map(opt => {
-        const isChecked = userAllergens.includes(opt.id);
+        const isChecked = isPlusActive && userAllergens.includes(opt.id);
         const activeBg = isChecked 
           ? 'bg-blue-950/50 border-blue-500/60 shadow-sm shadow-blue-950/40' 
           : 'bg-slate-950/60 border-slate-800 hover:border-slate-700';
+
+        const lockIcon = !isPlusActive ? `
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1 shrink-0">
+            🔒 PLUS
+          </span>
+        ` : `
+          <div class="w-6 h-6 rounded-lg flex items-center justify-center transition ${isChecked ? 'bg-blue-600 text-white font-bold' : 'border border-slate-700 bg-slate-900 text-transparent'}">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </div>
+        `;
 
         return `
           <button 
@@ -2432,18 +2638,19 @@
                 <span class="text-[11px] text-slate-400 block">${opt.desc}</span>
               </div>
             </div>
-            
-            <div class="w-6 h-6 rounded-lg flex items-center justify-center transition ${isChecked ? 'bg-blue-600 text-white font-bold' : 'border border-slate-700 bg-slate-900 text-transparent'}">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
-              </svg>
-            </div>
+            ${lockIcon}
           </button>
         `;
       }).join('');
 
       document.querySelectorAll('.allergen-toggle-btn').forEach(btn => {
         btn.addEventListener('click', () => {
+          if (!isPlusActive) {
+            triggerHaptic([40, 40]);
+            openPaywall();
+            showCustomizeToast("⭐ SafeBite Plus required to customize allergen guardrails.");
+            return;
+          }
           triggerHaptic([30]);
           const id = btn.getAttribute('data-id');
 
@@ -2461,10 +2668,15 @@
       });
     }
 
-    
     const selectAllergensBtn = document.getElementById('selectAllergensBtn');
     if (selectAllergensBtn) {
       selectAllergensBtn.addEventListener('click', () => {
+        if (!isPlusActive) {
+          triggerHaptic([40, 40]);
+          openPaywall();
+          showCustomizeToast("⭐ SafeBite Plus required to enable allergen guardrails.");
+          return;
+        }
         triggerHaptic([40]);
         userAllergens = ALLERGEN_OPTIONS.map(o => o.id);
         try {
@@ -2479,7 +2691,7 @@
       triggerHaptic([40]);
       userAllergens = [];
       try {
-        localStorage.setItem('safebite_allergens', JSON.stringify(userAllergens));
+        localStorage.setItem('safebite_allergens', JSON.stringify([]));
       } catch (e) {}
       sound.playScanBeep();
       renderAllergensTab();
