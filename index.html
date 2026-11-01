@@ -333,7 +333,7 @@
       </div>
     </div>
 
-        <!-- ADD FAMILY MEMBER MODAL SHEET -->
+        <!-- ADD / EDIT FAMILY MEMBER MODAL SHEET -->
     <div id="addProfileModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
       <div class="bg-slate-900 border-2 border-sky-500/50 max-w-sm w-full rounded-3xl p-5 shadow-2xl space-y-4 relative animate-in fade-in zoom-in-95 duration-200">
         <button type="button" id="closeAddProfileModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-full bg-slate-800 text-xs">
@@ -341,36 +341,62 @@
         </button>
 
         <div class="flex items-center gap-3 border-b border-slate-800 pb-3 pr-6">
-          <div class="w-10 h-10 rounded-2xl bg-sky-500/20 border border-sky-500/40 flex items-center justify-center text-xl shrink-0">
+          <div id="profileModalHeaderIcon" class="w-10 h-10 rounded-2xl bg-sky-500/20 border border-sky-500/40 flex items-center justify-center text-xl shrink-0">
             👨‍👩‍👧
           </div>
           <div>
-            <h3 class="font-display text-sm font-bold text-white leading-tight">Add Family Member</h3>
+            <h3 id="profileModalTitle" class="font-display text-sm font-bold text-white leading-tight">Add Family Member</h3>
             <p class="text-[11px] text-slate-400">Personalize sensitivity guardrails for your household</p>
           </div>
         </div>
 
-        <div class="space-y-3 text-xs">
+        <div class="space-y-3.5 text-xs">
+          <!-- Profile Picture & Live Preview Box -->
+          <div class="flex items-center gap-3 bg-slate-950 p-3 rounded-2xl border border-slate-800">
+            <div id="avatarPreviewBox" class="w-14 h-14 rounded-full bg-slate-900 border-2 border-sky-400 flex items-center justify-center text-2xl shrink-0 overflow-hidden relative shadow-inner">
+              <span id="previewEmojiSpan">👤</span>
+              <img id="previewPhotoImg" class="w-full h-full object-cover hidden" alt="Profile Photo">
+            </div>
+            <div class="flex-1 space-y-1.5">
+              <span class="font-semibold text-slate-200 block text-xs">Profile Picture</span>
+              <div class="flex items-center gap-2">
+                <label for="profilePhotoInput" class="cursor-pointer px-2.5 py-1 rounded-lg bg-sky-600/30 hover:bg-sky-600/50 text-sky-300 border border-sky-500/40 text-[11px] font-semibold flex items-center gap-1 transition active:scale-95 shadow-sm">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                  <span>Upload Photo</span>
+                  <input type="file" id="profilePhotoInput" accept="image/*" class="hidden">
+                </label>
+                <button type="button" id="removePhotoBtn" class="hidden px-2 py-1 rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/30 text-[11px] hover:bg-rose-500/30 transition">
+                  ✕ Remove
+                </button>
+              </div>
+            </div>
+          </div>
+
           <div>
-            <label for="newProfileNameInput" class="block text-slate-300 font-medium mb-1.5">Family Member Name</label>
+            <label for="newProfileNameInput" class="block text-slate-300 font-medium mb-1.5">Profile Name</label>
             <input 
               type="text" 
               id="newProfileNameInput" 
-              placeholder="e.g. Emma, Leo, Mom, Dad" 
+              placeholder="e.g. Me, Emma, Leo, Mom, Dad" 
               class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-950 text-white outline-none focus:border-sky-400 font-medium text-sm"
               maxlength="20"
             >
           </div>
 
           <div>
-            <label class="block text-slate-300 font-medium mb-1.5">Choose Avatar</label>
-            <div class="flex gap-2" id="avatarSelector">
-              <button type="button" class="avatar-option w-10 h-10 rounded-xl border-2 border-sky-400 bg-sky-500/20 text-xl flex items-center justify-center transition" data-icon="👧">👧</button>
+            <label class="block text-slate-300 font-medium mb-1.5">Or Choose an Emoji Avatar</label>
+            <div class="flex gap-2 flex-wrap" id="avatarSelector">
+              <button type="button" class="avatar-option w-10 h-10 rounded-xl border-2 border-sky-400 bg-sky-500/20 text-xl flex items-center justify-center transition" data-icon="👤">👤</button>
+              <button type="button" class="avatar-option w-10 h-10 rounded-xl border border-slate-800 bg-slate-950 text-xl flex items-center justify-center transition" data-icon="👧">👧</button>
               <button type="button" class="avatar-option w-10 h-10 rounded-xl border border-slate-800 bg-slate-950 text-xl flex items-center justify-center transition" data-icon="👦">👦</button>
               <button type="button" class="avatar-option w-10 h-10 rounded-xl border border-slate-800 bg-slate-950 text-xl flex items-center justify-center transition" data-icon="👩">👩</button>
               <button type="button" class="avatar-option w-10 h-10 rounded-xl border border-slate-800 bg-slate-950 text-xl flex items-center justify-center transition" data-icon="👨">👨</button>
               <button type="button" class="avatar-option w-10 h-10 rounded-xl border border-slate-800 bg-slate-950 text-xl flex items-center justify-center transition" data-icon="👶">👶</button>
-              <button type="button" class="avatar-option w-10 h-10 rounded-xl border border-slate-800 bg-slate-950 text-xl flex items-center justify-center transition" data-icon="👤">👤</button>
+              <button type="button" class="avatar-option w-10 h-10 rounded-xl border border-slate-800 bg-slate-950 text-xl flex items-center justify-center transition" data-icon="👵">👵</button>
+              <button type="button" class="avatar-option w-10 h-10 rounded-xl border border-slate-800 bg-slate-950 text-xl flex items-center justify-center transition" data-icon="👴">👴</button>
             </div>
           </div>
         </div>
@@ -380,7 +406,7 @@
           id="saveNewProfileBtn" 
           class="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 via-indigo-600 to-blue-600 hover:opacity-95 text-white font-bold text-xs shadow-lg shadow-blue-950/50 transition active:scale-[0.98] flex items-center justify-center gap-1.5"
         >
-          <span>Save Profile & Customize Allergens</span>
+          <span id="saveProfileBtnText">Save Profile</span>
         </button>
       </div>
     </div>
@@ -2452,6 +2478,7 @@
               triggeredFamilyMatches.push({
                 name: prof.name,
                 icon: prof.icon || '👤',
+                photo: prof.photo || null,
                 allergens: names
               });
             }
@@ -2666,8 +2693,10 @@
                   <div class="space-y-1.5 pt-0.5">
                     ${data.familyMatches.map(m => `
                       <div class="flex items-center justify-between bg-amber-950/70 px-2.5 py-1.5 rounded-lg border border-amber-500/30 text-xs">
-                        <span class="font-bold text-white flex items-center gap-1.5">
-                          <span>${m.icon}</span>
+                        <span class="font-bold text-white flex items-center gap-2">
+                          ${m.photo 
+                            ? `<img src="${m.photo}" class="w-5 h-5 rounded-full object-cover border border-amber-400 shrink-0">` 
+                            : `<span>${m.icon}</span>`}
                           <span>${m.name}</span>
                         </span>
                         <span class="font-semibold text-rose-300">Contains: ${m.allergens.join(', ')}</span>
@@ -2795,7 +2824,10 @@
       userAllergens = currentProfile.allergens || [];
 
       if (activeProfileNotice) {
-        activeProfileNotice.textContent = `Editing: ${currentProfile.icon || '👤'} ${currentProfile.name}`;
+        const photoEl = currentProfile.photo 
+          ? `<img src="${currentProfile.photo}" class="w-3.5 h-3.5 rounded-full object-cover shrink-0 inline-block align-middle mr-1">`
+          : `<span class="mr-1">${currentProfile.icon || '👤'}</span>`;
+        activeProfileNotice.innerHTML = `Editing: ${photoEl}<span class="font-bold text-slate-200">${currentProfile.name}</span> <button type="button" class="edit-profile-btn text-sky-400 hover:text-sky-300 ml-1.5 underline" data-edit="${currentProfile.id}" title="Edit profile name, emoji or photo">(Edit)</button>`;
       }
 
       if (isPlusActive) {
@@ -2825,7 +2857,7 @@
         }
       }
 
-      // Render Family Profiles Bar
+      // Render Family Profiles Bar with Edit pencil and Photo Thumbnail
       if (familyProfilesBar) {
         familyProfilesBar.innerHTML = familyProfiles.map(p => {
           const isActive = p.id === activeProfileId;
@@ -2833,18 +2865,28 @@
             ? 'bg-blue-600 border-blue-400 text-white font-bold shadow-md shadow-blue-950/40' 
             : 'bg-slate-950/80 border-slate-800 text-slate-300 hover:border-slate-700';
           const count = (p.allergens || []).length;
+          
+          const avatarEl = p.photo 
+            ? `<img src="${p.photo}" class="w-4 h-4 rounded-full object-cover shrink-0 border border-white/30">`
+            : `<span>${p.icon || '👤'}</span>`;
+
+          const editBtn = `<button type="button" class="edit-profile-btn px-1 text-slate-400 hover:text-sky-300 transition" data-edit="${p.id}" title="Edit ${p.name}">✏️</button>`;
+          
           const deleteBtn = (p.id !== 'me' && familyProfiles.length > 1) 
-            ? `<button type="button" class="delete-profile-btn ml-1 text-slate-400 hover:text-rose-400 p-0.5" data-del="${p.id}" title="Remove ${p.name}">✕</button>` 
+            ? `<button type="button" class="delete-profile-btn px-1 text-slate-400 hover:text-rose-400 transition" data-del="${p.id}" title="Remove ${p.name}">✕</button>` 
             : '';
 
           return `
             <div class="shrink-0 flex items-center rounded-xl border text-xs transition ${activeStyle}">
               <button type="button" class="select-profile-btn flex items-center gap-1.5 px-3 py-1.5" data-id="${p.id}">
-                <span>${p.icon || '👤'}</span>
+                ${avatarEl}
                 <span>${p.name}</span>
                 <span class="text-[10px] px-1.5 py-0.2 rounded-full ${isActive ? 'bg-blue-800 text-blue-200' : 'bg-slate-800 text-slate-400'}">${count}</span>
               </button>
-              ${deleteBtn ? `<div class="pr-2">${deleteBtn}</div>` : ''}
+              <div class="flex items-center gap-0.5 pr-2 pl-0.5 border-l border-white/10">
+                ${editBtn}
+                ${deleteBtn}
+              </div>
             </div>
           `;
         }).join('') + `
@@ -2861,6 +2903,16 @@
             activeProfileId = b.getAttribute('data-id');
             saveFamilyProfiles();
             renderAllergensTab();
+          });
+        });
+
+        // Edit profile click
+        document.querySelectorAll('.edit-profile-btn').forEach(b => {
+          b.addEventListener('click', (e) => {
+            e.stopPropagation();
+            triggerHaptic([30]);
+            const editId = b.getAttribute('data-edit');
+            openProfileModal(editId);
           });
         });
 
@@ -2889,7 +2941,7 @@
               return;
             }
             triggerHaptic([30]);
-            openAddProfileModal();
+            openProfileModal(null);
           });
         }
       }
@@ -2986,17 +3038,41 @@
       renderAllergensTab();
     });
 
-    // Add Family Member Modal Handlers
+    // Profile Add / Edit Modal & Live Photo Upload Handlers
     const addProfileModal = document.getElementById('addProfileModal');
     const closeAddProfileModalBtn = document.getElementById('closeAddProfileModalBtn');
+    const profileModalTitle = document.getElementById('profileModalTitle');
     const newProfileNameInput = document.getElementById('newProfileNameInput');
     const saveNewProfileBtn = document.getElementById('saveNewProfileBtn');
-    let selectedAvatarIcon = '👧';
+    const saveProfileBtnText = document.getElementById('saveProfileBtnText');
+    const profilePhotoInput = document.getElementById('profilePhotoInput');
+    const removePhotoBtn = document.getElementById('removePhotoBtn');
+    const previewEmojiSpan = document.getElementById('previewEmojiSpan');
+    const previewPhotoImg = document.getElementById('previewPhotoImg');
 
-    function openAddProfileModal() {
-      newProfileNameInput.value = '';
-      selectedAvatarIcon = '👧';
-      updateAvatarOptionsUI();
+    let currentEditingProfileId = null;
+    let selectedAvatarIcon = '👤';
+    let selectedProfilePhoto = null;
+
+    function openProfileModal(profileIdToEdit = null) {
+      currentEditingProfileId = profileIdToEdit;
+
+      if (profileIdToEdit) {
+        const p = familyProfiles.find(x => x.id === profileIdToEdit) || getActiveProfile();
+        if (profileModalTitle) profileModalTitle.textContent = `Edit Profile: ${p.name}`;
+        if (saveProfileBtnText) saveProfileBtnText.textContent = "Save Changes";
+        newProfileNameInput.value = p.name;
+        selectedAvatarIcon = p.icon || '👤';
+        selectedProfilePhoto = p.photo || null;
+      } else {
+        if (profileModalTitle) profileModalTitle.textContent = "Add Family Member";
+        if (saveProfileBtnText) saveProfileBtnText.textContent = "Save Profile & Customize Allergens";
+        newProfileNameInput.value = '';
+        selectedAvatarIcon = '👧';
+        selectedProfilePhoto = null;
+      }
+
+      updateAvatarDisplayAndOptions();
       addProfileModal.classList.remove('hidden');
       setTimeout(() => newProfileNameInput.focus(), 100);
     }
@@ -3009,10 +3085,24 @@
       closeAddProfileModalBtn.addEventListener('click', closeAddProfileModal);
     }
 
-    function updateAvatarOptionsUI() {
+    function updateAvatarDisplayAndOptions() {
+      // 1. Update Preview Box
+      if (selectedProfilePhoto) {
+        previewPhotoImg.src = selectedProfilePhoto;
+        previewPhotoImg.classList.remove('hidden');
+        previewEmojiSpan.classList.add('hidden');
+        if (removePhotoBtn) removePhotoBtn.classList.remove('hidden');
+      } else {
+        previewPhotoImg.classList.add('hidden');
+        previewEmojiSpan.textContent = selectedAvatarIcon;
+        previewEmojiSpan.classList.remove('hidden');
+        if (removePhotoBtn) removePhotoBtn.classList.add('hidden');
+      }
+
+      // 2. Update Emoji option borders
       document.querySelectorAll('.avatar-option').forEach(btn => {
         const icon = btn.getAttribute('data-icon');
-        if (icon === selectedAvatarIcon) {
+        if (!selectedProfilePhoto && icon === selectedAvatarIcon) {
           btn.className = "avatar-option w-10 h-10 rounded-xl border-2 border-sky-400 bg-sky-500/20 text-xl flex items-center justify-center transition";
         } else {
           btn.className = "avatar-option w-10 h-10 rounded-xl border border-slate-800 bg-slate-950 text-xl flex items-center justify-center transition";
@@ -3023,31 +3113,88 @@
     document.querySelectorAll('.avatar-option').forEach(btn => {
       btn.addEventListener('click', () => {
         selectedAvatarIcon = btn.getAttribute('data-icon');
-        updateAvatarOptionsUI();
+        selectedProfilePhoto = null; // Selecting emoji clears photo
+        updateAvatarDisplayAndOptions();
       });
     });
+
+    // Client-Side Photo Upload & Auto-Crop Resizing (Fast, light, saves to localStorage)
+    if (profilePhotoInput) {
+      profilePhotoInput.addEventListener('change', (e) => {
+        if (!e.target.files || e.target.files.length === 0) return;
+        const file = e.target.files[0];
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = 128;
+            canvas.height = 128;
+            const ctx = canvas.getContext('2d');
+
+            // Center square crop
+            const minSide = Math.min(img.width, img.height);
+            const sx = (img.width - minSide) / 2;
+            const sy = (img.height - minSide) / 2;
+            ctx.drawImage(img, sx, sy, minSide, minSide, 0, 0, 128, 128);
+
+            selectedProfilePhoto = canvas.toDataURL('image/jpeg', 0.85);
+            updateAvatarDisplayAndOptions();
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+        e.target.value = '';
+      });
+    }
+
+    if (removePhotoBtn) {
+      removePhotoBtn.addEventListener('click', () => {
+        selectedProfilePhoto = null;
+        updateAvatarDisplayAndOptions();
+      });
+    }
 
     if (saveNewProfileBtn) {
       saveNewProfileBtn.addEventListener('click', () => {
         const name = newProfileNameInput.value.trim();
         if (!name) {
-          showCustomizeToast("Please enter a name for the family member.");
+          showCustomizeToast("Please enter a profile name.");
           return;
         }
+
         triggerHaptic([50]);
         sound.playClearChime();
-        const newId = 'prof_' + Date.now();
-        familyProfiles.push({
-          id: newId,
-          name: name,
-          icon: selectedAvatarIcon,
-          allergens: []
-        });
-        activeProfileId = newId;
-        saveFamilyProfiles();
-        closeAddProfileModal();
-        renderAllergensTab();
-        showCustomizeToast(`🎉 ${name}'s profile added! Check their allergens below.`);
+
+        if (currentEditingProfileId) {
+          // Editing existing profile (e.g. 'me' or a member)
+          const p = familyProfiles.find(x => x.id === currentEditingProfileId);
+          if (p) {
+            p.name = name;
+            p.icon = selectedAvatarIcon;
+            p.photo = selectedProfilePhoto;
+          }
+          saveFamilyProfiles();
+          closeAddProfileModal();
+          renderAllergensTab();
+          showCustomizeToast(`✓ ${name}'s profile updated!`);
+        } else {
+          // Adding new family member
+          const newId = 'prof_' + Date.now();
+          familyProfiles.push({
+            id: newId,
+            name: name,
+            icon: selectedAvatarIcon,
+            photo: selectedProfilePhoto,
+            allergens: []
+          });
+          activeProfileId = newId;
+          saveFamilyProfiles();
+          closeAddProfileModal();
+          renderAllergensTab();
+          showCustomizeToast(`🎉 ${name}'s profile added! Check their allergens below.`);
+        }
       });
     }
 
