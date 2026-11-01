@@ -1,4 +1,4 @@
-const CACHE_NAME = 'safebite-v1';
+const CACHE_NAME = 'safebite-v2';
 const ASSETS = [
   './index.html?app=safebite',
   './manifest.json?v=3',
@@ -21,6 +21,22 @@ self.addEventListener('activate', (e) => {
   );
 });
 
+// Network-First for HTML navigation (updates load immediately when online; falls back to offline cache in store)
 self.addEventListener('fetch', (e) => {
+  if (e.request.mode === 'navigate') {
+    e.respondWith(
+      fetch(e.request)
+        .then((networkRes) => {
+          return caches.open(CACHE_NAME).then((cache) => {
+            cache.put(e.request, networkRes.clone());
+            return networkRes;
+          });
+        })
+        .catch(() => caches.match('./index.html?app=safebite') || caches.match(e.request))
+    );
+    return;
+  }
+
+  // Cache-first for images and static assets
   e.respondWith(caches.match(e.request).then((res) => res || fetch(e.request)));
 });
