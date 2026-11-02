@@ -3414,5 +3414,39 @@
       "Aldi"
     ],
     "isRecalled": false
+  },
+  "198306025480": {
+    "product": "Bolthouse Farms / Bonita Belle Baby-Cut Carrots (Single-Serve / Multi-Pack)",
+    "brand": "Bolthouse Farms",
+    "upc": "198306025480",
+    "ingredients": "Carrots (100% Whole Fresh Produce).",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target",
+      "Giant Eagle",
+      "Aldi"
+    ],
+    "isRecalled": false
+  },
+  "0198306025480": {
+    "product": "Bolthouse Farms / Bonita Belle Baby-Cut Carrots (Single-Serve / Multi-Pack)",
+    "brand": "Bolthouse Farms",
+    "upc": "198306025480",
+    "ingredients": "Carrots (100% Whole Fresh Produce).",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target",
+      "Giant Eagle",
+      "Aldi"
+    ],
+    "isRecalled": false
   }
 }
