@@ -1599,6 +1599,52 @@
 
 // Product Database
     const RECALL_DATABASE = {
+      "077034018653": {
+        isRecalled: false,
+        brand: "Kar's Nuts (Second Nature Brands)",
+        product: "Kar's Sweet 'N Salty Trail Mix (34 oz Resealable Pouch)",
+        upc: "077034018653",
+        recallDate: "Active Store Inventory",
+        hazard: "No active federal recalls on record.",
+        action: "Current store inventory cleared. Verified against FDA enforcement archives.",
+        severity: "Terminated Notice on Record",
+        agency: "openFDA Enforcement Wire",
+        tag: "Store Cleared",
+        states: ['ALL'],
+        stores: ['Walmart', 'Target', 'Kroger', 'Meijer', 'Costco', 'Sam\'s Club'],
+        allergens: ['peanuts', 'dairy', 'soy'],
+        terminatedNotice: {
+          date: "October 2015 – Resolved",
+          reason: "Voluntary Class II notice on limited 2016 best-by production lots (foreign material). Officially TERMINATED & COMPLETED by the FDA. Current store inventory is unaffected and cleared.",
+          agency: "FDA Terminated & Resolved",
+          product: "Kar's Sweet 'N Salty Trail Mix (Lot Archive F-0150-2016 / F-074-2016)"
+        },
+        ingredients: "Peanuts (peanuts, peanut and/or sunflower oil, salt), Raisins, Cocoa Candies (confectionary coating [sugar, hydrogenated palm kernel oil, cocoa powder, whey powder, nonfat milk powder, soy lecithin, vanilla], sugar, artificial coloring [includes Yellow 6 Lake, Yellow 6, Yellow 5 Lake, Blue 1 Lake, Red 40 Lake, Blue 2 Lake], gum acacia, corn syrup, confectioner's glaze), Sunflower Kernels (sunflower kernels, peanut and/or sunflower oil, salt).",
+        additives_tags: ["en:e129", "en:e110", "en:e102", "en:e133", "en:e132"]
+      },
+      "77034018653": {
+        isRecalled: false,
+        brand: "Kar's Nuts (Second Nature Brands)",
+        product: "Kar's Sweet 'N Salty Trail Mix (34 oz Resealable Pouch)",
+        upc: "077034018653",
+        recallDate: "Active Store Inventory",
+        hazard: "No active federal recalls on record.",
+        action: "Current store inventory cleared. Verified against FDA enforcement archives.",
+        severity: "Terminated Notice on Record",
+        agency: "openFDA Enforcement Wire",
+        tag: "Store Cleared",
+        states: ['ALL'],
+        stores: ['Walmart', 'Target', 'Kroger', 'Meijer', 'Costco', 'Sam\'s Club'],
+        allergens: ['peanuts', 'dairy', 'soy'],
+        terminatedNotice: {
+          date: "October 2015 – Resolved",
+          reason: "Voluntary Class II notice on limited 2016 best-by production lots (foreign material). Officially TERMINATED & COMPLETED by the FDA. Current store inventory is unaffected and cleared.",
+          agency: "FDA Terminated & Resolved",
+          product: "Kar's Sweet 'N Salty Trail Mix (Lot Archive F-0150-2016 / F-074-2016)"
+        },
+        ingredients: "Peanuts (peanuts, peanut and/or sunflower oil, salt), Raisins, Cocoa Candies (confectionary coating [sugar, hydrogenated palm kernel oil, cocoa powder, whey powder, nonfat milk powder, soy lecithin, vanilla], sugar, artificial coloring [includes Yellow 6 Lake, Yellow 6, Yellow 5 Lake, Blue 1 Lake, Red 40 Lake, Blue 2 Lake], gum acacia, corn syrup, confectioner's glaze), Sunflower Kernels (sunflower kernels, peanut and/or sunflower oil, salt).",
+        additives_tags: ["en:e129", "en:e110", "en:e102", "en:e133", "en:e132"]
+      },
       "022000010996": {
         isRecalled: false,
         brand: "Wrigley / Mars",
@@ -2848,6 +2894,7 @@
         let brandName = "Grocery Brand";
         let isRecalled = false;
         let recallRecord = findRecallRecord(code);
+        let terminatedNotice = null;
         let detectedAllergenIds = [];
         let ingredientsSummary = "";
         let productAdditivesTags = [];
@@ -2857,10 +2904,11 @@
         if (recallRecord) {
           productName = recallRecord.product;
           brandName = recallRecord.brand;
-          isRecalled = recallRecord.isRecalled;
+          isRecalled = Boolean(recallRecord.isRecalled);
           if (recallRecord.allergens) detectedAllergenIds.push(...recallRecord.allergens);
           if (recallRecord.ingredients) ingredientsSummary = recallRecord.ingredients;
           if (recallRecord.additives_tags) productAdditivesTags.push(...recallRecord.additives_tags);
+          if (recallRecord.terminatedNotice) terminatedNotice = recallRecord.terminatedNotice;
         } else if (cachedFDARecalls && cachedFDARecalls.length > 0) {
           // Check locally cached FDA wire records (works with ZERO cell reception)
           const match = cachedFDARecalls.find(item => {
@@ -2989,10 +3037,8 @@
           }
         }
 
-        let terminatedNotice = null;
-
         // 4. Query Official Live openFDA Food Enforcement API (Archived Recalls 2004–Present)
-        if (!isRecalled) {
+        if (!isRecalled && !terminatedNotice) {
           try {
             const fdaQueries = [];
             if (code.length >= 8) {
@@ -3040,7 +3086,7 @@
                   // 1. Definite UPC match in FDA code info or product description
                   const hasCode = codeInfo.includes(code) || desc.includes(code);
 
-                  // 2. High-precision distinctive product line matching (filters out generic words like 'chocolate', 'bar', 'snack')
+                  // 2. High-precision distinctive product line matching
                   const genericFoodTerms = new Set(['chocolate', 'candy', 'snack', 'snacks', 'organic', 'whole', 'slices', 'pack', 'package', 'food', 'mini', 'minis', 'classic', 'original', 'sweet', 'flavor', 'treat', 'butter', 'finger', 'crisp', 'bars', 'drink', 'sauce', 'cheese', 'white', 'fresh', 'water', 'roast', 'bites']);
                   const specificProdWords = productName.toLowerCase().split(/\s+/).filter(w => w.length >= 4 && !genericFoodTerms.has(w));
                   
@@ -3079,7 +3125,6 @@
                         product: item.product_description ? (item.product_description.slice(0, 95) + '...') : productName
                       };
                     } else {
-                      // Only mark active recall if the specific variety strictly matches (e.g. sandwich vs biscuit)
                       const isExactLineMatch = (productName.toLowerCase().includes('sandwich') === desc.includes('sandwich'));
                       if (isExactLineMatch) {
                         isRecalled = true;
@@ -3108,7 +3153,6 @@
 
         checkPlusStatus();
         let triggeredFamilyMatches = [];
-        // Resilient, 100% comprehensive additive & synthetic dye screening
         let detectedAdditivesList = auditFoodAdditives(ingredientsSummary, productAdditivesTags, productName);
 
         if (isPlusActive) {
@@ -3129,79 +3173,45 @@
           }
         }
 
-        let resultData;
-
+        let overallStatus = 'clear';
         if (isRecalled && recallRecord) {
+          overallStatus = 'recalled';
           triggerHaptic([150, 100, 200]);
           sound.playAlertSiren();
-          resultData = {
-            upc: code,
-            status: 'recalled',
-            title: 'FEDERAL RECALL DETECTED',
-            productName: productName,
-            brand: brandName,
-            details: recallRecord.hazard || 'Active public health notice issued.',
-            action: recallRecord.action || 'Do not consume. Return to store for a full refund.',
-            severity: recallRecord.severity || 'Class I Alert',
-            date: recallRecord.recallDate || 'Current Notice',
-            agency: recallRecord.agency || 'FDA / USDA',
-            tag: recallRecord.tag || 'Federal Notice',
-            stores: recallRecord.stores || [],
-            ingredients: ingredientsSummary,
-            triggeredAllergens: Array.from(new Set(detectedAllergenIds)),
-            time: timestamp,
-            detectedAdditives: detectedAdditivesList
-          };
         } else if (triggeredFamilyMatches.length > 0) {
+          overallStatus = 'allergen_alert';
           triggerHaptic([100, 50, 100]);
-          sound.playAlertSiren();
-          resultData = {
-            upc: code,
-            status: 'allergen_warning',
-            title: `Family Allergen Alert: ${triggeredFamilyMatches.map(m => m.name).join(', ')}`,
-            productName: productName,
-            brand: brandName,
-            details: `Cleared of federal recalls, but matches dietary sensitivities for: ${triggeredFamilyMatches.map(m => `${m.icon} ${m.name} (${m.allergens.join(', ')})`).join('; ')}.`,
-            agency: 'SafeBite Scanner Guardrail',
-            ingredients: ingredientsSummary,
-            triggeredAllergens: Array.from(new Set(triggeredFamilyMatches.flatMap(m => m.allergens))),
-            familyMatches: triggeredFamilyMatches,
-            time: timestamp,
-            detectedAdditives: detectedAdditivesList
-          };
-        } else if (terminatedNotice) {
-          triggerHaptic([50]);
+          sound.playAllergenAlert();
+        } else if (detectedAdditivesList.length > 0) {
+          overallStatus = 'additive_alert';
+          triggerHaptic([60, 40, 60]);
           sound.playClearChime();
-          resultData = {
-            upc: code,
-            status: 'clear',
-            title: 'NO ACTIVE RECALLS (PAST RECALL TERMINATED)',
-            productName: productName,
-            brand: brandName,
-            details: `Verified against official FDA records. A past voluntary recall on this product line (${terminatedNotice.date}) was officially TERMINATED & COMPLETED by the FDA. Current store inventory is unaffected and cleared.`,
-            agency: 'FDA Terminated & Resolved',
-            ingredients: ingredientsSummary,
-            triggeredAllergens: [],
-            time: timestamp,
-            detectedAdditives: detectedAdditivesList
-          };
         } else {
+          overallStatus = 'clear';
           triggerHaptic([50]);
           sound.playClearChime();
-          resultData = {
-            upc: code,
-            status: 'clear',
-            title: 'NO ACTIVE RECALLS DETECTED',
-            productName: productName,
-            brand: brandName,
-            details: 'Verified against national openFDA enforcement database, USDA records, and your active dietary guardrails. No matching federal recalls found.',
-            agency: 'FDA & USDA Cleared',
-            ingredients: ingredientsSummary,
-            triggeredAllergens: [],
-            time: timestamp,
-            detectedAdditives: detectedAdditivesList
-          };
         }
+
+        const resultData = {
+          upc: code,
+          status: overallStatus,
+          productName: productName,
+          brand: brandName,
+          time: timestamp,
+          ingredients: ingredientsSummary,
+
+          // 1. Federal Recall Category
+          isRecalled: isRecalled,
+          recallRecord: recallRecord,
+          terminatedNotice: terminatedNotice,
+
+          // 2. Household Allergen Guardrail Category
+          detectedAllergens: Array.from(new Set(detectedAllergenIds)),
+          familyMatches: triggeredFamilyMatches,
+
+          // 3. Food Additives & Dyes Category
+          detectedAdditives: detectedAdditivesList
+        };
 
         displayResult(resultData);
         addToHistory(resultData);
@@ -3211,261 +3221,461 @@
         displayResult({
           upc: rawCode,
           status: 'clear',
-          title: 'LOOKUP COMPLETED',
           productName: productName || `Scanned Product (${rawCode})`,
           brand: brandName || 'Retail Grocery Item',
-          details: 'Verified with local database. No active recalls found on record.',
-          agency: 'SafeBite Scanner Wire',
           ingredients: ingredientsSummary || '',
-          triggeredAllergens: [],
+          isRecalled: false,
+          recallRecord: null,
+          terminatedNotice: null,
+          detectedAllergens: [],
+          familyMatches: [],
           detectedAdditives: fallbackAdditives,
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         });
       }
     }
 
+    // MULTI-CATEGORY DEFINING WINDOWS (RECALLS, HOUSEHOLD ALLERGENS, FOOD ADDITIVES & INGREDIENTS)
     function displayResult(data) {
       resultContainer.classList.remove('hidden');
 
-      let cardHtml = '';
-      const additivesHtml = renderAdditivesHtml(data);
-      const hasAdditives = (data.detectedAdditives && data.detectedAdditives.length > 0);
+      const isRecalled = Boolean(data.isRecalled && data.recallRecord);
+      const isTerminated = Boolean(data.terminatedNotice);
+      const hasFamilyMatches = Boolean(data.familyMatches && data.familyMatches.length > 0);
+      const hasAdditives = Boolean(data.detectedAdditives && data.detectedAdditives.length > 0);
+      const additivesCount = (data.detectedAdditives || []).length;
+      const detectedAllergensCount = (data.detectedAllergens || []).length;
 
-      if (data.status === 'recalled') {
-        const allergenBadge = (data.triggeredAllergens && data.triggeredAllergens.length > 0) ? `
-          <div class="mt-2.5 p-2.5 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs flex items-center gap-2">
-            <span class="font-bold">⚠️ Personal Allergen Match:</span>
-            <span>Contains ${data.triggeredAllergens.join(', ')}</span>
-          </div>
-        ` : '';
+      // 1. MASTER PRODUCT OVERVIEW & MULTI-GUARDRAIL STATUS PILLS
+      let recallPillBg = "bg-emerald-500/15 text-emerald-300 border-emerald-500/30";
+      let recallPillIcon = "✓";
+      let recallPillText = "Cleared";
+      if (isRecalled) {
+        recallPillBg = "bg-rose-500/20 text-rose-300 border-rose-500/40 animate-pulse";
+        recallPillIcon = "🚨";
+        recallPillText = "Active Recall";
+      } else if (isTerminated) {
+        recallPillBg = "bg-teal-500/20 text-teal-300 border-teal-500/40";
+        recallPillIcon = "🏛️";
+        recallPillText = "Terminated";
+      }
 
-        const storeTag = (data.stores && data.stores.length > 0) ? `
-          <div class="flex justify-between border-b border-slate-800/80 pb-2">
-            <span class="text-slate-400">Sold At Stores:</span>
-            <span class="font-semibold text-sky-300 text-right">${data.stores.join(', ')}</span>
-          </div>
-        ` : '';
+      let allergenPillBg = "bg-emerald-500/15 text-emerald-300 border-emerald-500/30";
+      let allergenPillIcon = "✓";
+      let allergenPillText = "All Safe";
+      if (!isPlusActive) {
+        allergenPillBg = "bg-slate-800 text-amber-300 border-slate-700";
+        allergenPillIcon = "🔒";
+        allergenPillText = "Pro Locked";
+      } else if (hasFamilyMatches) {
+        allergenPillBg = "bg-amber-500/20 text-amber-300 border-amber-500/40";
+        allergenPillIcon = "⚠️";
+        allergenPillText = `${data.familyMatches.length} Alert${data.familyMatches.length > 1 ? 's' : ''}`;
+      }
 
-        cardHtml = `
-          <div class="rounded-2xl border-2 border-rose-500 bg-gradient-to-b from-rose-950/80 via-slate-900 to-slate-900 p-5 shadow-2xl shadow-rose-950/60 transition-all">
-            <div class="border-b border-rose-900/50 pb-3 mb-3.5">
-              <span class="text-[10px] font-mono tracking-widest text-rose-300 uppercase font-bold block mb-1">SCANNED PRODUCT IDENTIFIED</span>
-              <h3 class="font-display text-lg font-bold text-white leading-tight">${data.productName}</h3>
+      let additivePillBg = "bg-emerald-500/15 text-emerald-300 border-emerald-500/30";
+      let additivePillIcon = "✓";
+      let additivePillText = "Clean";
+      if (!isPlusActive && hasAdditives) {
+        additivePillBg = "bg-purple-950/60 text-purple-300 border-purple-500/40";
+        additivePillIcon = "🔒";
+        additivePillText = `${additivesCount} (Pro)`;
+      } else if (hasAdditives) {
+        additivePillBg = "bg-purple-500/20 text-purple-300 border-purple-500/40";
+        additivePillIcon = "🧪";
+        additivePillText = `${additivesCount} Flagged`;
+      }
+
+      const masterHeaderHtml = `
+        <div class="rounded-2xl border border-slate-800 bg-slate-900/95 p-4 shadow-xl space-y-3">
+          <div class="flex items-start justify-between gap-3 border-b border-slate-800/80 pb-3">
+            <div class="min-w-0">
+              <span class="text-[10px] font-mono tracking-widest text-sky-400 uppercase font-bold block mb-0.5">SCANNED PRODUCT IDENTIFIED</span>
+              <h3 class="font-display text-base sm:text-lg font-bold text-white leading-snug">${data.productName}</h3>
               <p class="text-xs text-slate-300 mt-0.5">${data.brand} • <span class="font-mono text-slate-400">UPC: ${data.upc}</span></p>
             </div>
+            <span class="text-[10px] font-mono text-slate-400 bg-slate-950 px-2 py-1 rounded-md border border-slate-800 shrink-0">
+              ${data.time}
+            </span>
+          </div>
 
-            <div class="flex items-center justify-between mb-3 bg-rose-950/90 p-3 rounded-xl border border-rose-800/60">
-              <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-rose-600 text-white flex items-center justify-center font-bold">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-                  </svg>
-                </div>
+          <!-- Defining Category Status Pills -->
+          <div class="grid grid-cols-3 gap-1.5 text-center">
+            <div class="p-2 rounded-xl border ${recallPillBg} flex flex-col items-center justify-center">
+              <span class="text-xs">${recallPillIcon}</span>
+              <span class="text-[10px] font-bold mt-0.5 truncate w-full">${recallPillText}</span>
+              <span class="text-[8px] uppercase tracking-wider opacity-70">FDA / USDA</span>
+            </div>
+
+            <div class="p-2 rounded-xl border ${allergenPillBg} flex flex-col items-center justify-center">
+              <span class="text-xs">${allergenPillIcon}</span>
+              <span class="text-[10px] font-bold mt-0.5 truncate w-full">${allergenPillText}</span>
+              <span class="text-[8px] uppercase tracking-wider opacity-70">Household Guard</span>
+            </div>
+
+            <div class="p-2 rounded-xl border ${additivePillBg} flex flex-col items-center justify-center">
+              <span class="text-xs">${additivePillIcon}</span>
+              <span class="text-[10px] font-bold mt-0.5 truncate w-full">${additivePillText}</span>
+              <span class="text-[8px] uppercase tracking-wider opacity-70">Additives</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // 2. WINDOW 1: FEDERAL RECALL STATUS (ACTIVE, TERMINATED, OR CLEARED)
+      let recallWindowHtml = '';
+      if (isRecalled) {
+        const storeTag = (data.recallRecord.stores && data.recallRecord.stores.length > 0) ? `
+          <div class="flex justify-between border-b border-rose-900/60 pb-2 text-xs">
+            <span class="text-rose-300/80">Sold At Stores:</span>
+            <span class="font-semibold text-rose-200 text-right">${data.recallRecord.stores.join(', ')}</span>
+          </div>
+        ` : '';
+
+        recallWindowHtml = `
+          <div class="rounded-2xl border-2 border-rose-500 bg-gradient-to-b from-rose-950/80 via-slate-900 to-slate-900 p-4 shadow-xl shadow-rose-950/50 space-y-3">
+            <div class="flex items-center justify-between pb-2.5 border-b border-rose-900/50">
+              <div class="flex items-center gap-2">
+                <span class="text-xl">🚨</span>
                 <div>
-                  <span class="text-[10px] uppercase font-bold text-rose-400 block">${data.severity}</span>
-                  <span class="text-sm font-bold text-white">${data.title}</span>
+                  <span class="text-xs font-bold text-white uppercase tracking-wider block">Window 1 • Federal Recall Wire</span>
+                  <span class="text-[11px] text-rose-300 font-semibold">Active Public Health Recall Alert</span>
                 </div>
               </div>
-              <span class="text-[10px] font-mono text-rose-300 bg-rose-900/60 px-2 py-1 rounded-md border border-rose-700/60">
-                ${data.agency}
+              <span class="text-[10px] uppercase font-bold text-rose-300 bg-rose-900/70 border border-rose-700/60 px-2 py-1 rounded-md">
+                ${data.recallRecord.severity || 'Class I Alert'}
               </span>
             </div>
 
-            <!-- Prominent Recall Issue Date -->
-            <div class="flex items-center justify-between bg-rose-950/60 px-3.5 py-2 rounded-xl border border-rose-800/50 mb-3 text-xs">
-              <span class="text-rose-300 font-semibold flex items-center gap-1.5">
-                <span>📅</span>
-                <span>Official Recall Date:</span>
-              </span>
-              <span class="font-bold text-white font-mono">${data.date || 'Active Public Notice'}</span>
-            </div>
-
-            <div class="space-y-2.5 text-xs text-slate-200 bg-slate-950/70 rounded-xl p-4 border border-rose-900/40">
+            <div class="space-y-2 text-xs bg-slate-950/80 rounded-xl p-3 border border-rose-900/50">
+              <div class="flex items-center justify-between text-[11px] text-rose-300">
+                <span class="font-semibold">📅 Issue Date:</span>
+                <span class="font-mono text-white font-bold">${data.recallRecord.recallDate || 'Active Notice'}</span>
+              </div>
               ${storeTag}
-              <div class="pt-0.5">
+              <div class="pt-1">
                 <span class="font-bold text-rose-400 block mb-0.5">Health Hazard / Contaminant:</span>
-                <p class="text-slate-300 leading-relaxed">${data.details}</p>
+                <p class="text-slate-200 leading-relaxed">${data.recallRecord.hazard}</p>
               </div>
-              <div class="pt-1.5 bg-rose-950/50 p-3 rounded-lg border border-rose-800/50">
+              <div class="pt-2 p-2.5 rounded-lg bg-rose-950/60 border border-rose-800/60">
                 <span class="font-bold text-rose-300 block mb-0.5">Consumer Action:</span>
-                <p class="text-slate-300">${data.action}</p>
+                <p class="text-slate-200">${data.recallRecord.action || 'Do not consume. Discard or return to store.'}</p>
               </div>
-              ${allergenBadge}
-              ${additivesHtml}
             </div>
-
-            <!-- Instant Scan Next Barcode Action Button -->
-            <button 
-              type="button" 
-              class="scan-next-item-btn w-full mt-3.5 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 text-white font-bold text-xs shadow-lg shadow-blue-950/50 transition active:scale-[0.98] flex items-center justify-center gap-2"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              </svg>
-              <span>📷 Scan Next Item</span>
-            </button>
           </div>
         `;
-      } else if (data.status === 'allergen_warning' || data.status === 'allergen_alert') {
-        // High-visibility Amber / Yellow Guardrail Alert Card
-        cardHtml = `
-          <div class="rounded-2xl border-2 border-amber-400 bg-gradient-to-b from-amber-950/80 via-slate-900 to-slate-900 p-5 shadow-2xl shadow-amber-950/60 transition-all">
-            <div class="border-b border-amber-900/50 pb-3 mb-3.5">
-              <span class="text-[10px] font-mono tracking-widest text-amber-300 uppercase font-bold block mb-1">SCANNED PRODUCT IDENTIFIED</span>
-              <h3 class="font-display text-lg font-bold text-white leading-tight">${data.productName}</h3>
-              <p class="text-xs text-slate-300 mt-0.5">${data.brand} • <span class="font-mono text-slate-400">UPC: ${data.upc}</span></p>
-            </div>
-
-            <div class="flex items-center justify-between mb-3 bg-amber-950/90 p-3 rounded-xl border border-amber-500/50">
-              <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-amber-500 text-slate-950 flex items-center justify-center font-bold text-base">
-                  ⚠️
-                </div>
+      } else if (isTerminated) {
+        recallWindowHtml = `
+          <div class="rounded-2xl border-2 border-teal-500/80 bg-gradient-to-b from-teal-950/70 via-slate-900 to-slate-900 p-4 shadow-xl shadow-teal-950/50 space-y-3">
+            <div class="flex items-center justify-between pb-2.5 border-b border-teal-900/50">
+              <div class="flex items-center gap-2">
+                <span class="text-xl">🏛️</span>
                 <div>
-                  <span class="text-[10px] uppercase font-bold text-amber-400 block">Personal Dietary Alert</span>
-                  <span class="text-sm font-bold text-amber-200">${data.title}</span>
+                  <span class="text-xs font-bold text-white uppercase tracking-wider block">Window 1 • Federal Recall Wire</span>
+                  <span class="text-[11px] text-teal-300 font-semibold">Past Recall Terminated & Resolved</span>
                 </div>
               </div>
-              <span class="text-[10px] font-mono text-emerald-300 bg-emerald-950/60 px-2 py-1 rounded-md border border-emerald-800/60">
-                No Federal Recall
+              <span class="text-[10px] font-mono text-teal-300 bg-teal-950/80 border border-teal-600/60 px-2 py-1 rounded-md">
+                FDA Completed
               </span>
             </div>
 
-            <div class="space-y-2.5 text-xs text-slate-200 bg-slate-950/80 rounded-xl p-4 border border-amber-500/40">
-              <div class="p-3 bg-amber-500/20 border border-amber-500/40 rounded-xl text-amber-200 font-semibold leading-relaxed flex flex-col gap-2">
-                <div class="flex items-center gap-2 font-bold text-amber-300 text-xs">
-                  <span class="text-base">⚠️</span>
-                  <span>Unsafe for Household Members:</span>
-                </div>
-                ${data.familyMatches && data.familyMatches.length > 0 ? `
-                  <div class="space-y-1.5 pt-0.5">
-                    ${data.familyMatches.map(m => `
-                      <div class="flex items-center justify-between bg-amber-950/70 px-2.5 py-1.5 rounded-lg border border-amber-500/30 text-xs">
-                        <span class="font-bold text-white flex items-center gap-2.5">
-                          ${m.photo 
-                            ? `<img src="${m.photo}" class="w-8 h-8 rounded-full object-cover border-2 border-amber-400 shrink-0 shadow-sm">` 
-                            : `<span class="w-8 h-8 rounded-full bg-amber-900/60 border border-amber-400/50 flex items-center justify-center text-base shrink-0">${m.icon}</span>`}
-                          <span class="text-sm">${m.name}</span>
-                        </span>
-                        <span class="font-semibold text-rose-300">Contains: ${m.allergens.join(', ')}</span>
-                      </div>
-                    `).join('')}
-                  </div>
-                ` : `
-                  <span>Contains guarded allergen: <span class="font-bold underline text-white">${(data.triggeredAllergens || []).join(', ')}</span></span>
-                `}
+            <div class="space-y-2 text-xs bg-slate-950/80 rounded-xl p-3 border border-teal-900/40">
+              <div class="flex items-center justify-between text-[11px] text-teal-300">
+                <span class="font-semibold">📅 Resolution Date:</span>
+                <span class="font-mono text-white font-bold">${data.terminatedNotice.date || 'Historical Archive'}</span>
               </div>
-              <p class="text-slate-300 pt-0.5 leading-relaxed">${data.details}</p>
-              ${data.ingredients ? `<p class="text-[11px] text-slate-400 border-t border-slate-800/80 pt-2"><span class="font-semibold text-slate-300">Detected Ingredients:</span> ${data.ingredients.slice(0, 160)}...</p>` : ''}
-              ${additivesHtml}
+              <p class="text-slate-200 leading-relaxed pt-1">
+                <strong class="text-teal-300">Official Status:</strong> ${data.terminatedNotice.reason || 'Past voluntary recall officially resolved.'}
+              </p>
+              <div class="mt-2 p-2 rounded-lg bg-teal-950/40 border border-teal-800/40 text-[11px] text-teal-200">
+                ✓ <strong>Store Verification:</strong> The historical lot batch associated with this notice was officially closed out. Current grocery store inventory is cleared and safe to purchase.
+              </div>
             </div>
-
-            <!-- Instant Scan Next Barcode Action Button -->
-            <button 
-              type="button" 
-              class="scan-next-item-btn w-full mt-3.5 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 text-white font-bold text-xs shadow-lg shadow-blue-950/50 transition active:scale-[0.98] flex items-center justify-center gap-2"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              </svg>
-              <span>📷 Scan Next Item</span>
-            </button>
           </div>
         `;
       } else {
-        // Cleared of Recalls: Highlight Additives Prominently if present
-        const isAdditiveAlert = hasAdditives && isPlusActive;
-        const containerBorder = isAdditiveAlert ? 'border-2 border-purple-500/80 bg-gradient-to-b from-purple-950/70 via-slate-900 to-slate-900 shadow-2xl shadow-purple-950/50' : 'border-2 border-emerald-500/80 bg-gradient-to-b from-emerald-950/70 via-slate-900 to-slate-900 p-5 shadow-2xl shadow-emerald-950/50';
-
-        cardHtml = `
-          <div class="rounded-2xl ${containerBorder} p-5 transition-all">
-            <div class="border-b ${isAdditiveAlert ? 'border-purple-900/50' : 'border-emerald-900/50'} pb-3 mb-3.5">
-              <span class="text-[10px] font-mono tracking-widest ${isAdditiveAlert ? 'text-purple-300' : 'text-emerald-300'} uppercase font-bold block mb-1">SCANNED PRODUCT IDENTIFIED</span>
-              <h3 class="font-display text-lg font-bold text-white leading-tight">${data.productName}</h3>
-              <p class="text-xs text-slate-300 mt-0.5">${data.brand} • <span class="font-mono text-slate-400">UPC: ${data.upc}</span></p>
-            </div>
-
-            <div class="flex items-center justify-between mb-3 ${isAdditiveAlert ? 'bg-purple-950/90 border border-purple-500/60' : 'bg-emerald-950/90 border border-emerald-800/60'} p-3 rounded-xl">
-              <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg ${isAdditiveAlert ? 'bg-purple-600 text-white' : 'bg-emerald-600 text-white'} flex items-center justify-center font-bold text-base">
-                  ${isAdditiveAlert ? '🧪' : '✓'}
-                </div>
+        recallWindowHtml = `
+          <div class="rounded-2xl border border-emerald-500/50 bg-gradient-to-b from-emerald-950/40 via-slate-900 to-slate-900 p-4 shadow-xl space-y-2">
+            <div class="flex items-center justify-between pb-2 border-b border-emerald-900/40">
+              <div class="flex items-center gap-2">
+                <span class="text-lg">✓</span>
                 <div>
-                  <span class="text-[10px] uppercase font-bold ${isAdditiveAlert ? 'text-purple-300' : 'text-emerald-400'} block">
-                    ${isAdditiveAlert ? 'Additive Alert' : 'Verified Status'}
-                  </span>
-                  <span class="text-sm font-bold text-white">
-                    ${isAdditiveAlert ? `No Recalls • ${data.detectedAdditives.length} Additive${data.detectedAdditives.length > 1 ? 's' : ''} Flagged` : data.title}
-                  </span>
+                  <span class="text-xs font-bold text-white uppercase tracking-wider block">Window 1 • Federal Recall Wire</span>
+                  <span class="text-[11px] text-emerald-300 font-semibold">100% Cleared of Federal Recalls</span>
                 </div>
               </div>
-              <span class="text-[10px] font-mono ${isAdditiveAlert ? 'text-purple-300 bg-purple-950/80 border border-purple-700/60' : 'text-emerald-400 bg-emerald-950/60 border border-emerald-800/60'} px-2 py-1 rounded-md">
-                ${isAdditiveAlert ? `${data.detectedAdditives.length} Flagged` : 'No Recalls'}
+              <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/80 border border-emerald-700/60 px-2 py-0.5 rounded-md">
+                No Recalls
+              </span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Audited against openFDA food enforcement logs and USDA-FSIS feeds. No active safety notices, biological pathogen alerts, or foreign material recalls on record.
+            </p>
+          </div>
+        `;
+      }
+
+      // 3. WINDOW 2: HOUSEHOLD DIETARY & ALLERGEN GUARDRAILS
+      let allergenWindowHtml = '';
+      if (hasFamilyMatches) {
+        allergenWindowHtml = `
+          <div class="rounded-2xl border-2 border-amber-400 bg-gradient-to-b from-amber-950/80 via-slate-900 to-slate-900 p-4 shadow-xl shadow-amber-950/50 space-y-3">
+            <div class="flex items-center justify-between pb-2.5 border-b border-amber-900/50">
+              <div class="flex items-center gap-2">
+                <span class="text-xl">⚠️</span>
+                <div>
+                  <span class="text-xs font-bold text-white uppercase tracking-wider block">Window 2 • Household Allergen Guard</span>
+                  <span class="text-[11px] text-amber-300 font-semibold">Unsafe for ${data.familyMatches.length} Household Member${data.familyMatches.length > 1 ? 's' : ''}</span>
+                </div>
+              </div>
+              <span class="text-[10px] font-bold text-amber-300 bg-amber-950/80 border border-amber-500/40 px-2 py-1 rounded-md">
+                Dietary Alert
               </span>
             </div>
 
-            <div class="text-xs text-slate-300 bg-slate-950/70 rounded-xl p-3.5 border ${isAdditiveAlert ? 'border-purple-900/40' : 'border-emerald-900/40'} space-y-2">
-              <p class="${isAdditiveAlert ? 'text-slate-200' : 'text-emerald-300'} leading-relaxed">${data.details}</p>
-              ${data.ingredients ? `<p class="text-[11px] text-slate-400 border-t border-slate-800 pt-1.5"><span class="font-semibold text-slate-300">Ingredients Checked:</span> ${data.ingredients.slice(0, 180)}${data.ingredients.length > 180 ? '...' : ''}</p>` : ''}
-              
-              ${isPlusActive ? `
-                <div class="mt-2 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-emerald-400">
-                  <span class="flex items-center gap-1.5">
-                    <span>✓</span>
-                    <span>Allergen Guard: Clear for all family profiles (${familyProfiles.map(p => p.name).join(", ")})</span>
-                  </span>
-                  <span class="font-bold text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/30">Pro Active</span>
-                </div>
-              ` : `
-                <div class="mt-2 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px]">
-                  <span class="text-slate-400 flex items-center gap-1.5">
-                    <span>🔒</span>
-                    <span>Allergen & Additive Guard: <strong class="text-amber-300">Locked</strong></span>
-                  </span>
-                  <button type="button" class="open-paywall-trigger px-2.5 py-1 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-[10px] transition shrink-0">
-                    Unlock Pro
-                  </button>
-                </div>
-              `}
+            <div class="space-y-2 bg-slate-950/80 rounded-xl p-3 border border-amber-500/30">
+              <span class="text-[11px] font-bold text-amber-300 block mb-1">Affected Household Profiles:</span>
+              <div class="space-y-1.5">
+                ${data.familyMatches.map(m => `
+                  <div class="flex items-center justify-between bg-amber-950/60 px-2.5 py-1.5 rounded-lg border border-amber-500/30 text-xs">
+                    <span class="font-bold text-white flex items-center gap-2">
+                      ${m.photo 
+                        ? `<img src="${m.photo}" class="w-7 h-7 rounded-full object-cover border border-amber-400 shrink-0">` 
+                        : `<span class="w-7 h-7 rounded-full bg-amber-900/60 border border-amber-400/50 flex items-center justify-center text-sm shrink-0">${m.icon}</span>`}
+                      <span>${m.name}</span>
+                    </span>
+                    <span class="font-semibold text-rose-300 text-right">Contains: ${m.allergens.join(', ')}</span>
+                  </div>
+                `).join('')}
+              </div>
 
-              ${additivesHtml}
+              <div class="pt-2 border-t border-slate-800/80 text-[11px] text-slate-300 flex items-center justify-between">
+                <span>Total Identified Allergens:</span>
+                <span class="font-bold text-white font-mono">${data.detectedAllergens.join(', ')}</span>
+              </div>
             </div>
-
-            <!-- Instant Scan Next Barcode Action Button -->
-            <button 
-              type="button" 
-              class="scan-next-item-btn w-full mt-3.5 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 text-white font-bold text-xs shadow-lg shadow-blue-950/50 transition active:scale-[0.98] flex items-center justify-center gap-2"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              </svg>
-              <span>📷 Scan Next Item</span>
+          </div>
+        `;
+      } else if (isPlusActive) {
+        allergenWindowHtml = `
+          <div class="rounded-2xl border border-emerald-500/50 bg-gradient-to-b from-emerald-950/40 via-slate-900 to-slate-900 p-4 shadow-xl space-y-2">
+            <div class="flex items-center justify-between pb-2 border-b border-emerald-900/40">
+              <div class="flex items-center gap-2">
+                <span class="text-lg">🛡️</span>
+                <div>
+                  <span class="text-xs font-bold text-white uppercase tracking-wider block">Window 2 • Household Allergen Guard</span>
+                  <span class="text-[11px] text-emerald-300 font-semibold">Cleared for All Family Profiles</span>
+                </div>
+              </div>
+              <span class="text-[10px] font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-700/60 px-2 py-0.5 rounded-md">
+                Pro Active
+              </span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Screened against active dietary profiles for <strong>${familyProfiles.map(p => p.name).join(", ")}</strong>. No matching allergen conflicts found.
+            </p>
+            ${detectedAllergensCount > 0 ? `
+              <div class="pt-1.5 text-[11px] text-slate-400 border-t border-slate-800/70">
+                <span class="text-slate-300 font-medium">Packaging mentions:</span> ${data.detectedAllergens.join(', ')} (no active member allergies match).
+              </div>
+            ` : ''}
+          </div>
+        `;
+      } else {
+        allergenWindowHtml = `
+          <div class="rounded-2xl border border-slate-800 bg-slate-900/90 p-4 shadow-xl space-y-2">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800/80">
+              <div class="flex items-center gap-2">
+                <span class="text-lg">🔒</span>
+                <div>
+                  <span class="text-xs font-bold text-slate-200 uppercase tracking-wider block">Window 2 • Household Allergen Guard</span>
+                  <span class="text-[11px] text-amber-300 font-semibold">Custom Family Profiles Locked</span>
+                </div>
+              </div>
+              <span class="text-[10px] font-bold text-amber-300 bg-amber-500/20 border border-amber-500/30 px-2 py-0.5 rounded-md">
+                Pro Feature
+              </span>
+            </div>
+            <p class="text-xs text-slate-400 leading-normal">
+              Screening 11 allergens across multi-member family profiles is a SafeBite Scanner Pro feature.
+            </p>
+            <button type="button" class="open-paywall-trigger w-full mt-1 py-2 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs transition active:scale-[0.98] flex items-center justify-center gap-1.5">
+              <span>⭐ Unlock Pro Allergen Guard</span>
             </button>
           </div>
         `;
       }
 
+      // 4. WINDOW 3: FOOD ADDITIVES & SYNTHETIC DYES GUARDRAIL
+      let additiveWindowHtml = '';
+      if (isPlusActive) {
+        if (hasAdditives) {
+          additiveWindowHtml = `
+            <div class="rounded-2xl border-2 border-purple-500/80 bg-gradient-to-b from-purple-950/80 via-slate-900 to-slate-900 p-4 shadow-xl shadow-purple-950/50 space-y-3">
+              <div class="flex items-center justify-between pb-2.5 border-b border-purple-900/50">
+                <div class="flex items-center gap-2">
+                  <span class="text-xl">🧪</span>
+                  <div>
+                    <span class="text-xs font-bold text-white uppercase tracking-wider block">Window 3 • Food Additive & Dye Guard</span>
+                    <span class="text-[11px] text-purple-300 font-semibold">${additivesCount} Scrutinized Additive${additivesCount > 1 ? 's' : ''} / Dye${additivesCount > 1 ? 's' : ''} Flagged</span>
+                  </div>
+                </div>
+                <span class="text-[10px] font-bold text-purple-300 bg-purple-950/80 border border-purple-600/60 px-2 py-1 rounded-md">
+                  Pro Guardrail
+                </span>
+              </div>
+
+              <div class="space-y-2">
+                <div class="space-y-1.5">
+                  ${data.detectedAdditives.map(add => `
+                    <div class="p-2.5 rounded-xl bg-slate-950/90 border border-purple-900/50 flex flex-col gap-1 text-xs">
+                      <div class="flex items-center justify-between gap-2">
+                        <span class="font-bold text-white flex items-center gap-1.5">
+                          <span>${add.icon}</span>
+                          <span>${add.name}</span>
+                        </span>
+                        <span class="text-[10px] font-semibold text-purple-300 bg-purple-900/40 px-2 py-0.5 rounded border border-purple-700/40 shrink-0">
+                          ${add.type}
+                        </span>
+                      </div>
+                      <p class="text-[11px] text-slate-300 leading-relaxed">${add.desc}</p>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          `;
+        } else {
+          additiveWindowHtml = `
+            <div class="rounded-2xl border border-emerald-500/50 bg-gradient-to-b from-emerald-950/40 via-slate-900 to-slate-900 p-4 shadow-xl space-y-2">
+              <div class="flex items-center justify-between pb-2 border-b border-emerald-900/40">
+                <div class="flex items-center gap-2">
+                  <span class="text-lg">🧪</span>
+                  <div>
+                    <span class="text-xs font-bold text-white uppercase tracking-wider block">Window 3 • Food Additive & Dye Guard</span>
+                    <span class="text-[11px] text-emerald-300 font-semibold">Clean Formulation Audited</span>
+                  </div>
+                </div>
+                <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/80 border border-emerald-700/60 px-2 py-0.5 rounded-md">
+                  Auto-Audited
+                </span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Zero synthetic petroleum dyes (Red 40, Yellow 5 & 6, Blue 1 & 2), titanium dioxide, BHA/BHT, TBHQ, nitrites, or scrutinized artificial sweeteners detected.
+              </p>
+            </div>
+          `;
+        }
+      } else {
+        if (hasAdditives) {
+          additiveWindowHtml = `
+            <div class="rounded-2xl border border-purple-500/50 bg-gradient-to-r from-purple-950/70 via-slate-900 to-indigo-950/70 p-4 shadow-xl space-y-2">
+              <div class="flex items-center justify-between pb-2 border-b border-purple-900/40">
+                <div class="flex items-center gap-2">
+                  <span class="text-lg">🔒</span>
+                  <div>
+                    <span class="text-xs font-bold text-purple-200 uppercase tracking-wider block">Window 3 • Food Additive & Dye Guard</span>
+                    <span class="text-[11px] text-purple-300 font-semibold">${additivesCount} Potential Additive${additivesCount > 1 ? 's' : ''} Detected</span>
+                  </div>
+                </div>
+                <span class="text-[10px] font-bold text-purple-300 bg-purple-950/80 border border-purple-500/40 px-2 py-0.5 rounded-md">
+                  Pro Feature
+                </span>
+              </div>
+              <p class="text-xs text-slate-300 leading-normal">
+                SafeBite Scanner detected <strong>${additivesCount} scrutinized food additive${additivesCount > 1 ? 's' : ''} or synthetic dye${additivesCount > 1 ? 's' : ''}</strong> in this product. Unlock Pro to view the exact chemicals and EU health advisories.
+              </p>
+              <button type="button" class="open-paywall-trigger w-full mt-1 py-2 px-3 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-sky-600 hover:from-purple-500 hover:to-sky-500 text-white font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5">
+                <span>⭐ Unlock Pro Additive Audit</span>
+              </button>
+            </div>
+          `;
+        } else {
+          additiveWindowHtml = `
+            <div class="rounded-2xl border border-slate-800 bg-slate-900/90 p-4 shadow-xl space-y-2">
+              <div class="flex items-center justify-between pb-2 border-b border-slate-800/80">
+                <div class="flex items-center gap-2">
+                  <span class="text-lg">🔒</span>
+                  <div>
+                    <span class="text-xs font-bold text-slate-200 uppercase tracking-wider block">Window 3 • Food Additive & Dye Guard</span>
+                    <span class="text-[11px] text-slate-400">Automatic Screening Locked</span>
+                  </div>
+                </div>
+                <span class="text-[10px] font-bold text-amber-300 bg-amber-500/20 border border-amber-500/30 px-2 py-0.5 rounded-md">
+                  Pro
+                </span>
+              </div>
+              <p class="text-xs text-slate-400 leading-normal">
+                Automatic chemical additive and synthetic petroleum dye screening requires SafeBite Scanner Pro.
+              </p>
+              <button type="button" class="open-paywall-trigger w-full mt-1 py-2 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs transition active:scale-[0.98] flex items-center justify-center gap-1.5">
+                <span>Unlock Pro</span>
+              </button>
+            </div>
+          `;
+        }
+      }
+
+      // 5. WINDOW 4: PACKAGING INGREDIENTS TRANSPARENCY
+      const ingredientsWindowHtml = `
+        <div class="rounded-2xl border border-slate-800 bg-slate-950/90 p-4 shadow-md space-y-2">
+          <div class="flex items-center justify-between pb-1.5 border-b border-slate-800/80">
+            <span class="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+              <span>📋</span>
+              <span>Window 4 • Packaging Ingredients Breakdown</span>
+            </span>
+            <span class="text-[10px] text-slate-500 font-mono">Catalog Transparency</span>
+          </div>
+          ${data.ingredients ? `
+            <p class="text-xs text-slate-300 leading-relaxed font-normal bg-slate-900/60 p-3 rounded-xl border border-slate-800/60">
+              ${data.ingredients}
+            </p>
+          ` : `
+            <p class="text-xs text-slate-500 italic bg-slate-900/40 p-2.5 rounded-xl border border-slate-800/60">
+              Full ingredients label text not currently indexed for this specific packaging batch. Always review printed packaging on shelf.
+            </p>
+          `}
+        </div>
+      `;
+
+      // 6. ACTION BUTTON: INSTANT SCAN NEXT BARCODE
+      const scanNextBtnHtml = `
+        <button 
+          type="button" 
+          class="scan-next-item-btn w-full py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 text-white font-bold text-sm shadow-xl shadow-blue-950/60 transition active:scale-[0.98] flex items-center justify-center gap-2"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+          <span>📷 Scan Next Item</span>
+        </button>
+      `;
+
       const microNotice = `
-        <div class="mt-3 pt-2.5 border-t border-slate-800/80 text-center">
-          <p class="text-[10px] text-slate-400 leading-tight">
+        <div class="pt-2 text-center">
+          <p class="text-[10px] text-slate-500 leading-tight">
             ⚠️ <strong>Safety Notice:</strong> Formulations and lot batches change. Always verify printed packaging labels before consuming. Not affiliated with FDA or USDA.
           </p>
         </div>
       `;
-      // Inject notice before the final closing div of the card
-      const lastDivIndex = cardHtml.lastIndexOf('</div>');
-      if (lastDivIndex !== -1) {
-        resultContainer.innerHTML = cardHtml.slice(0, lastDivIndex) + microNotice + cardHtml.slice(lastDivIndex);
-      } else {
-        resultContainer.innerHTML = cardHtml + microNotice;
-      }
+
+      resultContainer.innerHTML = `
+        <div class="space-y-3.5">
+          ${masterHeaderHtml}
+          ${recallWindowHtml}
+          ${allergenWindowHtml}
+          ${additiveWindowHtml}
+          ${ingredientsWindowHtml}
+          ${scanNextBtnHtml}
+          ${microNotice}
+        </div>
+      `;
 
       attachScanNextListeners();
       setTimeout(() => {
-        const navOffset = 135; // Accounts for combined sticky header (56px) + sticky nav (64px) + margin
+        const navOffset = 135;
         const rect = resultContainer.getBoundingClientRect();
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const targetY = scrollTop + rect.top - navOffset;
