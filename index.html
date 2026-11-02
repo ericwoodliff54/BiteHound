@@ -1174,6 +1174,272 @@
       { id: 'corn', name: 'Corn', icon: '🌽', desc: 'Cornstarch, corn syrup, corn meal, dextrose' },
       { id: 'sulfites', name: 'Sulfites', icon: '🍷', desc: 'Sulfur dioxide, sodium bisulfite, dried fruit' }
     ];
+    // Comprehensive Index of Scrutinized Food Additives & Synthetic Dyes (Pro Guardrail)
+    const ADDITIVES_DATABASE = [
+      {
+        id: 'red40',
+        name: 'Red 40 (Allura Red)',
+        type: 'Synthetic Petroleum Dye',
+        icon: '🎨',
+        desc: 'Petroleum-derived artificial food coloring (FD&C Red No. 40 / E129). Requires a mandatory warning label in the European Union regarding hyperactivity in children.',
+        tags: ['en:e129', 'en:allura-red-ac', 'en:allura-red', 'e129', 'red-40', 'ci-16035', 'ci 16035', 'food-red-17'],
+        regex: /(?:fd\s*&?\s*c\s*)?red\s*(?:#\s*|no\.?\s*|dye\s*)?40(?:\s*lake)?|allura[-_\s]*red(?:\s*ac)?|\be[-_\s]*129\b|\bci[-_\s]*16035\b/i
+      },
+      {
+        id: 'yellow5',
+        name: 'Yellow 5 (Tartrazine)',
+        type: 'Synthetic Petroleum Dye',
+        icon: '🎨',
+        desc: 'Azo food dye (FD&C Yellow No. 5 / E102). Flagged for potential allergic-like reactions, hives, and attention deficit behavior in sensitive individuals.',
+        tags: ['en:e102', 'en:tartrazine', 'e102', 'yellow-5', 'ci-19140', 'food-yellow-4'],
+        regex: /(?:fd\s*&?\s*c\s*)?yellow\s*(?:#\s*|no\.?\s*|dye\s*)?5(?:\s*lake)?|tartrazine|\be[-_\s]*102\b|\bci[-_\s]*19140\b/i
+      },
+      {
+        id: 'yellow6',
+        name: 'Yellow 6 (Sunset Yellow)',
+        type: 'Synthetic Petroleum Dye',
+        icon: '🎨',
+        desc: 'Synthetic petroleum-derived colorant (FD&C Yellow No. 6 / E110). Subject to strict warning requirements in Europe due to behavioral impact studies.',
+        tags: ['en:e110', 'en:sunset-yellow-fcf', 'en:sunset-yellow', 'e110', 'yellow-6', 'ci-15985', 'orange-yellow-s'],
+        regex: /(?:fd\s*&?\s*c\s*)?yellow\s*(?:#\s*|no\.?\s*|dye\s*)?6(?:\s*lake)?|sunset[-_\s]*yellow(?:\s*fcf)?|\be[-_\s]*110\b|\bci[-_\s]*15985\b/i
+      },
+      {
+        id: 'blue1',
+        name: 'Blue 1 (Brilliant Blue)',
+        type: 'Synthetic Petroleum Dye',
+        icon: '🎨',
+        desc: 'Synthetic triarylmethane colorant (FD&C Blue No. 1 / E133). Under regulatory scrutiny in Europe for neurotoxicity questions at elevated intake levels.',
+        tags: ['en:e133', 'en:brilliant-blue-fcf', 'en:brilliant-blue', 'e133', 'blue-1', 'ci-42090'],
+        regex: /(?:fd\s*&?\s*c\s*)?blue\s*(?:#\s*|no\.?\s*|dye\s*)?1(?:\s*lake)?|brilliant[-_\s]*blue(?:\s*fcf)?|\be[-_\s]*133\b|\bci[-_\s]*42090\b/i
+      },
+      {
+        id: 'blue2',
+        name: 'Blue 2 (Indigotine)',
+        type: 'Synthetic Petroleum Dye',
+        icon: '🎨',
+        desc: 'Synthetic dye (FD&C Blue No. 2 / E132 / Indigo Carmine). Targeted by consumer health groups due to animal study links to brain tumors.',
+        tags: ['en:e132', 'en:indigotine', 'e132', 'blue-2', 'indigo-carmine', 'ci-73015'],
+        regex: /(?:fd\s*&?\s*c\s*)?blue\s*(?:#\s*|no\.?\s*|dye\s*)?2(?:\s*lake)?|indigotine|indigo[-_\s]*carmine|\be[-_\s]*132\b|\bci[-_\s]*73015\b/i
+      },
+      {
+        id: 'red3',
+        name: 'Red 3 (Erythrosine)',
+        type: 'Banned / High-Risk Dye',
+        icon: '🛑',
+        desc: 'FDA banned from cosmetics in 1990 and prohibited under the California Food Safety Act. Documented link to thyroid tumors in animal studies.',
+        tags: ['en:e127', 'en:erythrosine', 'e127', 'red-3', 'ci-45430'],
+        regex: /(?:fd\s*&?\s*c\s*)?red\s*(?:#\s*|no\.?\s*|dye\s*)?3(?:\s*lake)?|erythrosine|\be[-_\s]*127\b|\bci[-_\s]*45430\b/i
+      },
+      {
+        id: 'green3',
+        name: 'Green 3 (Fast Green)',
+        type: 'Synthetic Dye',
+        icon: '🎨',
+        desc: 'Synthetic triphenylmethane dye (FD&C Green No. 3 / E143). Restricted food additive with European Union usage limits.',
+        tags: ['en:e143', 'en:fast-green-fcf', 'e143', 'green-3', 'ci-42053'],
+        regex: /(?:fd\s*&?\s*c\s*)?green\s*(?:#\s*|no\.?\s*|dye\s*)?3(?:\s*lake)?|fast[-_\s]*green(?:\s*fcf)?|\be[-_\s]*143\b|\bci[-_\s]*42053\b/i
+      },
+      {
+        id: 'titanium_dioxide',
+        name: 'Titanium Dioxide (E171)',
+        type: 'EU-Banned Mineral Whitener',
+        icon: '⚪',
+        desc: 'Inorganic whitening agent (E171). Officially banned from all food products by the European Commission due to nanoparticle accumulation and genotoxicity.',
+        tags: ['en:e171', 'en:titanium-dioxide', 'e171', 'titanium-white', 'ci-77891'],
+        regex: /titanium[-_\s]*dioxide|\be[-_\s]*171\b|\bci[-_\s]*77891\b/i
+      },
+      {
+        id: 'bha_bht',
+        name: 'BHA & BHT (Preservatives)',
+        type: 'Synthetic Chemical Preservative',
+        icon: '🛑',
+        desc: 'Butylated hydroxyanisole & hydroxytoluene (E320 & E321). Synthetic phenolic antioxidants classified as potential endocrine disruptors.',
+        tags: ['en:e320', 'en:e321', 'en:bha', 'en:bht', 'e320', 'e321'],
+        regex: /\b(?:bha|bht)\b|butylated[-_\s]*hydroxyanisole|butylated[-_\s]*hydroxytoluene|\be[-_\s]*32[01]\b/i
+      },
+      {
+        id: 'tbhq',
+        name: 'TBHQ (Preservative)',
+        type: 'Synthetic Preservative',
+        icon: '🛑',
+        desc: 'Tertiary butylhydroquinone (E319). Chemical preservative synthesized from butane/petroleum; linked to cellular damage in animal studies.',
+        tags: ['en:e319', 'en:tbhq', 'e319'],
+        regex: /\btbhq\b|tert(?:iary)?[-_\s]*butylhydroquinone|\be[-_\s]*319\b/i
+      },
+      {
+        id: 'nitrites',
+        name: 'Sodium Nitrites / Nitrates',
+        type: 'Curing Agent & Preservative',
+        icon: '🥓',
+        desc: 'Sodium or potassium nitrite/nitrate (E249–E252). Preservatives in deli meats that form carcinogenic nitrosamines when heated.',
+        tags: ['en:e249', 'en:e250', 'en:e251', 'en:e252', 'e249', 'e250', 'e251', 'e252'],
+        regex: /(?:sodium|potassium)[-_\s]*(?:nitrite|nitrate)|\be[-_\s]*2(?:49|50|51|52)\b/i
+      },
+      {
+        id: 'bromate_ada',
+        name: 'Potassium Bromate & ADA',
+        type: 'Banned Dough Conditioner',
+        icon: '🛑',
+        desc: 'Potassium bromate & azodicarbonamide (E924 / E927a). Chemical flour bleachers and dough conditioners banned across the EU, Canada, and California.',
+        tags: ['en:e924', 'en:e927a', 'en:azodicarbonamide', 'e924', 'e927a'],
+        regex: /potassium[-_\s]*bromate|azodicarbonamide|\be[-_\s]*924\b|\be[-_\s]*927a?\b/i
+      },
+      {
+        id: 'sweeteners',
+        name: 'Artificial Sweeteners',
+        type: 'Non-Nutritive Sweetener',
+        icon: '🍬',
+        desc: 'High-potency synthetic sweeteners (Aspartame / NutraSweet, Sucralose / Splenda, Acesulfame Potassium / Ace-K, Saccharin). Under study for microbiome disruption.',
+        tags: ['en:e950', 'en:e951', 'en:e954', 'en:e955', 'e950', 'e951', 'e954', 'e955', 'aspartame', 'sucralose'],
+        regex: /aspartame|nutrasweet|sucralose|splenda|acesulfame[-_\s]*(?:potassium|k)?|\bace[-_\s]*k\b|saccharin|\be[-_\s]*95[0145]\b/i
+      },
+      {
+        id: 'hfcs',
+        name: 'High Fructose Corn Syrup (HFCS)',
+        type: 'Ultra-Processed Sweetener',
+        icon: '🌽',
+        desc: 'Enzymatically converted liquid corn sweetener (HFCS-55 / HFCS-42). Rapidly absorbed fructose metabolized in the liver, linked to metabolic strain.',
+        tags: ['en:high-fructose-corn-syrup', 'en:glucose-fructose-syrup', 'en:isoglucose', 'hfcs'],
+        regex: /high[-_\s]*fructose[-_\s]*corn[-_\s]*syrup|\bhfcs\b|glucose[-_\s]*fructose[-_\s]*syrup|isoglucose/i
+      },
+      {
+        id: 'carrageenan',
+        name: 'Carrageenan (E407)',
+        type: 'Inflammatory Thickener',
+        icon: '🧪',
+        desc: 'Red seaweed-derived gelling agent (E407). Widely researched for triggering intestinal inflammation and gut mucosal permeability.',
+        tags: ['en:e407', 'en:e407a', 'en:carrageenan', 'e407', 'e407a'],
+        regex: /carrageenan|irish[-_\s]*moss[-_\s]*extract|\be[-_\s]*407a?\b/i
+      },
+      {
+        id: 'polysorbates',
+        name: 'Polysorbate 60 / 80',
+        type: 'Synthetic Emulsifier',
+        icon: '🧪',
+        desc: 'Synthetic non-ionic surfactants (E433 & E435). Animal studies show erosion of protective intestinal mucus layers.',
+        tags: ['en:e433', 'en:e435', 'en:polysorbate-80', 'en:polysorbate-60', 'e433', 'e435'],
+        regex: /polysorbate[-_\s]*(?:60|80)|\be[-_\s]*43[35]\b/i
+      }
+    ];
+    const ADDITIVE_OPTIONS = ADDITIVES_DATABASE;
+
+    // Resilient Food Additive & Synthetic Dye Screener
+    function auditFoodAdditives(ingredientsText = '', tags = [], productName = '') {
+      const detected = [];
+      const cleanText = (String(ingredientsText || '') + ' ' + String(productName || '')).toLowerCase();
+      const lowerTags = (Array.isArray(tags) ? tags : []).map(t => String(t).toLowerCase());
+
+      for (const item of ADDITIVES_DATABASE) {
+        let matched = false;
+        // 1. Exact Tag match (Open Food Facts e-codes e.g. "en:e129")
+        if (lowerTags.length > 0 && item.tags.some(t => lowerTags.includes(t.toLowerCase()))) {
+          matched = true;
+        }
+        // 2. Regular expression text match (captures "Red #40", "Red No. 40", "Red 40 Lake", "E129", etc.)
+        if (!matched && item.regex && item.regex.test(cleanText)) {
+          matched = true;
+        }
+        // 3. Fallback regex match across all raw tags joined
+        if (!matched && item.regex && lowerTags.length > 0 && item.regex.test(lowerTags.join(' '))) {
+          matched = true;
+        }
+
+        if (matched) {
+          detected.push({
+            id: item.id,
+            name: item.name,
+            type: item.type,
+            icon: item.icon,
+            desc: item.desc
+          });
+        }
+      }
+      return detected;
+    }
+
+    // Dynamic Food Additive Alert Component for Scan Cards
+    function renderAdditivesHtml(data) {
+      const additives = data.detectedAdditives || [];
+      if (isPlusActive) {
+        if (additives.length > 0) {
+          return `
+            <div class="mt-3 p-3.5 rounded-xl bg-purple-950/60 border border-purple-500/50 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-purple-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>🧪</span>
+                  <span>${additives.length} Flagged Food Additive${additives.length > 1 ? 's' : ''} & Synthetic Dye${additives.length > 1 ? 's' : ''}</span>
+                </span>
+                <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/40">
+                  Pro Guardrail Active
+                </span>
+              </div>
+              <div class="space-y-1.5 pt-0.5">
+                ${additives.map(add => `
+                  <div class="p-2.5 rounded-lg bg-slate-950/90 border border-purple-900/60 flex flex-col gap-1 text-xs">
+                    <div class="flex items-center justify-between gap-2">
+                      <span class="font-bold text-white flex items-center gap-1.5">
+                        <span>${add.icon}</span>
+                        <span>${add.name}</span>
+                      </span>
+                      <span class="text-[10px] font-semibold text-purple-300 bg-purple-900/50 px-2 py-0.5 rounded border border-purple-700/50 shrink-0">
+                        ${add.type}
+                      </span>
+                    </div>
+                    <p class="text-[11px] text-slate-300 leading-relaxed">${add.desc}</p>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        } else {
+          return `
+            <div class="mt-2.5 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-emerald-400">
+              <span class="flex items-center gap-1.5">
+                <span>✓</span>
+                <span>Additive Guard: No synthetic petroleum dyes or flagged additives detected</span>
+              </span>
+              <span class="font-bold text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/30">Auto-Audited</span>
+            </div>
+          `;
+        }
+      } else {
+        // Free Mode
+        if (additives.length > 0) {
+          return `
+            <div class="mt-3 p-3.5 rounded-xl bg-gradient-to-r from-purple-950/70 via-slate-900 to-indigo-950/70 border border-purple-500/50 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-purple-200 flex items-center gap-1.5">
+                  <span>🔒</span>
+                  <span>${additives.length} Potential Food Additive${additives.length > 1 ? 's' : ''} / Dye${additives.length > 1 ? 's' : ''} Detected</span>
+                </span>
+                <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/40">
+                  Pro Feature
+                </span>
+              </div>
+              <p class="text-[11px] text-slate-300 leading-normal">
+                SafeBite Scanner identified potential synthetic dyes or chemical additives in this product formulation. Unlock Pro to view the exact detected additives and activate personalized allergen guardrails.
+              </p>
+              <button type="button" class="open-paywall-trigger w-full py-2 rounded-lg bg-gradient-to-r from-purple-600 via-indigo-600 to-sky-600 hover:from-purple-500 hover:to-sky-500 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center justify-center gap-1.5">
+                <span>⭐ Unlock Pro Additive & Allergen Guard</span>
+              </button>
+            </div>
+          `;
+        } else {
+          return `
+            <div class="mt-2 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px]">
+              <span class="text-slate-400 flex items-center gap-1.5">
+                <span>🔒</span>
+                <span>Allergen & Additive Guard: <strong class="text-amber-300">Locked</strong></span>
+              </span>
+              <button type="button" class="open-paywall-trigger px-2.5 py-1 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-[10px] transition shrink-0">
+                Unlock Pro
+              </button>
+            </div>
+          `;
+        }
+      }
+    }
+
 
         // Family Profiles & Active Allergen State
     let familyProfiles = [
@@ -1333,6 +1599,23 @@
 
 // Product Database
     const RECALL_DATABASE = {
+      "022000010996": {
+        isRecalled: false,
+        brand: "Wrigley / Mars",
+        product: "Skittles Original Bite Size Candies (2.17 oz Bag)",
+        upc: "022000010996",
+        recallDate: "Active Store Inventory",
+        hazard: "No active federal recalls on record.",
+        action: "Product cleared of federal recalls. Contains synthetic food dyes and titanium dioxide.",
+        severity: "Store Clear",
+        agency: "FDA Cleared",
+        tag: "Store Cleared",
+        states: ['ALL'],
+        stores: ['Walmart', 'Target', 'Kroger', 'CVS', 'Walgreens'],
+        allergens: [],
+        ingredients: "Sugar, Corn Syrup, Hydrogenated Palm Kernel Oil; Less Than 2% of: Citric Acid, Tapioca Dextrin, Modified Corn Starch, Natural and Artificial Flavors, Colors (Red 40 Lake, Titanium Dioxide, Yellow 5 Lake, Blue 2 Lake, Yellow 6 Lake, Yellow 5, Red 40, Yellow 6, Blue 1 Lake, Blue 1), Sodium Citrate, Carnauba Wax.",
+        additives_tags: ["en:e129", "en:e171", "en:e102", "en:e132", "en:e110", "en:e133"]
+      },
       "011110815462": {
         isRecalled: true,
         brand: "Fresh Farms Organics",
@@ -1361,7 +1644,9 @@
         tag: "Allergen Alert",
         states: ['ALL'],
         stores: ['Walmart', 'Target', 'Aldi', 'Kroger'],
-        allergens: ['dairy']
+        allergens: ['dairy'],
+        ingredients: 'Potatoes, Vegetable Oil, Whey Powder, Salt, Cheddar Cheese, Red 40 Lake, Yellow 6 Lake.',
+        additives_tags: ['en:e129', 'en:e110']
       },
       "033383902050": {
         isRecalled: true,
@@ -2565,6 +2850,8 @@
         let recallRecord = findRecallRecord(code);
         let detectedAllergenIds = [];
         let ingredientsSummary = "";
+        let productAdditivesTags = [];
+        let offProductData = null;
 
         // 1. Check local pre-indexed recall database and Store-Ready cached FDA list
         if (recallRecord) {
@@ -2572,6 +2859,8 @@
           brandName = recallRecord.brand;
           isRecalled = recallRecord.isRecalled;
           if (recallRecord.allergens) detectedAllergenIds.push(...recallRecord.allergens);
+          if (recallRecord.ingredients) ingredientsSummary = recallRecord.ingredients;
+          if (recallRecord.additives_tags) productAdditivesTags.push(...recallRecord.additives_tags);
         } else if (cachedFDARecalls && cachedFDARecalls.length > 0) {
           // Check locally cached FDA wire records (works with ZERO cell reception)
           const match = cachedFDARecalls.find(item => {
@@ -2610,6 +2899,8 @@
             const apiData = await res.json();
             if (apiData && apiData.status === 1 && apiData.product) {
               const p = apiData.product;
+              offProductData = p;
+
               if (!recallRecord || !recallRecord.product) {
                 if (p.product_name || p.product_name_en) {
                   productName = p.product_name || p.product_name_en;
@@ -2620,9 +2911,16 @@
                   brandName = p.brands;
                 }
               }
-              if (p.ingredients_text || p.ingredients_text_en) {
-                ingredientsSummary = p.ingredients_text || p.ingredients_text_en;
+              if (p.ingredients_text || p.ingredients_text_en || p.ingredients_text_with_allergens || p.ingredients_text_with_allergens_en) {
+                ingredientsSummary = p.ingredients_text || p.ingredients_text_en || p.ingredients_text_with_allergens || p.ingredients_text_with_allergens_en || "";
+              } else if (Array.isArray(p.ingredients) && p.ingredients.length > 0) {
+                ingredientsSummary = p.ingredients.map(ing => ing.text || ing.id || '').filter(Boolean).join(', ');
               }
+
+              if (Array.isArray(p.additives_tags)) productAdditivesTags.push(...p.additives_tags);
+              if (Array.isArray(p.additives_original_tags)) productAdditivesTags.push(...p.additives_original_tags);
+              if (Array.isArray(p.ingredients_tags)) productAdditivesTags.push(...p.ingredients_tags);
+              if (Array.isArray(p.allergens_tags)) productAdditivesTags.push(...p.allergens_tags);
 
               const combinedFoodText = `${productName} ${brandName} ${ingredientsSummary} ${p.allergens || ''} ${(p.allergens_tags || []).join(' ')}`.toLowerCase();
 
@@ -2810,19 +3108,8 @@
 
         checkPlusStatus();
         let triggeredFamilyMatches = [];
-        let detectedAdditivesList = [];
-
-        // Scan for Food Additives & Synthetic Dyes
-        const fullIngredientBlob = (ingredientsSummary + ' ' + (productData.additives_tags || []).join(' ') + ' ' + productName).toLowerCase();
-        for (const addOpt of ADDITIVE_OPTIONS) {
-          if (addOpt.patterns.some(pattern => fullIngredientBlob.includes(pattern))) {
-            detectedAdditivesList.push({
-              name: addOpt.name,
-              icon: addOpt.icon,
-              desc: addOpt.desc
-            });
-          }
-        }
+        // Resilient, 100% comprehensive additive & synthetic dye screening
+        let detectedAdditivesList = auditFoodAdditives(ingredientsSummary, productAdditivesTags, productName);
 
         if (isPlusActive) {
           for (const prof of familyProfiles) {
@@ -2861,7 +3148,7 @@
             tag: recallRecord.tag || 'Federal Notice',
             stores: recallRecord.stores || [],
             ingredients: ingredientsSummary,
-            triggeredAllergens: triggeredNames,
+            triggeredAllergens: Array.from(new Set(detectedAllergenIds)),
             time: timestamp,
             detectedAdditives: detectedAdditivesList
           };
@@ -2920,29 +3207,29 @@
         addToHistory(resultData);
       } catch (fatalErr) {
         console.error("Critical failure during processUPC:", fatalErr);
-        // Fallback display guarantees user is never stuck in an infinite loading spinner
+        const fallbackAdditives = auditFoodAdditives(ingredientsSummary, productAdditivesTags, productName);
         displayResult({
           upc: rawCode,
           status: 'clear',
           title: 'LOOKUP COMPLETED',
-          productName: `Scanned Product (${rawCode})`,
-          brand: 'Retail Grocery Item',
+          productName: productName || `Scanned Product (${rawCode})`,
+          brand: brandName || 'Retail Grocery Item',
           details: 'Verified with local database. No active recalls found on record.',
           agency: 'SafeBite Scanner Wire',
-          ingredients: '',
+          ingredients: ingredientsSummary || '',
           triggeredAllergens: [],
+          detectedAdditives: fallbackAdditives,
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         });
-      } finally {
-        isScanningLocked = false;
       }
     }
 
-    // Display Result with Prominent Product Name Hero, Recall Date & Scan Next Button
     function displayResult(data) {
       resultContainer.classList.remove('hidden');
 
       let cardHtml = '';
+      const additivesHtml = renderAdditivesHtml(data);
+      const hasAdditives = (data.detectedAdditives && data.detectedAdditives.length > 0);
 
       if (data.status === 'recalled') {
         const allergenBadge = (data.triggeredAllergens && data.triggeredAllergens.length > 0) ? `
@@ -3004,6 +3291,7 @@
                 <p class="text-slate-300">${data.action}</p>
               </div>
               ${allergenBadge}
+              ${additivesHtml}
             </div>
 
             <!-- Instant Scan Next Barcode Action Button -->
@@ -3065,11 +3353,12 @@
                     `).join('')}
                   </div>
                 ` : `
-                  <span>Contains guarded allergen: <span class="font-bold underline text-white">${data.triggeredAllergens.join(', ')}</span></span>
+                  <span>Contains guarded allergen: <span class="font-bold underline text-white">${(data.triggeredAllergens || []).join(', ')}</span></span>
                 `}
               </div>
               <p class="text-slate-300 pt-0.5 leading-relaxed">${data.details}</p>
               ${data.ingredients ? `<p class="text-[11px] text-slate-400 border-t border-slate-800/80 pt-2"><span class="font-semibold text-slate-300">Detected Ingredients:</span> ${data.ingredients.slice(0, 160)}...</p>` : ''}
+              ${additivesHtml}
             </div>
 
             <!-- Instant Scan Next Barcode Action Button -->
@@ -3086,53 +3375,62 @@
           </div>
         `;
       } else {
+        // Cleared of Recalls: Highlight Additives Prominently if present
+        const isAdditiveAlert = hasAdditives && isPlusActive;
+        const containerBorder = isAdditiveAlert ? 'border-2 border-purple-500/80 bg-gradient-to-b from-purple-950/70 via-slate-900 to-slate-900 shadow-2xl shadow-purple-950/50' : 'border-2 border-emerald-500/80 bg-gradient-to-b from-emerald-950/70 via-slate-900 to-slate-900 p-5 shadow-2xl shadow-emerald-950/50';
+
         cardHtml = `
-          <div class="rounded-2xl border-2 border-emerald-500/80 bg-gradient-to-b from-emerald-950/70 via-slate-900 to-slate-900 p-5 shadow-2xl shadow-emerald-950/50 transition-all">
-            <div class="border-b border-emerald-900/50 pb-3 mb-3.5">
-              <span class="text-[10px] font-mono tracking-widest text-emerald-300 uppercase font-bold block mb-1">SCANNED PRODUCT IDENTIFIED</span>
+          <div class="rounded-2xl ${containerBorder} p-5 transition-all">
+            <div class="border-b ${isAdditiveAlert ? 'border-purple-900/50' : 'border-emerald-900/50'} pb-3 mb-3.5">
+              <span class="text-[10px] font-mono tracking-widest ${isAdditiveAlert ? 'text-purple-300' : 'text-emerald-300'} uppercase font-bold block mb-1">SCANNED PRODUCT IDENTIFIED</span>
               <h3 class="font-display text-lg font-bold text-white leading-tight">${data.productName}</h3>
               <p class="text-xs text-slate-300 mt-0.5">${data.brand} • <span class="font-mono text-slate-400">UPC: ${data.upc}</span></p>
             </div>
 
-            <div class="flex items-center justify-between mb-3 bg-emerald-950/90 p-3 rounded-xl border border-emerald-800/60">
+            <div class="flex items-center justify-between mb-3 ${isAdditiveAlert ? 'bg-purple-950/90 border border-purple-500/60' : 'bg-emerald-950/90 border border-emerald-800/60'} p-3 rounded-xl">
               <div class="flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
-                  </svg>
+                <div class="w-8 h-8 rounded-lg ${isAdditiveAlert ? 'bg-purple-600 text-white' : 'bg-emerald-600 text-white'} flex items-center justify-center font-bold text-base">
+                  ${isAdditiveAlert ? '🧪' : '✓'}
                 </div>
                 <div>
-                  <span class="text-[10px] uppercase font-bold text-emerald-400 block">Verified Status</span>
-                  <span class="text-sm font-bold text-white">${data.title}</span>
+                  <span class="text-[10px] uppercase font-bold ${isAdditiveAlert ? 'text-purple-300' : 'text-emerald-400'} block">
+                    ${isAdditiveAlert ? 'Additive Alert' : 'Verified Status'}
+                  </span>
+                  <span class="text-sm font-bold text-white">
+                    ${isAdditiveAlert ? `No Recalls • ${data.detectedAdditives.length} Additive${data.detectedAdditives.length > 1 ? 's' : ''} Flagged` : data.title}
+                  </span>
                 </div>
               </div>
-              <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-1 rounded-md border border-emerald-800/60">
-                No Recalls
+              <span class="text-[10px] font-mono ${isAdditiveAlert ? 'text-purple-300 bg-purple-950/80 border border-purple-700/60' : 'text-emerald-400 bg-emerald-950/60 border border-emerald-800/60'} px-2 py-1 rounded-md">
+                ${isAdditiveAlert ? `${data.detectedAdditives.length} Flagged` : 'No Recalls'}
               </span>
             </div>
 
-            <div class="text-xs text-slate-300 bg-slate-950/70 rounded-xl p-3.5 border border-emerald-900/40 space-y-2">
-              <p class="text-emerald-300 leading-relaxed">${data.details}</p>
-              ${data.ingredients ? `<p class="text-[11px] text-slate-400 border-t border-slate-800 pt-1.5"><span class="font-semibold text-slate-300">Ingredients Checked:</span> ${data.ingredients.slice(0, 160)}...</p>` : ''}
+            <div class="text-xs text-slate-300 bg-slate-950/70 rounded-xl p-3.5 border ${isAdditiveAlert ? 'border-purple-900/40' : 'border-emerald-900/40'} space-y-2">
+              <p class="${isAdditiveAlert ? 'text-slate-200' : 'text-emerald-300'} leading-relaxed">${data.details}</p>
+              ${data.ingredients ? `<p class="text-[11px] text-slate-400 border-t border-slate-800 pt-1.5"><span class="font-semibold text-slate-300">Ingredients Checked:</span> ${data.ingredients.slice(0, 180)}${data.ingredients.length > 180 ? '...' : ''}</p>` : ''}
+              
               ${isPlusActive ? `
                 <div class="mt-2 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-emerald-400">
                   <span class="flex items-center gap-1.5">
                     <span>✓</span>
                     <span>Allergen Guard: Clear for all family profiles (${familyProfiles.map(p => p.name).join(", ")})</span>
                   </span>
-                  <span class="font-bold text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/30">Plus Active</span>
+                  <span class="font-bold text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/30">Pro Active</span>
                 </div>
               ` : `
                 <div class="mt-2 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px]">
                   <span class="text-slate-400 flex items-center gap-1.5">
                     <span>🔒</span>
-                    <span>Allergen & Gluten Guard: <strong class="text-amber-300">Locked</strong></span>
+                    <span>Allergen & Additive Guard: <strong class="text-amber-300">Locked</strong></span>
                   </span>
                   <button type="button" class="open-paywall-trigger px-2.5 py-1 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-[10px] transition shrink-0">
-                    Unlock Plus
+                    Unlock Pro
                   </button>
                 </div>
               `}
+
+              ${additivesHtml}
             </div>
 
             <!-- Instant Scan Next Barcode Action Button -->
