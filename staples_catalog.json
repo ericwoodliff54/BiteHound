@@ -11,7 +11,8 @@
     "additives_tags": [],
     "stores": [
       "Meijer"
-    ]
+    ],
+    "isRecalled": false
   },
   "0886926377002": {
     "product": "Meijer Creamy Peanut Butter (16 oz / 40 oz)",
@@ -25,7 +26,8 @@
     "additives_tags": [],
     "stores": [
       "Meijer"
-    ]
+    ],
+    "isRecalled": false
   },
   "886926377019": {
     "product": "Meijer Crunchy Peanut Butter (16 oz / 40 oz)",
@@ -39,7 +41,8 @@
     "additives_tags": [],
     "stores": [
       "Meijer"
-    ]
+    ],
+    "isRecalled": false
   },
   "0886926377019": {
     "product": "Meijer Crunchy Peanut Butter (16 oz / 40 oz)",
@@ -53,7 +56,8 @@
     "additives_tags": [],
     "stores": [
       "Meijer"
-    ]
+    ],
+    "isRecalled": false
   },
   "051500255162": {
     "product": "Jif Creamy Peanut Butter (16 oz / 40 oz)",
@@ -71,7 +75,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "0051500255162": {
     "product": "Jif Creamy Peanut Butter (16 oz / 40 oz)",
@@ -89,7 +94,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "051500241776": {
     "product": "Jif Creamy Peanut Butter (28 oz Jar)",
@@ -106,7 +112,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0051500241776": {
     "product": "Jif Creamy Peanut Butter (28 oz Jar)",
@@ -123,7 +130,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "051500255377": {
     "product": "Jif Extra Crunchy Peanut Butter",
@@ -140,7 +148,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0051500255377": {
     "product": "Jif Extra Crunchy Peanut Butter",
@@ -157,7 +166,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "037600110753": {
     "product": "Skippy Creamy Peanut Butter (16.3 oz)",
@@ -175,7 +185,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "0037600110753": {
     "product": "Skippy Creamy Peanut Butter (16.3 oz)",
@@ -193,7 +204,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "037600105025": {
     "product": "Skippy Super Chunk Peanut Butter",
@@ -210,7 +222,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0037600105025": {
     "product": "Skippy Super Chunk Peanut Butter",
@@ -227,7 +240,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "045300001603": {
     "product": "Peter Pan Creamy Peanut Butter",
@@ -243,7 +257,8 @@
       "Target",
       "Kroger",
       "Meijer"
-    ]
+    ],
+    "isRecalled": false
   },
   "0045300001603": {
     "product": "Peter Pan Creamy Peanut Butter",
@@ -259,7 +274,8 @@
       "Target",
       "Kroger",
       "Meijer"
-    ]
+    ],
+    "isRecalled": false
   },
   "011110700406": {
     "product": "Kroger Creamy Peanut Butter (16 oz)",
@@ -273,7 +289,8 @@
     "additives_tags": [],
     "stores": [
       "Kroger"
-    ]
+    ],
+    "isRecalled": false
   },
   "0011110700406": {
     "product": "Kroger Creamy Peanut Butter (16 oz)",
@@ -287,7 +304,8 @@
     "additives_tags": [],
     "stores": [
       "Kroger"
-    ]
+    ],
+    "isRecalled": false
   },
   "078742352014": {
     "product": "Great Value Creamy Peanut Butter (40 oz)",
@@ -301,7 +319,8 @@
     "additives_tags": [],
     "stores": [
       "Walmart"
-    ]
+    ],
+    "isRecalled": false
   },
   "0078742352014": {
     "product": "Great Value Creamy Peanut Butter (40 oz)",
@@ -315,7 +334,8 @@
     "additives_tags": [],
     "stores": [
       "Walmart"
-    ]
+    ],
+    "isRecalled": false
   },
   "009800895007": {
     "product": "Nutella Hazelnut Spread with Cocoa",
@@ -334,7 +354,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "0009800895007": {
     "product": "Nutella Hazelnut Spread with Cocoa",
@@ -353,7 +374,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "051500006733": {
     "product": "Smucker's Concord Grape Jelly (32 oz)",
@@ -369,7 +391,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0051500006733": {
     "product": "Smucker's Concord Grape Jelly (32 oz)",
@@ -385,7 +408,42 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
+  },
+  "051500007853": {
+    "product": "Smucker's Seedless Strawberry Jam",
+    "brand": "Smucker's",
+    "upc": "051500007853",
+    "ingredients": "Strawberries, High Fructose Corn Syrup, Corn Syrup, Sugar, Fruit Pectin, Citric Acid.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0051500007853": {
+    "product": "Smucker's Seedless Strawberry Jam",
+    "brand": "Smucker's",
+    "upc": "051500007853",
+    "ingredients": "Strawberries, High Fructose Corn Syrup, Corn Syrup, Sugar, Fruit Pectin, Citric Acid.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
   },
   "888109111526": {
     "product": "Hostess Twinkies Creamy Filled Golden Sponge Cakes (Multi-Pack)",
@@ -411,7 +469,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "0888109111526": {
     "product": "Hostess Twinkies Creamy Filled Golden Sponge Cakes (Multi-Pack)",
@@ -437,13 +496,14 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "888109010102": {
-    "product": "Hostess Twinkies Creamy Filled Golden Sponge Cakes (2-Pack)",
+    "product": "Hostess Twinkies Creamy Filled Golden Sponge Cakes (Single 2-Pack)",
     "brand": "Hostess",
     "upc": "888109010102",
-    "ingredients": "Sugar, Water, Enriched Bleached Wheat Flour, High Fructose Corn Syrup, Tallow, Dextrose, Egg, Soybean Oil, Corn Starch, Whey, Hydrogenated Tallow, Glycerin, Salt, Mono and Diglycerides, Soy Lecithin, Polysorbate 60, Yellow 5, Red 40.",
+    "ingredients": "Sugar, Water, Enriched Bleached Wheat Flour, High Fructose Corn Syrup, Tallow, Dextrose, Egg, Soybean Oil, Corn Starch, Whey, Glycerin, Salt, Mono and Diglycerides, Soy Lecithin, Polysorbate 60, Yellow 5, Red 40.",
     "allergens": [
       "gluten",
       "dairy",
@@ -463,13 +523,14 @@
       "Walmart",
       "Target",
       "7-Eleven"
-    ]
+    ],
+    "isRecalled": false
   },
   "0888109010102": {
-    "product": "Hostess Twinkies Creamy Filled Golden Sponge Cakes (2-Pack)",
+    "product": "Hostess Twinkies Creamy Filled Golden Sponge Cakes (Single 2-Pack)",
     "brand": "Hostess",
     "upc": "888109010102",
-    "ingredients": "Sugar, Water, Enriched Bleached Wheat Flour, High Fructose Corn Syrup, Tallow, Dextrose, Egg, Soybean Oil, Corn Starch, Whey, Hydrogenated Tallow, Glycerin, Salt, Mono and Diglycerides, Soy Lecithin, Polysorbate 60, Yellow 5, Red 40.",
+    "ingredients": "Sugar, Water, Enriched Bleached Wheat Flour, High Fructose Corn Syrup, Tallow, Dextrose, Egg, Soybean Oil, Corn Starch, Whey, Glycerin, Salt, Mono and Diglycerides, Soy Lecithin, Polysorbate 60, Yellow 5, Red 40.",
     "allergens": [
       "gluten",
       "dairy",
@@ -489,7 +550,8 @@
       "Walmart",
       "Target",
       "7-Eleven"
-    ]
+    ],
+    "isRecalled": false
   },
   "888109110109": {
     "product": "Hostess Twinkies Creamy Golden Sponge Cakes (10 ct Box)",
@@ -514,7 +576,8 @@
       "Target",
       "Kroger",
       "Meijer"
-    ]
+    ],
+    "isRecalled": false
   },
   "0888109110109": {
     "product": "Hostess Twinkies Creamy Golden Sponge Cakes (10 ct Box)",
@@ -539,7 +602,8 @@
       "Target",
       "Kroger",
       "Meijer"
-    ]
+    ],
+    "isRecalled": false
   },
   "888109110086": {
     "product": "Hostess Chocolate CupCakes with Creamy Filling (8 ct Box)",
@@ -561,7 +625,8 @@
       "Target",
       "Kroger",
       "Meijer"
-    ]
+    ],
+    "isRecalled": false
   },
   "0888109110086": {
     "product": "Hostess Chocolate CupCakes with Creamy Filling (8 ct Box)",
@@ -583,7 +648,8 @@
       "Target",
       "Kroger",
       "Meijer"
-    ]
+    ],
+    "isRecalled": false
   },
   "888109110079": {
     "product": "Hostess Ding Dongs Chocolate Cake (10 ct Box)",
@@ -603,7 +669,8 @@
       "Target",
       "Kroger",
       "Meijer"
-    ]
+    ],
+    "isRecalled": false
   },
   "0888109110079": {
     "product": "Hostess Ding Dongs Chocolate Cake (10 ct Box)",
@@ -623,7 +690,50 @@
       "Target",
       "Kroger",
       "Meijer"
-    ]
+    ],
+    "isRecalled": false
+  },
+  "888109110093": {
+    "product": "Hostess Ho Hos Chocolate Rolled Cakes (10 ct Box)",
+    "brand": "Hostess",
+    "upc": "888109110093",
+    "ingredients": "Sugar, Water, Enriched Flour, High Fructose Corn Syrup, Hydrogenated Palm Kernel Oil, Cocoa, Soybean Oil, Egg, Whey, Soy Lecithin, Salt, Mono and Diglycerides, Polysorbate 60.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "eggs",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0888109110093": {
+    "product": "Hostess Ho Hos Chocolate Rolled Cakes (10 ct Box)",
+    "brand": "Hostess",
+    "upc": "888109110093",
+    "ingredients": "Sugar, Water, Enriched Flour, High Fructose Corn Syrup, Hydrogenated Palm Kernel Oil, Cocoa, Soybean Oil, Egg, Whey, Soy Lecithin, Salt, Mono and Diglycerides, Polysorbate 60.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "eggs",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer"
+    ],
+    "isRecalled": false
   },
   "024300041068": {
     "product": "Little Debbie Oatmeal Creme Pies (12 ct Box)",
@@ -650,7 +760,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "0024300041068": {
     "product": "Little Debbie Oatmeal Creme Pies (12 ct Box)",
@@ -677,7 +788,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "024300041129": {
     "product": "Little Debbie Cosmic Brownies with Chocolate Chip Candy",
@@ -702,7 +814,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0024300041129": {
     "product": "Little Debbie Cosmic Brownies with Chocolate Chip Candy",
@@ -727,7 +840,100 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
+  },
+  "024300041303": {
+    "product": "Little Debbie Swiss Cake Rolls (12 ct Box)",
+    "brand": "Little Debbie",
+    "upc": "024300041303",
+    "ingredients": "Sugar, Corn Syrup, Water, Enriched Bleached Flour, Palm and Soybean Oils with TBHQ, Cocoa, Dextrose, Contains 2% or less: Eggs, Soy Lecithin, Salt, Leavening.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "eggs",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "tbhq"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0024300041303": {
+    "product": "Little Debbie Swiss Cake Rolls (12 ct Box)",
+    "brand": "Little Debbie",
+    "upc": "024300041303",
+    "ingredients": "Sugar, Corn Syrup, Water, Enriched Bleached Flour, Palm and Soybean Oils with TBHQ, Cocoa, Dextrose, Contains 2% or less: Eggs, Soy Lecithin, Salt, Leavening.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "eggs",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "tbhq"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "038000318240": {
+    "product": "Rice Krispies Treats Crispy Marshmallow Squares",
+    "brand": "Kellogg's",
+    "upc": "038000318240",
+    "ingredients": "Toasted Rice Cereal (Rice, Sugar, Salt, Malt Flavor, Niacinamide, Reduced Iron), Corn Syrup, Fructose, Vegetable Oil (Soybean and Palm Oil with TBHQ for freshness), Sugar, Corn Syrup Solids, Contains 2% or less of Vegetable Glycerin, Dextrose, Gelatin, Natural and Artificial Flavors, Salt, DATEM, Acetylated Monoglycerides, Soy Lecithin, BHT for freshness.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "tbhq",
+      "bht"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0038000318240": {
+    "product": "Rice Krispies Treats Crispy Marshmallow Squares",
+    "brand": "Kellogg's",
+    "upc": "038000318240",
+    "ingredients": "Toasted Rice Cereal (Rice, Sugar, Salt, Malt Flavor, Niacinamide, Reduced Iron), Corn Syrup, Fructose, Vegetable Oil (Soybean and Palm Oil with TBHQ for freshness), Sugar, Corn Syrup Solids, Contains 2% or less of Vegetable Glycerin, Dextrose, Gelatin, Natural and Artificial Flavors, Salt, DATEM, Acetylated Monoglycerides, Soy Lecithin, BHT for freshness.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "tbhq",
+      "bht"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
   },
   "077034018653": {
     "product": "Kar's Sweet 'N Salty Trail Mix (34 oz Resealable Pouch)",
@@ -758,7 +964,8 @@
       "Target",
       "Costco",
       "Sam's Club"
-    ]
+    ],
+    "isRecalled": false
   },
   "0077034018653": {
     "product": "Kar's Sweet 'N Salty Trail Mix (34 oz Resealable Pouch)",
@@ -789,7 +996,8 @@
       "Target",
       "Costco",
       "Sam's Club"
-    ]
+    ],
+    "isRecalled": false
   },
   "016000275270": {
     "product": "Cheerios Gluten Free Whole Grain Toasted Oat Cereal",
@@ -806,7 +1014,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "0016000275270": {
     "product": "Cheerios Gluten Free Whole Grain Toasted Oat Cereal",
@@ -823,7 +1032,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "016000275287": {
     "product": "Honey Nut Cheerios Cereal",
@@ -840,7 +1050,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0016000275287": {
     "product": "Honey Nut Cheerios Cereal",
@@ -857,7 +1068,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "016000275645": {
     "product": "Cinnamon Toast Crunch Cereal",
@@ -874,7 +1086,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0016000275645": {
     "product": "Cinnamon Toast Crunch Cereal",
@@ -891,7 +1104,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "038000198644": {
     "product": "Kellogg's Frosted Flakes Cereal",
@@ -908,7 +1122,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0038000198644": {
     "product": "Kellogg's Frosted Flakes Cereal",
@@ -925,7 +1140,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "038000311104": {
     "product": "Pop-Tarts Frosted Strawberry Toaster Pastries",
@@ -948,7 +1164,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0038000311104": {
     "product": "Pop-Tarts Frosted Strawberry Toaster Pastries",
@@ -971,7 +1188,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "038000311166": {
     "product": "Pop-Tarts Frosted Brown Sugar Cinnamon Pastries",
@@ -992,7 +1210,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0038000311166": {
     "product": "Pop-Tarts Frosted Brown Sugar Cinnamon Pastries",
@@ -1013,7 +1232,122 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
+  },
+  "038000402604": {
+    "product": "Eggo Homestyle Frozen Waffles (10 ct Box)",
+    "brand": "Eggo",
+    "upc": "038000402604",
+    "ingredients": "Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Vitamin B1, Vitamin B2, Folic Acid), Water, Vegetable Oil (Soybean, Palm, and/or Canola Oil), Eggs, Contains 2% or less of Leavening (Baking Soda, Sodium Aluminum Phosphate, Monocalcium Phosphate), Sugar, Salt, Whey, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "eggs",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0038000402604": {
+    "product": "Eggo Homestyle Frozen Waffles (10 ct Box)",
+    "brand": "Eggo",
+    "upc": "038000402604",
+    "ingredients": "Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Vitamin B1, Vitamin B2, Folic Acid), Water, Vegetable Oil (Soybean, Palm, and/or Canola Oil), Eggs, Contains 2% or less of Leavening (Baking Soda, Sodium Aluminum Phosphate, Monocalcium Phosphate), Sugar, Salt, Whey, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "eggs",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "030000010402": {
+    "product": "Quaker Quick 1-Minute Oats (42 oz Canister)",
+    "brand": "Quaker",
+    "upc": "030000010402",
+    "ingredients": "100% Whole Grain Rolled Oats.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0030000010402": {
+    "product": "Quaker Quick 1-Minute Oats (42 oz Canister)",
+    "brand": "Quaker",
+    "upc": "030000010402",
+    "ingredients": "100% Whole Grain Rolled Oats.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "016000275348": {
+    "product": "Lucky Charms Gluten Free Marshmallow Cereal",
+    "brand": "General Mills",
+    "upc": "016000275348",
+    "ingredients": "Whole Grain Oats, Sugar, Corn Starch, Modified Corn Starch, Corn Syrup, Dextrose, Contains 2% or less of: Salt, Gelatin, Trisodium Phosphate, Red 40, Yellow 5, Blue 1, Yellow 6, Natural and Artificial Flavor.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "red40",
+      "yellow5",
+      "blue1",
+      "yellow6"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0016000275348": {
+    "product": "Lucky Charms Gluten Free Marshmallow Cereal",
+    "brand": "General Mills",
+    "upc": "016000275348",
+    "ingredients": "Whole Grain Oats, Sugar, Corn Starch, Modified Corn Starch, Corn Syrup, Dextrose, Contains 2% or less of: Salt, Gelatin, Trisodium Phosphate, Red 40, Yellow 5, Blue 1, Yellow 6, Natural and Artificial Flavor.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "red40",
+      "yellow5",
+      "blue1",
+      "yellow6"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
   },
   "014100085485": {
     "product": "Pepperidge Farm Goldfish Cheddar Crackers",
@@ -1032,7 +1366,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "0014100085485": {
     "product": "Pepperidge Farm Goldfish Cheddar Crackers",
@@ -1051,7 +1386,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "024100106850": {
     "product": "Cheez-It Original Baked Snack Crackers",
@@ -1071,7 +1407,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0024100106850": {
     "product": "Cheez-It Original Baked Snack Crackers",
@@ -1091,7 +1428,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "044000031114": {
     "product": "Ritz Original Crackers",
@@ -1109,7 +1447,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0044000031114": {
     "product": "Ritz Original Crackers",
@@ -1127,7 +1466,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "044000032029": {
     "product": "Oreo Chocolate Sandwich Cookies (Original)",
@@ -1146,7 +1486,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "0044000032029": {
     "product": "Oreo Chocolate Sandwich Cookies (Original)",
@@ -1165,7 +1506,48 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
+  },
+  "044000032227": {
+    "product": "Chips Ahoy! Real Chocolate Chip Cookies (Original)",
+    "brand": "Chips Ahoy!",
+    "upc": "044000032227",
+    "ingredients": "Unbleached Enriched Flour, Semisweet Chocolate Chips (Sugar, Chocolate, Cocoa Butter, Dextrose, Milk, Soy Lecithin), Sugar, Canola Oil, Palm Oil, High Fructose Corn Syrup, Leavening, Salt, Natural and Artificial Flavor, Caramel Color.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0044000032227": {
+    "product": "Chips Ahoy! Real Chocolate Chip Cookies (Original)",
+    "brand": "Chips Ahoy!",
+    "upc": "044000032227",
+    "ingredients": "Unbleached Enriched Flour, Semisweet Chocolate Chips (Sugar, Chocolate, Cocoa Butter, Dextrose, Milk, Soy Lecithin), Sugar, Canola Oil, Palm Oil, High Fructose Corn Syrup, Leavening, Salt, Natural and Artificial Flavor, Caramel Color.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
   },
   "044000028268": {
     "product": "belVita Crunchy Blueberry Breakfast Biscuits",
@@ -1182,7 +1564,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0044000028268": {
     "product": "belVita Crunchy Blueberry Breakfast Biscuits",
@@ -1199,7 +1582,78 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
+  },
+  "044000002442": {
+    "product": "Triscuit Original Whole Grain Wheat Crackers",
+    "brand": "Triscuit",
+    "upc": "044000002442",
+    "ingredients": "Whole Grain Wheat, Canola Oil, Sea Salt.",
+    "allergens": [
+      "gluten"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0044000002442": {
+    "product": "Triscuit Original Whole Grain Wheat Crackers",
+    "brand": "Triscuit",
+    "upc": "044000002442",
+    "ingredients": "Whole Grain Wheat, Canola Oil, Sea Salt.",
+    "allergens": [
+      "gluten"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "044000000301": {
+    "product": "Wheat Thins Original Whole Grain Snacks",
+    "brand": "Wheat Thins",
+    "upc": "044000000301",
+    "ingredients": "Whole Grain Wheat Flour, Canola Oil, Sugar, Cornstarch, Malt Syrup, Salt, Refiner's Syrup, Leavening.",
+    "allergens": [
+      "gluten",
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0044000000301": {
+    "product": "Wheat Thins Original Whole Grain Snacks",
+    "brand": "Wheat Thins",
+    "upc": "044000000301",
+    "ingredients": "Whole Grain Wheat Flour, Canola Oil, Sugar, Cornstarch, Malt Syrup, Salt, Refiner's Syrup, Leavening.",
+    "allergens": [
+      "gluten",
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
   },
   "028400199148": {
     "product": "Lay's Classic Potato Chips",
@@ -1214,7 +1668,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "0028400199148": {
     "product": "Lay's Classic Potato Chips",
@@ -1229,7 +1684,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "028400090896": {
     "product": "Doritos Nacho Cheese Flavored Tortilla Chips",
@@ -1252,7 +1708,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0028400090896": {
     "product": "Doritos Nacho Cheese Flavored Tortilla Chips",
@@ -1275,7 +1732,54 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
+  },
+  "028400090858": {
+    "product": "Doritos Cool Ranch Flavored Tortilla Chips",
+    "brand": "Doritos",
+    "upc": "028400090858",
+    "ingredients": "Corn, Vegetable Oil, Salt, Corn Starch, Tomato Powder, Lactose, Whey, Skim Milk, Onion Powder, Sugar, Garlic Powder, Monosodium Glutamate, Maltodextrin, Cheddar Cheese, Dextrose, Malic Acid, Corn Syrup Solids, Buttermilk, Natural and Artificial Flavors, Sodium Acetate, Artificial Color (Red 40, Blue 1, Yellow 5), Spice.",
+    "allergens": [
+      "dairy",
+      "corn"
+    ],
+    "additives_tags": [
+      "msg",
+      "red40",
+      "blue1",
+      "yellow5"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0028400090858": {
+    "product": "Doritos Cool Ranch Flavored Tortilla Chips",
+    "brand": "Doritos",
+    "upc": "028400090858",
+    "ingredients": "Corn, Vegetable Oil, Salt, Corn Starch, Tomato Powder, Lactose, Whey, Skim Milk, Onion Powder, Sugar, Garlic Powder, Monosodium Glutamate, Maltodextrin, Cheddar Cheese, Dextrose, Malic Acid, Corn Syrup Solids, Buttermilk, Natural and Artificial Flavors, Sodium Acetate, Artificial Color (Red 40, Blue 1, Yellow 5), Spice.",
+    "allergens": [
+      "dairy",
+      "corn"
+    ],
+    "additives_tags": [
+      "msg",
+      "red40",
+      "blue1",
+      "yellow5"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
   },
   "028400070560": {
     "product": "Cheetos Crunchy Cheese Flavored Snacks",
@@ -1295,7 +1799,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0028400070560": {
     "product": "Cheetos Crunchy Cheese Flavored Snacks",
@@ -1315,7 +1820,114 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
+  },
+  "028400064088": {
+    "product": "Tostitos Scoops! Tortilla Chips",
+    "brand": "Tostitos",
+    "upc": "028400064088",
+    "ingredients": "Corn, Vegetable Oil (Corn, Canola, and/or Sunflower Oil), and Salt.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0028400064088": {
+    "product": "Tostitos Scoops! Tortilla Chips",
+    "brand": "Tostitos",
+    "upc": "028400064088",
+    "ingredients": "Corn, Vegetable Oil (Corn, Canola, and/or Sunflower Oil), and Salt.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "038000138411": {
+    "product": "Pringles Original Potato Crisps",
+    "brand": "Pringles",
+    "upc": "038000138411",
+    "ingredients": "Dried Potatoes, Vegetable Oil (Corn, Cottonseed, High Oleic Soybean, and/or Sunflower Oil), Degerminated Yellow Corn Flour, Cornstarch, Rice Flour, Maltodextrin, Mono- and Diglycerides, Salt, Wheat Starch.",
+    "allergens": [
+      "gluten",
+      "corn",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0038000138411": {
+    "product": "Pringles Original Potato Crisps",
+    "brand": "Pringles",
+    "upc": "038000138411",
+    "ingredients": "Dried Potatoes, Vegetable Oil (Corn, Cottonseed, High Oleic Soybean, and/or Sunflower Oil), Degerminated Yellow Corn Flour, Cornstarch, Rice Flour, Maltodextrin, Mono- and Diglycerides, Salt, Wheat Starch.",
+    "allergens": [
+      "gluten",
+      "corn",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "028400014076": {
+    "product": "Fritos Original Corn Chips",
+    "brand": "Fritos",
+    "upc": "028400014076",
+    "ingredients": "Corn, Corn Oil, and Salt.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0028400014076": {
+    "product": "Fritos Original Corn Chips",
+    "brand": "Fritos",
+    "upc": "028400014076",
+    "ingredients": "Corn, Corn Oil, and Salt.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
   },
   "051000012517": {
     "product": "Campbell's Condensed Tomato Soup (10.75 oz Can)",
@@ -1332,7 +1944,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "0051000012517": {
     "product": "Campbell's Condensed Tomato Soup (10.75 oz Can)",
@@ -1349,7 +1962,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "051000010018": {
     "product": "Campbell's Condensed Chicken Noodle Soup (10.75 oz Can)",
@@ -1369,7 +1983,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0051000010018": {
     "product": "Campbell's Condensed Chicken Noodle Soup (10.75 oz Can)",
@@ -1389,7 +2004,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "051000012616": {
     "product": "Campbell's Condensed Cream of Mushroom Soup (10.5 oz Can)",
@@ -1410,7 +2026,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0051000012616": {
     "product": "Campbell's Condensed Cream of Mushroom Soup (10.5 oz Can)",
@@ -1431,7 +2048,48 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
+  },
+  "051000012715": {
+    "product": "Campbell's Condensed Cream of Chicken Soup",
+    "brand": "Campbell's",
+    "upc": "051000012715",
+    "ingredients": "Chicken Stock, Modified Food Starch, Vegetable Oil, Wheat Flour, Chicken Meat, Contains Less Than 2% Of: Salt, Dehydrated Mechanically Separated Chicken, Monosodium Glutamate, Soy Protein Concentrate, Water, Yeast Extract, Flavoring, Beta Carotene For Color.",
+    "allergens": [
+      "gluten",
+      "soy"
+    ],
+    "additives_tags": [
+      "msg"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0051000012715": {
+    "product": "Campbell's Condensed Cream of Chicken Soup",
+    "brand": "Campbell's",
+    "upc": "051000012715",
+    "ingredients": "Chicken Stock, Modified Food Starch, Vegetable Oil, Wheat Flour, Chicken Meat, Contains Less Than 2% Of: Salt, Dehydrated Mechanically Separated Chicken, Monosodium Glutamate, Soy Protein Concentrate, Water, Yeast Extract, Flavoring, Beta Carotene For Color.",
+    "allergens": [
+      "gluten",
+      "soy"
+    ],
+    "additives_tags": [
+      "msg"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
   },
   "021000658831": {
     "product": "Kraft Original Macaroni & Cheese Dinner (7.25 oz Box)",
@@ -1450,7 +2108,8 @@
       "Target",
       "Aldi",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "0021000658831": {
     "product": "Kraft Original Macaroni & Cheese Dinner (7.25 oz Box)",
@@ -1469,7 +2128,118 @@
       "Target",
       "Aldi",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
+  },
+  "021000658930": {
+    "product": "Velveeta Shells & Cheese Original Dinner",
+    "brand": "Velveeta",
+    "upc": "021000658930",
+    "ingredients": "Enriched Macaroni Product (Wheat Flour, Niacin, Ferrous Sulfate, Thiamin Mononitrate, Riboflavin, Folic Acid), Cheese Sauce (Whey, Cheddar Cheese [Milk, Cheese Culture, Salt, Enzymes], Canola Oil, Whey Protein Concentrate, Milk, Milk Protein Concentrate, Sodium Phosphate, Contains Less Than 2% Of Salt, Lactic Acid, Sodium Alginate, Sorbic Acid as a Preservative, Milfat, Oleoresin Paprika [Color], Annatto Extract [Color], Natural Flavor).",
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0021000658930": {
+    "product": "Velveeta Shells & Cheese Original Dinner",
+    "brand": "Velveeta",
+    "upc": "021000658930",
+    "ingredients": "Enriched Macaroni Product (Wheat Flour, Niacin, Ferrous Sulfate, Thiamin Mononitrate, Riboflavin, Folic Acid), Cheese Sauce (Whey, Cheddar Cheese [Milk, Cheese Culture, Salt, Enzymes], Canola Oil, Whey Protein Concentrate, Milk, Milk Protein Concentrate, Sodium Phosphate, Contains Less Than 2% Of Salt, Lactic Acid, Sodium Alginate, Sorbic Acid as a Preservative, Milfat, Oleoresin Paprika [Color], Annatto Extract [Color], Natural Flavor).",
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "064144043132": {
+    "product": "Chef Boyardee Beef Ravioli in Tomato & Meat Sauce",
+    "brand": "Chef Boyardee",
+    "upc": "064144043132",
+    "ingredients": "Tomatoes (Tomato Puree, Water), Water, Enriched Wheat Flour, Beef, Crackermeal, High Fructose Corn Syrup, Less than 2% of: Salt, Textured Soy Protein Concentrate, Modified Corn Starch, Soybean Oil, Carrots, Onions, Caramel Color, Flavorings, Enzyme Modified Cheese.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0064144043132": {
+    "product": "Chef Boyardee Beef Ravioli in Tomato & Meat Sauce",
+    "brand": "Chef Boyardee",
+    "upc": "064144043132",
+    "ingredients": "Tomatoes (Tomato Puree, Water), Water, Enriched Wheat Flour, Beef, Crackermeal, High Fructose Corn Syrup, Less than 2% of: Salt, Textured Soy Protein Concentrate, Modified Corn Starch, Soybean Oil, Carrots, Onions, Caramel Color, Flavorings, Enzyme Modified Cheese.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "039400016144": {
+    "product": "Bush's Best Original Baked Beans (28 oz Can)",
+    "brand": "Bush's Best",
+    "upc": "039400016144",
+    "ingredients": "Prepared Navy Beans, Water, Brown Sugar, Sugar, Contains 2% or Less of: Cured Bacon, Salt, Mustard (Water, Vinegar, Mustard Seed, Salt, Turmeric, Spices), Modified Corn Starch, Onion Powder, Caramel Color, Spices, Garlic Powder, Natural Flavor.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0039400016144": {
+    "product": "Bush's Best Original Baked Beans (28 oz Can)",
+    "brand": "Bush's Best",
+    "upc": "039400016144",
+    "ingredients": "Prepared Navy Beans, Water, Brown Sugar, Sugar, Contains 2% or Less of: Cured Bacon, Salt, Mustard (Water, Vinegar, Mustard Seed, Salt, Turmeric, Spices), Modified Corn Starch, Onion Powder, Caramel Color, Spices, Garlic Powder, Natural Flavor.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
   },
   "013000006408": {
     "product": "Heinz Tomato Ketchup (20 oz / 32 oz Squeeze Bottle)",
@@ -1486,7 +2256,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "0013000006408": {
     "product": "Heinz Tomato Ketchup (20 oz / 32 oz Squeeze Bottle)",
@@ -1503,7 +2274,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "041500000251": {
     "product": "French's Classic Yellow Mustard",
@@ -1517,7 +2289,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0041500000251": {
     "product": "French's Classic Yellow Mustard",
@@ -1531,7 +2304,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "048001005555": {
     "product": "Hellmann's Real Mayonnaise (30 oz Jar)",
@@ -1548,7 +2322,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0048001005555": {
     "product": "Hellmann's Real Mayonnaise (30 oz Jar)",
@@ -1565,7 +2340,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "013409351400": {
     "product": "Sweet Baby Ray's Barbecue Sauce (Original)",
@@ -1583,7 +2359,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0013409351400": {
     "product": "Sweet Baby Ray's Barbecue Sauce (Original)",
@@ -1601,7 +2378,80 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
+  },
+  "071100002900": {
+    "product": "Hidden Valley Original Ranch Dressing (16 oz Bottle)",
+    "brand": "Hidden Valley",
+    "upc": "071100002900",
+    "ingredients": "Vegetable Oil (Soybean and/or Canola), Water, Egg Yolk, Sugar, Salt, Cultured Nonfat Buttermilk, Natural Flavors, Less than 1% of: Spices, Dried Garlic, Dried Onion, Vinegar, Phosphoric Acid, Xanthan Gum, Modified Food Starch, Monosodium Glutamate, Artificial Flavors, Disodium Phosphate, Sorbic Acid and Calcium Disodium EDTA (to Preserve Freshness), Disodium Inosinate and Guanylate.",
+    "allergens": [
+      "eggs",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [
+      "msg"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0071100002900": {
+    "product": "Hidden Valley Original Ranch Dressing (16 oz Bottle)",
+    "brand": "Hidden Valley",
+    "upc": "071100002900",
+    "ingredients": "Vegetable Oil (Soybean and/or Canola), Water, Egg Yolk, Sugar, Salt, Cultured Nonfat Buttermilk, Natural Flavors, Less than 1% of: Spices, Dried Garlic, Dried Onion, Vinegar, Phosphoric Acid, Xanthan Gum, Modified Food Starch, Monosodium Glutamate, Artificial Flavors, Disodium Phosphate, Sorbic Acid and Calcium Disodium EDTA (to Preserve Freshness), Disodium Inosinate and Guanylate.",
+    "allergens": [
+      "eggs",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [
+      "msg"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "051000025494": {
+    "product": "Prego Traditional Italian Tomato Sauce (24 oz Jar)",
+    "brand": "Prego",
+    "upc": "051000025494",
+    "ingredients": "Tomato Puree (Water, Tomato Paste), Diced Tomatoes In Tomato Juice, Canola Oil, Sugar, Contains Less Than 1% Of: Salt, Dehydrated Onions, Spices, Citric Acid, Dehydrated Garlic, Onion Extract, Garlic Extract.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0051000025494": {
+    "product": "Prego Traditional Italian Tomato Sauce (24 oz Jar)",
+    "brand": "Prego",
+    "upc": "051000025494",
+    "ingredients": "Tomato Puree (Water, Tomato Paste), Diced Tomatoes In Tomato Juice, Canola Oil, Sugar, Contains Less Than 1% Of: Salt, Dehydrated Onions, Spices, Citric Acid, Dehydrated Garlic, Onion Extract, Garlic Extract.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
   },
   "099900720453": {
     "product": "Butterfinger Fun Size Candy Bars (2.6 oz Multi-Pack)",
@@ -1622,7 +2472,8 @@
       "Target",
       "CVS",
       "Walgreens"
-    ]
+    ],
+    "isRecalled": false
   },
   "0099900720453": {
     "product": "Butterfinger Fun Size Candy Bars (2.6 oz Multi-Pack)",
@@ -1643,7 +2494,8 @@
       "Target",
       "CVS",
       "Walgreens"
-    ]
+    ],
+    "isRecalled": false
   },
   "034000004409": {
     "product": "Reese's Milk Chocolate Peanut Butter Cups",
@@ -1664,7 +2516,8 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
   },
   "0034000004409": {
     "product": "Reese's Milk Chocolate Peanut Butter Cups",
@@ -1685,7 +2538,44 @@
       "Walmart",
       "Target",
       "Giant Eagle"
-    ]
+    ],
+    "isRecalled": false
+  },
+  "034000002405": {
+    "product": "Hershey's Milk Chocolate Candy Bar",
+    "brand": "Hershey's",
+    "upc": "034000002405",
+    "ingredients": "Milk Chocolate (Sugar, Milk, Chocolate, Cocoa Butter, Milk Fat, Lecithin [Soy], PGPR, Natural Flavor).",
+    "allergens": [
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0034000002405": {
+    "product": "Hershey's Milk Chocolate Candy Bar",
+    "brand": "Hershey's",
+    "upc": "034000002405",
+    "ingredients": "Milk Chocolate (Sugar, Milk, Chocolate, Cocoa Butter, Milk Fat, Lecithin [Soy], PGPR, Natural Flavor).",
+    "allergens": [
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
   },
   "040000002161": {
     "product": "Snickers Full Size Milk Chocolate Candy Bar",
@@ -1705,7 +2595,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0040000002161": {
     "product": "Snickers Full Size Milk Chocolate Candy Bar",
@@ -1725,7 +2616,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "040000004240": {
     "product": "M&M's Milk Chocolate Candies",
@@ -1749,7 +2641,8 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
   },
   "0040000004240": {
     "product": "M&M's Milk Chocolate Candies",
@@ -1773,6 +2666,223 @@
       "Kroger",
       "Walmart",
       "Target"
-    ]
+    ],
+    "isRecalled": false
+  },
+  "034000002467": {
+    "product": "Kit Kat Crisp Wafers in Milk Chocolate",
+    "brand": "Kit Kat",
+    "upc": "034000002467",
+    "ingredients": "Sugar, Wheat Flour, Skim Milk, Cocoa Butter, Chocolate, Vegetable Oil (Palm Kernel Oil, Palm Oil), Milk Fat, Lactose (Milk), Contains 2% or Less of: Lecithin (Soy), PGPR, Vanillin (Artificial Flavor), Salt, Yeast, Baking Soda.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0034000002467": {
+    "product": "Kit Kat Crisp Wafers in Milk Chocolate",
+    "brand": "Kit Kat",
+    "upc": "034000002467",
+    "ingredients": "Sugar, Wheat Flour, Skim Milk, Cocoa Butter, Chocolate, Vegetable Oil (Palm Kernel Oil, Palm Oil), Milk Fat, Lactose (Milk), Contains 2% or Less of: Lecithin (Soy), PGPR, Vanillin (Artificial Flavor), Salt, Yeast, Baking Soda.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "049000028904": {
+    "product": "Coca-Cola Original Taste (12 fl oz Can)",
+    "brand": "Coca-Cola",
+    "upc": "049000028904",
+    "ingredients": "Carbonated Water, High Fructose Corn Syrup, Caramel Color, Phosphoric Acid, Natural Flavors, Caffeine.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0049000028904": {
+    "product": "Coca-Cola Original Taste (12 fl oz Can)",
+    "brand": "Coca-Cola",
+    "upc": "049000028904",
+    "ingredients": "Carbonated Water, High Fructose Corn Syrup, Caramel Color, Phosphoric Acid, Natural Flavors, Caffeine.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "049000028911": {
+    "product": "Diet Coke No Calorie Soda (12 fl oz Can)",
+    "brand": "Diet Coke",
+    "upc": "049000028911",
+    "ingredients": "Carbonated Water, Caramel Color, Aspartame, Phosphoric Acid, Potassium Benzoate (to Protect Taste), Natural Flavors, Citric Acid, Caffeine.",
+    "allergens": [],
+    "additives_tags": [
+      "potassium_benzoate"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0049000028911": {
+    "product": "Diet Coke No Calorie Soda (12 fl oz Can)",
+    "brand": "Diet Coke",
+    "upc": "049000028911",
+    "ingredients": "Carbonated Water, Caramel Color, Aspartame, Phosphoric Acid, Potassium Benzoate (to Protect Taste), Natural Flavors, Citric Acid, Caffeine.",
+    "allergens": [],
+    "additives_tags": [
+      "potassium_benzoate"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "012000000133": {
+    "product": "Pepsi Cola Soda (12 fl oz Can)",
+    "brand": "Pepsi",
+    "upc": "012000000133",
+    "ingredients": "Carbonated Water, High Fructose Corn Syrup, Caramel Color, Sugar, Phosphoric Acid, Caffeine, Citric Acid, Natural Flavor.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0012000000133": {
+    "product": "Pepsi Cola Soda (12 fl oz Can)",
+    "brand": "Pepsi",
+    "upc": "012000000133",
+    "ingredients": "Carbonated Water, High Fructose Corn Syrup, Caramel Color, Sugar, Phosphoric Acid, Caffeine, Citric Acid, Natural Flavor.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "049000028928": {
+    "product": "Sprite Lemon-Lime Soda (12 fl oz Can)",
+    "brand": "Sprite",
+    "upc": "049000028928",
+    "ingredients": "Carbonated Water, High Fructose Corn Syrup, Citric Acid, Natural Flavors, Sodium Citrate, Sodium Benzoate (to Protect Taste).",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "sodium_benzoate"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0049000028928": {
+    "product": "Sprite Lemon-Lime Soda (12 fl oz Can)",
+    "brand": "Sprite",
+    "upc": "049000028928",
+    "ingredients": "Carbonated Water, High Fructose Corn Syrup, Citric Acid, Natural Flavors, Sodium Citrate, Sodium Benzoate (to Protect Taste).",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "sodium_benzoate"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "052000338776": {
+    "product": "Gatorade Cool Blue Thirst Quencher (28 fl oz)",
+    "brand": "Gatorade",
+    "upc": "052000338776",
+    "ingredients": "Water, Sugar, Dextrose, Citric Acid, Natural and Artificial Flavor, Salt, Sodium Citrate, Monopotassium Phosphate, Modified Food Starch, Glycerol Ester of Rosin, Blue 1.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "blue1"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0052000338776": {
+    "product": "Gatorade Cool Blue Thirst Quencher (28 fl oz)",
+    "brand": "Gatorade",
+    "upc": "052000338776",
+    "ingredients": "Water, Sugar, Dextrose, Citric Acid, Natural and Artificial Flavor, Salt, Sodium Citrate, Monopotassium Phosphate, Modified Food Starch, Glycerol Ester of Rosin, Blue 1.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "blue1"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
   }
 }
