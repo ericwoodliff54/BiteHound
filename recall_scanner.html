@@ -1191,17 +1191,17 @@
 
     // Allergen Options (Full FDA Big 9 + Gluten, Corn & Sulfites)
     const ALLERGEN_OPTIONS = [
-      { id: 'gluten', name: 'Gluten / Wheat', icon: '🌾', desc: 'Wheat, barley, rye, malt, flour, semolina' },
-      { id: 'dairy', name: 'Dairy / Milk', icon: '🥛', desc: 'Milk, whey, lactose, casein, cheese, butter' },
-      { id: 'peanuts', name: 'Peanuts', icon: '🥜', desc: 'Peanut butter, peanut flour, peanut oil' },
-      { id: 'treenuts', name: 'Tree Nuts', icon: '🌰', desc: 'Almonds, cashews, walnuts, pecans, pistachios' },
-      { id: 'soy', name: 'Soy', icon: '🌿', desc: 'Soy lecithin, soybeans, tofu, edamame' },
-      { id: 'eggs', name: 'Eggs', icon: '🥚', desc: 'Egg whites, yolk, albumin, mayonnaise' },
-      { id: 'shellfish', name: 'Shellfish', icon: '🦐', desc: 'Shrimp, crab, lobster, prawns, crawfish' },
-      { id: 'fish', name: 'Fish', icon: '🐟', desc: 'Salmon, tuna, cod, tilapia, halibut, anchovies' },
-      { id: 'sesame', name: 'Sesame', icon: '🌱', desc: 'Sesame seeds, tahini, sesame oil, benne' },
-      { id: 'corn', name: 'Corn', icon: '🌽', desc: 'Cornstarch, corn syrup, corn meal, dextrose' },
-      { id: 'sulfites', name: 'Sulfites', icon: '🍷', desc: 'Sulfur dioxide, sodium bisulfite, dried fruit' }
+      { id: 'gluten', name: 'Gluten / Wheat', icon: '🌾', desc: 'Wheat, barley, rye & flour' },
+      { id: 'dairy', name: 'Dairy / Milk', icon: '🥛', desc: 'Milk, whey, cheese & butter' },
+      { id: 'peanuts', name: 'Peanuts', icon: '🥜', desc: 'Peanuts, peanut butter & oils' },
+      { id: 'treenuts', name: 'Tree Nuts', icon: '🌰', desc: 'Almonds, walnuts & cashews' },
+      { id: 'soy', name: 'Soy', icon: '🌿', desc: 'Soy lecithin, soybeans & tofu' },
+      { id: 'eggs', name: 'Eggs', icon: '🥚', desc: 'Egg whites, yolks & mayo' },
+      { id: 'shellfish', name: 'Shellfish', icon: '🦐', desc: 'Shrimp, crab & lobster' },
+      { id: 'fish', name: 'Fish', icon: '🐟', desc: 'Salmon, tuna & finfish' },
+      { id: 'sesame', name: 'Sesame', icon: '🌱', desc: 'Sesame seeds & tahini' },
+      { id: 'corn', name: 'Corn', icon: '🌽', desc: 'Corn syrup, starch & meal' },
+      { id: 'sulfites', name: 'Sulfites', icon: '🍷', desc: 'Sulfur dioxide & bisulfites' }
     ];
     // Comprehensive Index of Scrutinized Food Additives & Synthetic Dyes (Pro Guardrail)
     const ADDITIVES_DATABASE = [
@@ -4341,7 +4341,7 @@
               <span class="text-3xl shrink-0">${opt.icon}</span>
               <div class="min-w-0">
                 <span class="font-bold text-sm sm:text-base text-white block leading-tight">${opt.name}</span>
-                <span class="text-xs sm:text-sm text-slate-300 block truncate mt-0.5">${opt.desc}</span>
+                <span class="text-xs sm:text-sm text-slate-300 block leading-tight mt-0.5">${opt.desc}</span>
               </div>
             </div>
             ${lockIcon}
