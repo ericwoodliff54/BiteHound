@@ -3372,40 +3372,51 @@
           }
         }
 
-        // Comprehensive Allergen Parsing across all retrieved fields
+        // Comprehensive Allergen Parsing across all retrieved fields (including scientific & industrial derivatives)
         const combinedFoodText = `${productName} ${brandName} ${ingredientsSummary} ${(offProductData?.allergens || '')} ${(offProductData?.allergens_tags || []).join(' ')}`.toLowerCase();
 
-        if (/gluten|wheat|barley|rye|malt|flour|bread|pasta|semolina|spelt/.test(combinedFoodText)) {
+        // 1. Gluten & Wheat (Includes farro, durum, graham, kamut, triticale, spelt, semolina, malt extract)
+        if (/gluten|wheat|barley|rye|malt|flour|bread|pasta|semolina|spelt|farro|graham|kamut|triticale|durum|couscous|einkorn|emmer/.test(combinedFoodText)) {
           if (!detectedAllergenIds.includes('gluten')) detectedAllergenIds.push('gluten');
         }
-        if (/milk|dairy|lactose|cheese|whey|butter|cream|casein|yogurt/.test(combinedFoodText)) {
+        // 2. Dairy & Milk (Includes casein, caseinate, sodium/calcium caseinate, lactalbumin, ghee, curds, butterfat, buttermilk)
+        if (/milk|dairy|lactose|cheese|whey|butter|cream|casein|caseinate|yogurt|ghee|curds|butterfat|buttermilk|lactalbumin|lactoglobulin/.test(combinedFoodText)) {
           if (!detectedAllergenIds.includes('dairy')) detectedAllergenIds.push('dairy');
         }
-        if (/peanut/.test(combinedFoodText)) {
+        // 3. Peanuts (Includes peanut butter, peanut flour, peanut oil, ground roasted peanuts)
+        if (/peanut|arachis/.test(combinedFoodText)) {
           if (!detectedAllergenIds.includes('peanuts')) detectedAllergenIds.push('peanuts');
         }
-        if (/almond|cashew|walnut|pecan|pistachio|hazelnut|macadamia/.test(combinedFoodText)) {
+        // 4. Tree Nuts (Includes almonds, cashews, walnuts, pecans, pistachios, hazelnuts/filberts, macadamias, pine nuts, chestnuts, brazil nuts)
+        if (/almond|cashew|walnut|pecan|pistachio|hazelnut|filbert|macadamia|pine\s*nut|pignoli|chestnut|brazil\s*nut|praline/.test(combinedFoodText)) {
           if (!detectedAllergenIds.includes('treenuts')) detectedAllergenIds.push('treenuts');
         }
-        if (/soy|soya|soybean|tofu|edamame|lecithin/.test(combinedFoodText)) {
+        // 5. Soy (Includes soy lecithin, soybeans, soya, edamame, tofu, tempeh, miso, tamari, shoyu, textured vegetable protein, hydrolyzed soy)
+        if (/soy|soya|soybean|tofu|edamame|lecithin|tempeh|miso|tamari|shoyu|tvp/.test(combinedFoodText)) {
           if (!detectedAllergenIds.includes('soy')) detectedAllergenIds.push('soy');
         }
-        if (/egg|albumin|yolk|mayonnaise/.test(combinedFoodText)) {
+        // 6. Eggs (Includes egg whites, yolk, albumin, ovalbumin, lysozyme, meringue, mayonnaise)
+        if (/egg|albumin|ovalbumin|yolk|mayonnaise|lysozyme|meringue|ovomucin/.test(combinedFoodText)) {
           if (!detectedAllergenIds.includes('eggs')) detectedAllergenIds.push('eggs');
         }
-        if (/shrimp|crab|lobster|prawn|clam|mussel|oyster|scallop|crustacean/.test(combinedFoodText)) {
+        // 7. Shellfish & Crustaceans (Includes shrimp, prawn, crab, lobster, crawfish/crayfish, clam, mussel, oyster, scallop, krill)
+        if (/shrimp|crab|lobster|prawn|clam|mussel|oyster|scallop|crustacean|crawfish|crayfish|krill/.test(combinedFoodText)) {
           if (!detectedAllergenIds.includes('shellfish')) detectedAllergenIds.push('shellfish');
         }
-        if (/fish|finfish|salmon|tuna|cod|tilapia|halibut|pollock|anchov|trout|haddock|sardine/.test(combinedFoodText)) {
+        // 8. Fish & Finfish (Includes salmon, tuna, cod, tilapia, halibut, pollock, anchovy, trout, haddock, sardine, bass, mackerel, fish sauce, worcestershire)
+        if (/fish|finfish|salmon|tuna|cod|tilapia|halibut|pollock|anchov|trout|haddock|sardine|mackerel|snapper|fish\s*sauce|worcestershire/.test(combinedFoodText)) {
           if (!detectedAllergenIds.includes('fish')) detectedAllergenIds.push('fish');
         }
-        if (/sesame|tahini|benne|sesamum/.test(combinedFoodText)) {
+        // 9. Sesame (Includes tahini, benne, sesamum, gingelly, halvah, sesame seeds, sesame oil)
+        if (/sesame|tahini|benne|sesamum|gingelly|halvah/.test(combinedFoodText)) {
           if (!detectedAllergenIds.includes('sesame')) detectedAllergenIds.push('sesame');
         }
-        if (/corn|cornstarch|corn syrup|maize|dextrose/.test(combinedFoodText)) {
+        // 10. Corn (Includes cornstarch, corn syrup, corn meal, maize, dextrose, dextrin, maltodextrin, high fructose corn syrup)
+        if (/corn|cornstarch|corn\s*syrup|maize|dextrose|dextrin|maltodextrin|hfcs/.test(combinedFoodText)) {
           if (!detectedAllergenIds.includes('corn')) detectedAllergenIds.push('corn');
         }
-        if (/sulfite|sulphite|sulfur dioxide|bisulfite|metabisulfite/.test(combinedFoodText)) {
+        // 11. Sulfites (Includes sulfur dioxide, potassium/sodium bisulfite, potassium/sodium metabisulfite)
+        if (/sulfite|sulphite|sulfur\s*dioxide|bisulfite|metabisulfite/.test(combinedFoodText)) {
           if (!detectedAllergenIds.includes('sulfites')) detectedAllergenIds.push('sulfites');
         }
 
@@ -3452,7 +3463,7 @@
             for (const q of fdaQueries) {
               if (isRecalled) break;
               const fdaCtrl = new AbortController();
-              const fdaTimer = setTimeout(() => fdaCtrl.abort(), 3500);
+              const fdaTimer = setTimeout(() => fdaCtrl.abort(), 6000); // 6s window for mobile cellular connections
               const fdaRes = await fetch(`https://api.fda.gov/food/enforcement.json?${q}`, { signal: fdaCtrl.signal });
               clearTimeout(fdaTimer);
 
@@ -3481,14 +3492,19 @@
                     if (!isNaN(dObj)) fdaDateStr = dObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
                   }
 
-                  // 1. Definite UPC match in FDA code info or product description
+                  // 1. Definite Primary UPC match in FDA code info or product description
                   const hasCode = codeInfo.includes(code) || desc.includes(code);
 
-                  // 2. High-precision distinctive product line matching
-                  const genericFoodTerms = new Set(['chocolate', 'candy', 'snack', 'snacks', 'organic', 'whole', 'slices', 'pack', 'package', 'food', 'mini', 'minis', 'classic', 'original', 'sweet', 'flavor', 'treat', 'butter', 'finger', 'crisp', 'bars', 'drink', 'sauce', 'cheese', 'white', 'fresh', 'water', 'roast', 'bites']);
-                  const specificProdWords = productName.toLowerCase().split(/\s+/).filter(w => w.length >= 4 && !genericFoodTerms.has(w));
+                  // 2. High-Precision Tier 2 Brand & Variety Matcher (eliminates brand over-matching across different product lines)
+                  const genericStopWords = new Set(['food', 'foods', 'brand', 'brands', 'item', 'product', 'products', 'pack', 'package', 'organic', 'classic', 'original', 'natural', 'flavor', 'flavored', 'treat', 'snack', 'snacks', 'slices', 'sliced', 'whole', 'fresh', 'mini', 'minis', 'size', 'family', 'ounce']);
+                  const specificProdWords = productName.toLowerCase().split(/\s+/).filter(w => w.length >= 4 && !genericStopWords.has(w));
+                  const matchingWords = specificProdWords.filter(w => desc.includes(w));
                   
-                  const hasSpecificProdTitle = specificProdWords.length > 0 && specificProdWords.some(w => desc.includes(w));
+                  // Require at least 2 distinctive variety words (or 100% of distinctive words if only 1 exists)
+                  const hasSpecificProdTitle = specificProdWords.length > 0 && (
+                    (specificProdWords.length === 1 && matchingWords.length === 1) ||
+                    (specificProdWords.length >= 2 && matchingWords.length >= 2)
+                  );
                   const hasBrandMatch = (brandName.length >= 3 && brandName !== 'Grocery Brand') && (firm.includes(brandName.toLowerCase()) || desc.includes(brandName.toLowerCase()));
 
                   if (hasCode) {
@@ -3687,6 +3703,15 @@
 
       const masterHeaderHtml = `
         <div class="rounded-2xl border border-slate-800 bg-slate-900/95 p-4 shadow-xl space-y-3">
+          ${(typeof navigator !== 'undefined' && navigator.onLine === false) ? `
+            <div class="px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-[11px] text-slate-300 flex items-center justify-between">
+              <span class="flex items-center gap-1.5">
+                <span>📶</span>
+                <span>Offline Supermarket Mode • Auditing against Store-Ready FDA Cache</span>
+              </span>
+              <span class="text-[9px] font-bold text-sky-400 uppercase tracking-wider">Local Wire</span>
+            </div>
+          ` : ''}
           <div class="flex items-start justify-between gap-3 border-b border-slate-800/80 pb-3">
             <div class="min-w-0">
               <span class="text-[10px] font-mono tracking-widest text-sky-400 uppercase font-bold block mb-0.5">SCANNED PRODUCT IDENTIFIED</span>
