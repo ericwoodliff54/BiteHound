@@ -2935,7 +2935,7 @@
       cameraPlaceholder.classList.remove('hidden');
     }
 
-    // Photo file scanner
+    // Photo file scanner (Upload UPC) - Supports immediate consecutive uploads without getting locked
     barcodeFileInput.addEventListener('change', async (e) => {
       if (!e.target.files || e.target.files.length === 0) return;
       const file = e.target.files[0];
@@ -2944,11 +2944,25 @@
         showScannerMessage("Analyzing uploaded barcode photo...");
         const decodedText = await html5QrCode.scanFile(file, true);
         hideScannerMessage();
-        e.target.value = '';
-        onBarcodeDetected(decodedText);
+        e.target.value = ''; // Reset input so same file can be uploaded consecutively
+
+        // Always unlock scanning locks for deliberate user file uploads
+        isScanningLocked = false;
+        lastScannedCode = null;
+        lastScanTimestamp = 0;
+
+        triggerHaptic([80, 40, 80]);
+        sound.playScanBeep();
+        upcInput.value = decodedText;
+        clearBtn.classList.remove('hidden');
+
+        // Directly process uploaded barcode without being blocked by camera frame debouncing
+        await processUPC(decodedText);
       } catch (err) {
         e.target.value = '';
-        showScannerMessage("Could not detect a standard barcode in that image. Ensure crisp focus or enter digits manually.");
+        hideScannerMessage();
+        console.warn("File scan error:", err);
+        showScannerMessage("Could not detect a clear barcode in that image. Ensure crisp focus or enter digits manually.");
       }
     });
 
