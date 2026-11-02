@@ -918,6 +918,15 @@
         </button>
         <button 
           type="button" 
+          id="shareFamilyVipBtn" 
+          class="w-full min-h-[48px] py-3 px-4 rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-2"
+          title="Share an instant unlocked VIP Pro link with your spouse or family members"
+        >
+          <span class="text-sm">👨‍👩‍👧</span>
+          <span>Share Family VIP Pass (Free Unlocked Link)</span>
+        </button>
+        <button 
+          type="button" 
           id="toggleTesterModeBtn" 
           class="w-full py-1.5 px-3 rounded-lg border border-slate-800 hover:border-slate-700 bg-slate-950/60 text-slate-400 hover:text-amber-300 text-[10px] font-mono transition flex items-center justify-center gap-1.5"
           title="Quickly test how the app looks for free vs paid users"
@@ -1205,10 +1214,77 @@
     let isPlusActive = false;
     let plusStatusType = 'free'; // 'free', 'trial', 'paid', or 'expired'
     let trialDaysRemaining = 0;
+    let justUnlockedViaUrl = false;
+
+    // Bulletproof Family VIP Link Detector (Executes BEFORE checkPlusStatus)
+    function checkFamilyAccessUrl() {
+      try {
+        const href = (window.location.href || '').toLowerCase();
+        const search = (window.location.search || '').toLowerCase();
+        const hash = (window.location.hash || '').toLowerCase();
+        const params = new URLSearchParams(window.location.search);
+
+        const vipParam = (params.get('vip') || '').toLowerCase();
+        const promoParam = (params.get('promo') || '').toLowerCase();
+        const codeParam = (params.get('code') || '').toLowerCase();
+        const familyParam = (params.get('family') || '').toLowerCase();
+        const proParam = (params.get('pro') || '').toLowerCase();
+
+        // Detect all plausible variations of family/vip/pro links
+        const isVip = (
+          vipParam === 'family' || vipParam === 'pro' || vipParam === 'true' || vipParam === '1' || vipParam === 'tester' || vipParam === 'vip' ||
+          familyParam === 'vip' || familyParam === 'true' || familyParam === '1' || familyParam === 'pro' ||
+          proParam === 'family' || proParam === 'vip' || proParam === 'true' || proParam === '1' ||
+          codeParam === 'family' || codeParam === 'vip' || codeParam === 'pro' || codeParam === 'tester' ||
+          promoParam === 'family' || promoParam === 'vip' || promoParam === 'pro' ||
+          search.includes('vip=family') || search.includes('vip=pro') || search.includes('vip=true') || search.includes('vip=1') ||
+          search.includes('family=vip') || search.includes('pro=vip') || search.includes('code=family') ||
+          hash.includes('vip=family') || hash.includes('family') || hash.includes('vip') || hash.includes('pro') ||
+          href.includes('vip=family') || href.includes('vip=pro') || href.includes('family=vip')
+        );
+
+        if (isVip) {
+          isPlusActive = true;
+          plusStatusType = 'paid';
+          trialDaysRemaining = 0;
+          justUnlockedViaUrl = true;
+
+          // Multi-layer persistence: localStorage + sessionStorage + persistent cookie
+          try {
+            localStorage.setItem('safebite_pro_active', 'paid');
+            localStorage.setItem('safebite_plus_active', 'paid');
+            sessionStorage.setItem('safebite_pro_active', 'paid');
+            document.cookie = "safebite_pro_vip=paid; max-age=315360000; path=/; SameSite=Lax";
+          } catch (e) {}
+
+          // Also clean URL query without page reload so refreshing maintains clean history
+          if (window.history && window.history.replaceState) {
+            const cleanUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, cleanUrl);
+          }
+        }
+      } catch (e) {}
+    }
+
+    // Run VIP check first so localStorage is populated before checkPlusStatus runs!
+    checkFamilyAccessUrl();
 
     function checkPlusStatus() {
       try {
-        const savedPro = localStorage.getItem('safebite_pro_active') || localStorage.getItem('safebite_plus_active');
+        // Check localStorage, sessionStorage, and persistent cookie
+        let savedPro = null;
+        try {
+          savedPro = localStorage.getItem('safebite_pro_active') || localStorage.getItem('safebite_plus_active') || sessionStorage.getItem('safebite_pro_active');
+        } catch (e) {}
+
+        if (!savedPro && document.cookie && document.cookie.includes('safebite_pro_vip=paid')) {
+          savedPro = 'paid';
+          try {
+            localStorage.setItem('safebite_pro_active', 'paid');
+            localStorage.setItem('safebite_plus_active', 'paid');
+          } catch (e) {}
+        }
+
         const trialStart = localStorage.getItem('safebite_trial_start');
 
         if (savedPro === 'paid' || savedPro === 'true') {
@@ -1606,22 +1682,7 @@
 
     // Paywall Handlers
         // Family VIP Link (?vip=family) & Promo Code Redeemer
-    function checkFamilyAccessUrl() {
-      try {
-        const params = new URLSearchParams(window.location.search);
-        const code = (params.get('vip') || params.get('promo') || params.get('code') || '').toLowerCase();
-        if (code === 'family' || code === 'tester' || code === 'vip') {
-          isPlusActive = true;
-          plusStatusType = 'paid';
-          localStorage.setItem('safebite_pro_active', 'paid'); localStorage.setItem('safebite_plus_active', 'paid');
-          updatePlusUI();
-          renderAllergensTab();
-          setTimeout(() => {
-            showCustomizeToast("🎉 Family VIP Access Unlocked! SafeBite Scanner Pro is active.");
-          }, 600);
-        }
-      } catch (e) {}
-    }
+// checkFamilyAccessUrl hoisted to top of script
 
     // In-App Browser Detector (Instagram, Facebook, Messenger, TikTok, Snapchat webviews)
     function checkInAppBrowser() {
@@ -4039,6 +4100,39 @@
     });
 
 
+    // Share Family VIP Pass handler (Copies link with ?vip=family or triggers native OS share sheet)
+    const shareFamilyVipBtn = document.getElementById('shareFamilyVipBtn');
+    if (shareFamilyVipBtn) {
+      shareFamilyVipBtn.addEventListener('click', async () => {
+        triggerHaptic([40]);
+        const shareUrl = window.location.origin + window.location.pathname + '?vip=family';
+        const shareData = {
+          title: 'SafeBite Scanner Pro - Family VIP Pass',
+          text: 'Here is your Family VIP Pass for SafeBite Scanner Pro! Open this link to unlock full recalls, allergens, and additive screening:',
+          url: shareUrl
+        };
+
+        if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+          try {
+            await navigator.share(shareData);
+            showCustomizeToast("✓ Family VIP Pass shared!");
+            return;
+          } catch (err) {
+            if (err.name === 'AbortError') return;
+          }
+        }
+
+        // Fallback: Clipboard Copy
+        try {
+          await navigator.clipboard.writeText(shareUrl);
+          sound.playClearChime();
+          showCustomizeToast("✓ VIP Link copied to clipboard! Send it to your family.");
+        } catch (clipErr) {
+          showCustomizeToast("VIP Link: " + shareUrl);
+        }
+      });
+    }
+
     renderHistory();
     renderBulletins();
     renderAllergensTab();
@@ -4046,10 +4140,18 @@
     updatePlusUI();
     updateOnlineStatus();
     checkDisclaimerStatus();
-    checkFamilyAccessUrl();
     checkInAppBrowser();
     updateSyncUI();
     syncStoreReadyRecalls(false);
+
+    // If page was just opened via VIP link, display celebratory confirmation toast
+    if (justUnlockedViaUrl) {
+      setTimeout(() => {
+        triggerHaptic([60, 40, 60]);
+        sound.playClearChime();
+        showCustomizeToast("🎉 Family VIP Access Unlocked! Full SafeBite Scanner Pro is active.");
+      }, 700);
+    }
 
 
     // Service Worker Registration for PWA Installability and Offline Support
