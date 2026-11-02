@@ -2610,9 +2610,19 @@
           html5QrCode = new Html5Qrcode("reader");
         }
 
-        // Optical-matched barcode configuration (synchronized with visible screen coordinates)
+        // Optical-matched barcode configuration with retail barcode format filtering (prevents ITF misreads)
+        const formatsToSupport = (typeof Html5QrcodeSupportedFormats !== 'undefined') ? [
+          Html5QrcodeSupportedFormats.UPC_A,
+          Html5QrcodeSupportedFormats.UPC_E,
+          Html5QrcodeSupportedFormats.EAN_13,
+          Html5QrcodeSupportedFormats.EAN_8,
+          Html5QrcodeSupportedFormats.CODE_128,
+          Html5QrcodeSupportedFormats.QR_CODE
+        ] : undefined;
+
         const config = {
           fps: 15,
+          formatsToSupport: formatsToSupport,
           qrbox: (w, h) => {
             const boxWidth = Math.floor(Math.min(w * 0.78, 280));
             const boxHeight = Math.floor(Math.min(h * 0.50, 140));
@@ -2827,6 +2837,8 @@
       
       // 1. Keep scanning locked during transition to prevent motion-blur partial scans
       isScanningLocked = true;
+      lastScannedCode = null;
+      lastScanTimestamp = 0;
 
       // 2. Hide result container & clear manual input and camera success overlay
       resultContainer.classList.add('hidden');
@@ -2841,33 +2853,35 @@
       setNavTab('scanner');
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      // 4. Resume camera preview & optical feed
-      if (html5QrCode && isCameraRunning) {
-        try {
-          if (isCameraPaused && typeof html5QrCode.resume === 'function') {
-            html5QrCode.resume();
-            isCameraPaused = false;
+      // 4. Delay camera resume until scroll finishes (350ms) to ensure steady optical focus
+      setTimeout(async () => {
+        if (html5QrCode && isCameraRunning) {
+          try {
+            if (isCameraPaused && typeof html5QrCode.resume === 'function') {
+              html5QrCode.resume();
+              isCameraPaused = false;
+            }
+            cameraBtnText.textContent = "Stop Camera";
+            toggleCameraBtn.classList.replace('from-blue-600', 'from-slate-700');
+            toggleCameraBtn.classList.replace('to-blue-500', 'to-slate-800');
+            cameraPlaceholder.classList.add('hidden');
+          } catch (resumeErr) {
+            console.warn("Camera resume failed, re-opening cleanly:", resumeErr);
+            await stopCamera();
+            await startCamera();
           }
-          cameraBtnText.textContent = "Stop Camera";
-          toggleCameraBtn.classList.replace('from-blue-600', 'from-slate-700');
-          toggleCameraBtn.classList.replace('to-blue-500', 'to-slate-800');
-          cameraPlaceholder.classList.add('hidden');
-        } catch (resumeErr) {
-          console.warn("Camera resume failed, re-opening cleanly:", resumeErr);
+        } else {
           await stopCamera();
           await startCamera();
         }
-      } else {
-        await stopCamera();
-        await startCamera();
-      }
 
-      // 5. Optical settle window (450ms): allows camera focus and hand positioning to stabilize before re-arming scanner
-      setTimeout(() => {
-        isScanningLocked = false;
-        lastScannedCode = null;
-        lastScanTimestamp = 0;
-      }, 450);
+        // 5. Re-arm scanning lock only after camera is active and steady
+        setTimeout(() => {
+          isScanningLocked = false;
+          lastScannedCode = null;
+          lastScanTimestamp = 0;
+        }, 150);
+      }, 350);
     }
 
     // Brand & Product Search
@@ -3392,16 +3406,16 @@
         const fallbackAdditives = auditFoodAdditives(ingredientsSummary, productAdditivesTags, productName);
         displayResult({
           upc: rawCode,
-          status: 'clear',
+          status: isRecalled ? 'recalled' : (triggeredFamilyMatches.length > 0 ? 'allergen_alert' : 'clear'),
           productName: productName || `Scanned Product (${rawCode})`,
           brand: brandName || 'Retail Grocery Item',
           ingredients: ingredientsSummary || '',
-          isRecalled: false,
-          recallRecord: null,
-          terminatedNotice: null,
-          detectedAllergens: [],
-          familyMatches: [],
-          detectedAdditives: fallbackAdditives,
+          isRecalled: isRecalled,
+          recallRecord: recallRecord,
+          terminatedNotice: terminatedNotice,
+          detectedAllergens: Array.from(new Set(detectedAllergenIds)),
+          familyMatches: triggeredFamilyMatches,
+          detectedAdditives: (detectedAdditivesList && detectedAdditivesList.length > 0) ? detectedAdditivesList : fallbackAdditives,
           time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
         });
       }
@@ -3417,6 +3431,7 @@
       const hasAdditives = Boolean(data.detectedAdditives && data.detectedAdditives.length > 0);
       const additivesCount = (data.detectedAdditives || []).length;
       const detectedAllergensCount = (data.detectedAllergens || []).length;
+      const hasIndexedIngredients = Boolean(data.ingredients && String(data.ingredients).trim().length > 0);
 
       // 1. MASTER PRODUCT OVERVIEW & MULTI-GUARDRAIL STATUS PILLS
       let recallPillBg = "bg-emerald-500/15 text-emerald-300 border-emerald-500/30";
@@ -3632,21 +3647,39 @@
       } else if (isPlusActive) {
         allergenWindowHtml = `
           <div class="rounded-2xl border border-emerald-500/50 bg-gradient-to-b from-emerald-950/40 via-slate-900 to-slate-900 p-4 shadow-xl space-y-2">
-            <div class="flex items-center justify-between pb-2 border-b border-emerald-900/40">
-              <div class="flex items-center gap-2">
-                <span class="text-lg">🛡️</span>
-                <div>
-                  <span class="text-xs font-bold text-white uppercase tracking-wider block">Household Allergen Guard</span>
-                  <span class="text-[11px] text-emerald-300 font-semibold">Cleared for All Family Profiles</span>
+            ${hasIndexedIngredients ? `
+              <div class="flex items-center justify-between pb-2 border-b border-emerald-900/40">
+                <div class="flex items-center gap-2">
+                  <span class="text-lg">🛡️</span>
+                  <div>
+                    <span class="text-xs font-bold text-white uppercase tracking-wider block">Household Allergen Guard</span>
+                    <span class="text-[11px] text-emerald-300 font-semibold">Cleared for All Family Profiles</span>
+                  </div>
                 </div>
+                <span class="text-[10px] font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-700/60 px-2 py-0.5 rounded-md">
+                  Pro Active
+                </span>
               </div>
-              <span class="text-[10px] font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-700/60 px-2 py-0.5 rounded-md">
-                Pro Active
-              </span>
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Screened against active dietary profiles for <strong>${familyProfiles.map(p => p.name).join(", ")}</strong>. No matching allergen conflicts found.
-            </p>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Screened against active dietary profiles for <strong>${familyProfiles.map(p => p.name).join(", ")}</strong>. No matching allergen conflicts found.
+              </p>
+            ` : `
+              <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                  <span class="text-lg">ℹ️</span>
+                  <div>
+                    <span class="text-xs font-bold text-slate-200 uppercase tracking-wider block">Household Allergen Guard</span>
+                    <span class="text-[11px] text-slate-400 font-semibold">Ingredients Unindexed • Label Check Required</span>
+                  </div>
+                </div>
+                <span class="text-[10px] font-mono text-slate-400 bg-slate-900 px-2 py-0.5 rounded-md border border-slate-700">
+                  Packaging Check
+                </span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Full ingredients are not yet published for this product barcode. Please inspect the printed packaging label directly for allergen warnings.
+              </p>
+            `}
             ${detectedAllergensCount > 0 ? `
               <div class="pt-1.5 text-[11px] text-slate-400 border-t border-slate-800/70">
                 <span class="text-slate-300 font-medium">Packaging mentions:</span> ${data.detectedAllergens.join(', ')} (no active member allergies match).
@@ -3721,6 +3754,7 @@
         } else {
           additiveWindowHtml = `
             <div class="rounded-2xl border border-emerald-500/50 bg-gradient-to-b from-emerald-950/40 via-slate-900 to-slate-900 p-4 shadow-xl space-y-2">
+              ${hasIndexedIngredients ? `
               <div class="flex items-center justify-between pb-2 border-b border-emerald-900/40">
                 <div class="flex items-center gap-2">
                   <span class="text-lg">🧪</span>
@@ -3736,6 +3770,23 @@
               <p class="text-xs text-slate-300 leading-relaxed">
                 Zero synthetic petroleum dyes (Red 40, Yellow 5 & 6, Blue 1 & 2), titanium dioxide, BHA/BHT, TBHQ, nitrites, or scrutinized artificial sweeteners detected.
               </p>
+            ` : `
+              <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                  <span class="text-lg">ℹ️</span>
+                  <div>
+                    <span class="text-xs font-bold text-slate-200 uppercase tracking-wider block">Food Additive & Dye Guard</span>
+                    <span class="text-[11px] text-slate-400 font-semibold">Ingredients Unindexed • Label Check Required</span>
+                  </div>
+                </div>
+                <span class="text-[10px] font-mono text-slate-400 bg-slate-900 px-2 py-0.5 rounded-md border border-slate-700">
+                  Packaging Check
+                </span>
+              </div>
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Packaging ingredients are not yet cataloged for this product. Check printed packaging for synthetic food dyes or preservatives.
+              </p>
+            `}
             </div>
           `;
         }
