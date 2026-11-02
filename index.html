@@ -2613,6 +2613,12 @@
     // SINGLE-SCAN DEBOUNCE & AUTO-PAUSE (Eliminates repeated multiple scans)
     async function onBarcodeDetected(code) {
       const now = Date.now();
+      const cleanDigits = String(code || '').replace(/\D/g, '');
+
+      // Reject partial / incomplete motion-blurred barcode fragments
+      if (cleanDigits.length < 8) {
+        return;
+      }
       
       // Debounce: prevent rapid repeated triggering on the same frame or within 3.5 seconds
       if (isScanningLocked || (code === lastScannedCode && now - lastScanTimestamp < 3500)) {
@@ -2658,10 +2664,8 @@
     async function resetAndScanNext() {
       triggerHaptic([40]);
       
-      // 1. Immediately reset scanning locks and last scanned code so subsequent scans trigger immediately
-      isScanningLocked = false;
-      lastScannedCode = null;
-      lastScanTimestamp = 0;
+      // 1. Keep scanning locked during transition to prevent motion-blur partial scans
+      isScanningLocked = true;
 
       // 2. Hide result container & clear manual input and camera success overlay
       resultContainer.classList.add('hidden');
@@ -2672,11 +2676,11 @@
       const camOverlay = document.getElementById('cameraScanSuccessOverlay');
       if (camOverlay) camOverlay.classList.add('hidden');
 
-      // 3. Ensure Scanner tab is active & scroll scanner viewport to top
+      // 3. Switch to Scanner tab & scroll smoothly to camera viewfinder
       setNavTab('scanner');
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      // 4. Resume camera preview & live scanning
+      // 4. Resume camera preview & optical feed
       if (html5QrCode && isCameraRunning) {
         try {
           if (isCameraPaused && typeof html5QrCode.resume === 'function') {
@@ -2687,15 +2691,22 @@
           toggleCameraBtn.classList.replace('from-blue-600', 'from-slate-700');
           toggleCameraBtn.classList.replace('to-blue-500', 'to-slate-800');
           cameraPlaceholder.classList.add('hidden');
-          return;
         } catch (resumeErr) {
           console.warn("Camera resume failed, re-opening cleanly:", resumeErr);
+          await stopCamera();
+          await startCamera();
         }
+      } else {
+        await stopCamera();
+        await startCamera();
       }
 
-      // 5. Fallback clean restart if camera was stopped or resume threw
-      await stopCamera();
-      await startCamera();
+      // 5. Optical settle window (450ms): allows camera focus and hand positioning to stabilize before re-arming scanner
+      setTimeout(() => {
+        isScanningLocked = false;
+        lastScannedCode = null;
+        lastScanTimestamp = 0;
+      }, 450);
     }
 
     // Brand & Product Search
