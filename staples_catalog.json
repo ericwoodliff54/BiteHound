@@ -2884,5 +2884,535 @@
       "Target"
     ],
     "isRecalled": false
+  },
+  "00507204": {
+    "product": "Trader Joe's Speculoos Cookie Butter (14.1 oz Jar)",
+    "brand": "Trader Joe's",
+    "upc": "00507204",
+    "ingredients": "Speculoos 57% (Wheat Flour, Candy Sugar, Non-Hydrogenated Vegetable Oils [Palm, Canola], Raw Cane Sugar, Soy Flour, Invert Sugar Syrup, Leavening [Sodium Hydrogen Carbonate], Cinnamon, Nutmeg), Canola Oil, Sugar, Emulsifier (Soy Lecithin), Citric Acid.",
+    "allergens": [
+      "gluten",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "00599995": {
+    "product": "Trader Joe's Everything but the Bagel Sesame Seasoning Blend",
+    "brand": "Trader Joe's",
+    "upc": "00599995",
+    "ingredients": "Sesame Seeds, Sea Salt Flakes, Dried Minced Garlic, Dried Minced Onion, Black Sesame Seeds, Poppy Seeds.",
+    "allergens": [
+      "sesame"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "00994132": {
+    "product": "Trader Joe's Dark Chocolate Peanut Butter Cups (16 oz Tub)",
+    "brand": "Trader Joe's",
+    "upc": "00994132",
+    "ingredients": "Dark Chocolate (Sugar, Chocolate Liquor, Cocoa Butter, Soy Lecithin, Vanilla), Peanut Butter (Dry Roasted Peanuts, Salt), Sugar, Palm Kernel Oil, Cocoa Powder, Salt, Soy Lecithin.",
+    "allergens": [
+      "peanuts",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "00100870": {
+    "product": "Trader Joe's Organic Creamy Peanut Butter (Valencia)",
+    "brand": "Trader Joe's",
+    "upc": "00100870",
+    "ingredients": "Organic Valencia Roasted Peanuts, Sea Salt.",
+    "allergens": [
+      "peanuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "00003053": {
+    "product": "Trader Joe's Joe-Joe's Chocolate Vanilla Creme Cookies",
+    "brand": "Trader Joe's",
+    "upc": "00003053",
+    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Niacin, Reduced Iron), Sugar, Palm Oil, Cocoa (Processed with Alkali), Invert Sugar, Cane Sugar, Baking Soda, Sea Salt, Soy Lecithin, Natural Vanilla Flavor.",
+    "allergens": [
+      "gluten",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "096619163013": {
+    "product": "Kirkland Signature Organic Creamy Peanut Butter (28 oz)",
+    "brand": "Kirkland Signature",
+    "upc": "096619163013",
+    "ingredients": "Organic Dry Roasted Valencia Peanuts, Sea Salt.",
+    "allergens": [
+      "peanuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "0096619163013": {
+    "product": "Kirkland Signature Organic Creamy Peanut Butter (28 oz)",
+    "brand": "Kirkland Signature",
+    "upc": "096619163013",
+    "ingredients": "Organic Dry Roasted Valencia Peanuts, Sea Salt.",
+    "allergens": [
+      "peanuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "096619864224": {
+    "product": "Kirkland Signature Organic Applesauce Pouches (3.17 oz)",
+    "brand": "Kirkland Signature",
+    "upc": "096619864224",
+    "ingredients": "Organic Apples, Ascorbic Acid (Vitamin C).",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "0096619864224": {
+    "product": "Kirkland Signature Organic Applesauce Pouches (3.17 oz)",
+    "brand": "Kirkland Signature",
+    "upc": "096619864224",
+    "ingredients": "Organic Apples, Ascorbic Acid (Vitamin C).",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "096619129750": {
+    "product": "Kirkland Signature Soft & Chewy Chocolate Chip Granola Bars",
+    "brand": "Kirkland Signature",
+    "upc": "096619129750",
+    "ingredients": "Granola (Whole Rolled Oats, Wheat Flakes, Corn Syrup, Sugar, Canola Oil, Honey, Molasses, Salt, Soy Lecithin), Semisweet Chocolate Chips (Sugar, Chocolate Liquor, Cocoa Butter, Soy Lecithin, Vanilla), Crisp Rice, Corn Syrup, Fructose, Invert Sugar, Canola Oil, Glycerin, Soy Lecithin, Salt.",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "0096619129750": {
+    "product": "Kirkland Signature Soft & Chewy Chocolate Chip Granola Bars",
+    "brand": "Kirkland Signature",
+    "upc": "096619129750",
+    "ingredients": "Granola (Whole Rolled Oats, Wheat Flakes, Corn Syrup, Sugar, Canola Oil, Honey, Molasses, Salt, Soy Lecithin), Semisweet Chocolate Chips (Sugar, Chocolate Liquor, Cocoa Butter, Soy Lecithin, Vanilla), Crisp Rice, Corn Syrup, Fructose, Invert Sugar, Canola Oil, Glycerin, Soy Lecithin, Salt.",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "099482431761": {
+    "product": "365 Organic Creamy Peanut Butter (Unsweetened & Salted)",
+    "brand": "365 by Whole Foods Market",
+    "upc": "099482431761",
+    "ingredients": "Organic Dry Roasted Peanuts, Sea Salt.",
+    "allergens": [
+      "peanuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "0099482431761": {
+    "product": "365 Organic Creamy Peanut Butter (Unsweetened & Salted)",
+    "brand": "365 by Whole Foods Market",
+    "upc": "099482431761",
+    "ingredients": "Organic Dry Roasted Peanuts, Sea Salt.",
+    "allergens": [
+      "peanuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "099482434311": {
+    "product": "365 Organic 100% Whole Wheat Sandwich Bread (24 oz)",
+    "brand": "365 by Whole Foods Market",
+    "upc": "099482434311",
+    "ingredients": "Organic Whole Wheat Flour, Water, Organic Cane Sugar, Organic Wheat Gluten, Organic Expeller Pressed Canola Oil, Yeast, Organic Cultured Wheat Flour, Sea Salt, Organic Vinegar, Enzymes.",
+    "allergens": [
+      "gluten"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "0099482434311": {
+    "product": "365 Organic 100% Whole Wheat Sandwich Bread (24 oz)",
+    "brand": "365 by Whole Foods Market",
+    "upc": "099482434311",
+    "ingredients": "Organic Whole Wheat Flour, Water, Organic Cane Sugar, Organic Wheat Gluten, Organic Expeller Pressed Canola Oil, Yeast, Organic Cultured Wheat Flour, Sea Salt, Organic Vinegar, Enzymes.",
+    "allergens": [
+      "gluten"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "041220700018": {
+    "product": "H-E-B Creamy Peanut Butter (16 oz / 28 oz Jar)",
+    "brand": "H-E-B",
+    "upc": "041220700018",
+    "ingredients": "Roasted Peanuts, Sugar, Hydrogenated Vegetable Oil (Cottonseed, Soybean, Rapeseed Oil), Salt, Molasses.",
+    "allergens": [
+      "peanuts",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "H-E-B"
+    ],
+    "isRecalled": false
+  },
+  "0041220700018": {
+    "product": "H-E-B Creamy Peanut Butter (16 oz / 28 oz Jar)",
+    "brand": "H-E-B",
+    "upc": "041220700018",
+    "ingredients": "Roasted Peanuts, Sugar, Hydrogenated Vegetable Oil (Cottonseed, Soybean, Rapeseed Oil), Salt, Molasses.",
+    "allergens": [
+      "peanuts",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "H-E-B"
+    ],
+    "isRecalled": false
+  },
+  "041220967381": {
+    "product": "Whataburger Spicy Ketchup (20 oz Bottle - H-E-B / Retail)",
+    "brand": "Whataburger",
+    "upc": "041220967381",
+    "ingredients": "Tomato Concentrate, High Fructose Corn Syrup, Distilled Vinegar, Red Jalapeno Pepper Puree, Salt, Sugar, Onion Powder, Garlic Powder, Natural Flavors, Spices.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "H-E-B",
+      "Walmart",
+      "Kroger"
+    ],
+    "isRecalled": false
+  },
+  "0041220967381": {
+    "product": "Whataburger Spicy Ketchup (20 oz Bottle - H-E-B / Retail)",
+    "brand": "Whataburger",
+    "upc": "041220967381",
+    "ingredients": "Tomato Concentrate, High Fructose Corn Syrup, Distilled Vinegar, Red Jalapeno Pepper Puree, Salt, Sugar, Onion Powder, Garlic Powder, Natural Flavors, Spices.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "H-E-B",
+      "Walmart",
+      "Kroger"
+    ],
+    "isRecalled": false
+  },
+  "041415100012": {
+    "product": "Publix Creamy Peanut Butter (16 oz Jar)",
+    "brand": "Publix",
+    "upc": "041415100012",
+    "ingredients": "Roasted Peanuts, Sugar, Hydrogenated Vegetable Oil (Cottonseed, Soybean, Rapeseed), Salt, Molasses.",
+    "allergens": [
+      "peanuts",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Publix"
+    ],
+    "isRecalled": false
+  },
+  "0041415100012": {
+    "product": "Publix Creamy Peanut Butter (16 oz Jar)",
+    "brand": "Publix",
+    "upc": "041415100012",
+    "ingredients": "Roasted Peanuts, Sugar, Hydrogenated Vegetable Oil (Cottonseed, Soybean, Rapeseed), Salt, Molasses.",
+    "allergens": [
+      "peanuts",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Publix"
+    ],
+    "isRecalled": false
+  },
+  "041415003009": {
+    "product": "Publix Bakery Homestyle White Sandwich Bread",
+    "brand": "Publix",
+    "upc": "041415003009",
+    "ingredients": "Enriched Wheat Flour, Water, Sugar, Yeast, Soybean Oil, Salt, Wheat Gluten, Calcium Propionate (Preservative), Monoglycerides, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Publix"
+    ],
+    "isRecalled": false
+  },
+  "0041415003009": {
+    "product": "Publix Bakery Homestyle White Sandwich Bread",
+    "brand": "Publix",
+    "upc": "041415003009",
+    "ingredients": "Enriched Wheat Flour, Water, Sugar, Yeast, Soybean Oil, Salt, Wheat Gluten, Calcium Propionate (Preservative), Monoglycerides, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Publix"
+    ],
+    "isRecalled": false
+  },
+  "021130070014": {
+    "product": "Signature SELECT Creamy Peanut Butter (16 oz Jar)",
+    "brand": "Signature SELECT",
+    "upc": "021130070014",
+    "ingredients": "Roasted Peanuts, Sugar, Contains 2% or Less of: Hydrogenated Vegetable Oil (Cottonseed, Soybean, Rapeseed), Salt, Molasses.",
+    "allergens": [
+      "peanuts",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Safeway",
+      "Albertsons",
+      "Vons",
+      "Jewel-Osco"
+    ],
+    "isRecalled": false
+  },
+  "0021130070014": {
+    "product": "Signature SELECT Creamy Peanut Butter (16 oz Jar)",
+    "brand": "Signature SELECT",
+    "upc": "021130070014",
+    "ingredients": "Roasted Peanuts, Sugar, Contains 2% or Less of: Hydrogenated Vegetable Oil (Cottonseed, Soybean, Rapeseed), Salt, Molasses.",
+    "allergens": [
+      "peanuts",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Safeway",
+      "Albertsons",
+      "Vons",
+      "Jewel-Osco"
+    ],
+    "isRecalled": false
+  },
+  "021130120016": {
+    "product": "Signature SELECT Thin Crust Pepperoni Frozen Pizza",
+    "brand": "Signature SELECT",
+    "upc": "021130120016",
+    "ingredients": "Crust (Enriched Flour, Water, Soybean Oil, Yeast, Salt), Sauce (Tomato Puree, Sugar, Salt, Spices, Garlic), Low Moisture Part-Skim Mozzarella (Pasteurized Milk, Cheese Cultures, Salt, Enzymes), Pepperoni (Pork, Beef, Salt, Dextrose, Sodium Nitrite, BHA, BHT, Citric Acid).",
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "additives_tags": [
+      "sodium_nitrite",
+      "bha",
+      "bht"
+    ],
+    "stores": [
+      "Safeway",
+      "Albertsons",
+      "Vons",
+      "Jewel-Osco"
+    ],
+    "isRecalled": false
+  },
+  "0021130120016": {
+    "product": "Signature SELECT Thin Crust Pepperoni Frozen Pizza",
+    "brand": "Signature SELECT",
+    "upc": "021130120016",
+    "ingredients": "Crust (Enriched Flour, Water, Soybean Oil, Yeast, Salt), Sauce (Tomato Puree, Sugar, Salt, Spices, Garlic), Low Moisture Part-Skim Mozzarella (Pasteurized Milk, Cheese Cultures, Salt, Enzymes), Pepperoni (Pork, Beef, Salt, Dextrose, Sodium Nitrite, BHA, BHT, Citric Acid).",
+    "allergens": [
+      "gluten",
+      "dairy"
+    ],
+    "additives_tags": [
+      "sodium_nitrite",
+      "bha",
+      "bht"
+    ],
+    "stores": [
+      "Safeway",
+      "Albertsons",
+      "Vons",
+      "Jewel-Osco"
+    ],
+    "isRecalled": false
+  },
+  "077890250014": {
+    "product": "Wegmans Creamy Peanut Butter (16 oz Jar)",
+    "brand": "Wegmans",
+    "upc": "077890250014",
+    "ingredients": "Roasted Peanuts, Sugar, Hydrogenated Rapeseed and Cottonseed Oil, Salt.",
+    "allergens": [
+      "peanuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Wegmans"
+    ],
+    "isRecalled": false
+  },
+  "0077890250014": {
+    "product": "Wegmans Creamy Peanut Butter (16 oz Jar)",
+    "brand": "Wegmans",
+    "upc": "077890250014",
+    "ingredients": "Roasted Peanuts, Sugar, Hydrogenated Rapeseed and Cottonseed Oil, Salt.",
+    "allergens": [
+      "peanuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Wegmans"
+    ],
+    "isRecalled": false
+  },
+  "030034005018": {
+    "product": "Giant Eagle Creamy Peanut Butter (16 oz Jar)",
+    "brand": "Giant Eagle",
+    "upc": "030034005018",
+    "ingredients": "Roasted Peanuts, Sugar, Hydrogenated Vegetable Oil (Cottonseed, Soybean and Rapeseed Oil), Salt, Molasses.",
+    "allergens": [
+      "peanuts",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0030034005018": {
+    "product": "Giant Eagle Creamy Peanut Butter (16 oz Jar)",
+    "brand": "Giant Eagle",
+    "upc": "030034005018",
+    "ingredients": "Roasted Peanuts, Sugar, Hydrogenated Vegetable Oil (Cottonseed, Soybean and Rapeseed Oil), Salt, Molasses.",
+    "allergens": [
+      "peanuts",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "409910001001": {
+    "product": "Simply Nature Organic Creamy Peanut Butter",
+    "brand": "Simply Nature (Aldi)",
+    "upc": "409910001001",
+    "ingredients": "Organic Dry Roasted Peanuts, Sea Salt.",
+    "allergens": [
+      "peanuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Aldi"
+    ],
+    "isRecalled": false
+  },
+  "0409910001001": {
+    "product": "Simply Nature Organic Creamy Peanut Butter",
+    "brand": "Simply Nature (Aldi)",
+    "upc": "409910001001",
+    "ingredients": "Organic Dry Roasted Peanuts, Sea Salt.",
+    "allergens": [
+      "peanuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Aldi"
+    ],
+    "isRecalled": false
+  },
+  "409910012345": {
+    "product": "Clancy's Restaurant Style Tortilla Chips",
+    "brand": "Clancy's (Aldi)",
+    "upc": "409910012345",
+    "ingredients": "Whole Grain Corn, Vegetable Oil (Corn, Canola, and/or Sunflower Oil), Sea Salt.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Aldi"
+    ],
+    "isRecalled": false
+  },
+  "0409910012345": {
+    "product": "Clancy's Restaurant Style Tortilla Chips",
+    "brand": "Clancy's (Aldi)",
+    "upc": "409910012345",
+    "ingredients": "Whole Grain Corn, Vegetable Oil (Corn, Canola, and/or Sunflower Oil), Sea Salt.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Aldi"
+    ],
+    "isRecalled": false
   }
 }
