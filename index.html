@@ -825,6 +825,9 @@
           <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800">🍬 Aspartame & Sucralose</span>
           <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800">🌽 High Fructose Corn Syrup</span>
           <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800">🧪 Carrageenan & Emulsifiers</span>
+          <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800">🛢️ Hydrogenated Oils & Mono/Diglycerides</span>
+          <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800">🛑 Sodium Benzoate, Sorbates & EDTA</span>
+          <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800">🎨 Caramel Color & MSG</span>
         </div>
       </div>
 
@@ -1345,6 +1348,78 @@
         desc: 'Synthetic non-ionic surfactants (E433 & E435). Animal studies show erosion of protective intestinal mucus layers.',
         tags: ['en:e433', 'en:e435', 'en:polysorbate-80', 'en:polysorbate-60', 'e433', 'e435'],
         regex: /polysorbate[-_\s]*(?:60|80)|\be[-_\s]*43[35]\b/i
+      },
+      {
+        id: 'hydrogenated_oils',
+        name: 'Hydrogenated Vegetable Oils',
+        type: 'Industrial Stabilizer / Hydrogenated Fat',
+        icon: '🛢️',
+        desc: 'Chemically altered vegetable oils (partially or fully hydrogenated cottonseed, soybean, or rapeseed) used to prevent oil separation in commercial spreads. Linked to cardiovascular strain and inflammation.',
+        tags: ['en:hydrogenated-vegetable-oil', 'en:fully-hydrogenated-vegetable-oil', 'en:partially-hydrogenated-vegetable-oil', 'en:hydrogenated-cottonseed-oil', 'en:hydrogenated-soybean-oil', 'en:hydrogenated-rapeseed-oil', 'en:hydrogenated-palm-oil', 'hydrogenated-oil'],
+        regex: /\b(?:fully\s+|partially\s+)?hydrogenated\s+(?:vegetable|soybean|cottonseed|rapeseed|palm|canola)\s+oils?\b|\bhydrogenated\s+oils?\b/i
+      },
+      {
+        id: 'mono_diglycerides',
+        name: 'Mono- & Diglycerides (E471)',
+        type: 'Synthetic Emulsifier / Hidden Trans-Fat',
+        icon: '🧪',
+        desc: 'Glycerol-derived emulsifiers (E471 / monoglycerides) used to stabilize commercial peanut butters, baked goods, and ice cream. Often contain unmeasured low levels of industrial trans fats.',
+        tags: ['en:e471', 'en:mono-and-diglycerides-of-fatty-acids', 'en:monoglycerides', 'en:diglycerides', 'e471', 'monoglycerides', 'diglycerides'],
+        regex: /\b(?:mono\s*[-–—]?\s*(?:and|&)\s*diglycerides?|monoglycerides?|diglycerides?)\b|\be[-_\s]*471\b/i
+      },
+      {
+        id: 'benzoates_sorbates',
+        name: 'Sodium Benzoate & Potassium Sorbate',
+        type: 'Chemical Antimicrobial Preservative',
+        icon: '🛑',
+        desc: 'Synthetic chemical preservatives (E211 & E202) used in condiments, beverages, and sauces. When combined with Vitamin C (ascorbic acid), sodium benzoate can form trace benzene.',
+        tags: ['en:e211', 'en:e202', 'en:sodium-benzoate', 'en:potassium-sorbate', 'e211', 'e202'],
+        regex: /\bsodium\s*benzoate\b|\bpotassium\s*sorbate\b|\be[-_\s]*2(?:02|11)\b/i
+      },
+      {
+        id: 'edta',
+        name: 'Calcium Disodium EDTA (E385)',
+        type: 'Chelating Preservative',
+        icon: '🛑',
+        desc: 'Synthetic chelating compound (E385) used in dressings, spreads, and canned vegetables to bind metals and preserve color. Restricted in Europe and Australia.',
+        tags: ['en:e385', 'en:calcium-disodium-edta', 'en:edta', 'e385'],
+        regex: /\b(?:calcium\s+disodium\s+)?edta\b|\be[-_\s]*385\b/i
+      },
+      {
+        id: 'caramel_color',
+        name: 'Caramel Color (Class III / IV)',
+        type: 'Ammonia-Processed Colorant',
+        icon: '🎨',
+        desc: 'Synthetically manufactured caramel coloring (E150c / E150d) produced with ammonia compounds, containing trace 4-methylimidazole (4-MEI), a California Prop 65 listed compound.',
+        tags: ['en:e150c', 'en:e150d', 'en:caramel-color', 'en:caramel-colour', 'e150c', 'e150d'],
+        regex: /\bcaramel\s*colou?r(?:ing)?\b|\be[-_\s]*150[cd]\b/i
+      },
+      {
+        id: 'msg',
+        name: 'MSG & Flavor Enhancers (E621)',
+        type: 'Concentrated Umami Enhancer',
+        icon: '🧂',
+        desc: 'Monosodium glutamate (E621), disodium inosinate (E631), or guanylate (E627). Concentrated sodium salts used to stimulate savory umami taste receptors.',
+        tags: ['en:e621', 'en:e627', 'en:e631', 'en:monosodium-glutamate', 'e621', 'msg'],
+        regex: /\bmonosodium\s*glutamate\b|\bmsg\b|\bdisodium\s*(?:inosinate|guanylate)\b|\be[-_\s]*6(?:21|27|31)\b/i
+      },
+      {
+        id: 'propyl_gallate',
+        name: 'Propyl Gallate (E310)',
+        type: 'Fat Antioxidant Preservative',
+        icon: '🛑',
+        desc: 'Synthetic antioxidant preservative (E310) added to vegetable oils, meat products, and snacks to prevent fat rancidity. Flagged for potential endocrine disruption.',
+        tags: ['en:e310', 'en:propyl-gallate', 'e310'],
+        regex: /\bpropyl\s*gallate\b|\be[-_\s]*310\b/i
+      },
+      {
+        id: 'bleached_flour',
+        name: 'Bleached Flour / Chemical Bleaching',
+        type: 'Flour Chemical Treatment',
+        icon: '🌾',
+        desc: 'Flour treated with benzoyl peroxide, chlorine dioxide, or potassium bromate to artificially accelerate aging and whiten texture. Banned across the EU and UK.',
+        tags: ['en:bleached-flour', 'en:bleached-wheat-flour'],
+        regex: /\bbleached\s+(?:wheat\s+|all[-_\s]*purpose\s+|white\s+)?flour\b|\bbenzoyl\s*peroxide\b/i
       }
     ];
     const ADDITIVE_OPTIONS = ADDITIVES_DATABASE;
