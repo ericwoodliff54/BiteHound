@@ -5,7 +5,8 @@ const ASSETS = [
   './icon-192.png?v=6',
   './icon-512.png?v=6',
   './apple-touch-icon.png?v=6',
-  './favicon.png?v=6'
+  './favicon.png?v=6',
+  './staples_catalog.json'
 ];
 
 self.addEventListener('install', (e) => {
