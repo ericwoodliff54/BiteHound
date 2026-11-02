@@ -206,13 +206,21 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
             </svg>
           </div>
-          <span class="text-[11px] font-bold tracking-widest uppercase text-amber-400 block">SAFEBITE SCANNER PLUS UPGRADE</span>
-          <h2 class="font-display text-xl font-bold text-white">Full Gluten & Allergen Defense</h2>
+          <span class="text-[11px] font-bold tracking-widest uppercase text-amber-400 block">SAFEBITE SCANNER PRO UPGRADE</span>
+          <h2 class="font-display text-xl font-bold text-white">Recalls + Allergen & Additive Guard</h2>
           <p class="text-xs text-slate-300 max-w-xs mx-auto">Instant peace of mind in every grocery aisle. Never read confusing ingredient fine print again.</p>
         </div>
 
         <!-- Benefits List -->
         <div class="space-y-2.5 text-xs bg-slate-950 p-4 rounded-2xl border border-slate-800">
+          <div class="flex items-start gap-2.5">
+            <span class="text-base">🧪</span>
+            <div>
+              <span class="font-bold text-white block">Automatic Additive & Synthetic Dye Screener</span>
+              <span class="text-[11px] text-slate-400">Flags petroleum dyes (Red 40, Yellow 5/6, Blue 1/2), Titanium Dioxide, BHA/BHT, TBHQ & preservatives.</span>
+            </div>
+          </div>
+
           <div class="flex items-start gap-2.5">
             <span class="text-base">🌾</span>
             <div>
@@ -248,21 +256,39 @@
 
         <!-- Interactive Pricing Tier Options -->
         <div class="space-y-2.5" id="paywallPlansContainer">
-          <!-- Annual Plan (Best Value) -->
-          <label id="planLabelAnnual" class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border-2 border-amber-500 bg-amber-950/30 text-xs transition relative">
+          <!-- Annual Plan (Best Value / Most Popular) -->
+          <label id="planLabelAnnual" class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border-2 border-amber-500 bg-amber-950/30 text-xs transition relative shadow-lg shadow-amber-950/30">
             <div class="flex items-center gap-2.5">
               <input type="radio" name="plusPlan" value="annual" checked class="text-amber-500 focus:ring-0">
               <div>
                 <div class="flex items-center gap-2">
                   <span class="font-bold text-white text-sm">Annual Membership</span>
-                  <span class="px-1.5 py-0.5 rounded bg-amber-400 text-slate-950 text-[10px] font-bold uppercase tracking-wider">Save 37% • Best Value</span>
+                  <span class="px-1.5 py-0.5 rounded bg-amber-400 text-slate-950 text-[10px] font-bold uppercase tracking-wider">Save 44% • Most Popular</span>
                 </div>
-                <span class="text-[11px] text-amber-200/90 block">3-Day Free Trial, then $14.99/yr (~$1.25/mo)</span>
+                <span class="text-[11px] text-amber-200/90 block">3-Day Free Trial, then $19.99/year (~$1.66/mo)</span>
               </div>
             </div>
             <div class="text-right">
-              <span class="font-bold text-white text-sm">$1.25<span class="text-[10px] text-slate-400 font-normal">/mo</span></span>
+              <span class="font-bold text-white text-sm">$1.66<span class="text-[10px] text-slate-400 font-normal">/mo</span></span>
               <span class="text-[10px] text-slate-400 block font-mono">$19.99 billed/yr</span>
+            </div>
+          </label>
+
+          <!-- Lifetime VIP Plan (One-Time Purchase) -->
+          <label id="planLabelLifetime" class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border border-purple-500/60 bg-purple-950/20 text-xs transition hover:border-purple-400">
+            <div class="flex items-center gap-2.5">
+              <input type="radio" name="plusPlan" value="lifetime" class="text-purple-500 focus:ring-0">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-white text-sm">Lifetime VIP Pass</span>
+                  <span class="px-1.5 py-0.5 rounded bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-[10px] font-bold uppercase tracking-wider">Pay Once • Forever</span>
+                </div>
+                <span class="text-[11px] text-purple-200/90 block">One-time payment • Never pay a recurring fee</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="font-bold text-white text-sm">$49.99</span>
+              <span class="text-[10px] text-purple-300 block font-medium">One-Time</span>
             </div>
           </label>
 
@@ -2091,11 +2117,15 @@
       const selected = document.querySelector('input[name="plusPlan"]:checked')?.value || 'annual';
       const activatePlusTrialBtnText = document.getElementById('activatePlusTrialBtnText');
 
-      ['annual', 'monthly'].forEach(p => {
+      ['annual', 'lifetime', 'monthly'].forEach(p => {
         const lbl = document.getElementById('planLabel' + p.charAt(0).toUpperCase() + p.slice(1));
         if (lbl) {
           if (p === selected) {
-            lbl.className = "cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border-2 border-amber-500 bg-amber-950/30 text-xs transition relative";
+            if (p === 'lifetime') {
+              lbl.className = "cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border-2 border-purple-500 bg-purple-950/40 text-xs transition relative shadow-lg shadow-purple-950/40";
+            } else {
+              lbl.className = "cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border-2 border-amber-500 bg-amber-950/30 text-xs transition relative shadow-lg shadow-amber-950/40";
+            }
           } else {
             lbl.className = "cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border border-slate-800 bg-slate-950 text-xs transition hover:border-slate-700";
           }
@@ -2103,14 +2133,16 @@
       });
 
       if (activatePlusTrialBtnText) {
-        if (selected === 'monthly') {
+        if (selected === 'lifetime') {
+          activatePlusTrialBtnText.textContent = "Get Lifetime VIP Pass ($49.99 One-Time • No Subscriptions)";
+        } else if (selected === 'monthly') {
           activatePlusTrialBtnText.textContent = plusStatusType === 'expired' 
             ? "Subscribe for $2.99/month" 
             : "Start 3-Day Free Trial (then $2.99/mo)";
         } else {
           activatePlusTrialBtnText.textContent = plusStatusType === 'expired' 
-            ? "Subscribe for $14.99/year" 
-            : "Start 3-Day Free Trial (then $14.99/yr)";
+            ? "Subscribe for $19.99/year" 
+            : "Start 3-Day Free Trial (then $19.99/yr)";
         }
       }
     }
@@ -2123,14 +2155,29 @@
       triggerHaptic([60, 40, 60]);
       sound.playClearChime();
 
-      isPlusActive = true;
-      plusStatusType = 'trial';
-      trialDaysRemaining = 3;
-      try {
-        localStorage.setItem('safebite_plus_active', 'trial');
-        localStorage.setItem('safebite_trial_start', Date.now().toString());
-      } catch (e) {}
-      showCustomizeToast("🎉 3-Day Free Trial activated! All family profiles & allergen guardrails unlocked.");
+      const selected = document.querySelector('input[name="plusPlan"]:checked')?.value || 'annual';
+
+      if (selected === 'lifetime') {
+        isPlusActive = true;
+        plusStatusType = 'paid';
+        trialDaysRemaining = 0;
+        try {
+          localStorage.setItem('safebite_pro_active', 'paid');
+          localStorage.setItem('safebite_plus_active', 'paid');
+          sessionStorage.setItem('safebite_pro_active', 'paid');
+          document.cookie = "safebite_pro_vip=paid; max-age=315360000; path=/";
+        } catch (e) {}
+        showCustomizeToast("⭐ SafeBite Scanner Pro Lifetime VIP Activated! Unlimited lifetime access unlocked.");
+      } else {
+        isPlusActive = true;
+        plusStatusType = 'trial';
+        trialDaysRemaining = 3;
+        try {
+          localStorage.setItem('safebite_plus_active', 'trial');
+          localStorage.setItem('safebite_trial_start', Date.now().toString());
+        } catch (e) {}
+        showCustomizeToast(`🎉 3-Day Free Trial activated! (${selected === 'monthly' ? '$2.99/mo' : '$19.99/yr'}) Family profiles & additive guardrails unlocked.`);
+      }
 
       updatePlusUI();
       closePaywall();
@@ -2172,7 +2219,7 @@
         headerPlusBadgeBtn.className = "text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30 transition flex items-center gap-1";
         plusActiveBadge.textContent = "TRIAL EXPIRED";
         plusActiveBadge.className = "text-[10px] font-bold px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40";
-        openPaywallBtn.innerHTML = `<span>Upgrade to SafeBite Scanner Pro ($2.99/mo or $19.99/yr)</span>`;
+        openPaywallBtn.innerHTML = `<span>Upgrade to SafeBite Scanner Pro ($19.99/yr or $49.99 Lifetime)</span>`;
         openPaywallBtn.className = "w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5";
         if (additiveBadge) {
           additiveBadge.textContent = "LOCKED (PRO)";
@@ -2183,7 +2230,7 @@
         headerPlusBadgeBtn.className = "text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30 transition flex items-center gap-1";
         plusActiveBadge.textContent = "FREE TIER";
         plusActiveBadge.className = "text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700";
-        openPaywallBtn.innerHTML = `<span>Start 3-Day Free Trial ($19.99/yr or $2.99/mo)</span>`;
+        openPaywallBtn.innerHTML = `<span>Start 3-Day Free Trial ($19.99/yr, $2.99/mo, or $49.99 Lifetime)</span>`;
         openPaywallBtn.className = "w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5";
         if (additiveBadge) {
           additiveBadge.textContent = "LOCKED (PRO)";
