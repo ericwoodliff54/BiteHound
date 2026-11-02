@@ -256,7 +256,7 @@
 
         <!-- Interactive Pricing Tier Options -->
         <div class="space-y-2.5" id="paywallPlansContainer">
-          <!-- Annual Plan (Best Value / Most Popular) -->
+          <!-- 1. Annual Plan (First • Most Popular / Best Value) -->
           <label id="planLabelAnnual" class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border-2 border-amber-500 bg-amber-950/30 text-xs transition relative shadow-lg shadow-amber-950/30">
             <div class="flex items-center gap-2.5">
               <input type="radio" name="plusPlan" value="annual" checked class="text-amber-500 focus:ring-0">
@@ -274,7 +274,22 @@
             </div>
           </label>
 
-          <!-- Lifetime VIP Plan (One-Time Purchase) -->
+          <!-- 2. Monthly Plan (Second) -->
+          <label id="planLabelMonthly" class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border border-slate-800 bg-slate-950 text-xs transition hover:border-slate-700">
+            <div class="flex items-center gap-2.5">
+              <input type="radio" name="plusPlan" value="monthly" class="text-amber-500 focus:ring-0">
+              <div>
+                <span class="font-bold text-white block text-sm">Monthly Plan</span>
+                <span class="text-[11px] text-slate-400">3-Day Free Trial, then $2.99/month</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="font-bold text-white text-sm">$2.99<span class="text-[10px] text-slate-400 font-normal">/mo</span></span>
+              <span class="text-[10px] text-slate-400 block">Cancel anytime</span>
+            </div>
+          </label>
+
+          <!-- 3. Lifetime VIP Plan (Last • One-Time Purchase) -->
           <label id="planLabelLifetime" class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border border-purple-500/60 bg-purple-950/20 text-xs transition hover:border-purple-400">
             <div class="flex items-center gap-2.5">
               <input type="radio" name="plusPlan" value="lifetime" class="text-purple-500 focus:ring-0">
@@ -289,21 +304,6 @@
             <div class="text-right">
               <span class="font-bold text-white text-sm">$49.99</span>
               <span class="text-[10px] text-purple-300 block font-medium">One-Time</span>
-            </div>
-          </label>
-
-          <!-- Monthly Plan -->
-          <label id="planLabelMonthly" class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border border-slate-800 bg-slate-950 text-xs transition hover:border-slate-700">
-            <div class="flex items-center gap-2.5">
-              <input type="radio" name="plusPlan" value="monthly" class="text-amber-500 focus:ring-0">
-              <div>
-                <span class="font-bold text-white block text-sm">Monthly Plan</span>
-                <span class="text-[11px] text-slate-400">3-Day Free Trial, then $2.99/month</span>
-              </div>
-            </div>
-            <div class="text-right">
-              <span class="font-bold text-white text-sm">$2.99<span class="text-[10px] text-slate-400 font-normal">/mo</span></span>
-              <span class="text-[10px] text-slate-400 block">Cancel anytime</span>
             </div>
           </label>
         </div><!-- Dynamic CTA Button -->
@@ -1522,8 +1522,8 @@
         const familyParam = (params.get('family') || '').toLowerCase();
         const proParam = (params.get('pro') || '').toLowerCase();
 
-        // Detect all plausible variations of family/vip/pro links
-        const isVip = (
+        // 1. Detect if this is a VIP / Family invitation link
+        const isVipCandidate = (
           vipParam === 'family' || vipParam === 'pro' || vipParam === 'true' || vipParam === '1' || vipParam === 'tester' || vipParam === 'vip' ||
           familyParam === 'vip' || familyParam === 'true' || familyParam === '1' || familyParam === 'pro' ||
           proParam === 'family' || proParam === 'vip' || proParam === 'true' || proParam === '1' ||
@@ -1535,25 +1535,64 @@
           href.includes('vip=family') || href.includes('vip=pro') || href.includes('family=vip')
         );
 
-        if (isVip) {
-          isPlusActive = true;
-          plusStatusType = 'paid';
-          trialDaysRemaining = 0;
-          justUnlockedViaUrl = true;
+        if (!isVipCandidate) return;
 
-          // Multi-layer persistence: localStorage + sessionStorage + persistent cookie
-          try {
-            localStorage.setItem('safebite_pro_active', 'paid');
-            localStorage.setItem('safebite_plus_active', 'paid');
-            sessionStorage.setItem('safebite_pro_active', 'paid');
-            document.cookie = "safebite_pro_vip=paid; max-age=315360000; path=/; SameSite=Lax";
-          } catch (e) {}
+        // 2. Validate Expiration (Default 10-day window from link creation)
+        const expParam = params.get('exp') || params.get('expires') || params.get('t') || '';
+        let isExpired = false;
+        let expDateObj = null;
 
-          // Also clean URL query without page reload so refreshing maintains clean history
-          if (window.history && window.history.replaceState) {
-            const cleanUrl = window.location.pathname;
-            window.history.replaceState({}, document.title, cleanUrl);
+        if (expParam) {
+          let expVal = Number(expParam);
+          if (!isNaN(expVal)) {
+            if (expVal < 10000000000) expVal = expVal * 1000; // convert seconds to ms
+            expDateObj = new Date(expVal);
+          } else {
+            expDateObj = new Date(expParam);
           }
+
+          if (expDateObj && !isNaN(expDateObj.getTime())) {
+            if (Date.now() > expDateObj.getTime()) {
+              isExpired = true;
+            }
+          }
+        } else {
+          // Legacy links without an exp parameter: allowed through Nov 11, 2026, then expire
+          const LEGACY_CUTOFF = new Date('2026-11-12T00:00:00Z').getTime();
+          if (Date.now() > LEGACY_CUTOFF) {
+            isExpired = true;
+          }
+        }
+
+        if (isExpired) {
+          window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+              if (typeof showCustomizeToast === 'function') {
+                showCustomizeToast('⚠️ This Family VIP link has expired. Please ask Eric for a fresh 10-day invite pass.');
+              }
+            }, 800);
+          });
+          return;
+        }
+
+        // 3. Link is valid and unexpired: Activate permanent Lifetime Pro access
+        isPlusActive = true;
+        plusStatusType = 'paid';
+        trialDaysRemaining = 0;
+        justUnlockedViaUrl = true;
+
+        // Multi-layer persistence: localStorage + sessionStorage + persistent 10-year cookie
+        try {
+          localStorage.setItem('safebite_pro_active', 'paid');
+          localStorage.setItem('safebite_plus_active', 'paid');
+          sessionStorage.setItem('safebite_pro_active', 'paid');
+          document.cookie = "safebite_pro_vip=paid; max-age=315360000; path=/; SameSite=Lax";
+        } catch (e) {}
+
+        // Strip the VIP parameters from the browser address bar so if they copy or share the URL, it's just the clean home URL
+        if (window.history && window.history.replaceState) {
+          const cleanUrl = window.location.pathname;
+          window.history.replaceState({}, document.title, cleanUrl);
         }
       } catch (e) {}
     }
@@ -2117,7 +2156,7 @@
       const selected = document.querySelector('input[name="plusPlan"]:checked')?.value || 'annual';
       const activatePlusTrialBtnText = document.getElementById('activatePlusTrialBtnText');
 
-      ['annual', 'lifetime', 'monthly'].forEach(p => {
+      ['annual', 'monthly', 'lifetime'].forEach(p => {
         const lbl = document.getElementById('planLabel' + p.charAt(0).toUpperCase() + p.slice(1));
         if (lbl) {
           if (p === selected) {
@@ -4671,17 +4710,20 @@
     if (shareFamilyVipBtn) {
       shareFamilyVipBtn.addEventListener('click', async () => {
         triggerHaptic([40]);
-        const shareUrl = window.location.origin + window.location.pathname + '?vip=family';
+        const TEN_DAYS_MS = 10 * 24 * 60 * 60 * 1000; // 10 days validity window
+        const expTimestamp = Date.now() + TEN_DAYS_MS;
+        const expDateFormatted = new Date(expTimestamp).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        const shareUrl = window.location.origin + window.location.pathname + '?vip=family&exp=' + expTimestamp;
         const shareData = {
           title: 'SafeBite Scanner Pro - Family VIP Pass',
-          text: 'Here is your Family VIP Pass for SafeBite Scanner Pro! Open this link to unlock full recalls, allergens, and additive screening:',
+          text: `Here is your Family VIP Pass for SafeBite Scanner Pro! Open this link before ${expDateFormatted} to unlock lifetime Pro for free:`,
           url: shareUrl
         };
 
         if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
           try {
             await navigator.share(shareData);
-            showCustomizeToast("✓ Family VIP Pass shared!");
+            showCustomizeToast("✓ 10-Day Family VIP Pass shared!");
             return;
           } catch (err) {
             if (err.name === 'AbortError') return;
@@ -4692,9 +4734,9 @@
         try {
           await navigator.clipboard.writeText(shareUrl);
           sound.playClearChime();
-          showCustomizeToast("✓ VIP Link copied to clipboard! Send it to your family.");
+          showCustomizeToast(`✓ 10-Day VIP Pass copied! (Valid through ${expDateFormatted})`);
         } catch (clipErr) {
-          showCustomizeToast("VIP Link: " + shareUrl);
+          showCustomizeToast("VIP Link (10-day pass): " + shareUrl);
         }
       });
     }
