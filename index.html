@@ -3610,67 +3610,52 @@
           if (cachedProduct.offProductData) offProductData = cachedProduct.offProductData;
         }
 
-        // If ingredients or brand are still unknown, query global food catalog with multi-endpoint fallback
+        // If ingredients or brand are still unknown, query global food catalog with responsive timeout
         if (!ingredientsSummary || brandName === "Grocery Brand") {
           try {
             const queryCodes = [code];
-            if (code.length === 12) queryCodes.push('0' + code, '00' + code);
-            if (code.length === 11) queryCodes.push('0' + code, '00' + code);
+            if (code.length === 12) queryCodes.push('0' + code);
             if (code.length === 13 && code.startsWith('0')) queryCodes.push(code.substring(1));
-            if (code.length === 14 && code.startsWith('00')) queryCodes.push(code.substring(2));
-
-            // Unique query codes preserving priority
             const uniqueCodes = [...new Set(queryCodes)];
 
             for (const qCode of uniqueCodes) {
               if (ingredientsSummary && brandName !== "Grocery Brand") break;
 
-              // Waterfalled endpoint clusters: Modern v2 API -> US Regional Cluster -> Legacy v0 Fallback
-              const endpoints = [
-                `https://world.openfoodfacts.org/api/v2/product/${qCode}.json`,
-                `https://us.openfoodfacts.org/api/v2/product/${qCode}.json`,
-                `https://world.openfoodfacts.org/api/v0/product/${qCode}.json`
-              ];
+              try {
+                const offCtrl = new AbortController();
+                const timeoutId = setTimeout(() => offCtrl.abort(), 3500); // 3.5s fast timeout
+                const res = await fetch(`https://world.openfoodfacts.org/api/v0/product/${qCode}.json`, { signal: offCtrl.signal });
+                clearTimeout(timeoutId);
 
-              for (const endpoint of endpoints) {
-                if (ingredientsSummary && brandName !== "Grocery Brand") break;
+                if (res && res.ok) {
+                  const apiData = await res.json();
+                  if (apiData && apiData.status === 1 && apiData.product) {
+                    const p = apiData.product;
+                    offProductData = p;
 
-                try {
-                  const offCtrl = new AbortController();
-                  const timeoutId = setTimeout(() => offCtrl.abort(), 4500);
-                  const res = await fetch(endpoint, { signal: offCtrl.signal });
-                  clearTimeout(timeoutId);
-
-                  if (res.ok) {
-                    const apiData = await res.json();
-                    if (apiData && (apiData.status === 1 || apiData.status_verbose === "product found") && apiData.product) {
-                      const p = apiData.product;
-                      offProductData = p;
-
-                      if (!productName || productName.startsWith('Retail Grocery Item')) {
-                        productName = p.product_name || p.product_name_en || p.generic_name || productName;
-                      }
-                      if (!brandName || brandName === "Grocery Brand") {
-                        brandName = p.brands || p.brand_owner || p.brands_tags?.[0] || brandName;
-                      }
-                      if (!ingredientsSummary) {
-                        if (p.ingredients_text || p.ingredients_text_en || p.ingredients_text_with_allergens || p.ingredients_text_with_allergens_en) {
-                          ingredientsSummary = p.ingredients_text || p.ingredients_text_en || p.ingredients_text_with_allergens || p.ingredients_text_with_allergens_en || "";
-                        } else if (Array.isArray(p.ingredients) && p.ingredients.length > 0) {
-                          ingredientsSummary = p.ingredients.map(ing => ing.text || ing.id || '').filter(Boolean).join(', ');
-                        }
-                      }
-
-                      if (Array.isArray(p.additives_tags)) productAdditivesTags.push(...p.additives_tags);
-                      if (Array.isArray(p.additives_original_tags)) productAdditivesTags.push(...p.additives_original_tags);
-                      if (Array.isArray(p.ingredients_tags)) productAdditivesTags.push(...p.ingredients_tags);
-                      if (Array.isArray(p.allergens_tags)) productAdditivesTags.push(...p.allergens_tags);
-                      break;
+                    if (!productName || productName.startsWith('Retail Grocery Item')) {
+                      productName = p.product_name || p.product_name_en || p.generic_name || productName;
                     }
+                    if (!brandName || brandName === "Grocery Brand") {
+                      brandName = p.brands || p.brand_owner || p.brands_tags?.[0] || brandName;
+                    }
+                    if (!ingredientsSummary) {
+                      if (p.ingredients_text || p.ingredients_text_en || p.ingredients_text_with_allergens || p.ingredients_text_with_allergens_en) {
+                        ingredientsSummary = p.ingredients_text || p.ingredients_text_en || p.ingredients_text_with_allergens || p.ingredients_text_with_allergens_en || "";
+                      } else if (Array.isArray(p.ingredients) && p.ingredients.length > 0) {
+                        ingredientsSummary = p.ingredients.map(ing => ing.text || ing.id || '').filter(Boolean).join(', ');
+                      }
+                    }
+
+                    if (Array.isArray(p.additives_tags)) productAdditivesTags.push(...p.additives_tags);
+                    if (Array.isArray(p.additives_original_tags)) productAdditivesTags.push(...p.additives_original_tags);
+                    if (Array.isArray(p.ingredients_tags)) productAdditivesTags.push(...p.ingredients_tags);
+                    if (Array.isArray(p.allergens_tags)) productAdditivesTags.push(...p.allergens_tags);
+                    break;
                   }
-                } catch (subErr) {
-                  // Fall through to next cluster endpoint
                 }
+              } catch (subErr) {
+                // Timeout or network drop; graceful fallback
               }
             }
           } catch (e) {
@@ -3933,6 +3918,16 @@
           detectedAdditives: detectedAdditivesList
         };
 
+        // Save fully evaluated product (with allergens and additives) to fast in-memory & local cache
+        saveCatalogProduct(code, {
+          name: productName,
+          brand: brandName,
+          ingredients: ingredientsSummary,
+          additives: productAdditivesTags,
+          allergens: detectedAllergenIds,
+          offProductData: offProductData
+        });
+
         displayResult(resultData);
         addToHistory(resultData);
       } catch (fatalErr) {
@@ -4002,7 +3997,7 @@
         allergenPillBg = "bg-amber-500/20 text-amber-300 border-amber-500/40";
         allergenPillIcon = "⚠️";
         allergenPillText = `${data.familyMatches.length} Alert${data.familyMatches.length > 1 ? 's' : ''}`;
-      } else if (!hasIngredients) {
+      } else if (!hasIndexedIngredients) {
         allergenPillBg = "bg-slate-800 text-amber-300 border-slate-700";
         allergenPillIcon = "ℹ️";
         allergenPillText = "Check Label";
@@ -4011,7 +4006,7 @@
       let additivePillBg = "bg-emerald-500/15 text-emerald-300 border-emerald-500/30";
       let additivePillIcon = "✓";
       let additivePillText = "Clean";
-      if (!hasIngredients) {
+      if (!hasIndexedIngredients) {
         additivePillBg = "bg-slate-800 text-slate-300 border-slate-700";
         additivePillIcon = "ℹ️";
         additivePillText = "Unindexed";
@@ -4424,8 +4419,9 @@
         </div>
       `;
 
-      // 6. ACTION BUTTON: INSTANT SCAN NEXT BARCODE
-      const scanNextBtnHtml = `
+      // 6. ACTION BUTTON: INSTANT SCAN NEXT BARCODE (Only active on live Scanner tab; hidden on UPC Entry)
+      const isScannerTabActive = Boolean(scannerPanel && !scannerPanel.classList.contains('hidden'));
+      const scanNextBtnHtml = isScannerTabActive ? `
         <button 
           type="button" 
           class="scan-next-item-btn w-full py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 text-white font-bold text-sm shadow-xl shadow-blue-950/60 transition active:scale-[0.98] flex items-center justify-center gap-2"
@@ -4436,7 +4432,7 @@
           </svg>
           <span>📷 Scan Next Item</span>
         </button>
-      `;
+      ` : '';
 
       const microNotice = `
         <div class="pt-2 text-center">
