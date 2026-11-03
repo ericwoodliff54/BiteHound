@@ -2677,33 +2677,53 @@
     "allergens": [
       "gluten",
       "dairy",
-      "soy"
+      "soy",
+      "wheat"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e476",
+      "en:vanillin",
+      "en:artificial-flavor",
+      "pgpr",
+      "vanillin",
+      "palm-kernel-oil"
+    ],
     "stores": [
       "Meijer",
       "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "CVS",
+      "Walgreens"
     ],
     "isRecalled": false
   },
   "0034000002467": {
     "product": "Kit Kat Crisp Wafers in Milk Chocolate",
     "brand": "Kit Kat",
-    "upc": "034000002467",
+    "upc": "0034000002467",
     "ingredients": "Sugar, Wheat Flour, Skim Milk, Cocoa Butter, Chocolate, Vegetable Oil (Palm Kernel Oil, Palm Oil), Milk Fat, Lactose (Milk), Contains 2% or Less of: Lecithin (Soy), PGPR, Vanillin (Artificial Flavor), Salt, Yeast, Baking Soda.",
     "allergens": [
       "gluten",
       "dairy",
-      "soy"
+      "soy",
+      "wheat"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e476",
+      "en:vanillin",
+      "en:artificial-flavor",
+      "pgpr",
+      "vanillin",
+      "palm-kernel-oil"
+    ],
     "stores": [
       "Meijer",
       "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "CVS",
+      "Walgreens"
     ],
     "isRecalled": false
   },
@@ -6052,6 +6072,64 @@
       "Kroger",
       "Walmart",
       "Target"
+    ],
+    "isRecalled": false
+  },
+  "03424607": {
+    "product": "Kit Kat Crisp Wafers in Milk Chocolate",
+    "brand": "Kit Kat",
+    "upc": "03424607",
+    "ingredients": "Sugar, Wheat Flour, Skim Milk, Cocoa Butter, Chocolate, Vegetable Oil (Palm Kernel Oil, Palm Oil), Milk Fat, Lactose (Milk), Contains 2% or Less of: Lecithin (Soy), PGPR, Vanillin (Artificial Flavor), Salt, Yeast, Baking Soda.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "soy",
+      "wheat"
+    ],
+    "additives_tags": [
+      "en:e476",
+      "en:vanillin",
+      "en:artificial-flavor",
+      "pgpr",
+      "vanillin",
+      "palm-kernel-oil"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target",
+      "CVS",
+      "Walgreens"
+    ],
+    "isRecalled": false
+  },
+  "003424607": {
+    "product": "Kit Kat Crisp Wafers in Milk Chocolate",
+    "brand": "Kit Kat",
+    "upc": "003424607",
+    "ingredients": "Sugar, Wheat Flour, Skim Milk, Cocoa Butter, Chocolate, Vegetable Oil (Palm Kernel Oil, Palm Oil), Milk Fat, Lactose (Milk), Contains 2% or Less of: Lecithin (Soy), PGPR, Vanillin (Artificial Flavor), Salt, Yeast, Baking Soda.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "soy",
+      "wheat"
+    ],
+    "additives_tags": [
+      "en:e476",
+      "en:vanillin",
+      "en:artificial-flavor",
+      "pgpr",
+      "vanillin",
+      "palm-kernel-oil"
+    ],
+    "stores": [
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target",
+      "CVS",
+      "Walgreens"
     ],
     "isRecalled": false
   }
