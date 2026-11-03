@@ -3879,7 +3879,17 @@
 
           if (match) {
             const matchStatus = (match.status || '').toLowerCase();
-            const isTerm = matchStatus.includes('terminated') || matchStatus.includes('completed');
+            let matchAgeDays = 0;
+            if (match.date && match.date.includes('/')) {
+              const parts = match.date.split('/');
+              if (parts.length === 3) {
+                const mDate = new Date(parseInt(parts[2]), parseInt(parts[0]) - 1, parseInt(parts[1]));
+                if (!isNaN(mDate)) matchAgeDays = (Date.now() - mDate.getTime()) / (1000 * 60 * 60 * 24);
+              }
+            }
+            const isPerishableMatch = /carrot|spinach|salad|lettuce|greens|produce|milk|cream|yogurt|berries|strawberr|blueberr|fresh|deli/.test((match.product + ' ' + (match.raw || '')).toLowerCase());
+            const isPastShelf = matchAgeDays > (isPerishableMatch ? 150 : 730);
+            const isTerm = matchStatus.includes('terminated') || matchStatus.includes('completed') || isPastShelf;
             if (isTerm) {
               terminatedNotice = {
                 date: match.date || 'Historical Archive',
@@ -6055,7 +6065,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=13')
+        navigator.serviceWorker.register('./sw.js?v=14')
           .then(reg => console.log('BiteHound SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
