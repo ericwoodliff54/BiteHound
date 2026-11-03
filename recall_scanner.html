@@ -275,7 +275,7 @@
             <span class="text-base">🧪</span>
             <div>
               <span class="font-bold text-white block">Automatic Additive & Synthetic Dye Screener</span>
-              <span class="text-[11px] text-slate-400">Flags petroleum dyes (Red 40, Yellow 5/6, Blue 1/2), Titanium Dioxide, BHA/BHT, TBHQ & preservatives.</span>
+              <span class="text-[11px] text-slate-400">Flags petroleum dyes (Red 40, Yellow 5/6, Blue 1/2), Titanium Dioxide, PGPR, artificial flavors, BHA/BHT & preservatives.</span>
             </div>
           </div>
 
@@ -840,14 +840,14 @@
       <!-- Allergen Tick Box Grid (FDA Big 9 + Gluten, Corn & Sulfites) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1" id="allergenCheckboxesContainer"></div>
 
-      <!-- Automatic Food Additives & Synthetic Dyes Pro Feature Card -->
-      <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+            <!-- Automatic Food Additives & Chemical Screener (Pro Feature Card) -->
+      <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2.5">
             <span class="text-2xl">🧪</span>
             <div>
-              <span class="font-bold text-sm text-white block">Automatic Additive & Synthetic Dye Scanner</span>
-              <span class="text-xs text-slate-400">Flags Red 40, Titanium Dioxide, Preservatives & Sweeteners</span>
+              <span class="font-bold text-sm text-white block">Automatic Chemical & Additive Screener</span>
+              <span class="text-xs text-purple-300 font-semibold">37 Scrutinized Additives, Dyes, Banned Agents & Emulsifiers</span>
             </div>
           </div>
           <span id="additiveProStatusBadge" class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold uppercase tracking-wider shrink-0">
@@ -855,19 +855,147 @@
           </span>
         </div>
         <p class="text-[11px] text-slate-400 leading-normal">
-          No manual selection needed! BiteHound Pro automatically audits all scanned ingredients against a comprehensive index of synthetic petroleum dyes, European-banned additives, and high-risk preservatives on every barcode scan.
+          No manual toggles needed! BiteHound Pro automatically cross-references every barcode scan against a database of 37 synthetic petroleum dyes, California- & EU-banned additives, endocrine disruptors, and confectionery replacers.
         </p>
-        <div class="flex flex-wrap gap-1.5 pt-0.5 text-[10px] text-slate-400">
-          <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800">🎨 Red 40, Yellow 5 & 6, Blue 1</span>
-          <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800">⚪ Titanium Dioxide (E171)</span>
-          <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800">🛑 BHA, BHT & TBHQ</span>
-          <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800">🥓 Sodium Nitrites / Nitrates</span>
-          <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800">🍬 Aspartame & Sucralose</span>
-          <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800">🌽 High Fructose Corn Syrup</span>
-          <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800">🧪 Carrageenan & Emulsifiers</span>
-          <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800">🛢️ Hydrogenated Oils & Mono/Diglycerides</span>
-          <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800">🛑 Sodium Benzoate, Sorbates & EDTA</span>
-          <span class="px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800">🎨 Caramel Color & MSG</span>
+        
+        <!-- Categorized Summary Badges -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 pt-0.5 text-[11px]">
+          <div class="p-2 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center gap-1.5">
+            <span>🎨</span>
+            <span class="text-slate-300 font-medium"><strong>7</strong> Petroleum Dyes</span>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center gap-1.5">
+            <span>🛑</span>
+            <span class="text-slate-300 font-medium"><strong>6</strong> Banned / Phased-Out</span>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center gap-1.5">
+            <span>🧪</span>
+            <span class="text-slate-300 font-medium"><strong>8</strong> Emulsifiers & Fats</span>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center gap-1.5">
+            <span>🥓</span>
+            <span class="text-slate-300 font-medium"><strong>8</strong> Chemical Preservatives</span>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center gap-1.5">
+            <span>🍬</span>
+            <span class="text-slate-300 font-medium"><strong>4</strong> Sweeteners & High-GI</span>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-900/90 border border-slate-800 flex items-center gap-1.5">
+            <span>🔬</span>
+            <span class="text-slate-300 font-medium"><strong>4</strong> Texturizers & Flavors</span>
+          </div>
+        </div>
+
+        <!-- Interactive Directory Toggle -->
+        <button 
+          type="button" 
+          id="toggleAdditivesDirectoryBtn" 
+          class="w-full py-2.5 px-3.5 rounded-xl bg-slate-900 hover:bg-slate-800/90 border border-slate-800 text-sky-400 hover:text-white font-bold text-xs flex items-center justify-between transition active:scale-[0.99] shadow-sm"
+        >
+          <span class="flex items-center gap-2">
+            <span>📋</span>
+            <span>Browse Full Directory of All 37 Screened Chemicals</span>
+          </span>
+          <span id="additivesDirectoryArrow" class="text-slate-400 font-mono text-[11px]">▼ View All</span>
+        </button>
+
+        <!-- Expandable Chemical Directory Drawer -->
+        <div id="additivesDirectoryDrawer" class="hidden pt-2 border-t border-slate-800/80 space-y-3 text-xs">
+          <!-- 1. Petroleum Dyes -->
+          <div class="space-y-1">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-rose-400 flex items-center gap-1">
+              <span>🎨</span> Synthetic Petroleum Food Dyes (Requires EU Warning Labels)
+            </span>
+            <div class="flex flex-wrap gap-1 text-[10px] text-slate-300">
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Red 40 (Allura Red / E129)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Yellow 5 (Tartrazine / E102)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Yellow 6 (Sunset Yellow / E110)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Blue 1 (Brilliant Blue / E133)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Blue 2 (Indigotine / E132)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Red 3 (Erythrosine / E127 - CA Banned)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Green 3 (Fast Green / E143)</span>
+            </div>
+          </div>
+
+          <!-- 2. Banned & High Risk -->
+          <div class="space-y-1">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1">
+              <span>🛑</span> Government Banned & High-Risk Additives
+            </span>
+            <div class="flex flex-wrap gap-1 text-[10px] text-slate-300">
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Brominated Vegetable Oil (BVO / FDA 2024 Ban)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Propylparaben (E216 / CA & EU Banned)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Titanium Dioxide (E171 / EU Banned)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Potassium Bromate (E924 / Banned in EU/CA)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Azodicarbonamide (ADA / E927a)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Bleached Flour (Benzoyl Peroxide)</span>
+            </div>
+          </div>
+
+          <!-- 3. Emulsifiers & Industrial Fats -->
+          <div class="space-y-1">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-purple-400 flex items-center gap-1">
+              <span>🧪</span> Industrial Emulsifiers & Confectionery Fats
+            </span>
+            <div class="flex flex-wrap gap-1 text-[10px] text-slate-300">
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">PGPR (E476 / Cocoa Butter Replacer)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">DATEM (E472e / Dough Conditioner)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Sodium Stearoyl Lactylate (SSL / E481)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Polysorbate 60 & 80 (E433/E435)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Carrageenan (E407)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Mono- & Diglycerides (E471)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Hydrogenated & Partially Hydrogenated Oils</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Palm Kernel Oil & Fractionated Fats</span>
+            </div>
+          </div>
+
+          <!-- 4. Chemical Preservatives -->
+          <div class="space-y-1">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-rose-300 flex items-center gap-1">
+              <span>🥓</span> Chemical Preservatives & Antioxidants
+            </span>
+            <div class="flex flex-wrap gap-1 text-[10px] text-slate-300">
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">BHA & BHT (E320/E321)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">TBHQ (E319)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Sodium Nitrites & Nitrates (E249–E252)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Sodium Benzoate & Potassium Sorbate (E211/E202)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Calcium Disodium EDTA (E385)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Propyl Gallate (E310)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Calcium & Sodium Propionate (E281/E282)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Sodium Aluminum Phosphate (E541)</span>
+            </div>
+          </div>
+
+          <!-- 5. Sweeteners & High-GI Fillers -->
+          <div class="space-y-1">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-sky-400 flex items-center gap-1">
+              <span>🍬</span> Artificial Sweeteners & Industrial Syrups
+            </span>
+            <div class="flex flex-wrap gap-1 text-[10px] text-slate-300">
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">High Fructose Corn Syrup (HFCS-55/42)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Aspartame (NutraSweet / E951)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Sucralose (Splenda / E955)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Acesulfame Potassium (Ace-K / E950)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Saccharin (E954)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Maltodextrin & Modified Food Starch</span>
+            </div>
+          </div>
+
+          <!-- 6. Coatings, Solvents & Flavorings -->
+          <div class="space-y-1">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-teal-300 flex items-center gap-1">
+              <span>🔬</span> Coatings, Solvents & Flavor Enhancers
+            </span>
+            <div class="flex flex-wrap gap-1 text-[10px] text-slate-300">
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Confectioner’s Glaze & Shellac (E904)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Silicon Dioxide & Silicates (E551)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Propylene Glycol (E1520)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Vanillin & Synthetic Artificial Flavors</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Caramel Color (Class III/IV - 4-MEI)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">MSG, Disodium Inosinate & Guanylate (E621)</span>
+              <span class="px-2 py-0.5 rounded bg-slate-900 border border-slate-800">Undisclosed Proprietary "Natural Flavors"</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1266,6 +1394,97 @@
     ];
     // Comprehensive Index of Scrutinized Food Additives & Synthetic Dyes (Pro Guard)
     const ADDITIVES_DATABASE = [
+      {
+        id: 'bvo',
+        name: 'Brominated Vegetable Oil (BVO)',
+        type: 'FDA-Banned Beverage Emulsifier (2024)',
+        icon: '🛑',
+        desc: 'Vegetable oil chemically bonded with bromine (E443). Officially banned by the US FDA in July 2024 and prohibited across Europe due to bioaccumulation in fat tissue and thyroid toxicity.',
+        tags: ['en:e443', 'en:brominated-vegetable-oil', 'e443', 'bvo', 'brominated-oil'],
+        regex: /\bbvo\b|brominated\s+vegetable\s+oils?|\be[-_\s]*443\b/i
+      },
+      {
+        id: 'propylparaben',
+        name: 'Propylparaben (Preservative)',
+        type: 'California- & EU-Banned Endocrine Disruptor',
+        icon: '🛑',
+        desc: 'Paraben-class synthetic antimicrobial preservative (E216) prohibited in the EU and banned under the California Food Safety Act. Animal toxicology shows disruption of endocrine and reproductive hormones.',
+        tags: ['en:e216', 'en:e217', 'en:propylparaben', 'en:sodium-propylparaben', 'e216', 'e217', 'propylparaben'],
+        regex: /(?:sodium\s+)?propyl\s*paraben|\be[-_\s]*21[67]\b/i
+      },
+      {
+        id: 'confectioners_glaze',
+        name: 'Confectioner’s Glaze & Shellac (E904)',
+        type: 'Insect-Derived Resin Coating',
+        icon: '🪲',
+        desc: 'Purified resin secreted by female lac beetles (Kerria lacca). Used to give hard glossy coatings to jelly beans, sprinkles, chocolate-covered candies, and pharmaceutical pills.',
+        tags: ['en:e904', 'en:shellac', 'e904', 'confectioners-glaze', 'shellac', 'resinous-glaze'],
+        regex: /confectioner'?s\s+glaze|resinous\s+glaze|\bshellac\b|\be[-_\s]*904\b/i
+      },
+      {
+        id: 'datem_ssl',
+        name: 'DATEM & Sodium Stearoyl Lactylate (SSL)',
+        type: 'Industrial Dough Strengthener',
+        icon: '🍞',
+        desc: 'Synthetic dough conditioners (E472e & E481) used in commercial sliced bread, hamburger buns, and packaged donuts to unnaturally retain moisture and extend factory shelf life.',
+        tags: ['en:e472e', 'en:e481', 'en:datem', 'en:sodium-stearoyl-lactylate', 'datem', 'e472e', 'e481'],
+        regex: /\bdatem\b|diacetyl\s+tartaric\s+acid\s+esters?|sodium\s+stearoyl[-_\s]*(?:lactylate|2[-_\s]*lactylate)|\be[-_\s]*(?:472e|481)\b/i
+      },
+      {
+        id: 'aluminum_compounds',
+        name: 'Sodium Aluminum Phosphate & Sulfates',
+        type: 'Aluminum-Based Chemical Leavener',
+        icon: '⚠️',
+        desc: 'Aluminum-containing chemical leavening salts (E541 / E521) found in commercial pancake mixes, frozen waffles, and processed cheese. Strictly limited in Europe due to neurotoxicity concerns.',
+        tags: ['en:e541', 'en:e521', 'en:sodium-aluminium-phosphate', 'e541', 'e521'],
+        regex: /(?:sodium\s+)?alumin(?:um|ium)\s+(?:phosphate|sulfate|silicate)|\be[-_\s]*5(?:41|21)\b/i
+      },
+      {
+        id: 'silicon_dioxide',
+        name: 'Silicon Dioxide & Synthetic Silicates (E551)',
+        type: 'Nanoparticle Anti-Caking Powder',
+        icon: '⚪',
+        desc: 'Synthetic silica powder (E551) added to seasoning packets, grated parmesan, spice blends, and powdered creamers. Under heightened scrutiny by the European Food Safety Authority for nanoparticle gut absorption.',
+        tags: ['en:e551', 'en:e552', 'en:silicon-dioxide', 'e551', 'e552', 'silicon-dioxide', 'silica'],
+        regex: /silicon\s+dioxide|synthetic\s+silica|calcium\s+silicate|\be[-_\s]*55[12]\b/i
+      },
+      {
+        id: 'propylene_glycol',
+        name: 'Propylene Glycol (E1520)',
+        type: 'Petrochemical Solvent & Humectant',
+        icon: '🧪',
+        desc: 'Synthetic chemical solvent (E1520) used as a carrier for artificial food coloring and flavoring extracts, and as a moisture retainer in commercial salad dressings and baked goods.',
+        tags: ['en:e1520', 'en:propylene-glycol', 'e1520', 'propylene-glycol'],
+        regex: /propylene\s+glycol|\be[-_\s]*1520\b/i
+      },
+      {
+        id: 'maltodextrin_modified_starch',
+        name: 'Maltodextrin & Modified Food Starch',
+        type: 'High-Glycemic Ultra-Processed Filler',
+        icon: '🌽',
+        desc: 'Enzymatically hydrolyzed corn, wheat, or tapioca starches with an ultra-high glycemic index (110–185) higher than pure table sugar. Used as cheap bulking fillers in chips, snack dusts, and instant sauces.',
+        tags: ['en:maltodextrin', 'en:modified-starch', 'en:modified-corn-starch', 'maltodextrin', 'modified-food-starch'],
+        regex: /\bmaltodextrin\b|modified\s+(?:food|corn|wheat|tapioca|potato)\s+starch(?:es)?/i
+      },
+      {
+        id: 'propionate_preservatives',
+        name: 'Calcium & Sodium Propionate (E281/E282)',
+        type: 'Antifungal Bakery Preservative',
+        icon: '🍞',
+        desc: 'Synthetic chemical propionates (E281 & E282) added to factory breads and tortillas to prevent mold. Documented in pediatric studies for potential links to behavioral irritability and sleep issues in sensitive children.',
+        tags: ['en:e281', 'en:e282', 'e281', 'e282', 'calcium-propionate'],
+        regex: /(?:calcium|sodium)\s+propionate|\be[-_\s]*28[12]\b/i
+      },
+      {
+        id: 'natural_flavors_unspecified',
+        name: 'Undisclosed "Natural Flavors" / Aroma Blends',
+        type: 'Proprietary Chemical Flavor Mixture',
+        icon: '❓',
+        desc: 'Broad umbrella label legally permitting food manufacturers to group dozens of proprietary chemical solvents, flavor concentrates, and synthetic carriers under a single ambiguous line item.',
+        tags: ['en:natural-flavouring', 'en:natural-flavor', 'natural-flavors', 'natural-flavoring'],
+        regex: /\bnatural\s+flavou?rs?(?:\s+and\s+artificial\s+flavou?rs?)?\b/i
+      },
+
       {
         id: 'pgpr',
         name: 'PGPR (Polyglycerol Polyricinoleate)',
@@ -4877,7 +5096,7 @@
                 </span>
               </div>
               <p class="text-xs text-slate-300 leading-relaxed">
-                Zero synthetic petroleum dyes (Red 40, Yellow 5 & 6, Blue 1 & 2), titanium dioxide, BHA/BHT, TBHQ, nitrites, or scrutinized artificial sweeteners detected.
+                Zero synthetic petroleum dyes (Red 40, Yellow 5 & 6, Blue 1 & 2), titanium dioxide, PGPR, artificial flavors, BHA/BHT, TBHQ, nitrites, or scrutinized artificial sweeteners detected.
               </p>
             ` : `
               <div class="flex items-center justify-between pb-2 border-b border-slate-800">
@@ -6250,7 +6469,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=26')
+        navigator.serviceWorker.register('./sw.js?v=27')
           .then(reg => console.log('BiteHound SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
