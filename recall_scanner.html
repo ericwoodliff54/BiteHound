@@ -3999,11 +3999,19 @@
       }, 350);
     }
 
-    // Brand & Product Search Engine (Auto-Searching as You Type + Enter Search + Adaptive View)
+        // Brand & Product Search Engine (Recalls Prioritized at Top + Clickable Bulletins + Persistent Clear Button)
     const brandSearchForm = document.getElementById('brandSearchForm');
     const brandSearchSection = document.getElementById('brandSearchSection');
     const executeSearchBtn = document.getElementById('executeSearchBtn');
     let searchDebounceTimer = null;
+
+    brandSearchInput.addEventListener('focus', () => {
+      clearSearchBtn.classList.toggle('hidden', brandSearchInput.value.trim() === '');
+      // Select existing text on tap so user can immediately type over it or tap 'X' to clear
+      if (brandSearchInput.value.trim() !== '') {
+        brandSearchInput.select();
+      }
+    });
 
     brandSearchInput.addEventListener('input', () => {
       const query = brandSearchInput.value.trim().toLowerCase();
@@ -4015,8 +4023,8 @@
         return;
       }
       searchDebounceTimer = setTimeout(() => {
-        performBrandSearch(query, false);
-      }, 180);
+        performBrandSearch(query, true); // true = smoothly bring results into view while typing
+      }, 150);
     });
 
     if (brandSearchForm) {
@@ -4026,7 +4034,7 @@
         const query = brandSearchInput.value.trim().toLowerCase();
         if (query.length >= 2) {
           brandSearchInput.blur(); // Dismiss mobile on-screen keyboard so results are immediately in full view!
-          performBrandSearch(query, true); // true = smoothly adapt and bring results into view
+          performBrandSearch(query, true);
         }
       });
     }
@@ -4060,114 +4068,263 @@
         return;
       }
 
-      const seenUpcs = new Set();
-      const upcMatches = [];
+      const seenKeys = new Set();
+      const activeRecallsList = [];
+      const clearedProductsList = [];
 
-      // 1. Search RECALL_DATABASE
+      // 1. Search NATIONAL_BULLETINS for Active Recalls (Always Highest Priority!)
+      NATIONAL_BULLETINS.forEach(item => {
+        const text = `${item.brand || ''} ${item.title || ''} ${item.reason || ''}`.toLowerCase();
+        if (text.includes(query)) {
+          const key = 'bulletin_' + item.id;
+          if (!seenKeys.has(key)) {
+            seenKeys.add(key);
+            activeRecallsList.push({
+              isBulletin: true,
+              bulletinId: item.id,
+              upc: (item.upcs && item.upcs.length > 0) ? item.upcs[0] : null,
+              title: item.title,
+              brand: item.brand,
+              severity: item.severity || 'Class I',
+              agency: item.agency || 'USDA-FSIS / FDA',
+              date: item.date || 'Active',
+              hazard: item.reason,
+              stores: item.stores || [],
+              states: item.states || ['ALL']
+            });
+          }
+        }
+      });
+
+      // 2. Search cachedFDARecalls for Live OpenFDA Recalls
+      if (typeof cachedFDARecalls !== 'undefined' && Array.isArray(cachedFDARecalls)) {
+        cachedFDARecalls.forEach(item => {
+          const text = `${item.brand || ''} ${item.product || ''} ${item.reason || ''} ${item.raw || ''}`.toLowerCase();
+          if (text.includes(query)) {
+            const key = 'fda_' + item.id;
+            if (!seenKeys.has(key)) {
+              seenKeys.add(key);
+              activeRecallsList.push({
+                isBulletin: true,
+                bulletinId: item.id,
+                upc: (item.upcs && item.upcs.length > 0) ? item.upcs[0] : null,
+                title: item.product,
+                brand: item.brand,
+                severity: item.severity || 'Class I',
+                agency: 'openFDA Live Wire',
+                date: item.date || 'Recent',
+                hazard: item.reason,
+                stores: [],
+                states: ['ALL']
+              });
+            }
+          }
+        });
+      }
+
+      // 3. Search RECALL_DATABASE
       if (typeof RECALL_DATABASE !== 'undefined') {
         Object.values(RECALL_DATABASE).forEach(item => {
-          if (!item.upc || seenUpcs.has(item.upc)) return;
+          if (!item.upc) return;
+          const key = 'upc_' + item.upc;
+          if (seenKeys.has(key)) return;
+
           const text = `${item.brand || ''} ${item.product || ''} ${item.hazard || ''}`.toLowerCase();
           if (text.includes(query)) {
-            seenUpcs.add(item.upc);
-            upcMatches.push(item);
+            seenKeys.add(key);
+            if (item.isRecalled) {
+              activeRecallsList.push({
+                isBulletin: false,
+                upc: item.upc,
+                title: item.product,
+                brand: item.brand,
+                severity: item.severity || 'Class I Alert',
+                agency: item.agency || 'FDA',
+                date: item.recallDate || 'Active',
+                hazard: item.hazard || 'Active federal recall notice',
+                isRecalled: true
+              });
+            } else {
+              clearedProductsList.push({
+                isBulletin: false,
+                upc: item.upc,
+                title: item.product,
+                brand: item.brand,
+                isRecalled: false
+              });
+            }
           }
         });
       }
 
-      // 2. Search staplesCatalog (325+ retail staples)
+      // 4. Search staplesCatalog (325+ retail staples)
       if (typeof staplesCatalog !== 'undefined') {
         Object.values(staplesCatalog).forEach(item => {
-          if (!item.upc || seenUpcs.has(item.upc)) return;
+          if (!item.upc) return;
+          const key = 'upc_' + item.upc;
+          if (seenKeys.has(key)) return;
+
           const text = `${item.brand || ''} ${item.product || ''}`.toLowerCase();
           if (text.includes(query)) {
-            seenUpcs.add(item.upc);
-            upcMatches.push(item);
+            seenKeys.add(key);
+            clearedProductsList.push({
+              isBulletin: false,
+              upc: item.upc,
+              title: item.product,
+              brand: item.brand,
+              isRecalled: false
+            });
           }
         });
       }
-
-      // 3. Search NATIONAL_BULLETINS
-      const bulletinMatches = NATIONAL_BULLETINS.filter(item => {
-        const text = `${item.brand || ''} ${item.title || ''} ${item.reason || ''}`.toLowerCase();
-        return text.includes(query);
-      });
 
       searchResultsBox.classList.remove('hidden');
 
-      if (upcMatches.length === 0 && bulletinMatches.length === 0) {
+      if (activeRecallsList.length === 0 && clearedProductsList.length === 0) {
         searchResultsBox.innerHTML = `
           <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-400 text-center space-y-1">
             <span class="text-emerald-400 font-bold block text-sm">✓ No Active Recalls or Hazards Found</span>
-            <span>No current alerts or catalog items matched "${query}". Check product expiration & packaging integrity.</span>
+            <span>Zero current FDA or USDA food safety alerts match "${query}".</span>
           </div>
         `;
-        if (shouldScroll) {
-          ensureSearchInView();
-        }
+        if (shouldScroll) ensureSearchInView();
         return;
       }
 
-      const totalCount = upcMatches.length + bulletinMatches.length;
-      let html = `
-        <div class="flex items-center justify-between pb-1 px-1 text-[11px] text-slate-400">
-          <span class="font-bold text-sky-400">Found ${totalCount} matching product${totalCount > 1 ? 's' : ''}</span>
-          <span class="text-slate-500 font-mono text-[10px]">Tap item to inspect</span>
-        </div>
-      `;
+      let html = '';
 
-      upcMatches.forEach(item => {
-        const isRecalled = Boolean(item.isRecalled);
-        const badgeColor = isRecalled ? 'bg-rose-500/20 text-rose-300 border-rose-500/30 font-black animate-pulse' : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30 font-bold';
-        const label = isRecalled ? '🚨 RECALLED' : '✓ CLEARED';
-
+      // SECTION 1: ACTIVE RECALLS AT THE TOP!
+      if (activeRecallsList.length > 0) {
         html += `
-          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/90 hover:border-sky-500/60 transition cursor-pointer search-result-item active:scale-[0.99] shadow-sm space-y-1" data-upc="${item.upc}" data-title="${item.product}">
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] uppercase px-1.5 py-0.5 rounded border ${badgeColor}">${label}</span>
-              <span class="text-[10px] text-slate-500 font-mono">UPC: ${item.upc}</span>
-            </div>
-            <h4 class="text-xs font-bold text-slate-100 leading-snug">${item.product}</h4>
-            <p class="text-[11px] text-slate-400">${item.brand}</p>
-            ${item.hazard ? `<p class="text-[11px] text-rose-300 leading-tight">${item.hazard}</p>` : ''}
+          <div class="p-2.5 rounded-xl bg-rose-950/80 border border-rose-500/60 text-rose-200 text-xs flex items-center justify-between">
+            <span class="font-bold flex items-center gap-1.5 text-rose-300">
+              <span class="animate-pulse">🚨</span>
+              <span>${activeRecallsList.length} Active Public Health Recall${activeRecallsList.length > 1 ? 's' : ''} Found</span>
+            </span>
+            <span class="text-[10px] text-rose-400 font-mono">Tap to Inspect</span>
+          </div>
+          <div class="space-y-1.5 pt-0.5">
+            ${activeRecallsList.map(item => `
+              <div 
+                class="p-3 rounded-xl bg-rose-950/40 border border-rose-600/60 hover:border-rose-400 transition cursor-pointer search-result-item active:scale-[0.99] shadow-sm space-y-1" 
+                data-type="${item.isBulletin ? 'bulletin' : 'product'}" 
+                data-upc="${item.upc || ''}" 
+                data-bulletin-id="${item.bulletinId || ''}" 
+                data-title="${item.title}"
+                data-brand="${item.brand}"
+                data-hazard="${item.hazard || ''}"
+                data-severity="${item.severity || 'Class I'}"
+                data-agency="${item.agency || 'FDA'}"
+                data-date="${item.date || 'Active'}"
+              >
+                <div class="flex items-center justify-between">
+                  <span class="text-[10px] font-black uppercase tracking-wide px-1.5 py-0.5 rounded border bg-rose-500/30 text-rose-200 border-rose-500/60 animate-pulse">
+                    🚨 ${item.severity || 'Class I'} RECALL
+                  </span>
+                  <span class="text-[10px] text-rose-300 font-mono">${item.date || 'Active Alert'}</span>
+                </div>
+                <h4 class="text-xs font-bold text-white leading-snug">${item.title}</h4>
+                <p class="text-[11px] text-slate-300">${item.brand} • <span class="text-rose-300">${item.agency || 'Federal Alert'}</span></p>
+                <p class="text-[11px] text-rose-200 leading-tight">${item.hazard}</p>
+                ${item.stores && item.stores.length > 0 ? `<p class="text-[10px] text-slate-400 pt-0.5">Retailers: ${item.stores.join(', ')}</p>` : ''}
+              </div>
+            `).join('')}
           </div>
         `;
-      });
+      }
 
-      bulletinMatches.forEach(item => {
-        const upcAttr = (item.upcs && item.upcs.length > 0) ? `data-upc="${item.upcs[0]}"` : '';
+      // SECTION 2: CLEARED STORE PRODUCTS (Displayed second, with clear context!)
+      if (clearedProductsList.length > 0) {
+        const headerTitle = (activeRecallsList.length > 0) 
+          ? `Other Store Items (Not Recalled • ${clearedProductsList.length})` 
+          : `Verified Store Inventory (${clearedProductsList.length} items • 0 Recalls)`;
+
         html += `
-          <div class="p-3 rounded-xl bg-slate-950 border border-rose-900/50 hover:border-rose-700 transition cursor-pointer search-result-item active:scale-[0.99] shadow-sm space-y-1" ${upcAttr} data-title="${item.title}">
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] font-black uppercase tracking-wide px-1.5 py-0.5 rounded border bg-rose-500/20 text-rose-300 border-rose-500/30">${item.severity} PRIORITY ALERT</span>
-              <span class="text-[10px] text-slate-500 font-mono">${item.date} • ${item.agency}</span>
+          <div class="pt-2">
+            <div class="flex items-center justify-between pb-1 px-1 text-[11px] text-slate-400">
+              <span class="font-bold text-emerald-400 flex items-center gap-1">
+                <span>✓</span>
+                <span>${headerTitle}</span>
+              </span>
+              <span class="text-[10px] text-slate-500">Tap to check ingredients</span>
             </div>
-            <h4 class="text-xs font-bold text-slate-100 leading-snug">${item.title}</h4>
-            <p class="text-[11px] text-slate-400">${item.brand}</p>
-            <p class="text-[11px] text-rose-300/90 leading-tight">${item.reason}</p>
+            <div class="space-y-1.5">
+              ${clearedProductsList.map(item => `
+                <div 
+                  class="p-3 rounded-xl bg-slate-950 border border-slate-800/90 hover:border-emerald-500/60 transition cursor-pointer search-result-item active:scale-[0.99] shadow-sm space-y-1" 
+                  data-type="product" 
+                  data-upc="${item.upc}" 
+                  data-title="${item.title}"
+                  data-brand="${item.brand}"
+                >
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded border bg-emerald-500/15 text-emerald-300 border-emerald-500/30">
+                      ✓ STORE INVENTORY CLEARED
+                    </span>
+                    <span class="text-[10px] text-slate-500 font-mono">UPC: ${item.upc}</span>
+                  </div>
+                  <h4 class="text-xs font-semibold text-slate-200 leading-snug">${item.title}</h4>
+                  <p class="text-[11px] text-slate-400">${item.brand}</p>
+                </div>
+              `).join('')}
+            </div>
           </div>
         `;
-      });
+      }
 
       searchResultsBox.innerHTML = html;
 
-      // Click handler for selecting a product on the UPC Scanner page
+      // Click handler: 100% functional for BOTH products and bulletins!
       document.querySelectorAll('.search-result-item').forEach(el => {
         el.addEventListener('click', () => {
+          triggerHaptic([30]);
           const upc = el.getAttribute('data-upc');
           const title = el.getAttribute('data-title') || '';
-          if (upc) {
-            triggerHaptic([30]);
-            searchResultsBox.classList.add('hidden');
-            clearSearchBtn.classList.add('hidden');
-            if (title) brandSearchInput.value = title;
-            brandSearchInput.blur(); // Dismiss mobile keyboard
-            processUPC(upc, 'scanner'); // DISPLAY DIRECTLY ON SCANNER PAGE!
+          const brand = el.getAttribute('data-brand') || '';
+          const hazard = el.getAttribute('data-hazard') || '';
+          const severity = el.getAttribute('data-severity') || 'Class I Alert';
+          const agency = el.getAttribute('data-agency') || 'USDA-FSIS / FDA';
+          const date = el.getAttribute('data-date') || 'Recent';
+          const bulletinId = el.getAttribute('data-bulletin-id');
+
+          // Keep search box populated and KEEP the 'X' clear button visible!
+          brandSearchInput.value = title;
+          clearSearchBtn.classList.remove('hidden');
+          searchResultsBox.classList.add('hidden');
+          brandSearchInput.blur(); // Dismiss mobile on-screen keyboard
+
+          if (upc && upc !== '' && upc !== 'null' && typeof RECALL_DATABASE !== 'undefined' && RECALL_DATABASE[upc]) {
+            processUPC(upc, 'scanner');
+          } else if (upc && upc !== '' && upc !== 'null' && typeof staplesCatalog !== 'undefined' && staplesCatalog[upc]) {
+            processUPC(upc, 'scanner');
+          } else {
+            // Bulletin or product without direct barcode: build complete recall display record
+            const bulletinRecord = {
+              productName: title,
+              brand: brand,
+              upc: upc || bulletinId || 'RECALL-NOTICE',
+              time: date,
+              isRecalled: true,
+              recallRecord: {
+                product: title,
+                brand: brand,
+                severity: severity,
+                agency: agency,
+                hazard: hazard || 'Active federal public health notice issued on this food item.',
+                action: 'Do not consume or serve. Return to place of purchase for full refund or discard immediately.',
+                stores: [],
+                states: ['ALL']
+              },
+              detectedAllergens: [],
+              detectedAdditives: [],
+              ingredients: ''
+            };
+            displayResult(bulletinRecord, 'scanner');
+            addToHistory(bulletinRecord);
           }
         });
       });
 
-      // Smoothly adapt page scroll position so results are comfortably in view above mobile keyboard
       if (shouldScroll) {
         ensureSearchInView();
       }
@@ -4178,10 +4335,11 @@
         if (!brandSearchSection) return;
         const rect = brandSearchSection.getBoundingClientRect();
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const targetY = scrollTop + rect.top - 100;
+        const targetY = scrollTop + rect.top - 80;
         window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
-      }, 60);
+      }, 50);
     }
+
 
     // State & Store Filter Handlers
     stateFilterSelect.addEventListener('change', () => {
@@ -6695,7 +6853,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=31')
+        navigator.serviceWorker.register('./sw.js?v=32')
           .then(reg => console.log('BiteHound SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
