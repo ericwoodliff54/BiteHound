@@ -565,7 +565,7 @@
     <!-- RETROSPECTIVE PANTRY RECALL ALERT BANNER (Reveals when an item in pantry matches an active recall) -->
     <section id="pantryRecallAlertBanner" class="hidden transition-all duration-300 mb-4 scroll-mt-36" aria-live="polite"></section>
 
-    <section id="resultContainer" class="hidden transition-all duration-300 mb-4 scroll-mt-36"></section>
+    <section id="scannerResultContainer" class="hidden transition-all duration-300 mb-4 scroll-mt-36" aria-live="polite"></section>
 
     <!-- SECTION 1: SCANNER PANEL WITH CLEAN SINGLE RETICLE (NO LASER, NO DUPLICATE FRAMES) -->
     <section id="scannerPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4">
@@ -786,6 +786,9 @@
           <span>Verify Recall Status</span>
         </button>
       </form>
+
+      <!-- Separate Result Container for Manual UPC Entry -->
+      <div id="manualResultContainer" class="hidden transition-all duration-300 pt-4 border-t border-slate-800 space-y-3.5 scroll-mt-36" aria-live="polite"></div>
     </section>
 
     <!-- SECTION 3: ALLERGEN GUARD PANEL (ALLERGENS & FOOD ADDITIVES) -->
@@ -2997,7 +3000,9 @@
     const upcForm = document.getElementById('upcForm');
     const upcInput = document.getElementById('upcInput');
     const clearBtn = document.getElementById('clearBtn');
-    const resultContainer = document.getElementById('resultContainer');
+    const scannerResultContainer = document.getElementById('scannerResultContainer');
+    const manualResultContainer = document.getElementById('manualResultContainer');
+    const resultContainer = scannerResultContainer; // backward-compatibility alias
     const historyList = document.getElementById('historyList');
     const clearHistoryBtn = document.getElementById('clearHistoryBtn');
     const bulletinFeedList = document.getElementById('bulletinFeedList');
@@ -3343,20 +3348,35 @@
         }
       }
 
-      scannerPanel.classList.toggle('hidden', activeTab !== 'scanner');
-      manualPanel.classList.toggle('hidden', activeTab !== 'manual');
       allergensPanel.classList.toggle('hidden', activeTab !== 'allergens');
       historySection.classList.toggle('hidden', activeTab !== 'watchlist');
       bulletinsPanel.classList.toggle('hidden', activeTab !== 'bulletins');
       customizePanel.classList.toggle('hidden', activeTab !== 'customize');
 
-      const isScanTab = (activeTab === 'scanner' || activeTab === 'manual');
-
-      // Scanned barcode card ONLY displays on Scanner and Manual tabs - completely hidden on Watchlist, Allergens, Settings!
-      if (!isScanTab) {
-        resultContainer.classList.add('hidden');
-      } else if (resultContainer.innerHTML.trim() !== '') {
-        resultContainer.classList.remove('hidden');
+      // Independent Result Visibility: Scanner results stay on Scanner page; Manual results stay on Manual Entry page
+      if (activeTab === 'scanner') {
+        scannerPanel.classList.remove('hidden');
+        manualPanel.classList.add('hidden');
+        if (scannerResultContainer && scannerResultContainer.innerHTML.trim() !== '') {
+          scannerResultContainer.classList.remove('hidden');
+        }
+        if (manualResultContainer) {
+          manualResultContainer.classList.add('hidden');
+        }
+      } else if (activeTab === 'manual') {
+        manualPanel.classList.remove('hidden');
+        scannerPanel.classList.add('hidden');
+        if (manualResultContainer && manualResultContainer.innerHTML.trim() !== '') {
+          manualResultContainer.classList.remove('hidden');
+        }
+        if (scannerResultContainer) {
+          scannerResultContainer.classList.add('hidden');
+        }
+      } else {
+        scannerPanel.classList.add('hidden');
+        manualPanel.classList.add('hidden');
+        if (scannerResultContainer) scannerResultContainer.classList.add('hidden');
+        if (manualResultContainer) manualResultContainer.classList.add('hidden');
       }
 
       if (activeTab === 'allergens') renderAllergensTab();
@@ -3768,7 +3788,7 @@
         clearBtn.classList.remove('hidden');
 
         // Directly process uploaded barcode without being blocked by camera frame debouncing
-        await processUPC(decodedText);
+        await processUPC(decodedText, 'manual');
       } catch (err) {
         e.target.value = '';
         hideScannerMessage();
@@ -3911,7 +3931,7 @@
       }
 
       // Process product and allergen analysis
-      await processUPC(code);
+      await processUPC(code, 'scanner');
     }
 
     // Reset workflow to seamlessly scan the next item
@@ -3923,11 +3943,11 @@
       lastScannedCode = null;
       lastScanTimestamp = 0;
 
-      // 2. Hide result container & clear manual input and camera success overlay
-      resultContainer.classList.add('hidden');
-      resultContainer.innerHTML = '';
-      upcInput.value = '';
-      clearBtn.classList.add('hidden');
+      // 2. Hide scanner result container & clear camera success overlay
+      if (scannerResultContainer) {
+        scannerResultContainer.classList.add('hidden');
+        scannerResultContainer.innerHTML = '';
+      }
       hideScannerMessage();
       const camOverlay = document.getElementById('cameraScanSuccessOverlay');
       if (camOverlay) camOverlay.classList.add('hidden');
@@ -4054,7 +4074,7 @@
             triggerHaptic([30]);
             upcInput.value = upc;
             clearBtn.classList.remove('hidden');
-            processUPC(upc);
+            processUPC(upc, 'manual');
           }
         });
       });
@@ -4087,6 +4107,10 @@
       triggerHaptic([30]);
       upcInput.value = '';
       clearBtn.classList.add('hidden');
+      if (manualResultContainer) {
+        manualResultContainer.classList.add('hidden');
+        manualResultContainer.innerHTML = '';
+      }
       upcInput.focus();
     });
 
@@ -4101,7 +4125,7 @@
         showScannerMessage("Please enter a valid retail barcode number (typically 12 digits).");
         return;
       }
-      processUPC(cleanCode);
+      processUPC(cleanCode, 'manual');
     });
 
     let clearConfirmPending = false;
@@ -4157,30 +4181,33 @@
     });
 
     // REAL-TIME GROCERY PRODUCT RESOLUTION & ALLERGEN ANALYSIS
-    async function processUPC(rawCode) {
+    async function processUPC(rawCode, source = 'scanner') {
       try {
         const code = String(rawCode).replace(/\D/g, '');
         if (!code) return;
 
         const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-        resultContainer.classList.remove('hidden');
-        resultContainer.innerHTML = `
-          <div class="rounded-2xl border border-slate-800 bg-slate-900/90 p-5 shadow-xl flex items-center gap-3">
-            <div class="w-8 h-8 rounded-full border-2 border-amber-400 border-t-transparent animate-spin shrink-0"></div>
-            <div>
-              <h4 id="scanProgressTitle" class="text-xs font-bold text-slate-100">Scanning global food catalog & FDA enforcement wire...</h4>
-              <p class="text-[11px] text-slate-400 font-mono">UPC: ${code} • Checking openFDA enforcement reports & allergen guards</p>
+        const targetContainer = (source === 'manual') ? manualResultContainer : scannerResultContainer;
+        if (targetContainer) {
+          targetContainer.classList.remove('hidden');
+          targetContainer.innerHTML = `
+            <div class="rounded-2xl border border-slate-800 bg-slate-900/90 p-5 shadow-xl flex items-center gap-3">
+              <div class="w-8 h-8 rounded-full border-2 border-amber-400 border-t-transparent animate-spin shrink-0"></div>
+              <div>
+                <h4 id="scanProgressTitle" class="text-xs font-bold text-slate-100">Scanning global food catalog & FDA enforcement wire...</h4>
+                <p class="text-[11px] text-slate-400 font-mono">UPC: ${code} • Checking openFDA enforcement reports & allergen guards</p>
+              </div>
             </div>
-          </div>
-        `;
-        setTimeout(() => {
-          const navOffset = 135;
-          const rect = resultContainer.getBoundingClientRect();
-          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-          const targetY = scrollTop + rect.top - navOffset;
-          window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
-        }, 40);
+          `;
+          setTimeout(() => {
+            const navOffset = 135;
+            const rect = targetContainer.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const targetY = scrollTop + rect.top - navOffset;
+            window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+          }, 40);
+        }
 
         let productName = `Retail Grocery Item (${code})`;
         let brandName = "Grocery Brand";
@@ -4693,7 +4720,7 @@
           offProductData: offProductData
         });
 
-        displayResult(resultData);
+        displayResult(resultData, source);
         addToHistory(resultData);
       } catch (fatalErr) {
         console.error("Critical failure during processUPC:", fatalErr);
@@ -4710,6 +4737,7 @@
 
         displayResult({
           upc: rawCode,
+          source: source,
           status: isRecalled ? 'recalled' : (triggeredFamilyMatches.length > 0 ? 'allergen_alert' : 'clear'),
           productName: productName || `Scanned Product (${rawCode})`,
           brand: brandName || 'Retail Grocery Item',
@@ -4726,8 +4754,11 @@
     }
 
     // MULTI-CATEGORY DEFINING WINDOWS (RECALLS, HOUSEHOLD ALLERGENS, FOOD ADDITIVES & INGREDIENTS)
-    function displayResult(data) {
-      resultContainer.classList.remove('hidden');
+    function displayResult(data, source = 'scanner') {
+      const activeSource = data.source || source;
+      const targetContainer = (activeSource === 'manual') ? manualResultContainer : scannerResultContainer;
+      if (!targetContainer) return;
+      targetContainer.classList.remove('hidden');
 
       const isRecalled = Boolean(data.isRecalled && data.recallRecord);
       const isTerminated = Boolean(data.terminatedNotice);
@@ -5190,9 +5221,8 @@
         </div>
       `;
 
-      // 6. ACTION BUTTON: INSTANT SCAN NEXT BARCODE (Only active on live Scanner tab; hidden on UPC Entry)
-      const isScannerTabActive = Boolean(scannerPanel && !scannerPanel.classList.contains('hidden'));
-      const scanNextBtnHtml = isScannerTabActive ? `
+      // 6. ACTION BUTTON: Dedicated per page (Scan Next on Scanner; Look Up Another on Manual Entry)
+      const actionBtnHtml = (activeSource === 'scanner') ? `
         <button 
           type="button" 
           class="scan-next-item-btn w-full py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 text-white font-bold text-sm shadow-xl shadow-blue-950/60 transition active:scale-[0.98] flex items-center justify-center gap-2"
@@ -5203,9 +5233,18 @@
           </svg>
           <span>📷 Scan Next Item</span>
         </button>
-      ` : '';
+      ` : `
+        <button 
+          type="button" 
+          class="lookup-another-btn w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-sm shadow-xl shadow-indigo-950/60 transition active:scale-[0.98] flex items-center justify-center gap-2"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+          </svg>
+          <span>✏️ Look Up Another Barcode</span>
+        </button>
+      `;
 
-      
       const dietaryContextCallout = `
         <div class="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 text-[11px] text-slate-300 space-y-1 shadow-sm">
           <div class="flex items-center gap-1.5 font-bold text-amber-300">
@@ -5226,23 +5265,23 @@
         </div>
       `;
 
-      resultContainer.innerHTML = `
+      targetContainer.innerHTML = `
         <div class="space-y-3.5">
           ${masterHeaderHtml}
           ${recallWindowHtml}
           ${allergenWindowHtml}
           ${additiveWindowHtml}
           ${ingredientsWindowHtml}
-          ${scanNextBtnHtml}
+          ${actionBtnHtml}
           ${dietaryContextCallout}
           ${microNotice}
         </div>
       `;
 
-      attachScanNextListeners();
+      attachResultActionListeners();
       setTimeout(() => {
         const navOffset = 135;
-        const rect = resultContainer.getBoundingClientRect();
+        const rect = targetContainer.getBoundingClientRect();
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const targetY = scrollTop + rect.top - navOffset;
         window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
@@ -6361,12 +6400,29 @@
       });
     }
 
-    // Attach event listeners to all dynamic "Scan Next Item" buttons
-    function attachScanNextListeners() {
+    // Attach event listeners to dynamic "Scan Next Item" and "Look Up Another Barcode" buttons
+    function attachResultActionListeners() {
       document.querySelectorAll('.scan-next-item-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
           resetAndScanNext();
+        });
+      });
+
+      document.querySelectorAll('.lookup-another-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          triggerHaptic([30]);
+          if (manualResultContainer) {
+            manualResultContainer.classList.add('hidden');
+            manualResultContainer.innerHTML = '';
+          }
+          upcInput.value = '';
+          clearBtn.classList.add('hidden');
+          upcInput.focus();
+          const rect = upcForm.getBoundingClientRect();
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          window.scrollTo({ top: Math.max(0, scrollTop + rect.top - 120), behavior: 'smooth' });
         });
       });
     }
@@ -6469,7 +6525,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=27')
+        navigator.serviceWorker.register('./sw.js?v=28')
           .then(reg => console.log('BiteHound SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
