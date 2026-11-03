@@ -224,7 +224,7 @@
         <span class="leading-tight">Allergen Guard</span>
       </button>
 
-      <!-- 4. Pantry & Fridge Watchlist Tab (Sits between Guardrails and Active Recalls) -->
+      <!-- 4. Pantry & Fridge Watchlist Tab (Sits between Allergen Guard and Active Recalls) -->
       <button 
         type="button" 
         id="tabWatchlist" 
@@ -897,9 +897,9 @@
       <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
         <span class="flex items-center gap-1.5 text-emerald-400 font-medium">
           <span>✓</span>
-          <span>Guardrails auto-save to device memory</span>
+          <span>Allergen guards auto-save to device memory</span>
         </span>
-        <span class="text-slate-500 font-mono text-[10px]">11 Dietary Guardrails (FDA Big 9 + Corn & Sulfites)</span>
+        <span class="text-slate-500 font-mono text-[10px]">11 Dietary Guards (FDA Big 9 + Corn & Sulfites)</span>
       </div>
     </section>
 
@@ -990,7 +990,7 @@
             <span class="text-base">⭐</span>
             <div>
               <span class="text-xs font-bold text-amber-300 block">BiteHound Pro</span>
-              <span class="text-[10px] text-slate-400 block">Gluten & Personalized Dietary Guardrails</span>
+              <span class="text-[10px] text-slate-400 block">Gluten & Personalized Dietary Guards</span>
             </div>
           </div>
           <span id="plusActiveBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40">
@@ -998,7 +998,7 @@
           </span>
         </div>
         <p class="text-[11px] text-slate-300 leading-relaxed">
-          Federal recall scanning is 100% free forever. BiteHound Pro unlocks 11 allergen guardrails, automatic food additive screening, and multi-member family dietary profiles. when shopping.
+          Federal recall scanning is 100% free forever. BiteHound Pro unlocks 11 allergen guards, automatic food additive screening, and multi-member family dietary profiles. when shopping.
         </p>
         <button 
           type="button" 
@@ -1076,7 +1076,7 @@
               <span>Active (Works in basements)</span>
             </span>
           </div>
-          <p class="text-[11px] text-slate-300">All databases, search indices, and guardrails are cached locally in your phone's memory so scanning works even with zero cellular signal.</p>
+          <p class="text-[11px] text-slate-300">All databases, search indices, and allergen guards are cached locally in your phone's memory so scanning works even with zero cellular signal.</p>
           <button 
             type="button" 
             id="settingsSyncNowBtn" 
@@ -1285,7 +1285,7 @@
       { id: 'corn', name: 'Corn', icon: '🌽', desc: 'Corn syrup, starch & meal' },
       { id: 'sulfites', name: 'Sulfites', icon: '🍷', desc: 'Sulfur dioxide & bisulfites' }
     ];
-    // Comprehensive Index of Scrutinized Food Additives & Synthetic Dyes (Pro Guardrail)
+    // Comprehensive Index of Scrutinized Food Additives & Synthetic Dyes (Pro Guard)
     const ADDITIVES_DATABASE = [
       {
         id: 'red40',
@@ -1553,7 +1553,7 @@
                   <span>${additives.length} Flagged Food Additive${additives.length > 1 ? 's' : ''} & Synthetic Dye${additives.length > 1 ? 's' : ''}</span>
                 </span>
                 <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/40">
-                  Pro Guardrail Active
+                  Pro Guard Active
                 </span>
               </div>
               <div class="space-y-1.5 pt-0.5">
@@ -1600,7 +1600,7 @@
                 </span>
               </div>
               <p class="text-[11px] text-slate-300 leading-normal">
-                BiteHound identified potential synthetic dyes or chemical additives in this product formulation. Unlock Pro to view the exact detected additives and activate personalized allergen guardrails.
+                BiteHound identified potential synthetic dyes or chemical additives in this product formulation. Unlock Pro to view the exact detected additives and activate personalized allergen guards.
               </p>
               <button type="button" class="open-paywall-trigger w-full py-2 rounded-lg bg-gradient-to-r from-purple-600 via-indigo-600 to-sky-600 hover:from-purple-500 hover:to-sky-500 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center justify-center gap-1.5">
                 <span>⭐ Unlock Pro Additive & Allergen Guard</span>
@@ -2860,7 +2860,7 @@
         localStorage.setItem('safebite_plus_active', 'trial');
         localStorage.setItem('safebite_trial_start', Date.now().toString());
       } catch (e) {}
-      showCustomizeToast(`🎉 3-Day Free Trial activated! (${selected === 'monthly' ? '$2.99/mo' : '$24.99/yr - Save 30%'}) Family profiles & additive guardrails unlocked.`);
+      showCustomizeToast(`🎉 3-Day Free Trial activated! (${selected === 'monthly' ? '$2.99/mo' : '$24.99/yr - Save 30%'}) Family profiles & additive guards unlocked.`);
 
       updatePlusUI();
       closePaywall();
@@ -3887,7 +3887,7 @@
             <div class="w-8 h-8 rounded-full border-2 border-amber-400 border-t-transparent animate-spin shrink-0"></div>
             <div>
               <h4 id="scanProgressTitle" class="text-xs font-bold text-slate-100">Scanning global food catalog & FDA enforcement wire...</h4>
-              <p class="text-[11px] text-slate-400 font-mono">UPC: ${code} • Checking openFDA enforcement reports & allergen guardrails</p>
+              <p class="text-[11px] text-slate-400 font-mono">UPC: ${code} • Checking openFDA enforcement reports & allergen guards</p>
             </div>
           </div>
         `;
@@ -4648,7 +4648,7 @@
         `;
       }
 
-      // 3. WINDOW 2: HOUSEHOLD DIETARY & ALLERGEN GUARDRAILS
+      // 3. WINDOW 2: HOUSEHOLD DIETARY & ALLERGEN GUARDS
       let allergenWindowHtml = '';
       if (hasFamilyMatches) {
         allergenWindowHtml = `
@@ -4757,7 +4757,7 @@
         `;
       }
 
-      // 4. WINDOW 3: FOOD ADDITIVES & SYNTHETIC DYES GUARDRAIL
+      // 4. WINDOW 3: FOOD ADDITIVES & SYNTHETIC DYES GUARD
       let additiveWindowHtml = '';
       if (isPlusActive) {
         if (hasAdditives) {
@@ -4772,7 +4772,7 @@
                   </div>
                 </div>
                 <span class="text-[10px] font-bold text-purple-300 bg-purple-950/80 border border-purple-600/60 px-2 py-1 rounded-md">
-                  Pro Guardrail
+                  Pro Guard
                 </span>
               </div>
 
@@ -4976,7 +4976,7 @@
             <div class="flex items-center gap-3 min-w-0">
               ${photoEl}
               <div class="min-w-0">
-                <span class="text-[10px] font-bold text-sky-400 uppercase tracking-wider block">Customizing Guardrails For:</span>
+                <span class="text-[10px] font-bold text-sky-400 uppercase tracking-wider block">Customizing Allergen Guards For:</span>
                 <span class="text-sm font-bold text-white leading-tight block truncate">${currentProfile.name}</span>
                 <span class="text-[11px] text-slate-400">${userAllergens.length} active allergy alerts • Automatic Additives Active</span>
               </div>
@@ -5003,7 +5003,7 @@
           allergensPlusBannerTitle.className = "text-xs font-bold text-emerald-300 flex items-center gap-1.5";
           allergensPlusBannerSub.textContent = plusStatusType === 'trial' 
             ? `3-Day Free Trial active (${trialDaysRemaining} day${trialDaysRemaining === 1 ? '' : 's'} remaining). Family profiles, 11 allergens & additive screening unlocked.`
-            : `Pro active. All 11 allergen guardrails, additive watchlists & family profiles unlocked.`;
+            : `Pro active. All 11 allergen guards, additive watchlists & family profiles unlocked.`;
           unlockAllergensBannerBtn.classList.add('hidden');
         }
       } else {
@@ -5164,7 +5164,7 @@
           if (!isPlusActive) {
             triggerHaptic([40, 40]);
             openPaywall();
-            showCustomizeToast("⭐ BiteHound Pro required to customize allergen guardrails.");
+            showCustomizeToast("⭐ BiteHound Pro required to customize allergen guards.");
             return;
           }
           triggerHaptic([30]);
@@ -5192,7 +5192,7 @@
         if (!isPlusActive) {
           triggerHaptic([40, 40]);
           openPaywall();
-          showCustomizeToast("⭐ BiteHound Pro required to enable allergen guardrails.");
+          showCustomizeToast("⭐ BiteHound Pro required to enable allergen guards.");
           return;
         }
         triggerHaptic([40]);
@@ -6120,7 +6120,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=21')
+        navigator.serviceWorker.register('./sw.js?v=22')
           .then(reg => console.log('BiteHound SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
