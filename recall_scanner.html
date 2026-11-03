@@ -1254,9 +1254,6 @@
             <span class="w-7 h-7 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-300 text-sm">🛡️</span>
             <span>Pantry & Fridge Watchlist</span>
           </h2>
-          <p class="text-xs text-slate-400 mt-0.5">
-            Scanned items are automatically monitored for 60 days against new FDA & USDA recalls.
-          </p>
         </div>
         <div class="flex items-center gap-2 shrink-0">
           <span id="pantryGuardCountBadge" class="px-3 py-1 text-xs font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
@@ -4447,7 +4444,10 @@
         const code = String(rawCode).replace(/\D/g, '');
         if (!code) return;
 
-        const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        const timeStr = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+        const timestamp = `${dateStr} • ${timeStr}`;
 
         const targetContainer = (source === 'manual') ? manualResultContainer : scannerResultContainer;
         if (targetContainer) {
@@ -6308,7 +6308,7 @@
                     <span class="text-[11px] font-black uppercase tracking-wider text-rose-300 bg-rose-500/20 px-2 py-0.5 rounded-md border border-rose-500/40">
                       ⚠️ URGENT PANTRY RECALL ALERT
                     </span>
-                    <span class="text-[10px] text-rose-400 font-mono">Scanned ${m.item.time || 'Previously'}</span>
+                    <span class="text-[10px] text-rose-400 font-mono">Scanned ${formatWatchedTimestamp(m.item)}</span>
                   </div>
                   <p class="font-bold text-sm text-white mt-1.5 leading-snug">${m.item.productName || m.item.upc}</p>
                   <p class="text-xs text-rose-200 mt-1 font-medium leading-relaxed">${m.item.activeRecallHazard || 'Active federal recall issued for this item.'}</p>
@@ -6326,6 +6326,30 @@
           `).join('')}
         </div>
       `;
+    }
+
+    
+    // Watchlist Date & Time Formatter (Guarantees every watched item displays both Date and Time)
+    function formatWatchedTimestamp(item) {
+      if (!item) return '';
+      if (item.timestamp) {
+        const d = new Date(item.timestamp);
+        if (!isNaN(d.getTime())) {
+          const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+          const timeStr = d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+          return `${dateStr} • ${timeStr}`;
+        }
+      }
+      if (item.time) {
+        // If time already contains a 3-letter month (e.g. "Nov 3") or a year
+        if (/[a-zA-Z]{3}|\d{4}/.test(item.time)) {
+          return item.time;
+        }
+        // If it only has e.g. "05:48 AM", prepend current formatted date
+        const todayStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        return `${todayStr} • ${item.time}`;
+      }
+      return new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     }
 
     function renderHistory() {
@@ -6360,7 +6384,7 @@
                     <span class="text-[10px] text-rose-300 font-mono">${item.upc}</span>
                   </div>
                   <p class="font-bold text-slate-100 text-sm mt-1 truncate">${item.productName || item.upc}</p>
-                  <p class="text-[11px] text-slate-400">${item.brand || 'Verified Grocery Item'} • Scanned ${item.time || 'Previously'}</p>
+                  <p class="text-[11px] text-slate-400">${item.brand || 'Verified Grocery Item'} • Scanned ${formatWatchedTimestamp(item)}</p>
                 </div>
                 <button type="button" onclick="removeGuardedItem('${item.upc}')" class="text-slate-400 hover:text-rose-300 p-1.5 rounded-lg hover:bg-rose-900/30 transition shrink-0" title="Remove from Pantry">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
@@ -6394,7 +6418,7 @@
               <div class="flex items-center gap-1.5 text-[11px] text-slate-500 font-mono mt-0.5 flex-wrap">
                 <span>${item.brand || 'Verified Item'}</span>
                 <span>•</span>
-                <span>${item.time || 'Recently'}</span>
+                <span>${formatWatchedTimestamp(item)}</span>
               </div>
             </div>
             <div class="flex items-center gap-2 shrink-0">
@@ -6853,7 +6877,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=32')
+        navigator.serviceWorker.register('./sw.js?v=33')
           .then(reg => console.log('BiteHound SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
