@@ -2560,17 +2560,7 @@
 
     // National & Regional Bulletins
     const NATIONAL_BULLETINS = [
-      {
-        id: "REC-2021-CARROTS",
-        title: "Bunny Luv & Grimmway Farms Organic Baby Carrots",
-        brand: "Grimmway Farms / Bunny Luv",
-        date: "Jul 22, 2021 & Nov 16, 2024",
-        agency: "FDA",
-        reason: "Salmonella enterica and E. coli O121 risk in retail bagged carrots",
-        severity: "Class I",
-        states: ['ALL'],
-        stores: ['Walmart', 'Target', 'Kroger', 'Giant Eagle', 'Aldi', 'Whole Foods', 'Trader Joe\'s']
-      },
+      
       {
         id: "REC-2026-904",
         title: "Organic Whole Carrots",
@@ -3888,19 +3878,30 @@
           });
 
           if (match) {
-            isRecalled = true;
-            recallRecord = {
-              product: match.product,
-              brand: match.brand,
-              hazard: match.reason,
-              action: "Do not consume. Return to retailer for a full refund or discard immediately.",
-              severity: match.severity,
-              recallDate: match.date,
-              agency: "openFDA Wire (Store-Ready Cache)",
-              isRecalled: true,
-              stores: [],
-              allergens: []
-            };
+            const matchStatus = (match.status || '').toLowerCase();
+            const isTerm = matchStatus.includes('terminated') || matchStatus.includes('completed');
+            if (isTerm) {
+              terminatedNotice = {
+                date: match.date || 'Historical Archive',
+                reason: match.reason || 'Past voluntary recall officially resolved and closed out by the FDA.',
+                agency: 'FDA Terminated & Resolved',
+                product: match.product
+              };
+            } else {
+              isRecalled = true;
+              recallRecord = {
+                product: match.product,
+                brand: match.brand,
+                hazard: match.reason,
+                action: "Do not consume. Return to retailer for a full refund or discard immediately.",
+                severity: match.severity,
+                recallDate: match.date,
+                agency: "openFDA Wire (Store-Ready Cache)",
+                isRecalled: true,
+                stores: [],
+                allergens: []
+              };
+            }
             productName = match.product;
             brandName = match.brand;
           }
@@ -4124,7 +4125,7 @@
             const bBrand = b.brand.toLowerCase();
             const bTitle = b.title.toLowerCase();
             const brandMatch = query.includes(bBrand) || bBrand.includes(brandName.toLowerCase());
-            const titleMatch = query.includes(bTitle) || bTitle.includes(productName.toLowerCase()) || (query.includes('carrot') && bTitle.includes('carrot'));
+            const titleMatch = query.includes(bTitle) || bTitle.includes(productName.toLowerCase());
             return brandMatch && titleMatch;
           });
           if (matchedBulletin) {
@@ -4174,6 +4175,22 @@
                   const fdaStatus = (item.status || '').toLowerCase();
                   const isTerminatedOrCompleted = fdaStatus.includes('terminated') || fdaStatus.includes('completed');
 
+                  // Calculate age of recall in days to prevent ancient historical records from flagging active red
+                  let recallAgeDays = 0;
+                  if (item.recall_initiation_date && item.recall_initiation_date.length >= 8) {
+                    const ry = parseInt(item.recall_initiation_date.substring(0, 4));
+                    const rm = parseInt(item.recall_initiation_date.substring(4, 6)) - 1;
+                    const rd = parseInt(item.recall_initiation_date.substring(6, 8));
+                    const rDateObj = new Date(ry, rm, rd);
+                    if (!isNaN(rDateObj)) recallAgeDays = (Date.now() - rDateObj.getTime()) / (1000 * 60 * 60 * 24);
+                  }
+
+                  // Perishable fresh foods (produce, salads, dairy, fresh meat) cycle off shelves in weeks
+                  const isPerishable = /carrot|spinach|salad|lettuce|greens|produce|milk|cream|yogurt|berries|strawberr|blueberr|fresh|deli/.test((productName + ' ' + desc).toLowerCase());
+                  // Perishables older than 150 days (5 months) or general grocery items older than 730 days (2 years) are past retail shelf life
+                  const isPastShelfLife = recallAgeDays > (isPerishable ? 150 : 730);
+                  const isHistoricalOrResolved = isTerminatedOrCompleted || isPastShelfLife;
+
                   let fdaDateStr = "Official FDA Archive";
                   if (item.recall_initiation_date) {
                     const y = item.recall_initiation_date.substring(0, 4);
@@ -4205,10 +4222,10 @@
                   const hasBrandMatch = (brandName.length >= 3 && brandName !== 'Grocery Brand') && (firm.includes(brandName.toLowerCase()) || desc.includes(brandName.toLowerCase()));
 
                   if (hasCode) {
-                    if (isTerminatedOrCompleted) {
+                    if (isHistoricalOrResolved) {
                       terminatedNotice = {
                         date: fdaDateStr,
-                        reason: item.reason_for_recall || "Past voluntary recall officially resolved.",
+                        reason: (isPastShelfLife && !isTerminatedOrCompleted) ? `Historical recall window closed. Commercial shelf life of affected production lots (${fdaDateStr}) has passed; current retail inventory is unaffected and cleared.` : (item.reason_for_recall || "Past voluntary recall officially resolved."),
                         agency: "FDA Terminated & Resolved",
                         product: item.product_description ? (item.product_description.slice(0, 95) + '...') : productName
                       };
@@ -4228,10 +4245,10 @@
                       break;
                     }
                   } else if (hasBrandMatch && hasSpecificProdTitle) {
-                    if (isTerminatedOrCompleted) {
+                    if (isHistoricalOrResolved) {
                       terminatedNotice = {
                         date: fdaDateStr,
-                        reason: item.reason_for_recall || "Past voluntary recall officially resolved.",
+                        reason: (isPastShelfLife && !isTerminatedOrCompleted) ? `Historical recall window closed. Commercial shelf life of affected production lots (${fdaDateStr}) has passed; current retail inventory is unaffected and cleared.` : (item.reason_for_recall || "Past voluntary recall officially resolved."),
                         agency: "FDA Terminated & Resolved",
                         product: item.product_description ? (item.product_description.slice(0, 95) + '...') : productName
                       };
@@ -6038,7 +6055,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=12')
+        navigator.serviceWorker.register('./sw.js?v=13')
           .then(reg => console.log('BiteHound SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
