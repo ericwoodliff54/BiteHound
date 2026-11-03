@@ -139,18 +139,35 @@
         </div>
       </div>
 
-      <!-- Header Install Action -->
-      <button 
-        type="button" 
-        id="installGuideBtn" 
-        class="shrink-0 flex items-center gap-1.5 sm:gap-2 px-3 py-2 min-h-[42px] rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition shadow-sm text-xs font-bold active:scale-95"
-        title="Install app on iPhone or Android"
-      >
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-        </svg>
-        <span>Install App</span>
-      </button>
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+        <!-- Header Install Action -->
+        <button 
+          type="button" 
+          id="installGuideBtn" 
+          class="shrink-0 flex items-center gap-1.5 sm:gap-2 px-3 py-2 min-h-[42px] rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition shadow-sm text-xs font-bold active:scale-95"
+          title="Install app on iPhone or Android"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+          </svg>
+          <span class="hidden xs:inline">Install</span>
+          <span>App</span>
+        </button>
+
+        <!-- Header Settings Gear Icon Button (Corner Icon) -->
+        <button 
+          type="button" 
+          id="headerSettingsBtn" 
+          class="shrink-0 w-10 h-10 min-h-[42px] min-w-[42px] rounded-xl bg-slate-800/90 hover:bg-slate-700/90 border border-slate-700 text-slate-300 hover:text-white transition flex items-center justify-center shadow-sm active:scale-95"
+          title="Settings & Family Profiles"
+          aria-label="Settings"
+        >
+          <svg class="w-5 h-5 text-slate-300 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -170,7 +187,7 @@
   <!-- Main Container -->
   <main class="flex-1 max-w-xl w-full mx-auto p-4 space-y-4">
 
-    <!-- 5 Clean Navigation Tabs -->
+    <!-- 5 Clean Navigation Tabs (Settings moved to corner icon) -->
     <nav class="bg-slate-900/95 p-2 rounded-2xl border border-slate-800 grid grid-cols-5 gap-1.5 sm:gap-2 shadow-xl text-center sticky top-16 z-20 backdrop-blur-md">
       <button 
         type="button" 
@@ -206,6 +223,19 @@
         <span class="leading-tight">Guardrails</span>
       </button>
 
+      <!-- 4. Pantry & Fridge Watchlist Tab (Sits between Guardrails and Active Recalls) -->
+      <button 
+        type="button" 
+        id="tabWatchlist" 
+        class="py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95 relative"
+      >
+        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+        </svg>
+        <span class="leading-tight">Watchlist</span>
+        <span id="tabWatchlistCount" class="absolute top-1.5 right-1 px-1.5 py-0.2 rounded-full bg-emerald-500/25 text-emerald-300 text-[9px] font-bold border border-emerald-500/40">0</span>
+      </button>
+
       <button 
         type="button" 
         id="tabBulletins" 
@@ -215,18 +245,6 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
         </svg>
         <span class="leading-tight">Active Recalls</span>
-      </button>
-
-      <button 
-        type="button" 
-        id="tabCustomize" 
-        class="py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95"
-      >
-        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-        </svg>
-        <span class="leading-tight">Settings</span>
       </button>
     </nav>
 
@@ -1104,29 +1122,39 @@
 </section>
 
 
-    <!-- SCAN HISTORY LOG -->
-    <section id="historySection" class="bg-slate-900/80 rounded-2xl p-4 sm:p-5 border border-slate-800 shadow-lg space-y-3.5">
-      <div class="flex items-center justify-between gap-2">
+    <!-- DEDICATED PANTRY & FRIDGE WATCHLIST PAGE (Opens from top tab) -->
+    <section id="historySection" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4 hidden">
+      <div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-4">
         <div>
-          <h3 class="text-sm font-bold text-slate-100 flex items-center gap-2">
-            <span class="w-6 h-6 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-xs">🛡️</span>
-            Pantry & Fridge Watchlist
-          </h3>
-          <p class="text-[11px] text-slate-400 mt-0.5">
-            Every item you scan is automatically monitored 24/7 against new FDA & USDA recalls.
+          <h2 class="font-display text-base font-bold text-slate-100 flex items-center gap-2">
+            <span class="w-7 h-7 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-300 text-sm">🛡️</span>
+            <span>Pantry & Fridge Watchlist</span>
+          </h2>
+          <p class="text-xs text-slate-400 mt-0.5">
+            24/7 Sentinel: Scanned items are automatically monitored for 60 days against new FDA & USDA recalls.
           </p>
         </div>
         <div class="flex items-center gap-2 shrink-0">
-          <span id="pantryGuardCountBadge" class="px-2.5 py-1 text-[11px] font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+          <span id="pantryGuardCountBadge" class="px-3 py-1 text-xs font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
             0 Guarded
           </span>
-          <button id="clearHistoryBtn" type="button" class="text-[11px] text-slate-500 hover:text-rose-400 transition min-h-[36px] px-2" title="Clear all saved pantry items">
+          <button id="clearHistoryBtn" type="button" class="text-xs text-slate-400 hover:text-rose-400 transition min-h-[36px] px-2 font-medium" title="Clear all saved pantry items">
             Clear All
           </button>
         </div>
       </div>
-      <div id="historyList" class="space-y-2">
-        <p class="text-xs text-slate-500 italic py-3 text-center">No foods scanned yet. Every barcode you scan is automatically guarded here for 60 days.</p>
+
+      <!-- Info banner -->
+      <div class="p-3 rounded-xl border border-emerald-500/30 bg-emerald-950/20 text-emerald-200 text-xs flex items-center gap-2.5">
+        <span class="text-base shrink-0">📡</span>
+        <span class="leading-relaxed text-[11px]">
+          If a retroactive recall is issued for any product you've scanned within the last 60 days, BiteHound flags it in red here and on your home screen.
+        </span>
+      </div>
+
+      <!-- List of guarded items -->
+      <div id="historyList" class="space-y-2.5">
+        <p class="text-xs text-slate-500 italic py-6 text-center">No foods scanned yet. Every barcode you scan is automatically guarded here for 60 days.</p>
       </div>
     </section>
 
@@ -2633,8 +2661,10 @@
     const tabScanner = document.getElementById('tabScanner');
     const tabManual = document.getElementById('tabManual');
     const tabAllergens = document.getElementById('tabAllergens');
+    const tabWatchlist = document.getElementById('tabWatchlist');
     const tabBulletins = document.getElementById('tabBulletins');
-    const tabCustomize = document.getElementById('tabCustomize');
+    const headerSettingsBtn = document.getElementById('headerSettingsBtn');
+    const tabWatchlistCount = document.getElementById('tabWatchlistCount');
 
     const scannerPanel = document.getElementById('scannerPanel');
     const manualPanel = document.getElementById('manualPanel');
@@ -3010,25 +3040,34 @@
     // Navigation Switcher (5 Tabs)
     function setNavTab(activeTab) {
       triggerHaptic([30]);
-      const activeClass = 'py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-1.5 transition bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 text-white shadow-md shadow-blue-950/50 ring-1 ring-blue-300/40 active:scale-95';
-      const inactiveClass = 'py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95';
+      const activeClass = 'py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-1.5 transition bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 text-white shadow-md shadow-blue-950/50 ring-1 ring-blue-300/40 active:scale-95 relative';
+      const inactiveClass = 'py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95 relative';
 
       tabScanner.className = (activeTab === 'scanner') ? activeClass : inactiveClass;
       tabManual.className = (activeTab === 'manual') ? activeClass : inactiveClass;
       tabAllergens.className = (activeTab === 'allergens') ? activeClass : inactiveClass;
+      tabWatchlist.className = (activeTab === 'watchlist') ? activeClass : inactiveClass;
       tabBulletins.className = (activeTab === 'bulletins') ? activeClass : inactiveClass;
-      tabCustomize.className = (activeTab === 'customize') ? activeClass : inactiveClass;
+
+      // Highlight header settings gear when settings is active
+      if (headerSettingsBtn) {
+        if (activeTab === 'customize') {
+          headerSettingsBtn.className = "shrink-0 w-10 h-10 min-h-[42px] min-w-[42px] rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/50 transition flex items-center justify-center shadow-sm active:scale-95";
+        } else {
+          headerSettingsBtn.className = "shrink-0 w-10 h-10 min-h-[42px] min-w-[42px] rounded-xl bg-slate-800/90 hover:bg-slate-700/90 border border-slate-700 text-slate-300 hover:text-white transition flex items-center justify-center shadow-sm active:scale-95";
+        }
+      }
 
       scannerPanel.classList.toggle('hidden', activeTab !== 'scanner');
       manualPanel.classList.toggle('hidden', activeTab !== 'manual');
       allergensPanel.classList.toggle('hidden', activeTab !== 'allergens');
+      historySection.classList.toggle('hidden', activeTab !== 'watchlist');
       bulletinsPanel.classList.toggle('hidden', activeTab !== 'bulletins');
       customizePanel.classList.toggle('hidden', activeTab !== 'customize');
 
       const isScanTab = (activeTab === 'scanner' || activeTab === 'manual');
-      historySection.classList.toggle('hidden', !isScanTab);
 
-      // Scanned barcode card ONLY displays on Scanner and Manual tabs - completely hidden on Allergens page!
+      // Scanned barcode card ONLY displays on Scanner and Manual tabs - completely hidden on Watchlist, Allergens, Settings!
       if (!isScanTab) {
         resultContainer.classList.add('hidden');
       } else if (resultContainer.innerHTML.trim() !== '') {
@@ -3036,6 +3075,7 @@
       }
 
       if (activeTab === 'allergens') renderAllergensTab();
+      if (activeTab === 'watchlist') renderHistory();
       if (activeTab === 'bulletins') renderBulletins();
       if (activeTab === 'customize') renderCustomizeTab();
     }
@@ -3043,8 +3083,9 @@
     tabScanner.addEventListener('click', () => setNavTab('scanner'));
     tabManual.addEventListener('click', () => setNavTab('manual'));
     tabAllergens.addEventListener('click', () => setNavTab('allergens'));
+    tabWatchlist.addEventListener('click', () => setNavTab('watchlist'));
     tabBulletins.addEventListener('click', () => setNavTab('bulletins'));
-    tabCustomize.addEventListener('click', () => setNavTab('customize'));
+    if (headerSettingsBtn) headerSettingsBtn.addEventListener('click', () => setNavTab('customize'));
 
     // Camera Handlers
     toggleCameraBtn.addEventListener('click', () => {
@@ -6077,7 +6118,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=18')
+        navigator.serviceWorker.register('./sw.js?v=19')
           .then(reg => console.log('BiteHound SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
