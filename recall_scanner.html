@@ -146,14 +146,13 @@
         <button 
           type="button" 
           id="installGuideBtn" 
-          class="shrink-0 flex items-center gap-1.5 sm:gap-2 px-3 py-2 min-h-[42px] rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition shadow-sm text-xs font-bold active:scale-95"
+          class="shrink-0 flex items-center gap-1.5 sm:gap-2 px-3.5 py-2 min-h-[42px] rounded-xl bg-blue-600 hover:bg-blue-500 text-white transition shadow-sm text-xs font-bold active:scale-95"
           title="Install app on iPhone or Android"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
           </svg>
-          <span class="hidden xs:inline">Install</span>
-          <span>App</span>
+          <span>Install</span>
         </button>
 
         <!-- Header Settings Gear Icon Button (Corner Icon) -->
@@ -579,15 +578,6 @@
       </div>
 
       <!-- Clean Viewfinder Box: single library-managed targeting box, zero overlapping duplicate reticles -->
-            <!-- Store-Ready FDA Auto-Sync Bar -->
-      <div id="syncStatusCard" class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs transition">
-        <div class="flex items-center gap-2.5 min-w-0 pr-2">
-          <span id="syncIndicatorDot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0 shadow-sm shadow-emerald-400/50"></span>
-          <div class="min-w-0">
-            <span id="syncStatusTitle" class="font-bold text-slate-200 block text-[11px] truncate">FDA Wire: Synced & Active</span>
-            <span id="syncStatusSub" class="text-[10px] text-slate-400 block truncate">Pre-syncing active federal recalls for offline shopping</span>
-          </div>
-        </div>
         <button 
           type="button" 
           id="syncNowBtn" 
@@ -745,6 +735,16 @@
 
         <div id="searchResultsBox" class="hidden space-y-2 pt-1 max-h-60 overflow-y-auto"></div>
       </div>
+
+            <!-- Store-Ready FDA Auto-Sync Bar -->
+      <div id="syncStatusCard" class="flex items-center justify-between p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs transition">
+        <div class="flex items-center gap-2.5 min-w-0 pr-2">
+          <span id="syncIndicatorDot" class="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0 shadow-sm shadow-emerald-400/50"></span>
+          <div class="min-w-0">
+            <span id="syncStatusTitle" class="font-bold text-slate-200 block text-[11px] truncate">FDA Wire: Synced & Active</span>
+            <span id="syncStatusSub" class="text-[10px] text-slate-400 block truncate">Pre-syncing active federal recalls for offline shopping</span>
+          </div>
+        </div>
 
       <div id="scannerMessage" class="hidden text-xs p-3 rounded-xl border border-blue-500/30 bg-blue-950/40 text-blue-200"></div>
     </section>
@@ -1133,7 +1133,7 @@
             <span>Pantry & Fridge Watchlist</span>
           </h2>
           <p class="text-xs text-slate-400 mt-0.5">
-            24/7 Sentinel: Scanned items are automatically monitored for 60 days against new FDA & USDA recalls.
+            Scanned items are automatically monitored for 60 days against new FDA & USDA recalls.
           </p>
         </div>
         <div class="flex items-center gap-2 shrink-0">
@@ -1150,7 +1150,7 @@
       <div class="p-3 rounded-xl border border-emerald-500/30 bg-emerald-950/20 text-emerald-200 text-xs flex items-center gap-2.5">
         <span class="text-base shrink-0">📡</span>
         <span class="leading-relaxed text-[11px]">
-          If a retroactive recall is issued for any product you've scanned within the last 60 days, BiteHound flags it in red here and on your home screen.
+          If a recall is issued for any product you've scanned within the last 60 days, BiteHound flags it in red here and on your home screen.
         </span>
       </div>
 
@@ -6120,7 +6120,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=20')
+        navigator.serviceWorker.register('./sw.js?v=21')
           .then(reg => console.log('BiteHound SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
