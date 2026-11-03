@@ -4754,6 +4754,26 @@
     }
 
     // MULTI-CATEGORY DEFINING WINDOWS (RECALLS, HOUSEHOLD ALLERGENS, FOOD ADDITIVES & INGREDIENTS)
+    
+    // Smooth Scroll to Result Window from Master Header Pills
+    window.scrollToResultSection = function(sectionType, source = 'scanner') {
+      triggerHaptic([25]);
+      const targetId = `${source}-window-${sectionType}`;
+      const el = document.getElementById(targetId);
+      if (el) {
+        const navOffset = 125;
+        const rect = el.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const targetY = scrollTop + rect.top - navOffset;
+        window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+
+        el.classList.add('ring-2', 'ring-amber-400/80');
+        setTimeout(() => {
+          el.classList.remove('ring-2', 'ring-amber-400/80');
+        }, 1200);
+      }
+    };
+
     function displayResult(data, source = 'scanner') {
       const activeSource = data.source || source;
       const targetContainer = (activeSource === 'manual') ? manualResultContainer : scannerResultContainer;
@@ -4788,7 +4808,7 @@
       if (!isPlusActive) {
         allergenPillBg = "bg-slate-800 text-amber-300 border-slate-700";
         allergenPillIcon = "🔒";
-        allergenPillText = "Pro Locked";
+        allergenPillText = "Pro Feature";
       } else if (hasFamilyMatches) {
         allergenPillBg = "bg-amber-500/20 text-amber-300 border-amber-500/40";
         allergenPillIcon = "⚠️";
@@ -4807,10 +4827,10 @@
         additivePillIcon = "ℹ️";
         additivePillText = "Unindexed";
       }
-      if (!isPlusActive && hasAdditives) {
-        additivePillBg = "bg-purple-950/60 text-purple-300 border-purple-500/40";
+      if (!isPlusActive) {
+        additivePillBg = "bg-slate-800 text-amber-300 border-slate-700";
         additivePillIcon = "🔒";
-        additivePillText = `${additivesCount} (Pro)`;
+        additivePillText = "Pro Feature";
       } else if (hasAdditives) {
         additivePillBg = "bg-purple-500/20 text-purple-300 border-purple-500/40";
         additivePillIcon = "🧪";
@@ -4845,25 +4865,49 @@
             </span>
           </div>
 
-          <!-- Defining Category Status Pills -->
+          <!-- Defining Category Status Pills (Click to Jump Directly to Window) -->
           <div class="grid grid-cols-3 gap-1.5 text-center">
-            <div class="p-2 rounded-xl border ${recallPillBg} flex flex-col items-center justify-center">
+            <button 
+              type="button" 
+              onclick="scrollToResultSection('Recall', '${activeSource}')" 
+              class="p-2 rounded-xl border ${recallPillBg} flex flex-col items-center justify-center transition active:scale-95 cursor-pointer hover:brightness-110 shadow-sm"
+              title="Jump directly to Federal Recall Wire window"
+            >
               <span class="text-xs">${recallPillIcon}</span>
               <span class="text-[10px] font-bold mt-0.5 truncate w-full">${recallPillText}</span>
-              <span class="text-[8px] uppercase tracking-wider opacity-70">FDA / USDA</span>
-            </div>
+              <span class="text-[8px] uppercase tracking-wider opacity-75 flex items-center gap-0.5">
+                <span>FDA / USDA</span>
+                <span class="text-[7px]">▼</span>
+              </span>
+            </button>
 
-            <div class="p-2 rounded-xl border ${allergenPillBg} flex flex-col items-center justify-center">
+            <button 
+              type="button" 
+              onclick="scrollToResultSection('Allergen', '${activeSource}')" 
+              class="p-2 rounded-xl border ${allergenPillBg} flex flex-col items-center justify-center transition active:scale-95 cursor-pointer hover:brightness-110 shadow-sm"
+              title="Jump directly to Household Allergen Guard window"
+            >
               <span class="text-xs">${allergenPillIcon}</span>
               <span class="text-[10px] font-bold mt-0.5 truncate w-full">${allergenPillText}</span>
-              <span class="text-[8px] uppercase tracking-wider opacity-70">Household Guard</span>
-            </div>
+              <span class="text-[8px] uppercase tracking-wider opacity-75 flex items-center gap-0.5">
+                <span>Allergens</span>
+                <span class="text-[7px]">▼</span>
+              </span>
+            </button>
 
-            <div class="p-2 rounded-xl border ${additivePillBg} flex flex-col items-center justify-center">
+            <button 
+              type="button" 
+              onclick="scrollToResultSection('Additive', '${activeSource}')" 
+              class="p-2 rounded-xl border ${additivePillBg} flex flex-col items-center justify-center transition active:scale-95 cursor-pointer hover:brightness-110 shadow-sm"
+              title="Jump directly to Food Additive & Dye Guard window"
+            >
               <span class="text-xs">${additivePillIcon}</span>
               <span class="text-[10px] font-bold mt-0.5 truncate w-full">${additivePillText}</span>
-              <span class="text-[8px] uppercase tracking-wider opacity-70">Additives</span>
-            </div>
+              <span class="text-[8px] uppercase tracking-wider opacity-75 flex items-center gap-0.5">
+                <span>Additives</span>
+                <span class="text-[7px]">▼</span>
+              </span>
+            </button>
           </div>
         </div>
       `;
@@ -5185,7 +5229,7 @@
                   </div>
                 </div>
                 <span class="text-[10px] font-bold text-amber-300 bg-amber-500/20 border border-amber-500/30 px-2 py-0.5 rounded-md">
-                  Pro
+                  Pro Feature
                 </span>
               </div>
               <p class="text-xs text-slate-400 leading-normal">
@@ -5268,10 +5312,18 @@
       targetContainer.innerHTML = `
         <div class="space-y-3.5">
           ${masterHeaderHtml}
-          ${recallWindowHtml}
-          ${allergenWindowHtml}
-          ${additiveWindowHtml}
-          ${ingredientsWindowHtml}
+          <div id="${activeSource}-window-Recall" class="scroll-mt-28 transition-all duration-300 rounded-2xl">
+            ${recallWindowHtml}
+          </div>
+          <div id="${activeSource}-window-Allergen" class="scroll-mt-28 transition-all duration-300 rounded-2xl">
+            ${allergenWindowHtml}
+          </div>
+          <div id="${activeSource}-window-Additive" class="scroll-mt-28 transition-all duration-300 rounded-2xl">
+            ${additiveWindowHtml}
+          </div>
+          <div id="${activeSource}-window-Ingredients" class="scroll-mt-28 transition-all duration-300 rounded-2xl">
+            ${ingredientsWindowHtml}
+          </div>
           ${actionBtnHtml}
           ${dietaryContextCallout}
           ${microNotice}
@@ -6525,7 +6577,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=28')
+        navigator.serviceWorker.register('./sw.js?v=29')
           .then(reg => console.log('BiteHound SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
