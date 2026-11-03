@@ -482,7 +482,7 @@
     </div>
 
 <!-- FOOD SAFETY & LEGAL DISCLAIMER MODAL SHEET -->
-    <div id="safetyDisclaimerModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div id="safetyDisclaimerModal" class="hidden fixed inset-0 z-[60] bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
       <div class="bg-slate-900 border-2 border-sky-500/50 max-w-lg w-full rounded-3xl p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto relative animate-in fade-in zoom-in-95 duration-200">
         
         <button id="closeDisclaimerModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-full bg-slate-800 text-xs">
@@ -5979,11 +5979,17 @@
       });
     }
 
-    // Food Safety & Legal Disclaimer Logic
-    function checkDisclaimerStatus() {
+    // Food Safety & Legal Disclaimer Logic (First Launch Agreement & On-Demand Settings Review)
+    function checkDisclaimerStatus(isManualOpen = false) {
       try {
         const accepted = localStorage.getItem('safebite_disclaimer_accepted') || localStorage.getItem('recall_radar_disclaimer_accepted');
-        if (accepted !== 'true') {
+        if (isManualOpen) {
+          // Opened voluntarily from Settings: show 'X' button so user can dismiss anytime
+          if (closeDisclaimerModalBtn) closeDisclaimerModalBtn.classList.remove('hidden');
+          safetyDisclaimerModal.classList.remove('hidden');
+        } else if (accepted !== 'true') {
+          // Mandatory Initial Installation Agreement: hide 'X' button so user must actively acknowledge & agree
+          if (closeDisclaimerModalBtn) closeDisclaimerModalBtn.classList.add('hidden');
           safetyDisclaimerModal.classList.remove('hidden');
         }
       } catch (e) {}
@@ -6005,7 +6011,7 @@
 
     openDisclaimerBtn.addEventListener('click', () => {
       triggerHaptic([30]);
-      safetyDisclaimerModal.classList.remove('hidden');
+      checkDisclaimerStatus(true);
     });
 
 
@@ -6052,7 +6058,7 @@
     renderCustomizeTab();
     updatePlusUI();
     updateOnlineStatus();
-    checkDisclaimerStatus();
+    // checkDisclaimerStatus deferred until splash screen completes
     checkInAppBrowser();
     updateSyncUI();
     syncStoreReadyRecalls(false);
@@ -6071,7 +6077,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=17')
+        navigator.serviceWorker.register('./sw.js?v=18')
           .then(reg => console.log('BiteHound SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
@@ -6085,6 +6091,8 @@
         splash.classList.add('pointer-events-none');
         setTimeout(() => {
           if (splash.parentNode) splash.remove();
+          // Seamlessly present legal & safety disclaimer right after opening screen on first install
+          checkDisclaimerStatus(false);
         }, 750);
       }
     }
