@@ -1,13 +1,13 @@
-const CACHE_NAME = 'bitehound-v24';
+const CACHE_NAME = 'bitehound-v25';
 const ASSETS = [
   './index.html?app=bitehound&v=17',
-  './manifest.json?v=24',
-  './icon-192.png?v=24',
-  './icon-512.png?v=24',
-  './apple-touch-icon.png?v=24',
-  './favicon.png?v=24',
-  './logo-1024.png?v=24',
-  './staples_catalog.json?v=24'
+  './manifest.json?v=25',
+  './icon-192.png?v=25',
+  './icon-512.png?v=25',
+  './apple-touch-icon.png?v=25',
+  './favicon.png?v=25',
+  './logo-1024.png?v=25',
+  './staples_catalog.json?v=25'
 ];
 
 self.addEventListener('install', (e) => {
