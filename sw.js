@@ -1,11 +1,11 @@
-const CACHE_NAME = 'safebite-scanner-v6';
+const CACHE_NAME = 'bitehound-v7';
 const ASSETS = [
-  './index.html?app=safebite_scanner',
-  './manifest.json?v=6',
-  './icon-192.png?v=6',
-  './icon-512.png?v=6',
-  './apple-touch-icon.png?v=6',
-  './favicon.png?v=6',
+  './index.html?app=bitehound',
+  './manifest.json?v=7',
+  './icon-192.png?v=7',
+  './icon-512.png?v=7',
+  './apple-touch-icon.png?v=7',
+  './favicon.png?v=7',
   './staples_catalog.json'
 ];
 
@@ -33,7 +33,7 @@ self.addEventListener('fetch', (e) => {
             return networkRes;
           });
         })
-        .catch(() => caches.match('./index.html?app=safebite_scanner') || caches.match(e.request))
+        .catch(() => caches.match('./index.html?app=bitehound') || caches.match(e.request))
     );
     return;
   }
