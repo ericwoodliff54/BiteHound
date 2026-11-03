@@ -113,7 +113,9 @@
   </div>
 
   <!-- Ambient blue glow backdrop -->
-  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-xl h-64 bg-blue-600/15 blur-[100px] pointer-events-none -z-10"></div>
+  <!-- Ambient Mascot-Inspired Dual Glow Backdrop (Warm Golden Amber + Emerald Green) -->
+  <div class="fixed top-0 left-1/4 -translate-x-1/2 w-80 h-64 bg-amber-500/10 blur-[120px] pointer-events-none -z-10"></div>
+  <div class="fixed top-0 right-1/4 translate-x-1/2 w-80 h-64 bg-emerald-500/10 blur-[120px] pointer-events-none -z-10"></div>
 
   <!-- Header with Clean Single Plus Badge & Tagline (FDA Free removed) -->
   <header class="bg-slate-900/80 backdrop-blur-md border-b border-slate-800/80 sticky top-0 z-30">
@@ -192,7 +194,7 @@
       <button 
         type="button" 
         id="tabScanner" 
-        class="py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-1.5 transition bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 text-white shadow-md shadow-blue-950/50 ring-1 ring-blue-300/40 active:scale-95"
+        class="py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-1.5 transition bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 text-white shadow-lg shadow-emerald-950/60 ring-2 ring-amber-400/40 active:scale-95 relative"
       >
         <svg class="w-5 h-5 sm:w-6 sm:h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
@@ -220,7 +222,7 @@
         <svg class="w-5 h-5 sm:w-6 sm:h-6 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
         </svg>
-        <span class="leading-tight">Guardrails</span>
+        <span class="leading-tight">Allergen Guard</span>
       </button>
 
       <!-- 4. Pantry & Fridge Watchlist Tab (Sits between Guardrails and Active Recalls) -->
@@ -289,7 +291,7 @@
           <div class="flex items-start gap-2.5">
             <span class="text-base">🛡️</span>
             <div>
-              <span class="font-bold text-white block">11 Essential Allergen Guardrails</span>
+              <span class="font-bold text-white block">11 Essential Allergen Guards</span>
               <span class="text-[11px] text-slate-400">Complete defense: Milk, Peanuts, Tree Nuts, Gluten, Soy, Eggs, Fish, Shellfish, Sesame, Corn & Sulfites.</span>
             </div>
           </div>
@@ -412,14 +414,14 @@
           </div>
           <div>
             <h3 id="profileModalTitle" class="font-display text-sm font-bold text-white leading-tight">Add Family Member</h3>
-            <p class="text-[11px] text-slate-400">Personalize sensitivity guardrails for your household</p>
+            <p class="text-[11px] text-slate-400">Personalize sensitivity guards for your household</p>
           </div>
         </div>
 
         <div class="space-y-3.5 text-xs">
           <!-- Profile Picture & Live Preview Box -->
           <div class="flex items-center gap-3 bg-slate-950 p-3 rounded-2xl border border-slate-800">
-            <div id="avatarPreviewBox" class="w-14 h-14 rounded-full bg-slate-900 border-2 border-sky-400 flex items-center justify-center text-2xl shrink-0 overflow-hidden relative shadow-inner">
+            <div id="avatarPreviewBox" class="w-14 h-14 rounded-full bg-slate-900 border-2 border-amber-400 flex items-center justify-center text-2xl shrink-0 overflow-hidden relative shadow-inner">
               <span id="previewEmojiSpan">👤</span>
               <img id="previewPhotoImg" class="w-full h-full object-cover hidden" alt="Profile Photo">
             </div>
@@ -459,7 +461,7 @@
               type="text" 
               id="newProfileNameInput" 
               placeholder="e.g. Me, Emma, Leo, Mom, Dad" 
-              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-950 text-white outline-none focus:border-sky-400 font-medium text-sm"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-950 text-white outline-none focus:border-amber-400 font-medium text-sm"
               maxlength="20"
             >
           </div>
@@ -467,7 +469,7 @@
           <div>
             <label class="block text-slate-300 font-medium mb-1.5">Or Choose an Emoji Avatar</label>
             <div class="flex gap-2 flex-wrap" id="avatarSelector">
-              <button type="button" class="avatar-option w-12 h-12 rounded-xl border-2 border-sky-400 bg-sky-500/20 text-2xl flex items-center justify-center transition" data-icon="👤">👤</button>
+              <button type="button" class="avatar-option w-12 h-12 rounded-xl border-2 border-amber-400 bg-sky-500/20 text-2xl flex items-center justify-center transition" data-icon="👤">👤</button>
               <button type="button" class="avatar-option w-12 h-12 rounded-xl border border-slate-800 bg-slate-950 text-2xl flex items-center justify-center transition" data-icon="👧">👧</button>
               <button type="button" class="avatar-option w-12 h-12 rounded-xl border border-slate-800 bg-slate-950 text-2xl flex items-center justify-center transition" data-icon="👦">👦</button>
               <button type="button" class="avatar-option w-12 h-12 rounded-xl border border-slate-800 bg-slate-950 text-2xl flex items-center justify-center transition" data-icon="👩">👩</button>
@@ -615,10 +617,10 @@
         <!-- Barcode Graphic Target in Viewfinder (shown only when camera is paused) -->
         <div id="cameraPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-slate-950/95">
           <div class="relative w-48 h-28 mb-3 flex flex-col items-center justify-center bg-slate-900/90 rounded-xl border border-sky-500/40 p-3 shadow-inner">
-            <div class="absolute -top-1 -left-1 w-3.5 h-3.5 border-t-2 border-l-2 border-sky-400"></div>
-            <div class="absolute -top-1 -right-1 w-3.5 h-3.5 border-t-2 border-r-2 border-sky-400"></div>
-            <div class="absolute -bottom-1 -left-1 w-3.5 h-3.5 border-b-2 border-l-2 border-sky-400"></div>
-            <div class="absolute -bottom-1 -right-1 w-3.5 h-3.5 border-b-2 border-r-2 border-sky-400"></div>
+            <div class="absolute -top-1 -left-1 w-3.5 h-3.5 border-t-2 border-l-2 border-amber-400"></div>
+            <div class="absolute -top-1 -right-1 w-3.5 h-3.5 border-t-2 border-r-2 border-amber-400"></div>
+            <div class="absolute -bottom-1 -left-1 w-3.5 h-3.5 border-b-2 border-l-2 border-amber-400"></div>
+            <div class="absolute -bottom-1 -right-1 w-3.5 h-3.5 border-b-2 border-r-2 border-amber-400"></div>
 
             <div class="w-full flex items-center justify-center gap-1 h-14 px-2 py-1 bg-slate-950/60 rounded border border-slate-800/80">
               <span class="w-1 h-full bg-sky-400/90 rounded-sm"></span>
@@ -638,7 +640,7 @@
               <span class="w-0.5 h-full bg-sky-400/50 rounded-sm"></span>
               <span class="w-1.5 h-full bg-sky-400/90 rounded-sm"></span>
             </div>
-            <span class="text-xs font-mono tracking-wider text-sky-300 font-bold mt-1">ALIGN BARCODE HERE</span>
+            <span class="text-xs font-mono tracking-wider text-amber-300 font-bold mt-1">ALIGN BARCODE HERE</span>
           </div>
 
           <p class="font-display font-bold text-sm sm:text-base text-slate-100">Point phone camera at grocery barcode</p>
@@ -651,7 +653,7 @@
         <button 
           type="button" 
           id="toggleCameraBtn" 
-          class="flex-1 min-h-[54px] bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-2xl shadow-lg shadow-blue-950/50 transition flex items-center justify-center gap-2.5 text-sm sm:text-base active:scale-[0.98]"
+          class="flex-1 min-h-[54px] bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3.5 px-4 rounded-2xl shadow-lg shadow-emerald-950/60 ring-1 ring-amber-400/30 transition flex items-center justify-center gap-2.5 text-sm sm:text-base active:scale-[0.98]"
         >
           <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
@@ -722,7 +724,7 @@
             type="text" 
             id="brandSearchInput" 
             placeholder="Search product name, food item, or keyword..."
-            class="w-full min-h-[50px] pl-11 pr-10 py-3 rounded-xl border border-slate-700 bg-slate-950 text-white text-sm placeholder:text-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+            class="w-full min-h-[50px] pl-11 pr-10 py-3 rounded-xl border border-slate-700 bg-slate-950 text-white text-sm placeholder:text-slate-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
           >
           <div class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -764,7 +766,7 @@
                 id="upcInput" 
                 inputmode="numeric" 
                 placeholder="e.g. 0-11110-81546-2 or 011110815462" 
-                class="w-full min-h-[48px] px-4 py-3.5 rounded-xl border border-slate-700 bg-slate-950 text-white font-mono text-base focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition placeholder:text-slate-600"
+                class="w-full min-h-[48px] px-4 py-3.5 rounded-xl border border-slate-700 bg-slate-950 text-white font-mono text-base focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition placeholder:text-slate-600"
               >
               <button 
                 type="button" 
@@ -798,7 +800,7 @@
         <button 
           type="submit" 
           id="checkBtn" 
-          class="w-full min-h-[54px] bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-blue-950/50 transition flex items-center justify-center gap-2 active:scale-[0.98] text-sm sm:text-base"
+          class="w-full min-h-[54px] bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-emerald-950/60 ring-1 ring-amber-400/30 transition flex items-center justify-center gap-2 active:scale-[0.98] text-sm sm:text-base"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -808,14 +810,14 @@
       </form>
     </section>
 
-    <!-- SECTION 3: GUARDRAILS PANEL (ALLERGENS & FOOD ADDITIVES) -->
+    <!-- SECTION 3: ALLERGEN GUARD PANEL (ALLERGENS & FOOD ADDITIVES) -->
     <section id="allergensPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4 hidden">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
         <div>
           <h2 class="font-display text-sm font-bold text-slate-100 flex items-center gap-2">
-            <span>🛡️ Pro Guardrails: Allergens & Additives</span>
+            <span>🛡️ Allergen Guard: Ingredients & Additives</span>
           </h2>
-          <p class="text-xs text-slate-400 mt-0.5">Personalized allergen & food additive guardrails require BiteHound Pro.</p>
+          <p class="text-xs text-slate-400 mt-0.5">Personalized allergen & food additive shields require BiteHound Pro.</p>
         </div>
         <span id="activeAllergensBadge" class="text-xs font-bold px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 shrink-0">
           Locked (Pro)
@@ -842,7 +844,7 @@
             <span>👨‍👩‍👧</span>
             <span>Family Profiles</span>
           </span>
-          <span class="text-[11px] text-slate-400 font-medium">Tap a member to switch guardrails</span>
+          <span class="text-[11px] text-slate-400 font-medium">Tap a member to switch allergen guards</span>
         </div>
         <div class="flex items-center gap-2.5 overflow-x-auto pb-2 pt-0.5" id="familyProfilesBar"></div>
         <div id="activeProfileNotice" class="w-full"></div>
@@ -850,7 +852,7 @@
 
       <!-- Quick Action Controls -->
       <div class="flex items-center justify-between bg-slate-900/90 p-3 rounded-2xl border border-slate-800 shadow-sm gap-2">
-        <span id="guardrailListHeaderNotice" class="text-xs sm:text-sm font-medium text-slate-300">Tap to toggle allergen guardrails:</span>
+        <span id="guardrailListHeaderNotice" class="text-xs sm:text-sm font-medium text-slate-300">Tap to toggle active allergen guards:</span>
         <div class="flex items-center gap-2 shrink-0">
           <button type="button" id="selectAllergensBtn" class="text-xs font-bold text-sky-300 hover:text-white bg-sky-950/60 border border-sky-500/40 hover:bg-sky-900/60 px-3.5 py-2 rounded-xl transition min-h-[42px] flex items-center justify-center shadow-sm active:scale-95">Check All</button>
           <button type="button" id="resetAllergensBtn" class="text-xs font-bold text-slate-300 hover:text-rose-300 bg-slate-800 border border-slate-700 hover:bg-slate-700 px-3.5 py-2 rounded-xl transition min-h-[42px] flex items-center justify-center shadow-sm active:scale-95">Clear All</button>
@@ -1191,7 +1193,7 @@
   </div>
 
   <!-- Global Floating Toast Notification (Visible on all tabs) -->
-  <div id="customizeToast" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-sm w-[90%] text-center text-xs font-semibold px-4 py-3 rounded-2xl border-2 border-sky-400 bg-slate-900/95 text-sky-100 shadow-2xl backdrop-blur-md"></div>
+  <div id="customizeToast" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-sm w-[90%] text-center text-xs font-semibold px-4 py-3 rounded-2xl border-2 border-amber-400 bg-slate-900/95 text-sky-100 shadow-2xl backdrop-blur-md"></div>
 
   <script>
     // Audio Feedback Synthesizer
@@ -3040,7 +3042,7 @@
     // Navigation Switcher (5 Tabs)
     function setNavTab(activeTab) {
       triggerHaptic([30]);
-      const activeClass = 'py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-1.5 transition bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 text-white shadow-md shadow-blue-950/50 ring-1 ring-blue-300/40 active:scale-95 relative';
+      const activeClass = 'py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-1.5 transition bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 text-white shadow-lg shadow-emerald-950/60 ring-2 ring-amber-400/40 active:scale-95 relative';
       const inactiveClass = 'py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95 relative';
 
       tabScanner.className = (activeTab === 'scanner') ? activeClass : inactiveClass;
@@ -3882,7 +3884,7 @@
         resultContainer.classList.remove('hidden');
         resultContainer.innerHTML = `
           <div class="rounded-2xl border border-slate-800 bg-slate-900/90 p-5 shadow-xl flex items-center gap-3">
-            <div class="w-8 h-8 rounded-full border-2 border-sky-400 border-t-transparent animate-spin shrink-0"></div>
+            <div class="w-8 h-8 rounded-full border-2 border-amber-400 border-t-transparent animate-spin shrink-0"></div>
             <div>
               <h4 id="scanProgressTitle" class="text-xs font-bold text-slate-100">Scanning global food catalog & FDA enforcement wire...</h4>
               <p class="text-[11px] text-slate-400 font-mono">UPC: ${code} • Checking openFDA enforcement reports & allergen guardrails</p>
@@ -4966,8 +4968,8 @@
 
       if (activeProfileNotice) {
         const photoEl = currentProfile.photo 
-          ? `<img src="${currentProfile.photo}" class="w-12 h-12 rounded-full object-cover border-2 border-sky-400 shadow-md shrink-0" alt="${currentProfile.name}">`
-          : `<div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-sky-400 flex items-center justify-center text-2xl shrink-0 shadow-md">${currentProfile.icon || '👤'}</div>`;
+          ? `<img src="${currentProfile.photo}" class="w-12 h-12 rounded-full object-cover border-2 border-amber-400 shadow-md shrink-0" alt="${currentProfile.name}">`
+          : `<div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-amber-400 flex items-center justify-center text-2xl shrink-0 shadow-md">${currentProfile.icon || '👤'}</div>`;
           
         activeProfileNotice.innerHTML = `
           <div class="flex items-center justify-between bg-slate-950/90 border border-slate-800/90 rounded-2xl p-2.5 shadow-sm">
@@ -5060,7 +5062,7 @@
           `;
         }).join('') + `
           <button type="button" id="addNewProfileBtn" class="shrink-0 flex items-center gap-2.5 px-3.5 py-2 min-h-[58px] rounded-2xl border-2 border-dashed border-sky-500/40 bg-sky-950/20 hover:bg-sky-900/30 text-sky-300 text-xs font-bold transition active:scale-95 shadow-sm">
-            <span class="w-10 h-10 rounded-full bg-sky-900/40 border border-sky-400/30 flex items-center justify-center text-lg shrink-0">➕</span>
+            <span class="w-10 h-10 rounded-full bg-sky-900/40 border border-amber-400/30 flex items-center justify-center text-lg shrink-0">➕</span>
             <div class="flex flex-col text-left">
               <span>Add Member</span>
               <span class="text-[10px] text-sky-400 font-normal">New profile</span>
@@ -5323,7 +5325,7 @@
       document.querySelectorAll('.avatar-option').forEach(btn => {
         const icon = btn.getAttribute('data-icon');
         if (!selectedProfilePhoto && icon === selectedAvatarIcon) {
-          btn.className = "avatar-option w-12 h-12 rounded-xl border-2 border-sky-400 bg-sky-500/20 text-2xl flex items-center justify-center transition";
+          btn.className = "avatar-option w-12 h-12 rounded-xl border-2 border-amber-400 bg-sky-500/20 text-2xl flex items-center justify-center transition";
         } else {
           btn.className = "avatar-option w-12 h-12 rounded-xl border border-slate-800 bg-slate-950 text-2xl flex items-center justify-center transition";
         }
@@ -6118,7 +6120,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=19')
+        navigator.serviceWorker.register('./sw.js?v=20')
           .then(reg => console.log('BiteHound SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
