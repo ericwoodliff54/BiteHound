@@ -563,7 +563,7 @@
 
     <!-- RESULTS DISPLAY AREA (Reveals above scanner for seamless mobile view) -->
     <!-- RETROSPECTIVE PANTRY RECALL ALERT BANNER (Reveals when an item in pantry matches an active recall) -->
-    <section id="pantryRecallAlertBanner" class="hidden transition-all duration-300 mb-4 scroll-mt-36" aria-live="polite"></section>
+    
 
     <section id="scannerResultContainer" class="hidden transition-all duration-300 mb-4 scroll-mt-36" aria-live="polite"></section>
 
@@ -1274,6 +1274,9 @@
       </div>
 
       <!-- List of watched items -->
+      <!-- Urgent Pantry Recall Alert Banner (Scoped exclusively to Watchlist tab) -->
+      <div id="pantryRecallAlertBanner" class="hidden transition-all duration-300 space-y-3" aria-live="polite"></div>
+
       <div id="historyList" class="space-y-2.5">
         <p class="text-xs text-slate-500 italic py-6 text-center">No foods scanned yet. Every barcode you scan is automatically watched here for 60 days.</p>
       </div>
@@ -3996,7 +3999,7 @@
       }, 350);
     }
 
-        // Brand & Product Search Engine (Recalls Prioritized at Top + Clickable Bulletins + Persistent Clear Button)
+        // Brand & Product Search Engine (Alerts & Recalls Prioritized + Clean Cleared Toggle)
     const brandSearchForm = document.getElementById('brandSearchForm');
     const brandSearchSection = document.getElementById('brandSearchSection');
     const executeSearchBtn = document.getElementById('executeSearchBtn');
@@ -4004,7 +4007,6 @@
 
     brandSearchInput.addEventListener('focus', () => {
       clearSearchBtn.classList.toggle('hidden', brandSearchInput.value.trim() === '');
-      // Select existing text on tap so user can immediately type over it or tap 'X' to clear
       if (brandSearchInput.value.trim() !== '') {
         brandSearchInput.select();
       }
@@ -4020,7 +4022,7 @@
         return;
       }
       searchDebounceTimer = setTimeout(() => {
-        performBrandSearch(query, true); // true = smoothly bring results into view while typing
+        performBrandSearch(query, true);
       }, 150);
     });
 
@@ -4030,7 +4032,7 @@
         clearTimeout(searchDebounceTimer);
         const query = brandSearchInput.value.trim().toLowerCase();
         if (query.length >= 2) {
-          brandSearchInput.blur(); // Dismiss mobile on-screen keyboard so results are immediately in full view!
+          brandSearchInput.blur();
           performBrandSearch(query, true);
         }
       });
@@ -4058,6 +4060,17 @@
       brandSearchInput.focus();
     });
 
+    window.toggleClearedSearchSection = function() {
+      triggerHaptic([20]);
+      const container = document.getElementById('clearedSearchContainer');
+      const arrow = document.getElementById('clearedSearchArrow');
+      if (container) {
+        const isHidden = container.classList.contains('hidden');
+        container.classList.toggle('hidden', !isHidden);
+        if (arrow) arrow.textContent = isHidden ? '▲' : '▼';
+      }
+    };
+
     function performBrandSearch(query, shouldScroll = false) {
       if (!query || query.length < 2) {
         searchResultsBox.classList.add('hidden');
@@ -4066,17 +4079,17 @@
       }
 
       const seenKeys = new Set();
-      const activeRecallsList = [];
+      const activeAlertsList = [];
       const clearedProductsList = [];
 
-      // 1. Search NATIONAL_BULLETINS for Active Recalls (Always Highest Priority!)
+      // 1. Search NATIONAL_BULLETINS for Active Recalls
       NATIONAL_BULLETINS.forEach(item => {
         const text = `${item.brand || ''} ${item.title || ''} ${item.reason || ''}`.toLowerCase();
         if (text.includes(query)) {
           const key = 'bulletin_' + item.id;
           if (!seenKeys.has(key)) {
             seenKeys.add(key);
-            activeRecallsList.push({
+            activeAlertsList.push({
               isBulletin: true,
               bulletinId: item.id,
               upc: (item.upcs && item.upcs.length > 0) ? item.upcs[0] : null,
@@ -4087,13 +4100,14 @@
               date: item.date || 'Active',
               hazard: item.reason,
               stores: item.stores || [],
-              states: item.states || ['ALL']
+              states: item.states || ['ALL'],
+              alertType: 'recall'
             });
           }
         }
       });
 
-      // 2. Search cachedFDARecalls for Live OpenFDA Recalls
+      // 2. Search cachedFDARecalls for OpenFDA Live Wire Alerts
       if (typeof cachedFDARecalls !== 'undefined' && Array.isArray(cachedFDARecalls)) {
         cachedFDARecalls.forEach(item => {
           const text = `${item.brand || ''} ${item.product || ''} ${item.reason || ''} ${item.raw || ''}`.toLowerCase();
@@ -4101,22 +4115,29 @@
             const key = 'fda_' + item.id;
             if (!seenKeys.has(key)) {
               seenKeys.add(key);
-              activeRecallsList.push({
+              activeAlertsList.push({
                 isBulletin: true,
                 bulletinId: item.id,
                 upc: (item.upcs && item.upcs.length > 0) ? item.upcs[0] : null,
                 title: item.product,
                 brand: item.brand,
                 severity: item.severity || 'Class I',
-                agency: 'openFDA Live Wire',
+                agency: 'openFDA Wire',
                 date: item.date || 'Recent',
                 hazard: item.reason,
                 stores: [],
-                states: ['ALL']
+                states: ['ALL'],
+                alertType: 'recall'
               });
             }
           }
         });
+      }
+
+      // Helper: check allergen conflicts
+      function checkAllergenConflicts(allergens) {
+        if (!allergens || !Array.isArray(allergens) || !userAllergens || userAllergens.length === 0) return [];
+        return allergens.filter(a => userAllergens.includes(a));
       }
 
       // 3. Search RECALL_DATABASE
@@ -4129,8 +4150,9 @@
           const text = `${item.brand || ''} ${item.product || ''} ${item.hazard || ''}`.toLowerCase();
           if (text.includes(query)) {
             seenKeys.add(key);
+            const conflicts = checkAllergenConflicts(item.allergens);
             if (item.isRecalled) {
-              activeRecallsList.push({
+              activeAlertsList.push({
                 isBulletin: false,
                 upc: item.upc,
                 title: item.product,
@@ -4139,7 +4161,19 @@
                 agency: item.agency || 'FDA',
                 date: item.recallDate || 'Active',
                 hazard: item.hazard || 'Active federal recall notice',
-                isRecalled: true
+                alertType: 'recall'
+              });
+            } else if (conflicts.length > 0) {
+              activeAlertsList.push({
+                isBulletin: false,
+                upc: item.upc,
+                title: item.product,
+                brand: item.brand,
+                severity: 'Dietary Conflict',
+                agency: 'Household Guard',
+                date: 'Allergen Alert',
+                hazard: `Contains active household allergen: ${conflicts.join(', ')}`,
+                alertType: 'allergen'
               });
             } else {
               clearedProductsList.push({
@@ -4154,7 +4188,7 @@
         });
       }
 
-      // 4. Search staplesCatalog (325+ retail staples)
+      // 4. Search staplesCatalog
       if (typeof staplesCatalog !== 'undefined') {
         Object.values(staplesCatalog).forEach(item => {
           if (!item.upc) return;
@@ -4164,23 +4198,38 @@
           const text = `${item.brand || ''} ${item.product || ''}`.toLowerCase();
           if (text.includes(query)) {
             seenKeys.add(key);
-            clearedProductsList.push({
-              isBulletin: false,
-              upc: item.upc,
-              title: item.product,
-              brand: item.brand,
-              isRecalled: false
-            });
+            const conflicts = checkAllergenConflicts(item.allergens);
+            if (conflicts.length > 0) {
+              activeAlertsList.push({
+                isBulletin: false,
+                upc: item.upc,
+                title: item.product,
+                brand: item.brand,
+                severity: 'Dietary Conflict',
+                agency: 'Household Guard',
+                date: 'Allergen Alert',
+                hazard: `Contains active household allergen: ${conflicts.join(', ')}`,
+                alertType: 'allergen'
+              });
+            } else {
+              clearedProductsList.push({
+                isBulletin: false,
+                upc: item.upc,
+                title: item.product,
+                brand: item.brand,
+                isRecalled: false
+              });
+            }
           }
         });
       }
 
       searchResultsBox.classList.remove('hidden');
 
-      if (activeRecallsList.length === 0 && clearedProductsList.length === 0) {
+      if (activeAlertsList.length === 0 && clearedProductsList.length === 0) {
         searchResultsBox.innerHTML = `
           <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-400 text-center space-y-1">
-            <span class="text-emerald-400 font-bold block text-sm">✓ No Active Recalls or Hazards Found</span>
+            <span class="text-emerald-400 font-bold block text-sm">✓ No Active Recalls or Dietary Alerts Found</span>
             <span>Zero current FDA or USDA food safety alerts match "${query}".</span>
           </div>
         `;
@@ -4190,18 +4239,18 @@
 
       let html = '';
 
-      // SECTION 1: ACTIVE RECALLS AT THE TOP!
-      if (activeRecallsList.length > 0) {
+      // TIER 1: ACTIVE RECALLS & ALLERGEN ALERTS (Displayed front and center)
+      if (activeAlertsList.length > 0) {
         html += `
           <div class="p-2.5 rounded-xl bg-rose-950/80 border border-rose-500/60 text-rose-200 text-xs flex items-center justify-between">
             <span class="font-bold flex items-center gap-1.5 text-rose-300">
               <span class="animate-pulse">🚨</span>
-              <span>${activeRecallsList.length} Active Public Health Recall${activeRecallsList.length > 1 ? 's' : ''} Found</span>
+              <span>${activeAlertsList.length} Food Safety Alert${activeAlertsList.length > 1 ? 's' : ''} Found</span>
             </span>
             <span class="text-[10px] text-rose-400 font-mono">Tap to Inspect</span>
           </div>
           <div class="space-y-1.5 pt-0.5">
-            ${activeRecallsList.map(item => `
+            ${activeAlertsList.map(item => `
               <div 
                 class="p-3 rounded-xl bg-rose-950/40 border border-rose-600/60 hover:border-rose-400 transition cursor-pointer search-result-item active:scale-[0.99] shadow-sm space-y-1" 
                 data-type="${item.isBulletin ? 'bulletin' : 'product'}" 
@@ -4216,36 +4265,72 @@
               >
                 <div class="flex items-center justify-between">
                   <span class="text-[10px] font-black uppercase tracking-wide px-1.5 py-0.5 rounded border bg-rose-500/30 text-rose-200 border-rose-500/60 animate-pulse">
-                    🚨 ${item.severity || 'Class I'} RECALL
+                    ${item.alertType === 'allergen' ? '⚠️ ALLERGEN CONFLICT' : '🚨 ' + (item.severity || 'Class I') + ' RECALL'}
                   </span>
                   <span class="text-[10px] text-rose-300 font-mono">${item.date || 'Active Alert'}</span>
                 </div>
                 <h4 class="text-xs font-bold text-white leading-snug">${item.title}</h4>
-                <p class="text-[11px] text-slate-300">${item.brand} • <span class="text-rose-300">${item.agency || 'Federal Alert'}</span></p>
+                <p class="text-[11px] text-slate-300">${item.brand} • <span class="text-rose-300">${item.agency || 'Safety Alert'}</span></p>
                 <p class="text-[11px] text-rose-200 leading-tight">${item.hazard}</p>
                 ${item.stores && item.stores.length > 0 ? `<p class="text-[10px] text-slate-400 pt-0.5">Retailers: ${item.stores.join(', ')}</p>` : ''}
               </div>
             `).join('')}
           </div>
         `;
-      }
 
-      // SECTION 2: CLEARED STORE PRODUCTS (Displayed second, with clear context!)
-      if (clearedProductsList.length > 0) {
-        const headerTitle = (activeRecallsList.length > 0) 
-          ? `Other Store Items (Not Recalled • ${clearedProductsList.length})` 
-          : `Verified Store Inventory (${clearedProductsList.length} items • 0 Recalls)`;
-
-        html += `
-          <div class="pt-2">
-            <div class="flex items-center justify-between pb-1 px-1 text-[11px] text-slate-400">
-              <span class="font-bold text-emerald-400 flex items-center gap-1">
-                <span>✓</span>
-                <span>${headerTitle}</span>
-              </span>
-              <span class="text-[10px] text-slate-500">Tap to check ingredients</span>
+        // If active alerts exist, keep cleared items collapsed in a clean drawer so they do not clutter the alert!
+        if (clearedProductsList.length > 0) {
+          html += `
+            <div class="pt-2">
+              <button 
+                type="button" 
+                onclick="toggleClearedSearchSection()" 
+                class="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-[11px] text-slate-400 hover:text-white flex items-center justify-between transition active:scale-[0.99]"
+              >
+                <span class="flex items-center gap-1.5">
+                  <span>📦</span>
+                  <span>View ${clearedProductsList.length} Other Store Item${clearedProductsList.length > 1 ? 's' : ''} (100% Cleared • 0 Alerts)</span>
+                </span>
+                <span id="clearedSearchArrow" class="font-mono text-[10px]">▼</span>
+              </button>
+              <div id="clearedSearchContainer" class="hidden space-y-1.5 pt-2">
+                ${clearedProductsList.map(item => `
+                  <div 
+                    class="p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-emerald-500/50 transition cursor-pointer search-result-item active:scale-[0.99] space-y-0.5" 
+                    data-type="product" 
+                    data-upc="${item.upc}" 
+                    data-title="${item.title}"
+                    data-brand="${item.brand}"
+                  >
+                    <div class="flex items-center justify-between">
+                      <span class="text-[9px] uppercase font-bold px-1.5 py-0.2 rounded border bg-emerald-500/15 text-emerald-300 border-emerald-500/30">
+                        ✓ Store Cleared
+                      </span>
+                      <span class="text-[9px] text-slate-500 font-mono">UPC: ${item.upc}</span>
+                    </div>
+                    <h4 class="text-xs font-semibold text-slate-200 leading-snug">${item.title}</h4>
+                    <p class="text-[10px] text-slate-400">${item.brand}</p>
+                  </div>
+                `).join('')}
+              </div>
             </div>
-            <div class="space-y-1.5">
+          `;
+        }
+      } else {
+        // TIER 2: NO ALERTS ON FILE - Show clean confirmation and display verified catalog products
+        html += `
+          <div class="p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/40 text-xs text-emerald-200 text-center space-y-1">
+            <span class="text-emerald-400 font-bold block text-sm">✓ Zero Active Recalls or Dietary Alerts</span>
+            <span>No federal safety notices or household allergen conflicts match "${query}".</span>
+          </div>
+        `;
+        if (clearedProductsList.length > 0) {
+          html += `
+            <div class="pt-1.5 space-y-1.5">
+              <div class="flex items-center justify-between pb-1 px-1 text-[11px] text-slate-400">
+                <span class="font-bold text-emerald-400">Verified Store Inventory (${clearedProductsList.length})</span>
+                <span class="text-slate-500 font-mono text-[10px]">Tap to inspect</span>
+              </div>
               ${clearedProductsList.map(item => `
                 <div 
                   class="p-3 rounded-xl bg-slate-950 border border-slate-800/90 hover:border-emerald-500/60 transition cursor-pointer search-result-item active:scale-[0.99] shadow-sm space-y-1" 
@@ -4265,13 +4350,13 @@
                 </div>
               `).join('')}
             </div>
-          </div>
-        `;
+          `;
+        }
       }
 
       searchResultsBox.innerHTML = html;
 
-      // Click handler: 100% functional for BOTH products and bulletins!
+      // Click handler: Renders directly into scannerResultContainer and smoothly scrolls up!
       document.querySelectorAll('.search-result-item').forEach(el => {
         el.addEventListener('click', () => {
           triggerHaptic([30]);
@@ -4288,14 +4373,14 @@
           brandSearchInput.value = title;
           clearSearchBtn.classList.remove('hidden');
           searchResultsBox.classList.add('hidden');
-          brandSearchInput.blur(); // Dismiss mobile on-screen keyboard
+          brandSearchInput.blur(); // Dismiss mobile keyboard
 
           if (upc && upc !== '' && upc !== 'null' && typeof RECALL_DATABASE !== 'undefined' && RECALL_DATABASE[upc]) {
             processUPC(upc, 'scanner');
           } else if (upc && upc !== '' && upc !== 'null' && typeof staplesCatalog !== 'undefined' && staplesCatalog[upc]) {
             processUPC(upc, 'scanner');
           } else {
-            // Bulletin or product without direct barcode: build complete recall display record
+            // Bulletin or item without UPC: construct complete display record
             const bulletinRecord = {
               productName: title,
               brand: brand,
@@ -4316,8 +4401,8 @@
               detectedAdditives: [],
               ingredients: ''
             };
+            // NOTE: Do NOT call addToHistory here to prevent false pantry recall banner!
             displayResult(bulletinRecord, 'scanner');
-            addToHistory(bulletinRecord);
           }
         });
       });
@@ -4336,7 +4421,6 @@
         window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
       }, 50);
     }
-
 
     // State & Store Filter Handlers
     stateFilterSelect.addEventListener('change', () => {
@@ -5016,22 +5100,39 @@
 
     // MULTI-CATEGORY DEFINING WINDOWS (RECALLS, HOUSEHOLD ALLERGENS, FOOD ADDITIVES & INGREDIENTS)
     
-    // Smooth Scroll to Result Window from Master Header Pills
+    // Smooth Scroll to Result Window from Master Header Pills (Dynamic Sticky Nav Measurement)
     window.scrollToResultSection = function(sectionType, source = 'scanner') {
       triggerHaptic([25]);
       const targetId = `${source}-window-${sectionType}`;
-      const el = document.getElementById(targetId);
+      let el = document.getElementById(targetId);
+      if (!el) {
+        el = document.querySelector(`[id$="-window-${sectionType}"]`);
+      }
       if (el) {
-        const navOffset = 125;
-        const rect = el.getBoundingClientRect();
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const targetY = scrollTop + rect.top - navOffset;
-        window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+        // Measure sticky navigation bar bottom edge dynamically
+        const navEl = document.querySelector('nav');
+        let navOffset = 150;
+        if (navEl) {
+          const navRect = navEl.getBoundingClientRect();
+          if (navRect.bottom > 0 && navRect.bottom < 220) {
+            navOffset = Math.round(navRect.bottom + 16);
+          }
+        }
 
-        el.classList.add('ring-2', 'ring-amber-400/80');
+        const rect = el.getBoundingClientRect();
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        const targetY = Math.round(currentScroll + rect.top - navOffset);
+
+        window.scrollTo({
+          top: Math.max(0, targetY),
+          behavior: 'smooth'
+        });
+
+        // High-visibility focus ring to immediately orient the user
+        el.classList.add('ring-2', 'ring-amber-400', 'shadow-2xl');
         setTimeout(() => {
-          el.classList.remove('ring-2', 'ring-amber-400/80');
-        }, 1200);
+          el.classList.remove('ring-2', 'ring-amber-400', 'shadow-2xl');
+        }, 1400);
       }
     };
 
@@ -5573,16 +5674,16 @@
       targetContainer.innerHTML = `
         <div class="space-y-3.5">
           ${masterHeaderHtml}
-          <div id="${activeSource}-window-Recall" class="scroll-mt-28 transition-all duration-300 rounded-2xl">
+          <div id="${activeSource}-window-Recall" class="scroll-mt-[150px] transition-all duration-300 rounded-2xl">
             ${recallWindowHtml}
           </div>
-          <div id="${activeSource}-window-Allergen" class="scroll-mt-28 transition-all duration-300 rounded-2xl">
+          <div id="${activeSource}-window-Allergen" class="scroll-mt-[150px] transition-all duration-300 rounded-2xl">
             ${allergenWindowHtml}
           </div>
-          <div id="${activeSource}-window-Additive" class="scroll-mt-28 transition-all duration-300 rounded-2xl">
+          <div id="${activeSource}-window-Additive" class="scroll-mt-[150px] transition-all duration-300 rounded-2xl">
             ${additiveWindowHtml}
           </div>
-          <div id="${activeSource}-window-Ingredients" class="scroll-mt-28 transition-all duration-300 rounded-2xl">
+          <div id="${activeSource}-window-Ingredients" class="scroll-mt-[150px] transition-all duration-300 rounded-2xl">
             ${ingredientsWindowHtml}
           </div>
           ${actionBtnHtml}
@@ -6877,7 +6978,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=33')
+        navigator.serviceWorker.register('./sw.js?v=34')
           .then(reg => console.log('BiteHound SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
