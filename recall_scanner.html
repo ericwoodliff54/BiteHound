@@ -256,27 +256,45 @@
           </div>
         </div>
 
-        <!-- Interactive Pricing Tier Options -->
+        <!-- Interactive Pricing Tier Options (Free, Annual ~30% off, Monthly) -->
         <div class="space-y-2.5" id="paywallPlansContainer">
-          <!-- 1. Annual Plan (First • Most Popular / Best Value) -->
+          <!-- Free Plan Summary Card -->
+          <div class="p-3 rounded-2xl border border-slate-800 bg-slate-950/70 text-xs flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="text-base">🛡️</span>
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="font-bold text-white text-xs">Free Plan Included</span>
+                  <span class="px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-semibold">Active Forever</span>
+                </div>
+                <span class="text-[11px] text-slate-400 block">Unlimited Barcode Scanning & 24/7 Pantry Recall Watchlist</span>
+              </div>
+            </div>
+            <div class="text-right">
+              <span class="font-bold text-emerald-400 text-sm">$0</span>
+              <span class="text-[10px] text-slate-500 block font-mono">Free Forever</span>
+            </div>
+          </div>
+
+          <!-- 1. Annual Plan (Save 30% • Best Value) -->
           <label id="planLabelAnnual" class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border-2 border-amber-500 bg-amber-950/30 text-xs transition relative shadow-lg shadow-amber-950/30">
             <div class="flex items-center gap-2.5">
               <input type="radio" name="plusPlan" value="annual" checked class="text-amber-500 focus:ring-0">
               <div>
                 <div class="flex items-center gap-2">
                   <span class="font-bold text-white text-sm">Annual Membership</span>
-                  <span class="px-1.5 py-0.5 rounded bg-amber-400 text-slate-950 text-[10px] font-bold uppercase tracking-wider">Save 44% • Most Popular</span>
+                  <span class="px-1.5 py-0.5 rounded bg-amber-400 text-slate-950 text-[10px] font-bold uppercase tracking-wider">Save 30% • Best Value</span>
                 </div>
-                <span class="text-[11px] text-amber-200/90 block">3-Day Free Trial, then $19.99/year (~$1.66/mo)</span>
+                <span class="text-[11px] text-amber-200/90 block">3-Day Free Trial, then $24.99/year (~$2.08/mo)</span>
               </div>
             </div>
             <div class="text-right">
-              <span class="font-bold text-white text-sm">$1.66<span class="text-[10px] text-slate-400 font-normal">/mo</span></span>
-              <span class="text-[10px] text-slate-400 block font-mono">$19.99 billed/yr</span>
+              <span class="font-bold text-white text-sm">$2.08<span class="text-[10px] text-slate-400 font-normal">/mo</span></span>
+              <span class="text-[10px] text-slate-400 block font-mono">$24.99 billed/yr</span>
             </div>
           </label>
 
-          <!-- 2. Monthly Plan (Second) -->
+          <!-- 2. Monthly Plan -->
           <label id="planLabelMonthly" class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border border-slate-800 bg-slate-950 text-xs transition hover:border-slate-700">
             <div class="flex items-center gap-2.5">
               <input type="radio" name="plusPlan" value="monthly" class="text-amber-500 focus:ring-0">
@@ -290,31 +308,13 @@
               <span class="text-[10px] text-slate-400 block">Cancel anytime</span>
             </div>
           </label>
-
-          <!-- 3. Lifetime VIP Plan (Last • One-Time Purchase) -->
-          <label id="planLabelLifetime" class="cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border border-purple-500/60 bg-purple-950/20 text-xs transition hover:border-purple-400">
-            <div class="flex items-center gap-2.5">
-              <input type="radio" name="plusPlan" value="lifetime" class="text-purple-500 focus:ring-0">
-              <div>
-                <div class="flex items-center gap-2">
-                  <span class="font-bold text-white text-sm">Lifetime VIP Pass</span>
-                  <span class="px-1.5 py-0.5 rounded bg-gradient-to-r from-purple-500 to-indigo-500 text-white text-[10px] font-bold uppercase tracking-wider">Pay Once • Forever</span>
-                </div>
-                <span class="text-[11px] text-purple-200/90 block">One-time payment • Never pay a recurring fee</span>
-              </div>
-            </div>
-            <div class="text-right">
-              <span class="font-bold text-white text-sm">$49.99</span>
-              <span class="text-[10px] text-purple-300 block font-medium">One-Time</span>
-            </div>
-          </label>
         </div><!-- Dynamic CTA Button -->
         <button 
           type="button" 
           id="activatePlusTrialBtn" 
           class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-sm shadow-xl shadow-amber-950/60 hover:opacity-95 transition active:scale-[0.98] flex items-center justify-center gap-2"
         >
-          <span id="activatePlusTrialBtnText">Start 3-Day Free Trial (then $14.99/yr)</span>
+          <span id="activatePlusTrialBtnText">Start 3-Day Free Trial (then $24.99/yr)</span>
         </button>
 
         <!-- Family & Tester Access Pass Redeemer -->
@@ -554,7 +554,7 @@
           </div>
           <span class="text-base font-bold text-white tracking-wide">Barcode Captured!</span>
           <span id="scannedSuccessCode" class="text-xs font-mono text-emerald-300 font-bold bg-emerald-950/80 border border-emerald-500/40 px-3.5 py-1.5 rounded-full mt-1.5 shadow-sm"></span>
-          <span class="text-xs text-slate-300 mt-2">Product & safety details loaded below</span>
+          <span class="text-xs text-slate-300 mt-2">Product & safety details loaded above</span>
         </div>
 
         <!-- Barcode Graphic Target in Viewfinder (shown only when camera is paused) -->
@@ -657,7 +657,7 @@
             <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
-            <span>Search by Brand / Product Name</span>
+            <span>Search by Food or Product Name</span>
           </label>
           <span class="text-[10px] text-slate-500">Torn barcode?</span>
         </div>
@@ -666,7 +666,7 @@
           <input 
             type="text" 
             id="brandSearchInput" 
-            placeholder="e.g. Boar's Head, carrots, spinach, chips..."
+            placeholder="Search product name, food item, or keyword..."
             class="w-full min-h-[50px] pl-11 pr-10 py-3 rounded-xl border border-slate-700 bg-slate-950 text-white text-sm placeholder:text-slate-500 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
           >
           <div class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">
@@ -948,7 +948,7 @@
           id="openPaywallBtn" 
           class="w-full min-h-[52px] py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-sm shadow-md transition active:scale-[0.98] flex items-center justify-center gap-2"
         >
-          <span>View BiteHound Pro Plans ($2.99/mo or $19.99/yr)</span>
+          <span>View BiteHound Pro Plans ($2.99/mo or $24.99/yr)</span>
         </button>
         <button 
           type="button" 
@@ -2718,15 +2718,11 @@
       const selected = document.querySelector('input[name="plusPlan"]:checked')?.value || 'annual';
       const activatePlusTrialBtnText = document.getElementById('activatePlusTrialBtnText');
 
-      ['annual', 'monthly', 'lifetime'].forEach(p => {
+      ['annual', 'monthly'].forEach(p => {
         const lbl = document.getElementById('planLabel' + p.charAt(0).toUpperCase() + p.slice(1));
         if (lbl) {
           if (p === selected) {
-            if (p === 'lifetime') {
-              lbl.className = "cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border-2 border-purple-500 bg-purple-950/40 text-xs transition relative shadow-lg shadow-purple-950/40";
-            } else {
-              lbl.className = "cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border-2 border-amber-500 bg-amber-950/30 text-xs transition relative shadow-lg shadow-amber-950/40";
-            }
+            lbl.className = "cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border-2 border-amber-500 bg-amber-950/30 text-xs transition relative shadow-lg shadow-amber-950/40";
           } else {
             lbl.className = "cursor-pointer flex items-center justify-between p-3.5 rounded-2xl border border-slate-800 bg-slate-950 text-xs transition hover:border-slate-700";
           }
@@ -2734,16 +2730,14 @@
       });
 
       if (activatePlusTrialBtnText) {
-        if (selected === 'lifetime') {
-          activatePlusTrialBtnText.textContent = "Get Lifetime VIP Pass ($49.99 One-Time • No Subscriptions)";
-        } else if (selected === 'monthly') {
+        if (selected === 'monthly') {
           activatePlusTrialBtnText.textContent = plusStatusType === 'expired' 
             ? "Subscribe for $2.99/month" 
             : "Start 3-Day Free Trial (then $2.99/mo)";
         } else {
           activatePlusTrialBtnText.textContent = plusStatusType === 'expired' 
-            ? "Subscribe for $19.99/year" 
-            : "Start 3-Day Free Trial (then $19.99/yr)";
+            ? "Subscribe for $24.99/year (Save 30%)" 
+            : "Start 3-Day Free Trial (then $24.99/yr)";
         }
       }
     }
@@ -2758,27 +2752,14 @@
 
       const selected = document.querySelector('input[name="plusPlan"]:checked')?.value || 'annual';
 
-      if (selected === 'lifetime') {
-        isPlusActive = true;
-        plusStatusType = 'paid';
-        trialDaysRemaining = 0;
-        try {
-          localStorage.setItem('safebite_pro_active', 'paid');
-          localStorage.setItem('safebite_plus_active', 'paid');
-          sessionStorage.setItem('safebite_pro_active', 'paid');
-          document.cookie = "safebite_pro_vip=paid; max-age=315360000; path=/";
-        } catch (e) {}
-        showCustomizeToast("⭐ BiteHound Pro Lifetime VIP Activated! Unlimited lifetime access unlocked.");
-      } else {
-        isPlusActive = true;
-        plusStatusType = 'trial';
-        trialDaysRemaining = 3;
-        try {
-          localStorage.setItem('safebite_plus_active', 'trial');
-          localStorage.setItem('safebite_trial_start', Date.now().toString());
-        } catch (e) {}
-        showCustomizeToast(`🎉 3-Day Free Trial activated! (${selected === 'monthly' ? '$2.99/mo' : '$19.99/yr'}) Family profiles & additive guardrails unlocked.`);
-      }
+      isPlusActive = true;
+      plusStatusType = 'trial';
+      trialDaysRemaining = 3;
+      try {
+        localStorage.setItem('safebite_plus_active', 'trial');
+        localStorage.setItem('safebite_trial_start', Date.now().toString());
+      } catch (e) {}
+      showCustomizeToast(`🎉 3-Day Free Trial activated! (${selected === 'monthly' ? '$2.99/mo' : '$24.99/yr - Save 30%'}) Family profiles & additive guardrails unlocked.`);
 
       updatePlusUI();
       closePaywall();
@@ -2798,7 +2779,7 @@
         headerPlusBadgeBtn.className = "text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 transition flex items-center gap-1";
         plusActiveBadge.textContent = "✓ PRO ACTIVE";
         plusActiveBadge.className = "text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
-        openPaywallBtn.innerHTML = `<span>⭐ BiteHound Pro Active (Lifetime VIP)</span>`;
+        openPaywallBtn.innerHTML = `<span>⭐ BiteHound Pro Active (VIP Member)</span>`;
         openPaywallBtn.className = "w-full py-2.5 px-3 rounded-xl bg-slate-800 border border-slate-700 text-amber-300 font-bold text-xs transition flex items-center justify-center gap-1.5";
         if (additiveBadge) {
           additiveBadge.textContent = "AUTO-ACTIVE (PRO)";
@@ -2820,7 +2801,7 @@
         headerPlusBadgeBtn.className = "text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40 hover:bg-rose-500/30 transition flex items-center gap-1";
         plusActiveBadge.textContent = "TRIAL EXPIRED";
         plusActiveBadge.className = "text-[10px] font-bold px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40";
-        openPaywallBtn.innerHTML = `<span>Upgrade to BiteHound Pro ($19.99/yr or $49.99 Lifetime)</span>`;
+        openPaywallBtn.innerHTML = `<span>Upgrade to BiteHound Pro ($24.99/yr or $2.99/mo)</span>`;
         openPaywallBtn.className = "w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5";
         if (additiveBadge) {
           additiveBadge.textContent = "LOCKED (PRO)";
@@ -2831,7 +2812,7 @@
         headerPlusBadgeBtn.className = "text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30 transition flex items-center gap-1";
         plusActiveBadge.textContent = "FREE TIER";
         plusActiveBadge.className = "text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700";
-        openPaywallBtn.innerHTML = `<span>Start 3-Day Free Trial ($19.99/yr, $2.99/mo, or $49.99 Lifetime)</span>`;
+        openPaywallBtn.innerHTML = `<span>Start 3-Day Free Trial ($24.99/yr or $2.99/mo)</span>`;
         openPaywallBtn.className = "w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-slate-950 font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5";
         if (additiveBadge) {
           additiveBadge.textContent = "LOCKED (PRO)";
@@ -5984,7 +5965,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=8')
+        navigator.serviceWorker.register('./sw.js?v=9')
           .then(reg => console.log('BiteHound SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });

@@ -1,7 +1,7 @@
-const CACHE_NAME = 'bitehound-v8';
+const CACHE_NAME = 'bitehound-v9';
 const ASSETS = [
   './index.html?app=bitehound',
-  './manifest.json?v=8',
+  './manifest.json?v=9',
   './icon-192.png?v=8',
   './icon-512.png?v=8',
   './apple-touch-icon.png?v=8',
