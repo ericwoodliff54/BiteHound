@@ -504,6 +504,9 @@
     </div>
 
     <!-- RESULTS DISPLAY AREA (Reveals above scanner for seamless mobile view) -->
+    <!-- RETROSPECTIVE PANTRY RECALL ALERT BANNER (Reveals when an item in pantry matches an active recall) -->
+    <section id="pantryRecallAlertBanner" class="hidden transition-all duration-300 mb-4 scroll-mt-36" aria-live="polite"></section>
+
     <section id="resultContainer" class="hidden transition-all duration-300 mb-4 scroll-mt-36"></section>
 
     <!-- SECTION 1: SCANNER PANEL WITH CLEAN SINGLE RETICLE (NO LASER, NO DUPLICATE FRAMES) -->
@@ -1063,18 +1066,28 @@
 
 
     <!-- SCAN HISTORY LOG -->
-    <section id="historySection" class="bg-slate-900/70 rounded-2xl p-4 border border-slate-800">
-      <div class="flex items-center justify-between mb-3">
-        <h3 class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
-          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-          Scan & Lookup History
-        </h3>
-        <button id="clearHistoryBtn" class="text-[11px] text-slate-400 hover:text-rose-400 transition min-h-[36px] px-2">Clear History</button>
+    <section id="historySection" class="bg-slate-900/80 rounded-2xl p-4 sm:p-5 border border-slate-800 shadow-lg space-y-3.5">
+      <div class="flex items-center justify-between gap-2">
+        <div>
+          <h3 class="text-sm font-bold text-slate-100 flex items-center gap-2">
+            <span class="w-6 h-6 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-xs">🛡️</span>
+            Pantry & Fridge Watchlist
+          </h3>
+          <p class="text-[11px] text-slate-400 mt-0.5">
+            Every item you scan is automatically monitored 24/7 against new FDA & USDA recalls.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <span id="pantryGuardCountBadge" class="px-2.5 py-1 text-[11px] font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+            0 Guarded
+          </span>
+          <button id="clearHistoryBtn" type="button" class="text-[11px] text-slate-500 hover:text-rose-400 transition min-h-[36px] px-2" title="Clear all saved pantry items">
+            Clear All
+          </button>
+        </div>
       </div>
       <div id="historyList" class="space-y-2">
-        <p class="text-xs text-slate-500 italic py-2 text-center">No scans recorded yet. Align a barcode or search a brand above.</p>
+        <p class="text-xs text-slate-500 italic py-3 text-center">No foods scanned yet. Every barcode you scan is automatically guarded here for 60 days.</p>
       </div>
     </section>
 
@@ -3713,13 +3726,36 @@
       processUPC(cleanCode);
     });
 
+    let clearConfirmPending = false;
+    let clearConfirmTimer = null;
     clearHistoryBtn.addEventListener('click', () => {
+      if (scanHistory.length === 0) return;
+      if (!clearConfirmPending) {
+        clearConfirmPending = true;
+        clearHistoryBtn.textContent = "Tap again to confirm";
+        clearHistoryBtn.classList.replace('text-slate-500', 'text-rose-400');
+        clearHistoryBtn.classList.add('font-bold');
+        clearConfirmTimer = setTimeout(() => {
+          clearConfirmPending = false;
+          clearHistoryBtn.textContent = "Clear All";
+          clearHistoryBtn.classList.replace('text-rose-400', 'text-slate-500');
+          clearHistoryBtn.classList.remove('font-bold');
+        }, 3500);
+        return;
+      }
+      clearTimeout(clearConfirmTimer);
+      clearConfirmPending = false;
+      clearHistoryBtn.textContent = "Clear All";
+      clearHistoryBtn.classList.replace('text-rose-400', 'text-slate-500');
+      clearHistoryBtn.classList.remove('font-bold');
+
       triggerHaptic([40]);
       scanHistory = [];
       try {
         localStorage.removeItem('safebite_history'); localStorage.removeItem('recall_radar_history');
       } catch (e) {}
-      renderHistory();
+      auditPantryAgainstRecalls();
+      showCustomizeToast("Pantry watchlist cleared.");
     });
 
     refreshFeedBtn.addEventListener('click', async () => {
@@ -4351,6 +4387,12 @@
               <span class="text-[10px] font-mono tracking-widest text-sky-400 uppercase font-bold block mb-0.5">SCANNED PRODUCT IDENTIFIED</span>
               <h3 class="font-display text-base sm:text-lg font-bold text-white leading-snug">${data.productName}</h3>
               <p class="text-xs text-slate-300 mt-0.5">${data.brand} • <span class="font-mono text-slate-400">UPC: ${data.upc}</span></p>
+              <div class="mt-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-950/70 text-emerald-300 border border-emerald-500/30">
+                <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                </svg>
+                <span>Auto-Guarded in 24/7 Pantry Watchlist</span>
+              </div>
             </div>
             <span class="text-[10px] font-mono text-slate-400 bg-slate-950 px-2 py-1 rounded-md border border-slate-800 shrink-0">
               ${data.time}
@@ -5341,44 +5383,217 @@
     }
 
     function addToHistory(item) {
-      scanHistory.unshift(item);
-      if (scanHistory.length > 8) scanHistory.pop();
+      if (!item || !item.upc) return;
+      // Deduplicate by UPC: remove previous entry of this barcode
+      scanHistory = scanHistory.filter(i => i.upc !== item.upc);
+      
+      // Prepend fresh scan with full details and timestamp
+      scanHistory.unshift({
+        upc: item.upc,
+        status: item.status,
+        productName: item.productName || item.upc,
+        brand: item.brand || '',
+        time: item.time || new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+        timestamp: Date.now(),
+        isRecalled: Boolean(item.isRecalled),
+        recallRecord: item.recallRecord || null,
+        detectedAllergens: item.detectedAllergens || [],
+        detectedAdditives: item.detectedAdditives || []
+      });
+
+      // Retain up to 100 items (generous 60-day household inventory)
+      if (scanHistory.length > 100) scanHistory.pop();
       try {
         localStorage.setItem('safebite_history', JSON.stringify(scanHistory));
       } catch (e) {}
+
+      auditPantryAgainstRecalls();
+    }
+
+    function removeGuardedItem(upc) {
+      scanHistory = scanHistory.filter(i => i.upc !== upc);
+      try {
+        localStorage.setItem('safebite_history', JSON.stringify(scanHistory));
+      } catch (e) {}
+      auditPantryAgainstRecalls();
+    }
+    window.removeGuardedItem = removeGuardedItem;
+
+    function auditPantryAgainstRecalls() {
+      if (!scanHistory || scanHistory.length === 0) {
+        updatePantryAlertBanner([]);
+        renderHistory();
+        return;
+      }
+
+      const recalledMatches = [];
+
+      scanHistory.forEach(item => {
+        const code = String(item.upc || '').trim();
+        const brandLower = String(item.brand || '').toLowerCase().trim();
+        const titleLower = String(item.productName || '').toLowerCase().trim();
+
+        // 1. Check NATIONAL_BULLETINS
+        let match = NATIONAL_BULLETINS.find(b => {
+          if (b.upcs && b.upcs.includes(code)) return true;
+          if (b.brand && brandLower && (b.brand.toLowerCase() === brandLower || brandLower.includes(b.brand.toLowerCase()))) {
+            if (b.product && titleLower && (titleLower.includes(b.product.toLowerCase()) || b.product.toLowerCase().includes(titleLower))) {
+              return true;
+            }
+          }
+          return false;
+        });
+
+        // 2. Check cachedFDARecalls
+        if (!match && cachedFDARecalls && cachedFDARecalls.length > 0) {
+          match = cachedFDARecalls.find(r => {
+            if (r.upcs && r.upcs.includes(code)) return true;
+            if (r.raw && r.raw.includes(code)) return true;
+            if (r.brand && brandLower && r.brand.toLowerCase() === brandLower) {
+              const prodDesc = (r.product || '').toLowerCase();
+              if (titleLower && (prodDesc.includes(titleLower) || titleLower.includes(prodDesc))) return true;
+            }
+            return false;
+          });
+        }
+
+        if (match) {
+          item.recalledNow = true;
+          item.activeRecallHazard = match.hazard || match.reason || 'Active FDA Recall notice';
+          item.recallAgency = match.agency || 'openFDA Wire';
+          item.recallDate = match.recallDate || match.date || 'Recent';
+          recalledMatches.push({ item: item, recall: match });
+        } else {
+          item.recalledNow = false;
+        }
+      });
+
+      updatePantryAlertBanner(recalledMatches);
       renderHistory();
     }
 
+    function updatePantryAlertBanner(matches) {
+      const banner = document.getElementById('pantryRecallAlertBanner');
+      if (!banner) return;
+      if (!matches || matches.length === 0) {
+        banner.classList.add('hidden');
+        banner.innerHTML = '';
+        return;
+      }
+
+      banner.classList.remove('hidden');
+      banner.innerHTML = `
+        <div class="space-y-3">
+          ${matches.map(m => `
+            <div class="p-4 rounded-2xl bg-gradient-to-r from-rose-950/95 via-red-950/90 to-rose-900/90 border-2 border-rose-500 shadow-xl shadow-rose-950/60 text-rose-100 animate-pulse">
+              <div class="flex items-start gap-3">
+                <div class="w-9 h-9 rounded-xl bg-rose-500/20 border border-rose-500/50 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg class="w-5 h-5 text-rose-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between gap-2 flex-wrap">
+                    <span class="text-[11px] font-black uppercase tracking-wider text-rose-300 bg-rose-500/20 px-2 py-0.5 rounded-md border border-rose-500/40">
+                      ⚠️ URGENT PANTRY RECALL ALERT
+                    </span>
+                    <span class="text-[10px] text-rose-400 font-mono">Scanned ${m.item.time || 'Previously'}</span>
+                  </div>
+                  <p class="font-bold text-sm text-white mt-1.5 leading-snug">${m.item.productName || m.item.upc}</p>
+                  <p class="text-xs text-rose-200 mt-1 font-medium leading-relaxed">${m.item.activeRecallHazard || 'Active federal recall issued for this item.'}</p>
+                  <div class="mt-3 flex items-center justify-between gap-2 flex-wrap">
+                    <span class="text-[11px] text-rose-300 font-bold flex items-center gap-1">
+                      <span>🛑</span> Check fridge/pantry immediately. Do not consume.
+                    </span>
+                    <button type="button" onclick="removeGuardedItem('${m.item.upc}')" class="px-3 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition shadow-sm active:scale-95">
+                      Mark Discarded & Clear
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
     function renderHistory() {
+      const countBadge = document.getElementById('pantryGuardCountBadge');
+      if (countBadge) {
+        const activeCount = scanHistory.length;
+        countBadge.textContent = `${activeCount} Guarded`;
+        if (activeCount > 0) {
+          countBadge.className = 'px-2.5 py-1 text-[11px] font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+        } else {
+          countBadge.className = 'px-2.5 py-1 text-[11px] font-medium rounded-full bg-slate-800 text-slate-400 border border-slate-700';
+        }
+      }
+
       if (scanHistory.length === 0) {
-        historyList.innerHTML = '<p class="text-xs text-slate-500 italic py-2 text-center">No scans recorded yet. Align a barcode or search a brand above.</p>';
+        historyList.innerHTML = '<p class="text-xs text-slate-500 italic py-3 text-center">No foods scanned yet. Every barcode you scan is automatically guarded here for 60 days.</p>';
         return;
       }
 
       historyList.innerHTML = scanHistory.map(item => {
-        let badgeColor = 'bg-slate-800 text-slate-300 border-slate-700';
-        let statusText = 'Not Listed';
+        const isItemRecalled = Boolean(item.recalledNow || item.status === 'recalled');
 
-        if (item.status === 'recalled') {
-          badgeColor = 'bg-rose-500/20 text-rose-300 border-rose-500/40 font-bold';
-          statusText = 'RECALLED';
-        } else if (item.status === 'allergen_alert') {
+        if (isItemRecalled) {
+          return `
+            <div class="p-3 rounded-xl border-2 border-rose-500/80 bg-rose-950/70 text-xs transition shadow-md shadow-rose-950/40 space-y-2">
+              <div class="flex items-start justify-between gap-2">
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <span class="px-2 py-0.5 text-[10px] rounded-md border bg-rose-500/30 text-rose-200 border-rose-500/60 font-black tracking-wide uppercase animate-pulse">
+                      🚨 RECALL DETECTED
+                    </span>
+                    <span class="text-[10px] text-rose-300 font-mono">${item.upc}</span>
+                  </div>
+                  <p class="font-bold text-slate-100 text-sm mt-1 truncate">${item.productName || item.upc}</p>
+                  <p class="text-[11px] text-slate-400">${item.brand || 'Verified Grocery Item'} • Scanned ${item.time || 'Previously'}</p>
+                </div>
+                <button type="button" onclick="removeGuardedItem('${item.upc}')" class="text-slate-400 hover:text-rose-300 p-1.5 rounded-lg hover:bg-rose-900/30 transition shrink-0" title="Remove from Pantry">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                </button>
+              </div>
+              <div class="p-2 rounded-lg bg-rose-900/30 border border-rose-500/30 text-[11px] text-rose-200 leading-snug">
+                <span class="font-bold text-rose-100">FDA Alert:</span> ${item.activeRecallHazard || 'Active recall notice issued for this product.'}
+              </div>
+              <div class="flex items-center justify-between pt-0.5">
+                <span class="text-[10px] text-rose-300 font-medium">⚠️ Action: Check fridge/pantry & discard</span>
+                <button type="button" onclick="removeGuardedItem('${item.upc}')" class="px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-[11px] font-bold transition">
+                  Mark Discarded
+                </button>
+              </div>
+            </div>
+          `;
+        }
+
+        let badgeColor = 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30';
+        let statusText = '🛡️ GUARDED';
+
+        if (item.status === 'allergen_alert') {
           badgeColor = 'bg-amber-500/20 text-amber-300 border-amber-500/40 font-bold';
-          statusText = 'ALLERGEN';
-        } else if (item.status === 'clear') {
-          badgeColor = 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 font-semibold';
-          statusText = 'CLEAR';
+          statusText = '⚠️ ALLERGEN';
         }
 
         return `
-          <div class="flex items-center justify-between p-2.5 rounded-xl border border-slate-800/80 bg-slate-950/60 hover:bg-slate-900 text-xs transition">
-            <div class="min-w-0 pr-2">
+          <div class="flex items-center justify-between p-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-900/80 text-xs transition">
+            <div class="min-w-0 pr-2 flex-1">
               <p class="font-semibold text-slate-200 truncate">${item.productName || item.upc}</p>
-              <p class="text-[11px] text-slate-500 font-mono">${item.upc} • ${item.time}</p>
+              <div class="flex items-center gap-1.5 text-[11px] text-slate-500 font-mono mt-0.5 flex-wrap">
+                <span>${item.brand || 'Verified Item'}</span>
+                <span>•</span>
+                <span>${item.time || 'Recently'}</span>
+              </div>
             </div>
-            <span class="px-2 py-0.5 text-[10px] rounded-lg border ${badgeColor} shrink-0">
-              ${statusText}
-            </span>
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="px-2 py-0.5 text-[10px] rounded-lg border ${badgeColor} font-semibold">
+                ${statusText}
+              </span>
+              <button type="button" onclick="removeGuardedItem('${item.upc}')" class="text-slate-500 hover:text-rose-400 p-1.5 rounded-lg hover:bg-slate-800 transition" title="Remove from Pantry">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+              </button>
+            </div>
           </div>
         `;
       }).join('');
@@ -5609,6 +5824,7 @@
             } catch (e) {}
 
             updateSyncUI();
+            auditPantryAgainstRecalls();
 
             if (forceManual) {
               triggerHaptic([50, 40, 50]);
@@ -5741,6 +5957,7 @@
     }
 
     renderHistory();
+    auditPantryAgainstRecalls();
     renderBulletins();
     renderAllergensTab();
     renderCustomizeTab();
