@@ -685,8 +685,8 @@
         </div>
 
 
-      <!-- BRAND & PRODUCT NAME SEARCH BAR -->
-      <div class="pt-3 border-t border-slate-800/80 space-y-2.5">
+      <!-- BRAND & PRODUCT NAME SEARCH BAR (Adaptive Search with Auto-Suggestions & Enter Search) -->
+      <div id="brandSearchSection" class="pt-3 border-t border-slate-800/80 space-y-2.5 scroll-mt-28">
         <div class="flex items-center justify-between">
           <label for="brandSearchInput" class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
             <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -694,34 +694,45 @@
             </svg>
             <span>Search by Food or Product Name</span>
           </label>
-          <span class="text-[10px] text-slate-500">Torn barcode?</span>
+          <span class="text-[10px] text-slate-400">Type or press Enter</span>
         </div>
 
-        <div class="relative">
-          <input 
-            type="text" 
-            id="brandSearchInput" 
-            placeholder="Search product name, food item, or keyword..."
-            class="w-full min-h-[50px] pl-11 pr-10 py-3 rounded-xl border border-slate-700 bg-slate-950 text-white text-sm placeholder:text-slate-500 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition"
-          >
-          <div class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
+        <form id="brandSearchForm" class="flex items-center gap-2" onsubmit="event.preventDefault();">
+          <div class="relative flex-1">
+            <input 
+              type="text" 
+              id="brandSearchInput" 
+              autocomplete="off"
+              enterkeyhint="search"
+              placeholder="e.g. Kit Kat, Peanut Butter, Spinach..."
+              class="w-full min-h-[50px] pl-11 pr-10 py-3 rounded-xl border border-slate-700 bg-slate-950 text-white text-sm placeholder:text-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition shadow-sm"
+            >
+            <div class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+            <button 
+              type="button" 
+              id="clearSearchBtn" 
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs px-2 py-1 bg-slate-800 rounded-lg hidden min-h-[32px] transition"
+              aria-label="Clear search input"
+            >
+              ✕
+            </button>
           </div>
+
           <button 
-            type="button" 
-            id="clearSearchBtn" 
-            class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs px-1.5 py-0.5 rounded hidden"
-            aria-label="Clear search input"
+            type="submit" 
+            id="executeSearchBtn" 
+            class="shrink-0 px-4 py-3 min-h-[50px] rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition active:scale-95 shadow-md shadow-sky-950/40"
+            title="Search products and recalls"
           >
-            ✕
+            <span>Search</span>
           </button>
-        </div>
+        </form>
 
-
-
-        <div id="searchResultsBox" class="hidden space-y-2 pt-1 max-h-60 overflow-y-auto"></div>
+        <div id="searchResultsBox" class="hidden space-y-2 pt-1 max-h-72 overflow-y-auto rounded-2xl"></div>
       </div>
 
       <div id="scannerMessage" class="hidden text-xs p-3 rounded-xl border border-blue-500/30 bg-blue-950/40 text-blue-200"></div>
@@ -3987,97 +3998,188 @@
       }, 350);
     }
 
-    // Brand & Product Search
+    // Brand & Product Search Engine (Auto-Searching as You Type + Enter Search + Adaptive View)
+    const brandSearchForm = document.getElementById('brandSearchForm');
+    const brandSearchSection = document.getElementById('brandSearchSection');
+    const executeSearchBtn = document.getElementById('executeSearchBtn');
+    let searchDebounceTimer = null;
+
     brandSearchInput.addEventListener('input', () => {
       const query = brandSearchInput.value.trim().toLowerCase();
       clearSearchBtn.classList.toggle('hidden', query === '');
-      performBrandSearch(query);
+      clearTimeout(searchDebounceTimer);
+      if (!query || query.length < 2) {
+        searchResultsBox.classList.add('hidden');
+        searchResultsBox.innerHTML = '';
+        return;
+      }
+      searchDebounceTimer = setTimeout(() => {
+        performBrandSearch(query, false);
+      }, 180);
     });
 
+    if (brandSearchForm) {
+      brandSearchForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        clearTimeout(searchDebounceTimer);
+        const query = brandSearchInput.value.trim().toLowerCase();
+        if (query.length >= 2) {
+          brandSearchInput.blur(); // Dismiss mobile on-screen keyboard so results are immediately in full view!
+          performBrandSearch(query, true); // true = smoothly adapt and bring results into view
+        }
+      });
+    }
+
+    if (executeSearchBtn) {
+      executeSearchBtn.addEventListener('click', () => {
+        clearTimeout(searchDebounceTimer);
+        const query = brandSearchInput.value.trim().toLowerCase();
+        if (query.length >= 2) {
+          brandSearchInput.blur();
+          performBrandSearch(query, true);
+        } else {
+          brandSearchInput.focus();
+        }
+      });
+    }
+
     clearSearchBtn.addEventListener('click', () => {
+      triggerHaptic([20]);
       brandSearchInput.value = '';
       clearSearchBtn.classList.add('hidden');
       searchResultsBox.classList.add('hidden');
+      searchResultsBox.innerHTML = '';
       brandSearchInput.focus();
     });
 
-// Quick search chips removed
-
-    function performBrandSearch(query) {
+    function performBrandSearch(query, shouldScroll = false) {
       if (!query || query.length < 2) {
         searchResultsBox.classList.add('hidden');
+        searchResultsBox.innerHTML = '';
         return;
       }
+
+      const seenUpcs = new Set();
+      const upcMatches = [];
+
+      // 1. Search RECALL_DATABASE
+      if (typeof RECALL_DATABASE !== 'undefined') {
+        Object.values(RECALL_DATABASE).forEach(item => {
+          if (!item.upc || seenUpcs.has(item.upc)) return;
+          const text = `${item.brand || ''} ${item.product || ''} ${item.hazard || ''}`.toLowerCase();
+          if (text.includes(query)) {
+            seenUpcs.add(item.upc);
+            upcMatches.push(item);
+          }
+        });
+      }
+
+      // 2. Search staplesCatalog (325+ retail staples)
+      if (typeof staplesCatalog !== 'undefined') {
+        Object.values(staplesCatalog).forEach(item => {
+          if (!item.upc || seenUpcs.has(item.upc)) return;
+          const text = `${item.brand || ''} ${item.product || ''}`.toLowerCase();
+          if (text.includes(query)) {
+            seenUpcs.add(item.upc);
+            upcMatches.push(item);
+          }
+        });
+      }
+
+      // 3. Search NATIONAL_BULLETINS
+      const bulletinMatches = NATIONAL_BULLETINS.filter(item => {
+        const text = `${item.brand || ''} ${item.title || ''} ${item.reason || ''}`.toLowerCase();
+        return text.includes(query);
+      });
 
       searchResultsBox.classList.remove('hidden');
 
-      const upcMatches = Object.values(RECALL_DATABASE).filter(item => {
-        const text = `${item.brand} ${item.product} ${item.hazard || ''}`.toLowerCase();
-        return text.includes(query);
-      });
-
-      const bulletinMatches = NATIONAL_BULLETINS.filter(item => {
-        const text = `${item.brand} ${item.title} ${item.reason}`.toLowerCase();
-        return text.includes(query);
-      });
-
       if (upcMatches.length === 0 && bulletinMatches.length === 0) {
         searchResultsBox.innerHTML = `
-          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-400 text-center">
-            <span class="text-emerald-400 font-semibold block mb-0.5">No Active Recalls Found</span>
-            <span>No current alerts matched "${query}". Check product expiration & packaging integrity.</span>
+          <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-400 text-center space-y-1">
+            <span class="text-emerald-400 font-bold block text-sm">✓ No Active Recalls or Hazards Found</span>
+            <span>No current alerts or catalog items matched "${query}". Check product expiration & packaging integrity.</span>
           </div>
         `;
+        if (shouldScroll) {
+          ensureSearchInView();
+        }
         return;
       }
 
-      let html = '';
+      const totalCount = upcMatches.length + bulletinMatches.length;
+      let html = `
+        <div class="flex items-center justify-between pb-1 px-1 text-[11px] text-slate-400">
+          <span class="font-bold text-sky-400">Found ${totalCount} matching product${totalCount > 1 ? 's' : ''}</span>
+          <span class="text-slate-500 font-mono text-[10px]">Tap item to inspect</span>
+        </div>
+      `;
 
       upcMatches.forEach(item => {
-        const isRecalled = item.isRecalled;
-        const badgeColor = isRecalled ? 'bg-rose-500/20 text-rose-300 border-rose-500/30' : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30';
-        const label = isRecalled ? 'RECALLED' : 'CLEARED';
+        const isRecalled = Boolean(item.isRecalled);
+        const badgeColor = isRecalled ? 'bg-rose-500/20 text-rose-300 border-rose-500/30 font-black animate-pulse' : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30 font-bold';
+        const label = isRecalled ? '🚨 RECALLED' : '✓ CLEARED';
 
         html += `
-          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-blue-500/50 transition cursor-pointer search-result-item" data-upc="${item.upc}">
-            <div class="flex items-center justify-between mb-1">
-              <span class="text-[10px] font-bold px-1.5 py-0.2 rounded border ${badgeColor}">${label}</span>
+          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800/90 hover:border-sky-500/60 transition cursor-pointer search-result-item active:scale-[0.99] shadow-sm space-y-1" data-upc="${item.upc}" data-title="${item.product}">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] uppercase px-1.5 py-0.5 rounded border ${badgeColor}">${label}</span>
               <span class="text-[10px] text-slate-500 font-mono">UPC: ${item.upc}</span>
             </div>
-            <h4 class="text-xs font-bold text-slate-100">${item.product}</h4>
+            <h4 class="text-xs font-bold text-slate-100 leading-snug">${item.product}</h4>
             <p class="text-[11px] text-slate-400">${item.brand}</p>
-            ${item.hazard ? `<p class="text-[11px] text-rose-300 mt-1 leading-tight">${item.hazard}</p>` : ''}
+            ${item.hazard ? `<p class="text-[11px] text-rose-300 leading-tight">${item.hazard}</p>` : ''}
           </div>
         `;
       });
 
       bulletinMatches.forEach(item => {
+        const upcAttr = (item.upcs && item.upcs.length > 0) ? `data-upc="${item.upcs[0]}"` : '';
         html += `
-          <div class="p-3 rounded-xl bg-slate-950 border border-slate-800 hover:border-blue-500/50 transition">
-            <div class="flex items-center justify-between mb-1">
-              <span class="text-[10px] font-bold px-1.5 py-0.2 rounded border bg-rose-500/20 text-rose-300 border-rose-500/30">${item.severity} ALERT</span>
+          <div class="p-3 rounded-xl bg-slate-950 border border-rose-900/50 hover:border-rose-700 transition cursor-pointer search-result-item active:scale-[0.99] shadow-sm space-y-1" ${upcAttr} data-title="${item.title}">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-black uppercase tracking-wide px-1.5 py-0.5 rounded border bg-rose-500/20 text-rose-300 border-rose-500/30">${item.severity} PRIORITY ALERT</span>
               <span class="text-[10px] text-slate-500 font-mono">${item.date} • ${item.agency}</span>
             </div>
-            <h4 class="text-xs font-bold text-slate-100">${item.title}</h4>
+            <h4 class="text-xs font-bold text-slate-100 leading-snug">${item.title}</h4>
             <p class="text-[11px] text-slate-400">${item.brand}</p>
-            <p class="text-[11px] text-rose-300/90 mt-1 leading-tight">${item.reason}</p>
+            <p class="text-[11px] text-rose-300/90 leading-tight">${item.reason}</p>
           </div>
         `;
       });
 
       searchResultsBox.innerHTML = html;
 
+      // Click handler for selecting a product on the UPC Scanner page
       document.querySelectorAll('.search-result-item').forEach(el => {
         el.addEventListener('click', () => {
           const upc = el.getAttribute('data-upc');
+          const title = el.getAttribute('data-title') || '';
           if (upc) {
             triggerHaptic([30]);
-            upcInput.value = upc;
-            clearBtn.classList.remove('hidden');
-            processUPC(upc, 'manual');
+            searchResultsBox.classList.add('hidden');
+            clearSearchBtn.classList.add('hidden');
+            if (title) brandSearchInput.value = title;
+            brandSearchInput.blur(); // Dismiss mobile keyboard
+            processUPC(upc, 'scanner'); // DISPLAY DIRECTLY ON SCANNER PAGE!
           }
         });
       });
+
+      // Smoothly adapt page scroll position so results are comfortably in view above mobile keyboard
+      if (shouldScroll) {
+        ensureSearchInView();
+      }
+    }
+
+    function ensureSearchInView() {
+      setTimeout(() => {
+        if (!brandSearchSection) return;
+        const rect = brandSearchSection.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const targetY = scrollTop + rect.top - 100;
+        window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
+      }, 60);
     }
 
     // State & Store Filter Handlers
@@ -6577,7 +6679,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=29')
+        navigator.serviceWorker.register('./sw.js?v=30')
           .then(reg => console.log('BiteHound SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
