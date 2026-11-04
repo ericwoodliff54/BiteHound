@@ -6012,8 +6012,9 @@
         if (/gluten|wheat|barley|rye|malt|flour|bread|pasta|semolina|spelt|farro|graham|kamut|triticale|durum|couscous|einkorn|emmer/.test(combinedFoodText)) {
           if (!detectedAllergenIds.includes('gluten')) detectedAllergenIds.push('gluten');
         }
-        // 2. Dairy & Milk (Includes casein, caseinate, sodium/calcium caseinate, lactalbumin, ghee, curds, butterfat, buttermilk)
-        if (/milk|dairy|lactose|cheese|whey|butter|cream|casein|caseinate|yogurt|ghee|curds|butterfat|buttermilk|lactalbumin|lactoglobulin/.test(combinedFoodText)) {
+        // 2. Dairy & Milk (Includes casein, caseinate, sodium/calcium caseinate, lactalbumin, ghee, curds, butterfat, buttermilk; excludes cocoa/cacao/shea/apple/peanut butter)
+        const dairyCleanText = combinedFoodText.replace(/(?:cocoa|cacao|shea|apple|peanut|cookie|almond|cashew)\s*butters?/gi, '');
+        if (/(?:milk|dairy|lactose|cheese|whey|butter|cream|casein|caseinate|yogurt|ghee|curds|butterfat|buttermilk|lactalbumin|lactoglobulin)/i.test(dairyCleanText)) {
           if (!detectedAllergenIds.includes('dairy')) detectedAllergenIds.push('dairy');
         }
         // 3. Peanuts (Includes peanut butter, peanut flour, peanut oil, ground roasted peanuts)
@@ -6028,8 +6029,9 @@
         if (/soy|soya|soybean|tofu|edamame|lecithin|tempeh|miso|tamari|shoyu|tvp/.test(combinedFoodText)) {
           if (!detectedAllergenIds.includes('soy')) detectedAllergenIds.push('soy');
         }
-        // 6. Eggs (Includes egg whites, yolk, albumin, ovalbumin, lysozyme, meringue, mayonnaise)
-        if (/egg|albumin|ovalbumin|yolk|mayonnaise|lysozyme|meringue|ovomucin/.test(combinedFoodText)) {
+        // 6. Eggs (Includes egg whites, yolk, albumin, ovalbumin, lysozyme, meringue, mayonnaise; excludes eggplant)
+        const eggCleanText = combinedFoodText.replace(/eggplants?/gi, '');
+        if (/(?:eggs?|egg\s*whites?|egg\s*yolks?|albumin|ovalbumin|yolk|mayonnaise|mayo|lysozyme|meringue|ovomucin)/i.test(eggCleanText)) {
           if (!detectedAllergenIds.includes('eggs')) detectedAllergenIds.push('eggs');
         }
         // 7. Shellfish & Crustaceans (Includes shrimp, prawn, crab, lobster, crawfish/crayfish, clam, mussel, oyster, scallop, krill)
@@ -6044,9 +6046,14 @@
         if (/sesame|tahini|benne|sesamum|gingelly|halvah/.test(combinedFoodText)) {
           if (!detectedAllergenIds.includes('sesame')) detectedAllergenIds.push('sesame');
         }
-        // 10. Corn (Includes cornstarch, corn syrup, corn meal, maize, dextrose, dextrin, maltodextrin, high fructose corn syrup)
-        if (/corn|cornstarch|corn\s*syrup|maize|dextrose|dextrin|maltodextrin|hfcs/.test(combinedFoodText)) {
+        // 10. Corn (Strict check: excludes false-positive substrings like peppercorn, peppercorns, acorn, unicorn)
+        const cornCleanText = combinedFoodText.replace(/(?:pepper|a|uni)corns?/gi, '');
+        const cornRegex = /(?:corn|corns|cornstarch|cornmeal|cornflour|cornbread|cornflakes|corncob|cornsyrup|popcorn|sweetcorn|maize|dextrose|dextrin|maltodextrin|hfcs)|corn\s+(?:starch|syrup|meal|flour|oil|bread|flakes|grain|gluten|chips?|tortillas?|cereal)|high[-_\s]*fructose[-_\s]*corn|zea\s*mays/i;
+        if (cornRegex.test(cornCleanText)) {
           if (!detectedAllergenIds.includes('corn')) detectedAllergenIds.push('corn');
+        } else {
+          // Explicitly strip any false positive from cached data if product is peppercorn/acorn
+          detectedAllergenIds = detectedAllergenIds.filter(id => id !== 'corn');
         }
         // 11. Sulfites (Includes sulfur dioxide, potassium/sodium bisulfite, potassium/sodium metabisulfite)
         if (/sulfite|sulphite|sulfur\s*dioxide|bisulfite|metabisulfite/.test(combinedFoodText)) {
@@ -8700,7 +8707,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=7')
+        navigator.serviceWorker.register('./sw.js?v=8')
           .then(reg => console.log('Rakka SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
