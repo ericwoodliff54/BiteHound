@@ -700,7 +700,7 @@
             </svg>
             <span>Search by Food or Product Name</span>
           </label>
-          <span class="text-[10px] text-slate-400">Type or press Enter</span>
+          <span class="text-[10px] text-slate-400">Press Search or Enter</span>
         </div>
 
         <form id="brandSearchForm" class="flex items-center gap-2" onsubmit="event.preventDefault();">
@@ -841,7 +841,7 @@
             <svg class="w-4 h-4 text-sky-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
             <span>Family Profiles</span>
           </span>
-          <span class="text-[11px] text-slate-400 font-medium">Tap to switch • Long-press & drag to move</span>
+          <span class="text-[11px] text-slate-400 font-medium">Tap member to select • Use ◀ / ▶ below to move</span>
         </div>
         <div class="flex items-center gap-2.5 overflow-x-auto pb-2 pt-0.5" id="familyProfilesBar"></div>
         <div id="activeProfileNotice" class="w-full"></div>
@@ -1032,14 +1032,58 @@
               class="w-full min-h-[48px] bg-slate-900 border border-slate-700 text-slate-100 rounded-xl p-3 text-sm font-medium outline-none focus:border-blue-500 shadow-sm"
             >
               <option value="ALL" selected>All States (Nationwide)</option>
-              <option value="OH">Ohio (OH)</option>
-              <option value="PA">Pennsylvania (PA)</option>
-              <option value="MI">Michigan (MI)</option>
-              <option value="IL">Illinois (IL)</option>
+              <option value="AL">Alabama (AL)</option>
+              <option value="AK">Alaska (AK)</option>
+              <option value="AZ">Arizona (AZ)</option>
+              <option value="AR">Arkansas (AR)</option>
               <option value="CA">California (CA)</option>
-              <option value="TX">Texas (TX)</option>
+              <option value="CO">Colorado (CO)</option>
+              <option value="CT">Connecticut (CT)</option>
+              <option value="DE">Delaware (DE)</option>
+              <option value="DC">District of Columbia (DC)</option>
               <option value="FL">Florida (FL)</option>
+              <option value="GA">Georgia (GA)</option>
+              <option value="HI">Hawaii (HI)</option>
+              <option value="ID">Idaho (ID)</option>
+              <option value="IL">Illinois (IL)</option>
+              <option value="IN">Indiana (IN)</option>
+              <option value="IA">Iowa (IA)</option>
+              <option value="KS">Kansas (KS)</option>
+              <option value="KY">Kentucky (KY)</option>
+              <option value="LA">Louisiana (LA)</option>
+              <option value="ME">Maine (ME)</option>
+              <option value="MD">Maryland (MD)</option>
+              <option value="MA">Massachusetts (MA)</option>
+              <option value="MI">Michigan (MI)</option>
+              <option value="MN">Minnesota (MN)</option>
+              <option value="MS">Mississippi (MS)</option>
+              <option value="MO">Missouri (MO)</option>
+              <option value="MT">Montana (MT)</option>
+              <option value="NE">Nebraska (NE)</option>
+              <option value="NV">Nevada (NV)</option>
+              <option value="NH">New Hampshire (NH)</option>
+              <option value="NJ">New Jersey (NJ)</option>
+              <option value="NM">New Mexico (NM)</option>
               <option value="NY">New York (NY)</option>
+              <option value="NC">North Carolina (NC)</option>
+              <option value="ND">North Dakota (ND)</option>
+              <option value="OH">Ohio (OH)</option>
+              <option value="OK">Oklahoma (OK)</option>
+              <option value="OR">Oregon (OR)</option>
+              <option value="PA">Pennsylvania (PA)</option>
+              <option value="PR">Puerto Rico (PR)</option>
+              <option value="RI">Rhode Island (RI)</option>
+              <option value="SC">South Carolina (SC)</option>
+              <option value="SD">South Dakota (SD)</option>
+              <option value="TN">Tennessee (TN)</option>
+              <option value="TX">Texas (TX)</option>
+              <option value="UT">Utah (UT)</option>
+              <option value="VT">Vermont (VT)</option>
+              <option value="VA">Virginia (VA)</option>
+              <option value="WA">Washington (WA)</option>
+              <option value="WV">West Virginia (WV)</option>
+              <option value="WI">Wisconsin (WI)</option>
+              <option value="WY">Wyoming (WY)</option>
             </select>
           </div>
 
@@ -1050,15 +1094,41 @@
               id="storeFilterSelect" 
               class="w-full min-h-[48px] bg-slate-900 border border-slate-700 text-slate-100 rounded-xl p-3 text-sm font-medium outline-none focus:border-blue-500 shadow-sm"
             >
-              <option value="ALL" selected>All Supermarkets</option>
-              <option value="Kroger">Kroger</option>
-              <option value="Giant Eagle">Giant Eagle</option>
-              <option value="Meijer">Meijer</option>
-              <option value="Walmart">Walmart</option>
+              <option value="ALL" selected>All Supermarkets (Nationwide)</option>
+              <option value="Albertsons">Albertsons</option>
               <option value="Aldi">Aldi</option>
+              <option value="BJ's">BJ's Wholesale Club</option>
+              <option value="Costco">Costco</option>
+              <option value="Dollar General">Dollar General</option>
+              <option value="Dollar Tree">Dollar Tree / Family Dollar</option>
+              <option value="Food Lion">Food Lion</option>
+              <option value="Fresh Market">The Fresh Market</option>
+              <option value="Giant Eagle">Giant Eagle</option>
+              <option value="Giant Food">Giant Food / Martin's</option>
+              <option value="H-E-B">H-E-B</option>
+              <option value="Harris Teeter">Harris Teeter</option>
+              <option value="Hy-Vee">Hy-Vee</option>
+              <option value="Jewel-Osco">Jewel-Osco</option>
+              <option value="King Soopers">King Soopers / City Market</option>
+              <option value="Kroger">Kroger (Fred Meyer, Ralphs, QFC, Fry's)</option>
+              <option value="Meijer">Meijer</option>
+              <option value="Publix">Publix</option>
+              <option value="Safeway">Safeway</option>
+              <option value="Sam's Club">Sam's Club</option>
+              <option value="Shaw's">Shaw's / Star Market</option>
+              <option value="ShopRite">ShopRite</option>
+              <option value="Smart & Final">Smart & Final</option>
+              <option value="Sprouts">Sprouts Farmers Market</option>
+              <option value="Stater Bros">Stater Bros.</option>
+              <option value="Stop & Shop">Stop & Shop</option>
               <option value="Target">Target</option>
+              <option value="Tops">Tops Friendly Markets</option>
               <option value="Trader Joe's">Trader Joe's</option>
-              <option value="Whole Foods">Whole Foods</option>
+              <option value="Walmart">Walmart</option>
+              <option value="Wegmans">Wegmans</option>
+              <option value="Whole Foods">Whole Foods Market</option>
+              <option value="WinCo">WinCo Foods</option>
+              <option value="Winn-Dixie">Winn-Dixie</option>
             </select>
           </div>
         </div>
@@ -4154,42 +4224,58 @@
       }
     });
 
+    // Typing in search input only toggles the clear button; does NOT auto-fetch results
     brandSearchInput.addEventListener('input', () => {
-      const query = brandSearchInput.value.trim().toLowerCase();
+      const query = brandSearchInput.value.trim();
       clearSearchBtn.classList.toggle('hidden', query === '');
-      clearTimeout(searchDebounceTimer);
+      // If user clears the text box, close the results box
+      if (query === '') {
+        searchResultsBox.classList.add('hidden');
+        searchResultsBox.innerHTML = '';
+      }
+    });
+
+    // Execute Search: Dismisses mobile keyboard, triggers search, and scrolls down to reveal results
+    function triggerFoodSearch() {
+      // 1. Immediately dismiss mobile on-screen keyboard
+      brandSearchInput.blur();
+      if (document.activeElement && typeof document.activeElement.blur === 'function') {
+        document.activeElement.blur();
+      }
+
+      const query = brandSearchInput.value.trim().toLowerCase();
       if (!query || query.length < 2) {
+        showCustomizeToast("Please type at least 2 letters to search.");
         searchResultsBox.classList.add('hidden');
         searchResultsBox.innerHTML = '';
         return;
       }
-      searchDebounceTimer = setTimeout(() => {
-        performBrandSearch(query, true);
-      }, 150);
+
+      triggerHaptic([30]);
+      sound.playScanBeep();
+      // Execute search with auto-scroll enabled
+      performBrandSearch(query, true);
+    }
+
+    // Enter key press inside search input
+    brandSearchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        triggerFoodSearch();
+      }
     });
 
     if (brandSearchForm) {
       brandSearchForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        clearTimeout(searchDebounceTimer);
-        const query = brandSearchInput.value.trim().toLowerCase();
-        if (query.length >= 2) {
-          brandSearchInput.blur();
-          performBrandSearch(query, true);
-        }
+        triggerFoodSearch();
       });
     }
 
     if (executeSearchBtn) {
-      executeSearchBtn.addEventListener('click', () => {
-        clearTimeout(searchDebounceTimer);
-        const query = brandSearchInput.value.trim().toLowerCase();
-        if (query.length >= 2) {
-          brandSearchInput.blur();
-          performBrandSearch(query, true);
-        } else {
-          brandSearchInput.focus();
-        }
+      executeSearchBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        triggerFoodSearch();
       });
     }
 
@@ -4475,13 +4561,16 @@
     }
 
     function ensureSearchInView() {
+      // 200ms delay allows the mobile virtual keyboard to retract and restore full viewport height
       setTimeout(() => {
         if (!brandSearchSection) return;
         const rect = brandSearchSection.getBoundingClientRect();
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const targetY = scrollTop + rect.top - 80;
+        // Position search box right under the sticky header (~85px offset) so results below are fully revealed
+        const navOffset = 85;
+        const targetY = scrollTop + rect.top - navOffset;
         window.scrollTo({ top: Math.max(0, targetY), behavior: 'smooth' });
-      }, 50);
+      }, 200);
     }
 
     // State & Store Filter Handlers
@@ -5995,6 +6084,8 @@
       userAllergens = currentProfile.allergens || [];
 
       const activeIdx = familyProfiles.findIndex(p => p.id === currentProfile.id);
+      const canMoveLeft = activeIdx > 0;
+      const canMoveRight = activeIdx >= 0 && activeIdx < familyProfiles.length - 1;
 
       if (activeProfileNotice) {
         const photoEl = currentProfile.photo 
@@ -6013,10 +6104,37 @@
                     ${userAllergens.length === 0 ? 'All Safe' : `${userAllergens.length} Alert${userAllergens.length > 1 ? 's' : ''}`}
                   </span>
                 </div>
-                <span class="text-[11px] text-slate-400 block truncate mt-0.5">Position ${activeIdx + 1} of ${familyProfiles.length} • Hold & drag pill above to move</span>
+                <span class="text-[11px] text-slate-400 block truncate mt-0.5">Position ${activeIdx + 1} of ${familyProfiles.length} • Tap ◀ / ▶ to change position</span>
               </div>
             </div>
+            
             <div class="flex items-center gap-1.5 shrink-0">
+              <!-- Tactile 1-Tap Move Left (Earlier in list) -->
+              <button 
+                type="button" 
+                class="move-profile-btn w-9 h-9 rounded-xl flex items-center justify-center transition active:scale-90 ${canMoveLeft ? 'bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 shadow-sm' : 'bg-slate-900/40 text-slate-600 border border-slate-800/40 cursor-not-allowed'}"
+                data-id="${currentProfile.id}"
+                data-dir="-1"
+                ${!canMoveLeft ? 'disabled' : ''}
+                title="Move ${currentProfile.name} left (earlier in list)"
+                aria-label="Move ${currentProfile.name} left"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+
+              <!-- Tactile 1-Tap Move Right (Later in list) -->
+              <button 
+                type="button" 
+                class="move-profile-btn w-9 h-9 rounded-xl flex items-center justify-center transition active:scale-90 ${canMoveRight ? 'bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 shadow-sm' : 'bg-slate-900/40 text-slate-600 border border-slate-800/40 cursor-not-allowed'}"
+                data-id="${currentProfile.id}"
+                data-dir="1"
+                ${!canMoveRight ? 'disabled' : ''}
+                title="Move ${currentProfile.name} right (later in list)"
+                aria-label="Move ${currentProfile.name} right"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+              </button>
+
               <!-- Edit Member Button -->
               <button 
                 type="button" 
@@ -6024,7 +6142,7 @@
                 data-edit="${currentProfile.id}" 
                 title="Edit ${currentProfile.name}'s name, photo, or avatar"
               >
-                <svg class="w-3.5 h-3.5 text-sky-300 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                <svg class="w-3.5 h-3.5 text-sky-300 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
                 <span>Edit</span>
               </button>
             </div>
@@ -6110,14 +6228,25 @@
           </div>
         `);
 
-        // Switch profile click (guarded against accidental click triggers after mobile long-press drag)
+        // Switch profile click (instant, fluid, zero drag lag)
         document.querySelectorAll('.select-profile-btn').forEach(b => {
           b.addEventListener('click', () => {
-            if (justFinishedLongPressDrag) return;
             triggerHaptic([30]);
             activeProfileId = b.getAttribute('data-id');
             saveFamilyProfiles();
             renderAllergensTab();
+          });
+        });
+
+        // Tactile 1-Tap Move Left / Right Buttons
+        document.querySelectorAll('.move-profile-btn').forEach(b => {
+          b.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const id = b.getAttribute('data-id');
+            const dir = parseInt(b.getAttribute('data-dir'), 10);
+            if (id && !isNaN(dir)) {
+              moveProfile(id, dir);
+            }
           });
         });
 
@@ -6927,6 +7056,20 @@
       }
     };
 
+    const US_STATES_MAP = {
+      AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas', CA: 'California',
+      CO: 'Colorado', CT: 'Connecticut', DE: 'Delaware', DC: 'District of Columbia',
+      FL: 'Florida', GA: 'Georgia', HI: 'Hawaii', ID: 'Idaho', IL: 'Illinois',
+      IN: 'Indiana', IA: 'Iowa', KS: 'Kansas', KY: 'Kentucky', LA: 'Louisiana',
+      ME: 'Maine', MD: 'Maryland', MA: 'Massachusetts', MI: 'Michigan', MN: 'Minnesota',
+      MS: 'Mississippi', MO: 'Missouri', MT: 'Montana', NE: 'Nebraska', NV: 'Nevada',
+      NH: 'New Hampshire', NJ: 'New Jersey', NM: 'New Mexico', NY: 'New York',
+      NC: 'North Carolina', ND: 'North Dakota', OH: 'Ohio', OK: 'Oklahoma', OR: 'Oregon',
+      PA: 'Pennsylvania', PR: 'Puerto Rico', RI: 'Rhode Island', SC: 'South Carolina',
+      SD: 'South Dakota', TN: 'Tennessee', TX: 'Texas', UT: 'Utah', VT: 'Vermont',
+      VA: 'Virginia', WA: 'Washington', WV: 'West Virginia', WI: 'Wisconsin', WY: 'Wyoming'
+    };
+
     function renderBulletins() {
       const selectedState = stateFilterSelect.value;
       const selectedStore = storeFilterSelect.value;
@@ -6934,26 +7077,63 @@
       const filtered = NATIONAL_BULLETINS.filter(item => {
         const matchesState = (selectedState === 'ALL') || 
                              (item.states.includes('ALL')) || 
-                             (item.states.includes(selectedState));
+                             (item.states.includes(selectedState)) ||
+                             (item.states.some(st => st.toLowerCase() === selectedState.toLowerCase() || (US_STATES_MAP[selectedState] && st.toLowerCase() === US_STATES_MAP[selectedState].toLowerCase())));
 
         const matchesStore = (selectedStore === 'ALL') || 
-                             (item.stores && item.stores.includes(selectedStore));
+                             (item.stores && (
+                               item.stores.includes(selectedStore) || 
+                               item.stores.some(s => s.toLowerCase().includes(selectedStore.toLowerCase()) || selectedStore.toLowerCase().includes(s.toLowerCase()))
+                             ));
 
         return matchesState && matchesStore;
       });
 
-      // Filter live synced openFDA cached enforcement reports
+      // Filter live synced openFDA cached enforcement reports across all 50 states and chains
       let fdaFiltered = [];
       if (cachedFDARecalls && cachedFDARecalls.length > 0) {
         fdaFiltered = cachedFDARecalls.filter(item => {
+          const rawLower = (item.raw || '').toLowerCase();
+          const firmLower = (item.firm || item.brand || '').toLowerCase();
+          const prodLower = (item.product || '').toLowerCase();
+          const combined = `${rawLower} ${firmLower} ${prodLower}`;
+
+          // Supermarket Chain Matcher
           if (selectedStore !== 'ALL') {
-            if (!item.raw.includes(selectedStore.toLowerCase())) return false;
+            const storeLower = selectedStore.toLowerCase();
+            const chainAliases = {
+              'kroger': ['kroger', 'fred meyer', 'ralphs', 'qfc', 'frys', "fry's", 'smiths', "smith's", 'dillons'],
+              'safeway': ['safeway', 'albertsons', 'vons', 'tom thumb', 'randalls', 'acme'],
+              'albertsons': ['albertsons', 'safeway', 'vons', 'jewel-osco', 'shaw', 'acme'],
+              'whole foods': ['whole foods', 'whole foods market', '365 by whole foods'],
+              'trader joe's': ['trader joe', 'trader joe's'],
+              'giant food': ['giant food', 'giant/martin', 'martin's', 'stop & shop', 'ahold'],
+              'dollar tree': ['dollar tree', 'family dollar'],
+              'king soopers': ['king soopers', 'city market']
+            };
+            const aliases = chainAliases[storeLower] || [storeLower];
+            const hasStoreMatch = aliases.some(alias => combined.includes(alias)) || 
+                                  (item.stores && item.stores.some(st => aliases.some(alias => st.toLowerCase().includes(alias))));
+            if (!hasStoreMatch) return false;
           }
+
+          // State / Distribution Matcher (Supports nationwide, abbreviation, or full state name)
           if (selectedState !== 'ALL') {
+            const isNationwide = combined.includes('nationwide') || combined.includes('all states') || combined.includes('nationally') || combined.includes('50 states') || combined.includes('across the us');
+            if (isNationwide) return true;
+
+            const stCode = selectedState;
             const stLower = selectedState.toLowerCase();
-            const isNationwide = item.raw.includes('nationwide') || item.raw.includes('all states');
-            const mentionsState = item.raw.includes(' ' + stLower) || item.raw.includes(',' + stLower) || item.raw.includes(',' + selectedState);
-            return isNationwide || mentionsState;
+            const fullName = US_STATES_MAP[selectedState] ? US_STATES_MAP[selectedState].toLowerCase() : '';
+
+            const mentionsState = (fullName && combined.includes(fullName)) || 
+                                  combined.includes(' ' + stLower) || 
+                                  combined.includes(',' + stLower) || 
+                                  combined.includes(',' + stCode) || 
+                                  combined.includes(' ' + stCode) ||
+                                  combined.includes('(' + stCode + ')') ||
+                                  combined.includes('/' + stCode);
+            return mentionsState;
           }
           return true;
         });
