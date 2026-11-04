@@ -32,6 +32,28 @@
       padding-top: env(safe-area-inset-top, 0px);
       padding-bottom: env(safe-area-inset-bottom, 0px);
     }
+        /* Spring Physics & High-End Polish Animations */
+    @keyframes slideUpSpring {
+      0% { transform: translateY(20px) scale(0.985); opacity: 0; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+    .animate-slide-up-spring {
+      animation: slideUpSpring 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes pulseSlow {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 0.45; }
+    }
+    .animate-pulse-slow {
+      animation: pulseSlow 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    .glass-surface {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
     .font-display { 
       font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif; 
       letter-spacing: -0.025em; 
@@ -578,52 +600,65 @@
         <p class="text-xs text-slate-400 mt-0.5">Scan any grocery barcode or search by brand</p>
       </div>
 
-      <!-- Clean Viewfinder Box -->
-
-<div class="relative bg-black rounded-2xl overflow-hidden min-h-[260px] sm:min-h-[290px] max-h-[350px] flex flex-col items-center justify-center border-2 border-slate-800 shadow-2xl">
+      <!-- Camera Viewfinder Box (Apple-Style Aperture with Floating Glass Controls & Corner Reticle) -->
+      <div class="relative bg-slate-950 rounded-3xl overflow-hidden min-h-[270px] sm:min-h-[300px] max-h-[360px] flex flex-col items-center justify-center border border-white/10 shadow-2xl">
         <div id="reader" class="w-full h-full"></div>
 
-        <!-- Sleek Scan Success Viewfinder Overlay (Replaces awkward frozen snapshot) -->
+        <!-- Floating Frosted Glass Flashlight Control (Overlaid in Viewfinder) -->
+        <button 
+          type="button" 
+          id="toggleTorchBtn" 
+          class="absolute top-3.5 right-3.5 z-20 px-3.5 py-1.5 rounded-full backdrop-blur-md bg-black/60 hover:bg-black/80 border border-white/20 text-white font-medium text-xs flex items-center gap-1.5 shadow-lg active:scale-95 transition hidden"
+          title="Toggle camera flashlight"
+        >
+          <svg id="torchIcon" class="w-4 h-4 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <span id="torchBtnText">Torch</span>
+        </button>
+
+        <!-- Sleek Scan Success Viewfinder Overlay -->
         <div id="cameraScanSuccessOverlay" class="hidden absolute inset-0 bg-slate-950/85 backdrop-blur-md flex flex-col items-center justify-center text-center p-5 z-20 transition-all duration-300">
           <div class="w-16 h-16 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-emerald-300 mb-2.5 shadow-lg shadow-emerald-950/60 animate-in zoom-in-75 duration-200">
             <svg class="w-8 h-8 text-emerald-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
           </div>
-          <span class="text-base font-bold text-white tracking-wide">Barcode Captured!</span>
-          <span id="scannedSuccessCode" class="text-xs font-mono text-emerald-300 font-bold bg-emerald-950/80 border border-emerald-500/40 px-3.5 py-1.5 rounded-full mt-1.5 shadow-sm"></span>
-          <span class="text-xs text-slate-300 mt-2">Product & safety details loaded above</span>
+          <span class="text-base font-bold text-white tracking-wide">Barcode Captured</span>
+          <span id="scannedSuccessCode" class="text-xs font-semibold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 px-3.5 py-1.5 rounded-full mt-1.5 shadow-sm"></span>
+          <span class="text-xs text-slate-400 mt-2">Safety clearance loaded above</span>
         </div>
 
-        <!-- Barcode Graphic Target in Viewfinder (shown only when camera is paused) -->
+        <!-- Minimalist Viewfinder Target (shown when camera is idle) -->
         <div id="cameraPlaceholder" class="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-slate-950/95">
-          <div class="relative w-48 h-28 mb-3 flex flex-col items-center justify-center bg-slate-900/90 rounded-xl border border-sky-500/40 p-3 shadow-inner">
-            <div class="absolute -top-1 -left-1 w-3.5 h-3.5 border-t-2 border-l-2 border-amber-400"></div>
-            <div class="absolute -top-1 -right-1 w-3.5 h-3.5 border-t-2 border-r-2 border-amber-400"></div>
-            <div class="absolute -bottom-1 -left-1 w-3.5 h-3.5 border-b-2 border-l-2 border-amber-400"></div>
-            <div class="absolute -bottom-1 -right-1 w-3.5 h-3.5 border-b-2 border-r-2 border-amber-400"></div>
+          <div class="relative w-52 h-32 mb-3 flex flex-col items-center justify-center bg-slate-900/80 rounded-2xl border border-white/10 p-3 shadow-inner">
+            <!-- Elegant Corner Targeting Brackets -->
+            <div class="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-amber-400 rounded-tl-md"></div>
+            <div class="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-amber-400 rounded-tr-md"></div>
+            <div class="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-amber-400 rounded-bl-md"></div>
+            <div class="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-amber-400 rounded-br-md"></div>
 
-            <div class="w-full flex items-center justify-center gap-1 h-14 px-2 py-1 bg-slate-950/60 rounded border border-slate-800/80">
-              <span class="w-1 h-full bg-sky-400/90 rounded-sm"></span>
-              <span class="w-0.5 h-full bg-sky-400/60 rounded-sm"></span>
-              <span class="w-2 h-full bg-sky-400/90 rounded-sm"></span>
-              <span class="w-0.5 h-full bg-sky-400/50 rounded-sm"></span>
-              <span class="w-1.5 h-full bg-sky-400/80 rounded-sm"></span>
-              <span class="w-1 h-full bg-sky-400/90 rounded-sm"></span>
-              <span class="w-0.5 h-full bg-sky-400/40 rounded-sm"></span>
-              <span class="w-2 h-full bg-sky-400/90 rounded-sm"></span>
-              <span class="w-1 h-full bg-sky-400/70 rounded-sm"></span>
-              <span class="w-0.5 h-full bg-sky-400/50 rounded-sm"></span>
-              <span class="w-1.5 h-full bg-sky-400/90 rounded-sm"></span>
-              <span class="w-0.5 h-full bg-sky-400/60 rounded-sm"></span>
-              <span class="w-2 h-full bg-sky-400/90 rounded-sm"></span>
-              <span class="w-1 h-full bg-sky-400/80 rounded-sm"></span>
-              <span class="w-0.5 h-full bg-sky-400/50 rounded-sm"></span>
-              <span class="w-1.5 h-full bg-sky-400/90 rounded-sm"></span>
+            <div class="w-full flex items-center justify-center gap-1 h-14 px-3 py-1 bg-slate-950/70 rounded-xl border border-white/5">
+              <span class="w-1 h-full bg-slate-300/80 rounded-sm"></span>
+              <span class="w-0.5 h-full bg-slate-300/50 rounded-sm"></span>
+              <span class="w-2 h-full bg-slate-300/80 rounded-sm"></span>
+              <span class="w-0.5 h-full bg-slate-300/40 rounded-sm"></span>
+              <span class="w-1.5 h-full bg-slate-300/70 rounded-sm"></span>
+              <span class="w-1 h-full bg-slate-300/80 rounded-sm"></span>
+              <span class="w-0.5 h-full bg-slate-300/40 rounded-sm"></span>
+              <span class="w-2 h-full bg-slate-300/80 rounded-sm"></span>
+              <span class="w-1 h-full bg-slate-300/60 rounded-sm"></span>
+              <span class="w-0.5 h-full bg-slate-300/40 rounded-sm"></span>
+              <span class="w-1.5 h-full bg-slate-300/80 rounded-sm"></span>
+              <span class="w-0.5 h-full bg-slate-300/50 rounded-sm"></span>
+              <span class="w-2 h-full bg-slate-300/80 rounded-sm"></span>
+              <span class="w-1 h-full bg-slate-300/70 rounded-sm"></span>
+              <span class="w-0.5 h-full bg-slate-300/40 rounded-sm"></span>
+              <span class="w-1.5 h-full bg-slate-300/80 rounded-sm"></span>
             </div>
-            <span class="text-xs tracking-wider text-amber-300 font-bold mt-1 uppercase">Align Barcode in Viewfinder</span>
+            <span class="text-xs tracking-wider text-amber-300 font-semibold mt-1.5">Align Barcode</span>
           </div>
 
-          <p class="font-display font-bold text-sm sm:text-base text-slate-100">Point phone camera at grocery barcode</p>
-          <p class="text-xs sm:text-sm text-slate-300 max-w-xs mt-1">Tap "Start Camera Scanner" or search brand below</p>
+          <p class="font-display font-bold text-sm sm:text-base text-slate-100">Ready to Scan</p>
+          <p class="text-xs text-slate-400 max-w-xs mt-1">Point your camera at any retail food package</p>
         </div>
       </div>
 
@@ -632,7 +667,7 @@
         <button 
           type="button" 
           id="toggleCameraBtn" 
-          class="flex-1 min-h-[54px] bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3.5 px-4 rounded-2xl shadow-lg shadow-emerald-950/60 ring-1 ring-amber-400/30 transition flex items-center justify-center gap-2.5 text-sm sm:text-base active:scale-[0.98]"
+          class="w-full min-h-[52px] bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 px-4 rounded-2xl shadow-lg shadow-amber-950/30 transition flex items-center justify-center gap-2.5 text-sm sm:text-base active:scale-[0.98]"
         >
           <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
@@ -641,18 +676,7 @@
           <span id="cameraBtnText">Start Camera Scanner</span>
         </button>
 
-        <!-- Flashlight / Torch Toggle (Hidden by default; revealed only when camera is running) -->
-        <button 
-          type="button" 
-          id="toggleTorchBtn" 
-          class="shrink-0 min-h-[54px] px-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-100 font-bold transition flex items-center justify-center gap-2 text-sm border border-slate-700 active:scale-[0.98] shadow-sm hidden"
-          title="Toggle camera flashlight for dim supermarket aisles"
-        >
-          <svg id="torchIcon" class="w-5 h-5 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-          </svg>
-          <span id="torchBtnText">Flashlight</span>
-        </button>
+        
       </div>
 
       <!-- Difficult Barcode Tips Drawer (Cans, Curved Bottles, Wrinkly Bags) -->
@@ -664,7 +688,7 @@
           >
             <span class="flex items-center gap-1.5 font-medium">
               <svg class="w-4 h-4 text-amber-300 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-              <span>Scanning Cans or Wrinkly Bags? View 3 Tips</span>
+              <span>Scanning curved cans or bags? View Tips</span>
             </span>
             <span id="scanTipsArrow" class="text-xs text-slate-500">▼</span>
           </button>
@@ -854,22 +878,24 @@
       <!-- Allergen Tick Box Grid (FDA Big 9 + Gluten, Corn, Sulfites & Yeast) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1" id="allergenCheckboxesContainer"></div>
 
-            <!-- Automatic Food Additives & Chemical Screener (Pro Feature Card) -->
-      <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
+            <!-- Automatic Food Additives & Chemical Screener -->
+      <div class="p-4 rounded-3xl bg-slate-950/80 border border-white/[0.06] space-y-3 shadow-sm">
         <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2.5">
-            <div class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-300 shrink-0"><svg class="w-4 h-4 text-purple-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg></div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-amber-500/10 border border-amber-400/20 flex items-center justify-center text-amber-300 shrink-0">
+              <svg class="w-5 h-5 text-amber-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+            </div>
             <div>
-              <span class="font-bold text-sm text-white block">Automatic Chemical & Additive Screener</span>
-              <span class="text-xs text-purple-300 font-semibold">37 Scrutinized Additives, Dyes, Banned Agents & Emulsifiers</span>
+              <span class="font-bold text-sm text-white block">Continuous Chemical & Additive Shield</span>
+              <span class="text-xs text-slate-400 font-medium">37 High-Risk Dyes, Industrial Emulsifiers & Banned Additives</span>
             </div>
           </div>
-          <span id="additiveProStatusBadge" class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold uppercase tracking-wider shrink-0">
-            AUTO-SCAN (PRO)
+          <span id="additiveProStatusBadge" class="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold tracking-wider shrink-0">
+            ACTIVE (PRO)
           </span>
         </div>
-        <p class="text-[11px] text-slate-400 leading-normal">
-          No manual toggles needed! BiteHound Pro automatically cross-references every barcode scan against a database of 37 synthetic petroleum dyes, California- & EU-banned additives, endocrine disruptors, and confectionery replacers.
+        <p class="text-[11px] text-slate-400 leading-relaxed">
+          Every scan is automatically screened against 37 synthetic petroleum dyes, California- & EU-banned additives, endocrine disruptors, and confectionery replacers.
         </p>
 
         <!-- Interactive Directory Toggle -->
@@ -5084,12 +5110,39 @@
         const targetContainer = (source === 'manual') ? manualResultContainer : scannerResultContainer;
         if (targetContainer) {
           targetContainer.classList.remove('hidden');
+      targetContainer.classList.add('animate-slide-up-spring');
           targetContainer.innerHTML = `
-            <div class="rounded-2xl border border-slate-800 bg-slate-900/90 p-5 shadow-xl flex items-center gap-3">
-              <div class="w-8 h-8 rounded-full border-2 border-amber-400 border-t-transparent animate-spin shrink-0"></div>
-              <div>
-                <h4 id="scanProgressTitle" class="text-xs font-bold text-slate-100">Scanning global food catalog & FDA enforcement wire...</h4>
-                <p class="text-[11px] text-slate-400 font-mono">UPC: ${code} • Checking openFDA enforcement reports & allergen guards</p>
+            <div class="rounded-3xl border border-white/10 bg-slate-900/95 p-5 shadow-2xl space-y-4 animate-slide-up-spring">
+              <!-- Top Header Skeleton with Animated Shimmer -->
+              <div class="flex items-start justify-between gap-3 animate-pulse">
+                <div class="space-y-2 flex-1">
+                  <div class="h-2.5 w-24 bg-slate-800 rounded-full"></div>
+                  <div class="h-5 w-4/5 bg-slate-700/80 rounded-lg"></div>
+                  <div class="h-3 w-1/2 bg-slate-800/80 rounded-md"></div>
+                </div>
+                <div class="w-14 h-6 rounded-full bg-slate-800"></div>
+              </div>
+
+              <!-- 3 Status Pills Skeleton -->
+              <div class="grid grid-cols-3 gap-2 pt-1 animate-pulse">
+                <div class="h-8 rounded-xl bg-slate-800/80 border border-white/5"></div>
+                <div class="h-8 rounded-xl bg-slate-800/80 border border-white/5"></div>
+                <div class="h-8 rounded-xl bg-slate-800/80 border border-white/5"></div>
+              </div>
+
+              <!-- Live Auditing Status Card -->
+              <div class="p-3.5 rounded-2xl bg-slate-950/70 border border-white/[0.06] space-y-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping shrink-0"></span>
+                    <span class="text-xs font-semibold text-slate-200" id="scanProgressTitle">Auditing safety records & allergen shields...</span>
+                  </div>
+                  <span class="text-[10px] text-slate-400 font-medium">UPC: ${code}</span>
+                </div>
+                <div class="space-y-1.5 animate-pulse pt-0.5">
+                  <div class="h-2 w-full bg-slate-800/70 rounded-full"></div>
+                  <div class="h-2 w-3/4 bg-slate-800/50 rounded-full"></div>
+                </div>
               </div>
             </div>
           `;
@@ -5710,6 +5763,7 @@
       const targetContainer = (activeSource === 'manual') ? manualResultContainer : scannerResultContainer;
       if (!targetContainer) return;
       targetContainer.classList.remove('hidden');
+      targetContainer.classList.add('animate-slide-up-spring');
 
       const isRecalled = Boolean(data.isRecalled && data.recallRecord);
       const isTerminated = Boolean(data.terminatedNotice);
