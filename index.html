@@ -445,7 +445,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
   <!-- APP STARTUP SPLASH SCREEN (Showcases Great Dane mascot with large, bold apple medallion & UPC barcode) -->
-  <div id="appSplashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 text-center select-none transition-opacity duration-700" style="background: radial-gradient(circle at center, #27343d 0%, #202b31 55%, #172025 100%);">
+  <div id="appSplashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 text-center select-none transition-opacity duration-700" style="background: radial-gradient(circle at center, #233239 0%, #202b31 55%, #1d282a 100%);">
     <div class="relative flex flex-col items-center animate-in fade-in zoom-in-95 duration-500 max-w-lg w-full">
       <!-- Ambient Golden Glow radiating behind mascot -->
       <div class="absolute w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-amber-500/20 blur-3xl pointer-events-none -z-10 animate-pulse"></div>
@@ -8511,7 +8511,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=3')
+        navigator.serviceWorker.register('./sw.js?v=5')
           .then(reg => console.log('Rakka SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
