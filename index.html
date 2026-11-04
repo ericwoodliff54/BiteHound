@@ -94,85 +94,339 @@
     button, label, input, select {
       touch-action: manipulation;
     }
-      /* ==========================================
-       HIGH-CONTRAST LIGHT THEME (SUPERMARKET STORE AISLE VISIBILITY)
-       ========================================== */
+      /* ==========================================================================
+       WCAG AAA HIGH-CONTRAST LIGHT MODE (SUPERMARKET SUNLIGHT & AISLE ACCESSIBILITY)
+       ========================================================================== */
     html.theme-light body {
-      background-color: #f1f5f9;
-      color: #0f172a;
+      background-color: #f8fafc !important;
+      color: #0f172a !important;
+      -webkit-font-smoothing: antialiased;
     }
 
+    /* Ambient background glows dimmed in light mode */
+    html.theme-light .fixed.top-0 {
+      opacity: 0.12 !important;
+    }
+
+    /* Header Bar */
     html.theme-light header {
-      background: rgba(255, 255, 255, 0.94);
-      border-color: #cbd5e1;
-      color: #0f172a;
+      background: rgba(255, 255, 255, 0.94) !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
     }
-
     html.theme-light header h1 {
       color: #0f172a !important;
     }
 
+    /* Navigation Bar */
     html.theme-light nav {
-      background: rgba(255, 255, 255, 0.94) !important;
-      border-color: #cbd5e1 !important;
+      background: rgba(255, 255, 255, 0.96) !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     }
-
     html.theme-light .nav-tab {
-      color: #64748b;
+      color: #475569 !important;
     }
-
     html.theme-light .nav-tab.active-tab {
       background: #0f172a !important;
       color: #ffffff !important;
       border-color: #0f172a !important;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
     }
 
+    /* Main Panels & Containers */
     html.theme-light section,
     html.theme-light #scannerSection,
     html.theme-light #manualPanel,
     html.theme-light #allergensPanel,
     html.theme-light #bulletinsPanel,
-    html.theme-light #customizePanel {
+    html.theme-light #customizePanel,
+    html.theme-light .glass-surface {
       background: #ffffff !important;
-      border-color: #cbd5e1 !important;
-      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
-      color: #0f172a;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.02) !important;
+      color: #0f172a !important;
     }
 
+    /* Universal Text Overrides for High Contrast */
     html.theme-light h1,
     html.theme-light h2,
     html.theme-light h3,
-    html.theme-light h4 {
+    html.theme-light h4,
+    html.theme-light strong {
+      color: #0f172a !important;
+    }
+
+    /* Force all white and light-gray text to dark slate in light mode */
+    html.theme-light span.text-white,
+    html.theme-light p.text-white,
+    html.theme-light div.text-white,
+    html.theme-light span.text-slate-100,
+    html.theme-light p.text-slate-100,
+    html.theme-light span.text-slate-200,
+    html.theme-light p.text-slate-200,
+    html.theme-light span.text-slate-300,
+    html.theme-light p.text-slate-300 {
       color: #0f172a !important;
     }
 
     html.theme-light p,
     html.theme-light span.text-slate-400,
-    html.theme-light span.text-slate-500 {
-      color: #64748b;
+    html.theme-light span.text-slate-500,
+    html.theme-light p.text-slate-400,
+    html.theme-light p.text-slate-500 {
+      color: #475569 !important;
     }
 
+    /* Dark Surfaces mapped to clean light surfaces */
     html.theme-light .bg-slate-950,
     html.theme-light .bg-slate-900,
     html.theme-light .bg-slate-900\/90,
+    html.theme-light .bg-slate-900\/80,
     html.theme-light .bg-slate-950\/80,
-    html.theme-light .bg-slate-950\/90 {
+    html.theme-light .bg-slate-950\/90,
+    html.theme-light .bg-slate-950\/60,
+    html.theme-light .bg-slate-950\/70,
+    html.theme-light .bg-slate-950\/95 {
       background-color: #f8fafc !important;
       border-color: #e2e8f0 !important;
+      color: #0f172a !important;
     }
 
+    /* Input Fields & Dropdowns */
     html.theme-light input,
     html.theme-light select {
       background-color: #ffffff !important;
       border-color: #cbd5e1 !important;
       color: #0f172a !important;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     }
-
     html.theme-light input::placeholder {
       color: #94a3b8 !important;
     }
+    html.theme-light #clearSearchBtn,
+    html.theme-light #clearBtn {
+      background-color: #e2e8f0 !important;
+      color: #475569 !important;
+    }
 
-    /* Modal Sheets in Light Mode */
+    /* Camera Viewfinder (Preserves dark aperture with clean border) */
+    html.theme-light #cameraPlaceholder {
+      background-color: #0f172a !important;
+    }
+    html.theme-light #cameraPlaceholder p {
+      color: #ffffff !important;
+    }
+    html.theme-light #cameraPlaceholder p.text-slate-400 {
+      color: #cbd5e1 !important;
+    }
+
+    /* High-Contrast Pill Badges in Master Scan Header */
+    html.theme-light .bg-emerald-500\/15,
+    html.theme-light .bg-emerald-500\/20 {
+      background-color: #ecfdf5 !important;
+      border-color: #a7f3d0 !important;
+      color: #065f46 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .bg-amber-500\/20,
+    html.theme-light .bg-amber-500\/15 {
+      background-color: #fffbeb !important;
+      border-color: #fde68a !important;
+      color: #92400e !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .bg-rose-500\/20,
+    html.theme-light .bg-rose-500\/30,
+    html.theme-light .bg-rose-950\/70 {
+      background-color: #fff1f2 !important;
+      border-color: #fecdd3 !important;
+      color: #9f1239 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .bg-teal-500\/20 {
+      background-color: #f0fdfa !important;
+      border-color: #99f6e4 !important;
+      color: #115e59 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .bg-slate-800 {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #334155 !important;
+    }
+
+    /* Scan Results Window Cards */
+    html.theme-light #scannerResultContainer > div,
+    html.theme-light #manualResultContainer > div {
+      color: #0f172a !important;
+    }
+
+    /* Window 1: Recall Card */
+    html.theme-light [id$="-window-Recall"] > div {
+      background: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Window 2: Allergen Card */
+    html.theme-light [id$="-window-Allergen"] > div {
+      background: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    html.theme-light .bg-amber-950\/60,
+    html.theme-light .bg-amber-950\/80 {
+      background-color: #fffbeb !important;
+      border-color: #fde68a !important;
+      color: #92400e !important;
+    }
+    html.theme-light .bg-amber-950\/60 span.font-bold,
+    html.theme-light .bg-amber-950\/60 span {
+      color: #0f172a !important;
+    }
+    html.theme-light .text-rose-300,
+    html.theme-light .text-rose-400 {
+      color: #b91c1c !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .text-amber-300,
+    html.theme-light .text-amber-400 {
+      color: #b45309 !important;
+    }
+    html.theme-light .text-emerald-300,
+    html.theme-light .text-emerald-400 {
+      color: #047857 !important;
+    }
+    html.theme-light .text-sky-300,
+    html.theme-light .text-sky-400 {
+      color: #0369a1 !important;
+    }
+    html.theme-light .text-teal-300 {
+      color: #0f766e !important;
+    }
+    html.theme-light .text-purple-300,
+    html.theme-light .text-purple-400 {
+      color: #7e22ce !important;
+    }
+
+    /* Window 3: Additives Card */
+    html.theme-light [id$="-window-Additive"] > div {
+      background: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Window 4: Ingredients Card */
+    html.theme-light [id$="-window-Ingredients"] > div {
+      background: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Watchlist & Search Items */
+    html.theme-light #historyList > div,
+    html.theme-light #searchResultsBox > div,
+    html.theme-light .search-result-item {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
+    }
+    html.theme-light .search-result-item:hover {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+    }
+
+    /* Priority Bulletin Cards */
+    html.theme-light #bulletinFeedList > div,
+    html.theme-light #bulletinFeedList .border-rose-900\/40 {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Family Profiles Bar in Light Mode */
+    html.theme-light .family-profile-pill:not(.bg-gradient-to-r) {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+    html.theme-light .family-profile-pill:not(.bg-gradient-to-r) span {
+      color: #0f172a !important;
+    }
+    html.theme-light .family-profile-pill:not(.bg-gradient-to-r) span.text-slate-400 {
+      color: #64748b !important;
+    }
+
+    /* Active Family Guard Card in Light Mode */
+    html.theme-light #activeProfileNotice > div {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+    }
+
+    /* Allergen Toggle Buttons in Light Mode */
+    html.theme-light .allergen-toggle-btn {
+      background: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      color: #0f172a !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    }
+    html.theme-light .allergen-toggle-btn span.text-white {
+      color: #0f172a !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .allergen-toggle-btn span.text-slate-300 {
+      color: #475569 !important;
+    }
+    html.theme-light .allergen-toggle-btn .bg-slate-800\/80 {
+      background: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #0284c7 !important;
+    }
+
+    /* Settings Tab Cards in Light Mode */
+    html.theme-light #customizePanel .bg-gradient-to-br {
+      background: #fffbeb !important;
+      border-color: #fde68a !important;
+    }
+    html.theme-light #customizePanel .bg-gradient-to-br h3,
+    html.theme-light #customizePanel .bg-gradient-to-br span.text-amber-300 {
+      color: #92400e !important;
+    }
+    html.theme-light #customizePanel .bg-gradient-to-br p {
+      color: #78350f !important;
+    }
+
+    /* Developer Mode Card in Light Mode */
+    html.theme-light .border-purple-500\/30 {
+      background: #faf5ff !important;
+      border-color: #e9d5ff !important;
+    }
+    html.theme-light .border-purple-500\/30 span.text-white {
+      color: #581c87 !important;
+    }
+    html.theme-light .border-purple-500\/30 span.text-slate-400 {
+      color: #6b21a8 !important;
+    }
+
+    /* Audio & Haptic Toggle Buttons in Light Mode */
+    html.theme-light #prefSoundBtn,
+    html.theme-light #prefHapticBtn {
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Appearance Segmented Control in Light Mode */
+    html.theme-light #themeSegmentedControl {
+      background: #e2e8f0 !important;
+      border-color: #cbd5e1 !important;
+    }
+    html.theme-light .theme-toggle-btn:not(.bg-amber-500) {
+      color: #475569 !important;
+    }
+
+    /* Modals in Light Mode */
     html.theme-light #plusPaywallModal > div > div,
     html.theme-light #addProfileModal > div > div,
     html.theme-light #safetyDisclaimerModal > div > div,
@@ -180,35 +434,12 @@
       background: #ffffff !important;
       color: #0f172a !important;
       border-color: #cbd5e1 !important;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
     }
-
-    /* Family Profile Pills in Light Mode */
-    html.theme-light .family-profile-pill:not(.bg-gradient-to-r) {
-      background: #ffffff !important;
-      border-color: #cbd5e1 !important;
+    html.theme-light #plusPaywallModal label,
+    html.theme-light #addProfileModal label {
       color: #0f172a !important;
     }
-
-    html.theme-light .family-profile-pill:not(.bg-gradient-to-r) span {
-      color: #0f172a !important;
-    }
-
-    /* Allergen Toggle Checkbox Buttons */
-    html.theme-light .allergen-toggle-btn {
-      background: #ffffff !important;
-      border-color: #e2e8f0 !important;
-      color: #0f172a !important;
-    }
-
-    html.theme-light .allergen-toggle-btn span {
-      color: #0f172a !important;
-    }
-
-    html.theme-light #themeSegmentedControl {
-      background: #e2e8f0 !important;
-      border-color: #cbd5e1 !important;
-    }
-
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
