@@ -835,7 +835,7 @@
             <svg class="w-4 h-4 text-sky-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
             <span>Family Profiles</span>
           </span>
-          <span class="text-[11px] text-slate-400 font-medium">Tap a member to switch allergen guards</span>
+          <span class="text-[11px] text-slate-400 font-medium">Tap to switch • Reorder with arrows or drag</span>
         </div>
         <div class="flex items-center gap-2.5 overflow-x-auto pb-2 pt-0.5" id="familyProfilesBar"></div>
         <div id="activeProfileNotice" class="w-full"></div>
@@ -1886,6 +1886,7 @@
 
 
         // Family Profiles & Active Allergen State
+    const MAX_FAMILY_MEMBERS = 8;
     let familyProfiles = [
       { id: 'me', name: 'Me', allergens: [] }
     ];
@@ -5754,6 +5755,75 @@
       }, 60);
     }
 
+    // Move Profile Position in Family List (e.g. Move Eli in front of Eric)
+    function moveProfile(profileId, direction) {
+      const idx = familyProfiles.findIndex(p => p.id === profileId);
+      if (idx === -1) return;
+      const targetIdx = idx + direction;
+      if (targetIdx < 0 || targetIdx >= familyProfiles.length) return;
+
+      const temp = familyProfiles[idx];
+      familyProfiles[idx] = familyProfiles[targetIdx];
+      familyProfiles[targetIdx] = temp;
+
+      activeProfileId = profileId;
+      saveFamilyProfiles();
+      sound.playScanBeep();
+      triggerHaptic([30]);
+      renderAllergensTab();
+      showCustomizeToast(`Moved ${temp.name} to position ${targetIdx + 1}`);
+    }
+
+    let draggedProfileId = null;
+
+    function handleProfileDragStart(e) {
+      draggedProfileId = e.currentTarget.getAttribute('data-id');
+      if (e.dataTransfer) {
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', draggedProfileId);
+      }
+      e.currentTarget.classList.add('opacity-50', 'scale-95');
+    }
+
+    function handleProfileDragOver(e) {
+      e.preventDefault();
+      if (e.dataTransfer) e.dataTransfer.dropEffect = 'move';
+      e.currentTarget.classList.add('ring-2', 'ring-sky-400');
+    }
+
+    function handleProfileDragLeave(e) {
+      e.currentTarget.classList.remove('ring-2', 'ring-sky-400');
+    }
+
+    function handleProfileDrop(e) {
+      e.preventDefault();
+      e.currentTarget.classList.remove('ring-2', 'ring-sky-400');
+      const targetId = e.currentTarget.getAttribute('data-id');
+      if (!draggedProfileId || draggedProfileId === targetId) return;
+
+      const fromIdx = familyProfiles.findIndex(p => p.id === draggedProfileId);
+      const toIdx = familyProfiles.findIndex(p => p.id === targetId);
+      if (fromIdx === -1 || toIdx === -1) return;
+
+      const [movedItem] = familyProfiles.splice(fromIdx, 1);
+      familyProfiles.splice(toIdx, 0, movedItem);
+
+      activeProfileId = draggedProfileId;
+      saveFamilyProfiles();
+      sound.playScanBeep();
+      triggerHaptic([40]);
+      renderAllergensTab();
+      showCustomizeToast(`Moved ${movedItem.name} to position ${toIdx + 1}`);
+    }
+
+    function handleProfileDragEnd(e) {
+      e.currentTarget.classList.remove('opacity-50', 'scale-95');
+      document.querySelectorAll('.family-profile-pill').forEach(el => {
+        el.classList.remove('ring-2', 'ring-sky-400');
+      });
+      draggedProfileId = null;
+    }
+
     function renderAllergensTab() {
       checkPlusStatus();
 
@@ -5768,30 +5838,68 @@
       if (!currentProfile.allergens) currentProfile.allergens = [];
       userAllergens = currentProfile.allergens || [];
 
+      const activeIdx = familyProfiles.findIndex(p => p.id === currentProfile.id);
+      const canMoveLeft = activeIdx > 0;
+      const canMoveRight = activeIdx >= 0 && activeIdx < familyProfiles.length - 1;
+
       if (activeProfileNotice) {
         const photoEl = currentProfile.photo 
-          ? `<img src="${currentProfile.photo}" class="w-12 h-12 rounded-full object-cover border-2 border-amber-400 shadow-md shrink-0" alt="${currentProfile.name}">`
-          : `<div class="w-12 h-12 rounded-full bg-slate-800 border-2 border-amber-400 flex items-center justify-center text-amber-300 shrink-0 shadow-md">${getProfileAvatarSvg(currentProfile.icon || 'user', "w-6 h-6")}</div>`;
+          ? `<img src="${currentProfile.photo}" class="w-11 h-11 rounded-full object-cover border-2 border-sky-400 shadow-sm shrink-0" alt="${currentProfile.name}">`
+          : `<div class="w-11 h-11 rounded-full bg-slate-800 border-2 border-sky-400 flex items-center justify-center text-sky-300 shrink-0 shadow-sm">${getProfileAvatarSvg(currentProfile.icon || 'user', "w-5 h-5")}</div>`;
           
         activeProfileNotice.innerHTML = `
-          <div class="flex items-center justify-between bg-slate-950/90 border border-slate-800/90 rounded-2xl p-2.5 shadow-sm">
-            <div class="flex items-center gap-3 min-w-0">
+          <div class="flex items-center justify-between bg-slate-950/95 border border-slate-800/90 rounded-2xl p-2.5 sm:p-3 shadow-md gap-2">
+            <div class="flex items-center gap-2.5 min-w-0">
               ${photoEl}
               <div class="min-w-0">
-                <span class="text-[10px] font-bold text-sky-400 uppercase tracking-wider block">Customizing Allergen Guards For:</span>
-                <span class="text-sm font-bold text-white leading-tight block truncate">${currentProfile.name}</span>
-                <span class="text-[11px] text-slate-400">${userAllergens.length} active allergy alerts • Automatic Additives Active</span>
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  <span class="text-[10px] font-bold text-sky-400 uppercase tracking-wider">Active Guard:</span>
+                  <span class="text-sm font-bold text-white leading-tight truncate">${currentProfile.name}</span>
+                  <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full ${userAllergens.length > 0 ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'}">
+                    ${userAllergens.length === 0 ? 'All Safe' : `${userAllergens.length} Alert${userAllergens.length > 1 ? 's' : ''}`}
+                  </span>
+                </div>
+                <span class="text-[11px] text-slate-400 block truncate mt-0.5">Position ${activeIdx + 1} of ${familyProfiles.length} in family list</span>
               </div>
             </div>
-            <button 
-              type="button" 
-              class="edit-profile-btn min-h-[42px] px-3.5 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 hover:text-white border border-sky-500/40 text-xs font-bold flex items-center gap-1.5 transition active:scale-95 shrink-0 shadow-sm" 
-              data-edit="${currentProfile.id}" 
-              title="Edit ${currentProfile.name}'s name, photo, or emoji"
-            >
-              <svg class="w-3.5 h-3.5 text-sky-300 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
-              <span>Edit Member</span>
-            </button>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <!-- Reorder Left (Move earlier in list) -->
+              <button 
+                type="button" 
+                class="move-profile-btn w-9 h-9 rounded-xl flex items-center justify-center transition active:scale-90 ${canMoveLeft ? 'bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 shadow-sm' : 'bg-slate-900/50 text-slate-600 border border-slate-800/50 cursor-not-allowed'}"
+                data-id="${currentProfile.id}"
+                data-dir="-1"
+                ${!canMoveLeft ? 'disabled' : ''}
+                title="Move ${currentProfile.name} earlier in list (left)"
+                aria-label="Move ${currentProfile.name} left"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+
+              <!-- Reorder Right (Move later in list) -->
+              <button 
+                type="button" 
+                class="move-profile-btn w-9 h-9 rounded-xl flex items-center justify-center transition active:scale-90 ${canMoveRight ? 'bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 shadow-sm' : 'bg-slate-900/50 text-slate-600 border border-slate-800/50 cursor-not-allowed'}"
+                data-id="${currentProfile.id}"
+                data-dir="1"
+                ${!canMoveRight ? 'disabled' : ''}
+                title="Move ${currentProfile.name} later in list (right)"
+                aria-label="Move ${currentProfile.name} right"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+              </button>
+
+              <!-- Edit Member Button -->
+              <button 
+                type="button" 
+                class="edit-profile-btn h-9 px-3 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 hover:text-white border border-sky-500/40 text-xs font-bold flex items-center gap-1.5 transition active:scale-95 shrink-0 shadow-sm" 
+                data-edit="${currentProfile.id}" 
+                title="Edit ${currentProfile.name}'s name, photo, or avatar"
+              >
+                <svg class="w-3.5 h-3.5 text-sky-300 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                <span>Edit</span>
+              </button>
+            </div>
           </div>
         `;
       }
@@ -5823,54 +5931,56 @@
         }
       }
 
-      // Render Family Profiles Bar with Large Avatars and Easy-to-Press Edit Buttons
+      // Render Streamlined Family Profiles Bar with Reorder Drag-and-Drop & Slot Limits
       if (familyProfilesBar) {
-        familyProfilesBar.innerHTML = familyProfiles.map(p => {
+        familyProfilesBar.innerHTML = familyProfiles.map((p, index) => {
           const isActive = p.id === activeProfileId;
           const activeStyle = isActive 
-            ? 'bg-blue-600 border-blue-400 text-white font-bold shadow-md shadow-blue-950/40 ring-1 ring-blue-300/40' 
-            : 'bg-slate-950/90 border-slate-800 text-slate-300 hover:border-slate-700';
+            ? 'bg-gradient-to-r from-sky-900/70 to-blue-900/70 border-sky-400 text-white font-bold shadow-md shadow-sky-950/50 ring-1 ring-sky-300/50' 
+            : 'bg-slate-950/90 border-slate-800/90 text-slate-300 hover:border-slate-700 hover:bg-slate-900/80';
           const count = (p.allergens || []).length;
           
           const avatarEl = p.photo 
-            ? `<img src="${p.photo}" class="w-11 h-11 rounded-full object-cover shrink-0 border-2 ${isActive ? 'border-white shadow' : 'border-slate-700'}" alt="${p.name}">`
-            : `<div class="w-11 h-11 rounded-full flex items-center justify-center shrink-0 ${isActive ? 'bg-white/20 border-2 border-white text-white' : 'bg-slate-800 border border-slate-700 text-slate-300'}">${getProfileAvatarSvg(p.icon || 'user', "w-5 h-5")}</div>`;
-
-          const editBtn = `
-            <button 
-              type="button" 
-              class="edit-profile-btn w-10 h-10 min-w-[40px] min-h-[40px] rounded-xl flex items-center justify-center text-base transition active:scale-90 ${isActive ? 'bg-blue-700 hover:bg-blue-800 text-white shadow-sm' : 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700/60'}" 
-              data-edit="${p.id}" 
-              title="Edit ${p.name}'s name, photo, or emoji"
-              aria-label="Edit ${p.name}"
-            >
-              <svg class="w-3.5 h-3.5 text-sky-300 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
-            </button>
-          `;
+            ? `<img src="${p.photo}" class="w-10 h-10 rounded-full object-cover shrink-0 border-2 ${isActive ? 'border-white shadow-sm' : 'border-slate-700'}" alt="${p.name}">`
+            : `<div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${isActive ? 'bg-sky-500/20 border-2 border-white text-white' : 'bg-slate-800 border border-slate-700 text-slate-300'}">${getProfileAvatarSvg(p.icon || 'user', "w-5 h-5")}</div>`;
 
           return `
-            <div class="shrink-0 flex items-center gap-1.5 p-1.5 rounded-2xl border transition ${activeStyle}">
-              <button type="button" class="select-profile-btn flex items-center gap-2.5 py-1 pl-1 pr-2 text-left" data-id="${p.id}">
-                ${avatarEl}
-                <div class="flex flex-col">
-                  <span class="text-xs font-bold text-white leading-tight truncate max-w-[90px]">${p.name}</span>
-                  <span class="text-[10px] font-semibold ${isActive ? 'text-blue-100' : 'text-slate-400'}">${count} ${count === 1 ? 'alert' : 'alerts'}</span>
-                </div>
-              </button>
-              <div class="border-l ${isActive ? 'border-blue-400/50' : 'border-slate-800'} pl-1.5 pr-1">
-                ${editBtn}
+            <div 
+              draggable="true" 
+              class="family-profile-pill select-profile-btn shrink-0 flex items-center gap-2.5 p-2 rounded-2xl border transition cursor-pointer select-none active:scale-[0.98] ${activeStyle}"
+              data-id="${p.id}"
+              data-index="${index}"
+              title="Tap to select • Drag to reorder"
+            >
+              ${avatarEl}
+              <div class="flex flex-col min-w-0 pr-1">
+                <span class="text-xs font-bold leading-tight truncate max-w-[100px] ${isActive ? 'text-white' : 'text-slate-200'}">${p.name}</span>
+                <span class="text-[10px] font-semibold mt-0.5 ${isActive ? 'text-sky-300' : 'text-slate-400'}">
+                  ${count === 0 ? 'All Safe' : `${count} alert${count > 1 ? 's' : ''}`}
+                </span>
               </div>
             </div>
           `;
-        }).join('') + `
-          <button type="button" id="addNewProfileBtn" class="shrink-0 flex items-center gap-2.5 px-3.5 py-2 min-h-[58px] rounded-2xl border-2 border-dashed border-sky-500/40 bg-sky-950/20 hover:bg-sky-900/30 text-sky-300 text-xs font-bold transition active:scale-95 shadow-sm">
-            <span class="w-10 h-10 rounded-full bg-sky-900/40 border border-amber-400/30 flex items-center justify-center text-sky-400 shrink-0"><svg class="w-4 h-4 text-sky-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg></span>
+        }).join('') + (familyProfiles.length < MAX_FAMILY_MEMBERS ? `
+          <button 
+            type="button" 
+            id="addNewProfileBtn" 
+            class="shrink-0 flex items-center gap-2 px-3 py-2 min-h-[56px] rounded-2xl border-2 border-dashed border-sky-500/40 bg-sky-950/20 hover:bg-sky-900/30 text-sky-300 text-xs font-bold transition active:scale-95 shadow-sm"
+            title="Add a family member (${familyProfiles.length}/${MAX_FAMILY_MEMBERS} slots)"
+          >
+            <span class="w-8 h-8 rounded-full bg-sky-900/40 border border-sky-500/30 flex items-center justify-center text-sky-400 shrink-0">
+              <svg class="w-4 h-4 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+            </span>
             <div class="flex flex-col text-left">
-              <span>Add Member</span>
-              <span class="text-[10px] text-sky-400 font-normal">New profile</span>
+              <span class="leading-tight">Add Member</span>
+              <span class="text-[10px] text-sky-400/80 font-normal leading-tight">${familyProfiles.length}/${MAX_FAMILY_MEMBERS} slots</span>
             </div>
           </button>
-        `;
+        ` : `
+          <div class="shrink-0 flex items-center gap-2 px-3 py-2 min-h-[56px] rounded-2xl border border-slate-800 bg-slate-950/50 text-slate-500 text-xs font-semibold select-none">
+            <span class="text-[10px] uppercase font-bold text-slate-400">Max ${MAX_FAMILY_MEMBERS} Members</span>
+          </div>
+        `);
 
         // Switch profile click
         document.querySelectorAll('.select-profile-btn').forEach(b => {
@@ -5880,6 +5990,27 @@
             saveFamilyProfiles();
             renderAllergensTab();
           });
+        });
+
+        // Reorder Move Left / Right buttons
+        document.querySelectorAll('.move-profile-btn').forEach(b => {
+          b.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const id = b.getAttribute('data-id');
+            const dir = parseInt(b.getAttribute('data-dir'), 10);
+            if (id && !isNaN(dir)) {
+              moveProfile(id, dir);
+            }
+          });
+        });
+
+        // Desktop Drag and Drop Reordering on Pills
+        document.querySelectorAll('.family-profile-pill').forEach(pill => {
+          pill.addEventListener('dragstart', handleProfileDragStart);
+          pill.addEventListener('dragover', handleProfileDragOver);
+          pill.addEventListener('dragleave', handleProfileDragLeave);
+          pill.addEventListener('drop', handleProfileDrop);
+          pill.addEventListener('dragend', handleProfileDragEnd);
         });
 
         // Edit profile click
@@ -5914,6 +6045,11 @@
               triggerHaptic([40, 40]);
               openPaywall();
               showCustomizeToast("BiteHound Pro required to add family profiles.");
+              return;
+            }
+            if (familyProfiles.length >= MAX_FAMILY_MEMBERS) {
+              triggerHaptic([40, 40]);
+              showCustomizeToast(`Family limit reached (max ${MAX_FAMILY_MEMBERS} members). Edit or remove a member to add another.`);
               return;
             }
             triggerHaptic([30]);
@@ -6220,6 +6356,10 @@
           showCustomizeToast(`${name}'s profile updated!`);
         } else {
           // Adding new family member
+          if (familyProfiles.length >= MAX_FAMILY_MEMBERS) {
+            showCustomizeToast(`Family limit reached (max ${MAX_FAMILY_MEMBERS} members).`);
+            return;
+          }
           const newId = 'prof_' + Date.now();
           familyProfiles.push({
             id: newId,
