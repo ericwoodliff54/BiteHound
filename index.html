@@ -835,7 +835,7 @@
             <svg class="w-4 h-4 text-sky-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
             <span>Family Profiles</span>
           </span>
-          <span class="text-[11px] text-slate-400 font-medium">Tap to switch • Reorder with arrows or drag</span>
+          <span class="text-[11px] text-slate-400 font-medium">Tap to switch • Long-press & drag to move</span>
         </div>
         <div class="flex items-center gap-2.5 overflow-x-auto pb-2 pt-0.5" id="familyProfilesBar"></div>
         <div id="activeProfileNotice" class="w-full"></div>
@@ -5755,27 +5755,16 @@
       }, 60);
     }
 
-    // Move Profile Position in Family List (e.g. Move Eli in front of Eric)
-    function moveProfile(profileId, direction) {
-      const idx = familyProfiles.findIndex(p => p.id === profileId);
-      if (idx === -1) return;
-      const targetIdx = idx + direction;
-      if (targetIdx < 0 || targetIdx >= familyProfiles.length) return;
-
-      const temp = familyProfiles[idx];
-      familyProfiles[idx] = familyProfiles[targetIdx];
-      familyProfiles[targetIdx] = temp;
-
-      activeProfileId = profileId;
-      saveFamilyProfiles();
-      sound.playScanBeep();
-      triggerHaptic([30]);
-      renderAllergensTab();
-      showCustomizeToast(`Moved ${temp.name} to position ${targetIdx + 1}`);
-    }
-
+    // Touch & Desktop Long-Press Drag-and-Drop Reordering Engine
+    let touchTimer = null;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let isLongPressActive = false;
+    let longPressPill = null;
+    let currentDropTargetPill = null;
     let draggedProfileId = null;
 
+    // Desktop HTML5 Drag Handlers
     function handleProfileDragStart(e) {
       draggedProfileId = e.currentTarget.getAttribute('data-id');
       if (e.dataTransfer) {
@@ -5824,6 +5813,135 @@
       draggedProfileId = null;
     }
 
+    let justFinishedLongPressDrag = false;
+
+    // Mobile Touch & Desktop Long-Press Drag & Drop Engine
+    function setupTouchLongPressDrag() {
+      const bar = document.getElementById('familyProfilesBar');
+      if (!bar) return;
+
+      bar.querySelectorAll('.family-profile-pill').forEach(pill => {
+        // Prevent default mobile callout / magnifier
+        pill.style.webkitTouchCallout = 'none';
+        pill.style.webkitUserSelect = 'none';
+        pill.style.userSelect = 'none';
+        pill.style.touchAction = 'pan-x';
+
+        pill.addEventListener('touchstart', (e) => {
+          const touch = e.touches[0];
+          touchStartX = touch.clientX;
+          touchStartY = touch.clientY;
+          isLongPressActive = false;
+          longPressPill = pill;
+          currentDropTargetPill = null;
+
+          touchTimer = setTimeout(() => {
+            isLongPressActive = true;
+            justFinishedLongPressDrag = true;
+            triggerHaptic([70]);
+            sound.playScanBeep();
+            
+            // Visual tactile pickup elevation on mobile
+            pill.classList.add('scale-105', 'z-30', 'shadow-2xl', 'ring-2', 'ring-sky-400', 'bg-sky-900/90');
+            pill.style.transition = 'transform 0.15s ease, box-shadow 0.15s ease';
+            pill.style.touchAction = 'none';
+            // Pointer-events none allows document.elementFromPoint to see the target pill beneath the dragging finger
+            pill.style.pointerEvents = 'none';
+          }, 300); // 300ms hold threshold
+        }, { passive: true });
+
+        pill.addEventListener('touchmove', (e) => {
+          const touch = e.touches[0];
+          const deltaX = Math.abs(touch.clientX - touchStartX);
+          const deltaY = Math.abs(touch.clientY - touchStartY);
+
+          if (!isLongPressActive) {
+            // Cancel long-press if user scrolls horizontally before hold time
+            if (deltaX > 8 || deltaY > 8) {
+              clearTimeout(touchTimer);
+            }
+            return;
+          }
+
+          // Active long-press drag: prevent page scrolling
+          if (e.cancelable) e.preventDefault();
+
+          // Locate hovering target pill directly beneath the touch coordinate
+          const elemBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+          const targetPill = elemBelow ? elemBelow.closest('.family-profile-pill') : null;
+
+          bar.querySelectorAll('.family-profile-pill').forEach(p => {
+            if (p !== pill) {
+              if (p === targetPill) {
+                p.classList.add('ring-2', 'ring-amber-400', 'bg-amber-950/60', 'scale-[1.02]');
+              } else {
+                p.classList.remove('ring-2', 'ring-amber-400', 'bg-amber-950/60', 'scale-[1.02]');
+              }
+            }
+          });
+          currentDropTargetPill = targetPill;
+        }, { passive: false });
+
+        pill.addEventListener('touchend', (e) => {
+          clearTimeout(touchTimer);
+
+          if (isLongPressActive) {
+            pill.style.pointerEvents = 'auto';
+            pill.style.touchAction = 'pan-x';
+            pill.classList.remove('scale-105', 'z-30', 'shadow-2xl', 'ring-2', 'ring-sky-400', 'bg-sky-900/90');
+            pill.style.transform = '';
+
+            bar.querySelectorAll('.family-profile-pill').forEach(p => {
+              p.classList.remove('ring-2', 'ring-amber-400', 'bg-amber-950/60', 'scale-[1.02]');
+            });
+
+            if (currentDropTargetPill && currentDropTargetPill !== pill) {
+              const fromId = pill.getAttribute('data-id');
+              const toId = currentDropTargetPill.getAttribute('data-id');
+
+              const fromIdx = familyProfiles.findIndex(p => p.id === fromId);
+              const toIdx = familyProfiles.findIndex(p => p.id === toId);
+
+              if (fromIdx !== -1 && toIdx !== -1) {
+                const [movedMember] = familyProfiles.splice(fromIdx, 1);
+                familyProfiles.splice(toIdx, 0, movedMember);
+                activeProfileId = fromId;
+                saveFamilyProfiles();
+                triggerHaptic([80, 40]);
+                sound.playClearChime();
+                renderAllergensTab();
+                showCustomizeToast(`Moved ${movedMember.name} to position ${toIdx + 1}`);
+                setTimeout(() => { justFinishedLongPressDrag = false; }, 350);
+                return;
+              }
+            }
+
+            setTimeout(() => { justFinishedLongPressDrag = false; }, 350);
+            isLongPressActive = false;
+            longPressPill = null;
+            currentDropTargetPill = null;
+          }
+        });
+
+        pill.addEventListener('touchcancel', () => {
+          clearTimeout(touchTimer);
+          if (longPressPill) {
+            longPressPill.style.pointerEvents = 'auto';
+            longPressPill.style.touchAction = 'pan-x';
+            longPressPill.classList.remove('scale-105', 'z-30', 'shadow-2xl', 'ring-2', 'ring-sky-400', 'bg-sky-900/90');
+            longPressPill.style.transform = '';
+          }
+          bar.querySelectorAll('.family-profile-pill').forEach(p => {
+            p.classList.remove('ring-2', 'ring-amber-400', 'bg-amber-950/60', 'scale-[1.02]');
+          });
+          setTimeout(() => { justFinishedLongPressDrag = false; }, 350);
+          isLongPressActive = false;
+          longPressPill = null;
+          currentDropTargetPill = null;
+        });
+      });
+    }
+
     function renderAllergensTab() {
       checkPlusStatus();
 
@@ -5839,8 +5957,6 @@
       userAllergens = currentProfile.allergens || [];
 
       const activeIdx = familyProfiles.findIndex(p => p.id === currentProfile.id);
-      const canMoveLeft = activeIdx > 0;
-      const canMoveRight = activeIdx >= 0 && activeIdx < familyProfiles.length - 1;
 
       if (activeProfileNotice) {
         const photoEl = currentProfile.photo 
@@ -5859,40 +5975,14 @@
                     ${userAllergens.length === 0 ? 'All Safe' : `${userAllergens.length} Alert${userAllergens.length > 1 ? 's' : ''}`}
                   </span>
                 </div>
-                <span class="text-[11px] text-slate-400 block truncate mt-0.5">Position ${activeIdx + 1} of ${familyProfiles.length} in family list</span>
+                <span class="text-[11px] text-slate-400 block truncate mt-0.5">Position ${activeIdx + 1} of ${familyProfiles.length} • Hold & drag pill above to move</span>
               </div>
             </div>
             <div class="flex items-center gap-1.5 shrink-0">
-              <!-- Reorder Left (Move earlier in list) -->
-              <button 
-                type="button" 
-                class="move-profile-btn w-9 h-9 rounded-xl flex items-center justify-center transition active:scale-90 ${canMoveLeft ? 'bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 shadow-sm' : 'bg-slate-900/50 text-slate-600 border border-slate-800/50 cursor-not-allowed'}"
-                data-id="${currentProfile.id}"
-                data-dir="-1"
-                ${!canMoveLeft ? 'disabled' : ''}
-                title="Move ${currentProfile.name} earlier in list (left)"
-                aria-label="Move ${currentProfile.name} left"
-              >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
-              </button>
-
-              <!-- Reorder Right (Move later in list) -->
-              <button 
-                type="button" 
-                class="move-profile-btn w-9 h-9 rounded-xl flex items-center justify-center transition active:scale-90 ${canMoveRight ? 'bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 shadow-sm' : 'bg-slate-900/50 text-slate-600 border border-slate-800/50 cursor-not-allowed'}"
-                data-id="${currentProfile.id}"
-                data-dir="1"
-                ${!canMoveRight ? 'disabled' : ''}
-                title="Move ${currentProfile.name} later in list (right)"
-                aria-label="Move ${currentProfile.name} right"
-              >
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
-              </button>
-
               <!-- Edit Member Button -->
               <button 
                 type="button" 
-                class="edit-profile-btn h-9 px-3 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 hover:text-white border border-sky-500/40 text-xs font-bold flex items-center gap-1.5 transition active:scale-95 shrink-0 shadow-sm" 
+                class="edit-profile-btn h-9 px-3.5 rounded-xl bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 hover:text-white border border-sky-500/40 text-xs font-bold flex items-center gap-1.5 transition active:scale-95 shrink-0 shadow-sm" 
                 data-edit="${currentProfile.id}" 
                 title="Edit ${currentProfile.name}'s name, photo, or avatar"
               >
@@ -5982,25 +6072,14 @@
           </div>
         `);
 
-        // Switch profile click
+        // Switch profile click (guarded against accidental click triggers after mobile long-press drag)
         document.querySelectorAll('.select-profile-btn').forEach(b => {
           b.addEventListener('click', () => {
+            if (justFinishedLongPressDrag) return;
             triggerHaptic([30]);
             activeProfileId = b.getAttribute('data-id');
             saveFamilyProfiles();
             renderAllergensTab();
-          });
-        });
-
-        // Reorder Move Left / Right buttons
-        document.querySelectorAll('.move-profile-btn').forEach(b => {
-          b.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const id = b.getAttribute('data-id');
-            const dir = parseInt(b.getAttribute('data-dir'), 10);
-            if (id && !isNaN(dir)) {
-              moveProfile(id, dir);
-            }
           });
         });
 
@@ -6012,6 +6091,9 @@
           pill.addEventListener('drop', handleProfileDrop);
           pill.addEventListener('dragend', handleProfileDragEnd);
         });
+
+        // Touch Long-Press Drag & Drop for Mobile
+        setupTouchLongPressDrag();
 
         // Edit profile click
         document.querySelectorAll('.edit-profile-btn').forEach(b => {
