@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rakka-v8';
+const CACHE_NAME = 'rakka-v9';
 const ASSETS = [
   './index.html',
   './manifest.json',
@@ -35,7 +35,24 @@ self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
 
-  // Cache-first for local static assets
+  // 1. Navigation requests (HTML pages): NETWORK-FIRST with offline cache fallback!
+  // Guarantees that any new deploy on GitHub is instantly visible while preserving 100% offline access
+  if (event.request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname === '/' || url.pathname.endsWith('/rakka/') || url.pathname.endsWith('/rakka')) {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          if (response && response.status === 200) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then(c => c.put(event.request, clone));
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request).then(cached => cached || caches.match('./index.html')))
+    );
+    return;
+  }
+
+  // 2. Local static assets (Images, Manifest, Catalog): Cache-first with network fallback
   if (url.origin === location.origin) {
     event.respondWith(
       caches.match(event.request).then(cached => {
@@ -51,7 +68,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Network-first with cache fallback for openFDA / barcode lookups
+  // 3. Network-first for external APIs (openFDA, etc.)
   event.respondWith(
     fetch(event.request).catch(() => caches.match(event.request))
   );

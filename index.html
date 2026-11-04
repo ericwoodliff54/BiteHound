@@ -540,14 +540,14 @@
     }
 
     /* Watchlist Shaded Windows */
-    html.theme-light #historySection .bg-slate-950\/80,
-    html.theme-light #historySection .bg-slate-950\/90,
+    html.theme-light #pantryDrawerContainer .bg-slate-950\/80,
+    html.theme-light #pantryDrawerContainer .bg-slate-950\/90,
     html.theme-light #pantryCapacityContainer {
       background-color: #f8fafc !important;
       border-color: #cbd5e1 !important;
     }
-    html.theme-light #historySection span.text-slate-300,
-    html.theme-light #historySection span.text-slate-400 {
+    html.theme-light #pantryDrawerContainer span.text-slate-300,
+    html.theme-light #pantryDrawerContainer span.text-slate-400 {
       color: #1e293b !important;
       font-weight: 500 !important;
     }
@@ -4109,10 +4109,10 @@
     const tabScanner = document.getElementById('tabScanner');
     const tabManual = document.getElementById('tabManual');
     const tabAllergens = document.getElementById('tabAllergens');
-    const tabWatchlist = document.getElementById('tabWatchlist');
+    
     const tabBulletins = document.getElementById('tabBulletins');
     const headerSettingsBtn = document.getElementById('headerSettingsBtn');
-    const tabWatchlistCount = document.getElementById('tabWatchlistCount');
+    
 
     const scannerPanel = document.getElementById('scannerPanel');
     const manualPanel = document.getElementById('manualPanel');
@@ -4120,7 +4120,7 @@
     const bulletinsPanel = document.getElementById('bulletinsPanel');
     const customizePanel = document.getElementById('customizePanel');
 
-    const historySection = document.getElementById('historySection');
+    
     
     const installGuideBtn = document.getElementById('installGuideBtn');
 
@@ -4493,7 +4493,7 @@
       tabScanner.className = (activeTab === 'scanner') ? activeClass : inactiveClass;
       tabManual.className = (activeTab === 'manual') ? activeClass : inactiveClass;
       tabAllergens.className = (activeTab === 'allergens') ? activeClass : inactiveClass;
-      if (tabWatchlist) tabWatchlist.className = (activeTab === 'watchlist') ? activeClass : inactiveClass;
+      
       tabBulletins.className = (activeTab === 'bulletins') ? activeClass : inactiveClass;
 
       // Highlight header settings gear when settings is active
@@ -4506,7 +4506,7 @@
       }
 
       allergensPanel.classList.toggle('hidden', activeTab !== 'allergens');
-      if (historySection) historySection.classList.toggle('hidden', activeTab !== 'watchlist');
+      
       bulletinsPanel.classList.toggle('hidden', activeTab !== 'bulletins');
       customizePanel.classList.toggle('hidden', activeTab !== 'customize');
 
@@ -4537,7 +4537,7 @@
       }
 
       if (activeTab === 'allergens') renderAllergensTab();
-      if (activeTab === 'watchlist') renderHistory();
+      
       if (activeTab === 'bulletins') renderBulletins();
       if (activeTab === 'customize') renderCustomizeTab();
     }
@@ -4545,7 +4545,7 @@
     tabScanner.addEventListener('click', () => setNavTab('scanner'));
     tabManual.addEventListener('click', () => setNavTab('manual'));
     tabAllergens.addEventListener('click', () => setNavTab('allergens'));
-    if (tabWatchlist) tabWatchlist.addEventListener('click', () => setNavTab('watchlist'));
+    
     tabBulletins.addEventListener('click', () => setNavTab('bulletins'));
     if (headerSettingsBtn) headerSettingsBtn.addEventListener('click', () => setNavTab('customize'));
 
@@ -8707,9 +8707,16 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=8')
-          .then(reg => console.log('Rakka SW registered:', reg.scope))
+        navigator.serviceWorker.register('./sw.js?v=9')
+          .then(reg => {
+            console.log('Rakka SW registered:', reg.scope);
+            if (typeof reg.update === 'function') reg.update();
+          })
           .catch(err => console.log('SW registration error:', err));
+      });
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        // Automatically activate new layout when service worker activates
+        console.log('Rakka SW updated, refreshing view');
       });
     }
   
