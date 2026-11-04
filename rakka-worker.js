@@ -505,18 +505,18 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
         const mimeType = body.mimeType || 'image/jpeg';
         const userAllergens = Array.isArray(body.activeAllergens) ? body.activeAllergens.join(', ') : 'None';
 
-        const prompt = `You are an expert food safety auditor reviewing a grocery store shopping receipt (e.g. from Aldi, Walmart, Kroger, Meijer, Giant Eagle, Trader Joe's, Costco, etc.).
+        const prompt = `You are an expert food safety auditor reviewing a grocery store shopping receipt (e.g. from ALDI, Walmart, Kroger, Meijer, Giant Eagle, Trader Joe's, Costco, etc.).
 User Household Allergen Safeguards to flag: ${userAllergens}
 
-Task:
-1. Examine this receipt image carefully.
-2. Identify the supermarket/store name if visible.
-3. Extract all purchased grocery/food items, filtering out non-food items (like paper towels, trash bags, tax, gift cards).
+Instructions for parsing this receipt:
+1. The receipt might be an ALDI receipt with 6-digit item codes followed by item names (e.g. "398511 Texas Toast", "287146 Mxd Fruit/Tropical", "383986 Pumpkin Loaf Cake", "385145 93% Organic Beef", "399495 Polska Kielbasa", "356394 Hneycrsp Tote LRW", "356482 Autumn Crisp Grape", "280701 Irish Cheddar").
+2. The receipt may be missing its top banner or store logo; identify the store from the private-label item nomenclature, prices, or store format (e.g. ALDI format with FA/FB food assistance indicators and item numbers).
+3. Extract ALL purchased food and grocery items shown on the tape.
 4. For each food item:
-   - Identify the clear consumer food title and brand (e.g. "Mama Cozzi's French Bread Pizza", "Organic Baby Carrots", "Friendly Farms Whole Milk").
-   - Assess whether the item is associated with active federal recalls (such as organic carrots for E. coli, deli turkey/meats for Listeria, frozen waffles, cinnamon, etc.).
-   - Flag potential allergen conflicts based on the household safeguards: ${userAllergens}.
-5. Synthesize an audit summary.
+   - Expand truncated or abbreviated register item names into clear consumer product names (e.g., "Texas Toast" -> "L'Oven Fresh Texas Toast", "Pumpkin Loaf Cake" -> "Bake Shop Pumpkin Sliced Loaf Cake", "ChknAlfrdoMtblMar" -> "Chicken Alfredo / Meatball Marinara", "Polska Kielbasa" -> "Parkview Polska Kielbasa", "Hneycrsp Tote LRW" -> "Honeycrisp Apples", "Autumn Crisp Grape" -> "Autumn Crisp Green Seedless Grapes").
+   - Assess whether any item is currently under an active national federal recall (such as Grimmway Farms bagged organic carrots for E. coli O121:H19, BrucePac cooked poultry for Listeria, TreeHouse frozen waffles, Boar's Head deli meat, etc.).
+   - Flag potential allergen conflicts against the active household safeguards: ${userAllergens}.
+5. Synthesize a concise 1-2 sentence safety summary.
 
 Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, no markdown, no backticks):
 {
@@ -530,12 +530,12 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
       "rawLine": "Raw line from receipt slip",
       "cleanName": "Standardized Food Name",
       "brand": "Brand or Store Brand",
-      "status": "clear", // 'clear', 'recalled', or 'allergen_alert'
+      "status": "clear",
       "warning": "Brief warning explanation if recalled or allergen alert, otherwise null",
-      "allergens": ["gluten", "dairy"] // detected common allergens
+      "allergens": ["gluten", "dairy"]
     }
   ],
-  "auditSummary": "1-2 sentence executive safety summary (e.g. '14 of 15 grocery items 100% cleared of active federal recalls. 1 potential alert detected for Organic Baby Carrots.')"
+  "auditSummary": "1-2 sentence executive safety summary"
 }`;
 
         const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
