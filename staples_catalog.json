@@ -1357,7 +1357,8 @@
     "allergens": [
       "gluten",
       "dairy",
-      "soy"
+      "soy",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -1377,7 +1378,8 @@
     "allergens": [
       "gluten",
       "dairy",
-      "soy"
+      "soy",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -1397,7 +1399,8 @@
     "allergens": [
       "gluten",
       "dairy",
-      "soy"
+      "soy",
+      "yeast"
     ],
     "additives_tags": [
       "tbhq"
@@ -1418,7 +1421,8 @@
     "allergens": [
       "gluten",
       "dairy",
-      "soy"
+      "soy",
+      "yeast"
     ],
     "additives_tags": [
       "tbhq"
@@ -2016,7 +2020,8 @@
       "gluten",
       "dairy",
       "soy",
-      "corn"
+      "corn",
+      "yeast"
     ],
     "additives_tags": [
       "msg"
@@ -2038,7 +2043,8 @@
       "gluten",
       "dairy",
       "soy",
-      "corn"
+      "corn",
+      "yeast"
     ],
     "additives_tags": [
       "msg"
@@ -2058,7 +2064,8 @@
     "ingredients": "Chicken Stock, Modified Food Starch, Vegetable Oil, Wheat Flour, Chicken Meat, Contains Less Than 2% Of: Salt, Dehydrated Mechanically Separated Chicken, Monosodium Glutamate, Soy Protein Concentrate, Water, Yeast Extract, Flavoring, Beta Carotene For Color.",
     "allergens": [
       "gluten",
-      "soy"
+      "soy",
+      "yeast"
     ],
     "additives_tags": [
       "msg"
@@ -2078,7 +2085,8 @@
     "ingredients": "Chicken Stock, Modified Food Starch, Vegetable Oil, Wheat Flour, Chicken Meat, Contains Less Than 2% Of: Salt, Dehydrated Mechanically Separated Chicken, Monosodium Glutamate, Soy Protein Concentrate, Water, Yeast Extract, Flavoring, Beta Carotene For Color.",
     "allergens": [
       "gluten",
-      "soy"
+      "soy",
+      "yeast"
     ],
     "additives_tags": [
       "msg"
@@ -2678,7 +2686,8 @@
       "gluten",
       "dairy",
       "soy",
-      "wheat"
+      "wheat",
+      "yeast"
     ],
     "additives_tags": [
       "en:e476",
@@ -2707,7 +2716,8 @@
       "gluten",
       "dairy",
       "soy",
-      "wheat"
+      "wheat",
+      "yeast"
     ],
     "additives_tags": [
       "en:e476",
@@ -3097,7 +3107,8 @@
     "upc": "099482434311",
     "ingredients": "Organic Whole Wheat Flour, Water, Organic Cane Sugar, Organic Wheat Gluten, Organic Expeller Pressed Canola Oil, Yeast, Organic Cultured Wheat Flour, Sea Salt, Organic Vinegar, Enzymes.",
     "allergens": [
-      "gluten"
+      "gluten",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -3111,7 +3122,8 @@
     "upc": "099482434311",
     "ingredients": "Organic Whole Wheat Flour, Water, Organic Cane Sugar, Organic Wheat Gluten, Organic Expeller Pressed Canola Oil, Yeast, Organic Cultured Wheat Flour, Sea Salt, Organic Vinegar, Enzymes.",
     "allergens": [
-      "gluten"
+      "gluten",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -3218,7 +3230,8 @@
     "ingredients": "Enriched Wheat Flour, Water, Sugar, Yeast, Soybean Oil, Salt, Wheat Gluten, Calcium Propionate (Preservative), Monoglycerides, Soy Lecithin.",
     "allergens": [
       "gluten",
-      "soy"
+      "soy",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -3233,7 +3246,8 @@
     "ingredients": "Enriched Wheat Flour, Water, Sugar, Yeast, Soybean Oil, Salt, Wheat Gluten, Calcium Propionate (Preservative), Monoglycerides, Soy Lecithin.",
     "allergens": [
       "gluten",
-      "soy"
+      "soy",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -3284,7 +3298,8 @@
     "ingredients": "Crust (Enriched Flour, Water, Soybean Oil, Yeast, Salt), Sauce (Tomato Puree, Sugar, Salt, Spices, Garlic), Low Moisture Part-Skim Mozzarella (Pasteurized Milk, Cheese Cultures, Salt, Enzymes), Pepperoni (Pork, Beef, Salt, Dextrose, Sodium Nitrite, BHA, BHT, Citric Acid).",
     "allergens": [
       "gluten",
-      "dairy"
+      "dairy",
+      "yeast"
     ],
     "additives_tags": [
       "sodium_nitrite",
@@ -3306,7 +3321,8 @@
     "ingredients": "Crust (Enriched Flour, Water, Soybean Oil, Yeast, Salt), Sauce (Tomato Puree, Sugar, Salt, Spices, Garlic), Low Moisture Part-Skim Mozzarella (Pasteurized Milk, Cheese Cultures, Salt, Enzymes), Pepperoni (Pork, Beef, Salt, Dextrose, Sodium Nitrite, BHA, BHT, Citric Acid).",
     "allergens": [
       "gluten",
-      "dairy"
+      "dairy",
+      "yeast"
     ],
     "additives_tags": [
       "sodium_nitrite",
@@ -5042,7 +5058,8 @@
     "ingredients": "Organic Whole Wheat (Organic Whole Wheat Flour, Organic Cracked Whole Wheat), Water, Organic Cane Sugar, 21 Whole Grains and Seeds Mix (Organic Whole Flax Seeds, Organic Sunflower Seeds, Organic Ground Whole Flax Seeds, Organic Brown Sesame Seeds, Organic Blue Poppy Seeds, Organic Black Sesame Seeds, Organic Pumpkin Seeds), Organic Wheat Gluten, Yeast, Sea Salt, Organic Cultured Wheat Flour.",
     "allergens": [
       "gluten",
-      "sesame"
+      "sesame",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5062,7 +5079,8 @@
     "ingredients": "Organic Whole Wheat (Organic Whole Wheat Flour, Organic Cracked Whole Wheat), Water, Organic Cane Sugar, 21 Whole Grains and Seeds Mix (Organic Whole Flax Seeds, Organic Sunflower Seeds, Organic Ground Whole Flax Seeds, Organic Brown Sesame Seeds, Organic Blue Poppy Seeds, Organic Black Sesame Seeds, Organic Pumpkin Seeds), Organic Wheat Gluten, Yeast, Sea Salt, Organic Cultured Wheat Flour.",
     "allergens": [
       "gluten",
-      "sesame"
+      "sesame",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5082,7 +5100,8 @@
     "ingredients": "Organic Whole Wheat Flour, Water, Organic Good Seed Grain and Seed Mix (Organic Whole Flax Seeds, Organic Sunflower Seeds, Organic Brown Sesame Seeds, Organic Blue Poppy Seeds, Organic Black Sesame Seeds, Organic Pumpkin Seeds), Organic Cane Sugar, Organic Wheat Gluten, Organic Oat Fiber, Sea Salt, Yeast.",
     "allergens": [
       "gluten",
-      "sesame"
+      "sesame",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5101,7 +5120,8 @@
     "ingredients": "Organic Whole Wheat Flour, Water, Organic Good Seed Grain and Seed Mix (Organic Whole Flax Seeds, Organic Sunflower Seeds, Organic Brown Sesame Seeds, Organic Blue Poppy Seeds, Organic Black Sesame Seeds, Organic Pumpkin Seeds), Organic Cane Sugar, Organic Wheat Gluten, Organic Oat Fiber, Sea Salt, Yeast.",
     "allergens": [
       "gluten",
-      "sesame"
+      "sesame",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5120,7 +5140,8 @@
     "ingredients": "Whole Wheat Flour, Water, Sugar, Wheat Gluten, Yeast, Brown Sugar, Contains 2% or Less of: Soybean Oil, Salt, Cultured Wheat Flour, Vinegar, Monoglycerides, Calcium Sulfate, Enzymes, Soy Lecithin.",
     "allergens": [
       "gluten",
-      "soy"
+      "soy",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5139,7 +5160,8 @@
     "ingredients": "Whole Wheat Flour, Water, Sugar, Wheat Gluten, Yeast, Brown Sugar, Contains 2% or Less of: Soybean Oil, Salt, Cultured Wheat Flour, Vinegar, Monoglycerides, Calcium Sulfate, Enzymes, Soy Lecithin.",
     "allergens": [
       "gluten",
-      "soy"
+      "soy",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5159,7 +5181,8 @@
     "allergens": [
       "gluten",
       "soy",
-      "corn"
+      "corn",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5179,7 +5202,8 @@
     "allergens": [
       "gluten",
       "soy",
-      "corn"
+      "corn",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5198,7 +5222,8 @@
     "ingredients": "Enriched Wheat Flour [Flour, Malted Barley Flour, Reduced Iron, Niacin, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid], Water, Yeast, Farina, Sugar, Salt, Calcium Propionate and Sorbic Acid (To Preserve Freshness), Soybean Oil, Grain Vinegar, Soy Lecithin.",
     "allergens": [
       "gluten",
-      "soy"
+      "soy",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5217,7 +5242,8 @@
     "ingredients": "Enriched Wheat Flour [Flour, Malted Barley Flour, Reduced Iron, Niacin, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid], Water, Yeast, Farina, Sugar, Salt, Calcium Propionate and Sorbic Acid (To Preserve Freshness), Soybean Oil, Grain Vinegar, Soy Lecithin.",
     "allergens": [
       "gluten",
-      "soy"
+      "soy",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5236,7 +5262,8 @@
     "ingredients": "Enriched Wheat Flour [Flour, Malted Barley Flour, Reduced Iron, Niacin, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid], Water, Sugar, Wheat Gluten, Yeast, Salt, Cornmeal, Calcium Propionate and Sorbic Acid (To Preserve Freshness), Monoglycerides, Guar Gum, Citric Acid.",
     "allergens": [
       "gluten",
-      "corn"
+      "corn",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5255,7 +5282,8 @@
     "ingredients": "Enriched Wheat Flour [Flour, Malted Barley Flour, Reduced Iron, Niacin, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid], Water, Sugar, Wheat Gluten, Yeast, Salt, Cornmeal, Calcium Propionate and Sorbic Acid (To Preserve Freshness), Monoglycerides, Guar Gum, Citric Acid.",
     "allergens": [
       "gluten",
-      "corn"
+      "corn",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5344,7 +5372,8 @@
     "ingredients": "Boneless, Skinless Chicken Breast with Rib Meat, Water, Wheat Flour, Salt, Modified Food Starch, Sodium Phosphates, Spices, Garlic Powder, Onion Powder, Dried Yeast, Sugar, Paprika Extract.",
     "allergens": [
       "gluten",
-      "corn"
+      "corn",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5363,7 +5392,8 @@
     "ingredients": "Boneless, Skinless Chicken Breast with Rib Meat, Water, Wheat Flour, Salt, Modified Food Starch, Sodium Phosphates, Spices, Garlic Powder, Onion Powder, Dried Yeast, Sugar, Paprika Extract.",
     "allergens": [
       "gluten",
-      "corn"
+      "corn",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5382,7 +5412,8 @@
     "ingredients": "Chicken Breast Tenderloins, Water, Wheat Flour, Bleached Wheat Flour, Modified Food Starch, Salt, Sodium Phosphates, Spices, Garlic Powder, Onion Powder, Dextrose, Yeast Extract, Paprika Extract.",
     "allergens": [
       "gluten",
-      "corn"
+      "corn",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5401,7 +5432,8 @@
     "ingredients": "Chicken Breast Tenderloins, Water, Wheat Flour, Bleached Wheat Flour, Modified Food Starch, Salt, Sodium Phosphates, Spices, Garlic Powder, Onion Powder, Dextrose, Yeast Extract, Paprika Extract.",
     "allergens": [
       "gluten",
-      "corn"
+      "corn",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5539,7 +5571,8 @@
     "allergens": [
       "gluten",
       "dairy",
-      "soy"
+      "soy",
+      "yeast"
     ],
     "additives_tags": [
       "en:e250",
@@ -5563,7 +5596,8 @@
     "allergens": [
       "gluten",
       "dairy",
-      "soy"
+      "soy",
+      "yeast"
     ],
     "additives_tags": [
       "en:e250",
@@ -5584,7 +5618,9 @@
     "brand": "Beyond Meat",
     "upc": "852629004523",
     "ingredients": "Water, Pea Protein, Expeller-Pressed Canola Oil, Refined Coconut Oil, Rice Protein, Natural Flavors, Dried Yeast, Mung Bean Protein, Methylcellulose, Potato Starch, Apple Extract, Pomegranate Extract, Salt, Potassium Chloride, Vinegar, Lemon Juice Concentrate, Sunflower Lecithin, Beet Juice Extract (For Color).",
-    "allergens": [],
+    "allergens": [
+      "yeast"
+    ],
     "additives_tags": [],
     "stores": [
       "Giant Eagle",
@@ -5600,7 +5636,9 @@
     "brand": "Beyond Meat",
     "upc": "852629004523",
     "ingredients": "Water, Pea Protein, Expeller-Pressed Canola Oil, Refined Coconut Oil, Rice Protein, Natural Flavors, Dried Yeast, Mung Bean Protein, Methylcellulose, Potato Starch, Apple Extract, Pomegranate Extract, Salt, Potassium Chloride, Vinegar, Lemon Juice Concentrate, Sunflower Lecithin, Beet Juice Extract (For Color).",
-    "allergens": [],
+    "allergens": [
+      "yeast"
+    ],
     "additives_tags": [],
     "stores": [
       "Giant Eagle",
@@ -5738,7 +5776,8 @@
     "ingredients": "Organic Wheat Flour, Organic Expeller-Pressed Sunflower Oil, Organic Cheddar Cheese (Pasteurized Organic Milk, Cheese Cultures, Salt, Non-Animal Enzymes), Salt, Organic Annatto (For Color), Yeast, Organic Paprika, Cultured Organic Milk, Non-Animal Enzymes.",
     "allergens": [
       "gluten",
-      "dairy"
+      "dairy",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5757,7 +5796,8 @@
     "ingredients": "Organic Wheat Flour, Organic Expeller-Pressed Sunflower Oil, Organic Cheddar Cheese (Pasteurized Organic Milk, Cheese Cultures, Salt, Non-Animal Enzymes), Salt, Organic Annatto (For Color), Yeast, Organic Paprika, Cultured Organic Milk, Non-Animal Enzymes.",
     "allergens": [
       "gluten",
-      "dairy"
+      "dairy",
+      "yeast"
     ],
     "additives_tags": [],
     "stores": [
@@ -5884,7 +5924,9 @@
     "brand": "Swanson",
     "upc": "051000198427",
     "ingredients": "Chicken Broth (Water, Chicken Stock), Contains Less than 1% of: Salt, Natural Flavoring, Yeast Extract, Carrot Juice Concentrate, Celery Juice Concentrate, Onion Juice Concentrate.",
-    "allergens": [],
+    "allergens": [
+      "yeast"
+    ],
     "additives_tags": [],
     "stores": [
       "Giant Eagle",
@@ -5900,7 +5942,9 @@
     "brand": "Swanson",
     "upc": "051000198427",
     "ingredients": "Chicken Broth (Water, Chicken Stock), Contains Less than 1% of: Salt, Natural Flavoring, Yeast Extract, Carrot Juice Concentrate, Celery Juice Concentrate, Onion Juice Concentrate.",
-    "allergens": [],
+    "allergens": [
+      "yeast"
+    ],
     "additives_tags": [],
     "stores": [
       "Giant Eagle",
@@ -6084,7 +6128,8 @@
       "gluten",
       "dairy",
       "soy",
-      "wheat"
+      "wheat",
+      "yeast"
     ],
     "additives_tags": [
       "en:e476",
@@ -6113,7 +6158,8 @@
       "gluten",
       "dairy",
       "soy",
-      "wheat"
+      "wheat",
+      "yeast"
     ],
     "additives_tags": [
       "en:e476",
