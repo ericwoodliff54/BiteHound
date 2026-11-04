@@ -10,7 +10,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="RAKKA">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#020617">
+  <meta name="theme-color" content="#202b31">
   <meta name="format-detection" content="telephone=no">
 
   <link rel="icon" type="image/png" sizes="64x64" href="./favicon.png">
@@ -445,19 +445,19 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
   <!-- APP STARTUP SPLASH SCREEN (Showcases Great Dane mascot with large, bold apple medallion & UPC barcode) -->
-  <div id="appSplashScreen" class="fixed inset-0 z-50 bg-[#0f172a] flex flex-col items-center justify-center p-6 text-center select-none transition-opacity duration-700">
+  <div id="appSplashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 text-center select-none transition-opacity duration-700" style="background: radial-gradient(circle at center, #27343d 0%, #202b31 55%, #172025 100%);">
     <div class="relative flex flex-col items-center animate-in fade-in zoom-in-95 duration-500 max-w-lg w-full">
       <!-- Ambient Golden Glow radiating behind mascot -->
       <div class="absolute w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-amber-500/20 blur-3xl pointer-events-none -z-10 animate-pulse"></div>
       
       <!-- Big Showcase Mascot with Huge Apple Medallion & UPC Barcode -->
       <div class="relative w-68 h-68 sm:w-80 sm:h-80 md:w-96 md:h-96 mb-3 flex items-center justify-center shrink-0">
-        <img src="./logo-1024.png" alt="RAKKA Mascot" class="w-full h-full object-contain filter drop-shadow-2xl">
+        <img src="./logo-1024.png" alt="RAKKA Mascot" class="w-full h-full object-contain filter drop-shadow-2xl" style="mask-image: radial-gradient(circle at center, black 62%, transparent 95%); -webkit-mask-image: radial-gradient(circle at center, black 62%, transparent 95%);">
       </div>
       
       <!-- Large Brand Typography -->
-      <h1 class="font-display font-black text-4xl sm:text-5xl md:text-6xl text-white tracking-tight drop-shadow-xl">
-        RAK<span class="text-amber-400">KA</span>
+      <h1 class="font-display font-black text-4xl sm:text-5xl md:text-6xl tracking-widest uppercase drop-shadow-[0_4px_16px_rgba(245,158,11,0.35)]" style="background: linear-gradient(180deg, #fef3c7 0%, #f59e0b 50%, #d97706 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        RAKKA
       </h1>
       
       <!-- Food Scanner Core Identity Badge -->
@@ -8511,7 +8511,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=2')
+        navigator.serviceWorker.register('./sw.js?v=3')
           .then(reg => console.log('Rakka SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
