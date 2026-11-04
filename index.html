@@ -6540,6 +6540,9 @@
       setTimeout(() => customizeToast.classList.add('hidden'), 4000);
     }
 
+    const MAX_WATCHLIST_ITEMS = 100;
+    const SIXTY_DAYS_MS = 60 * 24 * 60 * 60 * 1000;
+
     function addToHistory(item) {
       if (!item || !item.upc) return;
       // Deduplicate by UPC: remove previous entry of this barcode
@@ -6559,10 +6562,40 @@
         detectedAdditives: item.detectedAdditives || []
       });
 
-      // Retain up to 100 items (generous 60-day household inventory)
-      if (scanHistory.length > 100) scanHistory.pop();
+      const now = Date.now();
+
+      // 1. 60-Day Auto-Retirement:
+      // Retire items older than 60 days, UNLESS they have an active recall notice (Recall Immunity)
+      scanHistory = scanHistory.filter(i => {
+        const isRecalled = Boolean(i.recalledNow || i.status === 'recalled' || i.isRecalled);
+        if (isRecalled) return true; // Contaminated/recalled items remain pinned until dismissed
+        if (i.timestamp && (now - i.timestamp > SIXTY_DAYS_MS)) {
+          return false; // Safely retired past commercial household shelf life
+        }
+        return true;
+      });
+
+      // 2. Rolling Capacity Enforcer with Recall Immunity (FIFO)
+      // When exceeding MAX_WATCHLIST_ITEMS (100), pop the oldest CLEARED item from the bottom
+      while (scanHistory.length > MAX_WATCHLIST_ITEMS) {
+        let oldestClearedIdx = -1;
+        for (let idx = scanHistory.length - 1; idx >= 0; idx--) {
+          const isRecalled = Boolean(scanHistory[idx].recalledNow || scanHistory[idx].status === 'recalled' || scanHistory[idx].isRecalled);
+          if (!isRecalled) {
+            oldestClearedIdx = idx;
+            break;
+          }
+        }
+        if (oldestClearedIdx !== -1) {
+          scanHistory.splice(oldestClearedIdx, 1);
+        } else {
+          scanHistory.pop();
+        }
+      }
+
       try {
-        localStorage.setItem('bitehound_history', JSON.stringify(scanHistory)); localStorage.setItem('safebite_history', JSON.stringify(scanHistory));
+        localStorage.setItem('bitehound_history', JSON.stringify(scanHistory)); 
+        localStorage.setItem('safebite_history', JSON.stringify(scanHistory));
       } catch (e) {}
 
       auditPantryAgainstRecalls();
@@ -6731,10 +6764,12 @@
 
     function renderHistory() {
       const countBadge = document.getElementById('pantryGuardCountBadge');
+      const activeCount = scanHistory.length;
       if (countBadge) {
-        const activeCount = scanHistory.length;
-        countBadge.textContent = `${activeCount} Watched`;
-        if (activeCount > 0) {
+        countBadge.textContent = `${activeCount}/${MAX_WATCHLIST_ITEMS} Watched`;
+        if (activeCount >= MAX_WATCHLIST_ITEMS) {
+          countBadge.className = 'px-2.5 py-1 text-[11px] font-bold rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40';
+        } else if (activeCount > 0) {
           countBadge.className = 'px-2.5 py-1 text-[11px] font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
         } else {
           countBadge.className = 'px-2.5 py-1 text-[11px] font-medium rounded-full bg-slate-800 text-slate-400 border border-slate-700';
@@ -6746,7 +6781,19 @@
         return;
       }
 
-      historyList.innerHTML = scanHistory.map(item => {
+      const capacityBannerHtml = (activeCount >= MAX_WATCHLIST_ITEMS) ? `
+        <div class="p-3 rounded-2xl bg-slate-950/90 border border-amber-500/30 text-xs flex items-center gap-2.5 shadow-sm text-slate-300 mb-2">
+          <span class="p-1 rounded-lg bg-amber-500/20 text-amber-300 shrink-0">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </span>
+          <div class="min-w-0">
+            <span class="font-bold text-white block">Pantry at Capacity (100/100 items)</span>
+            <span class="text-[11px] text-slate-400 block leading-tight">Oldest cleared foods rotate off automatically as you scan new items. Recalled items remain pinned.</span>
+          </div>
+        </div>
+      ` : '';
+
+      historyList.innerHTML = capacityBannerHtml + scanHistory.map(item => {
         const isItemRecalled = Boolean(item.recalledNow || item.status === 'recalled');
 
         if (isItemRecalled) {
