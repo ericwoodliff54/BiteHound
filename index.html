@@ -4545,6 +4545,17 @@
       }
     });
 
+    function formatAllergenName(id) {
+      if (!id) return '';
+      const opt = ALLERGEN_OPTIONS.find(o => o.id === id);
+      return opt ? opt.name : (String(id).charAt(0).toUpperCase() + String(id).slice(1));
+    }
+
+    function formatAllergenList(idList) {
+      if (!Array.isArray(idList)) return '';
+      return idList.map(formatAllergenName).filter(Boolean).join(', ');
+    }
+
     // REAL-TIME GROCERY PRODUCT RESOLUTION & ALLERGEN ANALYSIS
     async function processUPC(rawCode, source = 'scanner') {
       try {
@@ -5045,10 +5056,7 @@
           for (const prof of familyProfiles) {
             const matches = (prof.allergens || []).filter(a => detectedAllergenIds.includes(a));
             if (matches.length > 0) {
-              const names = matches.map(id => {
-                const opt = ALLERGEN_OPTIONS.find(o => o.id === id);
-                return opt ? `${opt.icon} ${opt.name}` : id;
-              });
+              const names = matches.map(id => formatAllergenName(id));
               triggeredFamilyMatches.push({
                 name: prof.name,
                 icon: prof.icon || 'user',
@@ -5448,7 +5456,7 @@
 
               <div class="pt-2 border-t border-slate-800/80 text-[11px] text-slate-300 flex items-center justify-between">
                 <span>Total Identified Allergens:</span>
-                <span class="font-bold text-white font-mono">${data.detectedAllergens.join(', ')}</span>
+                <span class="font-bold text-slate-200 text-right">${formatAllergenList(data.detectedAllergens)}</span>
               </div>
             </div>
           </div>
@@ -5491,7 +5499,7 @@
             `}
             ${detectedAllergensCount > 0 ? `
               <div class="pt-1.5 text-[11px] text-slate-400 border-t border-slate-800/70">
-                <span class="text-slate-300 font-medium">Packaging mentions:</span> ${data.detectedAllergens.join(', ')} (no active member allergies match).
+                <span class="text-slate-300 font-medium">Packaging mentions:</span> ${formatAllergenList(data.detectedAllergens)} (no active member allergies match).
               </div>
             ` : ''}
           </div>
