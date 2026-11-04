@@ -211,15 +211,83 @@
       color: #475569 !important;
     }
 
-    /* Camera Viewfinder (Preserves dark aperture with clean border) */
+    /* Header Settings Gear Icon in Light Mode (Removes dark window) */
+    html.theme-light #headerSettingsBtn {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #1e293b !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+    }
+    html.theme-light #headerSettingsBtn:hover {
+      background-color: #f8fafc !important;
+      border-color: #94a3b8 !important;
+    }
+    html.theme-light #headerSettingsBtn svg {
+      color: #d97706 !important;
+    }
+
+    /* Camera Viewfinder in Light Mode (Removes black windows & dark frame) */
+    html.theme-light #scannerPanel .bg-slate-950,
     html.theme-light #cameraPlaceholder {
-      background-color: #0f172a !important;
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+    }
+    html.theme-light #cameraPlaceholder > div {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+    }
+    html.theme-light #cameraPlaceholder .bg-slate-950\/70 {
+      background-color: #f1f5f9 !important;
+      border-color: #e2e8f0 !important;
+    }
+    html.theme-light #cameraPlaceholder .bg-slate-300\/80,
+    html.theme-light #cameraPlaceholder .bg-slate-300\/70,
+    html.theme-light #cameraPlaceholder .bg-slate-300\/60,
+    html.theme-light #cameraPlaceholder .bg-slate-300\/50,
+    html.theme-light #cameraPlaceholder .bg-slate-300\/40 {
+      background-color: #1e293b !important;
+    }
+    html.theme-light #cameraPlaceholder span.text-amber-300 {
+      color: #b45309 !important;
+      font-weight: 700 !important;
     }
     html.theme-light #cameraPlaceholder p {
-      color: #ffffff !important;
+      color: #0f172a !important;
+      font-weight: 700 !important;
     }
     html.theme-light #cameraPlaceholder p.text-slate-400 {
-      color: #cbd5e1 !important;
+      color: #475569 !important;
+      font-weight: 500 !important;
+    }
+    html.theme-light #toggleTorchBtn {
+      background: rgba(255, 255, 255, 0.95) !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    }
+    html.theme-light #cameraScanSuccessOverlay {
+      background-color: rgba(248, 250, 252, 0.95) !important;
+    }
+    html.theme-light #cameraScanSuccessOverlay span.text-white {
+      color: #0f172a !important;
+    }
+    html.theme-light #toggleScanTipsBtn {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0284c7 !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+    }
+    html.theme-light #scanTipsDrawer {
+      background: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      color: #1e293b !important;
+    }
+    html.theme-light #scanTipsDrawer strong {
+      color: #0f172a !important;
+    }
+    html.theme-light #scanTipsDrawer p {
+      color: #334155 !important;
     }
 
     /* High-Contrast Pill Badges in Master Scan Header */
@@ -367,24 +435,145 @@
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
     }
 
+    /* Allergen Controls & Shaded Quick Action Windows */
+    html.theme-light #guardrailListHeaderNotice {
+      color: #0f172a !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light #allergensPanel > div.bg-slate-900\/90,
+    html.theme-light #allergensPanel div.flex.items-center.justify-between.bg-slate-900\/90 {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    }
+    html.theme-light #selectAllergensBtn {
+      background-color: #0284c7 !important;
+      color: #ffffff !important;
+      border-color: #0284c7 !important;
+      font-weight: 700 !important;
+      box-shadow: 0 2px 4px rgba(2, 132, 199, 0.3) !important;
+    }
+    html.theme-light #selectAllergensBtn:hover {
+      background-color: #0369a1 !important;
+    }
+    html.theme-light #resetAllergensBtn {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #1e293b !important;
+      font-weight: 700 !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+    }
+    html.theme-light #resetAllergensBtn:hover {
+      background-color: #fee2e2 !important;
+      color: #b91c1c !important;
+      border-color: #fca5a5 !important;
+    }
+
     /* Allergen Toggle Buttons in Light Mode */
     html.theme-light .allergen-toggle-btn {
       background: #ffffff !important;
-      border-color: #e2e8f0 !important;
+      border-color: #cbd5e1 !important;
       color: #0f172a !important;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    }
+    html.theme-light .allergen-toggle-btn.bg-blue-950\/50,
+    html.theme-light .allergen-toggle-btn[class*="bg-blue-950"] {
+      background-color: #f0f9ff !important;
+      border-color: #0284c7 !important;
+      box-shadow: 0 0 0 1px #0284c7, 0 2px 4px rgba(2, 132, 199, 0.1) !important;
     }
     html.theme-light .allergen-toggle-btn span.text-white {
       color: #0f172a !important;
       font-weight: 700 !important;
     }
     html.theme-light .allergen-toggle-btn span.text-slate-300 {
-      color: #475569 !important;
+      color: #334155 !important;
+      font-weight: 600 !important;
     }
     html.theme-light .allergen-toggle-btn .bg-slate-800\/80 {
-      background: #f1f5f9 !important;
-      border-color: #cbd5e1 !important;
+      background: #e0f2fe !important;
+      border-color: #bae6fd !important;
       color: #0284c7 !important;
+    }
+    html.theme-light .allergen-toggle-btn .bg-slate-900 {
+      background: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+    }
+
+    /* Chemical & Additive Screener Card in Light Mode */
+    html.theme-light #allergensPanel .rounded-3xl.bg-slate-950\/80 {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    }
+    html.theme-light #allergensPanel .rounded-3xl.bg-slate-950\/80 span.text-white {
+      color: #0f172a !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light #allergensPanel .rounded-3xl.bg-slate-950\/80 span.text-slate-400 {
+      color: #334155 !important;
+      font-weight: 600 !important;
+    }
+    html.theme-light #allergensPanel .rounded-3xl.bg-slate-950\/80 p.text-slate-400 {
+      color: #334155 !important;
+      font-weight: 500 !important;
+    }
+
+    /* Active Recalls Filter Bar & Shaded Windows */
+    html.theme-light #bulletinsPanel .bg-slate-950\/90 {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    }
+    html.theme-light #bulletinsPanel .text-sky-300 {
+      color: #0284c7 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light #bulletinsPanel label {
+      color: #0f172a !important;
+      font-weight: 600 !important;
+    }
+    html.theme-light #bulletinsPanel select {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+
+    /* Watchlist Shaded Windows */
+    html.theme-light #historySection .bg-slate-950\/80,
+    html.theme-light #historySection .bg-slate-950\/90,
+    html.theme-light #pantryCapacityContainer {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+    }
+    html.theme-light #historySection span.text-slate-300,
+    html.theme-light #historySection span.text-slate-400 {
+      color: #1e293b !important;
+      font-weight: 500 !important;
+    }
+
+    /* Settings Tab Shaded Windows */
+    html.theme-light #customizePanel .bg-slate-950\/80,
+    html.theme-light #customizePanel .bg-slate-950\/90 {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+    }
+    html.theme-light #customizePanel span.text-slate-300 {
+      color: #0f172a !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light #customizePanel span.text-slate-400 {
+      color: #475569 !important;
+      font-weight: 500 !important;
+    }
+    html.theme-light #settingsSyncNowBtn {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+    }
+    html.theme-light #settingsSyncNowBtn:hover {
+      background-color: #f1f5f9 !important;
     }
 
     /* Settings Tab Cards in Light Mode */
@@ -8511,7 +8700,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=5')
+        navigator.serviceWorker.register('./sw.js?v=6')
           .then(reg => console.log('Rakka SW registered:', reg.scope))
           .catch(err => console.log('SW registration error:', err));
       });
