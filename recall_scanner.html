@@ -13,8 +13,8 @@
   <meta name="theme-color" content="#d8d2c7">
   <meta name="format-detection" content="telephone=no">
 
-  <link rel="icon" type="image/png" sizes="64x64" href="./favicon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="./favicon.png?v=13">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=13">
   <link rel="manifest" href="./manifest.json">
 
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
@@ -641,7 +641,7 @@
       
       <!-- Big Showcase Mascot with Huge Apple Medallion & UPC Barcode -->
       <div class="relative w-68 h-68 sm:w-80 sm:h-80 md:w-96 md:h-96 mb-3 flex items-center justify-center shrink-0">
-        <img src="./logo-1024.png" alt="RAKKA Mascot" class="w-full h-full object-contain filter drop-shadow-2xl" style="mask-image: radial-gradient(circle at center, black 62%, transparent 95%); -webkit-mask-image: radial-gradient(circle at center, black 62%, transparent 95%);">
+        <img src="./logo-1024.png?v=13" alt="RAKKA Mascot" class="w-full h-full object-contain filter drop-shadow-2xl">
       </div>
       
       <!-- Large Brand Typography -->
@@ -681,7 +681,7 @@
     <div class="max-w-xl mx-auto px-4 py-2.5 sm:py-3 flex items-center justify-between">
       <div class="flex items-center gap-2.5 sm:gap-3 min-w-0 pr-1">
         <div class="relative shrink-0">
-          <img src="./icon-192.png" alt="RAKKA Mascot" class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl object-cover border border-amber-400/40 shadow-sm">
+          <img src="./icon-192.png?v=13" alt="RAKKA Mascot" class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl object-cover border border-amber-400/40 shadow-sm">
           <span class="absolute -top-1 -right-1 flex h-2.5 w-2.5">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
@@ -8742,7 +8742,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=12')
+        navigator.serviceWorker.register('./sw.js?v=13')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();

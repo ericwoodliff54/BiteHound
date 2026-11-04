@@ -1,12 +1,16 @@
-const CACHE_NAME = 'rakka-v12';
+const CACHE_NAME = 'rakka-v13';
 const ASSETS = [
   './index.html',
   './manifest.json',
   './icon-192.png',
+  './icon-192.png?v=13',
   './icon-512.png',
   './apple-touch-icon.png',
+  './apple-touch-icon.png?v=13',
   './favicon.png',
+  './favicon.png?v=13',
   './logo-1024.png',
+  './logo-1024.png?v=13',
   './staples_catalog.json'
 ];
 
@@ -36,7 +40,6 @@ self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
   // 1. Navigation requests (HTML pages): NETWORK-FIRST with offline cache fallback!
-  // Guarantees that any new deploy on GitHub is instantly visible while preserving 100% offline access
   if (event.request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname === '/' || url.pathname.endsWith('/rakka/') || url.pathname.endsWith('/rakka')) {
     event.respondWith(
       fetch(event.request)
@@ -52,7 +55,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // 2. Local static assets (Images, Manifest, Catalog): Cache-first with network fallback
+  // 2. Local static assets: Cache-first with network fallback
   if (url.origin === location.origin) {
     event.respondWith(
       caches.match(event.request).then(cached => {
