@@ -1357,8 +1357,7 @@
     "allergens": [
       "gluten",
       "dairy",
-      "soy",
-      "yeast"
+      "soy"
     ],
     "additives_tags": [],
     "stores": [
@@ -1378,8 +1377,7 @@
     "allergens": [
       "gluten",
       "dairy",
-      "soy",
-      "yeast"
+      "soy"
     ],
     "additives_tags": [],
     "stores": [
@@ -1399,8 +1397,7 @@
     "allergens": [
       "gluten",
       "dairy",
-      "soy",
-      "yeast"
+      "soy"
     ],
     "additives_tags": [
       "tbhq"
@@ -1421,8 +1418,7 @@
     "allergens": [
       "gluten",
       "dairy",
-      "soy",
-      "yeast"
+      "soy"
     ],
     "additives_tags": [
       "tbhq"
@@ -2020,8 +2016,7 @@
       "gluten",
       "dairy",
       "soy",
-      "corn",
-      "yeast"
+      "corn"
     ],
     "additives_tags": [
       "msg"
@@ -2043,8 +2038,7 @@
       "gluten",
       "dairy",
       "soy",
-      "corn",
-      "yeast"
+      "corn"
     ],
     "additives_tags": [
       "msg"
@@ -2064,8 +2058,7 @@
     "ingredients": "Chicken Stock, Modified Food Starch, Vegetable Oil, Wheat Flour, Chicken Meat, Contains Less Than 2% Of: Salt, Dehydrated Mechanically Separated Chicken, Monosodium Glutamate, Soy Protein Concentrate, Water, Yeast Extract, Flavoring, Beta Carotene For Color.",
     "allergens": [
       "gluten",
-      "soy",
-      "yeast"
+      "soy"
     ],
     "additives_tags": [
       "msg"
@@ -2085,8 +2078,7 @@
     "ingredients": "Chicken Stock, Modified Food Starch, Vegetable Oil, Wheat Flour, Chicken Meat, Contains Less Than 2% Of: Salt, Dehydrated Mechanically Separated Chicken, Monosodium Glutamate, Soy Protein Concentrate, Water, Yeast Extract, Flavoring, Beta Carotene For Color.",
     "allergens": [
       "gluten",
-      "soy",
-      "yeast"
+      "soy"
     ],
     "additives_tags": [
       "msg"
@@ -2686,8 +2678,7 @@
       "gluten",
       "dairy",
       "soy",
-      "wheat",
-      "yeast"
+      "wheat"
     ],
     "additives_tags": [
       "en:e476",
@@ -2716,8 +2707,7 @@
       "gluten",
       "dairy",
       "soy",
-      "wheat",
-      "yeast"
+      "wheat"
     ],
     "additives_tags": [
       "en:e476",
@@ -3107,8 +3097,7 @@
     "upc": "099482434311",
     "ingredients": "Organic Whole Wheat Flour, Water, Organic Cane Sugar, Organic Wheat Gluten, Organic Expeller Pressed Canola Oil, Yeast, Organic Cultured Wheat Flour, Sea Salt, Organic Vinegar, Enzymes.",
     "allergens": [
-      "gluten",
-      "yeast"
+      "gluten"
     ],
     "additives_tags": [],
     "stores": [
@@ -3122,8 +3111,7 @@
     "upc": "099482434311",
     "ingredients": "Organic Whole Wheat Flour, Water, Organic Cane Sugar, Organic Wheat Gluten, Organic Expeller Pressed Canola Oil, Yeast, Organic Cultured Wheat Flour, Sea Salt, Organic Vinegar, Enzymes.",
     "allergens": [
-      "gluten",
-      "yeast"
+      "gluten"
     ],
     "additives_tags": [],
     "stores": [
@@ -3230,8 +3218,7 @@
     "ingredients": "Enriched Wheat Flour, Water, Sugar, Yeast, Soybean Oil, Salt, Wheat Gluten, Calcium Propionate (Preservative), Monoglycerides, Soy Lecithin.",
     "allergens": [
       "gluten",
-      "soy",
-      "yeast"
+      "soy"
     ],
     "additives_tags": [],
     "stores": [
@@ -3246,8 +3233,7 @@
     "ingredients": "Enriched Wheat Flour, Water, Sugar, Yeast, Soybean Oil, Salt, Wheat Gluten, Calcium Propionate (Preservative), Monoglycerides, Soy Lecithin.",
     "allergens": [
       "gluten",
-      "soy",
-      "yeast"
+      "soy"
     ],
     "additives_tags": [],
     "stores": [
@@ -3298,8 +3284,7 @@
     "ingredients": "Crust (Enriched Flour, Water, Soybean Oil, Yeast, Salt), Sauce (Tomato Puree, Sugar, Salt, Spices, Garlic), Low Moisture Part-Skim Mozzarella (Pasteurized Milk, Cheese Cultures, Salt, Enzymes), Pepperoni (Pork, Beef, Salt, Dextrose, Sodium Nitrite, BHA, BHT, Citric Acid).",
     "allergens": [
       "gluten",
-      "dairy",
-      "yeast"
+      "dairy"
     ],
     "additives_tags": [
       "sodium_nitrite",
@@ -3321,8 +3306,7 @@
     "ingredients": "Crust (Enriched Flour, Water, Soybean Oil, Yeast, Salt), Sauce (Tomato Puree, Sugar, Salt, Spices, Garlic), Low Moisture Part-Skim Mozzarella (Pasteurized Milk, Cheese Cultures, Salt, Enzymes), Pepperoni (Pork, Beef, Salt, Dextrose, Sodium Nitrite, BHA, BHT, Citric Acid).",
     "allergens": [
       "gluten",
-      "dairy",
-      "yeast"
+      "dairy"
     ],
     "additives_tags": [
       "sodium_nitrite",
@@ -4224,8 +4208,7 @@
       "dairy",
       "eggs",
       "sesame",
-      "gluten",
-      "yeast"
+      "gluten"
     ],
     "additives_tags": [],
     "stores": [
@@ -4246,8 +4229,7 @@
       "dairy",
       "eggs",
       "sesame",
-      "gluten",
-      "yeast"
+      "gluten"
     ],
     "additives_tags": [],
     "stores": [
@@ -5060,8 +5042,7 @@
     "ingredients": "Organic Whole Wheat (Organic Whole Wheat Flour, Organic Cracked Whole Wheat), Water, Organic Cane Sugar, 21 Whole Grains and Seeds Mix (Organic Whole Flax Seeds, Organic Sunflower Seeds, Organic Ground Whole Flax Seeds, Organic Brown Sesame Seeds, Organic Blue Poppy Seeds, Organic Black Sesame Seeds, Organic Pumpkin Seeds), Organic Wheat Gluten, Yeast, Sea Salt, Organic Cultured Wheat Flour.",
     "allergens": [
       "gluten",
-      "sesame",
-      "yeast"
+      "sesame"
     ],
     "additives_tags": [],
     "stores": [
@@ -5081,8 +5062,7 @@
     "ingredients": "Organic Whole Wheat (Organic Whole Wheat Flour, Organic Cracked Whole Wheat), Water, Organic Cane Sugar, 21 Whole Grains and Seeds Mix (Organic Whole Flax Seeds, Organic Sunflower Seeds, Organic Ground Whole Flax Seeds, Organic Brown Sesame Seeds, Organic Blue Poppy Seeds, Organic Black Sesame Seeds, Organic Pumpkin Seeds), Organic Wheat Gluten, Yeast, Sea Salt, Organic Cultured Wheat Flour.",
     "allergens": [
       "gluten",
-      "sesame",
-      "yeast"
+      "sesame"
     ],
     "additives_tags": [],
     "stores": [
@@ -5102,8 +5082,7 @@
     "ingredients": "Organic Whole Wheat Flour, Water, Organic Good Seed Grain and Seed Mix (Organic Whole Flax Seeds, Organic Sunflower Seeds, Organic Brown Sesame Seeds, Organic Blue Poppy Seeds, Organic Black Sesame Seeds, Organic Pumpkin Seeds), Organic Cane Sugar, Organic Wheat Gluten, Organic Oat Fiber, Sea Salt, Yeast.",
     "allergens": [
       "gluten",
-      "sesame",
-      "yeast"
+      "sesame"
     ],
     "additives_tags": [],
     "stores": [
@@ -5122,8 +5101,7 @@
     "ingredients": "Organic Whole Wheat Flour, Water, Organic Good Seed Grain and Seed Mix (Organic Whole Flax Seeds, Organic Sunflower Seeds, Organic Brown Sesame Seeds, Organic Blue Poppy Seeds, Organic Black Sesame Seeds, Organic Pumpkin Seeds), Organic Cane Sugar, Organic Wheat Gluten, Organic Oat Fiber, Sea Salt, Yeast.",
     "allergens": [
       "gluten",
-      "sesame",
-      "yeast"
+      "sesame"
     ],
     "additives_tags": [],
     "stores": [
@@ -5142,8 +5120,7 @@
     "ingredients": "Whole Wheat Flour, Water, Sugar, Wheat Gluten, Yeast, Brown Sugar, Contains 2% or Less of: Soybean Oil, Salt, Cultured Wheat Flour, Vinegar, Monoglycerides, Calcium Sulfate, Enzymes, Soy Lecithin.",
     "allergens": [
       "gluten",
-      "soy",
-      "yeast"
+      "soy"
     ],
     "additives_tags": [],
     "stores": [
@@ -5162,8 +5139,7 @@
     "ingredients": "Whole Wheat Flour, Water, Sugar, Wheat Gluten, Yeast, Brown Sugar, Contains 2% or Less of: Soybean Oil, Salt, Cultured Wheat Flour, Vinegar, Monoglycerides, Calcium Sulfate, Enzymes, Soy Lecithin.",
     "allergens": [
       "gluten",
-      "soy",
-      "yeast"
+      "soy"
     ],
     "additives_tags": [],
     "stores": [
@@ -5183,8 +5159,7 @@
     "allergens": [
       "gluten",
       "soy",
-      "corn",
-      "yeast"
+      "corn"
     ],
     "additives_tags": [],
     "stores": [
@@ -5204,8 +5179,7 @@
     "allergens": [
       "gluten",
       "soy",
-      "corn",
-      "yeast"
+      "corn"
     ],
     "additives_tags": [],
     "stores": [
@@ -5224,8 +5198,7 @@
     "ingredients": "Enriched Wheat Flour [Flour, Malted Barley Flour, Reduced Iron, Niacin, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid], Water, Yeast, Farina, Sugar, Salt, Calcium Propionate and Sorbic Acid (To Preserve Freshness), Soybean Oil, Grain Vinegar, Soy Lecithin.",
     "allergens": [
       "gluten",
-      "soy",
-      "yeast"
+      "soy"
     ],
     "additives_tags": [],
     "stores": [
@@ -5244,8 +5217,7 @@
     "ingredients": "Enriched Wheat Flour [Flour, Malted Barley Flour, Reduced Iron, Niacin, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid], Water, Yeast, Farina, Sugar, Salt, Calcium Propionate and Sorbic Acid (To Preserve Freshness), Soybean Oil, Grain Vinegar, Soy Lecithin.",
     "allergens": [
       "gluten",
-      "soy",
-      "yeast"
+      "soy"
     ],
     "additives_tags": [],
     "stores": [
@@ -5264,8 +5236,7 @@
     "ingredients": "Enriched Wheat Flour [Flour, Malted Barley Flour, Reduced Iron, Niacin, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid], Water, Sugar, Wheat Gluten, Yeast, Salt, Cornmeal, Calcium Propionate and Sorbic Acid (To Preserve Freshness), Monoglycerides, Guar Gum, Citric Acid.",
     "allergens": [
       "gluten",
-      "corn",
-      "yeast"
+      "corn"
     ],
     "additives_tags": [],
     "stores": [
@@ -5284,8 +5255,7 @@
     "ingredients": "Enriched Wheat Flour [Flour, Malted Barley Flour, Reduced Iron, Niacin, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid], Water, Sugar, Wheat Gluten, Yeast, Salt, Cornmeal, Calcium Propionate and Sorbic Acid (To Preserve Freshness), Monoglycerides, Guar Gum, Citric Acid.",
     "allergens": [
       "gluten",
-      "corn",
-      "yeast"
+      "corn"
     ],
     "additives_tags": [],
     "stores": [
@@ -5374,8 +5344,7 @@
     "ingredients": "Boneless, Skinless Chicken Breast with Rib Meat, Water, Wheat Flour, Salt, Modified Food Starch, Sodium Phosphates, Spices, Garlic Powder, Onion Powder, Dried Yeast, Sugar, Paprika Extract.",
     "allergens": [
       "gluten",
-      "corn",
-      "yeast"
+      "corn"
     ],
     "additives_tags": [],
     "stores": [
@@ -5394,8 +5363,7 @@
     "ingredients": "Boneless, Skinless Chicken Breast with Rib Meat, Water, Wheat Flour, Salt, Modified Food Starch, Sodium Phosphates, Spices, Garlic Powder, Onion Powder, Dried Yeast, Sugar, Paprika Extract.",
     "allergens": [
       "gluten",
-      "corn",
-      "yeast"
+      "corn"
     ],
     "additives_tags": [],
     "stores": [
@@ -5414,8 +5382,7 @@
     "ingredients": "Chicken Breast Tenderloins, Water, Wheat Flour, Bleached Wheat Flour, Modified Food Starch, Salt, Sodium Phosphates, Spices, Garlic Powder, Onion Powder, Dextrose, Yeast Extract, Paprika Extract.",
     "allergens": [
       "gluten",
-      "corn",
-      "yeast"
+      "corn"
     ],
     "additives_tags": [],
     "stores": [
@@ -5434,8 +5401,7 @@
     "ingredients": "Chicken Breast Tenderloins, Water, Wheat Flour, Bleached Wheat Flour, Modified Food Starch, Salt, Sodium Phosphates, Spices, Garlic Powder, Onion Powder, Dextrose, Yeast Extract, Paprika Extract.",
     "allergens": [
       "gluten",
-      "corn",
-      "yeast"
+      "corn"
     ],
     "additives_tags": [],
     "stores": [
@@ -5573,8 +5539,7 @@
     "allergens": [
       "gluten",
       "dairy",
-      "soy",
-      "yeast"
+      "soy"
     ],
     "additives_tags": [
       "en:e250",
@@ -5598,8 +5563,7 @@
     "allergens": [
       "gluten",
       "dairy",
-      "soy",
-      "yeast"
+      "soy"
     ],
     "additives_tags": [
       "en:e250",
@@ -5620,9 +5584,7 @@
     "brand": "Beyond Meat",
     "upc": "852629004523",
     "ingredients": "Water, Pea Protein, Expeller-Pressed Canola Oil, Refined Coconut Oil, Rice Protein, Natural Flavors, Dried Yeast, Mung Bean Protein, Methylcellulose, Potato Starch, Apple Extract, Pomegranate Extract, Salt, Potassium Chloride, Vinegar, Lemon Juice Concentrate, Sunflower Lecithin, Beet Juice Extract (For Color).",
-    "allergens": [
-      "yeast"
-    ],
+    "allergens": [],
     "additives_tags": [],
     "stores": [
       "Giant Eagle",
@@ -5638,9 +5600,7 @@
     "brand": "Beyond Meat",
     "upc": "852629004523",
     "ingredients": "Water, Pea Protein, Expeller-Pressed Canola Oil, Refined Coconut Oil, Rice Protein, Natural Flavors, Dried Yeast, Mung Bean Protein, Methylcellulose, Potato Starch, Apple Extract, Pomegranate Extract, Salt, Potassium Chloride, Vinegar, Lemon Juice Concentrate, Sunflower Lecithin, Beet Juice Extract (For Color).",
-    "allergens": [
-      "yeast"
-    ],
+    "allergens": [],
     "additives_tags": [],
     "stores": [
       "Giant Eagle",
@@ -5778,8 +5738,7 @@
     "ingredients": "Organic Wheat Flour, Organic Expeller-Pressed Sunflower Oil, Organic Cheddar Cheese (Pasteurized Organic Milk, Cheese Cultures, Salt, Non-Animal Enzymes), Salt, Organic Annatto (For Color), Yeast, Organic Paprika, Cultured Organic Milk, Non-Animal Enzymes.",
     "allergens": [
       "gluten",
-      "dairy",
-      "yeast"
+      "dairy"
     ],
     "additives_tags": [],
     "stores": [
@@ -5798,8 +5757,7 @@
     "ingredients": "Organic Wheat Flour, Organic Expeller-Pressed Sunflower Oil, Organic Cheddar Cheese (Pasteurized Organic Milk, Cheese Cultures, Salt, Non-Animal Enzymes), Salt, Organic Annatto (For Color), Yeast, Organic Paprika, Cultured Organic Milk, Non-Animal Enzymes.",
     "allergens": [
       "gluten",
-      "dairy",
-      "yeast"
+      "dairy"
     ],
     "additives_tags": [],
     "stores": [
@@ -5926,9 +5884,7 @@
     "brand": "Swanson",
     "upc": "051000198427",
     "ingredients": "Chicken Broth (Water, Chicken Stock), Contains Less than 1% of: Salt, Natural Flavoring, Yeast Extract, Carrot Juice Concentrate, Celery Juice Concentrate, Onion Juice Concentrate.",
-    "allergens": [
-      "yeast"
-    ],
+    "allergens": [],
     "additives_tags": [],
     "stores": [
       "Giant Eagle",
@@ -5944,9 +5900,7 @@
     "brand": "Swanson",
     "upc": "051000198427",
     "ingredients": "Chicken Broth (Water, Chicken Stock), Contains Less than 1% of: Salt, Natural Flavoring, Yeast Extract, Carrot Juice Concentrate, Celery Juice Concentrate, Onion Juice Concentrate.",
-    "allergens": [
-      "yeast"
-    ],
+    "allergens": [],
     "additives_tags": [],
     "stores": [
       "Giant Eagle",
@@ -6130,8 +6084,7 @@
       "gluten",
       "dairy",
       "soy",
-      "wheat",
-      "yeast"
+      "wheat"
     ],
     "additives_tags": [
       "en:e476",
@@ -6160,8 +6113,7 @@
       "gluten",
       "dairy",
       "soy",
-      "wheat",
-      "yeast"
+      "wheat"
     ],
     "additives_tags": [
       "en:e476",
@@ -6178,981 +6130,6 @@
       "Target",
       "CVS",
       "Walgreens"
-    ],
-    "isRecalled": false
-  },
-  "071537001839": {
-    "product": "Polar Diet Pink Grapefruit Dry Sparkling Beverage",
-    "brand": "Polar Beverages",
-    "upc": "071537001839",
-    "ingredients": "Carbonated Water, Grapefruit Juice from Concentrate, Citric Acid, Natural Flavor, Potassium Benzoate (Preservative), Aspartame, Acesulfame Potassium, Acacia Gum, Ester Gum, Red 40.",
-    "allergens": [],
-    "additives_tags": [
-      "aspartame",
-      "acesulfame_k",
-      "potassium_benzoate",
-      "red40",
-      "citric_acid"
-    ],
-    "stores": [
-      "Market Basket",
-      "Stop & Shop",
-      "Hannaford",
-      "Big Y",
-      "Shaw's",
-      "Wegmans",
-      "Walmart",
-      "Target"
-    ],
-    "isRecalled": false
-  },
-  "0071537001839": {
-    "product": "Polar Diet Pink Grapefruit Dry Sparkling Beverage",
-    "brand": "Polar Beverages",
-    "upc": "071537001839",
-    "ingredients": "Carbonated Water, Grapefruit Juice from Concentrate, Citric Acid, Natural Flavor, Potassium Benzoate (Preservative), Aspartame, Acesulfame Potassium, Acacia Gum, Ester Gum, Red 40.",
-    "allergens": [],
-    "additives_tags": [
-      "aspartame",
-      "acesulfame_k",
-      "potassium_benzoate",
-      "red40",
-      "citric_acid"
-    ],
-    "stores": [
-      "Market Basket",
-      "Stop & Shop",
-      "Hannaford",
-      "Big Y",
-      "Shaw's",
-      "Wegmans",
-      "Walmart",
-      "Target"
-    ],
-    "isRecalled": false
-  },
-  "71537001839": {
-    "product": "Polar Diet Pink Grapefruit Dry Sparkling Beverage",
-    "brand": "Polar Beverages",
-    "upc": "071537001839",
-    "ingredients": "Carbonated Water, Grapefruit Juice from Concentrate, Citric Acid, Natural Flavor, Potassium Benzoate (Preservative), Aspartame, Acesulfame Potassium, Acacia Gum, Ester Gum, Red 40.",
-    "allergens": [],
-    "additives_tags": [
-      "aspartame",
-      "acesulfame_k",
-      "potassium_benzoate",
-      "red40",
-      "citric_acid"
-    ],
-    "stores": [
-      "Market Basket",
-      "Stop & Shop",
-      "Hannaford",
-      "Big Y",
-      "Shaw's",
-      "Wegmans",
-      "Walmart",
-      "Target"
-    ],
-    "isRecalled": false
-  },
-  "070537001839": {
-    "product": "Polar Diet Pink Grapefruit Dry Sparkling Beverage",
-    "brand": "Polar Beverages",
-    "upc": "071537001839",
-    "ingredients": "Carbonated Water, Grapefruit Juice from Concentrate, Citric Acid, Natural Flavor, Potassium Benzoate (Preservative), Aspartame, Acesulfame Potassium, Acacia Gum, Ester Gum, Red 40.",
-    "allergens": [],
-    "additives_tags": [
-      "aspartame",
-      "acesulfame_k",
-      "potassium_benzoate",
-      "red40",
-      "citric_acid"
-    ],
-    "stores": [
-      "Market Basket",
-      "Stop & Shop",
-      "Hannaford",
-      "Big Y",
-      "Shaw's",
-      "Wegmans",
-      "Walmart",
-      "Target"
-    ],
-    "isRecalled": false
-  },
-  "0070537001839": {
-    "product": "Polar Diet Pink Grapefruit Dry Sparkling Beverage",
-    "brand": "Polar Beverages",
-    "upc": "071537001839",
-    "ingredients": "Carbonated Water, Grapefruit Juice from Concentrate, Citric Acid, Natural Flavor, Potassium Benzoate (Preservative), Aspartame, Acesulfame Potassium, Acacia Gum, Ester Gum, Red 40.",
-    "allergens": [],
-    "additives_tags": [
-      "aspartame",
-      "acesulfame_k",
-      "potassium_benzoate",
-      "red40",
-      "citric_acid"
-    ],
-    "stores": [
-      "Market Basket",
-      "Stop & Shop",
-      "Hannaford",
-      "Big Y",
-      "Shaw's",
-      "Wegmans",
-      "Walmart",
-      "Target"
-    ],
-    "isRecalled": false
-  },
-  "70537001839": {
-    "product": "Polar Diet Pink Grapefruit Dry Sparkling Beverage",
-    "brand": "Polar Beverages",
-    "upc": "071537001839",
-    "ingredients": "Carbonated Water, Grapefruit Juice from Concentrate, Citric Acid, Natural Flavor, Potassium Benzoate (Preservative), Aspartame, Acesulfame Potassium, Acacia Gum, Ester Gum, Red 40.",
-    "allergens": [],
-    "additives_tags": [
-      "aspartame",
-      "acesulfame_k",
-      "potassium_benzoate",
-      "red40",
-      "citric_acid"
-    ],
-    "stores": [
-      "Market Basket",
-      "Stop & Shop",
-      "Hannaford",
-      "Big Y",
-      "Shaw's",
-      "Wegmans",
-      "Walmart",
-      "Target"
-    ],
-    "isRecalled": false
-  },
-  "071537001822": {
-    "product": "Polar Diet Blackberry Mango Dry Sparkling Beverage",
-    "brand": "Polar Beverages",
-    "upc": "071537001822",
-    "ingredients": "Carbonated Water, Blackberry & Mango Juice from Concentrate, Citric Acid, Natural Flavor, Potassium Benzoate (Preservative), Aspartame, Acesulfame Potassium, Red 40, Blue 1.",
-    "allergens": [],
-    "additives_tags": [
-      "aspartame",
-      "acesulfame_k",
-      "potassium_benzoate",
-      "red40",
-      "blue1",
-      "citric_acid"
-    ],
-    "stores": [
-      "Market Basket",
-      "Stop & Shop",
-      "Hannaford",
-      "Wegmans",
-      "Walmart"
-    ],
-    "isRecalled": false
-  },
-  "071537001815": {
-    "product": "Polar Diet Golden Ginger Ale Dry Sparkling Beverage",
-    "brand": "Polar Beverages",
-    "upc": "071537001815",
-    "ingredients": "Carbonated Water, Caramel Color, Citric Acid, Aspartame, Natural Flavors, Potassium Benzoate (Preservative), Acesulfame Potassium.",
-    "allergens": [],
-    "additives_tags": [
-      "aspartame",
-      "acesulfame_k",
-      "potassium_benzoate",
-      "caramel_color",
-      "citric_acid"
-    ],
-    "stores": [
-      "Market Basket",
-      "Stop & Shop",
-      "Hannaford",
-      "Wegmans",
-      "Walmart"
-    ],
-    "isRecalled": false
-  },
-  "071537001808": {
-    "product": "Polar Diet Lemon Dry Sparkling Beverage",
-    "brand": "Polar Beverages",
-    "upc": "071537001808",
-    "ingredients": "Carbonated Water, Lemon Juice from Concentrate, Citric Acid, Natural Flavor, Potassium Benzoate (Preservative), Aspartame, Acesulfame Potassium, Acacia Gum, Ester Gum, Yellow 5.",
-    "allergens": [],
-    "additives_tags": [
-      "aspartame",
-      "acesulfame_k",
-      "potassium_benzoate",
-      "yellow5",
-      "citric_acid"
-    ],
-    "stores": [
-      "Market Basket",
-      "Stop & Shop",
-      "Hannaford",
-      "Wegmans",
-      "Walmart"
-    ],
-    "isRecalled": false
-  },
-  "071537000184": {
-    "product": "Polar 100% Natural Seltzer - Black Cherry",
-    "brand": "Polar Beverages",
-    "upc": "071537000184",
-    "ingredients": "Carbonated Water, Natural Flavors.",
-    "allergens": [],
-    "additives_tags": [],
-    "stores": [
-      "Market Basket",
-      "Stop & Shop",
-      "Hannaford",
-      "Wegmans",
-      "Walmart",
-      "Target"
-    ],
-    "isRecalled": false
-  },
-  "071537000191": {
-    "product": "Polar 100% Natural Seltzer - Ruby Red Grapefruit",
-    "brand": "Polar Beverages",
-    "upc": "071537000191",
-    "ingredients": "Carbonated Water, Natural Flavors.",
-    "allergens": [],
-    "additives_tags": [],
-    "stores": [
-      "Market Basket",
-      "Stop & Shop",
-      "Hannaford",
-      "Wegmans",
-      "Walmart",
-      "Target"
-    ],
-    "isRecalled": false
-  },
-  "071537000030": {
-    "product": "Polar 100% Natural Seltzer - Lemon",
-    "brand": "Polar Beverages",
-    "upc": "071537000030",
-    "ingredients": "Carbonated Water, Natural Flavors.",
-    "allergens": [],
-    "additives_tags": [],
-    "stores": [
-      "Market Basket",
-      "Stop & Shop",
-      "Hannaford",
-      "Wegmans",
-      "Walmart",
-      "Target"
-    ],
-    "isRecalled": false
-  },
-  "071537000054": {
-    "product": "Polar 100% Natural Seltzer - Lime",
-    "brand": "Polar Beverages",
-    "upc": "071537000054",
-    "ingredients": "Carbonated Water, Natural Flavors.",
-    "allergens": [],
-    "additives_tags": [],
-    "stores": [
-      "Market Basket",
-      "Stop & Shop",
-      "Hannaford",
-      "Wegmans",
-      "Walmart",
-      "Target"
-    ],
-    "isRecalled": false
-  },
-  "072250011242": {
-    "product": "Wonder Classic White Bread (20 oz Loaf)",
-    "brand": "Wonder Bread",
-    "upc": "072250011242",
-    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Wheat Gluten, Dough Conditioners (Monoglycerides, Sodium Stearoyl Lactylate, Ascorbic Acid, Calcium Peroxide), Monocalcium Phosphate, Calcium Sulfate, Ammonium Sulfate, Soy Lecithin, Calcium Propionate (Preservative).",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Meijer",
-      "Publix",
-      "HEB"
-    ],
-    "isRecalled": false
-  },
-  "0072250011242": {
-    "product": "Wonder Classic White Bread (20 oz Loaf)",
-    "brand": "Wonder Bread",
-    "upc": "072250011242",
-    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Wheat Gluten, Dough Conditioners (Monoglycerides, Sodium Stearoyl Lactylate, Ascorbic Acid, Calcium Peroxide), Monocalcium Phosphate, Calcium Sulfate, Ammonium Sulfate, Soy Lecithin, Calcium Propionate (Preservative).",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Meijer",
-      "Publix",
-      "HEB"
-    ],
-    "isRecalled": false
-  },
-  "072945601360": {
-    "product": "Sara Lee Classic White Bread (20 oz Loaf)",
-    "brand": "Sara Lee",
-    "upc": "072945601360",
-    "ingredients": "Enriched Wheat Flour [Flour, Malted Barley Flour, Reduced Iron, Niacin, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid], Water, Sugar, Yeast, Soybean Oil, Salt, Wheat Gluten, Preservatives (Calcium Propionate, Sorbic Acid), Monoglycerides, DATEM, Monocalcium Phosphate, Calcium Sulfate, Soy Lecithin, Citric Acid, Grain Vinegar, Potassium Iodate.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Meijer",
-      "Publix",
-      "Food Lion"
-    ],
-    "isRecalled": false
-  },
-  "0072945601360": {
-    "product": "Sara Lee Classic White Bread (20 oz Loaf)",
-    "brand": "Sara Lee",
-    "upc": "072945601360",
-    "ingredients": "Enriched Wheat Flour [Flour, Malted Barley Flour, Reduced Iron, Niacin, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid], Water, Sugar, Yeast, Soybean Oil, Salt, Wheat Gluten, Preservatives (Calcium Propionate, Sorbic Acid), Monoglycerides, DATEM, Monocalcium Phosphate, Calcium Sulfate, Soy Lecithin, Citric Acid, Grain Vinegar, Potassium Iodate.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Meijer",
-      "Publix",
-      "Food Lion"
-    ],
-    "isRecalled": false
-  },
-  "072250009249": {
-    "product": "Nature's Own Butterbread Enriched White Bread (20 oz Loaf)",
-    "brand": "Nature's Own",
-    "upc": "072250009249",
-    "ingredients": "Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Sugar, Yeast, Butter (Cream, Salt), Contains 2% or Less of: Salt, Wheat Gluten, Cultured Wheat Flour, Vinegar, Soybean Oil, Monoglycerides, DATEM, Calcium Sulfate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "dairy",
-      "soy",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Publix",
-      "HEB",
-      "Harris Teeter"
-    ],
-    "isRecalled": false
-  },
-  "0072250009249": {
-    "product": "Nature's Own Butterbread Enriched White Bread (20 oz Loaf)",
-    "brand": "Nature's Own",
-    "upc": "072250009249",
-    "ingredients": "Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Sugar, Yeast, Butter (Cream, Salt), Contains 2% or Less of: Salt, Wheat Gluten, Cultured Wheat Flour, Vinegar, Soybean Oil, Monoglycerides, DATEM, Calcium Sulfate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "dairy",
-      "soy",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Publix",
-      "HEB",
-      "Harris Teeter"
-    ],
-    "isRecalled": false
-  },
-  "078742053362": {
-    "product": "Great Value White Sandwich Bread (20 oz Loaf)",
-    "brand": "Great Value",
-    "upc": "078742053362",
-    "ingredients": "Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Calcium Propionate (Preservative), Monoglycerides, DATEM, Calcium Sulfate, Wheat Gluten, Monocalcium Phosphate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Walmart"
-    ],
-    "isRecalled": false
-  },
-  "0078742053362": {
-    "product": "Great Value White Sandwich Bread (20 oz Loaf)",
-    "brand": "Great Value",
-    "upc": "078742053362",
-    "ingredients": "Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Calcium Propionate (Preservative), Monoglycerides, DATEM, Calcium Sulfate, Wheat Gluten, Monocalcium Phosphate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Walmart"
-    ],
-    "isRecalled": false
-  },
-  "011110862081": {
-    "product": "Kroger Enriched White Sandwich Bread (20 oz Loaf)",
-    "brand": "Kroger",
-    "upc": "011110862081",
-    "ingredients": "Enriched Wheat Flour (Flour, Malted Barley Flour, Reduced Iron, Niacin, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Calcium Propionate (Preservative), Monoglycerides, DATEM, Wheat Gluten, Calcium Sulfate, Monocalcium Phosphate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Kroger",
-      "Dillons",
-      "Frys",
-      "Fred Meyer",
-      "Ralphs"
-    ],
-    "isRecalled": false
-  },
-  "0011110862081": {
-    "product": "Kroger Enriched White Sandwich Bread (20 oz Loaf)",
-    "brand": "Kroger",
-    "upc": "011110862081",
-    "ingredients": "Enriched Wheat Flour (Flour, Malted Barley Flour, Reduced Iron, Niacin, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Calcium Propionate (Preservative), Monoglycerides, DATEM, Wheat Gluten, Calcium Sulfate, Monocalcium Phosphate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Kroger",
-      "Dillons",
-      "Frys",
-      "Fred Meyer",
-      "Ralphs"
-    ],
-    "isRecalled": false
-  },
-  "072250011389": {
-    "product": "Bimbo Large White Sandwich Bread (20 oz Loaf)",
-    "brand": "Bimbo",
-    "upc": "072250011389",
-    "ingredients": "Enriched Wheat Flour, Water, High Fructose Corn Syrup, Yeast, Vegetable Oil (Soybean and/or Palm Oil), Salt, Wheat Gluten, Monoglycerides, Calcium Propionate (Preservative), DATEM, Calcium Sulfate, Monocalcium Phosphate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "HEB",
-      "Publix"
-    ],
-    "isRecalled": false
-  },
-  "0072250011389": {
-    "product": "Bimbo Large White Sandwich Bread (20 oz Loaf)",
-    "brand": "Bimbo",
-    "upc": "072250011389",
-    "ingredients": "Enriched Wheat Flour, Water, High Fructose Corn Syrup, Yeast, Vegetable Oil (Soybean and/or Palm Oil), Salt, Wheat Gluten, Monoglycerides, Calcium Propionate (Preservative), DATEM, Calcium Sulfate, Monocalcium Phosphate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "HEB",
-      "Publix"
-    ],
-    "isRecalled": false
-  },
-  "071306001016": {
-    "product": "Sunbeam Giant Enriched White Bread (24 oz Loaf)",
-    "brand": "Sunbeam",
-    "upc": "071306001016",
-    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Wheat Gluten, Monocalcium Phosphate, Monoglycerides, Calcium Sulfate, Calcium Propionate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Food Lion",
-      "Ingles"
-    ],
-    "isRecalled": false
-  },
-  "0071306001016": {
-    "product": "Sunbeam Giant Enriched White Bread (24 oz Loaf)",
-    "brand": "Sunbeam",
-    "upc": "071306001016",
-    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Wheat Gluten, Monocalcium Phosphate, Monoglycerides, Calcium Sulfate, Calcium Propionate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Food Lion",
-      "Ingles"
-    ],
-    "isRecalled": false
-  },
-  "014100070528": {
-    "product": "Pepperidge Farm Farmhouse Hearty White Bread (24 oz Loaf)",
-    "brand": "Pepperidge Farm",
-    "upc": "014100070528",
-    "ingredients": "Enriched Wheat Flour (Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid), Water, Sugar, Yeast, Soybean Oil, Contains 2% or Less of: Salt, Wheat Gluten, Monoglycerides, Calcium Propionate and Sorbic Acid to Extend Freshness, DATEM, Butter (Cream, Salt), Nonfat Milk, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "dairy",
-      "soy",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Giant Eagle",
-      "Publix",
-      "Stop & Shop"
-    ],
-    "isRecalled": false
-  },
-  "0014100070528": {
-    "product": "Pepperidge Farm Farmhouse Hearty White Bread (24 oz Loaf)",
-    "brand": "Pepperidge Farm",
-    "upc": "014100070528",
-    "ingredients": "Enriched Wheat Flour (Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid), Water, Sugar, Yeast, Soybean Oil, Contains 2% or Less of: Salt, Wheat Gluten, Monoglycerides, Calcium Propionate and Sorbic Acid to Extend Freshness, DATEM, Butter (Cream, Salt), Nonfat Milk, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "dairy",
-      "soy",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Giant Eagle",
-      "Publix",
-      "Stop & Shop"
-    ],
-    "isRecalled": false
-  },
-  "073410013554": {
-    "product": "Arnold Country White Bread (24 oz Loaf)",
-    "brand": "Arnold",
-    "upc": "073410013554",
-    "ingredients": "Enriched Wheat Flour [Flour, Malted Barley Flour, Reduced Iron, Niacin, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid], Water, Sugar, Yeast, Soybean Oil, Salt, Wheat Gluten, Preservatives (Calcium Propionate, Sorbic Acid), Monoglycerides, DATEM, Monocalcium Phosphate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Giant Eagle",
-      "Stop & Shop",
-      "ShopRite"
-    ],
-    "isRecalled": false
-  },
-  "0073410013554": {
-    "product": "Arnold Country White Bread (24 oz Loaf)",
-    "brand": "Arnold",
-    "upc": "073410013554",
-    "ingredients": "Enriched Wheat Flour [Flour, Malted Barley Flour, Reduced Iron, Niacin, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid], Water, Sugar, Yeast, Soybean Oil, Salt, Wheat Gluten, Preservatives (Calcium Propionate, Sorbic Acid), Monoglycerides, DATEM, Monocalcium Phosphate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "yeast"
-    ],
-    "additives_tags": [],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Giant Eagle",
-      "Stop & Shop",
-      "ShopRite"
-    ],
-    "isRecalled": false
-  },
-  "072250011372": {
-    "product": "Wonder Classic White Bread (24 oz Loaf)",
-    "brand": "Wonder Bread",
-    "upc": "072250011372",
-    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Wheat Gluten, Dough Conditioners (Monoglycerides, Sodium Stearoyl Lactylate, Ascorbic Acid, Calcium Peroxide), Monocalcium Phosphate, Calcium Sulfate, Ammonium Sulfate, Soy Lecithin, Calcium Propionate (Preservative).",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [
-      "en:e282",
-      "en:e300",
-      "en:e341",
-      "en:e471",
-      "en:e481",
-      "en:e516",
-      "en:e517"
-    ],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Meijer",
-      "Publix",
-      "HEB"
-    ],
-    "isRecalled": false
-  },
-  "0072250011372": {
-    "product": "Wonder Classic White Bread (24 oz Loaf)",
-    "brand": "Wonder Bread",
-    "upc": "072250011372",
-    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Wheat Gluten, Dough Conditioners (Monoglycerides, Sodium Stearoyl Lactylate, Ascorbic Acid, Calcium Peroxide), Monocalcium Phosphate, Calcium Sulfate, Ammonium Sulfate, Soy Lecithin, Calcium Propionate (Preservative).",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [
-      "en:e282",
-      "en:e300",
-      "en:e341",
-      "en:e471",
-      "en:e481",
-      "en:e516",
-      "en:e517"
-    ],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Meijer",
-      "Publix",
-      "HEB"
-    ],
-    "isRecalled": false
-  },
-  "072250011402": {
-    "product": "Wonder Classic White Bread (16 oz Loaf)",
-    "brand": "Wonder Bread",
-    "upc": "072250011402",
-    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Wheat Gluten, Dough Conditioners (Monoglycerides, Sodium Stearoyl Lactylate, Ascorbic Acid, Calcium Peroxide), Monocalcium Phosphate, Calcium Sulfate, Ammonium Sulfate, Soy Lecithin, Calcium Propionate (Preservative).",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [
-      "en:e282",
-      "en:e300",
-      "en:e341",
-      "en:e471",
-      "en:e481",
-      "en:e516",
-      "en:e517"
-    ],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Meijer",
-      "Publix",
-      "HEB"
-    ],
-    "isRecalled": false
-  },
-  "0072250011402": {
-    "product": "Wonder Classic White Bread (16 oz Loaf)",
-    "brand": "Wonder Bread",
-    "upc": "072250011402",
-    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Wheat Gluten, Dough Conditioners (Monoglycerides, Sodium Stearoyl Lactylate, Ascorbic Acid, Calcium Peroxide), Monocalcium Phosphate, Calcium Sulfate, Ammonium Sulfate, Soy Lecithin, Calcium Propionate (Preservative).",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [
-      "en:e282",
-      "en:e300",
-      "en:e341",
-      "en:e471",
-      "en:e481",
-      "en:e516",
-      "en:e517"
-    ],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Meijer",
-      "Publix",
-      "HEB"
-    ],
-    "isRecalled": false
-  },
-  "072250011167": {
-    "product": "Wonder Round Top White Bread (20 oz Loaf)",
-    "brand": "Wonder Bread",
-    "upc": "072250011167",
-    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Wheat Gluten, Dough Conditioners, Monocalcium Phosphate, Calcium Sulfate, Soy Lecithin, Calcium Propionate (Preservative).",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [
-      "en:e282",
-      "en:e341",
-      "en:e516"
-    ],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Meijer",
-      "Publix"
-    ],
-    "isRecalled": false
-  },
-  "0072250011167": {
-    "product": "Wonder Round Top White Bread (20 oz Loaf)",
-    "brand": "Wonder Bread",
-    "upc": "072250011167",
-    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Wheat Gluten, Dough Conditioners, Monocalcium Phosphate, Calcium Sulfate, Soy Lecithin, Calcium Propionate (Preservative).",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [
-      "en:e282",
-      "en:e341",
-      "en:e516"
-    ],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Meijer",
-      "Publix"
-    ],
-    "isRecalled": false
-  },
-  "072250011204": {
-    "product": "Wonder Classic Hamburger Buns (8 ct 15 oz Pack)",
-    "brand": "Wonder Bread",
-    "upc": "072250011204",
-    "ingredients": "Enriched Wheat Flour (Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Contains 2% or Less of: Salt, Wheat Gluten, Dough Conditioners, Calcium Propionate, Monocalcium Phosphate, Calcium Sulfate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [
-      "en:e282",
-      "en:e341",
-      "en:e516"
-    ],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Meijer",
-      "Publix"
-    ],
-    "isRecalled": false
-  },
-  "0072250011204": {
-    "product": "Wonder Classic Hamburger Buns (8 ct 15 oz Pack)",
-    "brand": "Wonder Bread",
-    "upc": "072250011204",
-    "ingredients": "Enriched Wheat Flour (Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Contains 2% or Less of: Salt, Wheat Gluten, Dough Conditioners, Calcium Propionate, Monocalcium Phosphate, Calcium Sulfate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [
-      "en:e282",
-      "en:e341",
-      "en:e516"
-    ],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Meijer",
-      "Publix"
-    ],
-    "isRecalled": false
-  },
-  "072250011211": {
-    "product": "Wonder Classic Hot Dog Buns (8 ct 13 oz Pack)",
-    "brand": "Wonder Bread",
-    "upc": "072250011211",
-    "ingredients": "Enriched Wheat Flour (Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Contains 2% or Less of: Salt, Wheat Gluten, Dough Conditioners, Calcium Propionate, Monocalcium Phosphate, Calcium Sulfate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [
-      "en:e282",
-      "en:e341",
-      "en:e516"
-    ],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Meijer",
-      "Publix"
-    ],
-    "isRecalled": false
-  },
-  "0072250011211": {
-    "product": "Wonder Classic Hot Dog Buns (8 ct 13 oz Pack)",
-    "brand": "Wonder Bread",
-    "upc": "072250011211",
-    "ingredients": "Enriched Wheat Flour (Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Contains 2% or Less of: Salt, Wheat Gluten, Dough Conditioners, Calcium Propionate, Monocalcium Phosphate, Calcium Sulfate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [
-      "en:e282",
-      "en:e341",
-      "en:e516"
-    ],
-    "stores": [
-      "Walmart",
-      "Target",
-      "Kroger",
-      "Meijer",
-      "Publix"
-    ],
-    "isRecalled": false
-  },
-  "078742230862": {
-    "product": "Great Value White Sandwich Bread (Twin Pack 40 oz)",
-    "brand": "Great Value",
-    "upc": "078742230862",
-    "ingredients": "Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Calcium Propionate (Preservative), Monoglycerides, DATEM, Calcium Sulfate, Wheat Gluten, Monocalcium Phosphate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [
-      "en:e282",
-      "en:e341",
-      "en:e471",
-      "en:e472e",
-      "en:e516"
-    ],
-    "stores": [
-      "Walmart"
-    ],
-    "isRecalled": false
-  },
-  "0078742230862": {
-    "product": "Great Value White Sandwich Bread (Twin Pack 40 oz)",
-    "brand": "Great Value",
-    "upc": "078742230862",
-    "ingredients": "Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Calcium Propionate (Preservative), Monoglycerides, DATEM, Calcium Sulfate, Wheat Gluten, Monocalcium Phosphate, Soy Lecithin.",
-    "allergens": [
-      "gluten",
-      "soy",
-      "corn",
-      "yeast"
-    ],
-    "additives_tags": [
-      "en:e282",
-      "en:e341",
-      "en:e471",
-      "en:e472e",
-      "en:e516"
-    ],
-    "stores": [
-      "Walmart"
     ],
     "isRecalled": false
   }
