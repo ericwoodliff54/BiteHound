@@ -94,6 +94,121 @@
     button, label, input, select {
       touch-action: manipulation;
     }
+      /* ==========================================
+       HIGH-CONTRAST LIGHT THEME (SUPERMARKET STORE AISLE VISIBILITY)
+       ========================================== */
+    html.theme-light body {
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+
+    html.theme-light header {
+      background: rgba(255, 255, 255, 0.94);
+      border-color: #cbd5e1;
+      color: #0f172a;
+    }
+
+    html.theme-light header h1 {
+      color: #0f172a !important;
+    }
+
+    html.theme-light nav {
+      background: rgba(255, 255, 255, 0.94) !important;
+      border-color: #cbd5e1 !important;
+    }
+
+    html.theme-light .nav-tab {
+      color: #64748b;
+    }
+
+    html.theme-light .nav-tab.active-tab {
+      background: #0f172a !important;
+      color: #ffffff !important;
+      border-color: #0f172a !important;
+    }
+
+    html.theme-light section,
+    html.theme-light #scannerSection,
+    html.theme-light #manualPanel,
+    html.theme-light #allergensPanel,
+    html.theme-light #bulletinsPanel,
+    html.theme-light #customizePanel {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+      color: #0f172a;
+    }
+
+    html.theme-light h1,
+    html.theme-light h2,
+    html.theme-light h3,
+    html.theme-light h4 {
+      color: #0f172a !important;
+    }
+
+    html.theme-light p,
+    html.theme-light span.text-slate-400,
+    html.theme-light span.text-slate-500 {
+      color: #64748b;
+    }
+
+    html.theme-light .bg-slate-950,
+    html.theme-light .bg-slate-900,
+    html.theme-light .bg-slate-900\/90,
+    html.theme-light .bg-slate-950\/80,
+    html.theme-light .bg-slate-950\/90 {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+
+    html.theme-light input,
+    html.theme-light select {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+
+    html.theme-light input::placeholder {
+      color: #94a3b8 !important;
+    }
+
+    /* Modal Sheets in Light Mode */
+    html.theme-light #plusPaywallModal > div > div,
+    html.theme-light #addProfileModal > div > div,
+    html.theme-light #safetyDisclaimerModal > div > div,
+    html.theme-light #installHelpModal > div > div {
+      background: #ffffff !important;
+      color: #0f172a !important;
+      border-color: #cbd5e1 !important;
+    }
+
+    /* Family Profile Pills in Light Mode */
+    html.theme-light .family-profile-pill:not(.bg-gradient-to-r) {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+
+    html.theme-light .family-profile-pill:not(.bg-gradient-to-r) span {
+      color: #0f172a !important;
+    }
+
+    /* Allergen Toggle Checkbox Buttons */
+    html.theme-light .allergen-toggle-btn {
+      background: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+
+    html.theme-light .allergen-toggle-btn span {
+      color: #0f172a !important;
+    }
+
+    html.theme-light #themeSegmentedControl {
+      background: #e2e8f0 !important;
+      border-color: #cbd5e1 !important;
+    }
+
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
@@ -1171,6 +1286,49 @@
         </h2>
         <p class="text-xs text-slate-400 mt-0.5">Control audio alerts, haptic feedback, subscription tiers, and offline updates.</p>
       </div>
+
+      <!-- APPEARANCE / THEME SWITCHER (System | Light | Dark) -->
+      <div class="space-y-2 text-xs">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+              <span>Appearance</span>
+            </h3>
+            <p class="text-[11px] text-slate-400 mt-0.5">Choose light mode for bright store aisles, or dark mode for night</p>
+          </div>
+        </div>
+
+        <div class="p-1 rounded-2xl bg-slate-950 border border-slate-800 flex items-center gap-1 shadow-inner" id="themeSegmentedControl">
+          <button 
+            type="button" 
+            class="theme-toggle-btn flex-1 py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 active:scale-95" 
+            data-theme="system"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>System</span>
+          </button>
+
+          <button 
+            type="button" 
+            class="theme-toggle-btn flex-1 py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 active:scale-95" 
+            data-theme="light"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            <span>Light</span>
+          </button>
+
+          <button 
+            type="button" 
+            class="theme-toggle-btn flex-1 py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 active:scale-95" 
+            data-theme="dark"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+            <span>Dark</span>
+          </button>
+        </div>
+      </div>
+
 
       <!-- BITEHOUND PRO MEMBERSHIP SETTINGS -->
       <div class="p-3.5 rounded-xl bg-gradient-to-br from-amber-950/40 via-slate-900 to-slate-950 border border-amber-500/40 shadow-lg space-y-2.5">
@@ -7109,7 +7267,84 @@
     }
 
     // Settings Logic
+        // 3-Way Appearance / Theme Engine (System Default | Light | Dark)
+    let currentThemeMode = 'system';
+
+    function applyTheme(mode, notify = false) {
+      currentThemeMode = mode;
+      try {
+        localStorage.setItem('bitehound_theme', mode);
+      } catch (e) {}
+
+      const root = document.documentElement;
+      const isDarkSys = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+      let effectiveDark = true;
+      if (mode === 'light') {
+        effectiveDark = false;
+      } else if (mode === 'dark') {
+        effectiveDark = true;
+      } else {
+        effectiveDark = isDarkSys;
+      }
+
+      if (effectiveDark) {
+        root.classList.remove('theme-light');
+        root.classList.add('theme-dark');
+      } else {
+        root.classList.remove('theme-dark');
+        root.classList.add('theme-light');
+      }
+
+      const themeMeta = document.querySelector('meta[name="theme-color"]');
+      if (themeMeta) {
+        themeMeta.setAttribute('content', effectiveDark ? '#0b0f19' : '#ffffff');
+      }
+
+      renderThemeControls();
+
+      if (notify) {
+        sound.playScanBeep();
+        triggerHaptic([30]);
+        const labels = { system: 'System Auto', light: 'Light Theme', dark: 'Dark Theme' };
+        showCustomizeToast(`Appearance: ${labels[mode]}`);
+      }
+    }
+
+    function renderThemeControls() {
+      const container = document.getElementById('themeSegmentedControl');
+      if (!container) return;
+
+      container.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+        const t = btn.getAttribute('data-theme');
+        const isActive = (t === currentThemeMode);
+        if (isActive) {
+          btn.className = "theme-toggle-btn flex-1 py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 bg-amber-500 text-slate-950 shadow-md shadow-amber-950/30";
+        } else {
+          btn.className = "theme-toggle-btn flex-1 py-2 px-3 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1.5 text-slate-400 hover:text-slate-200";
+        }
+      });
+    }
+
+    function initTheme() {
+      let saved = null;
+      try {
+        saved = localStorage.getItem('bitehound_theme');
+      } catch (e) {}
+      if (!saved || !['system', 'light', 'dark'].includes(saved)) {
+        saved = 'system';
+      }
+      applyTheme(saved, false);
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (currentThemeMode === 'system') {
+          applyTheme('system', false);
+        }
+      });
+    }
+
     function renderCustomizeTab() {
+      renderThemeControls();
       prefSoundBtn.textContent = sound.enabled ? 'Enabled' : 'Muted';
       prefSoundBtn.className = sound.enabled 
         ? 'min-h-[40px] px-3.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold active:scale-95'
@@ -7883,6 +8118,15 @@
       if (navigator.onLine) {
         syncStoreReadyRecalls(false);
     initStaplesCatalog();
+    initTheme();
+
+    document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const selected = btn.getAttribute('data-theme');
+        if (selected) applyTheme(selected, true);
+      });
+    });
+
       }
     }
     window.addEventListener('online', updateOnlineStatus);
@@ -8012,6 +8256,15 @@
     updateSyncUI();
     syncStoreReadyRecalls(false);
     initStaplesCatalog();
+    initTheme();
+
+    document.querySelectorAll('.theme-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const selected = btn.getAttribute('data-theme');
+        if (selected) applyTheme(selected, true);
+      });
+    });
+
 
     // If page was just opened via VIP link, display celebratory confirmation toast
     if (justUnlockedViaUrl) {
