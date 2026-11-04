@@ -134,76 +134,82 @@
     "isRecalled": false
   },
   "051500255377": {
-    "product": "Jif Extra Crunchy Peanut Butter",
-    "brand": "Jif",
+    "product": "Jif Extra Crunchy Peanut Butter (16 oz)",
+    "brand": "Jif / Smucker's",
     "upc": "051500255377",
-    "ingredients": "Roasted Peanuts, Sugar, Contains 2% or Less of: Molasses, Fully Hydrogenated Vegetable Oils (Rapeseed and Soybean), Mono and Diglycerides, Salt.",
+    "ingredients": "Made from Roasted Peanuts and Sugar, Contains 2% or Less of: Molasses, Fully Hydrogenated Vegetable Oils (Rapeseed and Soybean), Mono and Diglycerides, Salt.",
     "allergens": [
       "peanuts",
       "soy"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e471"
+    ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "0051500255377": {
-    "product": "Jif Extra Crunchy Peanut Butter",
-    "brand": "Jif",
+    "product": "Jif Extra Crunchy Peanut Butter (16 oz)",
+    "brand": "Jif / Smucker's",
     "upc": "051500255377",
-    "ingredients": "Roasted Peanuts, Sugar, Contains 2% or Less of: Molasses, Fully Hydrogenated Vegetable Oils (Rapeseed and Soybean), Mono and Diglycerides, Salt.",
+    "ingredients": "Made from Roasted Peanuts and Sugar, Contains 2% or Less of: Molasses, Fully Hydrogenated Vegetable Oils (Rapeseed and Soybean), Mono and Diglycerides, Salt.",
     "allergens": [
       "peanuts",
       "soy"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e471"
+    ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "037600110753": {
     "product": "Skippy Creamy Peanut Butter (16.3 oz)",
-    "brand": "Skippy",
+    "brand": "Skippy / Hormel",
     "upc": "037600110753",
-    "ingredients": "Roasted Peanuts, Sugar, Hydrogenated Vegetable Oil (Cottonseed, Soybean and Rapeseed Oil) to Prevent Separation, Salt.",
+    "ingredients": "Roasted Peanuts, Sugar, Hydrogenated Vegetable Oil (Cottonseed, Soybean and Rapeseed Oil) To Prevent Separation, Salt.",
     "allergens": [
       "peanuts",
       "soy"
     ],
     "additives_tags": [],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
       "Target",
-      "Giant Eagle"
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "0037600110753": {
     "product": "Skippy Creamy Peanut Butter (16.3 oz)",
-    "brand": "Skippy",
+    "brand": "Skippy / Hormel",
     "upc": "037600110753",
-    "ingredients": "Roasted Peanuts, Sugar, Hydrogenated Vegetable Oil (Cottonseed, Soybean and Rapeseed Oil) to Prevent Separation, Salt.",
+    "ingredients": "Roasted Peanuts, Sugar, Hydrogenated Vegetable Oil (Cottonseed, Soybean and Rapeseed Oil) To Prevent Separation, Salt.",
     "allergens": [
       "peanuts",
       "soy"
     ],
     "additives_tags": [],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
       "Target",
-      "Giant Eagle"
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
@@ -1000,110 +1006,132 @@
     "isRecalled": false
   },
   "016000275270": {
-    "product": "Cheerios Gluten Free Whole Grain Toasted Oat Cereal",
-    "brand": "General Mills",
+    "product": "Cheerios Original Gluten Free Toasted Whole Grain Oat Cereal (8.9 oz)",
+    "brand": "Cheerios / General Mills",
     "upc": "016000275270",
-    "ingredients": "Whole Grain Oats, Corn Starch, Sugar, Salt, Tripotassium Phosphate, Vitamin E (mixed tocopherols) Added to Preserve Freshness.",
+    "ingredients": "Whole Grain Oats, Corn Starch, Sugar, Salt, Tripotassium Phosphate, Vitamin E (Mixed Tocopherols) Added to Preserve Freshness.",
     "allergens": [
       "corn"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e340"
+    ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
       "Target",
-      "Giant Eagle"
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "0016000275270": {
-    "product": "Cheerios Gluten Free Whole Grain Toasted Oat Cereal",
-    "brand": "General Mills",
+    "product": "Cheerios Original Gluten Free Toasted Whole Grain Oat Cereal (8.9 oz)",
+    "brand": "Cheerios / General Mills",
     "upc": "016000275270",
-    "ingredients": "Whole Grain Oats, Corn Starch, Sugar, Salt, Tripotassium Phosphate, Vitamin E (mixed tocopherols) Added to Preserve Freshness.",
+    "ingredients": "Whole Grain Oats, Corn Starch, Sugar, Salt, Tripotassium Phosphate, Vitamin E (Mixed Tocopherols) Added to Preserve Freshness.",
     "allergens": [
       "corn"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e340"
+    ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
       "Target",
-      "Giant Eagle"
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "016000275287": {
-    "product": "Honey Nut Cheerios Cereal",
-    "brand": "General Mills",
+    "product": "Honey Nut Cheerios Cereal (10.8 oz)",
+    "brand": "Honey Nut Cheerios / General Mills",
     "upc": "016000275287",
-    "ingredients": "Whole Grain Oats, Sugar, Corn Starch, Honey, Brown Sugar Syrup, Salt, Tripotassium Phosphate, Canola and/or Sunflower Oil, Natural Almond Flavor.",
+    "ingredients": "Whole Grain Oats, Sugar, Corn Starch, Honey, Brown Sugar Syrup, Salt, Tripotassium Phosphate, Canola and/or Sunflower Oil, Natural Almond Flavor, Vitamin E.",
     "allergens": [
       "treenuts",
       "corn"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e340"
+    ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "0016000275287": {
-    "product": "Honey Nut Cheerios Cereal",
-    "brand": "General Mills",
+    "product": "Honey Nut Cheerios Cereal (10.8 oz)",
+    "brand": "Honey Nut Cheerios / General Mills",
     "upc": "016000275287",
-    "ingredients": "Whole Grain Oats, Sugar, Corn Starch, Honey, Brown Sugar Syrup, Salt, Tripotassium Phosphate, Canola and/or Sunflower Oil, Natural Almond Flavor.",
+    "ingredients": "Whole Grain Oats, Sugar, Corn Starch, Honey, Brown Sugar Syrup, Salt, Tripotassium Phosphate, Canola and/or Sunflower Oil, Natural Almond Flavor, Vitamin E.",
     "allergens": [
       "treenuts",
       "corn"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e340"
+    ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "016000275645": {
-    "product": "Cinnamon Toast Crunch Cereal",
+    "product": "Cinnamon Toast Crunch Whole Grain Cereal (12 oz)",
     "brand": "General Mills",
     "upc": "016000275645",
     "ingredients": "Whole Grain Wheat, Sugar, Rice Flour, Canola and/or Sunflower Oil, Fructose, Maltodextrin, Dextrose, Salt, Cinnamon, Caramel Color, Soy Lecithin, Trisodium Phosphate.",
     "allergens": [
       "gluten",
-      "soy"
+      "soy",
+      "corn"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e150d",
+      "en:e322",
+      "en:e339"
+    ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "0016000275645": {
-    "product": "Cinnamon Toast Crunch Cereal",
+    "product": "Cinnamon Toast Crunch Whole Grain Cereal (12 oz)",
     "brand": "General Mills",
     "upc": "016000275645",
     "ingredients": "Whole Grain Wheat, Sugar, Rice Flour, Canola and/or Sunflower Oil, Fructose, Maltodextrin, Dextrose, Salt, Cinnamon, Caramel Color, Soy Lecithin, Trisodium Phosphate.",
     "allergens": [
       "gluten",
-      "soy"
+      "soy",
+      "corn"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e150d",
+      "en:e322",
+      "en:e339"
+    ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
@@ -1350,44 +1378,48 @@
     "isRecalled": false
   },
   "014100085485": {
-    "product": "Pepperidge Farm Goldfish Cheddar Crackers",
+    "product": "Pepperidge Farm Goldfish Cheddar Baked Snack Crackers (6.6 oz)",
     "brand": "Pepperidge Farm",
     "upc": "014100085485",
-    "ingredients": "Enriched Wheat Flour, Cheddar Cheese (Cultured Milk, Salt, Enzymes, Annatto), Vegetable Oils (Canola, Sunflower and/or Soybean), Salt, Contains 2% or less: Yeast, Autolyzed Yeast Extract, Paprika, Spices, Celery, Onion Powder.",
+    "ingredients": "Enriched Wheat Flour (Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid), Cheddar Cheese (Cultured Milk, Salt, Enzymes, Annatto), Vegetable Oils (Canola, Sunflower and/or Soybean), Salt, Contains 2% or Less of: Yeast, Autolyzed Yeast Extract, Paprika, Spices, Celery, Onion Powder, Monocalcium Phosphate, Baking Soda.",
     "allergens": [
       "gluten",
       "dairy",
-      "soy",
-      "yeast"
+      "yeast",
+      "soy"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e160b"
+    ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
       "Target",
-      "Giant Eagle"
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "0014100085485": {
-    "product": "Pepperidge Farm Goldfish Cheddar Crackers",
+    "product": "Pepperidge Farm Goldfish Cheddar Baked Snack Crackers (6.6 oz)",
     "brand": "Pepperidge Farm",
     "upc": "014100085485",
-    "ingredients": "Enriched Wheat Flour, Cheddar Cheese (Cultured Milk, Salt, Enzymes, Annatto), Vegetable Oils (Canola, Sunflower and/or Soybean), Salt, Contains 2% or less: Yeast, Autolyzed Yeast Extract, Paprika, Spices, Celery, Onion Powder.",
+    "ingredients": "Enriched Wheat Flour (Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid), Cheddar Cheese (Cultured Milk, Salt, Enzymes, Annatto), Vegetable Oils (Canola, Sunflower and/or Soybean), Salt, Contains 2% or Less of: Yeast, Autolyzed Yeast Extract, Paprika, Spices, Celery, Onion Powder, Monocalcium Phosphate, Baking Soda.",
     "allergens": [
       "gluten",
       "dairy",
-      "soy",
-      "yeast"
+      "yeast",
+      "soy"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e160b"
+    ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
       "Target",
-      "Giant Eagle"
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
@@ -1474,42 +1506,48 @@
     "isRecalled": false
   },
   "044000032029": {
-    "product": "Oreo Chocolate Sandwich Cookies (Original)",
-    "brand": "Oreo",
+    "product": "Oreo Original Chocolate Sandwich Cookies (13.29 oz)",
+    "brand": "Oreo / Nabisco",
     "upc": "044000032029",
-    "ingredients": "Unbleached Enriched Flour, Sugar, Palm and/or Canola Oil, Cocoa (Processed with Alkali), High Fructose Corn Syrup, Leavening, Salt, Soy Lecithin, Chocolate, Vanillin.",
+    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid), Sugar, Palm Oil, Soybean and/or Canola Oil, Cocoa (Processed with Alkali), High Fructose Corn Syrup, Leavening (Baking Soda and/or Calcium Phosphate), Salt, Soy Lecithin, Chocolate, Vanillin (Artificial Flavor).",
     "allergens": [
       "gluten",
       "soy",
       "corn"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:vanillin",
+      "en:e322"
+    ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
       "Target",
-      "Giant Eagle"
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "0044000032029": {
-    "product": "Oreo Chocolate Sandwich Cookies (Original)",
-    "brand": "Oreo",
+    "product": "Oreo Original Chocolate Sandwich Cookies (13.29 oz)",
+    "brand": "Oreo / Nabisco",
     "upc": "044000032029",
-    "ingredients": "Unbleached Enriched Flour, Sugar, Palm and/or Canola Oil, Cocoa (Processed with Alkali), High Fructose Corn Syrup, Leavening, Salt, Soy Lecithin, Chocolate, Vanillin.",
+    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid), Sugar, Palm Oil, Soybean and/or Canola Oil, Cocoa (Processed with Alkali), High Fructose Corn Syrup, Leavening (Baking Soda and/or Calcium Phosphate), Salt, Soy Lecithin, Chocolate, Vanillin (Artificial Flavor).",
     "allergens": [
       "gluten",
       "soy",
       "corn"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:vanillin",
+      "en:e322"
+    ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
       "Target",
-      "Giant Eagle"
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
@@ -1937,17 +1975,20 @@
     "product": "Campbell's Condensed Tomato Soup (10.75 oz Can)",
     "brand": "Campbell's",
     "upc": "051000012517",
-    "ingredients": "Tomato Puree (Water, Tomato Paste), Water, Wheat Flour, Sugar, Contains Less Than 2% Of: Salt, Citric Acid, Ascorbic Acid (Vitamin C), Potassium Chloride, Natural Flavoring.",
+    "ingredients": "Tomato Puree (Water, Tomato Paste), High Fructose Corn Syrup, Wheat Flour, Water, Contains Less Than 2% of: Salt, Potassium Chloride, Citric Acid, Lower Sodium Natural Sea Salt, Ascorbic Acid, Monopotassium Phosphate.",
     "allergens": [
-      "gluten"
+      "gluten",
+      "corn"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e330"
+    ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
       "Target",
-      "Giant Eagle"
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
@@ -1955,17 +1996,20 @@
     "product": "Campbell's Condensed Tomato Soup (10.75 oz Can)",
     "brand": "Campbell's",
     "upc": "051000012517",
-    "ingredients": "Tomato Puree (Water, Tomato Paste), Water, Wheat Flour, Sugar, Contains Less Than 2% Of: Salt, Citric Acid, Ascorbic Acid (Vitamin C), Potassium Chloride, Natural Flavoring.",
+    "ingredients": "Tomato Puree (Water, Tomato Paste), High Fructose Corn Syrup, Wheat Flour, Water, Contains Less Than 2% of: Salt, Potassium Chloride, Citric Acid, Lower Sodium Natural Sea Salt, Ascorbic Acid, Monopotassium Phosphate.",
     "allergens": [
-      "gluten"
+      "gluten",
+      "corn"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e330"
+    ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
       "Target",
-      "Giant Eagle"
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
@@ -2286,32 +2330,34 @@
     "isRecalled": false
   },
   "041500000251": {
-    "product": "French's Classic Yellow Mustard",
+    "product": "French's Classic Yellow Mustard (14 oz)",
     "brand": "French's",
     "upc": "041500000251",
-    "ingredients": "Distilled Vinegar, Water, #1 Grade Mustard Seed, Salt, Turmeric, Paprika, Spice, Natural Flavors and Garlic Powder.",
+    "ingredients": "Distilled Vinegar, Water, 1 Grade Mustard Seed, Salt, Turmeric, Paprika, Spice, Natural Flavors, Garlic Powder.",
     "allergens": [],
     "additives_tags": [],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "0041500000251": {
-    "product": "French's Classic Yellow Mustard",
+    "product": "French's Classic Yellow Mustard (14 oz)",
     "brand": "French's",
     "upc": "041500000251",
-    "ingredients": "Distilled Vinegar, Water, #1 Grade Mustard Seed, Salt, Turmeric, Paprika, Spice, Natural Flavors and Garlic Powder.",
+    "ingredients": "Distilled Vinegar, Water, 1 Grade Mustard Seed, Salt, Turmeric, Paprika, Spice, Natural Flavors, Garlic Powder.",
     "allergens": [],
     "additives_tags": [],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
@@ -2506,8 +2552,8 @@
     "isRecalled": false
   },
   "034000004409": {
-    "product": "Reese's Milk Chocolate Peanut Butter Cups",
-    "brand": "Reese's",
+    "product": "Reese's Milk Chocolate Peanut Butter Cups (2 ct, 1.5 oz)",
+    "brand": "Reese's / Hershey's",
     "upc": "034000004409",
     "ingredients": "Milk Chocolate (Sugar, Cocoa Butter, Chocolate, Skim Milk, Milk Fat, Lactose, Lecithin [Soy], PGPR), Peanuts, Sugar, Dextrose, Salt, TBHQ and Citric Acid to Maintain Freshness.",
     "allergens": [
@@ -2516,20 +2562,23 @@
       "soy"
     ],
     "additives_tags": [
-      "tbhq"
+      "en:e476",
+      "en:e319",
+      "en:e330",
+      "en:e322"
     ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
       "Target",
-      "Giant Eagle"
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "0034000004409": {
-    "product": "Reese's Milk Chocolate Peanut Butter Cups",
-    "brand": "Reese's",
+    "product": "Reese's Milk Chocolate Peanut Butter Cups (2 ct, 1.5 oz)",
+    "brand": "Reese's / Hershey's",
     "upc": "034000004409",
     "ingredients": "Milk Chocolate (Sugar, Cocoa Butter, Chocolate, Skim Milk, Milk Fat, Lactose, Lecithin [Soy], PGPR), Peanuts, Sugar, Dextrose, Salt, TBHQ and Citric Acid to Maintain Freshness.",
     "allergens": [
@@ -2538,19 +2587,22 @@
       "soy"
     ],
     "additives_tags": [
-      "tbhq"
+      "en:e476",
+      "en:e319",
+      "en:e330",
+      "en:e322"
     ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
       "Target",
-      "Giant Eagle"
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "034000002405": {
-    "product": "Hershey's Milk Chocolate Candy Bar",
+    "product": "Hershey's Milk Chocolate Bar (1.55 oz)",
     "brand": "Hershey's",
     "upc": "034000002405",
     "ingredients": "Milk Chocolate (Sugar, Milk, Chocolate, Cocoa Butter, Milk Fat, Lecithin [Soy], PGPR, Natural Flavor).",
@@ -2558,17 +2610,23 @@
       "dairy",
       "soy"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e476",
+      "en:e322"
+    ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer",
+      "CVS",
+      "Walgreens"
     ],
     "isRecalled": false
   },
   "0034000002405": {
-    "product": "Hershey's Milk Chocolate Candy Bar",
+    "product": "Hershey's Milk Chocolate Bar (1.55 oz)",
     "brand": "Hershey's",
     "upc": "034000002405",
     "ingredients": "Milk Chocolate (Sugar, Milk, Chocolate, Cocoa Butter, Milk Fat, Lecithin [Soy], PGPR, Natural Flavor).",
@@ -2576,12 +2634,18 @@
       "dairy",
       "soy"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e476",
+      "en:e322"
+    ],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer",
+      "CVS",
+      "Walgreens"
     ],
     "isRecalled": false
   },
@@ -4578,40 +4642,38 @@
     "isRecalled": false
   },
   "0894700010045": {
-    "product": "Chobani Non-Fat Plain Greek Yogurt (32 oz Tub)",
+    "product": "Chobani Whole Milk Plain Greek Yogurt (32 oz Tub)",
     "brand": "Chobani",
     "upc": "894700010045",
-    "ingredients": "Cultured Nonfat Milk. Contains 6 Live and Active Cultures: S. Thermophilus, L. Bulgaricus, L. Acidophilus, Bifidus, L. Casei, and L. Rhamnosus.",
+    "ingredients": "Cultured Pasteurized Grade A Milk, Cream. Contains 6 Live and Active Cultures: S. Thermophilus, L. Bulgaricus, L. Acidophilus, Bifidus, L. Casei, and L. Rhamnosus.",
     "allergens": [
       "dairy"
     ],
     "additives_tags": [],
     "stores": [
-      "Giant Eagle",
-      "Meijer",
-      "Kroger",
       "Walmart",
       "Target",
-      "Costco"
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "894700010045": {
-    "product": "Chobani Non-Fat Plain Greek Yogurt (32 oz Tub)",
+    "product": "Chobani Whole Milk Plain Greek Yogurt (32 oz Tub)",
     "brand": "Chobani",
     "upc": "894700010045",
-    "ingredients": "Cultured Nonfat Milk. Contains 6 Live and Active Cultures: S. Thermophilus, L. Bulgaricus, L. Acidophilus, Bifidus, L. Casei, and L. Rhamnosus.",
+    "ingredients": "Cultured Pasteurized Grade A Milk, Cream. Contains 6 Live and Active Cultures: S. Thermophilus, L. Bulgaricus, L. Acidophilus, Bifidus, L. Casei, and L. Rhamnosus.",
     "allergens": [
       "dairy"
     ],
     "additives_tags": [],
     "stores": [
-      "Giant Eagle",
-      "Meijer",
-      "Kroger",
       "Walmart",
       "Target",
-      "Costco"
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
@@ -4798,38 +4860,44 @@
     "isRecalled": false
   },
   "0025293000987": {
-    "product": "Silk Original Almondmilk (64 fl oz Half Gallon)",
+    "product": "Silk Original Almondmilk (64 fl oz)",
     "brand": "Silk",
     "upc": "025293000987",
-    "ingredients": "Almondmilk (Filtered Water, Almonds), Cane Sugar, Contains 2% or Less of: Vitamin and Mineral Blend (Calcium Carbonate, Vitamin E Acetate, Vitamin A Palmitate, Vitamin D2), Sea Salt, Gellan Gum, Sunflower Lecithin, Locust Bean Gum, Ascorbic Acid, Natural Flavor.",
+    "ingredients": "Almondmilk (Filtered Water, Almonds), Cane Sugar, Calcium Carbonate, Sea Salt, Potassium Citrate, Gellan Gum, Dipotassium Phosphate, Sunflower Lecithin, Vitamin A Palmitate, Vitamin D2, Vitamin E.",
     "allergens": [
       "treenuts"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e418",
+      "en:e322"
+    ],
     "stores": [
-      "Giant Eagle",
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "025293000987": {
-    "product": "Silk Original Almondmilk (64 fl oz Half Gallon)",
+    "product": "Silk Original Almondmilk (64 fl oz)",
     "brand": "Silk",
     "upc": "025293000987",
-    "ingredients": "Almondmilk (Filtered Water, Almonds), Cane Sugar, Contains 2% or Less of: Vitamin and Mineral Blend (Calcium Carbonate, Vitamin E Acetate, Vitamin A Palmitate, Vitamin D2), Sea Salt, Gellan Gum, Sunflower Lecithin, Locust Bean Gum, Ascorbic Acid, Natural Flavor.",
+    "ingredients": "Almondmilk (Filtered Water, Almonds), Cane Sugar, Calcium Carbonate, Sea Salt, Potassium Citrate, Gellan Gum, Dipotassium Phosphate, Sunflower Lecithin, Vitamin A Palmitate, Vitamin D2, Vitamin E.",
     "allergens": [
       "treenuts"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e418",
+      "en:e322"
+    ],
     "stores": [
-      "Giant Eagle",
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
@@ -4902,7 +4970,7 @@
     "isRecalled": false
   },
   "767707002149": {
-    "product": "Kerrygold Pure Irish Salted Butter (8 oz Foil Block)",
+    "product": "Kerrygold Pure Irish Salted Butter (8 oz)",
     "brand": "Kerrygold",
     "upc": "767707002149",
     "ingredients": "Pasteurized Cream, Salt.",
@@ -4911,19 +4979,17 @@
     ],
     "additives_tags": [],
     "stores": [
-      "Giant Eagle",
-      "Meijer",
-      "Kroger",
       "Walmart",
       "Target",
-      "Costco",
-      "Whole Foods Market",
-      "Trader Joe's"
+      "Kroger",
+      "Giant Eagle",
+      "Meijer",
+      "ALDI"
     ],
     "isRecalled": false
   },
   "0767707002149": {
-    "product": "Kerrygold Pure Irish Salted Butter (8 oz Foil Block)",
+    "product": "Kerrygold Pure Irish Salted Butter (8 oz)",
     "brand": "Kerrygold",
     "upc": "767707002149",
     "ingredients": "Pasteurized Cream, Salt.",
@@ -4932,14 +4998,12 @@
     ],
     "additives_tags": [],
     "stores": [
-      "Giant Eagle",
-      "Meijer",
-      "Kroger",
       "Walmart",
       "Target",
-      "Costco",
-      "Whole Foods Market",
-      "Trader Joe's"
+      "Kroger",
+      "Giant Eagle",
+      "Meijer",
+      "ALDI"
     ],
     "isRecalled": false
   },
@@ -5134,42 +5198,48 @@
     "isRecalled": false
   },
   "072250037129": {
-    "product": "Nature's Own 100% Whole Wheat Bread (20 oz Loaf)",
+    "product": "Nature's Own 100% Whole Wheat Bread (20 oz)",
     "brand": "Nature's Own",
     "upc": "072250037129",
-    "ingredients": "Whole Wheat Flour, Water, Sugar, Wheat Gluten, Yeast, Brown Sugar, Contains 2% or Less of: Soybean Oil, Salt, Cultured Wheat Flour, Vinegar, Monoglycerides, Calcium Sulfate, Enzymes, Soy Lecithin.",
+    "ingredients": "Whole Wheat Flour, Water, Sugar, Yeast, Wheat Gluten, Contains 2% or Less of: Soybean Oil, Salt, Molasses, Calcium Propionate, Monoglycerides, DATEM, Ascorbic Acid.",
     "allergens": [
       "gluten",
-      "soy",
-      "yeast"
+      "yeast",
+      "soy"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
     "stores": [
-      "Giant Eagle",
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "0072250037129": {
-    "product": "Nature's Own 100% Whole Wheat Bread (20 oz Loaf)",
+    "product": "Nature's Own 100% Whole Wheat Bread (20 oz)",
     "brand": "Nature's Own",
     "upc": "072250037129",
-    "ingredients": "Whole Wheat Flour, Water, Sugar, Wheat Gluten, Yeast, Brown Sugar, Contains 2% or Less of: Soybean Oil, Salt, Cultured Wheat Flour, Vinegar, Monoglycerides, Calcium Sulfate, Enzymes, Soy Lecithin.",
+    "ingredients": "Whole Wheat Flour, Water, Sugar, Yeast, Wheat Gluten, Contains 2% or Less of: Soybean Oil, Salt, Molasses, Calcium Propionate, Monoglycerides, DATEM, Ascorbic Acid.",
     "allergens": [
       "gluten",
-      "soy",
-      "yeast"
+      "yeast",
+      "soy"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
     "stores": [
-      "Giant Eagle",
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
@@ -5216,42 +5286,48 @@
     "isRecalled": false
   },
   "048121102088": {
-    "product": "Thomas' Original English Muffins (6 ct 12 oz Pack)",
+    "product": "Thomas' Original English Muffins (6 ct, 12 oz)",
     "brand": "Thomas'",
     "upc": "048121102088",
-    "ingredients": "Enriched Wheat Flour [Flour, Malted Barley Flour, Reduced Iron, Niacin, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid], Water, Yeast, Farina, Sugar, Salt, Calcium Propionate and Sorbic Acid (To Preserve Freshness), Soybean Oil, Grain Vinegar, Soy Lecithin.",
+    "ingredients": "Enriched Wheat Flour, Water, Yeast, Yellow Corn Meal, Corn Flour, Sugar, Salt, Soybean Oil, Vinegar, Calcium Propionate, Sorbic Acid.",
     "allergens": [
       "gluten",
-      "soy",
-      "yeast"
+      "yeast",
+      "corn"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e282",
+      "en:e200"
+    ],
     "stores": [
-      "Giant Eagle",
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
   "0048121102088": {
-    "product": "Thomas' Original English Muffins (6 ct 12 oz Pack)",
+    "product": "Thomas' Original English Muffins (6 ct, 12 oz)",
     "brand": "Thomas'",
     "upc": "048121102088",
-    "ingredients": "Enriched Wheat Flour [Flour, Malted Barley Flour, Reduced Iron, Niacin, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid], Water, Yeast, Farina, Sugar, Salt, Calcium Propionate and Sorbic Acid (To Preserve Freshness), Soybean Oil, Grain Vinegar, Soy Lecithin.",
+    "ingredients": "Enriched Wheat Flour, Water, Yeast, Yellow Corn Meal, Corn Flour, Sugar, Salt, Soybean Oil, Vinegar, Calcium Propionate, Sorbic Acid.",
     "allergens": [
       "gluten",
-      "soy",
-      "yeast"
+      "yeast",
+      "corn"
     ],
-    "additives_tags": [],
+    "additives_tags": [
+      "en:e282",
+      "en:e200"
+    ],
     "stores": [
-      "Giant Eagle",
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
     ],
     "isRecalled": false
   },
@@ -6605,6 +6681,2780 @@
     "additives_tags": [],
     "stores": [
       "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498221546": {
+    "product": "Mama Cozzi's 5 Cheese Garlic French Bread Pizza (2 ct, 11.25 oz)",
+    "brand": "Mama Cozzi's (Aldi)",
+    "upc": "041498221546",
+    "ingredients": "Crust (Wheat Flour, Water, Yeast, Salt, Canola Oil, Sugar), Mozzarella Cheese (Pasteurized Part-Skim Milk, Salt, Cheese Cultures, Enzymes), Cheddar, Gouda, Emmentaler, Pecorino Romano, Roasted Garlic Sauce (Water, Canola Oil, Garlic, Potato Starch, White Pepper), Spices.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "yeast"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498221546": {
+    "product": "Mama Cozzi's 5 Cheese Garlic French Bread Pizza (2 ct, 11.25 oz)",
+    "brand": "Mama Cozzi's (Aldi)",
+    "upc": "041498221546",
+    "ingredients": "Crust (Wheat Flour, Water, Yeast, Salt, Canola Oil, Sugar), Mozzarella Cheese (Pasteurized Part-Skim Milk, Salt, Cheese Cultures, Enzymes), Cheddar, Gouda, Emmentaler, Pecorino Romano, Roasted Garlic Sauce (Water, Canola Oil, Garlic, Potato Starch, White Pepper), Spices.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "yeast"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4061459199079": {
+    "product": "Mama Cozzi's Rising Crust Four Cheese Pizza (29.75 oz)",
+    "brand": "Mama Cozzi's (Aldi)",
+    "upc": "4061459199079",
+    "ingredients": "Crust (Enriched Wheat Flour, Water, Yeast, Soybean Oil, Sugar, Salt), Tomato Puree, Low-Moisture Part-Skim Mozzarella, Provolone, White Cheddar, Parmesan Cheese, Spices, Garlic Powder.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e330"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4099100002669": {
+    "product": "Mama Cozzi's Original Thin Crust Pepperoni Pizza (16 oz)",
+    "brand": "Mama Cozzi's (Aldi)",
+    "upc": "4099100002669",
+    "ingredients": "Crust (Wheat Flour, Malted Barley Flour, Water, Soybean Oil, Yeast, Salt), Sauce (Tomato Puree, Sugar, Salt, Spices, Garlic Powder), Mozzarella, Pepperoni (Pork, Beef, Salt, Spices, Dextrose, Sodium Nitrite, BHA, BHT, Citric Acid).",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e250",
+      "en:e320",
+      "en:e321",
+      "en:e330"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4099100002645": {
+    "product": "Mama Cozzi's Original Thin Crust Combo Sausage & Pepperoni Pizza",
+    "brand": "Mama Cozzi's (Aldi)",
+    "upc": "4099100002645",
+    "ingredients": "Crust (Wheat Flour, Water, Yeast, Soybean Oil, Salt), Pizza Sauce, Mozzarella Cheese, Cooked Italian Style Sausage (Pork, Chicken, Spices, Salt), Pepperoni (Pork, Beef, Salt, Dextrose, Sodium Nitrite).",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e250"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4099100002195": {
+    "product": "Mama Cozzi's Cheese Stuffed Crust Pepperoni Pizza (28.5 oz)",
+    "brand": "Mama Cozzi's (Aldi)",
+    "upc": "4099100002195",
+    "ingredients": "Crust (Enriched Wheat Flour, Water, Part-Skim Mozzarella Cheese, Yeast, Soybean Oil, Sugar, Salt), Tomato Sauce, Mozzarella, Pepperoni (Pork, Beef, Spices, Sodium Nitrite, BHA).",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e250",
+      "en:e320"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4099100225525": {
+    "product": "Mama Cozzi's Tavern Style Extra Loaded Supreme Pizza",
+    "brand": "Mama Cozzi's (Aldi)",
+    "upc": "4099100225525",
+    "ingredients": "Thin Crust (Flour, Water, Yeast, Oil, Salt), Pizza Sauce, Mozzarella, Italian Sausage, Pepperoni, Green Peppers, Onions, Black Olives.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e250"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4099100168181": {
+    "product": "Mama Cozzi's 12 Italian Style Mini Pizzas Margherita (10.5 oz)",
+    "brand": "Mama Cozzi's (Aldi)",
+    "upc": "4099100168181",
+    "ingredients": "Crust (Wheat Flour, Water, Yeast, Olive Oil, Salt), Tomato Puree, Mozzarella Cheese, Edam Cheese, Basil, Oregano.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "yeast"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498189112": {
+    "product": "Mama Cozzi's Real Garlic Breadsticks (6 ct)",
+    "brand": "Mama Cozzi's (Aldi)",
+    "upc": "041498189112",
+    "ingredients": "Breadstick: Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid), Water, Soybean Oil, Yeast, Salt, Sugar, Ascorbic Acid. Garlic Spread: Soybean Oil, Water, Palm Oil, Garlic, Salt, Parsley.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498189112": {
+    "product": "Mama Cozzi's Real Garlic Breadsticks (6 ct)",
+    "brand": "Mama Cozzi's (Aldi)",
+    "upc": "041498189112",
+    "ingredients": "Breadstick: Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid), Water, Soybean Oil, Yeast, Salt, Sugar, Ascorbic Acid. Garlic Spread: Soybean Oil, Water, Palm Oil, Garlic, Salt, Parsley.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4061459942903": {
+    "product": "Mama Cozzi's Pepperoni Pizza Snacks (40 ct)",
+    "brand": "Mama Cozzi's (Aldi)",
+    "upc": "4061459942903",
+    "ingredients": "Enriched Flour (Wheat Flour, Niacin, Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Tomato Puree, Mozzarella Cheese, Pepperoni (Pork, Beef, Salt, Sodium Nitrite), Palm Oil, Sugar, Yeast, Salt.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e250"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498110058": {
+    "product": "L'oven Fresh Classic White Sandwich Bread (20 oz)",
+    "brand": "L'oven Fresh (Aldi)",
+    "upc": "041498110058",
+    "ingredients": "Enriched Wheat Flour (Flour, Barley Malt, Niacin, Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or less of: Soybean Oil, Salt, Calcium Propionate, Dough Conditioners (DATEM, Monoglycerides).",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498110058": {
+    "product": "L'oven Fresh Classic White Sandwich Bread (20 oz)",
+    "brand": "L'oven Fresh (Aldi)",
+    "upc": "041498110058",
+    "ingredients": "Enriched Wheat Flour (Flour, Barley Malt, Niacin, Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or less of: Soybean Oil, Salt, Calcium Propionate, Dough Conditioners (DATEM, Monoglycerides).",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498110065": {
+    "product": "L'oven Fresh 100% Whole Wheat Bread (20 oz)",
+    "brand": "L'oven Fresh (Aldi)",
+    "upc": "041498110065",
+    "ingredients": "Whole Wheat Flour, Water, Sugar, Wheat Gluten, Yeast, Contains 2% or less of: Soybean Oil, Salt, Molasses, Calcium Propionate, Monoglycerides, DATEM, Ascorbic Acid.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498110065": {
+    "product": "L'oven Fresh 100% Whole Wheat Bread (20 oz)",
+    "brand": "L'oven Fresh (Aldi)",
+    "upc": "041498110065",
+    "ingredients": "Whole Wheat Flour, Water, Sugar, Wheat Gluten, Yeast, Contains 2% or less of: Soybean Oil, Salt, Molasses, Calcium Propionate, Monoglycerides, DATEM, Ascorbic Acid.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498110287": {
+    "product": "L'oven Fresh Plain Bagels (6 ct, 20 oz)",
+    "brand": "L'oven Fresh (Aldi)",
+    "upc": "041498110287",
+    "ingredients": "Enriched Wheat Flour (Flour, Niacin, Iron, Thiamine Mononitrate, Riboflavin, Folic Acid), Water, Sugar, Yeast, Wheat Gluten, Salt, Soybean Oil, Preservatives (Calcium Propionate).",
+    "allergens": [
+      "gluten",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e282"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498110287": {
+    "product": "L'oven Fresh Plain Bagels (6 ct, 20 oz)",
+    "brand": "L'oven Fresh (Aldi)",
+    "upc": "041498110287",
+    "ingredients": "Enriched Wheat Flour (Flour, Niacin, Iron, Thiamine Mononitrate, Riboflavin, Folic Acid), Water, Sugar, Yeast, Wheat Gluten, Salt, Soybean Oil, Preservatives (Calcium Propionate).",
+    "allergens": [
+      "gluten",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e282"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498110294": {
+    "product": "L'oven Fresh Everything Bagels (6 ct, 20 oz)",
+    "brand": "L'oven Fresh (Aldi)",
+    "upc": "041498110294",
+    "ingredients": "Enriched Wheat Flour, Water, Sugar, Yeast, Dehydrated Onion, Sesame Seeds, Poppy Seeds, Dehydrated Garlic, Salt, Wheat Gluten, Calcium Propionate.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "sesame"
+    ],
+    "additives_tags": [
+      "en:e282"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498110294": {
+    "product": "L'oven Fresh Everything Bagels (6 ct, 20 oz)",
+    "brand": "L'oven Fresh (Aldi)",
+    "upc": "041498110294",
+    "ingredients": "Enriched Wheat Flour, Water, Sugar, Yeast, Dehydrated Onion, Sesame Seeds, Poppy Seeds, Dehydrated Garlic, Salt, Wheat Gluten, Calcium Propionate.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "sesame"
+    ],
+    "additives_tags": [
+      "en:e282"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498110188": {
+    "product": "L'oven Fresh Original English Muffins (6 ct, 12 oz)",
+    "brand": "L'oven Fresh (Aldi)",
+    "upc": "041498110188",
+    "ingredients": "Enriched Wheat Flour, Water, Yeast, Yellow Corn Flour, Corn Meal, Sugar, Salt, Soybean Oil, Vinegar, Calcium Propionate, Potassium Sorbate.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "corn"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e202"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498110188": {
+    "product": "L'oven Fresh Original English Muffins (6 ct, 12 oz)",
+    "brand": "L'oven Fresh (Aldi)",
+    "upc": "041498110188",
+    "ingredients": "Enriched Wheat Flour, Water, Yeast, Yellow Corn Flour, Corn Meal, Sugar, Salt, Soybean Oil, Vinegar, Calcium Propionate, Potassium Sorbate.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "corn"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e202"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498110102": {
+    "product": "L'oven Fresh Hamburger Buns (8 ct, 11 oz)",
+    "brand": "L'oven Fresh (Aldi)",
+    "upc": "041498110102",
+    "ingredients": "Enriched Wheat Flour, Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Salt, Wheat Gluten, Calcium Propionate, Monoglycerides.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e471"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498110102": {
+    "product": "L'oven Fresh Hamburger Buns (8 ct, 11 oz)",
+    "brand": "L'oven Fresh (Aldi)",
+    "upc": "041498110102",
+    "ingredients": "Enriched Wheat Flour, Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Salt, Wheat Gluten, Calcium Propionate, Monoglycerides.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e471"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498110119": {
+    "product": "L'oven Fresh Hot Dog Buns (8 ct, 12 oz)",
+    "brand": "L'oven Fresh (Aldi)",
+    "upc": "041498110119",
+    "ingredients": "Enriched Wheat Flour, Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Salt, Calcium Propionate, DATEM, Monoglycerides.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498110119": {
+    "product": "L'oven Fresh Hot Dog Buns (8 ct, 12 oz)",
+    "brand": "L'oven Fresh (Aldi)",
+    "upc": "041498110119",
+    "ingredients": "Enriched Wheat Flour, Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Salt, Calcium Propionate, DATEM, Monoglycerides.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498246839": {
+    "product": "L'oven Fresh Hawaiian Sweet Rolls (12 ct, 12 oz)",
+    "brand": "L'oven Fresh (Aldi)",
+    "upc": "041498246839",
+    "ingredients": "Enriched Flour, Water, Sugar, Liquid Sugar, Yeast, Potato Flour, Butter (Cream, Salt), Nonfat Milk, Eggs, Soy Flour, Salt, DATEM, Monoglycerides.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "eggs",
+      "soy",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e472e",
+      "en:e471"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498246839": {
+    "product": "L'oven Fresh Hawaiian Sweet Rolls (12 ct, 12 oz)",
+    "brand": "L'oven Fresh (Aldi)",
+    "upc": "041498246839",
+    "ingredients": "Enriched Flour, Water, Sugar, Liquid Sugar, Yeast, Potato Flour, Butter (Cream, Salt), Nonfat Milk, Eggs, Soy Flour, Salt, DATEM, Monoglycerides.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "eggs",
+      "soy",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e472e",
+      "en:e471"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4099100147826": {
+    "product": "Specially Selected Chocolate Chip Sliced Brioche Loaf (17.6 oz)",
+    "brand": "Specially Selected (Aldi)",
+    "upc": "4099100147826",
+    "ingredients": "Wheat Flour, Chocolate Chips (Sugar, Chocolate Liquor, Cocoa Butter, Soy Lecithin), Eggs, Sugar, Canola Oil, Water, Invert Sugar, Yeast, Butter, Salt, Mono- and Diglycerides.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "eggs",
+      "soy",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e471"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4099100147819": {
+    "product": "Specially Selected Sliced Brioche Loaf Plain (17.6 oz)",
+    "brand": "Specially Selected (Aldi)",
+    "upc": "4099100147819",
+    "ingredients": "Wheat Flour, Eggs, Sugar, Canola Oil, Water, Invert Sugar, Yeast, Butterfat, Salt, Natural Flavor, Mono- and Diglycerides.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "eggs",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e471"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498183806": {
+    "product": "Clancy's Wavy Potato Chips (10 oz)",
+    "brand": "Clancy's (Aldi)",
+    "upc": "041498183806",
+    "ingredients": "Potatoes, Vegetable Oil (Contains One or More of: Corn, Cottonseed, Sunflower, or Canola Oil), Salt.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498183806": {
+    "product": "Clancy's Wavy Potato Chips (10 oz)",
+    "brand": "Clancy's (Aldi)",
+    "upc": "041498183806",
+    "ingredients": "Potatoes, Vegetable Oil (Contains One or More of: Corn, Cottonseed, Sunflower, or Canola Oil), Salt.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498183813": {
+    "product": "Clancy's Sour Cream & Onion Potato Chips (9.5 oz)",
+    "brand": "Clancy's (Aldi)",
+    "upc": "041498183813",
+    "ingredients": "Potatoes, Vegetable Oil, Whey, Salt, Onion Powder, Sour Cream (Cream, Nonfat Milk, Cultures), Monosodium Glutamate, Sugar, Dextrose, Nonfat Dry Milk, Natural and Artificial Flavors.",
+    "allergens": [
+      "dairy",
+      "corn"
+    ],
+    "additives_tags": [
+      "en:e621",
+      "en:vanillin"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498183813": {
+    "product": "Clancy's Sour Cream & Onion Potato Chips (9.5 oz)",
+    "brand": "Clancy's (Aldi)",
+    "upc": "041498183813",
+    "ingredients": "Potatoes, Vegetable Oil, Whey, Salt, Onion Powder, Sour Cream (Cream, Nonfat Milk, Cultures), Monosodium Glutamate, Sugar, Dextrose, Nonfat Dry Milk, Natural and Artificial Flavors.",
+    "allergens": [
+      "dairy",
+      "corn"
+    ],
+    "additives_tags": [
+      "en:e621",
+      "en:vanillin"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498183820": {
+    "product": "Clancy's Barbecue Potato Chips (9.5 oz)",
+    "brand": "Clancy's (Aldi)",
+    "upc": "041498183820",
+    "ingredients": "Potatoes, Vegetable Oil, Sugar, Salt, Dextrose, Onion Powder, Molasses, Spices, Tomato Powder, Paprika, Torula Yeast, Natural Smoke Flavor.",
+    "allergens": [
+      "yeast",
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498183820": {
+    "product": "Clancy's Barbecue Potato Chips (9.5 oz)",
+    "brand": "Clancy's (Aldi)",
+    "upc": "041498183820",
+    "ingredients": "Potatoes, Vegetable Oil, Sugar, Salt, Dextrose, Onion Powder, Molasses, Spices, Tomato Powder, Paprika, Torula Yeast, Natural Smoke Flavor.",
+    "allergens": [
+      "yeast",
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498184506": {
+    "product": "Clancy's White Cheddar Popcorn (8.5 oz)",
+    "brand": "Clancy's (Aldi)",
+    "upc": "041498184506",
+    "ingredients": "Popcorn, Vegetable Oil (Corn, Canola, or Sunflower Oil), Cheddar Cheese (Milk, Cheese Cultures, Salt, Enzymes), Whey, Buttermilk, Natural Flavor, Salt.",
+    "allergens": [
+      "dairy",
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498184506": {
+    "product": "Clancy's White Cheddar Popcorn (8.5 oz)",
+    "brand": "Clancy's (Aldi)",
+    "upc": "041498184506",
+    "ingredients": "Popcorn, Vegetable Oil (Corn, Canola, or Sunflower Oil), Cheddar Cheese (Milk, Cheese Cultures, Salt, Enzymes), Whey, Buttermilk, Natural Flavor, Salt.",
+    "allergens": [
+      "dairy",
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498184100": {
+    "product": "Clancy's Mini Pretzels (16 oz)",
+    "brand": "Clancy's (Aldi)",
+    "upc": "041498184100",
+    "ingredients": "Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Salt, Corn Syrup, Vegetable Oil (Corn, Canola, or Soybean), Yeast, Sodium Bicarbonate.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "corn",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498184100": {
+    "product": "Clancy's Mini Pretzels (16 oz)",
+    "brand": "Clancy's (Aldi)",
+    "upc": "041498184100",
+    "ingredients": "Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Salt, Corn Syrup, Vegetable Oil (Corn, Canola, or Soybean), Yeast, Sodium Bicarbonate.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "corn",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498184605": {
+    "product": "Clancy's Cheese Puffs (8.5 oz)",
+    "brand": "Clancy's (Aldi)",
+    "upc": "041498184605",
+    "ingredients": "Corn Meal, Vegetable Oil, Whey, Cheddar Cheese (Cultured Milk, Salt, Enzymes), Salt, Maltodextrin, Disodium Phosphate, Yellow 6, Yellow 5, Citric Acid, Lactic Acid.",
+    "allergens": [
+      "dairy",
+      "corn"
+    ],
+    "additives_tags": [
+      "en:e110",
+      "en:e102",
+      "en:e330",
+      "en:e270"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498184605": {
+    "product": "Clancy's Cheese Puffs (8.5 oz)",
+    "brand": "Clancy's (Aldi)",
+    "upc": "041498184605",
+    "ingredients": "Corn Meal, Vegetable Oil, Whey, Cheddar Cheese (Cultured Milk, Salt, Enzymes), Salt, Maltodextrin, Disodium Phosphate, Yellow 6, Yellow 5, Citric Acid, Lactic Acid.",
+    "allergens": [
+      "dairy",
+      "corn"
+    ],
+    "additives_tags": [
+      "en:e110",
+      "en:e102",
+      "en:e330",
+      "en:e270"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498111017": {
+    "product": "Friendly Farms Whole Vitamin D Milk (1 Gallon)",
+    "brand": "Friendly Farms (Aldi)",
+    "upc": "041498111017",
+    "ingredients": "Grade A Whole Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498111017": {
+    "product": "Friendly Farms Whole Vitamin D Milk (1 Gallon)",
+    "brand": "Friendly Farms (Aldi)",
+    "upc": "041498111017",
+    "ingredients": "Grade A Whole Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498111024": {
+    "product": "Friendly Farms 2% Reduced Fat Milk (1 Gallon)",
+    "brand": "Friendly Farms (Aldi)",
+    "upc": "041498111024",
+    "ingredients": "Grade A Reduced Fat Milk, Vitamin A Palmitate, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498111024": {
+    "product": "Friendly Farms 2% Reduced Fat Milk (1 Gallon)",
+    "brand": "Friendly Farms (Aldi)",
+    "upc": "041498111024",
+    "ingredients": "Grade A Reduced Fat Milk, Vitamin A Palmitate, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498112014": {
+    "product": "Goldhen Grade A Large White Eggs (1 Dozen)",
+    "brand": "Goldhen (Aldi)",
+    "upc": "041498112014",
+    "ingredients": "Grade A Large Shell Eggs.",
+    "allergens": [
+      "eggs"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498112014": {
+    "product": "Goldhen Grade A Large White Eggs (1 Dozen)",
+    "brand": "Goldhen (Aldi)",
+    "upc": "041498112014",
+    "ingredients": "Grade A Large Shell Eggs.",
+    "allergens": [
+      "eggs"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498121016": {
+    "product": "Happy Farms Finely Shredded Sharp Cheddar Cheese (8 oz)",
+    "brand": "Happy Farms (Aldi)",
+    "upc": "041498121016",
+    "ingredients": "Cheddar Cheese (Pasteurized Milk, Cheese Culture, Salt, Enzymes, Annatto [Color]), Potato Starch, Cornstarch, Powdered Cellulose (Added to Prevent Caking), Natamycin (Natural Mold Inhibitor).",
+    "allergens": [
+      "dairy",
+      "corn"
+    ],
+    "additives_tags": [
+      "en:e235",
+      "en:e160b"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498121016": {
+    "product": "Happy Farms Finely Shredded Sharp Cheddar Cheese (8 oz)",
+    "brand": "Happy Farms (Aldi)",
+    "upc": "041498121016",
+    "ingredients": "Cheddar Cheese (Pasteurized Milk, Cheese Culture, Salt, Enzymes, Annatto [Color]), Potato Starch, Cornstarch, Powdered Cellulose (Added to Prevent Caking), Natamycin (Natural Mold Inhibitor).",
+    "allergens": [
+      "dairy",
+      "corn"
+    ],
+    "additives_tags": [
+      "en:e235",
+      "en:e160b"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498121023": {
+    "product": "Happy Farms Shredded Mozzarella Cheese (8 oz)",
+    "brand": "Happy Farms (Aldi)",
+    "upc": "041498121023",
+    "ingredients": "Low-Moisture Part-Skim Mozzarella Cheese (Pasteurized Part-Skim Milk, Cheese Culture, Salt, Enzymes), Potato Starch, Powdered Cellulose, Natamycin.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "en:e235"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498121023": {
+    "product": "Happy Farms Shredded Mozzarella Cheese (8 oz)",
+    "brand": "Happy Farms (Aldi)",
+    "upc": "041498121023",
+    "ingredients": "Low-Moisture Part-Skim Mozzarella Cheese (Pasteurized Part-Skim Milk, Cheese Culture, Salt, Enzymes), Potato Starch, Powdered Cellulose, Natamycin.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "en:e235"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498121108": {
+    "product": "Happy Farms Cream Cheese Brick (8 oz)",
+    "brand": "Happy Farms (Aldi)",
+    "upc": "041498121108",
+    "ingredients": "Pasteurized Milk and Cream, Salt, Carob Bean Gum, Cheese Culture.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "en:e410"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498121108": {
+    "product": "Happy Farms Cream Cheese Brick (8 oz)",
+    "brand": "Happy Farms (Aldi)",
+    "upc": "041498121108",
+    "ingredients": "Pasteurized Milk and Cream, Salt, Carob Bean Gum, Cheese Culture.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "en:e410"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498121153": {
+    "product": "Happy Farms Low-Moisture Part-Skim Mozzarella String Cheese (12 ct)",
+    "brand": "Happy Farms (Aldi)",
+    "upc": "041498121153",
+    "ingredients": "Pasteurized Part-Skim Milk, Cheese Culture, Salt, Enzymes.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498121153": {
+    "product": "Happy Farms Low-Moisture Part-Skim Mozzarella String Cheese (12 ct)",
+    "brand": "Happy Farms (Aldi)",
+    "upc": "041498121153",
+    "ingredients": "Pasteurized Part-Skim Milk, Cheese Culture, Salt, Enzymes.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498121207": {
+    "product": "Countryside Creamery Sweet Cream Salted Butter (1 lb, 4 Sticks)",
+    "brand": "Countryside Creamery (Aldi)",
+    "upc": "041498121207",
+    "ingredients": "Pasteurized Cream (Milk), Salt.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498121207": {
+    "product": "Countryside Creamery Sweet Cream Salted Butter (1 lb, 4 Sticks)",
+    "brand": "Countryside Creamery (Aldi)",
+    "upc": "041498121207",
+    "ingredients": "Pasteurized Cream (Milk), Salt.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498121214": {
+    "product": "Countryside Creamery Sweet Cream Unsalted Butter (1 lb, 4 Sticks)",
+    "brand": "Countryside Creamery (Aldi)",
+    "upc": "041498121214",
+    "ingredients": "Pasteurized Cream (Milk), Natural Flavoring.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498121214": {
+    "product": "Countryside Creamery Sweet Cream Unsalted Butter (1 lb, 4 Sticks)",
+    "brand": "Countryside Creamery (Aldi)",
+    "upc": "041498121214",
+    "ingredients": "Pasteurized Cream (Milk), Natural Flavoring.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498121252": {
+    "product": "Friendly Farms All Natural Sour Cream (16 oz)",
+    "brand": "Friendly Farms (Aldi)",
+    "upc": "041498121252",
+    "ingredients": "Cultured Pasteurized Grade A Cream, Enzymes.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498121252": {
+    "product": "Friendly Farms All Natural Sour Cream (16 oz)",
+    "brand": "Friendly Farms (Aldi)",
+    "upc": "041498121252",
+    "ingredients": "Cultured Pasteurized Grade A Cream, Enzymes.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4099100045239": {
+    "product": "Simply Nature Organic Unsweetened Almondmilk (64 oz)",
+    "brand": "Simply Nature (Aldi)",
+    "upc": "4099100045239",
+    "ingredients": "Organic Almondmilk (Filtered Water, Organic Almonds), Calcium Carbonate, Sea Salt, Potassium Citrate, Organic Locust Bean Gum, Gellan Gum, Vitamin A Palmitate, Ergocalciferol (Vitamin D2), Vitamin E.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [
+      "en:e410",
+      "en:e418"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4099100048124": {
+    "product": "Simply Nature Organic Free Range Chicken Broth (32 oz)",
+    "brand": "Simply Nature (Aldi)",
+    "upc": "4099100048124",
+    "ingredients": "Organic Chicken Broth (Water, Organic Chicken), Organic Chicken Flavor, Organic Cane Sugar, Sea Salt, Organic Onion Powder, Organic Turmeric.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4099100056129": {
+    "product": "Simply Nature Organic Black Beans (15 oz Can)",
+    "brand": "Simply Nature (Aldi)",
+    "upc": "4099100056129",
+    "ingredients": "Organic Prepared Black Beans, Water, Sea Salt.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498131015": {
+    "product": "Millville Honey Nut Crispy Oats Cereal (12.25 oz)",
+    "brand": "Millville (Aldi)",
+    "upc": "041498131015",
+    "ingredients": "Whole Grain Oat Flour, Sugar, Modified Cornstarch, Honey, Brown Sugar, Salt, Tripotassium Phosphate, Natural Almond Flavor, Mixed Tocopherols (Vitamin E added to preserve freshness).",
+    "allergens": [
+      "corn",
+      "treenuts"
+    ],
+    "additives_tags": [
+      "en:modified-starch",
+      "en:e340"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498131015": {
+    "product": "Millville Honey Nut Crispy Oats Cereal (12.25 oz)",
+    "brand": "Millville (Aldi)",
+    "upc": "041498131015",
+    "ingredients": "Whole Grain Oat Flour, Sugar, Modified Cornstarch, Honey, Brown Sugar, Salt, Tripotassium Phosphate, Natural Almond Flavor, Mixed Tocopherols (Vitamin E added to preserve freshness).",
+    "allergens": [
+      "corn",
+      "treenuts"
+    ],
+    "additives_tags": [
+      "en:modified-starch",
+      "en:e340"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498131107": {
+    "product": "Millville 100% Whole Grain Quick Oats (42 oz Tub)",
+    "brand": "Millville (Aldi)",
+    "upc": "041498131107",
+    "ingredients": "100% Rolled Whole Grain Oats.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498131107": {
+    "product": "Millville 100% Whole Grain Quick Oats (42 oz Tub)",
+    "brand": "Millville (Aldi)",
+    "upc": "041498131107",
+    "ingredients": "100% Rolled Whole Grain Oats.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "013764027053": {
+    "product": "Dave's Killer Bread 21 Whole Grains and Seeds (27 oz)",
+    "brand": "Dave's Killer Bread",
+    "upc": "013764027053",
+    "ingredients": "Organic Whole Wheat, Water, Organic 21 Whole Grains and Seeds Mix (Organic Cracked Wheat, Organic Rye, Organic Barley, Organic Oats, Organic Corn, Organic Millet, Organic Flax Seeds, Organic Sesame Seeds), Organic Cane Sugar, Organic Wheat Gluten, Yeast, Sea Salt.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "sesame",
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0013764027053": {
+    "product": "Dave's Killer Bread 21 Whole Grains and Seeds (27 oz)",
+    "brand": "Dave's Killer Bread",
+    "upc": "013764027053",
+    "ingredients": "Organic Whole Wheat, Water, Organic 21 Whole Grains and Seeds Mix (Organic Cracked Wheat, Organic Rye, Organic Barley, Organic Oats, Organic Corn, Organic Millet, Organic Flax Seeds, Organic Sesame Seeds), Organic Cane Sugar, Organic Wheat Gluten, Yeast, Sea Salt.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "sesame",
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "013764027206": {
+    "product": "Dave's Killer Bread White Bread Done Right (24 oz)",
+    "brand": "Dave's Killer Bread",
+    "upc": "013764027206",
+    "ingredients": "Organic Wheat Flour, Water, Organic Cracked Wheat, Organic Cane Sugar, Organic Wheat Gluten, Organic Expeller Pressed Canola Oil, Yeast, Sea Salt, Cultured Organic Wheat Flour.",
+    "allergens": [
+      "gluten",
+      "yeast"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0013764027206": {
+    "product": "Dave's Killer Bread White Bread Done Right (24 oz)",
+    "brand": "Dave's Killer Bread",
+    "upc": "013764027206",
+    "ingredients": "Organic Wheat Flour, Water, Organic Cracked Wheat, Organic Cane Sugar, Organic Wheat Gluten, Organic Expeller Pressed Canola Oil, Yeast, Sea Salt, Cultured Organic Wheat Flour.",
+    "allergens": [
+      "gluten",
+      "yeast"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "013764027503": {
+    "product": "Dave's Killer Bread Epic Everything Bagels (5 ct, 16.75 oz)",
+    "brand": "Dave's Killer Bread",
+    "upc": "013764027503",
+    "ingredients": "Organic Wheat Flour, Water, Organic Everything Mix (Organic Chia Seeds, Organic Sesame Seeds, Organic Dehydrated Garlic, Organic Dehydrated Onion, Organic Poppy Seeds), Organic Cane Sugar, Yeast, Organic Wheat Gluten, Sea Salt.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "sesame"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0013764027503": {
+    "product": "Dave's Killer Bread Epic Everything Bagels (5 ct, 16.75 oz)",
+    "brand": "Dave's Killer Bread",
+    "upc": "013764027503",
+    "ingredients": "Organic Wheat Flour, Water, Organic Everything Mix (Organic Chia Seeds, Organic Sesame Seeds, Organic Dehydrated Garlic, Organic Dehydrated Onion, Organic Poppy Seeds), Organic Cane Sugar, Yeast, Organic Wheat Gluten, Sea Salt.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "sesame"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "072250037068": {
+    "product": "Nature's Own Honey Wheat Bread (20 oz)",
+    "brand": "Nature's Own",
+    "upc": "072250037068",
+    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Yeast, Honey, Sugar, Wheat Gluten, Soybean Oil, Salt, Calcium Propionate, Monoglycerides, DATEM.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0072250037068": {
+    "product": "Nature's Own Honey Wheat Bread (20 oz)",
+    "brand": "Nature's Own",
+    "upc": "072250037068",
+    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Yeast, Honey, Sugar, Wheat Gluten, Soybean Oil, Salt, Calcium Propionate, Monoglycerides, DATEM.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "072250037181": {
+    "product": "Nature's Own Butterbread (20 oz)",
+    "brand": "Nature's Own",
+    "upc": "072250037181",
+    "ingredients": "Enriched Flour, Water, Sugar, Yeast, Butter (Cream, Salt), Wheat Gluten, Salt, Calcium Propionate, Monoglycerides, DATEM.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0072250037181": {
+    "product": "Nature's Own Butterbread (20 oz)",
+    "brand": "Nature's Own",
+    "upc": "072250037181",
+    "ingredients": "Enriched Flour, Water, Sugar, Yeast, Butter (Cream, Salt), Wheat Gluten, Salt, Calcium Propionate, Monoglycerides, DATEM.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "072945601368": {
+    "product": "Sara Lee Classic White Bread (20 oz)",
+    "brand": "Sara Lee",
+    "upc": "072945601368",
+    "ingredients": "Enriched Wheat Flour, Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Salt, Wheat Gluten, Calcium Propionate, Monoglycerides, DATEM.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0072945601368": {
+    "product": "Sara Lee Classic White Bread (20 oz)",
+    "brand": "Sara Lee",
+    "upc": "072945601368",
+    "ingredients": "Enriched Wheat Flour, Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Salt, Wheat Gluten, Calcium Propionate, Monoglycerides, DATEM.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "072945612340": {
+    "product": "Sara Lee Artesano Bakery Bread (20 oz)",
+    "brand": "Sara Lee",
+    "upc": "072945612340",
+    "ingredients": "Enriched Wheat Flour, Water, Sugar, Yeast, Soybean Oil, Sea Salt, Wheat Gluten, Calcium Propionate, Monoglycerides, DATEM, Cornstarch.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "corn",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0072945612340": {
+    "product": "Sara Lee Artesano Bakery Bread (20 oz)",
+    "brand": "Sara Lee",
+    "upc": "072945612340",
+    "ingredients": "Enriched Wheat Flour, Water, Sugar, Yeast, Soybean Oil, Sea Salt, Wheat Gluten, Calcium Propionate, Monoglycerides, DATEM, Cornstarch.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "corn",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "073435000044": {
+    "product": "King's Hawaiian Original Sweet Rolls (12 ct)",
+    "brand": "King's Hawaiian",
+    "upc": "073435000044",
+    "ingredients": "Enriched Flour, Water, Sugar, Liquid Sugar, Butter, Eggs, Yeast, Potato Flour, Nonfat Milk, Whey, Soy Flour, Salt, Mono and Diglycerides.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "eggs",
+      "soy",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e471"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0073435000044": {
+    "product": "King's Hawaiian Original Sweet Rolls (12 ct)",
+    "brand": "King's Hawaiian",
+    "upc": "073435000044",
+    "ingredients": "Enriched Flour, Water, Sugar, Liquid Sugar, Butter, Eggs, Yeast, Potato Flour, Nonfat Milk, Whey, Soy Flour, Salt, Mono and Diglycerides.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "eggs",
+      "soy",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e471"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "856312002779": {
+    "product": "Fairlife 2% Reduced Fat Ultra-Filtered Milk (52 fl oz)",
+    "brand": "Fairlife",
+    "upc": "856312002779",
+    "ingredients": "Reduced Fat Ultra-Filtered Milk, Lactase Enzyme, Vitamin A Palmitate, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0856312002779": {
+    "product": "Fairlife 2% Reduced Fat Ultra-Filtered Milk (52 fl oz)",
+    "brand": "Fairlife",
+    "upc": "856312002779",
+    "ingredients": "Reduced Fat Ultra-Filtered Milk, Lactase Enzyme, Vitamin A Palmitate, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "856312002762": {
+    "product": "Fairlife Whole Ultra-Filtered Milk (52 fl oz)",
+    "brand": "Fairlife",
+    "upc": "856312002762",
+    "ingredients": "Ultra-Filtered Milk, Lactase Enzyme, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0856312002762": {
+    "product": "Fairlife Whole Ultra-Filtered Milk (52 fl oz)",
+    "brand": "Fairlife",
+    "upc": "856312002762",
+    "ingredients": "Ultra-Filtered Milk, Lactase Enzyme, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "894700010076": {
+    "product": "Chobani Non-Fat Vanilla Greek Yogurt (32 oz Tub)",
+    "brand": "Chobani",
+    "upc": "894700010076",
+    "ingredients": "Cultured Pasteurized Nonfat Milk, Water, Cane Sugar, Vanilla Extract, Pectin, Locust Bean Gum, Lemon Juice Concentrate.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "en:e440",
+      "en:e410"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0894700010076": {
+    "product": "Chobani Non-Fat Vanilla Greek Yogurt (32 oz Tub)",
+    "brand": "Chobani",
+    "upc": "894700010076",
+    "ingredients": "Cultured Pasteurized Nonfat Milk, Water, Cane Sugar, Vanilla Extract, Pectin, Locust Bean Gum, Lemon Juice Concentrate.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "en:e440",
+      "en:e410"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "742365004456": {
+    "product": "Horizon Organic Whole Milk (Half Gallon, 64 fl oz)",
+    "brand": "Horizon Organic",
+    "upc": "742365004456",
+    "ingredients": "Grade A Organic Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0742365004456": {
+    "product": "Horizon Organic Whole Milk (Half Gallon, 64 fl oz)",
+    "brand": "Horizon Organic",
+    "upc": "742365004456",
+    "ingredients": "Grade A Organic Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "853636006004": {
+    "product": "Oatly The Original Oatmilk (64 fl oz)",
+    "brand": "Oatly",
+    "upc": "853636006004",
+    "ingredients": "Oat Base (Water, Oats), Low Erucic Acid Rapeseed Oil. Contains 2% or less of: Dipotassium Phosphate, Calcium Carbonate, Tricalcium Phosphate, Sea Salt, Dicalcium Phosphate, Riboflavin, Vitamin A, Vitamin D2, Vitamin B12.",
+    "allergens": [],
+    "additives_tags": [
+      "en:e340"
+    ],
+    "stores": [
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer",
+      "Whole Foods"
+    ],
+    "isRecalled": false
+  },
+  "0853636006004": {
+    "product": "Oatly The Original Oatmilk (64 fl oz)",
+    "brand": "Oatly",
+    "upc": "853636006004",
+    "ingredients": "Oat Base (Water, Oats), Low Erucic Acid Rapeseed Oil. Contains 2% or less of: Dipotassium Phosphate, Calcium Carbonate, Tricalcium Phosphate, Sea Salt, Dicalcium Phosphate, Riboflavin, Vitamin A, Vitamin D2, Vitamin B12.",
+    "allergens": [],
+    "additives_tags": [
+      "en:e340"
+    ],
+    "stores": [
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer",
+      "Whole Foods"
+    ],
+    "isRecalled": false
+  },
+  "021000616015": {
+    "product": "Philadelphia Original Cream Cheese Brick (8 oz)",
+    "brand": "Philadelphia / Kraft",
+    "upc": "021000616015",
+    "ingredients": "Pasteurized Milk and Cream, Salt, Carob Bean Gum, Cheese Culture.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "en:e410"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0021000616015": {
+    "product": "Philadelphia Original Cream Cheese Brick (8 oz)",
+    "brand": "Philadelphia / Kraft",
+    "upc": "021000616015",
+    "ingredients": "Pasteurized Milk and Cream, Salt, Carob Bean Gum, Cheese Culture.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "en:e410"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "072830000046": {
+    "product": "Tillamook Medium Cheddar Cheese Block (8 oz)",
+    "brand": "Tillamook",
+    "upc": "072830000046",
+    "ingredients": "Cultured Milk, Salt, Enzymes, Annatto (Color).",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "en:e160b"
+    ],
+    "stores": [
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0072830000046": {
+    "product": "Tillamook Medium Cheddar Cheese Block (8 oz)",
+    "brand": "Tillamook",
+    "upc": "072830000046",
+    "ingredients": "Cultured Milk, Salt, Enzymes, Annatto (Color).",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "en:e160b"
+    ],
+    "stores": [
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "073420000112": {
+    "product": "Daisy Pure & Natural Sour Cream (16 oz)",
+    "brand": "Daisy",
+    "upc": "073420000112",
+    "ingredients": "Grade A Cultured Cream.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0073420000112": {
+    "product": "Daisy Pure & Natural Sour Cream (16 oz)",
+    "brand": "Daisy",
+    "upc": "073420000112",
+    "ingredients": "Grade A Cultured Cream.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "715141503487": {
+    "product": "Eggland's Best Large White Grade A Eggs (12 ct)",
+    "brand": "Eggland's Best",
+    "upc": "715141503487",
+    "ingredients": "Grade A Large Eggs.",
+    "allergens": [
+      "eggs"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0715141503487": {
+    "product": "Eggland's Best Large White Grade A Eggs (12 ct)",
+    "brand": "Eggland's Best",
+    "upc": "715141503487",
+    "ingredients": "Grade A Large Eggs.",
+    "allergens": [
+      "eggs"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "747479001066": {
+    "product": "Rao's Homemade Marinara Sauce (24 oz Jar)",
+    "brand": "Rao's Homemade",
+    "upc": "747479001066",
+    "ingredients": "Italian Whole Peeled Tomatoes, Olive Oil, Onions, Salt, Garlic, Basil, Black Pepper, Oregano.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer",
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0747479001066": {
+    "product": "Rao's Homemade Marinara Sauce (24 oz Jar)",
+    "brand": "Rao's Homemade",
+    "upc": "747479001066",
+    "ingredients": "Italian Whole Peeled Tomatoes, Olive Oil, Onions, Salt, Garlic, Basil, Black Pepper, Oregano.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer",
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "747479001073": {
+    "product": "Rao's Homemade Tomato Basil Pasta Sauce (24 oz Jar)",
+    "brand": "Rao's Homemade",
+    "upc": "747479001073",
+    "ingredients": "Italian Whole Peeled Tomatoes, Olive Oil, Basil, Onions, Salt, Garlic, Black Pepper, Oregano.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0747479001073": {
+    "product": "Rao's Homemade Tomato Basil Pasta Sauce (24 oz Jar)",
+    "brand": "Rao's Homemade",
+    "upc": "747479001073",
+    "ingredients": "Italian Whole Peeled Tomatoes, Olive Oil, Basil, Onions, Salt, Garlic, Black Pepper, Oregano.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "013000006059": {
+    "product": "Heinz Tomato Ketchup Easy Squeeze Bottle (20 oz)",
+    "brand": "Heinz",
+    "upc": "013000006059",
+    "ingredients": "Tomato Concentrate from Red Ripe Tomatoes, Distilled Vinegar, High Fructose Corn Syrup, Corn Syrup, Salt, Spice, Onion Powder, Natural Flavoring.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0013000006059": {
+    "product": "Heinz Tomato Ketchup Easy Squeeze Bottle (20 oz)",
+    "brand": "Heinz",
+    "upc": "013000006059",
+    "ingredients": "Tomato Concentrate from Red Ripe Tomatoes, Distilled Vinegar, High Fructose Corn Syrup, Corn Syrup, Salt, Spice, Onion Powder, Natural Flavoring.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "021000026982": {
+    "product": "Kraft Real Mayo Creamy Mayonnaise (30 fl oz)",
+    "brand": "Kraft",
+    "upc": "021000026982",
+    "ingredients": "Soybean Oil, Water, Vinegar, Eggs, Contains Less Than 2% of: Sugar, Salt, Egg Yolks, Natural Flavor, Calcium Disodium EDTA (to Protect Flavor), Dried Garlic, Dried Onions, Paprika.",
+    "allergens": [
+      "eggs",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e385"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0021000026982": {
+    "product": "Kraft Real Mayo Creamy Mayonnaise (30 fl oz)",
+    "brand": "Kraft",
+    "upc": "021000026982",
+    "ingredients": "Soybean Oil, Water, Vinegar, Eggs, Contains Less Than 2% of: Sugar, Salt, Egg Yolks, Natural Flavor, Calcium Disodium EDTA (to Protect Flavor), Dried Garlic, Dried Onions, Paprika.",
+    "allergens": [
+      "eggs",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e385"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "076808500854": {
+    "product": "Barilla Classic Blue Box Penne Rigate Pasta (16 oz)",
+    "brand": "Barilla",
+    "upc": "076808500854",
+    "ingredients": "Semolina (Wheat), Durum Wheat Flour, Niacin, Iron (Ferrous Sulfate), Thiamine Mononitrate, Riboflavin, Folic Acid.",
+    "allergens": [
+      "gluten"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer",
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0076808500854": {
+    "product": "Barilla Classic Blue Box Penne Rigate Pasta (16 oz)",
+    "brand": "Barilla",
+    "upc": "076808500854",
+    "ingredients": "Semolina (Wheat), Durum Wheat Flour, Niacin, Iron (Ferrous Sulfate), Thiamine Mononitrate, Riboflavin, Folic Acid.",
+    "allergens": [
+      "gluten"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer",
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "076808500878": {
+    "product": "Barilla Classic Blue Box Rotini Pasta (16 oz)",
+    "brand": "Barilla",
+    "upc": "076808500878",
+    "ingredients": "Semolina (Wheat), Durum Wheat Flour, Niacin, Iron, Thiamine Mononitrate, Riboflavin, Folic Acid.",
+    "allergens": [
+      "gluten"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer",
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0076808500878": {
+    "product": "Barilla Classic Blue Box Rotini Pasta (16 oz)",
+    "brand": "Barilla",
+    "upc": "076808500878",
+    "ingredients": "Semolina (Wheat), Durum Wheat Flour, Niacin, Iron, Thiamine Mononitrate, Riboflavin, Folic Acid.",
+    "allergens": [
+      "gluten"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer",
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "071100005086": {
+    "product": "Hidden Valley The Original Ranch Dressing (16 fl oz)",
+    "brand": "Hidden Valley",
+    "upc": "071100005086",
+    "ingredients": "Vegetable Oil (Soybean and/or Canola), Water, Sugar, Salt, Nonfat Buttermilk, Egg Yolk, Natural Flavors, Less Than 1% of: Spices, Garlic, Onion, Vinegar, Phosphoric Acid, Xanthan Gum, Modified Food Starch, Monosodium Glutamate, Artificial Flavors, Disodium Phosphate, Sorbic Acid, Calcium Disodium EDTA.",
+    "allergens": [
+      "dairy",
+      "eggs",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "en:e621",
+      "en:e415",
+      "en:e385",
+      "en:e200",
+      "en:modified-starch"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0071100005086": {
+    "product": "Hidden Valley The Original Ranch Dressing (16 fl oz)",
+    "brand": "Hidden Valley",
+    "upc": "071100005086",
+    "ingredients": "Vegetable Oil (Soybean and/or Canola), Water, Sugar, Salt, Nonfat Buttermilk, Egg Yolk, Natural Flavors, Less Than 1% of: Spices, Garlic, Onion, Vinegar, Phosphoric Acid, Xanthan Gum, Modified Food Starch, Monosodium Glutamate, Artificial Flavors, Disodium Phosphate, Sorbic Acid, Calcium Disodium EDTA.",
+    "allergens": [
+      "dairy",
+      "eggs",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "en:e621",
+      "en:e415",
+      "en:e385",
+      "en:e200",
+      "en:modified-starch"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "051000198426": {
+    "product": "Swanson 100% Natural Chicken Broth (32 oz Carton)",
+    "brand": "Swanson",
+    "upc": "051000198426",
+    "ingredients": "Chicken Broth, Contains Less Than 2% of: Salt, Natural Flavoring, Yeast Extract, Carrot Juice Concentrate, Celery Juice Concentrate, Onion Juice Concentrate.",
+    "allergens": [
+      "yeast"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0051000198426": {
+    "product": "Swanson 100% Natural Chicken Broth (32 oz Carton)",
+    "brand": "Swanson",
+    "upc": "051000198426",
+    "ingredients": "Chicken Broth, Contains Less Than 2% of: Salt, Natural Flavoring, Yeast Extract, Carrot Juice Concentrate, Celery Juice Concentrate, Onion Juice Concentrate.",
+    "allergens": [
+      "yeast"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "024100106853": {
+    "product": "Cheez-It Original Baked Snack Cheese Crackers (12.4 oz)",
+    "brand": "Cheez-It / Kellogg's",
+    "upc": "024100106853",
+    "ingredients": "Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Vitamin B1, Vitamin B2, Folic Acid), Vegetable Oil (Soybean and Palm Oil with TBHQ for Freshness), Cheese Made with Skim Milk (Skim Milk, Whey Protein, Salt, Cheese Cultures, Enzymes, Annatto Extract Color), White Cheddar, Salt, Paprika, Yeast, Paprika Extract Color, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e319",
+      "en:e160b",
+      "en:e322"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0024100106853": {
+    "product": "Cheez-It Original Baked Snack Cheese Crackers (12.4 oz)",
+    "brand": "Cheez-It / Kellogg's",
+    "upc": "024100106853",
+    "ingredients": "Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Vitamin B1, Vitamin B2, Folic Acid), Vegetable Oil (Soybean and Palm Oil with TBHQ for Freshness), Cheese Made with Skim Milk (Skim Milk, Whey Protein, Salt, Cheese Cultures, Enzymes, Annatto Extract Color), White Cheddar, Salt, Paprika, Yeast, Paprika Extract Color, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e319",
+      "en:e160b",
+      "en:e322"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "044000007676": {
+    "product": "Ritz Original Baked Crackers (13.7 oz)",
+    "brand": "Ritz / Nabisco",
+    "upc": "044000007676",
+    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid), Canola Oil, Palm Oil, Sugar, High Fructose Corn Syrup, Leavening (Calcium Phosphate, Baking Soda), Salt, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "en:e322"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0044000007676": {
+    "product": "Ritz Original Baked Crackers (13.7 oz)",
+    "brand": "Ritz / Nabisco",
+    "upc": "044000007676",
+    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid), Canola Oil, Palm Oil, Sugar, High Fructose Corn Syrup, Leavening (Calcium Phosphate, Baking Soda), Salt, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "en:e322"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "038000311107": {
+    "product": "Pop-Tarts Frosted Strawberry Toaster Pastries (8 ct)",
+    "brand": "Pop-Tarts / Kellogg's",
+    "upc": "038000311107",
+    "ingredients": "Enriched Flour, Corn Syrup, High Fructose Corn Syrup, Dextrose, Soybean and Palm Oil (with TBHQ), Bleached Wheat Flour, Contains 2% or Less of Wheat Starch, Salt, Dried Strawberries, Dried Pears, Dried Apples, Leavening, Citric Acid, Gelatin, Modified Wheat Starch, Yellow Corn Flour, Caramel Color, Xanthan Gum, Soy Lecithin, Red 40, Yellow 6, Blue 1.",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "en:e129",
+      "en:e110",
+      "en:e133",
+      "en:e319",
+      "en:e150d",
+      "en:e415",
+      "en:e322",
+      "en:e330"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0038000311107": {
+    "product": "Pop-Tarts Frosted Strawberry Toaster Pastries (8 ct)",
+    "brand": "Pop-Tarts / Kellogg's",
+    "upc": "038000311107",
+    "ingredients": "Enriched Flour, Corn Syrup, High Fructose Corn Syrup, Dextrose, Soybean and Palm Oil (with TBHQ), Bleached Wheat Flour, Contains 2% or Less of Wheat Starch, Salt, Dried Strawberries, Dried Pears, Dried Apples, Leavening, Citric Acid, Gelatin, Modified Wheat Starch, Yellow Corn Flour, Caramel Color, Xanthan Gum, Soy Lecithin, Red 40, Yellow 6, Blue 1.",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "en:e129",
+      "en:e110",
+      "en:e133",
+      "en:e319",
+      "en:e150d",
+      "en:e415",
+      "en:e322",
+      "en:e330"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "038000318212": {
+    "product": "Kellogg's Frosted Flakes Cereal (13.5 oz)",
+    "brand": "Kellogg's",
+    "upc": "038000318212",
+    "ingredients": "Milled Corn, Sugar, Malt Flavor, Contains 2% or Less of Salt, BHT for Freshness.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "en:e321"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0038000318212": {
+    "product": "Kellogg's Frosted Flakes Cereal (13.5 oz)",
+    "brand": "Kellogg's",
+    "upc": "038000318212",
+    "ingredients": "Milled Corn, Sugar, Malt Flavor, Contains 2% or Less of Salt, BHT for Freshness.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "en:e321"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "030034001019": {
+    "product": "Giant Eagle Grade A Whole Milk (1 Gallon)",
+    "brand": "Giant Eagle",
+    "upc": "030034001019",
+    "ingredients": "Grade A Whole Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0030034001019": {
+    "product": "Giant Eagle Grade A Whole Milk (1 Gallon)",
+    "brand": "Giant Eagle",
+    "upc": "030034001019",
+    "ingredients": "Grade A Whole Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "030034002016": {
+    "product": "Giant Eagle Grade A Large White Eggs (1 Dozen)",
+    "brand": "Giant Eagle",
+    "upc": "030034002016",
+    "ingredients": "Grade A Large Shell Eggs.",
+    "allergens": [
+      "eggs"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0030034002016": {
+    "product": "Giant Eagle Grade A Large White Eggs (1 Dozen)",
+    "brand": "Giant Eagle",
+    "upc": "030034002016",
+    "ingredients": "Grade A Large Shell Eggs.",
+    "allergens": [
+      "eggs"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "030034003013": {
+    "product": "Giant Eagle Salted Sweet Cream Butter (1 lb, 4 Quarters)",
+    "brand": "Giant Eagle",
+    "upc": "030034003013",
+    "ingredients": "Pasteurized Cream (Milk), Salt.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0030034003013": {
+    "product": "Giant Eagle Salted Sweet Cream Butter (1 lb, 4 Quarters)",
+    "brand": "Giant Eagle",
+    "upc": "030034003013",
+    "ingredients": "Pasteurized Cream (Milk), Salt.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "030034004010": {
+    "product": "Giant Eagle Traditional Enriched White Sandwich Bread (20 oz)",
+    "brand": "Giant Eagle",
+    "upc": "030034004010",
+    "ingredients": "Enriched Wheat Flour, Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Salt, Calcium Propionate, Monoglycerides, DATEM.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0030034004010": {
+    "product": "Giant Eagle Traditional Enriched White Sandwich Bread (20 oz)",
+    "brand": "Giant Eagle",
+    "upc": "030034004010",
+    "ingredients": "Enriched Wheat Flour, Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Salt, Calcium Propionate, Monoglycerides, DATEM.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "030034006014": {
+    "product": "Giant Eagle Finely Shredded Sharp Cheddar Cheese (8 oz)",
+    "brand": "Giant Eagle",
+    "upc": "030034006014",
+    "ingredients": "Cheddar Cheese (Pasteurized Milk, Cheese Culture, Salt, Enzymes, Annatto), Potato Starch, Powdered Cellulose, Natamycin.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "en:e235",
+      "en:e160b"
+    ],
+    "stores": [
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0030034006014": {
+    "product": "Giant Eagle Finely Shredded Sharp Cheddar Cheese (8 oz)",
+    "brand": "Giant Eagle",
+    "upc": "030034006014",
+    "ingredients": "Cheddar Cheese (Pasteurized Milk, Cheese Culture, Salt, Enzymes, Annatto), Potato Starch, Powdered Cellulose, Natamycin.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "en:e235",
+      "en:e160b"
+    ],
+    "stores": [
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "886926010015": {
+    "product": "Meijer Grade A Whole Milk (1 Gallon)",
+    "brand": "Meijer",
+    "upc": "886926010015",
+    "ingredients": "Grade A Whole Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0886926010015": {
+    "product": "Meijer Grade A Whole Milk (1 Gallon)",
+    "brand": "Meijer",
+    "upc": "886926010015",
+    "ingredients": "Grade A Whole Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "886926011012": {
+    "product": "Meijer 100% Whole Wheat Bread (20 oz)",
+    "brand": "Meijer",
+    "upc": "886926011012",
+    "ingredients": "Whole Wheat Flour, Water, Sugar, Yeast, Wheat Gluten, Soybean Oil, Salt, Calcium Propionate, Monoglycerides, DATEM.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0886926011012": {
+    "product": "Meijer 100% Whole Wheat Bread (20 oz)",
+    "brand": "Meijer",
+    "upc": "886926011012",
+    "ingredients": "Whole Wheat Flour, Water, Sugar, Yeast, Wheat Gluten, Soybean Oil, Salt, Calcium Propionate, Monoglycerides, DATEM.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "886926014013": {
+    "product": "Meijer Finely Shredded Mild Cheddar Cheese (8 oz)",
+    "brand": "Meijer",
+    "upc": "886926014013",
+    "ingredients": "Mild Cheddar Cheese (Pasteurized Milk, Cheese Culture, Salt, Enzymes, Annatto), Potato Starch, Powdered Cellulose, Natamycin.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "en:e235",
+      "en:e160b"
+    ],
+    "stores": [
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0886926014013": {
+    "product": "Meijer Finely Shredded Mild Cheddar Cheese (8 oz)",
+    "brand": "Meijer",
+    "upc": "886926014013",
+    "ingredients": "Mild Cheddar Cheese (Pasteurized Milk, Cheese Culture, Salt, Enzymes, Annatto), Potato Starch, Powdered Cellulose, Natamycin.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "en:e235",
+      "en:e160b"
+    ],
+    "stores": [
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "011110401014": {
+    "product": "Kroger Grade A Whole Milk (1 Gallon)",
+    "brand": "Kroger",
+    "upc": "011110401014",
+    "ingredients": "Grade A Whole Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Kroger"
+    ],
+    "isRecalled": false
+  },
+  "0011110401014": {
+    "product": "Kroger Grade A Whole Milk (1 Gallon)",
+    "brand": "Kroger",
+    "upc": "011110401014",
+    "ingredients": "Grade A Whole Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Kroger"
+    ],
+    "isRecalled": false
+  },
+  "011110403018": {
+    "product": "Kroger Traditional Sandwich Enriched White Bread (20 oz)",
+    "brand": "Kroger",
+    "upc": "011110403018",
+    "ingredients": "Enriched Wheat Flour, Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Salt, Calcium Propionate, DATEM, Monoglycerides.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "Kroger"
+    ],
+    "isRecalled": false
+  },
+  "0011110403018": {
+    "product": "Kroger Traditional Sandwich Enriched White Bread (20 oz)",
+    "brand": "Kroger",
+    "upc": "011110403018",
+    "ingredients": "Enriched Wheat Flour, Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Salt, Calcium Propionate, DATEM, Monoglycerides.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "Kroger"
+    ],
+    "isRecalled": false
+  },
+  "011110403025": {
+    "product": "Kroger 100% Whole Wheat Bread (20 oz)",
+    "brand": "Kroger",
+    "upc": "011110403025",
+    "ingredients": "Whole Wheat Flour, Water, Sugar, Wheat Gluten, Yeast, Soybean Oil, Salt, Calcium Propionate, Monoglycerides, DATEM.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "Kroger"
+    ],
+    "isRecalled": false
+  },
+  "0011110403025": {
+    "product": "Kroger 100% Whole Wheat Bread (20 oz)",
+    "brand": "Kroger",
+    "upc": "011110403025",
+    "ingredients": "Whole Wheat Flour, Water, Sugar, Wheat Gluten, Yeast, Soybean Oil, Salt, Calcium Propionate, Monoglycerides, DATEM.",
+    "allergens": [
+      "gluten",
+      "yeast",
+      "soy"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e472e"
+    ],
+    "stores": [
+      "Kroger"
+    ],
+    "isRecalled": false
+  },
+  "011110404015": {
+    "product": "Kroger Sweet Cream Salted Butter (1 lb, 4 Sticks)",
+    "brand": "Kroger",
+    "upc": "011110404015",
+    "ingredients": "Pasteurized Cream, Salt.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Kroger"
+    ],
+    "isRecalled": false
+  },
+  "0011110404015": {
+    "product": "Kroger Sweet Cream Salted Butter (1 lb, 4 Sticks)",
+    "brand": "Kroger",
+    "upc": "011110404015",
+    "ingredients": "Pasteurized Cream, Salt.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Kroger"
+    ],
+    "isRecalled": false
+  },
+  "011110405012": {
+    "product": "Kroger Finely Shredded Mild Cheddar Cheese (8 oz)",
+    "brand": "Kroger",
+    "upc": "011110405012",
+    "ingredients": "Pasteurized Milk, Cheese Culture, Salt, Enzymes, Annatto, Potato Starch, Powdered Cellulose, Natamycin.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "en:e235",
+      "en:e160b"
+    ],
+    "stores": [
+      "Kroger"
+    ],
+    "isRecalled": false
+  },
+  "0011110405012": {
+    "product": "Kroger Finely Shredded Mild Cheddar Cheese (8 oz)",
+    "brand": "Kroger",
+    "upc": "011110405012",
+    "ingredients": "Pasteurized Milk, Cheese Culture, Salt, Enzymes, Annatto, Potato Starch, Powdered Cellulose, Natamycin.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "en:e235",
+      "en:e160b"
+    ],
+    "stores": [
+      "Kroger"
+    ],
+    "isRecalled": false
+  },
+  "011110406019": {
+    "product": "Kroger Creamy Peanut Butter (16 oz)",
+    "brand": "Kroger",
+    "upc": "011110406019",
+    "ingredients": "Roasted Peanuts, Sugar, Hydrogenated Vegetable Oil (Cottonseed, Soybean, Rapeseed), Salt, Molasses.",
+    "allergens": [
+      "peanuts",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Kroger"
+    ],
+    "isRecalled": false
+  },
+  "0011110406019": {
+    "product": "Kroger Creamy Peanut Butter (16 oz)",
+    "brand": "Kroger",
+    "upc": "011110406019",
+    "ingredients": "Roasted Peanuts, Sugar, Hydrogenated Vegetable Oil (Cottonseed, Soybean, Rapeseed), Salt, Molasses.",
+    "allergens": [
+      "peanuts",
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Kroger"
     ],
     "isRecalled": false
   }
