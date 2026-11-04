@@ -1029,6 +1029,37 @@
       border-color: #94a3b8 !important;
     }
 
+    
+    /* Master Header Status Jump Pills in Light Mode (Ensure Allergens and Additives buttons never turn dark on mobile) */
+    html.theme-light .grid-cols-3 button.bg-slate-800,
+    html.theme-light button[onclick*="scrollToResultSection"].bg-slate-800 {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      color: #92400e !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    }
+    html.theme-light .grid-cols-3 button.bg-slate-800 span,
+    html.theme-light button[onclick*="scrollToResultSection"].bg-slate-800 span {
+      color: #000000 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .grid-cols-3 button.bg-slate-800 span.text-amber-300,
+    html.theme-light button[onclick*="scrollToResultSection"].bg-slate-800 span.text-amber-300 {
+      color: #b45309 !important;
+    }
+    html.theme-light .grid-cols-3 button.bg-slate-800 span.text-slate-300,
+    html.theme-light button[onclick*="scrollToResultSection"].bg-slate-800 span.text-slate-300 {
+      color: #334155 !important;
+    }
+    html.theme-light button[onclick*="scrollToResultSection('Allergen'"].bg-slate-800 {
+      background-color: #fefce8 !important;
+      border-color: #fef08a !important;
+    }
+    html.theme-light button[onclick*="scrollToResultSection('Additive'"].bg-slate-800 {
+      background-color: #faf5ff !important;
+      border-color: #e9d5ff !important;
+    }
+
     /* Unified Family Verdict Card Light Mode Styling */
     html.theme-light .family-verdict-card {
       background: #ffffff !important;
@@ -7198,6 +7229,28 @@
     };
 
     
+    
+    function renderMemberAvatar(iconKey, photoUrl, name, sizeCls = "w-7 h-7", iconSizeCls = "w-4 h-4") {
+      if (photoUrl) {
+        return `<img src="${photoUrl}" class="${sizeCls} rounded-full object-cover shrink-0 border border-amber-400" alt="${name || 'Member'}">`;
+      }
+      // If iconKey is an emoji (starts with high unicode or emoji char), render as emoji char directly
+      if (iconKey && typeof iconKey === 'string' && iconKey.trim().length > 0) {
+        const trimmed = iconKey.trim();
+        // Check if trimmed is a known SVG icon name
+        const knownSvgKeys = ['user', 'smile', 'shield', 'heart', 'star'];
+        if (knownSvgKeys.includes(trimmed.toLowerCase())) {
+          return `<div class="${sizeCls} rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-200 shrink-0 shadow-sm">${getProfileAvatarSvg(trimmed.toLowerCase(), iconSizeCls)}</div>`;
+        }
+        // If it's single character or typical emoji length, render the emoji directly
+        if (trimmed.length <= 4) {
+          return `<span class="${sizeCls} rounded-full bg-amber-900/60 border border-amber-400/50 flex items-center justify-center text-sm shrink-0">${trimmed}</span>`;
+        }
+      }
+      // Default picture emoji fallback
+      return `<span class="${sizeCls} rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-sm shrink-0">👤</span>`;
+    }
+
     function buildUnifiedFamilyVerdictCard(data) {
       const isRecalled = Boolean(data.isRecalled && data.recallRecord);
       const isTerminated = Boolean(data.terminatedNotice);
@@ -7225,7 +7278,7 @@
                   ${UI_ICONS.alertTriangle}
                 </span>
                 <div>
-                  <span class="text-[10px] font-mono tracking-widest text-rose-400 uppercase font-bold block">HOUSEHOLD VERDICT</span>
+                  <span class="text-[10px] font-mono tracking-widest text-rose-400 uppercase font-bold block">HOUSEHOLD ALLERGEN GUARD</span>
                   <h4 class="font-display text-sm font-bold text-white leading-tight">Do Not Consume • Active Federal Recall</h4>
                 </div>
               </div>
@@ -7255,7 +7308,7 @@
                   ${activeHasConflict ? UI_ICONS.alertCircle : UI_ICONS.shieldCheck}
                 </span>
                 <div>
-                  <span class="text-[10px] font-mono tracking-widest text-slate-400 uppercase font-bold block">SINGLE-USER ALLERGEN VERDICT</span>
+                  <span class="text-[10px] font-mono tracking-widest text-slate-400 uppercase font-bold block">HOUSEHOLD ALLERGEN GUARD</span>
                   <h4 class="font-display text-sm font-bold text-white leading-tight">
                     ${activeHasConflict ? `Dietary Alert for ${activeProf.name}` : `Safe for ${activeProf.name}`}
                   </h4>
@@ -7303,7 +7356,7 @@
                   ${UI_ICONS.info}
                 </span>
                 <div>
-                  <span class="text-[10px] font-mono tracking-widest text-slate-400 uppercase font-bold block">UNIFIED HOUSEHOLD VERDICT</span>
+                  <span class="text-[10px] font-mono tracking-widest text-slate-400 uppercase font-bold block">HOUSEHOLD ALLERGEN GUARD</span>
                   <h4 class="font-display text-sm font-bold text-white leading-tight">Check Packaging Label Directly</h4>
                 </div>
               </div>
@@ -7328,7 +7381,7 @@
                   ${UI_ICONS.shieldCheck}
                 </span>
                 <div>
-                  <span class="text-[10px] font-mono tracking-widest text-emerald-400 uppercase font-bold block">UNIFIED HOUSEHOLD VERDICT</span>
+                  <span class="text-[10px] font-mono tracking-widest text-emerald-400 uppercase font-bold block">HOUSEHOLD ALLERGEN GUARD</span>
                   <h4 class="font-display text-sm font-bold text-white leading-tight">Safe for the Entire Household</h4>
                 </div>
               </div>
@@ -7345,7 +7398,7 @@
               <div class="flex flex-wrap gap-1.5">
                 ${familyProfiles.map(p => `
                   <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 shadow-sm">
-                    ${p.photo ? `<img src="${p.photo}" class="w-4 h-4 rounded-full object-cover shrink-0">` : `<span class="text-[11px]">${p.icon || '👤'}</span>`}
+                    ${renderMemberAvatar(p.icon, p.photo, p.name, "w-4 h-4", "w-3 h-3")}
                     <span>${p.name}</span>
                     <span class="text-emerald-400 text-[10px]">✓</span>
                   </span>
@@ -7373,7 +7426,7 @@
                 ${UI_ICONS.alertTriangle}
               </span>
               <div>
-                <span class="text-[10px] font-mono tracking-widest text-amber-400 uppercase font-bold block">UNIFIED HOUSEHOLD VERDICT</span>
+                <span class="text-[10px] font-mono tracking-widest text-amber-400 uppercase font-bold block">HOUSEHOLD ALLERGEN GUARD</span>
                 <h4 class="font-display text-sm font-bold text-white leading-tight">
                   Dietary Alert for ${conflictingMembers.length} Household Member${conflictingMembers.length > 1 ? 's' : ''}
                 </h4>
@@ -7393,7 +7446,7 @@
               ${conflictingMembers.map(m => `
                 <div class="flex items-center justify-between bg-rose-950/60 border border-rose-500/40 px-3 py-1.5 rounded-xl text-xs">
                   <div class="flex items-center gap-2 font-bold text-white">
-                    ${m.photo ? `<img src="${m.photo}" class="w-5 h-5 rounded-full object-cover border border-rose-400 shrink-0">` : `<span class="text-sm shrink-0">${m.icon || '👤'}</span>`}
+                    ${renderMemberAvatar(m.icon, m.photo, m.name, "w-6 h-6", "w-3.5 h-3.5")}
                     <span>${m.name}</span>
                   </div>
                   <span class="font-semibold text-rose-300 text-right text-[11px]">Contains ${m.allergens.join(', ')}</span>
@@ -7411,7 +7464,7 @@
               <div class="flex flex-wrap gap-1.5">
                 ${safeMembers.map(p => `
                   <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-950/70 text-emerald-300 border border-emerald-500/30">
-                    ${p.photo ? `<img src="${p.photo}" class="w-3.5 h-3.5 rounded-full object-cover shrink-0">` : `<span class="text-[10px]">${p.icon || '👤'}</span>`}
+                    ${renderMemberAvatar(p.icon, p.photo, p.name, "w-4 h-4", "w-3 h-3")}
                     <span>${p.name}</span>
                   </span>
                 `).join('')}
@@ -7998,12 +8051,11 @@
       targetContainer.innerHTML = `
         <div class="space-y-3.5">
           ${masterHeaderHtml}
-          ${familyVerdictCardHtml}
           <div id="${activeSource}-window-Recall" class="scroll-mt-[150px] transition-all duration-300 rounded-2xl">
             ${recallWindowHtml}
           </div>
           <div id="${activeSource}-window-Allergen" class="scroll-mt-[150px] transition-all duration-300 rounded-2xl">
-            ${allergenWindowHtml}
+            ${familyVerdictCardHtml}
           </div>
           <div id="${activeSource}-window-Additive" class="scroll-mt-[150px] transition-all duration-300 rounded-2xl">
             ${additiveWindowHtml}
@@ -9858,7 +9910,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=35')
+        navigator.serviceWorker.register('./sw.js?v=36')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
