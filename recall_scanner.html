@@ -1205,15 +1205,26 @@
           <svg class="w-4 h-4 text-sky-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
           <span>Share Family VIP Pass (Free Unlocked Link)</span>
         </button>
-        <button 
-          type="button" 
-          id="toggleTesterModeBtn" 
-          class="w-full py-1.5 px-3 rounded-lg border border-slate-800 hover:border-slate-700 bg-slate-950/60 text-slate-400 hover:text-amber-300 text-[10px] font-mono transition flex items-center justify-center gap-1.5"
-          title="Quickly test how the app looks for free vs paid users"
-        >
-          <svg class="w-4 h-4 text-purple-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
-          <span id="toggleTesterBtnText">Tester Switch: Toggle Free / Pro</span>
-        </button>
+        <!-- Developer Testing Tier Switcher -->
+        <div class="p-3.5 rounded-2xl bg-slate-950/80 border border-purple-500/30 flex items-center justify-between gap-3 shadow-sm">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-300 shrink-0">
+              <svg class="w-5 h-5 text-purple-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+            </div>
+            <div class="min-w-0">
+              <span class="font-bold text-xs text-white block">Developer Mode</span>
+              <span id="devModeStatusSubtext" class="text-[11px] text-slate-400 block truncate">Testing as: BiteHound Pro</span>
+            </div>
+          </div>
+          <button 
+            type="button" 
+            id="toggleTesterModeBtn" 
+            class="min-h-[42px] px-3.5 py-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/20 text-emerald-300 font-bold text-xs transition active:scale-95 shadow-sm flex items-center gap-1.5 shrink-0 cursor-pointer"
+            title="Toggle between Free and Pro tiers for testing"
+          >
+            <span id="toggleTesterBtnText">Pro Active</span>
+          </button>
+        </div>
       </div>
 
       <!-- Sound & Haptic Options -->
@@ -2150,7 +2161,21 @@
 
     function checkPlusStatus() {
       try {
-        // Check localStorage, sessionStorage, and persistent cookie
+        // 1. Explicit Developer Mode Override (Highest Priority: Never overridden by cookies or cache)
+        const devOverride = localStorage.getItem('bitehound_dev_mode');
+        if (devOverride === 'free') {
+          isPlusActive = false;
+          plusStatusType = 'free';
+          trialDaysRemaining = 0;
+          return;
+        } else if (devOverride === 'paid') {
+          isPlusActive = true;
+          plusStatusType = 'paid';
+          trialDaysRemaining = 0;
+          return;
+        }
+
+        // 2. Standard Storage & Persistent Cookie checks
         let savedPro = null;
         try {
           savedPro = localStorage.getItem('bitehound_pro_active') || localStorage.getItem('safebite_pro_active') || localStorage.getItem('safebite_plus_active') || sessionStorage.getItem('safebite_pro_active');
@@ -7094,6 +7119,21 @@
       prefHapticBtn.className = hapticsEnabled 
         ? 'min-h-[40px] px-3.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold active:scale-95'
         : 'min-h-[40px] px-3.5 py-1.5 rounded-lg bg-slate-800 text-slate-400 border border-slate-700 font-medium active:scale-95';
+
+      const devBtn = document.getElementById('toggleTesterModeBtn');
+      const devText = document.getElementById('toggleTesterBtnText');
+      const devSub = document.getElementById('devModeStatusSubtext');
+      if (devBtn && devText) {
+        if (isPlusActive) {
+          devBtn.className = "min-h-[42px] px-3.5 py-1.5 rounded-xl border border-emerald-500/40 bg-emerald-500/20 text-emerald-300 font-bold text-xs transition active:scale-95 shadow-sm flex items-center gap-1.5 cursor-pointer";
+          devText.textContent = "Pro Active • Tap for Free";
+          if (devSub) devSub.textContent = "Testing as: BiteHound Pro (All features unlocked)";
+        } else {
+          devBtn.className = "min-h-[42px] px-3.5 py-1.5 rounded-xl border border-slate-700 bg-slate-800 text-slate-300 font-semibold text-xs transition active:scale-95 shadow-sm flex items-center gap-1.5 cursor-pointer hover:border-slate-600";
+          devText.textContent = "Free Mode • Tap for Pro";
+          if (devSub) devSub.textContent = "Testing as: Free Tier (Paywall & locked features active)";
+        }
+      }
     }
 
     const toggleTesterModeBtn = document.getElementById('toggleTesterModeBtn');
@@ -7103,28 +7143,38 @@
       toggleTesterModeBtn.addEventListener('click', () => {
         triggerHaptic([40]);
         if (isPlusActive) {
+          // Switch to Free Mode (Paywall & restrictions active)
+          try {
+            localStorage.setItem('bitehound_dev_mode', 'free');
+            localStorage.setItem('bitehound_pro_active', 'free');
+            localStorage.setItem('safebite_pro_active', 'free');
+            localStorage.setItem('safebite_plus_active', 'free');
+            sessionStorage.setItem('safebite_pro_active', 'free');
+            document.cookie = 'safebite_pro_vip=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+          } catch (e) {}
           isPlusActive = false;
           plusStatusType = 'free';
-          try {
-            localStorage.removeItem('safebite_pro_active');
-            localStorage.removeItem('safebite_plus_active');
-            localStorage.removeItem('safebite_trial_start');
-          } catch (e) {}
           updatePlusUI();
           renderAllergensTab();
+          renderCustomizeTab();
           sound.playScanBeep();
-          showCustomizeToast("Switched to Free Mode (Recalls only).");
+          showCustomizeToast("Developer Mode: Switched to Free Tier (Paywall Active)");
         } else {
+          // Switch to Pro Active Mode (All features unlocked)
+          try {
+            localStorage.setItem('bitehound_dev_mode', 'paid');
+            localStorage.setItem('bitehound_pro_active', 'paid');
+            localStorage.setItem('safebite_pro_active', 'paid');
+            localStorage.setItem('safebite_plus_active', 'paid');
+            sessionStorage.setItem('safebite_pro_active', 'paid');
+          } catch (e) {}
           isPlusActive = true;
           plusStatusType = 'paid';
-          try {
-            localStorage.setItem('safebite_pro_active', 'paid');
-            localStorage.setItem('safebite_pro_active', 'paid'); localStorage.setItem('safebite_plus_active', 'paid');
-          } catch (e) {}
           updatePlusUI();
           renderAllergensTab();
+          renderCustomizeTab();
           sound.playClearChime();
-          showCustomizeToast("Switched to Pro Active! 12 allergens & additive screening unlocked.");
+          showCustomizeToast("Developer Mode: Switched to Pro Active (All Features Unlocked)");
         }
       });
     }
