@@ -100,33 +100,34 @@
        ========================================================================== */
     html.theme-light body {
       background-color: #f8fafc !important;
-      color: #0f172a !important;
+      color: #000000 !important;
       -webkit-font-smoothing: antialiased;
     }
 
     /* Ambient background glows dimmed in light mode */
     html.theme-light .fixed.top-0 {
-      opacity: 0.12 !important;
+      opacity: 0.08 !important;
     }
 
     /* Header Bar */
     html.theme-light header {
-      background: rgba(255, 255, 255, 0.94) !important;
-      border-color: #e2e8f0 !important;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.96) !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06);
     }
     html.theme-light header h1 {
-      color: #0f172a !important;
+      color: #000000 !important;
     }
 
     /* Navigation Bar */
     html.theme-light nav {
-      background: rgba(255, 255, 255, 0.96) !important;
-      border-color: #e2e8f0 !important;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.98) !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06);
     }
     html.theme-light .nav-tab {
-      color: #475569 !important;
+      color: #000000 !important;
+      font-weight: 700 !important;
     }
     html.theme-light .nav-tab.active-tab {
       background: #0f172a !important;
@@ -137,28 +138,36 @@
 
     /* Main Panels & Containers */
     html.theme-light section,
-    html.theme-light #scannerSection,
+    html.theme-light #scannerPanel,
     html.theme-light #manualPanel,
     html.theme-light #allergensPanel,
     html.theme-light #bulletinsPanel,
     html.theme-light #customizePanel,
     html.theme-light .glass-surface {
       background: #ffffff !important;
-      border-color: #e2e8f0 !important;
+      border-color: #cbd5e1 !important;
       box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.02) !important;
-      color: #0f172a !important;
+      color: #000000 !important;
     }
 
-    /* Universal Text Overrides for High Contrast */
+    /* ==========================================================
+       ALL GRAY FONTS FORCED TO HIGH-CONTRAST BLACK IN LIGHT MODE
+       ========================================================== */
     html.theme-light h1,
     html.theme-light h2,
     html.theme-light h3,
     html.theme-light h4,
-    html.theme-light strong {
-      color: #0f172a !important;
+    html.theme-light strong,
+    html.theme-light b,
+    html.theme-light label {
+      color: #000000 !important;
+      font-weight: 700 !important;
     }
 
-    /* Force all white and light-gray text to dark slate in light mode */
+    /* Force all gray, white, and slate text variants to pure solid black */
+    html.theme-light p,
+    html.theme-light span,
+    html.theme-light div,
     html.theme-light span.text-white,
     html.theme-light p.text-white,
     html.theme-light div.text-white,
@@ -167,21 +176,63 @@
     html.theme-light span.text-slate-200,
     html.theme-light p.text-slate-200,
     html.theme-light span.text-slate-300,
-    html.theme-light p.text-slate-300 {
-      color: #0f172a !important;
+    html.theme-light p.text-slate-300,
+    html.theme-light span.text-slate-400,
+    html.theme-light p.text-slate-400,
+    html.theme-light span.text-slate-500,
+    html.theme-light p.text-slate-500,
+    html.theme-light span.text-slate-600,
+    html.theme-light p.text-slate-600,
+    html.theme-light span.text-gray-300,
+    html.theme-light span.text-gray-400,
+    html.theme-light span.text-gray-500,
+    html.theme-light span.text-gray-600,
+    html.theme-light p.text-gray-400,
+    html.theme-light p.text-gray-500,
+    html.theme-light .font-mono.text-slate-400 {
+      color: #000000 !important;
     }
 
-    html.theme-light p,
-    html.theme-light span.text-slate-400,
-    html.theme-light span.text-slate-500,
-    html.theme-light p.text-slate-400,
-    html.theme-light p.text-slate-500 {
-      color: #475569 !important;
+    /* Keep colored status pills & badges distinct and readable */
+    html.theme-light .text-emerald-300,
+    html.theme-light .text-emerald-400,
+    html.theme-light .text-emerald-500 {
+      color: #047857 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .text-rose-300,
+    html.theme-light .text-rose-400,
+    html.theme-light .text-rose-500 {
+      color: #b91c1c !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .text-amber-300,
+    html.theme-light .text-amber-400,
+    html.theme-light .text-amber-500 {
+      color: #b45309 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .text-sky-300,
+    html.theme-light .text-sky-400,
+    html.theme-light .text-sky-500 {
+      color: #0369a1 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .text-teal-300,
+    html.theme-light .text-teal-400 {
+      color: #0f766e !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .text-purple-300,
+    html.theme-light .text-purple-400 {
+      color: #7e22ce !important;
+      font-weight: 700 !important;
     }
 
     /* Dark Surfaces mapped to clean light surfaces */
     html.theme-light .bg-slate-950,
     html.theme-light .bg-slate-900,
+    html.theme-light .bg-slate-900\/95,
     html.theme-light .bg-slate-900\/90,
     html.theme-light .bg-slate-900\/80,
     html.theme-light .bg-slate-950\/80,
@@ -190,8 +241,19 @@
     html.theme-light .bg-slate-950\/70,
     html.theme-light .bg-slate-950\/95 {
       background-color: #f8fafc !important;
-      border-color: #e2e8f0 !important;
-      color: #0f172a !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+    }
+
+    /* Universal Border Adjustment in Light Mode */
+    html.theme-light .border-slate-800,
+    html.theme-light .border-slate-800\/80,
+    html.theme-light .border-slate-800\/90,
+    html.theme-light .border-slate-800\/70,
+    html.theme-light .border-slate-800\/60,
+    html.theme-light .border-slate-700,
+    html.theme-light .border-slate-700\/80 {
+      border-color: #cbd5e1 !important;
     }
 
     /* Input Fields & Dropdowns */
@@ -199,34 +261,30 @@
     html.theme-light select {
       background-color: #ffffff !important;
       border-color: #cbd5e1 !important;
-      color: #0f172a !important;
+      color: #000000 !important;
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     }
     html.theme-light input::placeholder {
-      color: #94a3b8 !important;
+      color: #64748b !important;
     }
     html.theme-light #clearSearchBtn,
     html.theme-light #clearBtn {
       background-color: #e2e8f0 !important;
-      color: #475569 !important;
+      color: #000000 !important;
     }
 
-    /* Header Settings Gear Icon in Light Mode (Removes dark window) */
+    /* Header Settings Gear Icon in Light Mode */
     html.theme-light #headerSettingsBtn {
       background-color: #ffffff !important;
       border-color: #cbd5e1 !important;
-      color: #1e293b !important;
+      color: #000000 !important;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
-    }
-    html.theme-light #headerSettingsBtn:hover {
-      background-color: #f8fafc !important;
-      border-color: #94a3b8 !important;
     }
     html.theme-light #headerSettingsBtn svg {
       color: #d97706 !important;
     }
 
-    /* Camera Viewfinder in Light Mode (Removes black windows & dark frame) */
+    /* Camera Viewfinder in Light Mode */
     html.theme-light #scannerPanel .bg-slate-950,
     html.theme-light #cameraPlaceholder {
       background-color: #f8fafc !important;
@@ -246,151 +304,217 @@
     html.theme-light #cameraPlaceholder .bg-slate-300\/60,
     html.theme-light #cameraPlaceholder .bg-slate-300\/50,
     html.theme-light #cameraPlaceholder .bg-slate-300\/40 {
-      background-color: #1e293b !important;
-    }
-    html.theme-light #cameraPlaceholder span.text-amber-300 {
-      color: #b45309 !important;
-      font-weight: 700 !important;
-    }
-    html.theme-light #cameraPlaceholder p {
-      color: #0f172a !important;
-      font-weight: 700 !important;
-    }
-    html.theme-light #cameraPlaceholder p.text-slate-400 {
-      color: #475569 !important;
-      font-weight: 500 !important;
-    }
-    html.theme-light #toggleTorchBtn {
-      background: rgba(255, 255, 255, 0.95) !important;
-      border-color: #cbd5e1 !important;
-      color: #0f172a !important;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
-    }
-    html.theme-light #cameraScanSuccessOverlay {
-      background-color: rgba(248, 250, 252, 0.95) !important;
-    }
-    html.theme-light #cameraScanSuccessOverlay span.text-white {
-      color: #0f172a !important;
-    }
-    html.theme-light #toggleScanTipsBtn {
-      background: #ffffff !important;
-      border-color: #cbd5e1 !important;
-      color: #0284c7 !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
-    }
-    html.theme-light #scanTipsDrawer {
-      background: #f8fafc !important;
-      border-color: #cbd5e1 !important;
-      color: #1e293b !important;
-    }
-    html.theme-light #scanTipsDrawer strong {
-      color: #0f172a !important;
-    }
-    html.theme-light #scanTipsDrawer p {
-      color: #334155 !important;
+      background-color: #0f172a !important;
     }
 
-    /* High-Contrast Pill Badges in Master Scan Header */
-    html.theme-light .bg-emerald-500\/15,
-    html.theme-light .bg-emerald-500\/20 {
+    /* ==========================================================
+       SCANNED PRODUCTS IDENTIFIER PAGE (CLEAN WHITE & ACCESSIBLE)
+       ========================================================== */
+    /* Remove dark gradient overlays from all result cards */
+    html.theme-light #scannerResultContainer,
+    html.theme-light #manualResultContainer,
+    html.theme-light #scannerResultContainer [class*="bg-gradient-"],
+    html.theme-light #manualResultContainer [class*="bg-gradient-"],
+    html.theme-light #scannerResultContainer .bg-gradient-to-b,
+    html.theme-light #manualResultContainer .bg-gradient-to-b {
+      background-image: none !important;
+    }
+
+    /* Master Product Overview Card */
+    html.theme-light #scannerResultContainer > div > div:first-child,
+    html.theme-light #manualResultContainer > div > div:first-child {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05) !important;
+    }
+    html.theme-light #scannerResultContainer h3,
+    html.theme-light #manualResultContainer h3 {
+      color: #000000 !important;
+      font-weight: 800 !important;
+    }
+    html.theme-light #scannerResultContainer span.text-sky-400,
+    html.theme-light #manualResultContainer span.text-sky-400 {
+      color: #0284c7 !important;
+      font-weight: 700 !important;
+    }
+
+    /* Scanned timestamp badge */
+    html.theme-light #scannerResultContainer span.bg-slate-950,
+    html.theme-light #manualResultContainer span.bg-slate-950 {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+      font-weight: 700 !important;
+    }
+
+    /* Pantry Shield status pill on master card */
+    html.theme-light #scannerResultContainer .bg-emerald-950\/70,
+    html.theme-light #manualResultContainer .bg-emerald-950\/70 {
       background-color: #ecfdf5 !important;
       border-color: #a7f3d0 !important;
       color: #065f46 !important;
+    }
+    html.theme-light #scannerResultContainer .bg-emerald-950\/70 span,
+    html.theme-light #manualResultContainer .bg-emerald-950\/70 span {
+      color: #065f46 !important;
       font-weight: 700 !important;
     }
-    html.theme-light .bg-amber-500\/20,
-    html.theme-light .bg-amber-500\/15 {
+
+    /* Interactive Jump Pills on Master Card */
+    html.theme-light .bg-emerald-500\/15 {
+      background-color: #ecfdf5 !important;
+      border-color: #a7f3d0 !important;
+      color: #065f46 !important;
+    }
+    html.theme-light .bg-emerald-500\/15 span {
+      color: #065f46 !important;
+    }
+    html.theme-light .bg-rose-500\/20 {
+      background-color: #fff1f2 !important;
+      border-color: #fecaca !important;
+      color: #991b1b !important;
+    }
+    html.theme-light .bg-rose-500\/20 span {
+      color: #991b1b !important;
+    }
+    html.theme-light .bg-amber-500\/20 {
       background-color: #fffbeb !important;
       border-color: #fde68a !important;
       color: #92400e !important;
-      font-weight: 700 !important;
     }
-    html.theme-light .bg-rose-500\/20,
-    html.theme-light .bg-rose-500\/30,
-    html.theme-light .bg-rose-950\/70 {
-      background-color: #fff1f2 !important;
-      border-color: #fecdd3 !important;
-      color: #9f1239 !important;
-      font-weight: 700 !important;
+    html.theme-light .bg-amber-500\/20 span {
+      color: #92400e !important;
+    }
+    html.theme-light .bg-purple-500\/20 {
+      background-color: #faf5ff !important;
+      border-color: #e9d5ff !important;
+      color: #6b21a8 !important;
+    }
+    html.theme-light .bg-purple-500\/20 span {
+      color: #6b21a8 !important;
     }
     html.theme-light .bg-teal-500\/20 {
       background-color: #f0fdfa !important;
       border-color: #99f6e4 !important;
       color: #115e59 !important;
-      font-weight: 700 !important;
     }
-    html.theme-light .bg-slate-800 {
-      background-color: #f1f5f9 !important;
+    html.theme-light .bg-teal-500\/20 span {
+      color: #115e59 !important;
+    }
+
+    /* Result Window Cards (Recall, Allergen, Additive) */
+    html.theme-light [id$="-window-Recall"] > div,
+    html.theme-light [id$="-window-Allergen"] > div,
+    html.theme-light [id$="-window-Additive"] > div {
+      background-color: #ffffff !important;
       border-color: #cbd5e1 !important;
-      color: #334155 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+      color: #000000 !important;
     }
 
-    /* Scan Results Window Cards */
-    html.theme-light #scannerResultContainer > div,
-    html.theme-light #manualResultContainer > div {
-      color: #0f172a !important;
+    /* Cleared (Emerald) Window */
+    html.theme-light .border-emerald-500\/50 {
+      background-color: #f0fdf4 !important;
+      border-color: #86efac !important;
+    }
+    html.theme-light .border-emerald-500\/50 h3,
+    html.theme-light .border-emerald-500\/50 p,
+    html.theme-light .border-emerald-500\/50 span {
+      color: #000000 !important;
+    }
+    html.theme-light .border-emerald-500\/50 span.text-emerald-300,
+    html.theme-light .border-emerald-500\/50 span.text-emerald-400 {
+      color: #047857 !important;
+    }
+    html.theme-light .bg-emerald-950\/80 {
+      background-color: #dcfce7 !important;
+      border-color: #bbf7d0 !important;
+      color: #14532d !important;
+    }
+    html.theme-light .bg-emerald-950\/80 span {
+      color: #14532d !important;
     }
 
-    /* Window 1: Recall Card */
-    html.theme-light [id$="-window-Recall"] > div {
-      background: #ffffff !important;
-      border-color: #e2e8f0 !important;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    /* Active Recall (Rose) Window */
+    html.theme-light .border-rose-500 {
+      background-color: #fff1f2 !important;
+      border-color: #f87171 !important;
+    }
+    html.theme-light .border-rose-500 p,
+    html.theme-light .border-rose-500 span {
+      color: #000000 !important;
+    }
+    html.theme-light .bg-rose-950\/80,
+    html.theme-light .bg-rose-950\/60,
+    html.theme-light .bg-rose-900\/70 {
+      background-color: #fee2e2 !important;
+      border-color: #fecaca !important;
+      color: #991b1b !important;
+    }
+    html.theme-light .bg-rose-950\/60 span,
+    html.theme-light .bg-rose-950\/60 p,
+    html.theme-light .bg-rose-900\/70 span {
+      color: #991b1b !important;
     }
 
-    /* Window 2: Allergen Card */
-    html.theme-light [id$="-window-Allergen"] > div {
-      background: #ffffff !important;
-      border-color: #e2e8f0 !important;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    }
-    html.theme-light .bg-amber-950\/60,
-    html.theme-light .bg-amber-950\/80 {
+    /* Allergen Conflict (Amber) Window */
+    html.theme-light .border-amber-400 {
       background-color: #fffbeb !important;
+      border-color: #fcd34d !important;
+    }
+    html.theme-light .border-amber-400 p,
+    html.theme-light .border-amber-400 span {
+      color: #000000 !important;
+    }
+    html.theme-light .bg-amber-950\/80,
+    html.theme-light .bg-amber-950\/60 {
+      background-color: #fef3c7 !important;
       border-color: #fde68a !important;
       color: #92400e !important;
     }
-    html.theme-light .bg-amber-950\/60 span.font-bold,
-    html.theme-light .bg-amber-950\/60 span {
-      color: #0f172a !important;
-    }
-    html.theme-light .text-rose-300,
-    html.theme-light .text-rose-400 {
-      color: #b91c1c !important;
-      font-weight: 700 !important;
-    }
-    html.theme-light .text-amber-300,
-    html.theme-light .text-amber-400 {
-      color: #b45309 !important;
-    }
-    html.theme-light .text-emerald-300,
-    html.theme-light .text-emerald-400 {
-      color: #047857 !important;
-    }
-    html.theme-light .text-sky-300,
-    html.theme-light .text-sky-400 {
-      color: #0369a1 !important;
-    }
-    html.theme-light .text-teal-300 {
-      color: #0f766e !important;
-    }
-    html.theme-light .text-purple-300,
-    html.theme-light .text-purple-400 {
-      color: #7e22ce !important;
+    html.theme-light .bg-amber-950\/60 span,
+    html.theme-light .bg-amber-950\/60 span.font-bold {
+      color: #92400e !important;
     }
 
-    /* Window 3: Additives Card */
-    html.theme-light [id$="-window-Additive"] > div {
-      background: #ffffff !important;
-      border-color: #e2e8f0 !important;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    /* Additives Flagged (Purple) Window */
+    html.theme-light .border-purple-500\/80 {
+      background-color: #faf5ff !important;
+      border-color: #d8b4fe !important;
+    }
+    html.theme-light .border-purple-500\/80 p,
+    html.theme-light .border-purple-500\/80 span {
+      color: #000000 !important;
+    }
+    html.theme-light .bg-purple-950\/70,
+    html.theme-light .bg-purple-950\/80,
+    html.theme-light .bg-purple-950\/50 {
+      background-color: #f3e8ff !important;
+      border-color: #e9d5ff !important;
+      color: #581c87 !important;
+    }
+    html.theme-light .bg-purple-950\/50 span {
+      color: #581c87 !important;
     }
 
-    /* Window 4: Ingredients Card */
-    html.theme-light [id$="-window-Ingredients"] > div {
-      background: #ffffff !important;
-      border-color: #e2e8f0 !important;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    /* Result Window Inner Containers (Ingredients, Details) */
+    html.theme-light [id$="-window-Recall"] .bg-slate-950\/80,
+    html.theme-light [id$="-window-Allergen"] .bg-slate-950\/80,
+    html.theme-light [id$="-window-Additive"] .bg-slate-950\/80,
+    html.theme-light [id$="-window-Additive"] .bg-slate-950\/90,
+    html.theme-light [id$="-window-Additive"] .bg-slate-950 {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+    }
+
+    /* Action buttons below result card */
+    html.theme-light #scanNextItemBtn,
+    html.theme-light #manualNextItemBtn {
+      background-color: #0f172a !important;
+      color: #ffffff !important;
+      border-color: #0f172a !important;
     }
 
     /* Watchlist & Search Items */
@@ -398,19 +522,21 @@
     html.theme-light #searchResultsBox > div,
     html.theme-light .search-result-item {
       background-color: #ffffff !important;
-      border-color: #e2e8f0 !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
       box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05) !important;
     }
     html.theme-light .search-result-item:hover {
       background-color: #f8fafc !important;
-      border-color: #cbd5e1 !important;
+      border-color: #94a3b8 !important;
     }
 
     /* Priority Bulletin Cards */
     html.theme-light #bulletinFeedList > div,
     html.theme-light #bulletinFeedList .border-rose-900\/40 {
       background-color: #ffffff !important;
-      border-color: #e2e8f0 !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
     }
 
@@ -418,33 +544,25 @@
     html.theme-light .family-profile-pill:not(.bg-gradient-to-r) {
       background: #ffffff !important;
       border-color: #cbd5e1 !important;
-      color: #0f172a !important;
+      color: #000000 !important;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     }
     html.theme-light .family-profile-pill:not(.bg-gradient-to-r) span {
-      color: #0f172a !important;
-    }
-    html.theme-light .family-profile-pill:not(.bg-gradient-to-r) span.text-slate-400 {
-      color: #64748b !important;
+      color: #000000 !important;
     }
 
     /* Active Family Guard Card in Light Mode */
     html.theme-light #activeProfileNotice > div {
       background: #ffffff !important;
       border-color: #cbd5e1 !important;
+      color: #000000 !important;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
     }
 
-    /* Allergen Controls & Shaded Quick Action Windows */
+    /* Allergen Controls & Buttons in Light Mode */
     html.theme-light #guardrailListHeaderNotice {
-      color: #0f172a !important;
+      color: #000000 !important;
       font-weight: 700 !important;
-    }
-    html.theme-light #allergensPanel > div.bg-slate-900\/90,
-    html.theme-light #allergensPanel div.flex.items-center.justify-between.bg-slate-900\/90 {
-      background-color: #f8fafc !important;
-      border-color: #cbd5e1 !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
     }
     html.theme-light #selectAllergensBtn {
       background-color: #0284c7 !important;
@@ -459,7 +577,7 @@
     html.theme-light #resetAllergensBtn {
       background-color: #f1f5f9 !important;
       border-color: #cbd5e1 !important;
-      color: #1e293b !important;
+      color: #000000 !important;
       font-weight: 700 !important;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
     }
@@ -469,11 +587,11 @@
       border-color: #fca5a5 !important;
     }
 
-    /* Allergen Toggle Buttons in Light Mode */
+    /* Allergen Toggle Cards in Light Mode */
     html.theme-light .allergen-toggle-btn {
       background: #ffffff !important;
       border-color: #cbd5e1 !important;
-      color: #0f172a !important;
+      color: #000000 !important;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
     }
     html.theme-light .allergen-toggle-btn.bg-blue-950\/50,
@@ -482,22 +600,19 @@
       border-color: #0284c7 !important;
       box-shadow: 0 0 0 1px #0284c7, 0 2px 4px rgba(2, 132, 199, 0.1) !important;
     }
-    html.theme-light .allergen-toggle-btn span.text-white {
-      color: #0f172a !important;
-      font-weight: 700 !important;
-    }
+    html.theme-light .allergen-toggle-btn span.text-white,
     html.theme-light .allergen-toggle-btn span.text-slate-300 {
-      color: #334155 !important;
-      font-weight: 600 !important;
+      color: #000000 !important;
     }
     html.theme-light .allergen-toggle-btn .bg-slate-800\/80 {
       background: #e0f2fe !important;
       border-color: #bae6fd !important;
       color: #0284c7 !important;
     }
-    html.theme-light .allergen-toggle-btn .bg-slate-900 {
-      background: #f8fafc !important;
-      border-color: #cbd5e1 !important;
+    /* Empty Unchecked Checkbox in Light Mode */
+    html.theme-light .allergen-toggle-btn .border-slate-600 {
+      background: #ffffff !important;
+      border-color: #94a3b8 !important;
     }
 
     /* Chemical & Additive Screener Card in Light Mode */
@@ -506,17 +621,9 @@
       border-color: #cbd5e1 !important;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
     }
-    html.theme-light #allergensPanel .rounded-3xl.bg-slate-950\/80 span.text-white {
-      color: #0f172a !important;
-      font-weight: 700 !important;
-    }
-    html.theme-light #allergensPanel .rounded-3xl.bg-slate-950\/80 span.text-slate-400 {
-      color: #334155 !important;
-      font-weight: 600 !important;
-    }
-    html.theme-light #allergensPanel .rounded-3xl.bg-slate-950\/80 p.text-slate-400 {
-      color: #334155 !important;
-      font-weight: 500 !important;
+    html.theme-light #allergensPanel .rounded-3xl.bg-slate-950\/80 span,
+    html.theme-light #allergensPanel .rounded-3xl.bg-slate-950\/80 p {
+      color: #000000 !important;
     }
 
     /* Active Recalls Filter Bar & Shaded Windows */
@@ -525,18 +632,9 @@
       border-color: #cbd5e1 !important;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
     }
-    html.theme-light #bulletinsPanel .text-sky-300 {
-      color: #0284c7 !important;
-      font-weight: 700 !important;
-    }
-    html.theme-light #bulletinsPanel label {
-      color: #0f172a !important;
-      font-weight: 600 !important;
-    }
+    html.theme-light #bulletinsPanel label,
     html.theme-light #bulletinsPanel select {
-      background-color: #ffffff !important;
-      border-color: #cbd5e1 !important;
-      color: #0f172a !important;
+      color: #000000 !important;
     }
 
     /* Watchlist Shaded Windows */
@@ -545,11 +643,7 @@
     html.theme-light #pantryCapacityContainer {
       background-color: #f8fafc !important;
       border-color: #cbd5e1 !important;
-    }
-    html.theme-light #pantryDrawerContainer span.text-slate-300,
-    html.theme-light #pantryDrawerContainer span.text-slate-400 {
-      color: #1e293b !important;
-      font-weight: 500 !important;
+      color: #000000 !important;
     }
 
     /* Settings Tab Shaded Windows */
@@ -557,19 +651,12 @@
     html.theme-light #customizePanel .bg-slate-950\/90 {
       background-color: #f8fafc !important;
       border-color: #cbd5e1 !important;
-    }
-    html.theme-light #customizePanel span.text-slate-300 {
-      color: #0f172a !important;
-      font-weight: 700 !important;
-    }
-    html.theme-light #customizePanel span.text-slate-400 {
-      color: #475569 !important;
-      font-weight: 500 !important;
+      color: #000000 !important;
     }
     html.theme-light #settingsSyncNowBtn {
       background-color: #ffffff !important;
       border-color: #cbd5e1 !important;
-      color: #0f172a !important;
+      color: #000000 !important;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
     }
     html.theme-light #settingsSyncNowBtn:hover {
@@ -586,25 +673,7 @@
       color: #92400e !important;
     }
     html.theme-light #customizePanel .bg-gradient-to-br p {
-      color: #78350f !important;
-    }
-
-    /* Developer Mode Card in Light Mode */
-    html.theme-light .border-purple-500\/30 {
-      background: #faf5ff !important;
-      border-color: #e9d5ff !important;
-    }
-    html.theme-light .border-purple-500\/30 span.text-white {
-      color: #581c87 !important;
-    }
-    html.theme-light .border-purple-500\/30 span.text-slate-400 {
-      color: #6b21a8 !important;
-    }
-
-    /* Audio & Haptic Toggle Buttons in Light Mode */
-    html.theme-light #prefSoundBtn,
-    html.theme-light #prefHapticBtn {
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      color: #000000 !important;
     }
 
     /* Appearance Segmented Control in Light Mode */
@@ -613,7 +682,7 @@
       border-color: #cbd5e1 !important;
     }
     html.theme-light .theme-toggle-btn:not(.bg-amber-500) {
-      color: #475569 !important;
+      color: #000000 !important;
     }
 
     /* Modals in Light Mode */
@@ -622,15 +691,14 @@
     html.theme-light #safetyDisclaimerModal > div > div,
     html.theme-light #installHelpModal > div > div {
       background: #ffffff !important;
-      color: #0f172a !important;
+      color: #000000 !important;
       border-color: #cbd5e1 !important;
       box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
     }
     html.theme-light #plusPaywallModal label,
     html.theme-light #addProfileModal label {
-      color: #0f172a !important;
-    }
-  </style>
+      color: #000000 !important;
+    }  </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
   <!-- APP STARTUP SPLASH SCREEN (Showcases Great Dane mascot with large, bold apple medall<!-- APP STARTUP SPLASH SCREEN (Showcases Great Dane mascot with clean sandstone aesthetic) -->
@@ -7449,18 +7517,27 @@
           ? 'bg-blue-950/50 border-blue-500/60 shadow-sm shadow-blue-950/40 ring-1 ring-blue-500/30' 
           : 'bg-slate-950/60 border-slate-800 hover:border-slate-700';
 
-        const lockIcon = !isPlusActive ? `
-          <span class="text-xs font-bold px-3 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center gap-1.5 shrink-0 shadow-sm">
-            ${UI_ICONS.lock}
-            <span>PRO</span>
-          </span>
-        ` : `
-          <div class="w-8 h-8 rounded-xl flex items-center justify-center transition shrink-0 ${isChecked ? 'bg-blue-600 text-white shadow-md' : 'border-2 border-slate-700 bg-slate-900 text-transparent'}">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-            </svg>
-          </div>
-        `;
+        let lockIcon = '';
+        if (!isPlusActive) {
+          lockIcon = `
+            <span class="text-xs font-bold px-3 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center gap-1.5 shrink-0 shadow-sm">
+              ${UI_ICONS.lock}
+              <span>PRO</span>
+            </span>
+          `;
+        } else if (isChecked) {
+          lockIcon = `
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center bg-blue-600 text-white shadow-md transition shrink-0">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+              </svg>
+            </div>
+          `;
+        } else {
+          lockIcon = `
+            <div class="w-8 h-8 rounded-xl border-2 border-slate-600 bg-slate-900/60 transition shrink-0"></div>
+          `;
+        }
 
         return `
           <button 
@@ -8816,7 +8893,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=21')
+        navigator.serviceWorker.register('./sw.js?v=22')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
