@@ -821,6 +821,53 @@
       stroke: #0f172a !important;
     }
 
+  
+    /* Close Profile Modal Button in Light Mode */
+    html.theme-light #closeAddProfileModalBtn {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+    }
+    html.theme-light #closeAddProfileModalBtn:hover {
+      background-color: #e2e8f0 !important;
+    }
+    html.theme-light #closeAddProfileModalBtn svg {
+      stroke: #0f172a !important;
+    }
+
+    /* Add/Edit Profile Modal Inner Elements in Light Mode */
+    html.theme-light #addProfileModal .bg-slate-950 {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+    }
+    html.theme-light #addProfileModal label[for="profileCameraInput"] {
+      background-color: #ecfdf5 !important;
+      border-color: #a7f3d0 !important;
+      color: #065f46 !important;
+    }
+    html.theme-light #addProfileModal label[for="profilePhotoInput"] {
+      background-color: #f0f9ff !important;
+      border-color: #bae6fd !important;
+      color: #0369a1 !important;
+    }
+    html.theme-light .avatar-option {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+    }
+    html.theme-light .avatar-option.border-amber-400 {
+      border-color: #f59e0b !important;
+      background-color: #fef3c7 !important;
+      color: #b45309 !important;
+    }
+    html.theme-light #newProfileNameInput {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+    }
+
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
@@ -1090,8 +1137,10 @@
         <!-- ADD / EDIT FAMILY MEMBER MODAL SHEET -->
     <div id="addProfileModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
       <div class="bg-slate-900 border-2 border-sky-500/50 max-w-sm w-full rounded-3xl p-5 shadow-2xl space-y-4 relative animate-in fade-in zoom-in-95 duration-200">
-        <button type="button" id="closeAddProfileModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1.5 rounded-full bg-slate-800 text-xs" aria-label="Close">
-          &times;
+        <button type="button" id="closeAddProfileModalBtn" class="absolute top-4 right-4 text-slate-300 hover:text-white w-10 h-10 min-w-[40px] min-h-[40px] rounded-full bg-slate-800/90 hover:bg-slate-700 border border-slate-700/80 flex items-center justify-center transition active:scale-95 shadow-md cursor-pointer z-10" aria-label="Close profile modal">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
         </button>
 
         <div class="flex items-center gap-3 border-b border-slate-800 pb-3 pr-6">
@@ -7842,6 +7891,15 @@
       closeAddProfileModalBtn.addEventListener('click', closeAddProfileModal);
     }
 
+    // Click/touch outside profile modal sheet (backdrop) to dismiss
+    if (addProfileModal) {
+      addProfileModal.addEventListener('click', (e) => {
+        if (e.target === addProfileModal) {
+          closeAddProfileModal();
+        }
+      });
+    }
+
     function updateAvatarDisplayAndOptions() {
       // 1. Update Preview Box
       if (selectedProfilePhoto) {
@@ -9027,7 +9085,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=24')
+        navigator.serviceWorker.register('./sw.js?v=25')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
