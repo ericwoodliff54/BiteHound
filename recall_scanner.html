@@ -931,6 +931,36 @@
       font-weight: 700 !important;
     }
 
+  
+    /* Lot Code Auditor in Light Mode */
+    html.theme-light #lotAuditorModal > div > div {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+    }
+    html.theme-light #closeLotAuditorModalBtn {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    html.theme-light #closeLotAuditorModalBtn svg {
+      stroke: #0f172a !important;
+    }
+    html.theme-light #lotRecallContextBox,
+    html.theme-light #lotAuditorModal .bg-slate-950 {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+    }
+    html.theme-light #lotRecallTitle {
+      color: #000000 !important;
+    }
+    html.theme-light #lotAuditorModal .from-slate-950 {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+    }
+
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
@@ -5341,22 +5371,63 @@
                   clearBtn.classList.remove('hidden');
                 }
 
-                // If lotCode is present, store it for recall matching
+                // Autonomous 1-Shot Lot Code & Recall Verification
                 if (p.lotCode) {
-                  showCustomizeToast(`AI Vision spotted packaging lot: ${p.lotCode}`);
+                  showCustomizeToast(`1-Shot AI Vision: Stamped date spotted (${p.lotCode})`);
                 }
 
-                // Display resolved product directly
+                let isRecalled = false;
+                let recallRecord = findRecallRecord(detectedCode);
+                let terminatedNotice = null;
+
+                // If AI Vision detected a recall match or safe batch directly from the stamped packaging
+                if (p.lotAudit) {
+                  if (p.lotAudit.isMatch === true) {
+                    isRecalled = true;
+                    recallRecord = {
+                      product: p.name,
+                      brand: p.brand,
+                      hazard: p.lotAudit.explanation || 'Packaging date matches active federal recall window.',
+                      action: p.lotAudit.action || 'Do not consume. Discard or return to retailer for full refund.',
+                      severity: 'Class I Recall',
+                      recallDate: p.lotCode || 'Matched Lot Batch',
+                      agency: 'FDA Public Health Alert (1-Shot AI Audit)'
+                    };
+                  } else if (p.lotAudit.isMatch === false) {
+                    isRecalled = false;
+                    terminatedNotice = {
+                      date: p.lotCode || 'Verified Lot Batch',
+                      reason: p.lotAudit.explanation || '1-Shot AI Verified: Stamped expiration date is outside the federal recall window. Product is safe to consume.',
+                      agency: 'FDA Cleared Batch (1-Shot AI Audit)',
+                      product: p.name
+                    };
+                  }
+                }
+
+                // If not determined by vision, fallback to standard database lookup
+                if (!isRecalled && !terminatedNotice && detectedCode) {
+                  recallRecord = findRecallRecord(detectedCode);
+                  if (recallRecord) {
+                    isRecalled = Boolean(recallRecord.isRecalled);
+                    terminatedNotice = recallRecord.terminatedNotice || null;
+                  }
+                }
+
+                // Display resolved product with unified 1-shot recall/lot audit
                 displayResult({
                   upc: detectedCode || 'AI-VISION',
                   source: 'manual',
-                  status: 'clear',
+                  status: isRecalled ? 'recalled' : 'clear',
                   productName: p.name,
                   brand: p.brand,
                   ingredients: p.ingredients || '',
-                  isRecalled: false,
+                  isRecalled: isRecalled,
+                  recallRecord: recallRecord,
+                  terminatedNotice: terminatedNotice,
                   detectedAllergens: [],
-                  detectedAdditives: []
+                  detectedAdditives: [],
+                  lotCode: p.lotCode || null,
+                  lotAudit: p.lotAudit || null
                 }, 'manual');
                 return;
               }
@@ -6907,6 +6978,18 @@
                 </svg>
                 <span>${isPlusActive ? 'Protected in Pro Pantry Shield (100-item monitoring)' : (scanHistory.length >= 5 ? 'Pantry Shield Full (5/5 Free Limit • Tap to Upgrade)' : 'Tracked in Free Pantry Shield (up to 5 items)')}</span>
               </div>
+              ${data.lotCode ? `
+                <div class="mt-2 p-2 rounded-xl border flex items-center justify-between text-xs ${data.lotAudit && data.lotAudit.isMatch === true ? 'bg-rose-950/80 border-rose-500/80 text-rose-200' : 'bg-slate-950/80 border-slate-800 text-slate-200'}">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full ${data.lotAudit && data.lotAudit.isMatch === true ? 'bg-rose-400 animate-ping' : 'bg-emerald-400'}"></span>
+                    <span class="font-bold">1-Shot Date Stamp:</span>
+                    <span class="font-mono text-white">${data.lotCode}</span>
+                  </div>
+                  <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${data.lotAudit && data.lotAudit.isMatch === true ? 'bg-rose-500 text-white' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'}">
+                    ${data.lotAudit ? (data.lotAudit.isMatch === true ? 'Recalled Batch' : 'Safe Batch') : 'Visual Stamp'}
+                  </span>
+                </div>
+              ` : ''}
             </div>
             <span class="text-[10px] font-semibold text-slate-300 bg-slate-950 px-2 py-1 rounded-md border border-slate-800 shrink-0">
               ${data.time}
@@ -6999,6 +7082,15 @@
                 <span class="font-bold text-rose-300 block mb-0.5">Consumer Action:</span>
                 <p class="text-slate-200">${data.recallRecord.action || 'Do not consume. Discard or return to store.'}</p>
               </div>
+              <button 
+                type="button" 
+                onclick="openLotAuditor('${escape(data.recallRecord.product || data.productName)}', '${escape(data.recallRecord.hazard || '')}', '${escape(data.recallRecord.brand || '')}', '${escape((data.recallRecord.upcs || []).join(', '))}')"
+                class="w-full py-2.5 px-3 min-h-[42px] rounded-xl bg-gradient-to-r from-rose-600 to-amber-600 hover:from-rose-500 hover:to-amber-500 text-white font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer mt-1"
+                title="Point camera at printed Best-By date to confirm if your specific bag is recalled"
+              >
+                <svg class="w-4 h-4 text-amber-200 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
+                <span>Audit My Bag: Check Stamped Date</span>
+              </button>
             </div>
           </div>
         `;
@@ -9219,7 +9311,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=27')
+        navigator.serviceWorker.register('./sw.js?v=29')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
@@ -9282,6 +9374,204 @@
         splashEl.addEventListener('touchstart', safeDismissSplash, { passive: true });
       }
     })();
+
+    // ==========================================
+    // AI LOT & BEST-BY DATE AUDITOR PIPELINE
+    // ==========================================
+    const lotAuditorModal = document.getElementById('lotAuditorModal');
+    const closeLotAuditorModalBtn = document.getElementById('closeLotAuditorModalBtn');
+    const lotCodeCameraInput = document.getElementById('lotCodeCameraInput');
+    const lotAuditResultBox = document.getElementById('lotAuditResultBox');
+    const lotVerdictBanner = document.getElementById('lotVerdictBanner');
+    const lotVerdictTitle = document.getElementById('lotVerdictTitle');
+    const lotVerdictIcon = document.getElementById('lotVerdictIcon');
+    const lotExtractedCodeText = document.getElementById('lotExtractedCodeText');
+    const lotVerdictExplanation = document.getElementById('lotVerdictExplanation');
+    const lotVerdictActionBox = document.getElementById('lotVerdictActionBox');
+
+    let currentAuditorRecall = {
+      title: '',
+      hazard: '',
+      brand: '',
+      expectedLots: ''
+    };
+
+    function openLotAuditor(productTitle, hazard, brand, expectedLots) {
+      triggerHaptic([30]);
+      currentAuditorRecall = {
+        title: unescape(productTitle || ''),
+        hazard: unescape(hazard || ''),
+        brand: unescape(brand || ''),
+        expectedLots: unescape(expectedLots || '')
+      };
+
+      const titleEl = document.getElementById('lotRecallTitle');
+      const hazardEl = document.getElementById('lotRecallHazard');
+      if (titleEl) titleEl.textContent = currentAuditorRecall.title;
+      if (hazardEl) hazardEl.textContent = currentAuditorRecall.hazard || 'Under active FDA/USDA safety notice.';
+
+      if (lotAuditResultBox) lotAuditResultBox.classList.add('hidden');
+      if (lotCodeCameraInput) lotCodeCameraInput.value = '';
+      if (lotAuditorModal) lotAuditorModal.classList.remove('hidden');
+    }
+
+    function closeLotAuditor() {
+      if (lotAuditorModal) lotAuditorModal.classList.add('hidden');
+    }
+
+    if (closeLotAuditorModalBtn) closeLotAuditorModalBtn.addEventListener('click', closeLotAuditor);
+    if (lotAuditorModal) {
+      lotAuditorModal.addEventListener('click', (e) => {
+        if (e.target === lotAuditorModal) closeLotAuditor();
+      });
+    }
+
+    if (lotCodeCameraInput) {
+      lotCodeCameraInput.addEventListener('change', async (e) => {
+        if (!e.target.files || e.target.files.length === 0) return;
+        const file = e.target.files[0];
+        triggerHaptic([30]);
+
+        showCustomizeToast("Analyzing date stamp with AI Vision...");
+
+        const reader = new FileReader();
+        const base64Promise = new Promise((resolve, reject) => {
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+
+        try {
+          const dataUrl = await base64Promise;
+          const hookUrl = (localStorage.getItem('rakka_cloudflare_hook') || DEFAULT_CLOUDFLARE_HOOK).trim();
+
+          const res = await fetch(`${hookUrl.replace(/\/+$/, '')}/audit-lot-code`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              imageBase64: dataUrl,
+              mimeType: file.type || 'image/jpeg',
+              recallTitle: currentAuditorRecall.title,
+              recallReason: currentAuditorRecall.hazard,
+              recallBrand: currentAuditorRecall.brand,
+              expectedLots: currentAuditorRecall.expectedLots
+            })
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            if (data && data.success && data.audit) {
+              const audit = data.audit;
+              renderLotAuditVerdict(audit);
+              return;
+            }
+          }
+          throw new Error("Cloud audit endpoint failed");
+        } catch (err) {
+          console.warn("Lot code auditor notice:", err);
+          renderLotAuditVerdict({
+            extractedCode: "Manual Review Needed",
+            isMatch: null,
+            verdictTitle: "Inspection Note",
+            severity: "warning",
+            explanation: "Could not establish connection to the AI vision inspector. Please compare the printed expiration date on your packaging directly against the recall bulletin dates above.",
+            action: "When in doubt, contact the retailer or discard the product."
+          });
+        }
+      });
+    }
+
+    function renderLotAuditVerdict(audit) {
+      if (!lotAuditResultBox) return;
+      lotAuditResultBox.classList.remove('hidden');
+
+      if (lotVerdictTitle) lotVerdictTitle.textContent = audit.verdictTitle;
+      if (lotExtractedCodeText) lotExtractedCodeText.textContent = `Stamped Date Spotted: ${audit.extractedCode || 'Not detected'}`;
+      if (lotVerdictExplanation) lotVerdictExplanation.textContent = audit.explanation;
+      if (lotVerdictActionBox) {
+        lotVerdictActionBox.textContent = audit.action;
+      }
+
+      if (audit.severity === 'danger' || audit.isMatch === true) {
+        triggerHaptic([100, 60, 100]);
+        sound.playScanBeep();
+        lotVerdictBanner.className = "p-3.5 rounded-2xl border-2 border-rose-500 bg-rose-950/80 text-rose-200 flex items-start gap-2.5 shadow-lg shadow-rose-950/50";
+        lotVerdictIcon.innerHTML = `<span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/40 flex items-center justify-center shrink-0">` + UI_ICONS.alertTriangle + `</span>`;
+        if (lotVerdictActionBox) lotVerdictActionBox.className = "p-2 rounded-xl text-[11px] font-bold bg-rose-950 border border-rose-800 text-rose-300";
+      } else if (audit.severity === 'safe' || audit.isMatch === false) {
+        triggerHaptic([30, 40]);
+        sound.playClearChime();
+        lotVerdictBanner.className = "p-3.5 rounded-2xl border-2 border-emerald-500 bg-emerald-950/80 text-emerald-200 flex items-start gap-2.5 shadow-lg shadow-emerald-950/50";
+        lotVerdictIcon.innerHTML = `<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center justify-center shrink-0">` + UI_ICONS.checkCircle + `</span>`;
+        if (lotVerdictActionBox) lotVerdictActionBox.className = "p-2 rounded-xl text-[11px] font-bold bg-emerald-950 border border-emerald-800 text-emerald-300";
+      } else {
+        triggerHaptic([40]);
+        lotVerdictBanner.className = "p-3.5 rounded-2xl border border-amber-500 bg-amber-950/80 text-amber-200 flex items-start gap-2.5";
+        lotVerdictIcon.innerHTML = `<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center justify-center shrink-0">` + UI_ICONS.info + `</span>`;
+        if (lotVerdictActionBox) lotVerdictActionBox.className = "p-2 rounded-xl text-[11px] font-bold bg-amber-950 border border-amber-800 text-amber-300";
+      }
+    }
+
   </script>
+  <!-- LOT & BEST-BY DATE AUDITOR MODAL SHEET -->
+  <div id="lotAuditorModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border-2 border-rose-500/60 max-w-md w-full rounded-3xl p-5 shadow-2xl space-y-4 relative animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto">
+      <button type="button" id="closeLotAuditorModalBtn" class="absolute top-4 right-4 text-slate-300 hover:text-white w-10 h-10 min-w-[40px] min-h-[40px] rounded-full bg-slate-800/90 hover:bg-slate-700 border border-slate-700/80 flex items-center justify-center transition active:scale-95 shadow-md cursor-pointer z-10" aria-label="Close lot auditor">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div class="flex items-center gap-3 border-b border-slate-800 pb-3 pr-8">
+        <div class="w-10 h-10 rounded-2xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400 shrink-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        </div>
+        <div>
+          <h3 class="font-display text-sm font-bold text-white leading-tight">AI Lot & Best-By Date Auditor</h3>
+          <p id="lotAuditorSub" class="text-[11px] text-slate-400 truncate">Verifying against active federal notice</p>
+        </div>
+      </div>
+
+      <div class="space-y-3 text-xs">
+        <div id="lotRecallContextBox" class="p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-1">
+          <span id="lotRecallTitle" class="font-bold text-white block text-xs truncate">Grimmway Farms Organic Carrots</span>
+          <p id="lotRecallHazard" class="text-[11px] text-slate-400 leading-relaxed">Potential contamination risk under active FDA bulletin.</p>
+        </div>
+
+        <!-- Camera Upload Trigger -->
+        <div class="p-4 rounded-2xl bg-gradient-to-b from-slate-950 to-slate-900 border border-slate-800 text-center space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-300 mx-auto">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white block text-sm">Snap Stamped Expiration Date</span>
+            <span class="text-[11px] text-slate-400 block mt-0.5">Point camera at the printed ink stamp, bag flap, or lid date</span>
+          </div>
+
+          <label for="lotCodeCameraInput" class="cursor-pointer w-full py-3 px-4 min-h-[46px] rounded-xl bg-gradient-to-r from-rose-600 via-rose-500 to-amber-600 text-white font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
+            <span>Capture Date Stamp Photo</span>
+            <input type="file" id="lotCodeCameraInput" accept="image/*" capture="environment" class="hidden">
+          </label>
+        </div>
+
+        <!-- Live Analysis & Verdict Box -->
+        <div id="lotAuditResultBox" class="hidden space-y-2.5 pt-1 animate-in fade-in duration-200">
+          <div id="lotVerdictBanner" class="p-3.5 rounded-2xl border flex items-start gap-2.5">
+            <span id="lotVerdictIcon" class="mt-0.5"></span>
+            <div>
+              <span id="lotVerdictTitle" class="font-bold text-sm block"></span>
+              <span id="lotExtractedCodeText" class="text-[10px] font-mono block opacity-90 mt-0.5"></span>
+            </div>
+          </div>
+          <div class="p-3 rounded-2xl bg-slate-950 border border-slate-800 space-y-1.5 text-xs">
+            <p id="lotVerdictExplanation" class="text-slate-200 leading-relaxed"></p>
+            <div id="lotVerdictActionBox" class="p-2 rounded-xl text-[11px] font-medium leading-relaxed"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

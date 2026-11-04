@@ -311,15 +311,28 @@ export default {
           }), { status: 503, headers: corsHeaders });
         }
 
-        const prompt = `Analyze this grocery product package image. 
-Inspect the whole packaging including any barcodes, printed text, numbers, brand, and ingredient list.
+        const prompt = `Analyze this grocery product package image with 1-shot food safety inspection.
+Inspect the whole packaging including any barcodes, printed text, numbers, brand, ingredient list, and stamped expiration/lot dates.
+
+Critical Safety Knowledge:
+- If this is Grimmway Farms, Bunny Luv, Cal-Organic, or O Organics carrots: The FDA/CDC issued a major E. coli recall on whole and baby organic carrots.
+- The affected recall window for Grimmway Farms organic baby carrots is Best-if-used-by dates between September 11, 2024 through November 12, 2024 (and historical lot batches).
+- Inspect any ink stamp on the bag (e.g. BEST IF USED BY date or Julian lot code).
+
 Extract and return STRICTLY a JSON object with this exact schema (no markdown, no backticks, raw JSON only):
 {
   "upc": "12 or 13 digit barcode number if visible, otherwise null",
   "productName": "Exact product name and size (e.g. Organic Cut Baby Carrots, 1 lb)",
   "brand": "Exact brand name (e.g. Grimmway Farms)",
   "ingredients": "Raw comma-separated ingredients text if visible, or null",
-  "lotCode": "Stamped expiration date or lot code if visible (e.g. BEST IF USED BY 07 07 2016 159101BP2), or null"
+  "lotCode": "Exact stamped expiration date or lot code found on the packaging (e.g. BEST IF USED BY 07 07 2016 159101BP2), or null",
+  "lotAudit": {
+    "hasRecallContext": true, // true if product brand/item has active or notable recall records
+    "isMatch": true, // true if stamped date is within recall window, false if safe/outside window, null if date not visible
+    "verdictTitle": "Short bold badge (e.g. 'CONFIRMED RECALL MATCH', 'CLEARED - SAFE BATCH', or 'RECALL ON RECORD - CHECK STAMP')",
+    "explanation": "Clear 2-sentence explanation of whether this specific bag/lot is affected based on the stamped date.",
+    "action": "Immediate directive for the consumer"
+  }
 }`;
 
         const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
@@ -372,6 +385,7 @@ Extract and return STRICTLY a JSON object with this exact schema (no markdown, n
             brand: brand || 'Grocery Brand',
             ingredients: ingredients || '',
             lotCode: parsed.lotCode || null,
+            lotAudit: parsed.lotAudit || null,
             additives: [],
             allergens: []
           };
@@ -392,6 +406,85 @@ Extract and return STRICTLY a JSON object with this exact schema (no markdown, n
       } catch (err) {
         console.error("Detect package exception:", err);
         return new Response(JSON.stringify({ found: false, error: err.message }), { status: 500, headers: corsHeaders });
+      }
+    }
+
+    // 6. POST /audit-lot-code: AI Lot & Best-By Date Auditor
+    if (request.method === 'POST' && (url.pathname === '/audit-lot-code' || url.pathname === '/api/audit-lot-code')) {
+      try {
+        const body = await request.json();
+        const apiKey = env && env.GEMINI_API_KEY;
+
+        if (!apiKey) {
+          return new Response(JSON.stringify({ 
+            success: false, 
+            error: 'AI Vision key not configured on edge hook. Set GEMINI_API_KEY in Cloudflare Worker settings.' 
+          }), { status: 503, headers: corsHeaders });
+        }
+
+        const cleanBase64 = String(body.imageBase64 || '').replace(/^data:image\/\w+;base64,/, '');
+        const mimeType = body.mimeType || 'image/jpeg';
+        const recallTitle = body.recallTitle || 'Federal Public Health Recall';
+        const recallReason = body.recallReason || '';
+        const recallBrand = body.recallBrand || '';
+        const expectedLots = body.expectedLots || '';
+
+        const prompt = `You are an expert food safety inspector reviewing a customer's package photo for a federal food recall.
+Recall Details:
+- Food / Firm: ${recallBrand} - ${recallTitle}
+- Hazard: ${recallReason}
+- Known Affected Lots / Best-By Dates: ${expectedLots}
+
+Task:
+1. Carefully inspect the photo of the product package/stamp.
+2. Extract any stamped "Best By", "Use By", "Sell By" dates, Julian lot codes, or establishment numbers (e.g., EST. or P-numbers).
+3. Determine whether the extracted stamped date or code falls within the recall window, or if it is outside the recall, or if the stamp is unclear.
+4. Give a clear, compassionate, and definitive verdict for a worried family.
+
+Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, no markdown, no backticks):
+{
+  "extractedCode": "Exact date/lot text found stamped on packaging, or 'Unclear' if illegible",
+  "isMatch": true, // true if recalled lot/date, false if cleared/safe, null if indeterminate
+  "verdictTitle": "Short bold verdict (e.g. 'CONFIRMED RECALL MATCH', 'CLEARED - OUTSIDE RECALL WINDOW', or 'UNCLEAR STAMP')",
+  "severity": "danger", // 'danger' for match, 'safe' for clear, 'warning' for unclear
+  "explanation": "2-3 sentences explaining exactly why this lot is affected or safe based on the stamped dates and the recall window.",
+  "action": "Immediate directive (e.g., 'Do not consume. Discard immediately or return to retailer for a full refund.')"
+}`;
+
+        const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{
+              parts: [
+                { text: prompt },
+                { inline_data: { mime_type: mimeType, data: cleanBase64 } }
+              ]
+            }],
+            generationConfig: {
+              temperature: 0.1,
+              response_mime_type: "application/json"
+            }
+          })
+        });
+
+        if (!geminiRes.ok) {
+          const errText = await geminiRes.text();
+          console.warn("Gemini Lot Audit error:", errText);
+          return new Response(JSON.stringify({ success: false, error: 'AI inspection service temporarily busy' }), { status: 502, headers: corsHeaders });
+        }
+
+        const geminiData = await geminiRes.json();
+        const rawJsonText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text;
+        let parsed = JSON.parse(rawJsonText);
+
+        return new Response(JSON.stringify({
+          success: true,
+          audit: parsed
+        }), { headers: corsHeaders });
+      } catch (err) {
+        console.error("Audit lot code exception:", err);
+        return new Response(JSON.stringify({ success: false, error: err.message }), { status: 500, headers: corsHeaders });
       }
     }
 
