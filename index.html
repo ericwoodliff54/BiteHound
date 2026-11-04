@@ -1844,6 +1844,35 @@
           </button>
         </div>
 
+        <!-- Community Cloud Edge Hook (Cloudflare Workers) -->
+        <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 text-xs space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-200 text-xs flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-sky-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+              <span>Cloudflare Edge Hook</span>
+            </span>
+            <span id="hookStatusBadge" class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">Optional</span>
+          </div>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Connect your free Cloudflare Worker URL to enable community barcode caching, multi-source aggregation, and AI label verification.
+          </p>
+          <div class="flex gap-2">
+            <input 
+              type="url" 
+              id="cloudflareHookInput" 
+              placeholder="https://rakka-edge.YOUR_NAME.workers.dev" 
+              class="w-full py-2 px-3 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-400"
+            >
+            <button 
+              type="button" 
+              id="saveHookBtn" 
+              class="px-3.5 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs shrink-0 transition active:scale-95"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+
       <!-- Legal & Safety Disclaimers -->
       <div class="pt-2 border-t border-slate-800 space-y-2">
         <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Legal & Compliance</h3>
@@ -5975,6 +6004,38 @@
               } catch (fdcErr) {}
             }
 
+            // Cloud Edge Hook: Query Cloudflare Community DB & Edge Multi-Source Aggregator
+            const activeHookUrl = (localStorage.getItem('rakka_cloudflare_hook') || '').trim();
+            if ((!ingredientsSummary || brandName === "Grocery Brand") && activeHookUrl) {
+              try {
+                const hookCtrl = new AbortController();
+                const hookTimeout = setTimeout(() => hookCtrl.abort(), 3500);
+                const hookRes = await fetch(`${activeHookUrl.replace(/\/+$/, '')}/lookup?upc=${encodeURIComponent(code)}`, { signal: hookCtrl.signal });
+                clearTimeout(hookTimeout);
+                if (hookRes && hookRes.ok) {
+                  const hookData = await hookRes.json();
+                  if (hookData && hookData.found && hookData.product) {
+                    const hp = hookData.product;
+                    if (hp.name && !hp.name.startsWith('Retail Grocery Item')) productName = hp.name;
+                    if (hp.brand && hp.brand !== 'Grocery Brand') brandName = hp.brand;
+                    if (hp.ingredients) ingredientsSummary = hp.ingredients;
+                    if (Array.isArray(hp.additives)) productAdditivesTags.push(...hp.additives);
+                    if (Array.isArray(hp.allergens)) detectedAllergenIds.push(...hp.allergens);
+                    // Cache locally for instant future offline lookups
+                    saveCatalogProduct(code, {
+                      name: productName,
+                      brand: brandName,
+                      ingredients: ingredientsSummary,
+                      allergens: detectedAllergenIds,
+                      additives: productAdditivesTags
+                    });
+                  }
+                }
+              } catch (hookErr) {
+                console.warn("Cloud hook lookup notice:", hookErr);
+              }
+            }
+
             // Tertiary Tier: GS1 Manufacturer Prefix Intelligence
             // If barcode is not yet indexed in public crowdsourced APIs, identify the brand from its GS1 manufacturer prefix
             if (!brandName || brandName === "Grocery Brand") {
@@ -8745,6 +8806,41 @@
     }
 
     renderHistory();
+    // Cloudflare Edge Hook Settings Handler
+    const cloudflareHookInput = document.getElementById('cloudflareHookInput');
+    const saveHookBtn = document.getElementById('saveHookBtn');
+    const hookStatusBadge = document.getElementById('hookStatusBadge');
+
+    function updateHookBadgeUI() {
+      const saved = (localStorage.getItem('rakka_cloudflare_hook') || '').trim();
+      if (cloudflareHookInput) cloudflareHookInput.value = saved;
+      if (hookStatusBadge) {
+        if (saved) {
+          hookStatusBadge.textContent = "Connected";
+          hookStatusBadge.className = "text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
+        } else {
+          hookStatusBadge.textContent = "Optional";
+          hookStatusBadge.className = "text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700";
+        }
+      }
+    }
+
+    if (saveHookBtn) {
+      saveHookBtn.addEventListener('click', () => {
+        triggerHaptic([30]);
+        const val = (cloudflareHookInput?.value || '').trim();
+        if (val) {
+          localStorage.setItem('rakka_cloudflare_hook', val);
+          showCustomizeToast("Cloudflare Edge Hook connected!");
+        } else {
+          localStorage.removeItem('rakka_cloudflare_hook');
+          showCustomizeToast("Edge Hook cleared (using local offline mode).");
+        }
+        updateHookBadgeUI();
+      });
+    }
+    updateHookBadgeUI();
+
     auditPantryAgainstRecalls();
     renderBulletins();
     renderAllergensTab();
@@ -8779,7 +8875,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=18')
+        navigator.serviceWorker.register('./sw.js?v=19')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
