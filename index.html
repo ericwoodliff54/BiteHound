@@ -868,6 +868,69 @@
       color: #000000 !important;
     }
 
+  
+    /* Developer Mode Switcher in Light Mode */
+    html.theme-light .border-purple-500\/30 {
+      background-color: #faf5ff !important;
+      border-color: #d8b4fe !important;
+    }
+    html.theme-light .border-purple-500\/30 .text-white {
+      color: #000000 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .border-purple-500\/30 #devModeStatusSubtext {
+      color: #6b21a8 !important;
+      font-weight: 600 !important;
+    }
+    html.theme-light #toggleTesterModeBtn {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+    }
+    /* When Pro Active */
+    html.theme-light #toggleTesterModeBtn.border-emerald-500\/40,
+    html.theme-light #toggleTesterModeBtn.bg-emerald-500\/20 {
+      background-color: #ecfdf5 !important;
+      border-color: #a7f3d0 !important;
+      color: #065f46 !important;
+    }
+    html.theme-light #toggleTesterModeBtn.border-emerald-500\/40 span,
+    html.theme-light #toggleTesterModeBtn.bg-emerald-500\/20 span {
+      color: #065f46 !important;
+      font-weight: 700 !important;
+    }
+    /* When in Free Mode (Removes dark button in light mode) */
+    html.theme-light #toggleTesterModeBtn.border-slate-700,
+    html.theme-light #toggleTesterModeBtn.bg-slate-800 {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+    }
+    html.theme-light #toggleTesterModeBtn.border-slate-700:hover,
+    html.theme-light #toggleTesterModeBtn.bg-slate-800:hover {
+      background-color: #f8fafc !important;
+      border-color: #94a3b8 !important;
+    }
+    html.theme-light #toggleTesterModeBtn.border-slate-700 span,
+    html.theme-light #toggleTesterModeBtn.bg-slate-800 span {
+      color: #000000 !important;
+      font-weight: 700 !important;
+    }
+
+    /* Sound and Haptics Toggles in Light Mode */
+    html.theme-light #prefSoundBtn.bg-emerald-500\/20,
+    html.theme-light #prefHapticBtn.bg-emerald-500\/20 {
+      background-color: #ecfdf5 !important;
+      border-color: #a7f3d0 !important;
+      color: #065f46 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light #prefSoundBtn.bg-slate-800,
+    html.theme-light #prefHapticBtn.bg-slate-800 {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+      font-weight: 700 !important;
+    }
+
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
@@ -9085,7 +9148,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=25')
+        navigator.serviceWorker.register('./sw.js?v=26')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
