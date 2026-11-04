@@ -2422,7 +2422,7 @@
     let activeProfileId = 'me';
 
     try {
-      const savedProfiles = localStorage.getItem('rakka_family_profiles') || localStorage.getItem('bitehound_family_profiles') || localStorage.getItem('safebite_family_profiles');
+      const savedProfiles = localStorage.getItem('rakka_family_profiles')  || localStorage.getItem('safebite_family_profiles');
       if (savedProfiles) {
         familyProfiles = JSON.parse(savedProfiles);
       } else {
@@ -2551,7 +2551,7 @@
     function checkPlusStatus() {
       try {
         // 1. Explicit Developer Mode Override (Highest Priority: Never overridden by cookies or cache)
-        const devOverride = localStorage.getItem('rakka_dev_mode') || localStorage.getItem('bitehound_dev_mode');
+        const devOverride = localStorage.getItem('rakka_dev_mode') ;
         if (devOverride === 'free') {
           isPlusActive = false;
           plusStatusType = 'free';
@@ -2567,7 +2567,7 @@
         // 2. Standard Storage & Persistent Cookie checks
         let savedPro = null;
         try {
-          savedPro = localStorage.getItem('rakka_pro_active') || localStorage.getItem('bitehound_pro_active') || localStorage.getItem('safebite_pro_active') || localStorage.getItem('safebite_plus_active') || sessionStorage.getItem('safebite_pro_active');
+          savedPro = localStorage.getItem('rakka_pro_active')  || localStorage.getItem('safebite_pro_active') || localStorage.getItem('safebite_plus_active') || sessionStorage.getItem('safebite_pro_active');
         } catch (e) {}
 
         if (!savedPro && document.cookie && document.cookie.includes('safebite_pro_vip=paid')) {
@@ -3905,7 +3905,7 @@
 
     let scanHistory = [];
     try {
-      const saved = localStorage.getItem('rakka_history') || localStorage.getItem('bitehound_history') || localStorage.getItem('safebite_history') || localStorage.getItem('recall_radar_history');
+      const saved = localStorage.getItem('rakka_history')  || localStorage.getItem('safebite_history') || localStorage.getItem('recall_radar_history');
       if (saved) scanHistory = JSON.parse(saved);
     } catch (e) {}
 
@@ -4035,7 +4035,7 @@
     if (redeemPromoBtn && promoCodeInput) {
       redeemPromoBtn.addEventListener('click', () => {
         const inputCode = promoCodeInput.value.trim().toUpperCase();
-        if (inputCode === 'FAMILY' || inputCode === 'TESTER' || inputCode === 'VIP' || inputCode === 'RAKKA' || inputCode === 'BITEHOUND' || inputCode === 'PRO') {
+        if (inputCode === 'FAMILY' || inputCode === 'TESTER' || inputCode === 'VIP' || inputCode === 'RAKKA'  || inputCode === 'PRO') {
           triggerHaptic([60, 40, 60]);
           sound.playClearChime();
           isPlusActive = true;
@@ -7560,7 +7560,7 @@
     function initTheme() {
       let saved = null;
       try {
-        saved = localStorage.getItem('rakka_theme') || localStorage.getItem('bitehound_theme');
+        saved = localStorage.getItem('rakka_theme') ;
       } catch (e) {}
       if (!saved || !['system', 'light', 'dark'].includes(saved)) {
         saved = 'system';
