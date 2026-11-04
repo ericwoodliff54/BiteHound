@@ -1,44 +1,58 @@
-const CACHE_NAME = 'bitehound-v56';
+const CACHE_NAME = 'rakka-v1';
 const ASSETS = [
-  './index.html?app=bitehound&v=34',
-  './manifest.json?v=56',
-  './icon-192.png?v=56',
-  './icon-512.png?v=56',
-  './apple-touch-icon.png?v=56',
-  './favicon.png?v=56',
-  './logo-1024.png?v=56',
-  './staples_catalog.json?v=56'
+  './index.html?app=rakka&v=1',
+  './manifest.json?v=1',
+  './icon-192.png?v=1',
+  './icon-512.png?v=1',
+  './apple-touch-icon.png?v=1',
+  './favicon.png?v=1',
+  './logo-1024.png?v=1',
+  './staples_catalog.json?v=1'
 ];
 
-self.addEventListener('install', (e) => {
+self.addEventListener('install', event => {
   self.skipWaiting();
-  e.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));
-});
-
-self.addEventListener('activate', (e) => {
-  e.waitUntil(
-    caches.keys().then((keys) => Promise.all(
-      keys.map((k) => { if (k !== CACHE_NAME) return caches.delete(k); })
-    )).then(() => self.clients.claim())
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(ASSETS).catch(err => {
+        console.warn('Rakka pre-cache item missing or failed:', err);
+      });
+    })
   );
 });
 
-// Network-First for HTML navigation (updates load immediately when online; falls back to offline cache in store)
-self.addEventListener('fetch', (e) => {
-  if (e.request.mode === 'navigate') {
-    e.respondWith(
-      fetch(e.request)
-        .then((networkRes) => {
-          return caches.open(CACHE_NAME).then((cache) => {
-            cache.put(e.request, networkRes.clone());
-            return networkRes;
-          });
-        })
-        .catch(() => caches.match('./index.html?app=bitehound&v=34') || caches.match(e.request))
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
+      );
+    }).then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener('fetch', event => {
+  if (event.request.method !== 'GET') return;
+  const url = new URL(event.request.url);
+
+  // Cache-first for local static assets
+  if (url.origin === location.origin) {
+    event.respondWith(
+      caches.match(event.request).then(cached => {
+        return cached || fetch(event.request).then(response => {
+          if (response && response.status === 200) {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then(c => c.put(event.request, clone));
+          }
+          return response;
+        });
+      })
     );
     return;
   }
 
-  // Cache-first for images and static assets
-  e.respondWith(caches.match(e.request).then((res) => res || fetch(e.request)));
+  // Network-first with cache fallback for openFDA / barcode lookups
+  event.respondWith(
+    fetch(event.request).catch(() => caches.match(event.request))
+  );
 });
