@@ -488,6 +488,93 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
       }
     }
 
+    // 7. POST /audit-receipt: AI Multi-Item Shopping Receipt Auditor
+    if (request.method === 'POST' && (url.pathname === '/audit-receipt' || url.pathname === '/api/audit-receipt')) {
+      try {
+        const body = await request.json();
+        const apiKey = env && env.GEMINI_API_KEY;
+
+        if (!apiKey) {
+          return new Response(JSON.stringify({ 
+            success: false, 
+            error: 'AI Vision key not configured on edge hook. Set GEMINI_API_KEY in Cloudflare Worker settings.' 
+          }), { status: 503, headers: corsHeaders });
+        }
+
+        const cleanBase64 = String(body.imageBase64 || '').replace(/^data:image\/\w+;base64,/, '');
+        const mimeType = body.mimeType || 'image/jpeg';
+        const userAllergens = Array.isArray(body.activeAllergens) ? body.activeAllergens.join(', ') : 'None';
+
+        const prompt = `You are an expert food safety auditor reviewing a grocery store shopping receipt (e.g. from Aldi, Walmart, Kroger, Meijer, Giant Eagle, Trader Joe's, Costco, etc.).
+User Household Allergen Safeguards to flag: ${userAllergens}
+
+Task:
+1. Examine this receipt image carefully.
+2. Identify the supermarket/store name if visible.
+3. Extract all purchased grocery/food items, filtering out non-food items (like paper towels, trash bags, tax, gift cards).
+4. For each food item:
+   - Identify the clear consumer food title and brand (e.g. "Mama Cozzi's French Bread Pizza", "Organic Baby Carrots", "Friendly Farms Whole Milk").
+   - Assess whether the item is associated with active federal recalls (such as organic carrots for E. coli, deli turkey/meats for Listeria, frozen waffles, cinnamon, etc.).
+   - Flag potential allergen conflicts based on the household safeguards: ${userAllergens}.
+5. Synthesize an audit summary.
+
+Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, no markdown, no backticks):
+{
+  "storeName": "Identified Store Name (e.g. ALDI, Kroger, Meijer) or 'Grocery Store'",
+  "purchaseDate": "Date on receipt or 'Today'",
+  "totalFoodItems": 12,
+  "recalledCount": 0,
+  "allergenWarningCount": 1,
+  "items": [
+    {
+      "rawLine": "Raw line from receipt slip",
+      "cleanName": "Standardized Food Name",
+      "brand": "Brand or Store Brand",
+      "status": "clear", // 'clear', 'recalled', or 'allergen_alert'
+      "warning": "Brief warning explanation if recalled or allergen alert, otherwise null",
+      "allergens": ["gluten", "dairy"] // detected common allergens
+    }
+  ],
+  "auditSummary": "1-2 sentence executive safety summary (e.g. '14 of 15 grocery items 100% cleared of active federal recalls. 1 potential alert detected for Organic Baby Carrots.')"
+}`;
+
+        const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{
+              parts: [
+                { text: prompt },
+                { inline_data: { mime_type: mimeType, data: cleanBase64 } }
+              ]
+            }],
+            generationConfig: {
+              temperature: 0.1,
+              response_mime_type: "application/json"
+            }
+          })
+        });
+
+        if (!geminiRes.ok) {
+          const errText = await geminiRes.text();
+          console.warn("Gemini Receipt Audit error:", errText);
+          return new Response(JSON.stringify({ success: false, error: 'Receipt vision service busy' }), { status: 502, headers: corsHeaders });
+        }
+
+        const geminiData = await geminiRes.json();
+        const rawJsonText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text;
+        let parsed = JSON.parse(rawJsonText);
+
+        return new Response(JSON.stringify({
+          success: true,
+          receipt: parsed
+        }), { headers: corsHeaders });
+      } catch (err) {
+        console.error("Audit receipt exception:", err);
+        return new Response(JSON.stringify({ success: false, error: err.message }), { status: 500, headers: corsHeaders });
+      }
+    }
+
     return new Response(JSON.stringify({ error: 'Endpoint not found' }), { status: 404, headers: corsHeaders });
   }
 };

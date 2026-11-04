@@ -961,6 +961,57 @@
       border-color: #cbd5e1 !important;
     }
 
+  
+    /* Receipt Auditor in Light Mode */
+    html.theme-light #receiptAuditorModal > div > div {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+    }
+    html.theme-light #closeReceiptAuditorModalBtn {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    html.theme-light #closeReceiptAuditorModalBtn svg {
+      stroke: #0f172a !important;
+    }
+    html.theme-light #receiptAuditorModal .bg-slate-950,
+    html.theme-light #receiptAuditorModal .from-slate-950 {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+    }
+    html.theme-light #receiptStoreName {
+      color: #000000 !important;
+    }
+    html.theme-light #receiptItemsList > div {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+    }
+    html.theme-light #batchImportPantryBtn {
+      background-color: #0f172a !important;
+      color: #ffffff !important;
+    }
+
+  
+    /* Batch Receipt Auditor Card on Scanner Page in Light Mode */
+    html.theme-light #scannerPanel .bg-gradient-to-r.from-emerald-950\/40 {
+      background: #f0fdf4 !important;
+      border-color: #86efac !important;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04) !important;
+    }
+    html.theme-light #scannerPanel .bg-gradient-to-r.from-emerald-950\/40 span.text-white {
+      color: #000000 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light #scannerPanel .bg-gradient-to-r.from-emerald-950\/40 span.text-slate-300 {
+      color: #065f46 !important;
+      font-weight: 500 !important;
+    }
+
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
@@ -1515,6 +1566,30 @@
           </div>
         </div>
 
+
+      <!-- BATCH GROCERY RECEIPT SCANNER CARD (Live on UPC Scanner Page) -->
+      <div class="p-3.5 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-teal-950/30 to-slate-950 border border-emerald-500/30 flex items-center justify-between gap-3 shadow-md">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
+            <svg class="w-5 h-5 text-emerald-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="font-bold text-xs sm:text-sm text-white leading-tight">Batch Receipt Auditor</span>
+              <span class="text-[9px] font-bold px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 uppercase tracking-wider">AI Fast</span>
+            </div>
+            <span class="text-[11px] text-slate-300 block truncate mt-0.5">Audit 15–30 groceries from a single receipt photo</span>
+          </div>
+        </div>
+        <button 
+          type="button" 
+          onclick="openReceiptAuditor()" 
+          class="shrink-0 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5 cursor-pointer"
+        >
+          <svg class="w-3.5 h-3.5 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
+          <span>Audit</span>
+        </button>
+      </div>
 
       <!-- BRAND & PRODUCT NAME SEARCH BAR (Adaptive Search with Auto-Suggestions & Enter Search) -->
       <div id="brandSearchSection" class="pt-3 border-t border-slate-800/80 space-y-2.5 scroll-mt-28">
@@ -2127,6 +2202,7 @@
             Clear All
           </button>
         </div>
+
 
         <div id="pantryDrawerContainer" class="hidden pt-2 space-y-2.5">
           <div id="pantryRecallAlertBanner" class="hidden transition-all duration-300 space-y-3" aria-live="polite"></div>
@@ -9311,7 +9387,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=29')
+        navigator.serviceWorker.register('./sw.js?v=32')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
@@ -9512,6 +9588,269 @@
       }
     }
 
+
+    // ==========================================
+    // MULTI-ITEM SHOPPING RECEIPT AUDITOR
+    // ==========================================
+    const receiptAuditorModal = document.getElementById('receiptAuditorModal');
+    const closeReceiptAuditorModalBtn = document.getElementById('closeReceiptAuditorModalBtn');
+    const receiptCameraInput = document.getElementById('receiptCameraInput');
+    const receiptAuditLoadingBox = document.getElementById('receiptAuditLoadingBox');
+    const receiptAuditResultsBox = document.getElementById('receiptAuditResultsBox');
+    const receiptStoreName = document.getElementById('receiptStoreName');
+    const receiptPurchaseDate = document.getElementById('receiptPurchaseDate');
+    const receiptClearedBadge = document.getElementById('receiptClearedBadge');
+    const receiptAlertBadge = document.getElementById('receiptAlertBadge');
+    const receiptExecutiveSummary = document.getElementById('receiptExecutiveSummary');
+    const receiptItemsList = document.getElementById('receiptItemsList');
+    const batchImportBtnText = document.getElementById('batchImportBtnText');
+
+    let latestAuditedReceiptItems = [];
+
+    // Helper functions for Receipt Quota & Fair-Use Enforcement
+    function getReceiptUsageData() {
+      const currentMonthKey = new Date().toISOString().slice(0, 7); // '2026-11'
+      const todayKey = new Date().toISOString().slice(0, 10); // '2026-11-04'
+
+      const savedMonth = localStorage.getItem('rakka_receipt_month') || '';
+      let freeCount = parseInt(localStorage.getItem('rakka_receipt_free_count') || '0', 10);
+      if (savedMonth !== currentMonthKey) {
+        freeCount = 0;
+        localStorage.setItem('rakka_receipt_month', currentMonthKey);
+        localStorage.setItem('rakka_receipt_free_count', '0');
+      }
+
+      const savedDay = localStorage.getItem('rakka_receipt_day') || '';
+      let proDailyCount = parseInt(localStorage.getItem('rakka_receipt_pro_daily') || '0', 10);
+      if (savedDay !== todayKey) {
+        proDailyCount = 0;
+        localStorage.setItem('rakka_receipt_day', todayKey);
+        localStorage.setItem('rakka_receipt_pro_daily', '0');
+      }
+
+      return { currentMonthKey, todayKey, freeCount, proDailyCount };
+    }
+
+    function recordReceiptScanUsage() {
+      const { freeCount, proDailyCount } = getReceiptUsageData();
+      if (isPlusActive) {
+        localStorage.setItem('rakka_receipt_pro_daily', String(proDailyCount + 1));
+      } else {
+        localStorage.setItem('rakka_receipt_free_count', String(freeCount + 1));
+      }
+    }
+
+    function openReceiptAuditor() {
+      checkPlusStatus();
+      const { freeCount, proDailyCount } = getReceiptUsageData();
+
+      // 1. Free Tier Check: 1 scan per month
+      if (!isPlusActive && freeCount >= 1) {
+        triggerHaptic([40, 40]);
+        openPaywall();
+        showCustomizeToast("Free monthly receipt scan used. Upgrade to RAKKA Pro for unlimited receipt auditing!");
+        return;
+      }
+
+      // 2. Pro Tier Fair-Use Check: 10 scans per day
+      if (isPlusActive && proDailyCount >= 10) {
+        triggerHaptic([40, 40]);
+        showCustomizeToast("Daily fair-use limit reached (10 receipts/day). Refreshes at midnight!");
+        return;
+      }
+
+      triggerHaptic([30]);
+      if (receiptAuditResultsBox) receiptAuditResultsBox.classList.add('hidden');
+      if (receiptAuditLoadingBox) receiptAuditLoadingBox.classList.add('hidden');
+      if (receiptCameraInput) receiptCameraInput.value = '';
+      
+      // Update modal subtitle with current usage status
+      const sub = document.getElementById('receiptAuditorSub');
+      if (sub) {
+        if (isPlusActive) {
+          sub.textContent = `RAKKA Pro Member • ${10 - proDailyCount} receipt scans remaining today`;
+        } else {
+          sub.textContent = "Free Tier • 1 Free Monthly Receipt Scan Available";
+        }
+      }
+
+      if (receiptAuditorModal) receiptAuditorModal.classList.remove('hidden');
+    }
+
+    function closeReceiptAuditor() {
+      if (receiptAuditorModal) receiptAuditorModal.classList.add('hidden');
+    }
+
+    if (closeReceiptAuditorModalBtn) closeReceiptAuditorModalBtn.addEventListener('click', closeReceiptAuditor);
+    if (receiptAuditorModal) {
+      receiptAuditorModal.addEventListener('click', (e) => {
+        if (e.target === receiptAuditorModal) closeReceiptAuditor();
+      });
+    }
+
+    if (receiptCameraInput) {
+      receiptCameraInput.addEventListener('change', async (e) => {
+        if (!e.target.files || e.target.files.length === 0) return;
+        const file = e.target.files[0];
+        triggerHaptic([40]);
+
+        if (receiptAuditLoadingBox) receiptAuditLoadingBox.classList.remove('hidden');
+        if (receiptAuditResultsBox) receiptAuditResultsBox.classList.add('hidden');
+
+        const reader = new FileReader();
+        const base64Promise = new Promise((resolve, reject) => {
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+
+        try {
+          const dataUrl = await base64Promise;
+          const hookUrl = (localStorage.getItem('rakka_cloudflare_hook') || DEFAULT_CLOUDFLARE_HOOK).trim();
+
+          // Pass active user allergens for cross-checking
+          const activeProf = getActiveProfile();
+          const activeAllergens = (activeProf && activeProf.allergens) ? activeProf.allergens : [];
+
+          const res = await fetch(`${hookUrl.replace(/\/+$/, '')}/audit-receipt`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              imageBase64: dataUrl,
+              mimeType: file.type || 'image/jpeg',
+              activeAllergens: activeAllergens
+            })
+          });
+
+          if (receiptAuditLoadingBox) receiptAuditLoadingBox.classList.add('hidden');
+
+          if (res.ok) {
+            const data = await res.json();
+            if (data && data.success && data.receipt) {
+              recordReceiptScanUsage();
+              renderReceiptAuditResults(data.receipt);
+              return;
+            }
+          }
+          throw new Error("Receipt audit service error");
+        } catch (err) {
+          if (receiptAuditLoadingBox) receiptAuditLoadingBox.classList.add('hidden');
+          console.warn("Receipt auditor error:", err);
+          showCustomizeToast("Could not read receipt slip clearly. Please ensure good lighting and try again.");
+        }
+      });
+    }
+
+    function renderReceiptAuditResults(receipt) {
+      if (!receiptAuditResultsBox) return;
+      receiptAuditResultsBox.classList.remove('hidden');
+
+      if (receiptStoreName) receiptStoreName.textContent = receipt.storeName || 'Grocery Receipt';
+      if (receiptPurchaseDate) receiptPurchaseDate.textContent = `Purchased: ${receipt.purchaseDate || 'Recent Trip'}`;
+      if (receiptExecutiveSummary) receiptExecutiveSummary.textContent = receipt.auditSummary || `${receipt.totalFoodItems || 0} food items audited against federal safety registries.`;
+
+      const recalledCount = receipt.recalledCount || 0;
+      const allergenCount = receipt.allergenWarningCount || 0;
+      const totalCount = receipt.totalFoodItems || (receipt.items ? receipt.items.length : 0);
+
+      if (receiptClearedBadge) {
+        receiptClearedBadge.textContent = `${totalCount - recalledCount - allergenCount} Cleared`;
+      }
+
+      if (receiptAlertBadge) {
+        if (recalledCount > 0 || allergenCount > 0) {
+          receiptAlertBadge.textContent = `${recalledCount + allergenCount} Warning${(recalledCount + allergenCount) > 1 ? 's' : ''}`;
+          receiptAlertBadge.classList.remove('hidden');
+          triggerHaptic([100, 50, 100]);
+          sound.playScanBeep();
+        } else {
+          receiptAlertBadge.classList.add('hidden');
+          triggerHaptic([30, 40]);
+          sound.playClearChime();
+        }
+      }
+
+      latestAuditedReceiptItems = Array.isArray(receipt.items) ? receipt.items : [];
+
+      if (receiptItemsList) {
+        receiptItemsList.innerHTML = latestAuditedReceiptItems.map((item, idx) => {
+          let statusBadge = `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Cleared</span>`;
+          let itemBorder = 'border-slate-800 bg-slate-950/70';
+
+          if (item.status === 'recalled') {
+            statusBadge = `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-pulse">RECALL MATCH</span>`;
+            itemBorder = 'border-rose-500/60 bg-rose-950/40';
+          } else if (item.status === 'allergen_alert') {
+            statusBadge = `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">Allergen Alert</span>`;
+            itemBorder = 'border-amber-500/50 bg-amber-950/40';
+          }
+
+          return `
+            <div class="p-2.5 rounded-xl border ${itemBorder} text-xs space-y-1">
+              <div class="flex items-center justify-between gap-2">
+                <span class="font-bold text-white truncate">${item.cleanName || item.rawLine}</span>
+                ${statusBadge}
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-slate-400">
+                <span class="truncate">${item.brand || 'Store Item'}</span>
+                ${item.allergens && item.allergens.length > 0 ? `<span class="text-[10px] font-medium text-amber-300">Contains: ${item.allergens.join(', ')}</span>` : ''}
+              </div>
+              ${item.warning ? `<p class="text-[11px] font-medium text-rose-300 pt-0.5 leading-snug">${item.warning}</p>` : ''}
+            </div>
+          `;
+        }).join('');
+      }
+
+      if (batchImportBtnText) {
+        batchImportBtnText.textContent = `Add ${latestAuditedReceiptItems.filter(i => i.status !== 'recalled').length} Safe Items to 60-Day Pantry Shield`;
+      }
+    }
+
+    function batchImportReceiptToPantry() {
+      if (!latestAuditedReceiptItems || latestAuditedReceiptItems.length === 0) return;
+      triggerHaptic([40, 40]);
+
+      let importedCount = 0;
+      const maxCap = isPlusActive ? MAX_WATCHLIST_ITEMS : 5;
+
+      const safeItems = latestAuditedReceiptItems.filter(item => item.status !== 'recalled');
+      let skippedDueToCap = 0;
+
+      safeItems.forEach(item => {
+        if (scanHistory.length >= maxCap) {
+          skippedDueToCap++;
+          return;
+        }
+
+        const syntheticUpc = 'RCPT-' + Math.floor(100000 + Math.random() * 900000);
+        const historyItem = {
+          upc: syntheticUpc,
+          product: item.cleanName || item.rawLine,
+          brand: item.brand || 'Grocery Item',
+          date: new Date().toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }) + ' • ' + new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
+          timestamp: Date.now(),
+          status: 'clear',
+          source: 'receipt'
+        };
+
+        scanHistory.unshift(historyItem);
+        importedCount++;
+      });
+
+      if (scanHistory.length > maxCap) {
+        scanHistory = scanHistory.slice(0, maxCap);
+      }
+
+      saveHistory();
+      renderHistory();
+      closeReceiptAuditor();
+      if (skippedDueToCap > 0 && !isPlusActive) {
+        showCustomizeToast(`Imported ${importedCount}/5 free items. Upgrade to RAKKA Pro to monitor all ${safeItems.length} items!`);
+      } else {
+        showCustomizeToast(`Imported ${importedCount} items into your 60-Day Local Pantry Shield!`);
+      }
+    }
+
   </script>
   <!-- LOT & BEST-BY DATE AUDITOR MODAL SHEET -->
   <div id="lotAuditorModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
@@ -9568,6 +9907,87 @@
             <p id="lotVerdictExplanation" class="text-slate-200 leading-relaxed"></p>
             <div id="lotVerdictActionBox" class="p-2 rounded-xl text-[11px] font-medium leading-relaxed"></div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MULTI-ITEM GROCERY RECEIPT AUDITOR MODAL SHEET -->
+  <div id="receiptAuditorModal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border-2 border-emerald-500/60 max-w-lg w-full rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4 relative animate-in fade-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto">
+      <button type="button" id="closeReceiptAuditorModalBtn" class="absolute top-4 right-4 text-slate-300 hover:text-white w-10 h-10 min-w-[40px] min-h-[40px] rounded-full bg-slate-800/90 hover:bg-slate-700 border border-slate-700/80 flex items-center justify-center transition active:scale-95 shadow-md cursor-pointer z-10" aria-label="Close receipt auditor">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div class="flex items-center gap-3 border-b border-slate-800 pb-3 pr-8">
+        <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        </div>
+        <div>
+          <h3 class="font-display text-sm sm:text-base font-bold text-white leading-tight">Batch Receipt Auditor</h3>
+          <p id="receiptAuditorSub" class="text-[11px] text-slate-400">1-Shot AI Recall & Allergen Screen for Your Entire Grocery Haul</p>
+        </div>
+      </div>
+
+      <div class="space-y-3.5 text-xs">
+        <!-- Capture / Upload Box -->
+        <div class="p-4 rounded-2xl bg-gradient-to-b from-slate-950 to-slate-900 border border-slate-800 text-center space-y-3">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-300 mx-auto">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
+          </div>
+          <div>
+            <span class="font-bold text-white block text-sm">Snap or Upload Paper Receipt</span>
+            <span class="text-[11px] text-slate-400 block mt-0.5">Works with Aldi, Kroger, Meijer, Walmart, Giant Eagle, Trader Joe's & more</span>
+          </div>
+
+          <label for="receiptCameraInput" class="cursor-pointer w-full py-3.5 px-4 min-h-[48px] rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-sky-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-2">
+            <svg class="w-4 h-4 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
+            <span id="receiptUploadBtnText">Capture / Select Receipt Photo</span>
+            <input type="file" id="receiptCameraInput" accept="image/*" class="hidden">
+          </label>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div id="receiptAuditLoadingBox" class="hidden p-4 rounded-2xl bg-slate-950 border border-slate-800 text-center space-y-2">
+          <div class="inline-block animate-spin rounded-full h-7 w-7 border-2 border-emerald-400 border-t-transparent"></div>
+          <p class="text-xs text-slate-300 font-medium">Auditing receipt lines against FDA/USDA recall feeds & household allergens...</p>
+        </div>
+
+        <!-- Audit Results Container -->
+        <div id="receiptAuditResultsBox" class="hidden space-y-3 pt-1 animate-in fade-in duration-200">
+          <!-- Summary Header -->
+          <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <div>
+                <span id="receiptStoreName" class="font-bold text-white text-sm block">Store Name</span>
+                <span id="receiptPurchaseDate" class="text-[10px] text-slate-400 block font-mono">Date</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span id="receiptClearedBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"></span>
+                <span id="receiptAlertBadge" class="hidden text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30"></span>
+              </div>
+            </div>
+            <p id="receiptExecutiveSummary" class="text-xs text-slate-200 leading-relaxed pt-1 border-t border-slate-800/80"></p>
+          </div>
+
+          <!-- Itemized Breakdown List -->
+          <div class="space-y-1.5">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400 block px-1">Audited Items Breakdown</span>
+            <div id="receiptItemsList" class="space-y-2 max-h-64 overflow-y-auto pr-1"></div>
+          </div>
+
+          <!-- Batch Import to Pantry Shield Button -->
+          <button 
+            type="button" 
+            id="batchImportPantryBtn" 
+            onclick="batchImportReceiptToPantry()" 
+            class="w-full py-3 px-4 min-h-[46px] rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 font-bold text-xs border border-slate-700 flex items-center justify-center gap-2 transition active:scale-[0.98] shadow-sm cursor-pointer"
+          >
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+            <span id="batchImportBtnText">Add All Cleared Items to 60-Day Pantry Shield</span>
+          </button>
         </div>
       </div>
     </div>
