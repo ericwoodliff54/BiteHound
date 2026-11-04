@@ -1839,7 +1839,7 @@
         </p>
 
         <div class="flex items-center gap-2 pt-1">
-          <button type="button" id="togglePantryDrawerBtn" class="flex-1 py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 transition border border-slate-700 flex items-center justify-center gap-2 active:scale-95">
+          <button type="button" id="togglePantryDrawerBtn" onclick="togglePantryDrawer()" class="flex-1 py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 transition border border-slate-700 flex items-center justify-center gap-2 active:scale-95">
             <span id="pantryDrawerBtnText">View Monitored Groceries (0)</span>
             <span id="pantryDrawerChevron">▼</span>
           </button>
@@ -6449,7 +6449,7 @@
                 <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                 </svg>
-                <span>Tracked in Local Pantry Shield (60-day auto recall monitoring)</span>
+                <span>${isPlusActive ? 'Protected in Pro Pantry Shield (100-item monitoring)' : (scanHistory.length >= 5 ? 'Pantry Shield Full (5/5 Free Limit • Tap to Upgrade)' : 'Tracked in Free Pantry Shield (up to 5 items)')}</span>
               </div>
             </div>
             <span class="text-[10px] font-semibold text-slate-300 bg-slate-950 px-2 py-1 rounded-md border border-slate-800 shrink-0">
@@ -7768,6 +7768,7 @@
     }
 
     function renderCustomizeTab() {
+      if (typeof renderHistory === "function") renderHistory();
       renderThemeControls();
       prefSoundBtn.textContent = sound.enabled ? 'Enabled' : 'Muted';
       prefSoundBtn.className = sound.enabled 
@@ -7910,7 +7911,8 @@
 
       // 2. Rolling Capacity Enforcer with Recall Immunity (FIFO)
       // When exceeding MAX_WATCHLIST_ITEMS (100), pop the oldest CLEARED item from the bottom
-      while (scanHistory.length > MAX_WATCHLIST_ITEMS) {
+      const effectiveCap = isPlusActive ? MAX_WATCHLIST_ITEMS : 5;
+      while (scanHistory.length > effectiveCap) {
         let oldestClearedIdx = -1;
         for (let idx = scanHistory.length - 1; idx >= 0; idx--) {
           const isRecalled = Boolean(scanHistory[idx].recalledNow || scanHistory[idx].status === 'recalled' || scanHistory[idx].isRecalled);
@@ -8095,11 +8097,29 @@
       return new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     }
 
+    
+    window.togglePantryDrawer = function() {
+      triggerHaptic([30]);
+      const drawer = document.getElementById('pantryDrawerContainer');
+      const chevron = document.getElementById('pantryDrawerChevron');
+      if (drawer) {
+        const isHidden = drawer.classList.contains('hidden');
+        drawer.classList.toggle('hidden', !isHidden);
+        if (chevron) {
+          chevron.textContent = !isHidden ? '▲' : '▼';
+        }
+        if (typeof renderHistory === 'function') {
+          renderHistory();
+        }
+      }
+    };
+
     function renderHistory() {
       const countBadge = document.getElementById('pantryGuardCountBadge');
       const activeCount = scanHistory.length;
       if (countBadge) {
-        countBadge.textContent = `${activeCount}/${MAX_WATCHLIST_ITEMS} Watched`;
+        const maxCap = isPlusActive ? MAX_WATCHLIST_ITEMS : 5;
+        countBadge.textContent = `${activeCount}/${maxCap} Watched (${isPlusActive ? 'Pro' : 'Free'})`;
         const drawerBtnText = document.getElementById('pantryDrawerBtnText');
         if (drawerBtnText) {
           drawerBtnText.textContent = `View Monitored Groceries (${activeCount})`;
@@ -8130,7 +8150,22 @@
         </div>
       ` : '';
 
-      historyList.innerHTML = capacityBannerHtml + scanHistory.map(item => {
+      const freeUpgradeBanner = (!isPlusActive) ? `
+        <div class="p-3 rounded-xl bg-gradient-to-r from-amber-950/40 via-slate-900 to-amber-950/30 border border-amber-500/40 text-xs flex items-center justify-between gap-3 text-slate-200 mb-2.5 shadow-sm">
+          <div>
+            <span class="font-bold text-amber-300 block flex items-center gap-1.5">
+              ${UI_ICONS.shieldCheck}
+              <span>Pantry Shield (${activeCount}/5 Free Foods Monitored)</span>
+            </span>
+            <span class="text-[11px] text-slate-300">Upgrade to RAKKA Pro to monitor up to 100 groceries in background.</span>
+          </div>
+          <button type="button" class="open-paywall-trigger px-3 py-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-950 font-bold text-xs shrink-0 active:scale-95 shadow-sm">
+            Unlock 100
+          </button>
+        </div>
+      ` : '';
+
+      historyList.innerHTML = freeUpgradeBanner + capacityBannerHtml + scanHistory.map(item => {
         const isItemRecalled = Boolean(item.recalledNow || item.status === 'recalled');
 
         if (isItemRecalled) {
@@ -8707,7 +8742,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=9')
+        navigator.serviceWorker.register('./sw.js?v=11')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
