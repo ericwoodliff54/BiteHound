@@ -403,6 +403,32 @@
       color: #115e59 !important;
     }
 
+    
+    /* Packaging Ingredients Breakdown Window in Light Mode */
+    html.theme-light [id$="-window-Ingredients"] > div {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+      color: #000000 !important;
+    }
+    html.theme-light [id$="-window-Ingredients"] span {
+      color: #000000 !important;
+    }
+    html.theme-light [id$="-window-Ingredients"] span.text-slate-400 {
+      color: #475569 !important;
+      font-weight: 600 !important;
+    }
+    html.theme-light [id$="-window-Ingredients"] p {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+      font-weight: 500 !important;
+    }
+    html.theme-light [id$="-window-Ingredients"] p.italic {
+      background-color: #f1f5f9 !important;
+      color: #64748b !important;
+    }
+
     /* Result Window Cards (Recall, Allergen, Additive) */
     html.theme-light [id$="-window-Recall"] > div,
     html.theme-light [id$="-window-Allergen"] > div,
@@ -7278,8 +7304,8 @@
                   ${UI_ICONS.alertTriangle}
                 </span>
                 <div>
-                  <span class="text-[10px] font-mono tracking-widest text-rose-400 uppercase font-bold block">HOUSEHOLD ALLERGEN GUARD</span>
-                  <h4 class="font-display text-sm font-bold text-white leading-tight">Do Not Consume • Active Federal Recall</h4>
+                  <span class="text-xs font-bold text-white uppercase tracking-wider block">Household Allergen Guard</span>
+                  <span class="text-[11px] text-rose-300 font-semibold">Do Not Consume • Active Federal Recall Alert</span>
                 </div>
               </div>
               <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-rose-500 text-white shadow-sm shrink-0">
@@ -7308,10 +7334,10 @@
                   ${activeHasConflict ? UI_ICONS.alertCircle : UI_ICONS.shieldCheck}
                 </span>
                 <div>
-                  <span class="text-[10px] font-mono tracking-widest text-slate-400 uppercase font-bold block">HOUSEHOLD ALLERGEN GUARD</span>
-                  <h4 class="font-display text-sm font-bold text-white leading-tight">
+                  <span class="text-xs font-bold text-white uppercase tracking-wider block">Household Allergen Guard</span>
+                  <span class="text-[11px] ${activeHasConflict ? 'text-amber-300' : 'text-emerald-300'} font-semibold">
                     ${activeHasConflict ? `Dietary Alert for ${activeProf.name}` : `Safe for ${activeProf.name}`}
-                  </h4>
+                  </span>
                 </div>
               </div>
               <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${activeHasConflict ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'} shrink-0">
@@ -7356,8 +7382,8 @@
                   ${UI_ICONS.info}
                 </span>
                 <div>
-                  <span class="text-[10px] font-mono tracking-widest text-slate-400 uppercase font-bold block">HOUSEHOLD ALLERGEN GUARD</span>
-                  <h4 class="font-display text-sm font-bold text-white leading-tight">Check Packaging Label Directly</h4>
+                  <span class="text-xs font-bold text-slate-200 uppercase tracking-wider block">Household Allergen Guard</span>
+                  <span class="text-[11px] text-slate-400 font-semibold">Ingredients Unindexed • Label Check Required</span>
                 </div>
               </div>
               <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-800 text-amber-300 border border-slate-700 shrink-0">
@@ -7381,8 +7407,8 @@
                   ${UI_ICONS.shieldCheck}
                 </span>
                 <div>
-                  <span class="text-[10px] font-mono tracking-widest text-emerald-400 uppercase font-bold block">HOUSEHOLD ALLERGEN GUARD</span>
-                  <h4 class="font-display text-sm font-bold text-white leading-tight">Safe for the Entire Household</h4>
+                  <span class="text-xs font-bold text-white uppercase tracking-wider block">Household Allergen Guard</span>
+                  <span class="text-[11px] text-emerald-300 font-semibold">Cleared for All Family Profiles (${familyProfiles.length} Screened)</span>
                 </div>
               </div>
               <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-500 text-white shadow-sm shrink-0">
@@ -7426,10 +7452,10 @@
                 ${UI_ICONS.alertTriangle}
               </span>
               <div>
-                <span class="text-[10px] font-mono tracking-widest text-amber-400 uppercase font-bold block">HOUSEHOLD ALLERGEN GUARD</span>
-                <h4 class="font-display text-sm font-bold text-white leading-tight">
-                  Dietary Alert for ${conflictingMembers.length} Household Member${conflictingMembers.length > 1 ? 's' : ''}
-                </h4>
+                <span class="text-xs font-bold text-white uppercase tracking-wider block">Household Allergen Guard</span>
+                <span class="text-[11px] text-amber-300 font-semibold">
+                  Unsafe for ${conflictingMembers.length} Household Member${conflictingMembers.length > 1 ? 's' : ''}
+                </span>
               </div>
             </div>
             <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-500 text-slate-950 shadow-sm shrink-0">
@@ -9910,7 +9936,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=37')
+        navigator.serviceWorker.register('./sw.js?v=38')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
