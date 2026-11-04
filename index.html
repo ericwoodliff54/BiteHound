@@ -25,16 +25,22 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     body { 
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       -webkit-tap-highlight-color: transparent;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      letter-spacing: -0.01em;
       padding-top: env(safe-area-inset-top, 0px);
       padding-bottom: env(safe-area-inset-bottom, 0px);
     }
-    .font-display { font-family: 'Space Grotesk', sans-serif; }
+    .font-display { 
+      font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif; 
+      letter-spacing: -0.025em; 
+    }
 
     /* Synchronized camera viewport: eliminates zoom cropping and reticle coordinate offset */
     #reader {
@@ -328,7 +334,7 @@
             </div>
             <div class="text-right">
               <span class="font-bold text-emerald-400 text-sm">$0</span>
-              <span class="text-[10px] text-slate-500 block font-mono">Free Forever</span>
+              <span class="text-[10px] text-slate-400 block font-medium tracking-wide">Free Forever</span>
             </div>
           </div>
 
@@ -346,7 +352,7 @@
             </div>
             <div class="text-right">
               <span class="font-bold text-white text-sm">$2.08<span class="text-[10px] text-slate-400 font-normal">/mo</span></span>
-              <span class="text-[10px] text-slate-400 block font-mono">$24.99 billed/yr</span>
+              <span class="text-[10px] text-slate-400 block font-semibold">$24.99 billed/yr</span>
             </div>
           </label>
 
@@ -383,7 +389,7 @@
               type="text" 
               id="promoCodeInput" 
               placeholder="e.g. FAMILY" 
-              class="px-3 py-2 rounded-xl border border-slate-700 bg-slate-950 text-white text-xs uppercase font-mono tracking-wider outline-none focus:border-amber-400 text-center w-40"
+              class="px-3 py-2 rounded-xl border border-slate-700 bg-slate-950 text-white text-xs uppercase font-semibold tracking-wider outline-none focus:border-amber-400 text-center w-40"
               maxlength="15"
             >
             <button 
@@ -618,7 +624,7 @@
               <span class="w-0.5 h-full bg-sky-400/50 rounded-sm"></span>
               <span class="w-1.5 h-full bg-sky-400/90 rounded-sm"></span>
             </div>
-            <span class="text-xs font-mono tracking-wider text-amber-300 font-bold mt-1">ALIGN BARCODE HERE</span>
+            <span class="text-xs tracking-wider text-amber-300 font-bold mt-1 uppercase">Align Barcode in Viewfinder</span>
           </div>
 
           <p class="font-display font-bold text-sm sm:text-base text-slate-100">Point phone camera at grocery barcode</p>
@@ -882,7 +888,7 @@
             <svg class="w-4 h-4 text-sky-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
             <span>Browse Full Directory of All 37 Screened Chemicals</span>
           </span>
-          <span id="additivesDirectoryArrow" class="text-slate-400 font-mono text-[11px]">▼ View All</span>
+          <span id="additivesDirectoryArrow" class="text-slate-400 font-semibold text-[11px]">▼ View All</span>
         </button>
 
         <!-- Expandable Chemical Directory Drawer -->
@@ -991,7 +997,7 @@
           <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
           <span>Allergen guards auto-save to device memory</span>
         </span>
-        <span class="text-slate-500 font-mono text-[10px]">12 Dietary Guards (FDA Big 9 + Corn, Sulfites & Yeast)</span>
+        <span class="text-slate-400 font-medium text-[10px]">12 Dietary Guards (FDA Big 9 + Corn, Sulfites & Yeast)</span>
       </div>
     </section>
 
@@ -1212,7 +1218,7 @@
 
                 <!-- Version Tag -->
       <div class="pt-2 text-center">
-        <p class="text-[11px] text-slate-500 font-mono">BiteHound v1.3 • Offline Engine & App Up to Date</p>
+        <p class="text-[11px] text-slate-400 font-medium">BiteHound v1.3 • Offline Engine & App Up to Date</p>
       </div>
 </section>
 
@@ -1290,6 +1296,7 @@
 
   <script>
     // Audio Feedback Synthesizer
+    // Sleek Acoustic Sound Engine (Warm, Filtered Harmonics — Zero Harsh 8-Bit Buzzers)
     class SoundEngine {
       constructor() {
         this.enabled = true;
@@ -1301,56 +1308,87 @@
           if (AudioContext) this.ctx = new AudioContext();
         }
       }
-      playTone(freq, type, duration, delay = 0) {
+
+      // Soft-Attack Harmonic Tone Synthesizer with Biquad Acoustic Lowpass Filter
+      playHarmonic(freq, duration, gainLevel = 0.1, delay = 0, type = 'sine') {
         if (!this.enabled) return;
         try {
           this.init();
           if (!this.ctx) return;
           if (this.ctx.state === 'suspended') this.ctx.resume();
 
+          const startTime = this.ctx.currentTime + delay;
+          const stopTime = startTime + duration;
+
           const osc = this.ctx.createOscillator();
           const gain = this.ctx.createGain();
+          const filter = this.ctx.createBiquadFilter();
+
           osc.type = type;
-          osc.frequency.setValueAtTime(freq, this.ctx.currentTime + delay);
+          osc.frequency.setValueAtTime(freq, startTime);
 
-          gain.gain.setValueAtTime(0.12, this.ctx.currentTime + delay);
-          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + delay + duration);
+          // Acoustic Lowpass Filter: removes harsh electronic edge, creating a warm, polished chime
+          filter.type = 'lowpass';
+          filter.frequency.setValueAtTime(2600, startTime);
 
-          osc.connect(gain);
+          // Smooth exponential envelope (prevents harsh audio clicks, creates silky bell/marimba decay)
+          gain.gain.setValueAtTime(0.0001, startTime);
+          gain.gain.exponentialRampToValueAtTime(gainLevel, startTime + 0.008);
+          gain.gain.exponentialRampToValueAtTime(0.0001, stopTime);
+
+          osc.connect(filter);
+          filter.connect(gain);
           gain.connect(this.ctx.destination);
 
-          osc.start(this.ctx.currentTime + delay);
-          osc.stop(this.ctx.currentTime + delay + duration);
+          osc.start(startTime);
+          osc.stop(stopTime);
         } catch (e) {
           console.warn('Audio tone error', e);
         }
       }
+
+      // 1. Modern Glassy Camera Scan Beep (Apple Pay / Sleek UI micro-chime)
       playScanBeep() {
-        try { this.playTone(880, 'sine', 0.08); } catch(e) {}
+        try {
+          this.playHarmonic(1046.5, 0.06, 0.10, 0);      // C6 (crystal strike)
+          this.playHarmonic(1318.5, 0.08, 0.08, 0.02);   // E6 (bright shimmer)
+        } catch (e) {}
       }
+
+      // 2. Safe & Cleared Chime (Warm, reassuring acoustic major chord)
       playClearChime() {
         try {
-          this.playTone(523.25, 'triangle', 0.15, 0);
-          this.playTone(659.25, 'triangle', 0.25, 0.12);
-        } catch(e) {}
+          this.playHarmonic(587.33, 0.20, 0.09, 0);       // D5
+          this.playHarmonic(739.99, 0.26, 0.11, 0.07);    // F#5
+          this.playHarmonic(880.00, 0.38, 0.13, 0.14);    // A5
+          this.playHarmonic(1174.66, 0.42, 0.07, 0.20);   // D6 (soft vibraphone tail)
+        } catch (e) {}
       }
-      playWarningBuzz() {
-        try {
-          this.playTone(280, 'sawtooth', 0.25, 0);
-          this.playTone(220, 'sawtooth', 0.35, 0.2);
-        } catch(e) {}
-      }
-      playAlertSiren() {
-        try {
-          this.playTone(380, 'sawtooth', 0.22, 0);
-          this.playTone(260, 'sawtooth', 0.32, 0.18);
-        } catch(e) {}
-      }
+
+      // 3. Allergen Alert (Dignified modern notification — warm minor chord chime)
       playAllergenAlert() {
         try {
-          this.playTone(440, 'square', 0.15, 0);
-          this.playTone(349.23, 'square', 0.25, 0.15);
-        } catch(e) {}
+          this.playHarmonic(554.37, 0.22, 0.12, 0);       // C#5
+          this.playHarmonic(440.00, 0.28, 0.14, 0.09);    // A4
+          this.playHarmonic(369.99, 0.36, 0.11, 0.18);    // F#4 (gentle marimba alert)
+        } catch (e) {}
+      }
+
+      // 4. Federal Recall Notice (Deep, commanding resonance — urgent yet refined)
+      playAlertSiren() {
+        try {
+          this.playHarmonic(440.00, 0.28, 0.15, 0);       // A4
+          this.playHarmonic(329.63, 0.38, 0.16, 0.12);    // E4
+          this.playHarmonic(220.00, 0.50, 0.14, 0.24);    // A3 (deep resonant gong pulse)
+        } catch (e) {}
+      }
+
+      // 5. Warning / Notice Buzz (Subtle tactile acoustic feedback)
+      playWarningBuzz() {
+        try {
+          this.playHarmonic(329.63, 0.18, 0.10, 0);
+          this.playHarmonic(293.66, 0.24, 0.12, 0.08);
+        } catch (e) {}
       }
     }
 
@@ -4314,7 +4352,7 @@
               ${UI_ICONS.alertTriangle}
               <span>${activeAlertsList.length} Active Recall${activeAlertsList.length > 1 ? 's' : ''} Found</span>
             </span>
-            <span class="text-[10px] text-rose-400 font-mono">Tap to Inspect</span>
+            <span class="text-[10px] text-rose-300 font-bold tracking-wide">Tap to Inspect</span>
           </div>
           <div class="space-y-1.5 pt-0.5">
             ${activeAlertsList.map(item => `
@@ -4355,7 +4393,7 @@
                 ${UI_ICONS.shieldCheck}
                 <span>From Your Watchlist (${watchedItemsList.length})</span>
               </span>
-              <span class="text-[10px] text-slate-500 font-mono">0 Recalls on file</span>
+              <span class="text-[10px] text-slate-400 font-medium">0 Recalls on file</span>
             </div>
             ${watchedItemsList.map(item => `
               <div 
@@ -4369,7 +4407,7 @@
                   <span class="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded border bg-emerald-500/15 text-emerald-300 border-emerald-500/30">
                     WATCHED IN PANTRY
                   </span>
-                  <span class="text-[10px] text-slate-500 font-mono">UPC: ${item.upc}</span>
+                  <span class="text-[10px] text-slate-400 font-medium">UPC: ${item.upc}</span>
                 </div>
                 <h4 class="text-xs font-semibold text-slate-200 leading-snug">${item.title}</h4>
                 <p class="text-[11px] text-slate-400">${item.brand}</p>
@@ -5275,7 +5313,7 @@
                 <span>Auto-Watched in Pantry Watchlist</span>
               </div>
             </div>
-            <span class="text-[10px] font-mono text-slate-400 bg-slate-950 px-2 py-1 rounded-md border border-slate-800 shrink-0">
+            <span class="text-[10px] font-semibold text-slate-300 bg-slate-950 px-2 py-1 rounded-md border border-slate-800 shrink-0">
               ${data.time}
             </span>
           </div>
@@ -5380,7 +5418,7 @@
                   <span class="text-[11px] text-teal-300 font-semibold">Past Recall Terminated & Resolved</span>
                 </div>
               </div>
-              <span class="text-[10px] font-mono text-teal-300 bg-teal-950/80 border border-teal-600/60 px-2 py-1 rounded-md">
+              <span class="text-[10px] font-bold text-teal-200 bg-teal-950/80 border border-teal-600/60 px-2 py-1 rounded-md">
                 FDA Completed
               </span>
             </div>
@@ -5410,7 +5448,7 @@
                   <span class="text-[11px] text-emerald-300 font-semibold">100% Cleared of Federal Recalls</span>
                 </div>
               </div>
-              <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/80 border border-emerald-700/60 px-2 py-0.5 rounded-md">
+              <span class="text-[10px] font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-700/60 px-2 py-0.5 rounded-md">
                 No Recalls
               </span>
             </div>
@@ -5490,7 +5528,7 @@
                     <span class="text-[11px] text-slate-400 font-semibold">Ingredients Unindexed • Label Check Required</span>
                   </div>
                 </div>
-                <span class="text-[10px] font-mono text-slate-400 bg-slate-900 px-2 py-0.5 rounded-md border border-slate-700">
+                <span class="text-[10px] font-semibold text-slate-300 bg-slate-900 px-2 py-0.5 rounded-md border border-slate-700">
                   Packaging Check
                 </span>
               </div>
@@ -5581,7 +5619,7 @@
                     <span class="text-[11px] text-emerald-300 font-semibold">Clean Formulation Audited</span>
                   </div>
                 </div>
-                <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950/80 border border-emerald-700/60 px-2 py-0.5 rounded-md">
+                <span class="text-[10px] font-bold text-emerald-300 bg-emerald-950/80 border border-emerald-700/60 px-2 py-0.5 rounded-md">
                   Auto-Audited
                 </span>
               </div>
@@ -5597,7 +5635,7 @@
                     <span class="text-[11px] text-slate-400 font-semibold">Ingredients Unindexed • Label Check Required</span>
                   </div>
                 </div>
-                <span class="text-[10px] font-mono text-slate-400 bg-slate-900 px-2 py-0.5 rounded-md border border-slate-700">
+                <span class="text-[10px] font-semibold text-slate-300 bg-slate-900 px-2 py-0.5 rounded-md border border-slate-700">
                   Packaging Check
                 </span>
               </div>
@@ -5666,7 +5704,7 @@
               ${UI_ICONS.archive}
               <span>Packaging Ingredients Breakdown</span>
             </span>
-            <span class="text-[10px] text-slate-500 font-mono">Catalog Transparency</span>
+            <span class="text-[10px] text-slate-400 font-medium">Catalog Transparency</span>
           </div>
           ${data.ingredients ? `
             <p class="text-xs text-slate-300 leading-relaxed font-normal bg-slate-900/60 p-3 rounded-xl border border-slate-800/60">
