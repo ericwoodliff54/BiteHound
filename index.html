@@ -698,7 +698,115 @@
     html.theme-light #plusPaywallModal label,
     html.theme-light #addProfileModal label {
       color: #000000 !important;
-    }  </style>
+    }
+    /* ==========================================================
+       TARGETED FIXES FOR REMAINING DARK PILLS & BUTTONS IN LIGHT MODE
+       ========================================================== */
+
+    /* 1. UPC Entry Page: Upload UPC Button */
+    html.theme-light label[for="barcodeFileInput"] {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+    }
+    html.theme-light label[for="barcodeFileInput"]:hover {
+      background-color: #f8fafc !important;
+      border-color: #94a3b8 !important;
+    }
+    html.theme-light label[for="barcodeFileInput"] span {
+      color: #000000 !important;
+      font-weight: 700 !important;
+    }
+
+    /* 2. Active Recalls Page: Listed Retailers Pills */
+    html.theme-light #bulletinFeedList span.bg-slate-800,
+    html.theme-light .bulletin-card span.bg-slate-800,
+    html.theme-light [id^="priority-bulletin-details-"] span.bg-slate-800,
+    html.theme-light div[id^="priority-bulletin-details-"] .space-y-1 span.bg-slate-800 {
+      background-color: #f1f5f9 !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #000000 !important;
+      font-weight: 600 !important;
+    }
+
+    /* 3. Settings Page: RAKKA Pro Active Member Pill & Button */
+    html.theme-light #plusActiveBadge {
+      font-weight: 700 !important;
+    }
+    html.theme-light #plusActiveBadge.bg-emerald-500\/20 {
+      background-color: #ecfdf5 !important;
+      border-color: #a7f3d0 !important;
+      color: #065f46 !important;
+    }
+    html.theme-light #plusActiveBadge.bg-amber-500\/20 {
+      background-color: #fef3c7 !important;
+      border-color: #fde68a !important;
+      color: #92400e !important;
+    }
+    html.theme-light #plusActiveBadge.bg-slate-800 {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+    }
+    html.theme-light #openPaywallBtn.bg-slate-800 {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #92400e !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+    }
+    html.theme-light #openPaywallBtn.bg-slate-800 span {
+      color: #92400e !important;
+      font-weight: 700 !important;
+    }
+
+    /* 4. Settings Page: Expand Pantry Monitored Items Button */
+    html.theme-light #togglePantryDrawerBtn {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+    }
+    html.theme-light #togglePantryDrawerBtn:hover {
+      background-color: #f8fafc !important;
+      border-color: #94a3b8 !important;
+    }
+    html.theme-light #togglePantryDrawerBtn span {
+      color: #000000 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light #pantryGuardCountBadge.bg-emerald-500\/20 {
+      background-color: #ecfdf5 !important;
+      border-color: #a7f3d0 !important;
+      color: #065f46 !important;
+    }
+
+    /* 5. Scanned Products: FDA Completed / Terminated Recall Pill */
+    html.theme-light .bg-teal-950\/80,
+    html.theme-light span.bg-teal-950\/80 {
+      background-color: #ccfbf1 !important;
+      border-color: #5eead4 !important;
+      color: #0f766e !important;
+      font-weight: 700 !important;
+    }
+
+    /* 6. Scanned Products: Packaging Ingredients / Packaging Check Pill */
+    html.theme-light span.bg-slate-900.border-slate-700,
+    html.theme-light #scannerResultContainer span.bg-slate-900,
+    html.theme-light #manualResultContainer span.bg-slate-900,
+    html.theme-light [id$="-window-Allergen"] span.bg-slate-900,
+    html.theme-light [id$="-window-Additive"] span.bg-slate-900 {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light span.bg-slate-800 {
+      background-color: #e2e8f0 !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+    }
+  </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
   <!-- APP STARTUP SPLASH SCREEN (Showcases Great Dane mascot with large, bold apple medall<!-- APP STARTUP SPLASH SCREEN (Showcases Great Dane mascot with clean sandstone aesthetic) -->
@@ -8893,7 +9001,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=22')
+        navigator.serviceWorker.register('./sw.js?v=23')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
