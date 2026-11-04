@@ -5195,15 +5195,21 @@
             { x: 0, y: 0, w: origW, h: origH, scale: Math.min(1, 1800 / Math.max(origW, origH)), rotate: 0 },
             // Region 2: Bottom Half of Package (80%+ of retail packaging barcodes)
             { x: 0, y: Math.floor(origH * 0.45), w: origW, h: Math.floor(origH * 0.55), scale: 1, rotate: 0 },
-            // Region 3: Bottom Right Quadrant
+            // Region 3: Bottom Right Quadrant (where bagged carrots, chips, & snacks place barcodes)
             { x: Math.floor(origW * 0.45), y: Math.floor(origH * 0.45), w: Math.floor(origW * 0.55), h: Math.floor(origH * 0.55), scale: 1, rotate: 0 },
-            // Region 4: Bottom Left Quadrant
+            // Region 4: Bottom Right Quadrant ROTATED 90° (for vertical/sideways barcodes on bags)
+            { x: Math.floor(origW * 0.45), y: Math.floor(origH * 0.45), w: Math.floor(origW * 0.55), h: Math.floor(origH * 0.55), scale: 1, rotate: 90 },
+            // Region 5: Bottom Right Quadrant ROTATED 270°
+            { x: Math.floor(origW * 0.45), y: Math.floor(origH * 0.45), w: Math.floor(origW * 0.55), h: Math.floor(origH * 0.55), scale: 1, rotate: 270 },
+            // Region 6: Bottom Left Quadrant
             { x: 0, y: Math.floor(origH * 0.45), w: Math.floor(origW * 0.55), h: Math.floor(origH * 0.55), scale: 1, rotate: 0 },
-            // Region 5: Center Section (30% to 70%)
+            // Region 7: Bottom Left Quadrant ROTATED 90°
+            { x: 0, y: Math.floor(origH * 0.45), w: Math.floor(origW * 0.55), h: Math.floor(origH * 0.55), scale: 1, rotate: 90 },
+            // Region 8: Center Section (30% to 70%)
             { x: Math.floor(origW * 0.20), y: Math.floor(origH * 0.20), w: Math.floor(origW * 0.60), h: Math.floor(origH * 0.60), scale: 1, rotate: 0 },
-            // Region 6: 90° Rotated View (for vertical barcodes on cans, tall bottles, or cereal box sides)
+            // Region 9: 90° Rotated Full View
             { x: 0, y: 0, w: origW, h: origH, scale: Math.min(1, 1400 / Math.max(origW, origH)), rotate: 90 },
-            // Region 7: 270° Rotated View
+            // Region 10: 270° Rotated Full View
             { x: 0, y: 0, w: origW, h: origH, scale: Math.min(1, 1400 / Math.max(origW, origH)), rotate: 270 }
           ];
 
@@ -5293,10 +5299,75 @@
 
         // Directly process uploaded barcode without being blocked by camera frame debouncing
         await processUPC(decodedText, 'manual');
-      } catch (err) {
+      } catch (opticalErr) {
+        console.warn("Optical barcode detection missed, trying Cloud Edge AI Packaging Vision:", opticalErr);
+        
+        // Edge AI Vision Fallback: Upload whole package to Cloudflare Worker Gemini Vision
+        const hookUrl = (localStorage.getItem('rakka_cloudflare_hook') || DEFAULT_CLOUDFLARE_HOOK).trim();
+        if (hookUrl && file) {
+          try {
+            showScannerMessage("Analyzing whole package with AI Vision...");
+            
+            // Read file to base64
+            const reader = new FileReader();
+            const base64Promise = new Promise((bResolve, bReject) => {
+              reader.onload = () => bResolve(reader.result);
+              reader.onerror = bReject;
+              reader.readAsDataURL(file);
+            });
+            const dataUrl = await base64Promise;
+
+            const visionRes = await fetch(`${hookUrl.replace(/\/+$/, '')}/detect-package`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                imageBase64: dataUrl,
+                mimeType: file.type || 'image/jpeg'
+              })
+            });
+
+            if (visionRes.ok) {
+              const visionData = await visionRes.json();
+              if (visionData && visionData.found && visionData.product) {
+                hideScannerMessage();
+                e.target.value = '';
+                triggerHaptic([80, 40, 80]);
+                sound.playScanBeep();
+
+                const p = visionData.product;
+                const detectedCode = p.upc && p.upc !== 'VISION-DETECTED' ? p.upc : '';
+                if (detectedCode) {
+                  upcInput.value = detectedCode;
+                  clearBtn.classList.remove('hidden');
+                }
+
+                // If lotCode is present, store it for recall matching
+                if (p.lotCode) {
+                  showCustomizeToast(`AI Vision spotted packaging lot: ${p.lotCode}`);
+                }
+
+                // Display resolved product directly
+                displayResult({
+                  upc: detectedCode || 'AI-VISION',
+                  source: 'manual',
+                  status: 'clear',
+                  productName: p.name,
+                  brand: p.brand,
+                  ingredients: p.ingredients || '',
+                  isRecalled: false,
+                  detectedAllergens: [],
+                  detectedAdditives: []
+                }, 'manual');
+                return;
+              }
+            }
+          } catch (visionErr) {
+            console.warn("Edge AI Vision fallback notice:", visionErr);
+          }
+        }
+
         e.target.value = '';
         hideScannerMessage();
-        console.warn("Whole package scan error:", err);
         showScannerMessage("Could not spot a barcode on that package. Try getting slightly closer to the barcode or type digits manually.");
       }
     });
@@ -9148,7 +9219,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=26')
+        navigator.serviceWorker.register('./sw.js?v=27')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();

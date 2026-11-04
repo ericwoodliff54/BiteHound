@@ -292,6 +292,109 @@ export default {
       }
     }
 
+    // 5. POST /detect-package: Multimodal AI Vision for whole-package photos
+    if (request.method === 'POST' && (url.pathname === '/detect-package' || url.pathname === '/api/detect-package')) {
+      try {
+        const body = await request.json();
+        if (!body.imageBase64) {
+          return new Response(JSON.stringify({ error: 'Image base64 data required' }), { status: 400, headers: corsHeaders });
+        }
+
+        const cleanBase64 = body.imageBase64.replace(/^data:image\/\w+;base64,/, '');
+        const mimeType = body.mimeType || 'image/jpeg';
+        const apiKey = env && env.GEMINI_API_KEY;
+
+        if (!apiKey) {
+          return new Response(JSON.stringify({ 
+            found: false, 
+            error: 'AI Vision key not configured on edge hook. Configure GEMINI_API_KEY in Cloudflare Worker settings.' 
+          }), { status: 503, headers: corsHeaders });
+        }
+
+        const prompt = `Analyze this grocery product package image. 
+Inspect the whole packaging including any barcodes, printed text, numbers, brand, and ingredient list.
+Extract and return STRICTLY a JSON object with this exact schema (no markdown, no backticks, raw JSON only):
+{
+  "upc": "12 or 13 digit barcode number if visible, otherwise null",
+  "productName": "Exact product name and size (e.g. Organic Cut Baby Carrots, 1 lb)",
+  "brand": "Exact brand name (e.g. Grimmway Farms)",
+  "ingredients": "Raw comma-separated ingredients text if visible, or null",
+  "lotCode": "Stamped expiration date or lot code if visible (e.g. BEST IF USED BY 07 07 2016 159101BP2), or null"
+}`;
+
+        const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{
+              parts: [
+                { text: prompt },
+                { inline_data: { mime_type: mimeType, data: cleanBase64 } }
+              ]
+            }],
+            generationConfig: {
+              temperature: 0.1,
+              response_mime_type: "application/json"
+            }
+          })
+        });
+
+        if (!geminiRes.ok) {
+          const errText = await geminiRes.text();
+          console.warn("Gemini Vision API error:", errText);
+          return new Response(JSON.stringify({ found: false, error: 'AI vision inspection service busy' }), { status: 502, headers: corsHeaders });
+        }
+
+        const geminiData = await geminiRes.json();
+        const rawJsonText = geminiData.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!rawJsonText) {
+          return new Response(JSON.stringify({ found: false, message: 'Could not detect product attributes from image' }), { headers: corsHeaders });
+        }
+
+        let parsed;
+        try {
+          parsed = JSON.parse(rawJsonText);
+        } catch (jsonErr) {
+          const match = rawJsonText.match(/\{[\s\S]*\}/);
+          if (match) parsed = JSON.parse(match[0]);
+          else throw jsonErr;
+        }
+
+        const upc = String(parsed.upc || '').replace(/\D/g, '');
+        const productName = parsed.productName || '';
+        const brand = parsed.brand || '';
+        const ingredients = parsed.ingredients || '';
+
+        if (productName || upc) {
+          const resolvedRecord = {
+            upc: upc || 'VISION-DETECTED',
+            name: productName,
+            brand: brand || 'Grocery Brand',
+            ingredients: ingredients || '',
+            lotCode: parsed.lotCode || null,
+            additives: [],
+            allergens: []
+          };
+
+          // Cache in community DB if barcode and name exist
+          if (upc && productName && env && env.RAKKA_COMMUNITY_DB) {
+            ctx.waitUntil(env.RAKKA_COMMUNITY_DB.put(`upc:${upc}`, JSON.stringify(resolvedRecord)));
+          }
+
+          return new Response(JSON.stringify({
+            found: true,
+            source: 'gemini_vision_ai',
+            product: resolvedRecord
+          }), { headers: corsHeaders });
+        }
+
+        return new Response(JSON.stringify({ found: false, message: 'No clear product or barcode found in image' }), { headers: corsHeaders });
+      } catch (err) {
+        console.error("Detect package exception:", err);
+        return new Response(JSON.stringify({ found: false, error: err.message }), { status: 500, headers: corsHeaders });
+      }
+    }
+
     return new Response(JSON.stringify({ error: 'Endpoint not found' }), { status: 404, headers: corsHeaders });
   }
 };
