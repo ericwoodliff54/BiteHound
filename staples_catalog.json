@@ -6370,5 +6370,68 @@
       "Walmart"
     ],
     "isRecalled": false
+  },
+  "3267790000017": {
+    "product": "Saf-Instant Baker's Dry Yeast (55g / 5x11g Sachets)",
+    "brand": "Saf-Instant / Lesaffre",
+    "upc": "3267790000017",
+    "ingredients": "Baker's Dry Yeast (Saccharomyces cerevisiae), Sorbitan Monostearate (E491 Rehydration Emulsifier).",
+    "allergens": [
+      "yeast"
+    ],
+    "additives_tags": [
+      "e491"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Amazon",
+      "Specialty Bakers",
+      "International Markets"
+    ],
+    "isRecalled": false
+  },
+  "03267790000017": {
+    "product": "Saf-Instant Baker's Dry Yeast (55g / 5x11g Sachets)",
+    "brand": "Saf-Instant / Lesaffre",
+    "upc": "3267790000017",
+    "ingredients": "Baker's Dry Yeast (Saccharomyces cerevisiae), Sorbitan Monostearate (E491 Rehydration Emulsifier).",
+    "allergens": [
+      "yeast"
+    ],
+    "additives_tags": [
+      "e491"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Amazon",
+      "Specialty Bakers",
+      "International Markets"
+    ],
+    "isRecalled": false
+  },
+  "003267790000017": {
+    "product": "Saf-Instant Baker's Dry Yeast (55g / 5x11g Sachets)",
+    "brand": "Saf-Instant / Lesaffre",
+    "upc": "3267790000017",
+    "ingredients": "Baker's Dry Yeast (Saccharomyces cerevisiae), Sorbitan Monostearate (E491 Rehydration Emulsifier).",
+    "allergens": [
+      "yeast"
+    ],
+    "additives_tags": [
+      "e491"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Amazon",
+      "Specialty Bakers",
+      "International Markets"
+    ],
+    "isRecalled": false
   }
 }
