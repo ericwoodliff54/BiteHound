@@ -1013,6 +1013,22 @@
     }
 
   
+    
+    /* Receipt Modal Buttons in Light Mode */
+    html.theme-light #openReceiptUploadBtn {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+    }
+    html.theme-light #openReceiptUploadBtn svg {
+      stroke: #0f172a !important;
+    }
+    html.theme-light #openReceiptUploadBtn:hover {
+      background-color: #f8fafc !important;
+      border-color: #94a3b8 !important;
+    }
+
     /* Unified Family Verdict Card Light Mode Styling */
     html.theme-light .family-verdict-card {
       background: #ffffff !important;
@@ -9689,7 +9705,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=33')
+        navigator.serviceWorker.register('./sw.js?v=34')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
@@ -9990,56 +10006,104 @@
       });
     }
 
+    const openReceiptCameraBtn = document.getElementById('openReceiptCameraBtn');
+    const openReceiptUploadBtn = document.getElementById('openReceiptUploadBtn');
+    const receiptUploadInput = document.getElementById('receiptUploadInput');
+
+    async function processReceiptFile(file) {
+      if (!file) return;
+      triggerHaptic([40]);
+
+      if (receiptAuditLoadingBox) receiptAuditLoadingBox.classList.remove('hidden');
+      if (receiptAuditResultsBox) receiptAuditResultsBox.classList.add('hidden');
+
+      const reader = new FileReader();
+      const base64Promise = new Promise((resolve, reject) => {
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+
+      try {
+        const dataUrl = await base64Promise;
+        const hookUrl = (localStorage.getItem('rakka_cloudflare_hook') || DEFAULT_CLOUDFLARE_HOOK).trim();
+
+        // Pass active user allergens for cross-checking
+        const activeProf = getActiveProfile();
+        const activeAllergens = (activeProf && activeProf.allergens) ? activeProf.allergens : [];
+
+        const res = await fetch(`${hookUrl.replace(/\/+$/, '')}/audit-receipt`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            imageBase64: dataUrl,
+            mimeType: file.type || 'image/jpeg',
+            activeAllergens: activeAllergens
+          })
+        });
+
+        if (receiptAuditLoadingBox) receiptAuditLoadingBox.classList.add('hidden');
+
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.success && data.receipt) {
+            recordReceiptScanUsage();
+            renderReceiptAuditResults(data.receipt);
+            return;
+          }
+        }
+        throw new Error("Receipt audit service error");
+      } catch (err) {
+        if (receiptAuditLoadingBox) receiptAuditLoadingBox.classList.add('hidden');
+        console.warn("Receipt auditor error:", err);
+        showCustomizeToast("Could not read receipt slip clearly. Please ensure good lighting and try again.");
+      }
+    }
+
+    // Programmatic trigger for Camera Button (handles Samsung Fold/Flip & WebKit/Blink security context)
+    if (openReceiptCameraBtn && receiptCameraInput) {
+      openReceiptCameraBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        triggerHaptic([20]);
+        receiptCameraInput.value = '';
+        try {
+          receiptCameraInput.click();
+        } catch (camErr) {
+          console.warn("Camera input click failed, trying fallback:", camErr);
+          if (receiptUploadInput) receiptUploadInput.click();
+        }
+      });
+    }
+
+    // Programmatic trigger for Gallery Button
+    if (openReceiptUploadBtn && receiptUploadInput) {
+      openReceiptUploadBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        triggerHaptic([20]);
+        receiptUploadInput.value = '';
+        try {
+          receiptUploadInput.click();
+        } catch (uploadErr) {
+          console.warn("Upload input click failed:", uploadErr);
+        }
+      });
+    }
+
     if (receiptCameraInput) {
       receiptCameraInput.addEventListener('change', async (e) => {
         if (!e.target.files || e.target.files.length === 0) return;
         const file = e.target.files[0];
-        triggerHaptic([40]);
+        await processReceiptFile(file);
+        e.target.value = '';
+      });
+    }
 
-        if (receiptAuditLoadingBox) receiptAuditLoadingBox.classList.remove('hidden');
-        if (receiptAuditResultsBox) receiptAuditResultsBox.classList.add('hidden');
-
-        const reader = new FileReader();
-        const base64Promise = new Promise((resolve, reject) => {
-          reader.onload = () => resolve(reader.result);
-          reader.onerror = reject;
-          reader.readAsDataURL(file);
-        });
-
-        try {
-          const dataUrl = await base64Promise;
-          const hookUrl = (localStorage.getItem('rakka_cloudflare_hook') || DEFAULT_CLOUDFLARE_HOOK).trim();
-
-          // Pass active user allergens for cross-checking
-          const activeProf = getActiveProfile();
-          const activeAllergens = (activeProf && activeProf.allergens) ? activeProf.allergens : [];
-
-          const res = await fetch(`${hookUrl.replace(/\/+$/, '')}/audit-receipt`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              imageBase64: dataUrl,
-              mimeType: file.type || 'image/jpeg',
-              activeAllergens: activeAllergens
-            })
-          });
-
-          if (receiptAuditLoadingBox) receiptAuditLoadingBox.classList.add('hidden');
-
-          if (res.ok) {
-            const data = await res.json();
-            if (data && data.success && data.receipt) {
-              recordReceiptScanUsage();
-              renderReceiptAuditResults(data.receipt);
-              return;
-            }
-          }
-          throw new Error("Receipt audit service error");
-        } catch (err) {
-          if (receiptAuditLoadingBox) receiptAuditLoadingBox.classList.add('hidden');
-          console.warn("Receipt auditor error:", err);
-          showCustomizeToast("Could not read receipt slip clearly. Please ensure good lighting and try again.");
-        }
+    if (receiptUploadInput) {
+      receiptUploadInput.addEventListener('change', async (e) => {
+        if (!e.target.files || e.target.files.length === 0) return;
+        const file = e.target.files[0];
+        await processReceiptFile(file);
+        e.target.value = '';
       });
     }
 
@@ -10244,11 +10308,23 @@
             <span class="text-[11px] text-slate-400 block mt-0.5">Works with Aldi, Kroger, Meijer, Walmart, Giant Eagle, Trader Joe's & more</span>
           </div>
 
-          <label for="receiptCameraInput" class="cursor-pointer w-full py-3.5 px-4 min-h-[48px] rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-sky-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-2">
-            <svg class="w-4 h-4 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
-            <span id="receiptUploadBtnText">Capture / Select Receipt Photo</span>
-            <input type="file" id="receiptCameraInput" accept="image/*" class="hidden">
-          </label>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <!-- Dedicated Direct Camera Button (Optimized for Samsung Galaxy Z Fold/Flip rear camera capture) -->
+            <button type="button" id="openReceiptCameraBtn" class="cursor-pointer w-full py-3 px-3.5 min-h-[48px] rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 hover:from-emerald-500 hover:to-teal-400 text-white font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 text-emerald-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
+              <span>Snap with Camera</span>
+            </button>
+
+            <!-- Dedicated Upload / Gallery Button (Reliable fallback for folding phones and saved receipts) -->
+            <button type="button" id="openReceiptUploadBtn" class="cursor-pointer w-full py-3 px-3.5 min-h-[48px] rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs border border-slate-700 shadow-md transition active:scale-[0.98] flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 text-slate-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              <span>Upload from Gallery</span>
+            </button>
+
+            <!-- Hidden file inputs with capture="environment" for camera, and standard for file picker -->
+            <input type="file" id="receiptCameraInput" accept="image/*" capture="environment" class="hidden">
+            <input type="file" id="receiptUploadInput" accept="image/*" class="hidden">
+          </div>
         </div>
 
         <!-- Progress Indicator -->
