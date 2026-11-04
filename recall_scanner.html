@@ -1012,6 +1012,65 @@
       font-weight: 500 !important;
     }
 
+  
+    /* Unified Family Verdict Card Light Mode Styling */
+    html.theme-light .family-verdict-card {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+      color: #000000 !important;
+    }
+    html.theme-light .family-verdict-card h4 {
+      color: #000000 !important;
+      font-weight: 800 !important;
+    }
+    html.theme-light .family-verdict-card p {
+      color: #1e293b !important;
+      font-weight: 500 !important;
+    }
+    html.theme-light .family-verdict-card .text-white {
+      color: #000000 !important;
+    }
+    html.theme-light .family-verdict-card .text-slate-300,
+    html.theme-light .family-verdict-card .text-slate-400 {
+      color: #334155 !important;
+      font-weight: 600 !important;
+    }
+    html.theme-light .family-verdict-card .bg-emerald-950\/80,
+    html.theme-light .family-verdict-card .bg-emerald-950\/70,
+    html.theme-light .family-verdict-card .bg-emerald-950\/50 {
+      background-color: #f0fdf4 !important;
+      border-color: #86efac !important;
+      color: #166534 !important;
+    }
+    html.theme-light .family-verdict-card .bg-rose-950\/60 {
+      background-color: #fef2f2 !important;
+      border-color: #fca5a5 !important;
+      color: #991b1b !important;
+    }
+    html.theme-light .family-verdict-card .text-rose-300 {
+      color: #b91c1c !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .family-verdict-card .text-rose-200 {
+      color: #991b1b !important;
+      font-weight: 600 !important;
+    }
+    html.theme-light .family-verdict-card .text-emerald-300,
+    html.theme-light .family-verdict-card .text-emerald-400 {
+      color: #15803d !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .family-verdict-card .text-amber-300,
+    html.theme-light .family-verdict-card .text-amber-400 {
+      color: #b45309 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .family-verdict-card .text-purple-300 {
+      color: #6b21a8 !important;
+      font-weight: 700 !important;
+    }
+
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
@@ -6838,6 +6897,7 @@
             if (matches.length > 0) {
               const names = matches.map(id => formatAllergenName(id));
               triggeredFamilyMatches.push({
+                id: prof.id,
                 name: prof.name,
                 icon: prof.icon || 'user',
                 photo: prof.photo || null,
@@ -6968,6 +7028,245 @@
       }
     };
 
+    
+    function buildUnifiedFamilyVerdictCard(data) {
+      const isRecalled = Boolean(data.isRecalled && data.recallRecord);
+      const isTerminated = Boolean(data.terminatedNotice);
+      const hasFamilyMatches = Boolean(data.familyMatches && data.familyMatches.length > 0);
+      const hasAdditives = Boolean(data.detectedAdditives && data.detectedAdditives.length > 0);
+      const additivesCount = (data.detectedAdditives || []).length;
+      const detectedAllergensCount = (data.detectedAllergens || []).length;
+      const hasIndexedIngredients = Boolean(data.ingredients && String(data.ingredients).trim().length > 0);
+      
+      const activeProf = (typeof getActiveProfile === 'function') ? getActiveProfile() : (familyProfiles[0] || { id: 'me', name: 'Me', allergens: [] });
+      const totalProfiles = (familyProfiles && familyProfiles.length) ? familyProfiles.length : 1;
+      const isMultiMember = totalProfiles > 1;
+
+      // Compute safe and conflict members
+      const conflictingMembers = data.familyMatches || [];
+      const safeMembers = (familyProfiles || []).filter(p => !conflictingMembers.some(m => (m.id && m.id === p.id) || m.name === p.name));
+
+      // CASE A: Active Federal Recall (Critical Warning)
+      if (isRecalled) {
+        return `
+          <div class="family-verdict-card rounded-2xl border-2 border-rose-500 bg-gradient-to-b from-rose-950/90 via-slate-900 to-slate-900 p-4 shadow-xl shadow-rose-950/60 space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b border-rose-900/60">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 rounded-xl bg-rose-500/25 text-rose-300 border border-rose-500/50 shrink-0 animate-pulse">
+                  ${UI_ICONS.alertTriangle}
+                </span>
+                <div>
+                  <span class="text-[10px] font-mono tracking-widest text-rose-400 uppercase font-bold block">HOUSEHOLD VERDICT</span>
+                  <h4 class="font-display text-sm font-bold text-white leading-tight">Do Not Consume • Active Federal Recall</h4>
+                </div>
+              </div>
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-rose-500 text-white shadow-sm shrink-0">
+                Unsafe
+              </span>
+            </div>
+            <p class="text-xs text-rose-200 leading-relaxed font-medium">
+              This product matches an active FDA/USDA safety recall for <strong>${data.recallRecord.reason || 'contamination/safety risk'}</strong>. Do not serve to any household member.
+            </p>
+          </div>
+        `;
+      }
+
+      // CASE B: Free Mode (Single-profile audit + Pro multi-member banner)
+      if (!isPlusActive) {
+        // Free user: audit against activeProfile
+        const activeMatches = (activeProf.allergens || []).filter(a => (data.detectedAllergens || []).includes(a));
+        const activeHasConflict = activeMatches.length > 0;
+        const activeAllergenNames = activeMatches.map(id => formatAllergenName(id));
+
+        return `
+          <div class="family-verdict-card rounded-2xl border ${activeHasConflict ? 'border-amber-500/80 bg-gradient-to-b from-amber-950/70 via-slate-900 to-slate-900' : 'border-emerald-500/50 bg-gradient-to-b from-emerald-950/50 via-slate-900 to-slate-900'} p-4 shadow-xl space-y-3">
+            <div class="flex items-center justify-between pb-2 border-b ${activeHasConflict ? 'border-amber-900/50' : 'border-emerald-900/50'}">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 rounded-xl ${activeHasConflict ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'} shrink-0">
+                  ${activeHasConflict ? UI_ICONS.alertCircle : UI_ICONS.shieldCheck}
+                </span>
+                <div>
+                  <span class="text-[10px] font-mono tracking-widest text-slate-400 uppercase font-bold block">SINGLE-USER ALLERGEN VERDICT</span>
+                  <h4 class="font-display text-sm font-bold text-white leading-tight">
+                    ${activeHasConflict ? `Dietary Alert for ${activeProf.name}` : `Safe for ${activeProf.name}`}
+                  </h4>
+                </div>
+              </div>
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${activeHasConflict ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'} shrink-0">
+                ${activeHasConflict ? 'Conflict' : 'Cleared'}
+              </span>
+            </div>
+
+            <div class="flex items-center gap-2 text-xs">
+              ${activeHasConflict ? `
+                <div class="w-full bg-rose-950/60 border border-rose-500/40 rounded-xl p-2.5 text-rose-200">
+                  <span class="font-bold text-white block mb-0.5">⚠️ Contains: ${activeAllergenNames.join(', ')}</span>
+                  <span class="text-[11px] text-slate-300">Conflicts with your active dietary profile (${activeProf.name}).</span>
+                </div>
+              ` : `
+                <div class="w-full bg-emerald-950/50 border border-emerald-500/30 rounded-xl p-2.5 text-emerald-200 text-xs">
+                  <span class="font-semibold text-emerald-300">✓ No allergen conflicts detected</span> for your active profile (${activeProf.name}).
+                </div>
+              `}
+            </div>
+
+            <!-- Pro Multi-Member Household Teaser -->
+            <div class="pt-2 border-t border-slate-800 flex items-center justify-between gap-3">
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="text-amber-400 shrink-0 text-xs">${UI_ICONS.lock}</span>
+                <span class="text-[11px] text-slate-300 truncate font-medium">Screen entire family (kids, spouse, pets) simultaneously with RAKKA Pro</span>
+              </div>
+              <button type="button" class="open-paywall-trigger shrink-0 px-2.5 py-1 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-[11px] transition active:scale-95 shadow-sm">
+                Unlock Pro
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      // CASE C: Pro Mode - Unindexed Ingredients Warning
+      if (!hasIndexedIngredients) {
+        return `
+          <div class="family-verdict-card rounded-2xl border border-slate-700 bg-slate-900/95 p-4 shadow-xl space-y-2.5">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 rounded-xl bg-slate-800 text-amber-300 border border-slate-700 shrink-0">
+                  ${UI_ICONS.info}
+                </span>
+                <div>
+                  <span class="text-[10px] font-mono tracking-widest text-slate-400 uppercase font-bold block">UNIFIED HOUSEHOLD VERDICT</span>
+                  <h4 class="font-display text-sm font-bold text-white leading-tight">Check Packaging Label Directly</h4>
+                </div>
+              </div>
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-800 text-amber-300 border border-slate-700 shrink-0">
+                Unindexed
+              </span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Full ingredients are not yet cataloged for this UPC barcode. Freedom from federal recalls is confirmed, but please review printed box labels for family allergen warnings.
+            </p>
+          </div>
+        `;
+      }
+
+      // CASE D: Pro Mode - All Profiles Cleared (100% Safe for Household)
+      if (!hasFamilyMatches) {
+        return `
+          <div class="family-verdict-card rounded-2xl border-2 border-emerald-500/80 bg-gradient-to-b from-emerald-950/60 via-slate-900 to-slate-900 p-4 shadow-xl shadow-emerald-950/40 space-y-3">
+            <div class="flex items-center justify-between pb-2.5 border-b border-emerald-900/50">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 shrink-0">
+                  ${UI_ICONS.shieldCheck}
+                </span>
+                <div>
+                  <span class="text-[10px] font-mono tracking-widest text-emerald-400 uppercase font-bold block">UNIFIED HOUSEHOLD VERDICT</span>
+                  <h4 class="font-display text-sm font-bold text-white leading-tight">Safe for the Entire Household</h4>
+                </div>
+              </div>
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-500 text-white shadow-sm shrink-0">
+                All Cleared
+              </span>
+            </div>
+
+            <!-- Member Safe Badges Grid -->
+            <div>
+              <span class="text-[10px] uppercase tracking-wider font-bold text-emerald-300 block mb-1.5">
+                Screened & Cleared (${familyProfiles.length} Member${familyProfiles.length > 1 ? 's' : ''}):
+              </span>
+              <div class="flex flex-wrap gap-1.5">
+                ${familyProfiles.map(p => `
+                  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 shadow-sm">
+                    ${p.photo ? `<img src="${p.photo}" class="w-4 h-4 rounded-full object-cover shrink-0">` : `<span class="text-[11px]">${p.icon || '👤'}</span>`}
+                    <span>${p.name}</span>
+                    <span class="text-emerald-400 text-[10px]">✓</span>
+                  </span>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Additive / Chemical Transparency Note -->
+            <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-300">
+              <span class="flex items-center gap-1 text-slate-400">
+                ${hasAdditives ? `${UI_ICONS.flask} <span class="text-purple-300 font-semibold">${additivesCount} scrutinized additive${additivesCount > 1 ? 's' : ''} detected</span>` : `${UI_ICONS.checkCircle} <span class="text-emerald-300 font-medium">Clean formulation (zero petroleum dyes)</span>`}
+              </span>
+              <span class="text-[10px] font-semibold text-emerald-400">0 Allergens</span>
+            </div>
+          </div>
+        `;
+      }
+
+      // CASE E: Pro Mode - Allergen Conflicts Detected (Split Safe vs Unsafe)
+      return `
+        <div class="family-verdict-card rounded-2xl border-2 border-amber-500 bg-gradient-to-b from-amber-950/70 via-slate-900 to-slate-900 p-4 shadow-xl shadow-amber-950/50 space-y-3">
+          <div class="flex items-center justify-between pb-2.5 border-b border-amber-900/50">
+            <div class="flex items-center gap-2">
+              <span class="p-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 shrink-0">
+                ${UI_ICONS.alertTriangle}
+              </span>
+              <div>
+                <span class="text-[10px] font-mono tracking-widest text-amber-400 uppercase font-bold block">UNIFIED HOUSEHOLD VERDICT</span>
+                <h4 class="font-display text-sm font-bold text-white leading-tight">
+                  Dietary Alert for ${conflictingMembers.length} Household Member${conflictingMembers.length > 1 ? 's' : ''}
+                </h4>
+              </div>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-500 text-slate-950 shadow-sm shrink-0">
+              Partial Match
+            </span>
+          </div>
+
+          <!-- Section 1: Unsafe for these Members -->
+          <div class="space-y-1.5">
+            <span class="text-[10px] uppercase tracking-wider font-bold text-rose-400 flex items-center gap-1">
+              <span>⚠️ Allergen Alert (${conflictingMembers.length}):</span>
+            </span>
+            <div class="space-y-1.5">
+              ${conflictingMembers.map(m => `
+                <div class="flex items-center justify-between bg-rose-950/60 border border-rose-500/40 px-3 py-1.5 rounded-xl text-xs">
+                  <div class="flex items-center gap-2 font-bold text-white">
+                    ${m.photo ? `<img src="${m.photo}" class="w-5 h-5 rounded-full object-cover border border-rose-400 shrink-0">` : `<span class="text-sm shrink-0">${m.icon || '👤'}</span>`}
+                    <span>${m.name}</span>
+                  </div>
+                  <span class="font-semibold text-rose-300 text-right text-[11px]">Contains ${m.allergens.join(', ')}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Section 2: Safe for these Members -->
+          ${safeMembers.length > 0 ? `
+            <div class="pt-2 border-t border-slate-800/80 space-y-1.5">
+              <span class="text-[10px] uppercase tracking-wider font-bold text-emerald-400 flex items-center gap-1">
+                <span>✓ Safe For (${safeMembers.length}):</span>
+              </span>
+              <div class="flex flex-wrap gap-1.5">
+                ${safeMembers.map(p => `
+                  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-950/70 text-emerald-300 border border-emerald-500/30">
+                    ${p.photo ? `<img src="${p.photo}" class="w-3.5 h-3.5 rounded-full object-cover shrink-0">` : `<span class="text-[10px]">${p.icon || '👤'}</span>`}
+                    <span>${p.name}</span>
+                  </span>
+                `).join('')}
+              </div>
+            </div>
+          ` : `
+            <div class="pt-1.5 border-t border-slate-800/80 text-[11px] text-rose-300 italic">
+              All screened household profiles have matching allergen alerts for this item.
+            </div>
+          `}
+
+          <!-- Section 3: Additives & Total Allergens -->
+          <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-300">
+            <span class="text-slate-400">
+              ${hasAdditives ? `<span class="text-purple-300 font-medium">${additivesCount} additive${additivesCount > 1 ? 's' : ''} flagged</span>` : '<span class="text-emerald-400 font-medium">Clean formulation</span>'}
+            </span>
+            <span class="text-[10px] font-mono text-slate-400">
+              Total Allergens: ${data.detectedAllergens ? data.detectedAllergens.length : 0}
+            </span>
+          </div>
+        </div>
+      `;
+    }
+
     function displayResult(data, source = 'scanner') {
       const activeSource = data.source || source;
       const targetContainer = (activeSource === 'manual') ? manualResultContainer : scannerResultContainer;
@@ -7031,6 +7330,8 @@
         additivePillIcon = UI_ICONS.flask;
         additivePillText = `${additivesCount} Flagged`;
       }
+
+      const familyVerdictCardHtml = buildUnifiedFamilyVerdictCard(data);
 
       const masterHeaderHtml = `
         <div class="rounded-2xl border border-slate-800 bg-slate-900/95 p-4 shadow-xl space-y-3">
@@ -7528,6 +7829,7 @@
       targetContainer.innerHTML = `
         <div class="space-y-3.5">
           ${masterHeaderHtml}
+          ${familyVerdictCardHtml}
           <div id="${activeSource}-window-Recall" class="scroll-mt-[150px] transition-all duration-300 rounded-2xl">
             ${recallWindowHtml}
           </div>
@@ -9387,7 +9689,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=32')
+        navigator.serviceWorker.register('./sw.js?v=33')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
