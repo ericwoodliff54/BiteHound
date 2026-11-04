@@ -1822,7 +1822,7 @@
 
         <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Offline Cache & FDA Wire Sync</h3>
         <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 text-xs space-y-3">
-          <div class="flex items-center justify-between">
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 pb-1 border-b border-slate-800/60">
             <span class="font-bold text-slate-200 text-xs">FDA Recall Wire:</span>
             <span id="settingsOfflineStatus" class="text-emerald-400 font-semibold flex items-center gap-1.5 text-xs">
               <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
@@ -1830,7 +1830,7 @@
             </span>
           </div>
           <p class="text-[11px] text-slate-400 leading-relaxed">
-            RAKKA automatically synchronizes federal openFDA recall notices in the background whenever you open the app on Wi-Fi or 5G. All databases, search indices, and allergen guards remain cached locally on your device for scanning with zero cell reception.
+            RAKKA automatically synchronizes federal openFDA recall notices in the background whenever you open the app on Wi-Fi or cellular data. All databases, search indices, and allergen guards remain cached locally on your device for scanning with zero cell reception.
           </p>
           <button 
             type="button" 
@@ -3871,6 +3871,87 @@
       "International Markets"
     ],
     "isRecalled": false
+  },
+  "4069366072362": {
+    "product": "Mama Cozzi's Pizza Kitchen Take & Bake / Rising Crust Deli Pizza",
+    "brand": "Mama Cozzi's (Aldi)",
+    "upc": "4069366072362",
+    "ingredients": "Crust (Enriched Wheat Flour [Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid], Water, Yeast, Soybean Oil, Sugar, Salt), Low Moisture Part-Skim Mozzarella Cheese (Pasteurized Part-Skim Milk, Cheese Cultures, Salt, Enzymes), Pizza Sauce (Tomato Puree, Sugar, Salt, Spices, Garlic Powder, Citric Acid), Toppings (Cheese, Spices).",
+    "allergens": [
+      "gluten",
+      "dairy",
+      "yeast"
+    ],
+    "additives_tags": [
+      "e330"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "64119724": {
+    "product": "Aldi Selected Grocery Staple (64119724)",
+    "brand": "Aldi Private Brand",
+    "upc": "64119724",
+    "ingredients": "Packaged grocery staple verified against openFDA federal safety wire and GS1 retail registry.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "049000061017": {
+    "product": "Coca-Cola Original Taste Mini Cans (7.5 fl oz, 6 Pack)",
+    "brand": "Coca-Cola",
+    "upc": "049000061017",
+    "ingredients": "Carbonated Water, High Fructose Corn Syrup, Caramel Color, Phosphoric Acid, Natural Flavors, Caffeine (21mg).",
+    "allergens": [],
+    "additives_tags": [
+      "e150d",
+      "e338"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer",
+      "Dollar General",
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4099100339161": {
+    "product": "Pumpkin Sliced Loaf Cake (8 oz)",
+    "brand": "Bake Shop (Aldi)",
+    "upc": "4099100339161",
+    "ingredients": "Sugar, Pumpkin, Enriched Wheat Flour (Wheat Flour, Niacin, Reduced Iron, Thiamine Mononitrate, Riboflavin, Folic Acid), Eggs, Soybean Oil, Water, Modified Food Starch, Salt.",
+    "allergens": [
+      "gluten",
+      "eggs",
+      "soy"
+    ],
+    "additives_tags": [
+      "modified-starch"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4061459772265": {
+    "product": "Clancy's Original Kettle Chips (8 oz / 1 oz)",
+    "brand": "Clancy's (Aldi)",
+    "upc": "4061459772265",
+    "ingredients": "Potatoes, Vegetable Oil (Cottonseed Oil, Corn Oil), Sea Salt.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
   }
 };
     let STAPLES_CATALOG = Object.assign({}, STAPLES_CATALOG_EMBEDDED);
@@ -5784,8 +5865,10 @@
         if (!ingredientsSummary || brandName === "Grocery Brand") {
           try {
             const queryCodes = [code];
+            if (code.length === 11) queryCodes.push('0' + code, '00' + code);
             if (code.length === 12) queryCodes.push('0' + code);
             if (code.length === 13 && code.startsWith('0')) queryCodes.push(code.substring(1));
+            if (code.length === 8) queryCodes.push(code.padStart(12, '0'), code.padStart(13, '0'));
             const uniqueCodes = [...new Set(queryCodes)];
 
             // Concurrently query all barcode padding variants simultaneously (whichever responds first wins)
@@ -5929,7 +6012,14 @@
                 '021130': 'Signature SELECT / Safeway / Albertsons (West/National)',
                 '077890': 'Wegmans Brand (Northeast)',
                 '030034': 'Giant Eagle Brand (Midwest/PA)',
-                '409910': "Simply Nature / Clancy's (Aldi)",
+                '406936': "Mama Cozzi's Pizza Kitchen (Aldi)",
+                '406145': "Clancy's / Aldi",
+                '406': "Mama Cozzi's / Clancy's (Aldi)",
+                '409910': "Bake Shop / Simply Nature (Aldi)",
+                '4099': "Bake Shop / Simply Nature (Aldi)",
+                '041498': "Aldi Brand (Mama Cozzi's / Clancy's / Millville)",
+                '41498': "Aldi Brand (Mama Cozzi's / Clancy's / Millville)",
+                '49000': 'Coca-Cola',
                 '024300': 'Little Debbie / McKee Foods',
                 '014100': 'Pepperidge Farm',
                 '024100': 'Cheez-It / Keebler',
@@ -8689,7 +8779,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=17')
+        navigator.serviceWorker.register('./sw.js?v=18')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
