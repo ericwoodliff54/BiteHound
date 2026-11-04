@@ -6839,5 +6839,321 @@
       "ShopRite"
     ],
     "isRecalled": false
+  },
+  "072250011372": {
+    "product": "Wonder Classic White Bread (24 oz Loaf)",
+    "brand": "Wonder Bread",
+    "upc": "072250011372",
+    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Wheat Gluten, Dough Conditioners (Monoglycerides, Sodium Stearoyl Lactylate, Ascorbic Acid, Calcium Peroxide), Monocalcium Phosphate, Calcium Sulfate, Ammonium Sulfate, Soy Lecithin, Calcium Propionate (Preservative).",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e300",
+      "en:e341",
+      "en:e471",
+      "en:e481",
+      "en:e516",
+      "en:e517"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Publix",
+      "HEB"
+    ],
+    "isRecalled": false
+  },
+  "0072250011372": {
+    "product": "Wonder Classic White Bread (24 oz Loaf)",
+    "brand": "Wonder Bread",
+    "upc": "072250011372",
+    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Wheat Gluten, Dough Conditioners (Monoglycerides, Sodium Stearoyl Lactylate, Ascorbic Acid, Calcium Peroxide), Monocalcium Phosphate, Calcium Sulfate, Ammonium Sulfate, Soy Lecithin, Calcium Propionate (Preservative).",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e300",
+      "en:e341",
+      "en:e471",
+      "en:e481",
+      "en:e516",
+      "en:e517"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Publix",
+      "HEB"
+    ],
+    "isRecalled": false
+  },
+  "072250011402": {
+    "product": "Wonder Classic White Bread (16 oz Loaf)",
+    "brand": "Wonder Bread",
+    "upc": "072250011402",
+    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Wheat Gluten, Dough Conditioners (Monoglycerides, Sodium Stearoyl Lactylate, Ascorbic Acid, Calcium Peroxide), Monocalcium Phosphate, Calcium Sulfate, Ammonium Sulfate, Soy Lecithin, Calcium Propionate (Preservative).",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e300",
+      "en:e341",
+      "en:e471",
+      "en:e481",
+      "en:e516",
+      "en:e517"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Publix",
+      "HEB"
+    ],
+    "isRecalled": false
+  },
+  "0072250011402": {
+    "product": "Wonder Classic White Bread (16 oz Loaf)",
+    "brand": "Wonder Bread",
+    "upc": "072250011402",
+    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Wheat Gluten, Dough Conditioners (Monoglycerides, Sodium Stearoyl Lactylate, Ascorbic Acid, Calcium Peroxide), Monocalcium Phosphate, Calcium Sulfate, Ammonium Sulfate, Soy Lecithin, Calcium Propionate (Preservative).",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e300",
+      "en:e341",
+      "en:e471",
+      "en:e481",
+      "en:e516",
+      "en:e517"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Publix",
+      "HEB"
+    ],
+    "isRecalled": false
+  },
+  "072250011167": {
+    "product": "Wonder Round Top White Bread (20 oz Loaf)",
+    "brand": "Wonder Bread",
+    "upc": "072250011167",
+    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Wheat Gluten, Dough Conditioners, Monocalcium Phosphate, Calcium Sulfate, Soy Lecithin, Calcium Propionate (Preservative).",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e341",
+      "en:e516"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Publix"
+    ],
+    "isRecalled": false
+  },
+  "0072250011167": {
+    "product": "Wonder Round Top White Bread (20 oz Loaf)",
+    "brand": "Wonder Bread",
+    "upc": "072250011167",
+    "ingredients": "Unbleached Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Wheat Gluten, Dough Conditioners, Monocalcium Phosphate, Calcium Sulfate, Soy Lecithin, Calcium Propionate (Preservative).",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e341",
+      "en:e516"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Publix"
+    ],
+    "isRecalled": false
+  },
+  "072250011204": {
+    "product": "Wonder Classic Hamburger Buns (8 ct 15 oz Pack)",
+    "brand": "Wonder Bread",
+    "upc": "072250011204",
+    "ingredients": "Enriched Wheat Flour (Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Contains 2% or Less of: Salt, Wheat Gluten, Dough Conditioners, Calcium Propionate, Monocalcium Phosphate, Calcium Sulfate, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e341",
+      "en:e516"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Publix"
+    ],
+    "isRecalled": false
+  },
+  "0072250011204": {
+    "product": "Wonder Classic Hamburger Buns (8 ct 15 oz Pack)",
+    "brand": "Wonder Bread",
+    "upc": "072250011204",
+    "ingredients": "Enriched Wheat Flour (Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Contains 2% or Less of: Salt, Wheat Gluten, Dough Conditioners, Calcium Propionate, Monocalcium Phosphate, Calcium Sulfate, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e341",
+      "en:e516"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Publix"
+    ],
+    "isRecalled": false
+  },
+  "072250011211": {
+    "product": "Wonder Classic Hot Dog Buns (8 ct 13 oz Pack)",
+    "brand": "Wonder Bread",
+    "upc": "072250011211",
+    "ingredients": "Enriched Wheat Flour (Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Contains 2% or Less of: Salt, Wheat Gluten, Dough Conditioners, Calcium Propionate, Monocalcium Phosphate, Calcium Sulfate, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e341",
+      "en:e516"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Publix"
+    ],
+    "isRecalled": false
+  },
+  "0072250011211": {
+    "product": "Wonder Classic Hot Dog Buns (8 ct 13 oz Pack)",
+    "brand": "Wonder Bread",
+    "upc": "072250011211",
+    "ingredients": "Enriched Wheat Flour (Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Soybean Oil, Contains 2% or Less of: Salt, Wheat Gluten, Dough Conditioners, Calcium Propionate, Monocalcium Phosphate, Calcium Sulfate, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e341",
+      "en:e516"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Publix"
+    ],
+    "isRecalled": false
+  },
+  "078742230862": {
+    "product": "Great Value White Sandwich Bread (Twin Pack 40 oz)",
+    "brand": "Great Value",
+    "upc": "078742230862",
+    "ingredients": "Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Calcium Propionate (Preservative), Monoglycerides, DATEM, Calcium Sulfate, Wheat Gluten, Monocalcium Phosphate, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e341",
+      "en:e471",
+      "en:e472e",
+      "en:e516"
+    ],
+    "stores": [
+      "Walmart"
+    ],
+    "isRecalled": false
+  },
+  "0078742230862": {
+    "product": "Great Value White Sandwich Bread (Twin Pack 40 oz)",
+    "brand": "Great Value",
+    "upc": "078742230862",
+    "ingredients": "Enriched Flour (Wheat Flour, Malted Barley Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, High Fructose Corn Syrup, Yeast, Contains 2% or Less of: Soybean Oil, Salt, Calcium Propionate (Preservative), Monoglycerides, DATEM, Calcium Sulfate, Wheat Gluten, Monocalcium Phosphate, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "en:e282",
+      "en:e341",
+      "en:e471",
+      "en:e472e",
+      "en:e516"
+    ],
+    "stores": [
+      "Walmart"
+    ],
+    "isRecalled": false
   }
 }
