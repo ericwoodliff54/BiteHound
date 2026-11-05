@@ -1242,7 +1242,7 @@
     <div class="flex items-center justify-between pb-1 px-1">
       <div class="flex items-center gap-2">
         <span class="font-display font-black text-xl text-amber-400 tracking-wider">RAKKA</span>
-        <span class="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">Pro Active</span>
+        <span id="headerTopTierBadge" class="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">Free</span>
       </div>
       <button 
         type="button" 
@@ -1756,23 +1756,23 @@
         </div>
 
 
-      <!-- BATCH GROCERY RECEIPT SCANNER CARD (Live on UPC Scanner Page) -->
-      <div class="p-3.5 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-slate-900 to-teal-950/30 border border-emerald-500/40 shadow-lg flex items-center justify-between gap-3">
-        <div class="flex items-center gap-3 min-w-0">
-          <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      <!-- BATCH GROCERY RECEIPT SCANNER CARD (Prominent Featured Feature) -->
+      <div class="p-4 sm:p-4.5 rounded-3xl bg-gradient-to-r from-emerald-950/60 via-slate-900 to-teal-950/50 border-2 border-emerald-500/50 shadow-xl shadow-emerald-950/40 flex items-center justify-between gap-3.5">
+        <div class="flex items-center gap-3.5 min-w-0">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/30 to-teal-500/20 border-2 border-emerald-400/50 flex items-center justify-center text-emerald-300 shrink-0 shadow-md">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
           </div>
           <div class="min-w-0">
-            <span class="font-bold text-xs sm:text-sm text-white leading-tight block">Scan Receipt</span>
-            <span class="text-[11px] text-slate-300 block truncate mt-0.5">Audit 15–30 groceries from a single receipt photo</span>
+            <h3 class="font-display font-extrabold text-base sm:text-lg text-white leading-tight block tracking-tight">Scan Receipt</h3>
+            <p class="text-xs sm:text-[13px] text-emerald-300/90 font-medium block truncate mt-1">Scanned receipts automatically load all items into your watchlist.</p>
           </div>
         </div>
         <button 
           type="button" 
           onclick="openReceiptAuditor()" 
-          class="shrink-0 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5 cursor-pointer"
+          class="shrink-0 px-5 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-sm shadow-lg shadow-emerald-950/60 transition active:scale-95 flex items-center gap-2 cursor-pointer border border-emerald-300/40"
         >
-          <svg class="w-3.5 h-3.5 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
+          <svg class="w-4 h-4 text-slate-950 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
           <span>Scan</span>
         </button>
       </div>
@@ -5189,6 +5189,16 @@
 
     function updatePlusUI() {
       checkPlusStatus();
+      const topBadge = document.getElementById('headerTopTierBadge');
+      if (topBadge) {
+        if (isPlusActive) {
+          topBadge.textContent = (plusStatusType === 'trial') ? `Trial (${trialDaysRemaining}d)` : "Pro Active";
+          topBadge.className = "text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40";
+        } else {
+          topBadge.textContent = "Free";
+          topBadge.className = "text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700";
+        }
+      }
       if (toggleTesterBtnText) {
         toggleTesterBtnText.textContent = isPlusActive ? 'Developer: Switch to Free Mode' : 'Developer: Switch to Pro Active Mode';
       }
@@ -10228,7 +10238,7 @@
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=45')
+        navigator.serviceWorker.register('./sw.js?v=46')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
@@ -10497,9 +10507,9 @@
       }
 
       // 2. Pro Tier Fair-Use Check: 10 scans per day
-      if (isPlusActive && proDailyCount >= 10) {
+      if (isPlusActive && proDailyCount >= 100) {
         triggerHaptic([40, 40]);
-        showCustomizeToast("Daily fair-use limit reached (10 receipts/day). Refreshes at midnight!");
+        showCustomizeToast("Daily fair-use limit reached (100 receipts/day). Refreshes at midnight!");
         return;
       }
 
