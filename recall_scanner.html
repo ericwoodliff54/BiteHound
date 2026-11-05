@@ -9619,9 +9619,14 @@
           item.activeRecallHazard = match.hazard || match.reason || 'Active FDA Recall notice';
           item.recallAgency = match.agency || 'openFDA Wire';
           item.recallDate = match.recallDate || match.date || 'Recent';
+          item.recallSeverity = match.severity || 'Class I Recall';
           recalledMatches.push({ item: item, recall: match });
         } else {
           item.recalledNow = false;
+          // Automatically clear stale AI false-positive recall flags
+          if (item.status === 'recalled') {
+            item.status = (item.detectedAllergens && item.detectedAllergens.length > 0) ? 'allergen_alert' : 'clear';
+          }
         }
       });
 

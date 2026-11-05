@@ -553,7 +553,9 @@ Instructions for parsing this receipt:
 3. Extract ALL purchased food and grocery items shown on the tape.
 4. For each food item:
    - Expand truncated or abbreviated register item names into clear consumer product names (e.g., "Texas Toast" -> "L'Oven Fresh Texas Toast", "Pumpkin Loaf Cake" -> "Bake Shop Pumpkin Sliced Loaf Cake", "ChknAlfrdoMtblMar" -> "Chicken Alfredo / Meatball Marinara", "Polska Kielbasa" -> "Parkview Polska Kielbasa", "Hneycrsp Tote LRW" -> "Honeycrisp Apples", "Autumn Crisp Grape" -> "Autumn Crisp Green Seedless Grapes").
-   - Assess whether any item is currently under an active national federal recall (such as Grimmway Farms bagged organic carrots for E. coli O121:H19, BrucePac cooked poultry for Listeria, TreeHouse frozen waffles, Boar's Head deli meat, etc.).
+   - STRICT RECALL ACCURACY (NO HALLUCINATIONS OR GUESSING):
+     * NEVER guess or assume an everyday food (like generic chicken, bread, or canned goods) is recalled unless there is an official, brand-wide nationwide recall specifically named for that exact brand and product on record (e.g. Grimmway Farms organic whole/baby carrots, TreeHouse frozen waffles, Boar's Head liverwurst/deli meat).
+     * If uncertain, or if a product is an everyday safe supermarket item (such as Aldi Park Street Deli meals or fresh meats), set status to "clear". Do NOT flag items as "recalled" based on ingredient speculation.
    - Flag all common food allergens in this product (e.g. gluten, wheat, milk, dairy, soy, peanuts, tree_nuts, eggs, fish, shellfish, sesame, corn, sulfites, yeast).
    - CRITICAL ADDITIVE SCREENING: Identify all scrutinized food additives, preservatives, emulsifiers, synthetic dyes, or dough conditioners commonly used in this commercial formulation.
      Examples:
