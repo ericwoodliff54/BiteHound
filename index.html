@@ -9936,7 +9936,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=38')
+        navigator.serviceWorker.register('./sw.js?v=39')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
@@ -10332,11 +10332,17 @@
             return;
           }
         }
-        throw new Error(`Receipt audit request failed with HTTP ${res.status}`);
+        let errMsg = `Server returned HTTP ${res.status}`;
+        try {
+          const errData = await res.json();
+          if (errData && errData.error) errMsg = errData.error;
+        } catch (_) {}
+        throw new Error(errMsg);
       } catch (err) {
         if (receiptAuditLoadingBox) receiptAuditLoadingBox.classList.add('hidden');
         console.warn("Receipt auditor error:", err);
-        showCustomizeToast("Could not process receipt slip. Check your Cloudflare Worker hook or try snapping in brighter light.");
+        const detailedMsg = (err && err.message) ? err.message : "Network/Worker error";
+        showCustomizeToast(`Receipt Audit: ${detailedMsg}`);
       }
     }
 
