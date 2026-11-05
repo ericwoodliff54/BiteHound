@@ -364,7 +364,7 @@ Extract and return STRICTLY a JSON object with this exact schema (no markdown, n
     "explanation": "Clear 2-sentence explanation of whether this specific bag/lot is affected based on the stamped date.",
     "action": "Immediate directive for the consumer"
   }
-}';
+}`;
 
         const geminiRes = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent', {
           method: 'POST',
@@ -464,7 +464,7 @@ Extract and return STRICTLY a JSON object with this exact schema (no markdown, n
         const recallBrand = body.recallBrand || '';
         const expectedLots = body.expectedLots || '';
 
-        const prompt = 'You are an expert food safety inspector reviewing a customer's package photo for a federal food recall.
+        const prompt = `You are an expert food safety inspector reviewing a customer's package photo for a federal food recall.
 Recall Details:
 - Food / Firm: ${recallBrand} - ${recallTitle}
 - Hazard: ${recallReason}
@@ -484,7 +484,7 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
   "severity": "danger", // 'danger' for match, 'safe' for clear, 'warning' for unclear
   "explanation": "2-3 sentences explaining exactly why this lot is affected or safe based on the stamped dates and the recall window.",
   "action": "Immediate directive (e.g., 'Do not consume. Discard immediately or return to retailer for a full refund.')"
-}';
+}`;
 
         const geminiRes = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent', {
           method: 'POST',
@@ -544,7 +544,7 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
         const mimeType = body.mimeType || 'image/jpeg';
         const userAllergens = Array.isArray(body.activeAllergens) ? body.activeAllergens.join(', ') : 'None';
 
-        const prompt = 'You are an expert food safety auditor reviewing a grocery store shopping receipt (e.g. from ALDI, Walmart, Kroger, Meijer, Giant Eagle, Trader Joe's, Costco, etc.).
+        const prompt = `You are an expert food safety auditor reviewing a grocery store shopping receipt (e.g. from ALDI, Walmart, Kroger, Meijer, Giant Eagle, Trader Joe's, Costco, etc.).
 User Household Allergen Safeguards to flag: ${userAllergens}
 
 Instructions for parsing this receipt:
