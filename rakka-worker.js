@@ -569,9 +569,10 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
       "rawLine": "Raw line from receipt slip",
       "cleanName": "Standardized Food Name",
       "brand": "Brand or Store Brand",
-      "status": "clear",
+      "status": "clear", // 'clear', 'recalled', or 'allergen_alert'
       "warning": "Brief warning explanation if recalled or allergen alert, otherwise null",
-      "allergens": ["gluten", "dairy"]
+      "allergens": ["gluten", "dairy"], // list of common allergen ids e.g. gluten, dairy, soy, peanuts, tree_nuts, eggs, fish, shellfish, sesame, corn, sulfites, yeast
+      "additives": ["red_40", "pgpr", "vanillin"] // scrutinized additive IDs detected or typical for this ultra-processed grocery item
     }
   ],
   "auditSummary": "1-2 sentence executive safety summary"
