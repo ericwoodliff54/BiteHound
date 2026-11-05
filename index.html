@@ -119,21 +119,35 @@
       color: #000000 !important;
     }
 
-    /* Navigation Bar */
+    /* Navigation Bar - High-Contrast Light Mode */
     html.theme-light nav {
       background: rgba(255, 255, 255, 0.98) !important;
       border-color: #cbd5e1 !important;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06);
     }
     html.theme-light .nav-tab {
-      color: #000000 !important;
+      color: #334155 !important;
       font-weight: 700 !important;
+      background: transparent !important;
+    }
+    html.theme-light .nav-tab span {
+      color: #334155 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .nav-tab:hover span {
+      color: #0f172a !important;
     }
     html.theme-light .nav-tab.active-tab {
       background: #0f172a !important;
-      color: #ffffff !important;
       border-color: #0f172a !important;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+      box-shadow: 0 3px 6px rgba(15, 23, 42, 0.25) !important;
+    }
+    html.theme-light .nav-tab.active-tab span {
+      color: #ffffff !important;
+      font-weight: 800 !important;
+    }
+    html.theme-light .nav-tab.active-tab::after {
+      background-color: #fbbf24 !important;
     }
 
     /* Main Panels & Containers */
@@ -1187,6 +1201,64 @@
       font-weight: 700 !important;
     }
 
+
+    /* Enhanced Contrast for Results & Watchlist Cards in Light Mode */
+    html.theme-light .watched-card,
+    html.theme-light #scanHistoryContainer > div,
+    html.theme-light #scannerResultContainer > div,
+    html.theme-light #manualResultContainer > div {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    html.theme-light .watched-card h4,
+    html.theme-light #scanHistoryContainer h4,
+    html.theme-light #scannerResultContainer h3,
+    html.theme-light #manualResultContainer h3 {
+      color: #0f172a !important;
+    }
+    html.theme-light .bg-emerald-500\/20,
+    html.theme-light .bg-emerald-950\/70 {
+      background-color: #ecfdf5 !important;
+      border-color: #a7f3d0 !important;
+    }
+    html.theme-light .bg-emerald-500\/20 span,
+    html.theme-light .bg-emerald-950\/70 span {
+      color: #047857 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .bg-amber-500\/20 {
+      background-color: #fffbeb !important;
+      border-color: #fde68a !important;
+    }
+    html.theme-light .bg-amber-500\/20 span {
+      color: #b45309 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .bg-rose-500\/20 {
+      background-color: #fff1f2 !important;
+      border-color: #fecdd3 !important;
+    }
+    html.theme-light .bg-rose-500\/20 span {
+      color: #be123c !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .bg-purple-500\/20 {
+      background-color: #faf5ff !important;
+      border-color: #e9d5ff !important;
+    }
+    html.theme-light .bg-purple-500\/20 span {
+      color: #7e22ce !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .bg-sky-500\/20 {
+      background-color: #f0f9ff !important;
+      border-color: #bae6fd !important;
+    }
+    html.theme-light .bg-sky-500\/20 span {
+      color: #0369a1 !important;
+      font-weight: 700 !important;
+    }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
@@ -1259,61 +1331,70 @@
 
     <!-- 5 Clean Navigation Tabs: Scanner | Manual | Allergens | Watchlist | Recalls -->
     <nav class="bg-slate-900/95 p-2 rounded-2xl border border-slate-800 grid grid-cols-5 gap-1.5 sm:gap-2 shadow-xl text-center sticky top-2 z-20 backdrop-blur-md">
-      <button 
-        type="button" 
-        id="tabScanner" 
-        class="py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-1.5 transition bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 text-white shadow-lg shadow-emerald-950/60 ring-2 ring-amber-400/40 active:scale-95 relative"
+      <button
+        type="button"
+        id="tabScanner"
+        class="nav-tab active-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-1 transition bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 text-white shadow-lg shadow-emerald-950/60 ring-2 ring-amber-400/40 active:scale-95 relative after:content-[''] after:w-1.5 after:h-1.5 after:rounded-full after:bg-amber-300 after:absolute after:bottom-1"
       >
-        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-        </svg>
-        <span class="leading-tight">UPC Scanner</span>
+        <div class="h-6 flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+          </svg>
+        </div>
+        <span class="leading-tight truncate max-w-full tracking-tight">UPC Scanner</span>
       </button>
 
-      <button 
-        type="button" 
-        id="tabManual" 
-        class="py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95"
+      <button
+        type="button"
+        id="tabManual"
+        class="nav-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1 transition active:scale-95 relative"
       >
-        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-indigo-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-        </svg>
-        <span class="leading-tight">UPC Entry</span>
+        <div class="h-6 flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-indigo-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+          </svg>
+        </div>
+        <span class="leading-tight truncate max-w-full tracking-tight">UPC Entry</span>
       </button>
 
-      <button 
-        type="button" 
-        id="tabAllergens" 
-        class="py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95 relative"
+      <button
+        type="button"
+        id="tabAllergens"
+        class="nav-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1 transition active:scale-95 relative"
       >
-        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-        </svg>
-        <span class="leading-tight">Allergen Guard</span>
+        <div class="h-6 flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+          </svg>
+        </div>
+        <span class="leading-tight truncate max-w-full tracking-tight">Allergens</span>
       </button>
 
-      <!-- 4. Watchlist Tab (Dedicated Primary Tab) -->
-      <button 
-        type="button" 
-        id="tabWatchlist" 
-        class="py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95 relative"
+      <button
+        type="button"
+        id="tabWatchlist"
+        class="nav-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1 transition active:scale-95 relative"
       >
-        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
-        </svg>
-        <span class="leading-tight">Watchlist</span>
+        <div class="h-6 flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+          </svg>
+        </div>
+        <span class="leading-tight truncate max-w-full tracking-tight">Watchlist</span>
       </button>
 
-      <button 
-        type="button" 
-        id="tabBulletins" 
-        class="py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95"
+      <button
+        type="button"
+        id="tabBulletins"
+        class="nav-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1 transition active:scale-95 relative"
       >
-        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-rose-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
-        </svg>
-        <span class="leading-tight">Active Recalls</span>
+        <div class="h-6 flex items-center justify-center shrink-0">
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-rose-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+          </svg>
+        </div>
+        <span class="leading-tight truncate max-w-full tracking-tight">Recalls</span>
       </button>
     </nav>
 
@@ -1453,7 +1534,7 @@
               type="text" 
               id="promoCodeInput" 
               placeholder="e.g. FAMILY" 
-              class="px-3 py-2 rounded-xl border border-slate-700 bg-slate-950 text-white text-xs uppercase font-semibold tracking-wider outline-none focus:border-amber-400 text-center w-40"
+              class="px-3 py-2 rounded-xl border border-slate-700 bg-slate-950 text-white text-[16px] sm:text-xs uppercase font-semibold tracking-wider outline-none focus:border-amber-400 text-center w-40"
               maxlength="15"
             >
             <button 
@@ -1532,7 +1613,7 @@
               type="text" 
               id="newProfileNameInput" 
               placeholder="e.g. Me, Emma, Leo, Mom, Dad" 
-              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-950 text-white outline-none focus:border-amber-400 font-medium text-sm"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-950 text-white outline-none focus:border-amber-400 font-medium text-[16px] sm:text-sm"
               maxlength="20"
             >
           </div>
@@ -1800,7 +1881,7 @@
               autocomplete="off"
               enterkeyhint="search"
               placeholder="e.g. Kit Kat, Peanut Butter, Spinach..."
-              class="w-full min-h-[50px] pl-11 pr-10 py-3 rounded-xl border border-slate-700 bg-slate-950 text-white text-sm placeholder:text-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition shadow-sm"
+              class="w-full min-h-[50px] pl-11 pr-10 py-3 rounded-xl border border-slate-700 bg-slate-950 text-white text-[16px] sm:text-sm placeholder:text-slate-500 focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition shadow-sm"
             >
             <div class="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -2169,7 +2250,7 @@
             <label for="stateFilterSelect" class="block text-[11px] text-slate-400 mb-1">State / Distribution Area</label>
             <select 
               id="stateFilterSelect" 
-              class="w-full min-h-[48px] bg-slate-900 border border-slate-700 text-slate-100 rounded-xl p-3 text-sm font-medium outline-none focus:border-blue-500 shadow-sm"
+              class="w-full min-h-[48px] bg-slate-900 border border-slate-700 text-slate-100 rounded-xl p-3 text-[16px] sm:text-sm font-medium outline-none focus:border-blue-500 shadow-sm"
             >
               <option value="ALL" selected>All States (Nationwide)</option>
               <option value="AL">Alabama (AL)</option>
@@ -2232,7 +2313,7 @@
             <label for="storeFilterSelect" class="block text-[11px] text-slate-400 mb-1">Supermarket Chain</label>
             <select 
               id="storeFilterSelect" 
-              class="w-full min-h-[48px] bg-slate-900 border border-slate-700 text-slate-100 rounded-xl p-3 text-sm font-medium outline-none focus:border-blue-500 shadow-sm"
+              class="w-full min-h-[48px] bg-slate-900 border border-slate-700 text-slate-100 rounded-xl p-3 text-[16px] sm:text-sm font-medium outline-none focus:border-blue-500 shadow-sm"
             >
               <option value="ALL" selected>All Supermarkets (Nationwide)</option>
               <option value="Albertsons">Albertsons</option>
@@ -2438,7 +2519,7 @@
               type="url" 
               id="settingsWorkerUrlInput" 
               placeholder="https://rakka-edge.ericwoodliff.workers.dev" 
-              class="w-full py-2.5 px-3 rounded-xl bg-slate-950 border border-slate-700 text-white font-mono text-xs focus:outline-none focus:border-indigo-400"
+              class="w-full py-2.5 px-3 rounded-xl bg-slate-950 border border-slate-700 text-white font-mono text-[16px] sm:text-xs focus:outline-none focus:border-indigo-400"
             >
           </div>
 
@@ -2448,7 +2529,7 @@
               type="password" 
               id="settingsGeminiKeyInput" 
               placeholder="Paste AQ.Ab... or AIza... key here" 
-              class="w-full py-2.5 px-3 rounded-xl bg-slate-950 border border-slate-700 text-white font-mono text-xs focus:outline-none focus:border-indigo-400"
+              class="w-full py-2.5 px-3 rounded-xl bg-slate-950 border border-slate-700 text-white font-mono text-[16px] sm:text-xs focus:outline-none focus:border-indigo-400"
             >
           </div>
 
@@ -5377,8 +5458,16 @@
     // Navigation Switcher (5 Tabs)
     function setNavTab(activeTab) {
       triggerHaptic([30]);
-      const activeClass = 'py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-1.5 transition bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 text-white shadow-lg shadow-emerald-950/60 ring-2 ring-amber-400/40 active:scale-95 relative';
-      const inactiveClass = 'py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95 relative';
+
+      // Auto-stop camera when leaving scanner tab to save battery and prevent background streaming
+      if (activeTab !== 'scanner' && typeof isCameraRunning !== 'undefined' && isCameraRunning) {
+        if (typeof stopCamera === 'function') {
+          stopCamera();
+        }
+      }
+
+      const activeClass = "nav-tab active-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-1 transition bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 text-white shadow-lg shadow-emerald-950/60 ring-2 ring-amber-400/40 active:scale-95 relative after:content-[''] after:w-1.5 after:h-1.5 after:rounded-full after:bg-amber-300 after:absolute after:bottom-1";
+      const inactiveClass = "nav-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1 transition active:scale-95 relative";
 
       const tabScanner = document.getElementById('tabScanner');
       const tabManual = document.getElementById('tabManual');
