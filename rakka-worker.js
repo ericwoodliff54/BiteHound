@@ -364,9 +364,9 @@ Extract and return STRICTLY a JSON object with this exact schema (no markdown, n
     "explanation": "Clear 2-sentence explanation of whether this specific bag/lot is affected based on the stamped date.",
     "action": "Immediate directive for the consumer"
   }
-}`;
+}';
 
-        const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`, {
+        const geminiRes = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent', {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
@@ -426,7 +426,7 @@ Extract and return STRICTLY a JSON object with this exact schema (no markdown, n
 
           // Cache in community DB if barcode and name exist
           if (upc && productName && env && env.RAKKA_COMMUNITY_DB) {
-            ctx.waitUntil(env.RAKKA_COMMUNITY_DB.put(`upc:${upc}`, JSON.stringify(resolvedRecord)));
+            ctx.waitUntil(env.RAKKA_COMMUNITY_DB.put('upc:${upc}', JSON.stringify(resolvedRecord)));
           }
 
           return new Response(JSON.stringify({
@@ -464,7 +464,7 @@ Extract and return STRICTLY a JSON object with this exact schema (no markdown, n
         const recallBrand = body.recallBrand || '';
         const expectedLots = body.expectedLots || '';
 
-        const prompt = `You are an expert food safety inspector reviewing a customer's package photo for a federal food recall.
+        const prompt = 'You are an expert food safety inspector reviewing a customer's package photo for a federal food recall.
 Recall Details:
 - Food / Firm: ${recallBrand} - ${recallTitle}
 - Hazard: ${recallReason}
@@ -484,9 +484,9 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
   "severity": "danger", // 'danger' for match, 'safe' for clear, 'warning' for unclear
   "explanation": "2-3 sentences explaining exactly why this lot is affected or safe based on the stamped dates and the recall window.",
   "action": "Immediate directive (e.g., 'Do not consume. Discard immediately or return to retailer for a full refund.')"
-}`;
+}';
 
-        const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`, {
+        const geminiRes = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent', {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
@@ -544,7 +544,7 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
         const mimeType = body.mimeType || 'image/jpeg';
         const userAllergens = Array.isArray(body.activeAllergens) ? body.activeAllergens.join(', ') : 'None';
 
-        const prompt = `You are an expert food safety auditor reviewing a grocery store shopping receipt (e.g. from ALDI, Walmart, Kroger, Meijer, Giant Eagle, Trader Joe's, Costco, etc.).
+        const prompt = 'You are an expert food safety auditor reviewing a grocery store shopping receipt (e.g. from ALDI, Walmart, Kroger, Meijer, Giant Eagle, Trader Joe's, Costco, etc.).
 User Household Allergen Safeguards to flag: ${userAllergens}
 
 Instructions for parsing this receipt:
@@ -562,7 +562,11 @@ Instructions for parsing this receipt:
      * Commercial baked goods / sweet loaf cakes / cookies: Artificial Flavors (Vanillin), High Fructose Corn Syrup, Polysorbate 60, Titanium Dioxide.
      * Confections & flavored snacks / chips / soda / energy drinks: Red 40, Yellow 5/6, Blue 1, Caramel Color, Sucralose, Acesulfame K, Citric Acid preservative.
      Return an array of objects: [{"name": "Calcium Propionate", "type": "Chemical Preservative", "desc": "Antifungal preservative common in factory breads to prevent mold growth."}, {"name": "DATEM / Monoglycerides", "type": "Dough Conditioner", "desc": "Industrial emulsifier used to increase loaf volume and artificial softness."}]
-5. Synthesize a concise 1-2 sentence safety summary.
+5. CRITICAL RECEIPT BARCODE / ITEM CODE EXTRACTION:
+   - For every item on the receipt, extract the exact printed barcode number, UPC, or store item code printed on the receipt line (e.g. 6-digit ALDI code like "398511" or "640511", or 8-to-12 digit standard UPC/SKU).
+   - If identical products appear multiple times on the receipt (such as 3 cans of Poppi Prebiotic Soda), ensure that their printed itemCode and upc are IDENTICAL across all lines, matching the physical receipt tape.
+   - Return this in the 'itemCode' field, and standard 12-digit UPC if known in the 'upc' field (otherwise matching itemCode).
+6. Synthesize a concise 1-2 sentence safety summary.
 
 Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, no markdown, no backticks):
 {
@@ -576,6 +580,8 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
       "rawLine": "Raw line from receipt slip",
       "cleanName": "Standardized Food Name",
       "brand": "Brand or Store Brand",
+      "itemCode": "Receipt barcode or store item code printed on receipt line (e.g. '398511', '640511', or '08500248231')",
+      "upc": "Receipt barcode, item code, or standard 12-digit UPC",
       "status": "clear", // 'clear', 'recalled', or 'allergen_alert'
       "warning": "Brief warning explanation if recalled or allergen alert, otherwise null",
       "allergens": ["gluten", "dairy", "soy", "yeast"], // list of common allergen ids e.g. gluten, milk, soy, peanuts, tree_nuts, eggs, fish, shellfish, sesame, corn, sulfites, yeast

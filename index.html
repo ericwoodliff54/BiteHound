@@ -9312,10 +9312,11 @@
       auditPantryAgainstRecalls();
     }
 
-    function removeGuardedItem(upc) {
-      scanHistory = scanHistory.filter(i => i.upc !== upc);
+    function removeGuardedItem(key) {
+      scanHistory = scanHistory.filter(i => (i.id ? i.id !== key : i.upc !== key));
       try {
-        localStorage.setItem('rakka_history', JSON.stringify(scanHistory)); localStorage.setItem('safebite_history', JSON.stringify(scanHistory));
+        localStorage.setItem('rakka_history', JSON.stringify(scanHistory)); 
+        localStorage.setItem('safebite_history', JSON.stringify(scanHistory));
       } catch (e) {}
       auditPantryAgainstRecalls();
     }
@@ -9519,9 +9520,25 @@
     }
 
     function renderHistory() {
-      // Normalize any legacy receipt items that had .product instead of .productName
+      // Normalize and harmonize legacy items in scanHistory
       if (Array.isArray(scanHistory)) {
+        // Harmonize identical products so multiple scans of the same item share the exact same barcode code
+        const nameToCodeMap = {};
         scanHistory.forEach(item => {
+          const key = (String(item.brand || '') + ' ' + String(item.productName || item.product || '')).toLowerCase().trim();
+          if (key && item.upc) {
+            if (!nameToCodeMap[key]) {
+              nameToCodeMap[key] = item.upc;
+            } else {
+              item.upc = nameToCodeMap[key];
+            }
+          }
+        });
+
+        scanHistory.forEach((item, idx) => {
+          if (!item.id) {
+            item.id = 'item_' + String(item.upc || 'upc').replace(/[^a-zA-Z0-9_-]/g, '_') + '_' + (item.timestamp || idx) + '_' + idx;
+          }
           if (!item.productName && item.product) {
             item.productName = item.product;
           }
@@ -9579,6 +9596,7 @@
         const isItemRecalled = Boolean(item.recalledNow || item.status === 'recalled');
         const additivesCount = Array.isArray(item.detectedAdditives) ? item.detectedAdditives.length : 0;
         const normalizedAllergens = Array.isArray(item.detectedAllergens) ? item.detectedAllergens : [];
+        const cardKey = item.id || (String(item.upc || 'upc').replace(/[^a-zA-Z0-9_-]/g, '_') + '_' + (item.timestamp || '0'));
 
         // Calculate which household family members are affected by this product's allergens
         const affectedMembers = [];
@@ -9600,8 +9618,8 @@
         // Active Recall Card
         if (isItemRecalled) {
           return `
-            <div id="watchlist-card-${item.upc}" class="rounded-2xl border-2 border-rose-500/80 bg-rose-950/70 text-xs transition duration-200 shadow-md shadow-rose-950/40 overflow-hidden">
-              <div class="p-3.5 flex items-start justify-between gap-2 cursor-pointer" onclick="toggleWatchlistItemDetails('${item.upc}')">
+            <div id="watchlist-card-${cardKey}" class="rounded-2xl border-2 border-rose-500/80 bg-rose-950/70 text-xs transition duration-200 shadow-md shadow-rose-950/40 overflow-hidden">
+              <div class="p-3.5 flex items-start justify-between gap-2 cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
                 <div class="min-w-0 flex-1">
                   <div class="flex items-center gap-1.5 flex-wrap">
                     <span class="px-2 py-0.5 text-[10px] rounded-md border bg-rose-500 text-white font-black tracking-wide uppercase animate-pulse">
@@ -9617,18 +9635,24 @@
                   <p class="text-[11px] text-slate-300 mt-0.5">${item.brand || 'Verified Grocery Item'} • Added ${formatWatchedTimestamp(item)}</p>
                 </div>
                 <div class="flex items-center gap-1.5 shrink-0 pt-0.5">
-                  <span id="watchlist-chevron-${item.upc}" class="text-xs text-rose-300 font-bold px-1.5 py-1">▼</span>
-                  <button type="button" onclick="event.stopPropagation(); removeGuardedItem('${item.upc}')" class="text-slate-400 hover:text-rose-300 p-2 rounded-xl hover:bg-rose-900/40 transition shrink-0" title="Remove from Watchlist">
+                  <span id="watchlist-chevron-${cardKey}" class="text-xs text-rose-300 font-bold px-1.5 py-1">▼</span>
+                  <button type="button" onclick="event.stopPropagation(); removeGuardedItem('${cardKey}')" class="text-slate-400 hover:text-rose-300 p-2 rounded-xl hover:bg-rose-900/40 transition shrink-0" title="Remove from Watchlist">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                   </button>
                 </div>
               </div>
 
-              <!-- Expandable Drawer -->
-              <div id="watchlist-drawer-${item.upc}" class="hidden px-4 pb-4 pt-2 border-t border-rose-900/60 space-y-2.5 bg-rose-950/90 text-xs">
+              <!-- Expandable Drawer with Full-Window Click-to-Collapse -->
+              <div id="watchlist-drawer-${cardKey}" class="hidden px-4 pb-4 pt-2 border-t border-rose-900/60 space-y-2.5 bg-rose-950/90 text-xs cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
                 <div class="p-2.5 rounded-xl bg-rose-900/50 border border-rose-500/40 text-rose-100 leading-relaxed">
                   <span class="font-bold text-white block mb-0.5">⚠️ FDA / USDA Alert:</span>
                   ${item.activeRecallHazard || 'Active public health notice issued for this grocery product. Discard or return to retailer immediately.'}
+                </div>
+                
+                <!-- Bottom Tap-to-Collapse Bar -->
+                <div class="pt-2 border-t border-rose-900/60 text-center text-rose-300 text-[11px] font-semibold flex items-center justify-center gap-1.5 py-1">
+                  <span>Tap anywhere to collapse</span>
+                  <span class="text-xs">▲</span>
                 </div>
               </div>
             </div>
@@ -9642,9 +9666,9 @@
           : `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shrink-0">Clear</span>`;
 
         return `
-          <div id="watchlist-card-${item.upc}" class="rounded-2xl border ${cardBorder} text-xs transition-all duration-200 overflow-hidden shadow-sm">
+          <div id="watchlist-card-${cardKey}" class="rounded-2xl border ${cardBorder} text-xs transition-all duration-200 overflow-hidden shadow-sm">
             <!-- Compact, Professional Collapsed Header -->
-            <div class="p-3.5 flex flex-col gap-1.5 cursor-pointer" onclick="toggleWatchlistItemDetails('${item.upc}')">
+            <div class="p-3.5 flex flex-col gap-1.5 cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
               <!-- Top Row: Full Product Title + High-Aligned Badges + Actions -->
               <div class="flex items-start justify-between gap-2.5">
                 <div class="min-w-0 flex-1">
@@ -9666,9 +9690,9 @@
                     </span>
                   `}
 
-                  <span id="watchlist-chevron-${item.upc}" class="text-xs text-slate-400 font-bold px-1 transition-transform">▼</span>
+                  <span id="watchlist-chevron-${cardKey}" class="text-xs text-slate-400 font-bold px-1 transition-transform">▼</span>
                   
-                  <button type="button" onclick="event.stopPropagation(); removeGuardedItem('${item.upc}')" class="text-slate-400 hover:text-rose-400 p-1 rounded-lg hover:bg-slate-800 transition shrink-0 ml-0.5" title="Remove from Watchlist">
+                  <button type="button" onclick="event.stopPropagation(); removeGuardedItem('${cardKey}')" class="text-slate-400 hover:text-rose-400 p-1 rounded-lg hover:bg-slate-800 transition shrink-0 ml-0.5" title="Remove from Watchlist">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                   </button>
                 </div>
@@ -9685,8 +9709,8 @@
               </div>
             </div>
 
-            <!-- Expandable Accordion Drawer -->
-            <div id="watchlist-drawer-${item.upc}" class="hidden px-4 pb-4 pt-2.5 border-t border-slate-800/80 bg-slate-900/90 space-y-3 text-xs">
+            <!-- Expandable Accordion Drawer with Full-Window Click-to-Collapse -->
+            <div id="watchlist-drawer-${cardKey}" class="hidden px-4 pb-4 pt-2.5 border-t border-slate-800/80 bg-slate-900/90 space-y-3 text-xs cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
               
               <!-- Reference Barcode Info Box -->
               <div class="p-2 rounded-xl bg-slate-950/80 border border-slate-800 flex items-center justify-between text-[11px] font-mono">
@@ -9736,6 +9760,12 @@
                     ✓ Clean formulation. Zero synthetic petroleum dyes (Red 40, Yellow 5/6, Blue 1/2), Titanium Dioxide, PGPR, artificial flavors, BHA/BHT, or nitrites detected.
                   </div>
                 `}
+              </div>
+
+              <!-- Bottom Tap-to-Collapse Prompt Bar -->
+              <div class="pt-2 border-t border-slate-800/80 text-center text-slate-400 hover:text-slate-200 text-[11px] font-semibold flex items-center justify-center gap-1.5 py-1">
+                <span>Tap anywhere to collapse</span>
+                <span class="text-xs">▲</span>
               </div>
 
             </div>
@@ -10419,7 +10449,7 @@
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=51')
+        navigator.serviceWorker.register('./sw.js?v=52')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
@@ -10892,14 +10922,37 @@
       let importedCount = 0;
       let skippedDueToCap = 0;
 
-      items.forEach(item => {
+      items.forEach((item, index) => {
         if (scanHistory.length >= maxCap) {
           skippedDueToCap++;
           return;
         }
 
-        const syntheticUpc = 'RCPT-' + Math.floor(100000 + Math.random() * 900000);
         const itemName = item.cleanName || item.rawLine || 'Grocery Item';
+
+        // 1. Resolve true printed receipt barcode / store item code
+        let resolvedUpc = item.upc || item.itemCode || '';
+        if (!resolvedUpc && item.rawLine) {
+          const match = String(item.rawLine).match(/\b\d{5,14}\b/);
+          if (match) {
+            resolvedUpc = match[0];
+          }
+        }
+
+        // 2. Deterministic fallback for items without printed receipt numbers:
+        // Hash product brand & clean name so identical items (e.g. 3 cans of Poppi) ALWAYS share the EXACT SAME barcode identifier!
+        if (!resolvedUpc) {
+          const keyStr = (String(item.brand || '') + ' ' + String(itemName)).toLowerCase().replace(/[^a-z0-9]/g, '');
+          let hash = 0;
+          for (let i = 0; i < keyStr.length; i++) {
+            hash = ((hash << 5) - hash) + keyStr.charCodeAt(i);
+            hash |= 0;
+          }
+          resolvedUpc = String(Math.abs(hash)).padStart(8, '0').slice(-8);
+        }
+
+        // Unique item instance ID for DOM element identification & individual deletion
+        const uniqueId = 'rcpt_' + Date.now() + '_' + index + '_' + Math.random().toString(36).substr(2, 5);
         
         // Process scrutinized additives from worker or catalog heuristic
         let localDetectedAdditives = [];
@@ -10955,7 +11008,8 @@
         }
 
         const historyItem = {
-          upc: syntheticUpc,
+          id: uniqueId,
+          upc: resolvedUpc,
           productName: itemName,
           product: itemName,
           brand: item.brand || (receipt.storeName ? receipt.storeName : 'Grocery Item'),
@@ -11096,16 +11150,32 @@
       const safeItems = latestAuditedReceiptItems.filter(item => item.status !== 'recalled');
       let skippedDueToCap = 0;
 
-      safeItems.forEach(item => {
+      safeItems.forEach((item, index) => {
         if (scanHistory.length >= maxCap) {
           skippedDueToCap++;
           return;
         }
 
-        const syntheticUpc = 'RCPT-' + Math.floor(100000 + Math.random() * 900000);
         const itemName = item.cleanName || item.rawLine || 'Grocery Item';
+        let resolvedUpc = item.upc || item.itemCode || '';
+        if (!resolvedUpc && item.rawLine) {
+          const match = String(item.rawLine).match(/\b\d{5,14}\b/);
+          if (match) resolvedUpc = match[0];
+        }
+        if (!resolvedUpc) {
+          const keyStr = (String(item.brand || '') + ' ' + String(itemName)).toLowerCase().replace(/[^a-z0-9]/g, '');
+          let hash = 0;
+          for (let i = 0; i < keyStr.length; i++) {
+            hash = ((hash << 5) - hash) + keyStr.charCodeAt(i);
+            hash |= 0;
+          }
+          resolvedUpc = String(Math.abs(hash)).padStart(8, '0').slice(-8);
+        }
+        const uniqueId = 'rcpt_' + Date.now() + '_' + index + '_' + Math.random().toString(36).substr(2, 5);
+
         const historyItem = {
-          upc: syntheticUpc,
+          id: uniqueId,
+          upc: resolvedUpc,
           productName: itemName,
           product: itemName,
           brand: item.brand || 'Grocery Item',
