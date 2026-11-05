@@ -7675,7 +7675,7 @@
                 <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                 </svg>
-                <span>${isPlusActive ? 'Protected in Pro Pantry Shield (100-item monitoring)' : (scanHistory.length >= 5 ? 'Pantry Shield Full (5/5 Free Limit • Tap to Upgrade)' : 'Tracked in Free Pantry Shield (up to 5 items)')}</span>
+                <span>${isPlusActive ? 'Protected in Pro Pantry Shield (500-item monitoring)' : (scanHistory.length >= 5 ? 'Pantry Shield Full (5/5 Free Limit • Tap to Upgrade)' : 'Tracked in Free Pantry Shield (up to 5 items)')}</span>
               </div>
               ${data.lotCode ? `
                 <div class="mt-2 p-2 rounded-xl border flex items-center justify-between text-xs ${data.lotAudit && data.lotAudit.isMatch === true ? 'bg-rose-950/80 border-rose-500/80 text-rose-200' : 'bg-slate-950/80 border-slate-800 text-slate-200'}">
@@ -9139,7 +9139,7 @@
       setTimeout(() => customizeToast.classList.add('hidden'), 4000);
     }
 
-    const MAX_WATCHLIST_ITEMS = 100;
+    const MAX_WATCHLIST_ITEMS = 500;
     const SIXTY_DAYS_MS = 60 * 24 * 60 * 60 * 1000;
 
     function addToHistory(item) {
@@ -9380,6 +9380,14 @@
     };
 
     function renderHistory() {
+      // Normalize any receipt items that had .product instead of .productName
+      if (Array.isArray(scanHistory)) {
+        scanHistory.forEach(item => {
+          if (!item.productName && item.product) {
+            item.productName = item.product;
+          }
+        });
+      }
       const countBadge = document.getElementById('pantryGuardCountBadge');
       const activeCount = scanHistory.length;
       if (countBadge) {
@@ -9409,7 +9417,7 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
           </span>
           <div class="min-w-0">
-            <span class="font-bold text-white block">Pantry at Capacity (100/100 items)</span>
+            <span class="font-bold text-white block">Pantry at Capacity (500/500 items)</span>
             <span class="text-[11px] text-slate-400 block leading-tight">Oldest cleared foods rotate off automatically as you scan new items. Recalled items remain pinned.</span>
           </div>
         </div>
@@ -9422,10 +9430,10 @@
               ${UI_ICONS.shieldCheck}
               <span>Pantry Shield (${activeCount}/5 Free Foods Monitored)</span>
             </span>
-            <span class="text-[11px] text-slate-300">Upgrade to RAKKA Pro to monitor up to 100 groceries in background.</span>
+            <span class="text-[11px] text-slate-300">Upgrade to RAKKA Pro to monitor up to 500 groceries in background.</span>
           </div>
           <button type="button" class="open-paywall-trigger px-3 py-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-950 font-bold text-xs shrink-0 active:scale-95 shadow-sm">
-            Unlock 100
+            Unlock 500
           </button>
         </div>
       ` : '';
@@ -10070,7 +10078,7 @@
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=41')
+        navigator.serviceWorker.register('./sw.js?v=42')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
@@ -10595,7 +10603,10 @@
 
     function batchImportReceiptToPantry() {
       if (!latestAuditedReceiptItems || latestAuditedReceiptItems.length === 0) return;
-      triggerHaptic([40, 40]);
+      triggerHaptic([50, 40, 60]);
+      if (typeof sound !== 'undefined' && sound.playClearChime) {
+        sound.playClearChime();
+      }
 
       let importedCount = 0;
       const maxCap = isPlusActive ? MAX_WATCHLIST_ITEMS : 5;
@@ -10610,14 +10621,18 @@
         }
 
         const syntheticUpc = 'RCPT-' + Math.floor(100000 + Math.random() * 900000);
+        const itemName = item.cleanName || item.rawLine || 'Grocery Item';
         const historyItem = {
           upc: syntheticUpc,
-          product: item.cleanName || item.rawLine,
+          productName: itemName,
+          product: itemName,
           brand: item.brand || 'Grocery Item',
+          time: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
           date: new Date().toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }) + ' • ' + new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
           timestamp: Date.now(),
-          status: 'clear',
-          source: 'receipt'
+          status: item.status || 'clear',
+          source: 'receipt',
+          detectedAllergens: item.allergens || []
         };
 
         scanHistory.unshift(historyItem);
@@ -10630,12 +10645,34 @@
 
       saveHistory();
       renderHistory();
-      closeReceiptAuditor();
-      if (skippedDueToCap > 0 && !isPlusActive) {
-        showCustomizeToast(`Imported ${importedCount}/5 free items. Upgrade to RAKKA Pro to monitor all ${safeItems.length} items!`);
-      } else {
-        showCustomizeToast(`Imported ${importedCount} items into your 60-Day Local Pantry Shield!`);
+
+      // Instant Visual Button Confirmation State
+      const importBtn = document.getElementById('batchImportPantryBtn');
+      const importBtnText = document.getElementById('batchImportBtnText');
+      if (importBtn && importBtnText) {
+        importBtn.classList.remove('bg-slate-800', 'hover:bg-slate-700', 'border-slate-700');
+        importBtn.classList.add('bg-emerald-600', 'hover:bg-emerald-500', 'border-emerald-500', 'text-white');
+        importBtnText.textContent = `✓ Successfully Added ${importedCount} Items to Pantry Shield!`;
       }
+
+      // Briefly hold confirmation on button, then close modal and open Pantry Watchlist tab
+      setTimeout(() => {
+        closeReceiptAuditor();
+        // Reset button state for next scan
+        if (importBtn && importBtnText) {
+          importBtn.classList.remove('bg-emerald-600', 'hover:bg-emerald-500', 'border-emerald-500', 'text-white');
+          importBtn.classList.add('bg-slate-800', 'hover:bg-slate-700', 'border-slate-700');
+        }
+        if (skippedDueToCap > 0 && !isPlusActive) {
+          showCustomizeToast(`✓ Added ${importedCount}/5 items. Upgrade to Pro to monitor all ${safeItems.length}!`);
+        } else {
+          showCustomizeToast(`🎉 Added ${importedCount} items to your 60-Day Pantry Watchlist!`);
+        }
+        // Switch to Watchlist tab so the user sees their items right away
+        if (typeof setNavTab === 'function') {
+          setNavTab('history');
+        }
+      }, 700);
     }
 
   </script>

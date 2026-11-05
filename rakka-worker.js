@@ -26,12 +26,37 @@ export default {
     };
 
     // 2. Health check / status
+        // Diagnostic: Query Google ModelService.ListModels to see exactly which models this API key is allowed to use
+    if (url.pathname === '/models' || url.pathname === '/api/models') {
+      const apiKey = (env && env.GEMINI_API_KEY) || url.searchParams.get('key');
+      if (!apiKey) {
+        return new Response(JSON.stringify({ error: 'No API key provided. Pass ?key= or configure GEMINI_API_KEY.' }), { status: 400, headers: corsHeaders });
+      }
+      try {
+        const listRes = await fetch('https://generativelanguage.googleapis.com/v1beta/models', {
+          headers: { 'x-goog-api-key': apiKey }
+        });
+        const listData = await listRes.json();
+        return new Response(JSON.stringify({
+          status: listRes.status,
+          modelCount: (listData.models || []).length,
+          models: (listData.models || []).map(m => ({
+            name: m.name,
+            displayName: m.displayName,
+            supportedMethods: m.supportedGenerationMethods
+          }))
+        }, null, 2), { headers: { ...corsHeaders, 'Content-Type': 'application/json' } });
+      } catch (e) {
+        return new Response(JSON.stringify({ error: e.message }), { status: 500, headers: corsHeaders });
+      }
+    }
+
     if (url.pathname === '/' || url.pathname === '/health') {
       const hasKey = Boolean(env && env.GEMINI_API_KEY && String(env.GEMINI_API_KEY).trim().length > 0);
       return new Response(JSON.stringify({
         status: 'online',
         service: 'RAKKA Cloud Edge Hook',
-        version: '1.1.0',
+        version: '1.3.0',
         ai_vision_key_configured: hasKey,
         key_preview: hasKey ? `${env.GEMINI_API_KEY.slice(0, 6)}...` : 'NONE',
         timestamp: new Date().toISOString()
@@ -233,7 +258,7 @@ export default {
         // Optional: If an image was submitted, call Gemini 1.5 Flash OCR (free tier)
         if (body.imageBase64 && env && env.GEMINI_API_KEY && !ingredients) {
           try {
-            const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${env.GEMINI_API_KEY}`, {
+            const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`, {
               method: 'POST',
               headers: { 
                 'Content-Type': 'application/json',
@@ -341,7 +366,7 @@ Extract and return STRICTLY a JSON object with this exact schema (no markdown, n
   }
 }`;
 
-        const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+        const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`, {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
@@ -461,7 +486,7 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
   "action": "Immediate directive (e.g., 'Do not consume. Discard immediately or return to retailer for a full refund.')"
 }`;
 
-        const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+        const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`, {
           method: 'POST',
           headers: { 
             'Content-Type': 'application/json',
@@ -552,30 +577,105 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
   "auditSummary": "1-2 sentence executive safety summary"
 }`;
 
-        const geminiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
-          method: 'POST',
-          headers: { 
-            'Content-Type': 'application/json',
-            'x-goog-api-key': apiKey
-          },
-          body: JSON.stringify({
-            contents: [{
-              parts: [
-                { text: prompt },
-                { inline_data: { mime_type: mimeType, data: cleanBase64 } }
-              ]
-            }],
-            generationConfig: {
-              temperature: 0.1,
-              response_mime_type: "application/json"
-            }
-          })
-        });
+        // Multi-Model Fallback: Try current Gemini 2.0/2.5 Flash, followed by latest Flash revisions
+                // Multi-Model Fallback: Try current Gemini 2.0/2.5 Flash, followed by latest Flash revisions
+        // If static names fail, dynamically discover which model this key is permitted to call!
+        const candidateModels = [
+          'gemini-2.0-flash',
+          'gemini-2.5-flash',
+          'gemini-2.0-flash-exp',
+          'gemini-1.5-flash-latest',
+          'gemini-flash-latest'
+        ];
 
-        if (!geminiRes.ok) {
-          const errText = await geminiRes.text();
-          console.warn("Gemini Receipt Audit error:", errText);
-          return new Response(JSON.stringify({ success: false, error: 'Receipt vision service busy' }), { status: 502, headers: corsHeaders });
+        let geminiRes = null;
+        let lastErrText = '';
+
+        for (const modelName of candidateModels) {
+          try {
+            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent`, {
+              method: 'POST',
+              headers: { 
+                'Content-Type': 'application/json',
+                'x-goog-api-key': apiKey
+              },
+              body: JSON.stringify({
+                contents: [{
+                  parts: [
+                    { text: prompt },
+                    { inline_data: { mime_type: mimeType, data: cleanBase64 } }
+                  ]
+                }],
+                generationConfig: {
+                  temperature: 0.1,
+                  response_mime_type: "application/json"
+                }
+              })
+            });
+
+            if (res.ok) {
+              geminiRes = res;
+              break;
+            } else {
+              lastErrText = await res.text();
+              console.warn(`Model ${modelName} returned HTTP ${res.status}:`, lastErrText);
+            }
+          } catch (modelErr) {
+            console.warn(`Model ${modelName} fetch exception:`, modelErr);
+          }
+        }
+
+        // If candidate list failed, query Google's ModelService directly for all models permitted on this key!
+        if (!geminiRes || !geminiRes.ok) {
+          try {
+            const listRes = await fetch('https://generativelanguage.googleapis.com/v1beta/models', {
+              headers: { 'x-goog-api-key': apiKey }
+            });
+            if (listRes.ok) {
+              const listData = await listRes.json();
+              const availableModels = (listData.models || []).filter(m => (m.supportedGenerationMethods || []).includes('generateContent'));
+              for (const m of availableModels) {
+                const modelPath = m.name; // e.g. "models/gemini-..."
+                const cleanModelName = modelPath.replace(/^models\//, '');
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${cleanModelName}:generateContent`, {
+                  method: 'POST',
+                  headers: { 
+                    'Content-Type': 'application/json',
+                    'x-goog-api-key': apiKey
+                  },
+                  body: JSON.stringify({
+                    contents: [{
+                      parts: [
+                        { text: prompt },
+                        { inline_data: { mime_type: mimeType, data: cleanBase64 } }
+                      ]
+                    }],
+                    generationConfig: {
+                      temperature: 0.1,
+                      response_mime_type: "application/json"
+                    }
+                  })
+                });
+                if (res.ok) {
+                  geminiRes = res;
+                  break;
+                }
+              }
+            }
+          } catch (listErr) {
+            console.warn('Dynamic model discovery error:', listErr);
+          }
+        }
+
+        if (!geminiRes || !geminiRes.ok) {
+          let detailedErr = 'Receipt vision service busy';
+          try {
+            const errObj = JSON.parse(lastErrText);
+            if (errObj && errObj.error && errObj.error.message) {
+              detailedErr = errObj.error.message;
+            }
+          } catch (_) {}
+          return new Response(JSON.stringify({ success: false, error: detailedErr }), { status: 502, headers: corsHeaders });
         }
 
         const geminiData = await geminiRes.json();
