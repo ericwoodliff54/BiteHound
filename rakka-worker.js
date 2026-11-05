@@ -27,10 +27,13 @@ export default {
 
     // 2. Health check / status
     if (url.pathname === '/' || url.pathname === '/health') {
+      const hasKey = Boolean(env && env.GEMINI_API_KEY && String(env.GEMINI_API_KEY).trim().length > 0);
       return new Response(JSON.stringify({
         status: 'online',
         service: 'RAKKA Cloud Edge Hook',
-        version: '1.0.0',
+        version: '1.1.0',
+        ai_vision_key_configured: hasKey,
+        key_preview: hasKey ? `${env.GEMINI_API_KEY.slice(0, 6)}...` : 'NONE',
         timestamp: new Date().toISOString()
       }), { headers: corsHeaders });
     }
@@ -419,12 +422,13 @@ Extract and return STRICTLY a JSON object with this exact schema (no markdown, n
     if (request.method === 'POST' && (url.pathname === '/audit-lot-code' || url.pathname === '/api/audit-lot-code')) {
       try {
         const body = await request.json();
-        const apiKey = env && env.GEMINI_API_KEY;
+        // Support either server-side Cloudflare secret OR client-provided key
+        const apiKey = (env && env.GEMINI_API_KEY) || (body && body.clientApiKey);
 
         if (!apiKey) {
           return new Response(JSON.stringify({ 
             success: false, 
-            error: 'AI Vision key not configured on edge hook. Set GEMINI_API_KEY in Cloudflare Worker settings.' 
+            error: 'AI Vision key not configured on edge hook. Set GEMINI_API_KEY in Cloudflare Worker settings or in app Settings.' 
           }), { status: 503, headers: corsHeaders });
         }
 
@@ -501,12 +505,13 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
     if (request.method === 'POST' && (url.pathname === '/audit-receipt' || url.pathname === '/api/audit-receipt')) {
       try {
         const body = await request.json();
-        const apiKey = env && env.GEMINI_API_KEY;
+        // Support either server-side Cloudflare secret OR client-provided key
+        const apiKey = (env && env.GEMINI_API_KEY) || (body && body.clientApiKey);
 
         if (!apiKey) {
           return new Response(JSON.stringify({ 
             success: false, 
-            error: 'AI Vision key not configured on edge hook. Set GEMINI_API_KEY in Cloudflare Worker settings.' 
+            error: 'AI Vision key not configured on edge hook. Set GEMINI_API_KEY in Cloudflare Worker settings or in app Settings.' 
           }), { status: 503, headers: corsHeaders });
         }
 

@@ -9936,7 +9936,7 @@
     // Service Worker Registration for PWA Installability and Offline Support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=39')
+        navigator.serviceWorker.register('./sw.js?v=40')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
@@ -10314,7 +10314,8 @@
           body: JSON.stringify({
             imageBase64: dataUrl,
             mimeType: mimeType,
-            activeAllergens: activeAllergens
+            activeAllergens: activeAllergens,
+            clientApiKey: (localStorage.getItem('rakka_gemini_key') || localStorage.getItem('gemini_api_key') || '').trim()
           })
         });
 
