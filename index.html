@@ -1757,26 +1757,23 @@
 
 
       <!-- BATCH GROCERY RECEIPT SCANNER CARD (Live on UPC Scanner Page) -->
-      <div class="p-3.5 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-teal-950/30 to-slate-950 border border-emerald-500/30 flex items-center justify-between gap-3 shadow-md">
-        <div class="flex items-center gap-2.5 min-w-0">
-          <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
-            <svg class="w-5 h-5 text-emerald-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      <div class="p-3.5 rounded-2xl bg-gradient-to-r from-emerald-950/40 via-slate-900 to-teal-950/30 border border-emerald-500/40 shadow-lg flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
           </div>
           <div class="min-w-0">
-            <div class="flex items-center gap-1.5">
-              <span class="font-bold text-xs sm:text-sm text-white leading-tight">Batch Receipt Auditor</span>
-              <span class="text-[9px] font-bold px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 uppercase tracking-wider">AI Fast</span>
-            </div>
+            <span class="font-bold text-xs sm:text-sm text-white leading-tight block">Scan Receipt</span>
             <span class="text-[11px] text-slate-300 block truncate mt-0.5">Audit 15–30 groceries from a single receipt photo</span>
           </div>
         </div>
         <button 
           type="button" 
           onclick="openReceiptAuditor()" 
-          class="shrink-0 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5 cursor-pointer"
+          class="shrink-0 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center gap-1.5 cursor-pointer"
         >
           <svg class="w-3.5 h-3.5 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
-          <span>Audit</span>
+          <span>Scan</span>
         </button>
       </div>
 
@@ -2117,10 +2114,10 @@
         <button 
           type="button" 
           onclick="openReceiptAuditor()" 
-          class="flex-1 py-2 px-3 rounded-lg bg-gradient-to-r from-emerald-600 via-teal-600 to-sky-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold transition active:scale-95 flex items-center justify-center gap-1.5 shadow-sm"
+          class="flex-1 py-2 px-3 rounded-lg bg-gradient-to-r from-emerald-600 via-teal-600 to-sky-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold transition active:scale-95 flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
         >
           <svg class="w-3.5 h-3.5 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
-          <span>Audit Store Receipt</span>
+          <span>Scan Receipt</span>
         </button>
         <button 
           id="clearHistoryBtn" 
@@ -2662,8 +2659,8 @@
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
         </div>
         <div>
-          <h3 class="font-display text-sm sm:text-base font-bold text-white leading-tight">Batch Receipt Auditor</h3>
-          <p id="receiptAuditorSub" class="text-[11px] text-slate-400">1-Shot AI Recall & Allergen Screen for Your Entire Grocery Haul</p>
+          <h3 class="font-display text-sm sm:text-base font-bold text-white leading-tight">Scan Receipt</h3>
+          <p id="receiptAuditorSub" class="text-[11px] text-emerald-400 font-medium">Scanned receipts automatically load all items into your watchlist.</p>
         </div>
       </div>
 
@@ -10231,7 +10228,7 @@
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=44')
+        navigator.serviceWorker.register('./sw.js?v=45')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
@@ -10511,14 +10508,10 @@
       if (receiptAuditLoadingBox) receiptAuditLoadingBox.classList.add('hidden');
       if (receiptCameraInput) receiptCameraInput.value = '';
       
-      // Update modal subtitle with current usage status
+      // Permanent Subtitle as requested by user
       const sub = document.getElementById('receiptAuditorSub');
       if (sub) {
-        if (isPlusActive) {
-          sub.textContent = `RAKKA Pro Member • ${10 - proDailyCount} receipt scans remaining today`;
-        } else {
-          sub.textContent = "Free Tier • 1 Free Monthly Receipt Scan Available";
-        }
+        sub.textContent = "Scanned receipts automatically load all items into your watchlist.";
       }
 
       const targetModal = receiptAuditorModal || document.getElementById('receiptAuditorModal');
@@ -10620,7 +10613,8 @@
           const data = await res.json();
           if (data && data.success && data.receipt) {
             recordReceiptScanUsage();
-            renderReceiptAuditResults(data.receipt);
+            // 1. Immediately Auto-Load All Receipt Items directly into Watchlist!
+            autoImportReceiptDirectlyToWatchlist(data.receipt);
             return;
           } else if (data && data.error) {
             console.warn("Backend receipt audit error:", data.error);
@@ -10687,6 +10681,95 @@
         await processReceiptFile(file);
         e.target.value = '';
       });
+    }
+
+    
+    // Automatically loads all scanned receipt items directly into the Watchlist with zero user clicks needed!
+    function autoImportReceiptDirectlyToWatchlist(receipt) {
+      const items = Array.isArray(receipt.items) ? receipt.items : [];
+      if (items.length === 0) {
+        showCustomizeToast("Receipt audited, but no grocery lines detected.");
+        return;
+      }
+
+      triggerHaptic([50, 40, 60]);
+      if (typeof sound !== 'undefined' && sound.playClearChime) {
+        sound.playClearChime();
+      }
+
+      const maxCap = isPlusActive ? MAX_WATCHLIST_ITEMS : 5;
+      let importedCount = 0;
+      let skippedDueToCap = 0;
+
+      items.forEach(item => {
+        if (scanHistory.length >= maxCap) {
+          skippedDueToCap++;
+          return;
+        }
+
+        const syntheticUpc = 'RCPT-' + Math.floor(100000 + Math.random() * 900000);
+        const itemName = item.cleanName || item.rawLine || 'Grocery Item';
+        const historyItem = {
+          upc: syntheticUpc,
+          productName: itemName,
+          product: itemName,
+          brand: item.brand || (receipt.storeName ? receipt.storeName : 'Grocery Item'),
+          time: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+          date: new Date().toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }) + ' • ' + new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }),
+          timestamp: Date.now(),
+          status: item.status || 'clear',
+          source: 'receipt',
+          detectedAllergens: item.allergens || []
+        };
+
+        scanHistory.unshift(historyItem);
+        importedCount++;
+      });
+
+      if (scanHistory.length > maxCap) {
+        scanHistory = scanHistory.slice(0, maxCap);
+      }
+
+      saveHistory();
+
+      // Show brief confirmation state in modal loading box before gliding to Watchlist
+      const loadingBox = document.getElementById('receiptAuditLoadingBox');
+      if (loadingBox) {
+        loadingBox.innerHTML = `
+          <div class="space-y-2 py-2">
+            <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center mx-auto text-lg font-bold">✓</div>
+            <p class="text-sm font-bold text-white">Auto-Loaded ${importedCount} Items into Watchlist!</p>
+            <p class="text-xs text-slate-300">Switching to your Watchlist now...</p>
+          </div>
+        `;
+        loadingBox.classList.remove('hidden');
+      }
+
+      setTimeout(() => {
+        closeReceiptAuditor();
+        // Restore standard loading spinner HTML for next scan
+        if (loadingBox) {
+          loadingBox.innerHTML = `
+            <div class="inline-block animate-spin rounded-full h-7 w-7 border-2 border-emerald-400 border-t-transparent"></div>
+            <p class="text-xs text-slate-300 font-medium">Auditing receipt lines against FDA/USDA recall feeds & household allergens...</p>
+          `;
+          loadingBox.classList.add('hidden');
+        }
+
+        // Direct auto-navigation to Watchlist tab
+        if (typeof setNavTab === 'function') {
+          setNavTab('watchlist');
+        }
+        if (typeof renderHistory === 'function') {
+          renderHistory();
+        }
+
+        if (skippedDueToCap > 0 && !isPlusActive) {
+          showCustomizeToast(`✓ Auto-loaded ${importedCount}/5 items. Upgrade to Pro to monitor all ${items.length}!`);
+        } else {
+          showCustomizeToast(`🎉 Auto-loaded all ${importedCount} receipt items into your Watchlist!`);
+        }
+      }, 700);
     }
 
     function renderReceiptAuditResults(receipt) {
@@ -10838,5 +10921,5 @@
     }
 
   </script>
-  </body>
+</body>
 </html>
