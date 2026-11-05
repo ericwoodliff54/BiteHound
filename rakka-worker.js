@@ -56,7 +56,7 @@ export default {
       return new Response(JSON.stringify({
         status: 'online',
         service: 'RAKKA Cloud Edge Hook',
-        version: '1.3.0',
+        version: '1.4.0',
         ai_vision_key_configured: hasKey,
         key_preview: hasKey ? `${env.GEMINI_API_KEY.slice(0, 6)}...` : 'NONE',
         timestamp: new Date().toISOString()
@@ -554,7 +554,14 @@ Instructions for parsing this receipt:
 4. For each food item:
    - Expand truncated or abbreviated register item names into clear consumer product names (e.g., "Texas Toast" -> "L'Oven Fresh Texas Toast", "Pumpkin Loaf Cake" -> "Bake Shop Pumpkin Sliced Loaf Cake", "ChknAlfrdoMtblMar" -> "Chicken Alfredo / Meatball Marinara", "Polska Kielbasa" -> "Parkview Polska Kielbasa", "Hneycrsp Tote LRW" -> "Honeycrisp Apples", "Autumn Crisp Grape" -> "Autumn Crisp Green Seedless Grapes").
    - Assess whether any item is currently under an active national federal recall (such as Grimmway Farms bagged organic carrots for E. coli O121:H19, BrucePac cooked poultry for Listeria, TreeHouse frozen waffles, Boar's Head deli meat, etc.).
-   - Flag potential allergen conflicts against the active household safeguards: ${userAllergens}.
+   - Flag all common food allergens in this product (e.g. gluten, wheat, milk, dairy, soy, peanuts, tree_nuts, eggs, fish, shellfish, sesame, corn, sulfites, yeast).
+   - CRITICAL ADDITIVE SCREENING: Identify all scrutinized food additives, preservatives, emulsifiers, synthetic dyes, or dough conditioners commonly used in this commercial formulation.
+     Examples:
+     * Commercial sliced bread / buns / texas toast: Calcium Propionate (preservative), DATEM, Monoglycerides, SSL (dough conditioners).
+     * Processed meats (Kielbasa, Sausage, Pepperoni): Sodium Nitrite, Sodium Erythorbate, BHA/BHT, Sodium Phosphate.
+     * Commercial baked goods / sweet loaf cakes / cookies: Artificial Flavors (Vanillin), High Fructose Corn Syrup, Polysorbate 60, Titanium Dioxide.
+     * Confections & flavored snacks / chips / soda / energy drinks: Red 40, Yellow 5/6, Blue 1, Caramel Color, Sucralose, Acesulfame K, Citric Acid preservative.
+     Return an array of objects: [{"name": "Calcium Propionate", "type": "Chemical Preservative", "desc": "Antifungal preservative common in factory breads to prevent mold growth."}, {"name": "DATEM / Monoglycerides", "type": "Dough Conditioner", "desc": "Industrial emulsifier used to increase loaf volume and artificial softness."}]
 5. Synthesize a concise 1-2 sentence safety summary.
 
 Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, no markdown, no backticks):
@@ -571,8 +578,14 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
       "brand": "Brand or Store Brand",
       "status": "clear", // 'clear', 'recalled', or 'allergen_alert'
       "warning": "Brief warning explanation if recalled or allergen alert, otherwise null",
-      "allergens": ["gluten", "dairy"], // list of common allergen ids e.g. gluten, dairy, soy, peanuts, tree_nuts, eggs, fish, shellfish, sesame, corn, sulfites, yeast
-      "additives": ["red_40", "pgpr", "vanillin"] // scrutinized additive IDs detected or typical for this ultra-processed grocery item
+      "allergens": ["gluten", "dairy", "soy", "yeast"], // list of common allergen ids e.g. gluten, milk, soy, peanuts, tree_nuts, eggs, fish, shellfish, sesame, corn, sulfites, yeast
+      "additives": [
+        {
+          "name": "Calcium Propionate",
+          "type": "Chemical Preservative",
+          "desc": "Antifungal bread preservative used to extend commercial shelf life."
+        }
+      ]
     }
   ],
   "auditSummary": "1-2 sentence executive safety summary"
