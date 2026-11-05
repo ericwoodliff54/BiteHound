@@ -404,6 +404,40 @@
     }
 
     
+    
+    /* Standalone Watchlist Tab in Light Mode */
+    html.theme-light #historyPanel {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+    }
+    html.theme-light #historyPanel h2 {
+      color: #000000 !important;
+    }
+    html.theme-light #historyPanel .bg-slate-950\/80,
+    html.theme-light #historyPanel .bg-slate-950\/70 {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+    }
+    html.theme-light #historyPanel p.text-slate-200 {
+      color: #000000 !important;
+    }
+    html.theme-light #historyPanel [id^="watchlist-drawer-"] {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #1e293b !important;
+    }
+    html.theme-light #headerSettingsBtn {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+    }
+    html.theme-light #headerSettingsBtn svg {
+      color: #d97706 !important;
+    }
+
     /* Packaging Ingredients Breakdown Window in Light Mode */
     html.theme-light [id$="-window-Ingredients"] > div {
       background-color: #ffffff !important;
@@ -1204,6 +1238,23 @@
   <main class="flex-1 max-w-xl w-full mx-auto p-4 space-y-4">
 
     <!-- 5 Clean Navigation Tabs (Settings moved to corner icon) -->
+    <!-- Top Compact Header with Brand & Quick Settings Button -->
+    <div class="flex items-center justify-between pb-1 px-1">
+      <div class="flex items-center gap-2">
+        <span class="font-display font-black text-xl text-amber-400 tracking-wider">RAKKA</span>
+        <span class="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">Pro Active</span>
+      </div>
+      <button 
+        type="button" 
+        id="headerSettingsBtn" 
+        class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition active:scale-95 shadow-sm cursor-pointer" 
+        title="Settings & Preferences"
+      >
+        <svg class="w-4 h-4 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      </button>
+    </div>
+
+    <!-- 5 Clean Navigation Tabs: Scanner | Manual | Allergens | Watchlist | Recalls -->
     <nav class="bg-slate-900/95 p-2 rounded-2xl border border-slate-800 grid grid-cols-5 gap-1.5 sm:gap-2 shadow-xl text-center sticky top-2 z-20 backdrop-blur-md">
       <button 
         type="button" 
@@ -1239,8 +1290,17 @@
         <span class="leading-tight">Allergen Guard</span>
       </button>
 
-      <!-- 4. Pantry & Fridge Watchlist Tab (Sits between Allergen Guard and Active Recalls) -->
-      
+      <!-- 4. Watchlist Tab (Dedicated Primary Tab) -->
+      <button 
+        type="button" 
+        id="tabWatchlist" 
+        class="py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95 relative"
+      >
+        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
+        </svg>
+        <span class="leading-tight">Watchlist</span>
+      </button>
 
       <button 
         type="button" 
@@ -1251,18 +1311,6 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
         </svg>
         <span class="leading-tight">Active Recalls</span>
-      </button>
-
-      <button 
-        type="button" 
-        id="tabCustomize" 
-        class="py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95"
-      >
-        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-amber-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-        </svg>
-        <span class="leading-tight">Settings</span>
       </button>
     </nav>
 
@@ -2045,6 +2093,55 @@
     </section>
 
     <!-- SECTION 4: LIVE RECALL BULLETINS PANEL -->
+    
+    <!-- SECTION 4: DEDICATED PANTRY & FRIDGE WATCHLIST (Household Safe Shield) -->
+    <section id="historyPanel" class="bg-slate-900/90 rounded-2xl p-4 sm:p-5 border border-slate-800 shadow-xl space-y-4 hidden">
+      <!-- Header Title & Filter Bar -->
+      <div class="border-b border-slate-800 pb-3 flex items-start justify-between gap-3">
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 class="font-display text-base sm:text-lg font-bold text-white flex items-center gap-2">
+              <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
+              <span>Pantry Watchlist</span>
+            </h2>
+          </div>
+          <p class="text-xs text-slate-400 mt-0.5">Continuous 60-day background screening against new FDA & USDA recalls.</p>
+        </div>
+        <span id="pantryGuardCountBadge" class="px-2.5 py-1 text-xs font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0">
+          0/500 Watched
+        </span>
+      </div>
+
+      <!-- Action Toolbar (Batch Receipt Auditor CTA + Clear All) -->
+      <div class="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs">
+        <button 
+          type="button" 
+          onclick="openReceiptAuditor()" 
+          class="flex-1 py-2 px-3 rounded-lg bg-gradient-to-r from-emerald-600 via-teal-600 to-sky-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold transition active:scale-95 flex items-center justify-center gap-1.5 shadow-sm"
+        >
+          <svg class="w-3.5 h-3.5 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
+          <span>Audit Store Receipt</span>
+        </button>
+        <button 
+          id="clearHistoryBtn" 
+          type="button" 
+          class="py-2 px-3 rounded-lg bg-rose-950/40 hover:bg-rose-900/40 text-rose-300 font-semibold transition border border-rose-800/40 active:scale-95 shrink-0" 
+          title="Clear all saved watchlist items"
+        >
+          Clear List
+        </button>
+      </div>
+
+      <!-- Live Urgent Alert Banner (Only shown if a watched food is actively recalled) -->
+      <div id="pantryRecallAlertBanner" class="hidden transition-all duration-300 space-y-3" aria-live="polite"></div>
+
+      <!-- Dynamic Itemized Watchlist (Expandable accordion drawer for each food) -->
+      <div id="historyList" class="space-y-2.5">
+        <p class="text-xs text-slate-500 italic py-6 text-center">No foods monitored yet. Scan barcodes or snap an Aldi/Kroger receipt to begin 60-day monitoring.</p>
+      </div>
+    </section>
+
+
     <section id="bulletinsPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4 hidden">
       <div class="flex items-center justify-between">
         <div>
@@ -2313,47 +2410,6 @@
         </div>
       </div>
 
-      <!-- AUTOMATIC LOCAL PANTRY SHIELD (Silent 60-Day Recall Guard) -->
-      <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-3">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2.5">
-            <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
-              <svg class="w-5 h-5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
-            </div>
-            <div>
-              <span class="font-bold text-sm text-slate-100 block">Automatic Local Pantry Shield</span>
-              <span class="text-xs text-slate-400 font-medium">Silent 60-day recall monitoring</span>
-            </div>
-          </div>
-          <span id="pantryGuardCountBadge" class="px-2.5 py-1 text-xs font-bold rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0">
-            0 Watched
-          </span>
-        </div>
-
-        <p class="text-xs text-slate-300 leading-relaxed">
-          Every food product you scan is automatically guarded in your device's local memory for 60 days. RAKKA continuously monitors these items in the background against new FDA & USDA recalls with 100% on-device privacy (zero cloud tracking).
-        </p>
-
-        <div class="flex items-center gap-2 pt-1">
-          <button type="button" id="togglePantryDrawerBtn" onclick="togglePantryDrawer()" class="flex-1 py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 transition border border-slate-700 flex items-center justify-center gap-2 active:scale-95">
-            <span id="pantryDrawerBtnText">View Monitored Groceries (0)</span>
-            <span id="pantryDrawerChevron">▼</span>
-          </button>
-          <button id="clearHistoryBtn" type="button" class="py-2.5 px-3 rounded-xl bg-rose-950/30 hover:bg-rose-900/30 text-rose-300 text-xs font-bold transition border border-rose-800/40 active:scale-95" title="Clear all saved pantry items">
-            Clear All
-          </button>
-        </div>
-
-
-        <div id="pantryDrawerContainer" class="hidden pt-2 space-y-2.5">
-          <div id="pantryRecallAlertBanner" class="hidden transition-all duration-300 space-y-3" aria-live="polite"></div>
-          <div id="historyList" class="space-y-2.5 max-h-80 overflow-y-auto pr-1">
-            <p class="text-xs text-slate-500 italic py-6 text-center">No foods scanned yet. Every barcode you scan is automatically watched here for 60 days.</p>
-          </div>
-        </div>
-      </div>
-
-      
       <!-- CLOUDFLARE EDGE HOOK & GEMINI AI VISION SETTINGS -->
       <div class="p-4 rounded-2xl bg-gradient-to-br from-indigo-950/40 via-slate-900 to-slate-950 border border-indigo-500/40 shadow-lg space-y-3">
         <div class="flex items-center justify-between">
@@ -5297,31 +5353,48 @@
       const activeClass = 'py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-1.5 transition bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 text-white shadow-lg shadow-emerald-950/60 ring-2 ring-amber-400/40 active:scale-95 relative';
       const inactiveClass = 'py-3 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-300 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95 relative';
 
-      tabScanner.className = (activeTab === 'scanner') ? activeClass : inactiveClass;
-      tabManual.className = (activeTab === 'manual') ? activeClass : inactiveClass;
-      tabAllergens.className = (activeTab === 'allergens') ? activeClass : inactiveClass;
-      
-      tabBulletins.className = (activeTab === 'bulletins') ? activeClass : inactiveClass;
-      if (tabCustomize) tabCustomize.className = (activeTab === 'customize') ? activeClass : inactiveClass;
+      const tabScanner = document.getElementById('tabScanner');
+      const tabManual = document.getElementById('tabManual');
+      const tabAllergens = document.getElementById('tabAllergens');
+      const tabWatchlist = document.getElementById('tabWatchlist');
+      const tabBulletins = document.getElementById('tabBulletins');
+      const headerSettingsBtn = document.getElementById('headerSettingsBtn');
+
+      if (tabScanner) tabScanner.className = (activeTab === 'scanner') ? activeClass : inactiveClass;
+      if (tabManual) tabManual.className = (activeTab === 'manual') ? activeClass : inactiveClass;
+      if (tabAllergens) tabAllergens.className = (activeTab === 'allergens') ? activeClass : inactiveClass;
+      if (tabWatchlist) tabWatchlist.className = (activeTab === 'watchlist' || activeTab === 'history') ? activeClass : inactiveClass;
+      if (tabBulletins) tabBulletins.className = (activeTab === 'bulletins') ? activeClass : inactiveClass;
 
       // Highlight header settings gear when settings is active
       if (headerSettingsBtn) {
-        if (activeTab === 'customize') {
-          headerSettingsBtn.className = "shrink-0 w-10 h-10 min-h-[42px] min-w-[42px] rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/50 transition flex items-center justify-center shadow-sm active:scale-95";
+        if (activeTab === 'customize' || activeTab === 'settings') {
+          headerSettingsBtn.className = "w-9 h-9 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/50 flex items-center justify-center transition shadow-sm active:scale-95 cursor-pointer";
         } else {
-          headerSettingsBtn.className = "shrink-0 w-10 h-10 min-h-[42px] min-w-[42px] rounded-xl bg-slate-800/90 hover:bg-slate-700/90 border border-slate-700 text-slate-300 hover:text-white transition flex items-center justify-center shadow-sm active:scale-95";
+          headerSettingsBtn.className = "w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition active:scale-95 shadow-sm cursor-pointer";
         }
       }
 
-      allergensPanel.classList.toggle('hidden', activeTab !== 'allergens');
-      
-      bulletinsPanel.classList.toggle('hidden', activeTab !== 'bulletins');
-      customizePanel.classList.toggle('hidden', activeTab !== 'customize');
+      const allergensPanel = document.getElementById('allergensPanel');
+      const historyPanel = document.getElementById('historyPanel');
+      const bulletinsPanel = document.getElementById('bulletinsPanel');
+      const customizePanel = document.getElementById('customizePanel');
+
+      if (allergensPanel) allergensPanel.classList.toggle('hidden', activeTab !== 'allergens');
+      if (historyPanel) {
+        const showHistory = (activeTab === 'watchlist' || activeTab === 'history');
+        historyPanel.classList.toggle('hidden', !showHistory);
+        if (showHistory && typeof renderHistory === 'function') {
+          renderHistory();
+        }
+      }
+      if (bulletinsPanel) bulletinsPanel.classList.toggle('hidden', activeTab !== 'bulletins');
+      if (customizePanel) customizePanel.classList.toggle('hidden', !(activeTab === 'customize' || activeTab === 'settings'));
 
       // Independent Result Visibility: Scanner results stay on Scanner page; Manual results stay on Manual Entry page
       if (activeTab === 'scanner') {
-        scannerPanel.classList.remove('hidden');
-        manualPanel.classList.add('hidden');
+        if (scannerPanel) scannerPanel.classList.remove('hidden');
+        if (manualPanel) manualPanel.classList.add('hidden');
         if (scannerResultContainer && scannerResultContainer.innerHTML.trim() !== '') {
           scannerResultContainer.classList.remove('hidden');
         }
@@ -5329,8 +5402,8 @@
           manualResultContainer.classList.add('hidden');
         }
       } else if (activeTab === 'manual') {
-        manualPanel.classList.remove('hidden');
-        scannerPanel.classList.add('hidden');
+        if (manualPanel) manualPanel.classList.remove('hidden');
+        if (scannerPanel) scannerPanel.classList.add('hidden');
         if (manualResultContainer && manualResultContainer.innerHTML.trim() !== '') {
           manualResultContainer.classList.remove('hidden');
         }
@@ -5338,25 +5411,27 @@
           scannerResultContainer.classList.add('hidden');
         }
       } else {
-        scannerPanel.classList.add('hidden');
-        manualPanel.classList.add('hidden');
+        if (scannerPanel) scannerPanel.classList.add('hidden');
+        if (manualPanel) manualPanel.classList.add('hidden');
         if (scannerResultContainer) scannerResultContainer.classList.add('hidden');
         if (manualResultContainer) manualResultContainer.classList.add('hidden');
       }
-
-      if (activeTab === 'allergens') renderAllergensTab();
-      
-      if (activeTab === 'bulletins') renderBulletins();
-      if (activeTab === 'customize') renderCustomizeTab();
     }
 
-    tabScanner.addEventListener('click', () => setNavTab('scanner'));
-    tabManual.addEventListener('click', () => setNavTab('manual'));
-    tabAllergens.addEventListener('click', () => setNavTab('allergens'));
-    
-    tabBulletins.addEventListener('click', () => setNavTab('bulletins'));
-    if (tabCustomize) tabCustomize.addEventListener('click', () => setNavTab('customize'));
-    if (headerSettingsBtn) headerSettingsBtn.addEventListener('click', () => setNavTab('customize'));
+    // Attach Tab Event Listeners
+    const tabScannerBtn = document.getElementById('tabScanner');
+    const tabManualBtn = document.getElementById('tabManual');
+    const tabAllergensBtn = document.getElementById('tabAllergens');
+    const tabWatchlistBtn = document.getElementById('tabWatchlist');
+    const tabBulletinsBtn = document.getElementById('tabBulletins');
+    const headerSettingsBtnEl = document.getElementById('headerSettingsBtn');
+
+    if (tabScannerBtn) tabScannerBtn.addEventListener('click', () => setNavTab('scanner'));
+    if (tabManualBtn) tabManualBtn.addEventListener('click', () => setNavTab('manual'));
+    if (tabAllergensBtn) tabAllergensBtn.addEventListener('click', () => setNavTab('allergens'));
+    if (tabWatchlistBtn) tabWatchlistBtn.addEventListener('click', () => setNavTab('watchlist'));
+    if (tabBulletinsBtn) tabBulletinsBtn.addEventListener('click', () => setNavTab('bulletins'));
+    if (headerSettingsBtnEl) headerSettingsBtnEl.addEventListener('click', () => setNavTab('customize'));
 
     // Camera Handlers
     toggleCameraBtn.addEventListener('click', () => {
@@ -9379,6 +9454,18 @@
       }
     };
 
+    function toggleWatchlistItemDetails(upc) {
+      triggerHaptic([20]);
+      const drawer = document.getElementById(`watchlist-drawer-${upc}`);
+      const chevron = document.getElementById(`watchlist-chevron-${upc}`);
+      if (drawer) {
+        drawer.classList.toggle('hidden');
+        if (chevron) {
+          chevron.textContent = drawer.classList.contains('hidden') ? '▼' : '▲';
+        }
+      }
+    }
+
     function renderHistory() {
       // Normalize any receipt items that had .product instead of .productName
       if (Array.isArray(scanHistory)) {
@@ -9393,10 +9480,6 @@
       if (countBadge) {
         const maxCap = isPlusActive ? MAX_WATCHLIST_ITEMS : 5;
         countBadge.textContent = `${activeCount}/${maxCap} Watched (${isPlusActive ? 'Pro' : 'Free'})`;
-        const drawerBtnText = document.getElementById('pantryDrawerBtnText');
-        if (drawerBtnText) {
-          drawerBtnText.textContent = `View Monitored Groceries (${activeCount})`;
-        }
         if (activeCount >= MAX_WATCHLIST_ITEMS) {
           countBadge.className = 'px-2.5 py-1 text-[11px] font-bold rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40';
         } else if (activeCount > 0) {
@@ -9406,8 +9489,11 @@
         }
       }
 
+      const historyList = document.getElementById('historyList');
+      if (!historyList) return;
+
       if (scanHistory.length === 0) {
-        historyList.innerHTML = '<p class="text-xs text-slate-500 italic py-3 text-center">No foods scanned yet. Every barcode you scan is automatically watched here for 60 days.</p>';
+        historyList.innerHTML = '<p class="text-xs text-slate-500 italic py-6 text-center">No foods monitored yet. Scan barcodes or snap a grocery receipt to begin 60-day monitoring.</p>';
         return;
       }
 
@@ -9417,7 +9503,7 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
           </span>
           <div class="min-w-0">
-            <span class="font-bold text-white block">Pantry at Capacity (500/500 items)</span>
+            <span class="font-bold text-white block">Watchlist at Capacity (500/500 items)</span>
             <span class="text-[11px] text-slate-400 block leading-tight">Oldest cleared foods rotate off automatically as you scan new items. Recalled items remain pinned.</span>
           </div>
         </div>
@@ -9440,11 +9526,12 @@
 
       historyList.innerHTML = freeUpgradeBanner + capacityBannerHtml + scanHistory.map(item => {
         const isItemRecalled = Boolean(item.recalledNow || item.status === 'recalled');
+        const sourceLabel = item.source === 'receipt' ? '🧾 Receipt' : (item.source === 'manual' ? '⌨️ Manual' : '📷 Camera');
 
         if (isItemRecalled) {
           return `
-            <div class="p-3 rounded-xl border-2 border-rose-500/80 bg-rose-950/70 text-xs transition shadow-md shadow-rose-950/40 space-y-2">
-              <div class="flex items-start justify-between gap-2">
+            <div class="rounded-xl border-2 border-rose-500/80 bg-rose-950/70 text-xs transition shadow-md shadow-rose-950/40 overflow-hidden">
+              <div class="p-3 flex items-start justify-between gap-2 cursor-pointer" onclick="toggleWatchlistItemDetails('${item.upc}')">
                 <div class="min-w-0 flex-1">
                   <div class="flex items-center gap-1.5 flex-wrap">
                     <span class="px-2 py-0.5 text-[10px] rounded-md border bg-rose-500/30 text-rose-200 border-rose-500/60 font-black tracking-wide uppercase animate-pulse">
@@ -9452,21 +9539,26 @@
                     </span>
                     <span class="text-[10px] text-rose-300 font-mono">${item.upc}</span>
                   </div>
-                  <p class="font-bold text-slate-100 text-sm mt-1 truncate">${item.productName || item.upc}</p>
-                  <p class="text-[11px] text-slate-400">${item.brand || 'Verified Grocery Item'} • Scanned ${formatWatchedTimestamp(item)}</p>
+                  <p class="font-bold text-slate-100 text-sm mt-1 truncate">${item.productName || item.product || item.upc}</p>
+                  <p class="text-[11px] text-slate-400">${item.brand || 'Verified Grocery Item'} • Added ${formatWatchedTimestamp(item)}</p>
                 </div>
-                <button type="button" onclick="removeGuardedItem('${item.upc}')" class="text-slate-400 hover:text-rose-300 p-1.5 rounded-lg hover:bg-rose-900/30 transition shrink-0" title="Remove from Pantry">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                </button>
+                <div class="flex items-center gap-1 shrink-0">
+                  <span id="watchlist-chevron-${item.upc}" class="text-xs text-rose-300 font-bold px-1.5 py-1">▼</span>
+                  <button type="button" onclick="event.stopPropagation(); removeGuardedItem('${item.upc}')" class="text-slate-400 hover:text-rose-300 p-1.5 rounded-lg hover:bg-rose-900/30 transition shrink-0" title="Remove from Watchlist">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                  </button>
+                </div>
               </div>
-              <div class="p-2 rounded-lg bg-rose-900/30 border border-rose-500/30 text-[11px] text-rose-200 leading-snug">
-                <span class="font-bold text-rose-100">FDA Alert:</span> ${item.activeRecallHazard || 'Active recall notice issued for this product.'}
-              </div>
-              <div class="flex items-center justify-between pt-0.5">
-                <span class="text-[10px] text-rose-300 font-medium">Action: Check fridge/pantry & discard</span>
-                <button type="button" onclick="removeGuardedItem('${item.upc}')" class="px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-[11px] font-bold transition">
-                  Mark Discarded
-                </button>
+              <div id="watchlist-drawer-${item.upc}" class="hidden px-3 pb-3 pt-1 border-t border-rose-900/50 space-y-2 bg-rose-950/80 text-[11px]">
+                <div class="p-2 rounded-lg bg-rose-900/40 border border-rose-500/30 text-rose-200 leading-snug">
+                  <span class="font-bold text-rose-100">FDA Directive:</span> ${item.activeRecallHazard || 'Active recall notice issued for this product.'}
+                </div>
+                <div class="flex items-center justify-between pt-1">
+                  <span class="text-[10px] text-rose-300 font-medium">Source: ${sourceLabel}</span>
+                  <button type="button" onclick="event.stopPropagation(); removeGuardedItem('${item.upc}')" class="px-2.5 py-1 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-[11px] font-bold transition">
+                    Mark Discarded
+                  </button>
+                </div>
               </div>
             </div>
           `;
@@ -9480,23 +9572,61 @@
           statusText = 'ALLERGEN ALERT';
         }
 
+        const allergensList = Array.isArray(item.detectedAllergens) && item.detectedAllergens.length > 0
+          ? item.detectedAllergens.join(', ')
+          : 'None detected';
+
         return `
-          <div class="flex items-center justify-between p-2.5 rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-900/80 text-xs transition">
-            <div class="min-w-0 pr-2 flex-1">
-              <p class="font-semibold text-slate-200 truncate">${item.productName || item.upc}</p>
-              <div class="flex items-center gap-1.5 text-[11px] text-slate-500 font-mono mt-0.5 flex-wrap">
-                <span>${item.brand || 'Verified Item'}</span>
-                <span>•</span>
-                <span>${formatWatchedTimestamp(item)}</span>
+          <div class="rounded-xl border border-slate-800 bg-slate-950/70 hover:bg-slate-900/80 text-xs transition overflow-hidden">
+            <!-- Summary Row (Clickable to Expand Drawer) -->
+            <div class="p-3 flex items-center justify-between cursor-pointer" onclick="toggleWatchlistItemDetails('${item.upc}')">
+              <div class="min-w-0 pr-2 flex-1">
+                <div class="flex items-center gap-2">
+                  <p class="font-bold text-slate-200 truncate text-xs sm:text-sm">${item.productName || item.product || item.upc}</p>
+                  <span class="text-[9px] uppercase px-1.5 py-0.2 rounded font-mono bg-slate-800 text-slate-400 shrink-0">${sourceLabel}</span>
+                </div>
+                <div class="flex items-center gap-1.5 text-[11px] text-slate-400 font-mono mt-0.5 flex-wrap">
+                  <span>${item.brand || 'Verified Item'}</span>
+                  <span>•</span>
+                  <span>${formatWatchedTimestamp(item)}</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <span class="px-2 py-0.5 text-[10px] rounded-lg border ${badgeColor} font-semibold">
+                  ${statusText}
+                </span>
+                <span id="watchlist-chevron-${item.upc}" class="text-xs text-slate-400 font-bold px-1">▼</span>
+                <button type="button" onclick="event.stopPropagation(); removeGuardedItem('${item.upc}')" class="text-slate-500 hover:text-rose-400 p-1.5 rounded-lg hover:bg-slate-800 transition" title="Remove from Watchlist">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                </button>
               </div>
             </div>
-            <div class="flex items-center gap-2 shrink-0">
-              <span class="px-2 py-0.5 text-[10px] rounded-lg border ${badgeColor} font-semibold">
-                ${statusText}
-              </span>
-              <button type="button" onclick="removeGuardedItem('${item.upc}')" class="text-slate-500 hover:text-rose-400 p-1.5 rounded-lg hover:bg-slate-800 transition" title="Remove from Pantry">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-              </button>
+
+            <!-- Expandable Drawer with Detailed Product & Allergen Attributes -->
+            <div id="watchlist-drawer-${item.upc}" class="hidden px-3.5 pb-3.5 pt-2 border-t border-slate-800/80 bg-slate-900/60 space-y-2 text-[11px] text-slate-300">
+              <div class="grid grid-cols-2 gap-2 pb-1 border-b border-slate-800/60">
+                <div>
+                  <span class="text-slate-400 block text-[10px] uppercase font-bold">Tracking Code:</span>
+                  <span class="font-mono text-slate-200">${item.upc}</span>
+                </div>
+                <div>
+                  <span class="text-slate-400 block text-[10px] uppercase font-bold">Monitored Since:</span>
+                  <span class="text-slate-200">${formatWatchedTimestamp(item)}</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-slate-400 block text-[10px] uppercase font-bold">Allergen Profile:</span>
+                  <span class="${item.status === 'allergen_alert' ? 'text-amber-300 font-semibold' : 'text-slate-300'}">${allergensList}</span>
+                </div>
+                <button 
+                  type="button" 
+                  onclick="event.stopPropagation(); removeGuardedItem('${item.upc}')" 
+                  class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-rose-950/60 hover:text-rose-300 text-slate-300 border border-slate-700 transition font-semibold"
+                >
+                  Mark Consumed
+                </button>
+              </div>
             </div>
           </div>
         `;
@@ -10078,7 +10208,7 @@
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=42')
+        navigator.serviceWorker.register('./sw.js?v=43')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
@@ -10397,7 +10527,7 @@
           const img = new Image();
           img.onload = () => {
             try {
-              const maxDim = 2400; // Optimal resolution for long receipt strips and micro-printed dot-matrix text
+              const maxDim = 1600; // Optimized resolution for fast cellular upload while maintaining razor-sharp text and micro-printed dot-matrix text
               let w = img.naturalWidth || img.width;
               let h = img.naturalHeight || img.height;
 
@@ -10670,7 +10800,7 @@
         }
         // Switch to Watchlist tab so the user sees their items right away
         if (typeof setNavTab === 'function') {
-          setNavTab('history');
+          setNavTab('watchlist');
         }
       }, 700);
     }
