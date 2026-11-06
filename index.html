@@ -24,6 +24,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
+    .hidden, [hidden] {
+      display: none !important;
+    }
+
     body { 
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       -webkit-tap-highlight-color: transparent;
@@ -2838,8 +2842,7 @@
             <span id="settingsSyncBtnText">Check for FDA Updates Now</span>
           </button>
         </div>
-
-
+      </div>
 
       <!-- Legal & Safety Disclaimers -->
       <div class="pt-2 border-t border-slate-800 space-y-2">
@@ -6005,40 +6008,77 @@
       }
 
       // Panel Elements
+      const scannerPanelEl = document.getElementById('scannerPanel');
+      const receiptsPanelEl = document.getElementById('receiptsPanel');
+      const manualPanelEl = document.getElementById('manualPanel');
       const allergensPanel = document.getElementById('allergensPanel');
       const historyPanel = document.getElementById('historyPanel');
       const bulletinsPanel = document.getElementById('bulletinsPanel');
       const customizePanel = document.getElementById('customizePanel');
-      const scannerPanelEl = document.getElementById('scannerPanel');
-      const receiptsPanelEl = document.getElementById('receiptsPanel');
-      const manualPanelEl = document.getElementById('manualPanel');
 
-      // STRICT MUTUAL EXCLUSION: Toggle all main tab panels BEFORE running any render routines
-      if (allergensPanel) allergensPanel.classList.toggle('hidden', !isAllergens);
-      if (bulletinsPanel) bulletinsPanel.classList.toggle('hidden', !isBulletins);
-      if (customizePanel) customizePanel.classList.toggle('hidden', !isCustomize);
-      if (scannerPanelEl) scannerPanelEl.classList.toggle('hidden', !isBarcodes);
-      if (receiptsPanelEl) receiptsPanelEl.classList.toggle('hidden', !isReceipts);
-      if (manualPanelEl && manualPanelEl !== receiptsPanelEl) manualPanelEl.classList.add('hidden');
+      const panelList = [
+        { el: scannerPanelEl, active: isBarcodes },
+        { el: receiptsPanelEl, active: isReceipts },
+        { el: manualPanelEl, active: false },
+        { el: allergensPanel, active: isAllergens },
+        { el: historyPanel, active: isWatchlist },
+        { el: bulletinsPanel, active: isBulletins },
+        { el: customizePanel, active: isCustomize }
+      ];
+
+      // Triple-Lock Mutual Exclusion: CSS class + inline style + HTML5 hidden attribute
+      panelList.forEach(p => {
+        if (p.el) {
+          if (p.active) {
+            p.el.classList.remove('hidden');
+            p.el.style.display = '';
+            p.el.removeAttribute('hidden');
+          } else {
+            p.el.classList.add('hidden');
+            p.el.style.display = 'none';
+            p.el.setAttribute('hidden', '');
+          }
+        }
+      });
 
       if (scannerResultContainer) {
         if (isBarcodes && scannerResultContainer.innerHTML.trim() !== '') {
           scannerResultContainer.classList.remove('hidden');
+          scannerResultContainer.style.display = '';
         } else {
           scannerResultContainer.classList.add('hidden');
+          scannerResultContainer.style.display = 'none';
         }
       }
-      if (manualResultContainer) manualResultContainer.classList.add('hidden');
+      if (manualResultContainer) {
+        manualResultContainer.classList.add('hidden');
+        manualResultContainer.style.display = 'none';
+      }
 
-      // Watchlist Panel
-      if (historyPanel) {
-        historyPanel.classList.toggle('hidden', !isWatchlist);
-        if (isWatchlist && typeof renderHistory === 'function') {
-          try {
-            renderHistory();
-          } catch (renderErr) {
-            console.error("renderHistory execution error:", renderErr);
-          }
+      // Execute render routines strictly for the active tab
+      if (isWatchlist && typeof renderHistory === 'function') {
+        try {
+          renderHistory();
+        } catch (e) {
+          console.error("renderHistory error:", e);
+        }
+      } else if (isAllergens && typeof renderAllergensTab === 'function') {
+        try {
+          renderAllergensTab();
+        } catch (e) {
+          console.error("renderAllergensTab error:", e);
+        }
+      } else if (isBulletins && typeof renderBulletins === 'function') {
+        try {
+          renderBulletins();
+        } catch (e) {
+          console.error("renderBulletins error:", e);
+        }
+      } else if (isCustomize && typeof renderCustomizeTab === 'function') {
+        try {
+          renderCustomizeTab();
+        } catch (e) {
+          console.error("renderCustomizeTab error:", e);
         }
       }
     }
