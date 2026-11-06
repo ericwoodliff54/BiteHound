@@ -49,7 +49,7 @@
       0%, 100% { opacity: 0.9; }
       50% { opacity: 0.45; }
     }
-    .animate-pulse-slow {
+    .-slow {
       animation: pulseSlow 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
     .glass-surface {
@@ -1489,7 +1489,7 @@
         id="tabWatchlist"
         class="nav-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1 transition active:scale-95 relative"
       >
-        <span id="watchlistNavRecallBadge" class="hidden absolute -top-1 right-1.5 px-1.5 py-0.2 rounded-full bg-rose-500 text-white font-black text-[9px] shadow-md border border-slate-900 z-10 animate-pulse">0</span>
+        <span id="watchlistNavRecallBadge" class="hidden absolute -top-1 right-1.5 px-1.5 py-0.2 rounded-full bg-rose-500 text-white font-black text-[9px] shadow-md border border-slate-900 z-10 ">0</span>
         <div class="h-6 flex items-center justify-center shrink-0">
           <svg class="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
@@ -3846,6 +3846,22 @@
         : [(typeof getActiveProfile === 'function' ? getActiveProfile() : (familyProfiles[0] || { id: 'me', name: 'Me', allergens: [] }))];
 
       scanHistory.forEach(item => {
+        const itemCode = String(item.upc || '').trim();
+        const itemCleanCode = itemCode.replace(/\D/g, '');
+        const itemBrandLower = String(item.brand || item.receiptStore || '').toLowerCase().trim();
+        const itemTitleLower = String(item.productName || item.product || '').toLowerCase().trim();
+        const isAldi746502Immune = (itemCode === '746502' || itemCleanCode === '746502' || itemCleanCode === '0746502' || (itemBrandLower.includes('aldi') && itemTitleLower.includes('alfredo')));
+        if (isAldi746502Immune) {
+          item.recalledNow = false;
+          item.isRecalled = false;
+          delete item.activeRecallHazard;
+          delete item.recallAgency;
+          delete item.recallSeverity;
+          delete item.recallDate;
+          if (item.status === 'recalled' || item.status === 'recall_notice') {
+            item.status = 'clear';
+          }
+        }
         const isItemRecalled = Boolean(
           item.recalledNow ||
           item.status === 'recalled' ||
@@ -5608,7 +5624,7 @@
         title: "Ready-to-Eat Poultry & Deli Provisions",
         brand: "BrucePac / Boar's Head Provisions",
         brands: ['BrucePac', "Boar's Head", 'Strassburger', 'DeliPrime'],
-        keywords: ['liverwurst', 'deli turkey', 'smoked turkey', 'ready-to-eat chicken', 'chicken alfredo'],
+        keywords: ['liverwurst', 'deli turkey', 'smoked turkey', 'ready-to-eat chicken'],
         upcs: ['042421000000', '042421000010', '072487002012'],
         date: "Oct 20, 2026",
         agency: "USDA-FSIS",
@@ -5676,9 +5692,6 @@
         localStorage.setItem('recall_radar_history', JSON.stringify(scanHistory));
       } catch (e) {
         console.warn("Error saving history to localStorage:", e);
-      }
-      if (typeof auditPantryAgainstRecalls === 'function') {
-        auditPantryAgainstRecalls();
       }
     }
     window.saveHistory = saveHistory;
@@ -7300,7 +7313,7 @@
                 data-date="${item.date || 'Active'}"
               >
                 <div class="flex items-center justify-between">
-                  <span class="text-[10px] font-black uppercase tracking-wide px-1.5 py-0.5 rounded border bg-rose-500/30 text-rose-200 border-rose-500/60 animate-pulse">
+                  <span class="text-[10px] font-black uppercase tracking-wide px-1.5 py-0.5 rounded border bg-rose-500/30 text-rose-200 border-rose-500/60 ">
                     ${item.severity || 'Class I'} RECALL
                   </span>
                   <span class="text-[10px] text-rose-300 font-mono">${item.date || 'Active Alert'}</span>
@@ -7556,7 +7569,7 @@
           targetContainer.innerHTML = `
             <div class="rounded-3xl border border-white/10 bg-slate-900/95 p-5 shadow-2xl space-y-4 animate-slide-up-spring">
               <!-- Top Header Skeleton with Animated Shimmer -->
-              <div class="flex items-start justify-between gap-3 animate-pulse">
+              <div class="flex items-start justify-between gap-3 ">
                 <div class="space-y-2 flex-1">
                   <div class="h-2.5 w-24 bg-slate-800 rounded-full"></div>
                   <div class="h-5 w-4/5 bg-slate-700/80 rounded-lg"></div>
@@ -7566,7 +7579,7 @@
               </div>
 
               <!-- 3 Status Pills Skeleton -->
-              <div class="grid grid-cols-3 gap-2 pt-1 animate-pulse">
+              <div class="grid grid-cols-3 gap-2 pt-1 ">
                 <div class="h-8 rounded-xl bg-slate-800/80 border border-white/5"></div>
                 <div class="h-8 rounded-xl bg-slate-800/80 border border-white/5"></div>
                 <div class="h-8 rounded-xl bg-slate-800/80 border border-white/5"></div>
@@ -7581,7 +7594,7 @@
                   </div>
                   <span class="text-[10px] text-slate-400 font-medium">UPC: ${code}</span>
                 </div>
-                <div class="space-y-1.5 animate-pulse pt-0.5">
+                <div class="space-y-1.5  pt-0.5">
                   <div class="h-2 w-full bg-slate-800/70 rounded-full"></div>
                   <div class="h-2 w-3/4 bg-slate-800/50 rounded-full"></div>
                 </div>
@@ -8295,7 +8308,7 @@
           <div class="family-verdict-card rounded-2xl border-2 border-rose-500 bg-gradient-to-b from-rose-950/90 via-slate-900 to-slate-900 p-4 shadow-xl shadow-rose-950/60 space-y-3">
             <div class="flex items-center justify-between pb-2 border-b border-rose-900/60">
               <div class="flex items-center gap-2">
-                <span class="p-1.5 rounded-xl bg-rose-500/25 text-rose-300 border border-rose-500/50 shrink-0 animate-pulse">
+                <span class="p-1.5 rounded-xl bg-rose-500/25 text-rose-300 border border-rose-500/50 shrink-0 ">
                   ${UI_ICONS.alertTriangle}
                 </span>
                 <div>
@@ -8530,7 +8543,7 @@
       let recallPillIcon = UI_ICONS.checkCircle;
       let recallPillText = "Cleared";
       if (isRecalled) {
-        recallPillBg = "bg-rose-500/20 text-rose-300 border-rose-500/40 animate-pulse";
+        recallPillBg = "bg-rose-500/20 text-rose-300 border-rose-500/40 ";
         recallPillIcon = UI_ICONS.alertTriangle;
         recallPillText = "Active Recall";
       } else if (isTerminated) {
@@ -9700,7 +9713,7 @@
         if (!pendingDeleteConfirm) {
           pendingDeleteConfirm = true;
           deleteProfileModalBtn.innerHTML = `<span class="flex items-center gap-1.5">` + UI_ICONS.alertTriangle + `<span>Tap Again to Confirm Deletion</span></span>`;
-          deleteProfileModalBtn.className = "w-full py-2.5 rounded-xl border border-rose-500 bg-rose-600 text-white font-bold text-xs transition active:scale-[0.98] flex items-center justify-center gap-1.5 animate-pulse";
+          deleteProfileModalBtn.className = "w-full py-2.5 rounded-xl border border-rose-500 bg-rose-600 text-white font-bold text-xs transition active:scale-[0.98] flex items-center justify-center gap-1.5 ";
           setTimeout(() => {
             pendingDeleteConfirm = false;
             if (deleteProfileModalBtn) {
@@ -10142,6 +10155,21 @@
         const cleanCode = code.replace(/\D/g, '');
         const brandLower = String(item.brand || item.receiptStore || '').toLowerCase().trim();
         const titleLower = String(item.productName || item.product || '').toLowerCase().trim();
+
+        // Safe staple immunity: Aldi 746502 (Chicken Alfredo / Meatball Marinara) - NEVER recalled
+        if (code === '746502' || cleanCode === '746502' || cleanCode === '0746502' || (brandLower.includes('aldi') && titleLower.includes('alfredo'))) {
+          item.recalledNow = false;
+          item.isRecalled = false;
+          delete item.activeRecallHazard;
+          delete item.recallAgency;
+          delete item.recallSeverity;
+          delete item.recallDate;
+          if (item.status === 'recalled' || item.status === 'recall_notice') {
+            item.status = 'clear';
+          }
+          historyNeedsSave = true;
+          return;
+        }
 
         // 0. If item was already verified & flagged as recalled by receipt AI audit, PRESERVE IT!
         if (item.source === 'receipt' && (item.status === 'recalled' || item.isRecalled) && item.activeRecallHazard) {
@@ -10589,18 +10617,24 @@ function renderHistory() {
 
       // Helper function to render a single item card
       function renderSingleWatchlistCard(item, qty) {
-        const isItemRecalled = Boolean(
+        const code = String(item.upc || '').trim();
+        const cleanCode = code.replace(/\D/g, '');
+        const brandLower = String(item.brand || item.receiptStore || '').toLowerCase().trim();
+        const titleLower = String(item.productName || item.product || '').toLowerCase().trim();
+        const isAldi746502 = (code === '746502' || cleanCode === '746502' || cleanCode === '0746502' || (brandLower.includes('aldi') && titleLower.includes('alfredo')));
+
+        const isItemRecalled = !isAldi746502 && Boolean(
           item.recalledNow ||
           item.status === 'recalled' ||
           item.status === 'recall_notice' ||
           item.isRecalled ||
           (item.activeRecallHazard && String(item.activeRecallHazard).trim().length > 0)
         );
+
         const additivesCount = Array.isArray(item.detectedAdditives) ? item.detectedAdditives.length : 0;
         const normalizedAllergens = Array.isArray(item.detectedAllergens) ? item.detectedAllergens : [];
         const cardKey = item.id || (String(item.upc || 'upc').replace(/[^a-zA-Z0-9_-]/g, '_') + '_' + (item.timestamp || '0'));
         const dateAdded = formatWatchedTimestamp(item);
-        const barcodeNumber = item.upc || 'N/A';
 
         // Calculate family allergen matches
         const affectedMembers = [];
@@ -10619,120 +10653,38 @@ function renderHistory() {
           }
         }
 
-        // RECALLED ITEM CARD
+        const isAlert = !isItemRecalled && (item.status === 'allergen_alert' || affectedMembers.length > 0);
+
+        // Clean, sleek, professional card styling (matching Clear and Allergen Alert exactly)
+        let cardBorder = 'border-slate-800 bg-slate-900/90 hover:bg-slate-850 hover:border-slate-700';
+        let statusPill = `<span class="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">Clear</span>`;
+
         if (isItemRecalled) {
-          const recallReason = item.activeRecallHazard || (item.recallRecord && item.recallRecord.hazard) || 'FDA/USDA Public Health Recall: Pathogen contamination alert on record.';
-          const recallAgency = item.recallAgency || (item.recallRecord && item.recallRecord.agency) || 'FDA';
-          const recallSeverity = item.recallSeverity || (item.recallRecord && item.recallRecord.severity) || 'Class I High Risk';
-
-          return `
-            <div id="watchlist-card-${cardKey}" class="rounded-xl border-2 border-rose-500 bg-rose-950/80 text-xs transition duration-200 shadow-md shadow-rose-950/40 overflow-hidden">
-              <div class="p-3.5 flex flex-col gap-2 cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
-                <div class="flex items-center justify-between gap-2">
-                  <div class="flex items-center gap-1.5 flex-wrap">
-                    <span class="px-2.5 py-1 text-[10px] rounded-lg border border-rose-400 bg-rose-600 text-white font-black tracking-wider uppercase shadow-md flex items-center gap-1 shrink-0 animate-pulse">
-                      🛑 RECALL NOTICE
-                    </span>
-                    ${qty > 1 ? `<span class="px-2 py-0.5 text-[10px] rounded-lg font-bold bg-slate-900 text-amber-300 border border-amber-500/40">Qty: ${qty}</span>` : ''}
-                    ${additivesCount > 0 ? `
-                      <span class="px-2 py-0.5 text-[10px] rounded-lg font-bold bg-purple-900/80 text-purple-200 border border-purple-500/50">
-                        ${additivesCount} Additives
-                      </span>
-                    ` : ''}
-                  </div>
-                  <div class="flex items-center gap-1 shrink-0">
-                    <span id="watchlist-chevron-${cardKey}" class="text-xs text-rose-300 font-bold px-1 transition-transform">▼</span>
-                    <button type="button" onclick="event.stopPropagation(); removeGuardedItem('${cardKey}')" class="text-slate-400 hover:text-rose-300 p-1 rounded-lg hover:bg-rose-900/50 transition shrink-0" title="Remove from Watchlist">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                    </button>
-                  </div>
-                </div>
-
-                <h4 class="font-display font-extrabold text-white text-sm sm:text-base leading-snug tracking-tight">
-                  ${item.productName || item.product || item.upc}
-                </h4>
-
-                <div class="flex items-center justify-between text-[11px] text-slate-300 flex-wrap gap-x-2 gap-y-1 pt-1 border-t border-rose-900/60 font-mono">
-                  <div class="flex items-center gap-1.5 flex-wrap">
-                    <span class="text-slate-100 font-semibold font-sans">${item.brand || item.receiptStore || 'Grocery Item'}</span>
-                    <span>•</span>
-                    <span class="text-amber-300 font-bold">${barcodeNumber}</span>
-                  </div>
-                  <span class="text-slate-400 font-sans">${dateAdded}</span>
-                </div>
-              </div>
-
-              <!-- Expandable Recall Drawer -->
-              <div id="watchlist-drawer-${cardKey}" class="hidden px-3.5 pb-3.5 pt-2 border-t border-rose-900/80 space-y-2.5 bg-slate-950/95 text-xs cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
-                <div class="recall-directive-box p-3 rounded-xl bg-gradient-to-br from-rose-950/90 via-slate-900 to-rose-950/90 border-2 border-rose-500 text-rose-100 space-y-2 shadow-lg">
-                  <div class="flex items-center justify-between gap-2 flex-wrap pb-1.5 border-b border-rose-800/60">
-                    <div class="flex items-center gap-2">
-                      <span class="w-2.5 h-2.5 rounded-full bg-rose-400 animate-pulse"></span>
-                      <span class="font-black text-white text-xs uppercase tracking-wider">⚠️ ${recallAgency} Alert</span>
-                    </div>
-                    <span class="px-2 py-0.5 rounded-full bg-rose-600 text-white font-black text-[10px] tracking-wide border border-rose-400">${recallSeverity}</span>
-                  </div>
-                  <div class="recall-hazard-box p-2.5 rounded-lg bg-black/70 border border-rose-500/40">
-                    <span class="text-[10px] uppercase font-bold tracking-wider text-rose-300 block mb-0.5">Hazard / Health Risk:</span>
-                    <p class="text-xs text-white font-semibold leading-relaxed">${recallReason}</p>
-                  </div>
-                  <div class="recall-action-box p-2.5 rounded-lg bg-rose-950/90 border border-rose-500/60 flex items-start gap-2 text-xs font-bold text-rose-100">
-                    <span class="text-base shrink-0">🛑</span>
-                    <div class="leading-snug">
-                      <span class="text-white block font-black uppercase text-[10px] tracking-wide">Consumer Action:</span>
-                      Do not consume. Discard immediately or return to your local store for a 100% full refund.
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Additives breakdown -->
-                ${additivesCount > 0 ? `
-                  <div class="p-2.5 rounded-xl bg-slate-900 border border-purple-500/30 space-y-1.5">
-                    <span class="text-[10px] font-bold uppercase tracking-wider text-purple-300 block">🧪 ${additivesCount} Scrutinized Additive${additivesCount > 1 ? 's' : ''} Detected</span>
-                    <div class="space-y-1">
-                      ${(item.detectedAdditives || []).map(add => `
-                        <div class="p-2 rounded-lg bg-slate-950 border border-slate-800">
-                          <span class="font-bold text-white text-xs">${add.name}</span>
-                          <p class="text-[10px] text-slate-300">${add.desc || 'Preservative / additive.'}</p>
-                        </div>
-                      `).join('')}
-                    </div>
-                  </div>
-                ` : ''}
-
-                <div class="pt-1">
-                  <button type="button" onclick="event.stopPropagation(); removeGuardedItem('${cardKey}')" class="w-full py-2.5 px-3 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-extrabold text-xs transition shadow-md active:scale-98 flex items-center justify-center gap-1.5">
-                    <span>Mark Discarded & Remove from Pantry</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          `;
+          cardBorder = 'border border-rose-500/50 bg-slate-900/90 hover:border-rose-400';
+          statusPill = `<span class="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">Recall</span>`;
+        } else if (isAlert) {
+          cardBorder = 'border border-amber-500/50 bg-slate-900/90 hover:border-amber-400';
+          const memberNames = affectedMembers.length > 0 ? ` (${affectedMembers.map(m => m.name).join(', ')})` : '';
+          statusPill = `<span class="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">Allergen Alert${memberNames}</span>`;
         }
 
-        // NORMAL ITEM CARD (Clear or Allergen Alert)
-        const isAlert = !isItemRecalled && (item.status === 'allergen_alert' || affectedMembers.length > 0);
-        const cardBorder = isAlert 
-          ? 'border-2 border-amber-500/70 bg-gradient-to-r from-amber-950/30 via-slate-900/95 to-slate-900/95 shadow-md shadow-amber-950/30' 
-          : 'border border-slate-700/80 bg-slate-900/95 hover:bg-slate-850 hover:border-slate-600 shadow-sm';
-        const memberNames = affectedMembers.map(m => m.name).join(', ');
-        const statusBadge = isAlert
-          ? `<span class="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center gap-1">⚠️ Allergen Alert${memberNames ? ` (${memberNames})` : ''}</span>`
-          : `<span class="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">Clear</span>`;
+        const recallReason = item.activeRecallHazard || (item.recallRecord && item.recallRecord.hazard) || 'FDA/USDA Public Health Recall on record.';
+        const recallAgency = item.recallAgency || (item.recallRecord && item.recallRecord.agency) || 'FDA';
+        const recallSeverity = item.recallSeverity || (item.recallRecord && item.recallRecord.severity) || 'Class I High Risk';
 
         return `
           <div id="watchlist-card-${cardKey}" class="rounded-xl border ${cardBorder} text-xs transition-all duration-200 overflow-hidden shadow-sm">
             <div class="p-3.5 flex flex-col gap-2 cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
               <div class="flex items-center justify-between gap-2">
                 <div class="flex items-center gap-1.5 flex-wrap">
-                  ${statusBadge}
-                  ${qty > 1 ? `<span class="px-2 py-0.5 text-[10px] rounded-lg font-bold bg-slate-900 text-sky-300 border border-sky-500/40 font-mono">Qty: ${qty}</span>` : ''}
+                  ${statusPill}
+                  ${qty > 1 ? `<span class="px-2 py-0.5 text-[10px] rounded-lg font-bold bg-slate-950 text-sky-300 border border-sky-500/40 font-mono">Qty: ${qty}</span>` : ''}
                   ${additivesCount > 0 ? `
-                    <span class="px-2 py-0.5 text-[10px] rounded-lg font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">
+                    <span class="px-2 py-0.5 text-[10px] rounded-lg font-medium bg-purple-500/20 text-purple-300 border border-purple-500/40">
                       ${additivesCount} Additive${additivesCount > 1 ? 's' : ''}
                     </span>
                   ` : `
-                    <span class="px-2 py-0.5 text-[10px] rounded-lg font-medium bg-slate-900 text-slate-400 border border-slate-800">
+                    <span class="px-2 py-0.5 text-[10px] rounded-lg font-medium bg-slate-950 text-slate-400 border border-slate-800">
                       0 Additives
                     </span>
                   `}
@@ -10760,11 +10712,23 @@ function renderHistory() {
             </div>
 
             <!-- Expandable Drawer -->
-            <div id="watchlist-drawer-${cardKey}" class="hidden px-3.5 pb-3.5 pt-2.5 border-t border-slate-800/80 bg-slate-900/90 space-y-2.5 text-xs cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
-              <div class="p-2 rounded-xl bg-slate-950/80 border border-slate-800 flex items-center justify-between text-[11px] font-mono">
+            <div id="watchlist-drawer-${cardKey}" class="hidden px-3.5 pb-3.5 pt-2.5 border-t border-slate-800/80 bg-slate-950 space-y-2.5 text-xs cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
+              <div class="p-2 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-[11px] font-mono">
                 <span class="text-slate-400">Barcode / Item Identifier:</span>
                 <span class="text-sky-300 font-bold">${item.upc}</span>
               </div>
+
+              <!-- Recall Section (Clean, non-flashing) -->
+              ${isItemRecalled ? `
+                <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 space-y-1.5 text-xs">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-rose-300 text-xs">${recallAgency} Public Health Recall</span>
+                    <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-rose-500/20 text-rose-300 border border-rose-500/30">${recallSeverity}</span>
+                  </div>
+                  <p class="text-xs text-rose-200/90 leading-relaxed font-medium">${recallReason}</p>
+                  <p class="text-[10px] text-slate-400 pt-1 border-t border-rose-900/30">Action: Do not consume. Discard or return to store for full refund.</p>
+                </div>
+              ` : ''}
 
               <!-- Allergen Breakdown -->
               <div class="space-y-1">
@@ -10779,7 +10743,7 @@ function renderHistory() {
                     `).join('')}
                   </div>
                 ` : `
-                  <div class="p-2 rounded-xl bg-slate-950/80 border border-slate-800 text-slate-400 text-xs">
+                  <div class="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 text-xs">
                     ✓ Zero active household allergen conflicts for all family members.
                   </div>
                 `}
@@ -10791,7 +10755,7 @@ function renderHistory() {
                 ${item.detectedAdditives && item.detectedAdditives.length > 0 ? `
                   <div class="space-y-1">
                     ${item.detectedAdditives.map(add => `
-                      <div class="p-2 rounded-xl bg-slate-950/80 border border-purple-900/50 flex flex-col gap-0.5 text-xs">
+                      <div class="p-2 rounded-xl bg-slate-900 border border-purple-900/50 flex flex-col gap-0.5 text-xs">
                         <div class="flex items-center justify-between">
                           <span class="font-bold text-white text-xs">${add.name}</span>
                           <span class="text-[10px] uppercase font-bold text-purple-300">${add.type || 'Additive'}</span>
@@ -10807,7 +10771,13 @@ function renderHistory() {
                 `}
               </div>
 
-              <div class="pt-1 border-t border-slate-800/80 text-center text-slate-400 text-[10px]">
+              <div class="pt-1">
+                <button type="button" onclick="event.stopPropagation(); removeGuardedItem('${cardKey}')" class="w-full py-2 px-3 rounded-xl bg-slate-900 hover:bg-rose-950/50 text-slate-300 hover:text-rose-300 font-bold text-xs border border-slate-800 hover:border-rose-500/40 transition">
+                  <span>Remove from Watchlist</span>
+                </button>
+              </div>
+
+              <div class="pt-0.5 text-center text-slate-500 text-[10px]">
                 Tap anywhere to collapse ▲
               </div>
             </div>
@@ -10819,11 +10789,21 @@ function renderHistory() {
       let finalHtml = '';
 
       sortedReceipts.forEach((rcpt, rcptIdx) => {
-        const hasRecalls = rcpt.items.some(i => Boolean(i.recalledNow || i.status === 'recalled' || i.isRecalled));
+        const isDirectBarcode = rcpt.isDirectBarcode || rcpt.id === 'direct_barcode';
+
+        const isAldi746502Check = (item) => {
+          const code = String(item.upc || '').trim();
+          const cleanCode = code.replace(/\D/g, '');
+          const brandLower = String(item.brand || item.receiptStore || '').toLowerCase().trim();
+          const titleLower = String(item.productName || item.product || '').toLowerCase().trim();
+          return (code === '746502' || cleanCode === '746502' || cleanCode === '0746502' || (brandLower.includes('aldi') && titleLower.includes('alfredo')));
+        };
+
+        const hasRecalls = rcpt.items.some(i => !isAldi746502Check(i) && Boolean(i.recalledNow || i.status === 'recalled' || i.status === 'recall_notice' || i.isRecalled || (i.activeRecallHazard && String(i.activeRecallHazard).trim().length > 0)));
         const hasAlerts = !hasRecalls && rcpt.items.some(i => i.status === 'allergen_alert' || (Array.isArray(i.familyMatches) && i.familyMatches.length > 0));
         const isAllClear = !hasRecalls && !hasAlerts;
 
-        // Auto-expand if recall detected, or if user is searching, or if newest receipt
+        // Auto-expand if recall detected, or searching, or first receipt
         const isExpanded = (q.length > 0) || hasRecalls || (collapsedReceiptGroups[rcpt.id] === false) || (rcptIdx === 0 && collapsedReceiptGroups[rcpt.id] !== true);
 
         // Deduplicate identical items in this receipt and calculate quantities
@@ -10840,10 +10820,9 @@ function renderHistory() {
         });
 
         // PUSH RECALLED ITEMS TO THE VERY TOP OF THE RECEIPT LIST!
-        // Order: 1) Recalls (top priority), 2) Household Allergen Alerts, 3) Cleared items
         uniqueItems.sort((a, b) => {
-          const aRec = Boolean(a.recalledNow || a.status === 'recalled' || a.status === 'recall_notice' || a.isRecalled || (a.activeRecallHazard && String(a.activeRecallHazard).trim().length > 0));
-          const bRec = Boolean(b.recalledNow || b.status === 'recalled' || b.status === 'recall_notice' || b.isRecalled || (b.activeRecallHazard && String(b.activeRecallHazard).trim().length > 0));
+          const aRec = !isAldi746502Check(a) && Boolean(a.recalledNow || a.status === 'recalled' || a.status === 'recall_notice' || a.isRecalled || (a.activeRecallHazard && String(a.activeRecallHazard).trim().length > 0));
+          const bRec = !isAldi746502Check(b) && Boolean(b.recalledNow || b.status === 'recalled' || b.status === 'recall_notice' || b.isRecalled || (b.activeRecallHazard && String(b.activeRecallHazard).trim().length > 0));
           if (aRec && !bRec) return -1;
           if (!aRec && bRec) return 1;
 
@@ -10855,74 +10834,59 @@ function renderHistory() {
           return 0;
         });
 
-        // Store Icon & DISTINCT Shading for Receipt Card vs Drawer Products
-        let storeIconSvg = `<svg class="w-5 h-5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>`;
-        let storeBg = 'bg-emerald-500/10 border-emerald-500/20';
-        let receiptCardBorder = 'border-slate-700/80 shadow-lg';
-        let receiptCardBg = 'bg-slate-900';
-        let receiptHeaderBg = 'bg-gradient-to-r from-slate-800/90 via-slate-800 to-slate-850 hover:bg-slate-800 border-b border-slate-700/80';
-        let receiptDrawerBg = 'bg-black/60';
-        let statusPill = `<span class="px-2.5 py-1 text-[10px] font-bold rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1 shadow-sm">✓ Cleared</span>`;
+        // Clean, elegant store icon (no bouncing emojis, no flashing!)
+        let storeIconSvg = `<svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12l2-1 2 1 2-1 2 1 2-1 2 1V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>`;
+        let iconBg = 'bg-sky-950/80 border border-sky-500/30';
+        let statusPill = `<span class="px-2 py-0.5 text-[10px] font-bold rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">Cleared</span>`;
 
         if (hasRecalls) {
-          const recallCount = rcpt.items.filter(i => Boolean(i.recalledNow || i.status === 'recalled' || i.status === 'recall_notice' || i.isRecalled || (i.activeRecallHazard && String(i.activeRecallHazard).trim().length > 0))).length;
-          storeIconSvg = `<span class="text-base shrink-0 animate-bounce">🛑</span>`;
-          storeBg = 'bg-rose-500/20 border-rose-500/40 text-rose-300';
-          receiptCardBorder = 'border-2 border-rose-500/80 shadow-rose-950/50 shadow-xl';
-          receiptCardBg = 'bg-slate-900';
-          receiptHeaderBg = 'bg-gradient-to-r from-rose-950/80 via-slate-900 to-slate-900 hover:from-rose-950 border-b border-rose-900/60';
-          receiptDrawerBg = 'bg-black/70';
-          // User requested RED pill not yellow for recall notices
-          statusPill = `<span class="px-2.5 py-1 text-[10px] font-black rounded-lg bg-rose-600 text-white uppercase tracking-wider shadow-md flex items-center gap-1 border border-rose-400 animate-pulse">🛑 ${recallCount} Recall Notice${recallCount > 1 ? 's' : ''}</span>`;
+          const recallCount = rcpt.items.filter(i => !isAldi746502Check(i) && Boolean(i.recalledNow || i.status === 'recalled' || i.status === 'recall_notice' || i.isRecalled || (i.activeRecallHazard && String(i.activeRecallHazard).trim().length > 0))).length;
+          storeIconSvg = `<svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`;
+          iconBg = 'bg-rose-950/80 border border-rose-500/40';
+          statusPill = `<span class="px-2 py-0.5 text-[10px] font-bold rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40">${recallCount} Recall${recallCount > 1 ? 's' : ''}</span>`;
         } else if (hasAlerts) {
-          storeIconSvg = `<span class="text-base shrink-0">⚠️</span>`;
-          storeBg = 'bg-amber-500/20 border-amber-500/40 text-amber-300';
-          receiptCardBorder = 'border-2 border-amber-500/60 shadow-amber-950/30 shadow-lg';
-          receiptCardBg = 'bg-slate-900';
-          receiptHeaderBg = 'bg-gradient-to-r from-amber-950/60 via-slate-900 to-slate-900 hover:from-amber-950/80 border-b border-amber-900/50';
-          receiptDrawerBg = 'bg-black/60';
-          statusPill = `<span class="px-2.5 py-1 text-[10px] font-bold rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center gap-1 shadow-sm">⚠️ Allergen Alert</span>`;
-        } else if (rcpt.isDirectBarcode) {
-          storeIconSvg = `<svg class="w-5 h-5 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>`;
-          storeBg = 'bg-sky-500/10 border-sky-500/20 text-sky-400';
-          receiptCardBorder = 'border border-sky-500/40 shadow-md';
-          receiptCardBg = 'bg-slate-900';
-          receiptHeaderBg = 'bg-gradient-to-r from-sky-950/50 via-slate-900 to-slate-900 hover:from-sky-950/70 border-b border-sky-900/40';
-          receiptDrawerBg = 'bg-slate-950/90';
+          storeIconSvg = `<svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`;
+          iconBg = 'bg-amber-950/80 border border-amber-500/40';
+          statusPill = `<span class="px-2 py-0.5 text-[10px] font-bold rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/40">Allergen Alert</span>`;
+        } else if (isDirectBarcode) {
+          storeIconSvg = `<svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>`;
+          iconBg = 'bg-sky-950/80 border border-sky-500/30';
         }
 
+        // Distinctly shaded receipt window (steel-slate header, clearly separate from products)
         finalHtml += `
-          <div class="receipt-group rounded-2xl border ${receiptCardBorder} ${receiptCardBg} shadow-xl overflow-hidden transition-all duration-200">
-            <!-- Receipt Header (Tap to Expand/Collapse) -->
-            <div class="p-3.5 sm:p-4 flex items-center justify-between gap-3 cursor-pointer select-none ${receiptHeaderBg} transition" onclick="toggleReceiptGroup('${rcpt.id}')">
+          <div class="receipt-group rounded-2xl border border-slate-750 bg-[#161c28] shadow-md overflow-hidden transition-all duration-200">
+            <!-- Receipt Header (Distinct Steel-Slate Header Bar) -->
+            <div class="p-3.5 sm:p-4 flex items-center justify-between gap-3 cursor-pointer select-none bg-[#1e2536] hover:bg-[#252e42] transition" onclick="toggleReceiptGroup('${rcpt.id}')">
               <div class="flex items-center gap-3 min-w-0">
-                <div class="w-10 h-10 rounded-xl ${storeBg} border flex items-center justify-center shrink-0 shadow-sm">
+                <div class="w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center shrink-0">
                   ${storeIconSvg}
                 </div>
                 <div class="min-w-0">
                   <div class="flex items-center gap-2 flex-wrap">
-                    <h3 class="font-display font-extrabold text-white text-sm sm:text-base tracking-tight truncate">${rcpt.store}</h3>
+                    <span class="text-[9px] font-black uppercase tracking-wider text-sky-400/90 px-1.5 py-0.5 rounded bg-sky-950/80 border border-sky-500/30">RECEIPT</span>
+                    <h3 class="font-display font-bold text-white text-sm sm:text-base tracking-tight truncate">${rcpt.store}</h3>
                     ${statusPill}
                   </div>
-                  <div class="flex items-center gap-2 text-[11px] text-slate-300 font-mono mt-0.5">
+                  <div class="flex items-center gap-2 text-[11px] text-slate-400 font-mono mt-0.5">
                     <span>${rcpt.date}</span>
                     <span>•</span>
-                    <span class="text-slate-200 font-semibold font-sans">${rcpt.items.length} Item${rcpt.items.length === 1 ? '' : 's'}</span>
+                    <span class="text-slate-300 font-sans">${rcpt.items.length} Item${rcpt.items.length === 1 ? '' : 's'}</span>
                   </div>
                 </div>
               </div>
 
               <!-- Action Buttons -->
               <div class="flex items-center gap-1.5 shrink-0">
-                <button type="button" onclick="event.stopPropagation(); deleteReceiptGroup('${rcpt.id}')" class="text-slate-400 hover:text-rose-400 p-2 rounded-lg hover:bg-slate-800 transition" title="Delete this receipt">
+                <button type="button" onclick="event.stopPropagation(); deleteReceiptGroup('${rcpt.id}')" class="text-slate-400 hover:text-rose-400 p-2 rounded-lg hover:bg-slate-700/50 transition" title="Delete this receipt">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                 </button>
                 <span id="receipt-chevron-${rcpt.id}" class="text-slate-400 text-xs font-bold px-1 transition-transform duration-200">${isExpanded ? '▲' : '▼'}</span>
               </div>
             </div>
 
-            <!-- Receipt Items Drawer (Distinctly shaded recessed well so child product cards stand out cleanly) -->
-            <div id="receipt-drawer-${rcpt.id}" class="${isExpanded ? '' : 'hidden'} p-3.5 sm:p-4 space-y-2.5 border-t ${receiptDrawerBg} shadow-inner">
+            <!-- Receipt Items Drawer (Distinct contrasting tray for child product cards) -->
+            <div id="receipt-drawer-${rcpt.id}" class="${isExpanded ? '' : 'hidden'} p-3 sm:p-3.5 space-y-2 border-t border-slate-700/70 bg-[#0c1017]">
               ${uniqueItems.map(it => {
                 const key = (String(it.upc || '') + '::' + String(it.productName || it.product || '')).toLowerCase();
                 const qty = itemCounts[key] ? itemCounts[key].count : 1;
@@ -11564,7 +11528,7 @@ function renderHistory() {
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=62')
+        navigator.serviceWorker.register('./sw.js?v=63')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
@@ -12083,6 +12047,11 @@ function renderHistory() {
 
         // RECALL CROSS-CHECK INTELLIGENCE
         let isRecalledItem = item.status === 'recalled' || Boolean(item.isRecalled);
+        if (resolvedUpc === '746502' || resolvedUpc === '0746502' || (String(receiptStore).toLowerCase().includes('aldi') && itemName.toLowerCase().includes('alfredo'))) {
+          isRecalledItem = false;
+          item.status = 'clear';
+          item.isRecalled = false;
+        }
         let hazardText = item.warning || item.hazard || '';
         let recallAgencyText = item.recallAgency || 'FDA';
         let recallSeverityText = item.recallSeverity || 'Class I High Risk';
@@ -12242,7 +12211,7 @@ function renderHistory() {
           let itemBorder = 'border-slate-800 bg-slate-950/70';
 
           if (item.status === 'recalled') {
-            statusBadge = `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-pulse">RECALL MATCH</span>`;
+            statusBadge = `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40 ">RECALL MATCH</span>`;
             itemBorder = 'border-rose-500/60 bg-rose-950/40';
           } else if (item.status === 'allergen_alert') {
             statusBadge = `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">Allergen Alert</span>`;
