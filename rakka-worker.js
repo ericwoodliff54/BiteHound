@@ -553,9 +553,24 @@ Instructions for parsing this receipt:
 3. Extract ALL purchased food and grocery items shown on the tape.
 4. For each food item:
    - Expand truncated or abbreviated register item names into clear consumer product names (e.g., "Texas Toast" -> "L'Oven Fresh Texas Toast", "Pumpkin Loaf Cake" -> "Bake Shop Pumpkin Sliced Loaf Cake", "ChknAlfrdoMtblMar" -> "Chicken Alfredo / Meatball Marinara", "Polska Kielbasa" -> "Parkview Polska Kielbasa", "Hneycrsp Tote LRW" -> "Honeycrisp Apples", "Autumn Crisp Grape" -> "Autumn Crisp Green Seedless Grapes").
-   - STRICT RECALL ACCURACY (NO HALLUCINATIONS OR GUESSING):
-     * NEVER guess or assume an everyday food (like generic chicken, bread, or canned goods) is recalled unless there is an official, brand-wide nationwide recall specifically named for that exact brand and product on record (e.g. Grimmway Farms organic whole/baby carrots, TreeHouse frozen waffles, Boar's Head liverwurst/deli meat).
-     * If uncertain, or if a product is an everyday safe supermarket item (such as Aldi Park Street Deli meals or fresh meats), set status to "clear". Do NOT flag items as "recalled" based on ingredient speculation.
+      - INTELLIGENT FOOD RECALL & SAFETY DETECTION (TOP PRIORITY):
+      * Actively cross-reference each purchased item against active and historical FDA and USDA Class I and Class II recall bulletins, outbreak investigations, and food contamination advisories.
+      * Proactively flag recognized food recall categories and products:
+        - Packaged Baby Spinach & Organic Leafy Greens (FDA Class I alerts: Listeria monocytogenes / Salmonella risk in pre-packaged greens from Whole Foods 365, Dole, Fresh Express, etc.)
+        - Baby Lettuce Salad Greens & Spring Mix (FDA Class I alerts: Listeria monocytogenes contamination risk in retail salad clamshells)
+        - Sweet Potato Spirals & Fresh Cut Veggie Spirals (FDA Class I alerts: Listeria monocytogenes / microbial pathogens in pre-cut sweet potato spirals)
+        - Organic Whole & Baby Carrots (FDA Class I recall: E. Coli O121 risk in multi-pound retail bags across Grimmway, SunVale, 365, Cal-Organic, Trader Joe's)
+        - Frozen Buttermilk & Homestyle Waffles (FDA Class I recall: Listeria monocytogenes in TreeHouse / store brands)
+        - Ready-to-Eat Poultry, Liverwurst & Sliced Deli Cuts (USDA-FSIS Class I recall: Listeria monocytogenes in BrucePac, Boar's Head, DeliPrime)
+        - Peanut Butter & Nut Butters (FDA Class II: Salmonella / metal fragment contamination)
+        - Soft Cheeses / Queso Fresco / Cotija (Listeria monocytogenes)
+        - Simulated or mock food recall tests matching public health alerts
+      * If an item matches an active food safety recall notice, public health alert, or recognized contamination risk:
+        - Set status to "recalled"
+        - In the 'warning' field, provide the clear pathogen/hazard directive (e.g. "FDA Class I Recall: Risk of Listeria monocytogenes contamination in packaged baby spinach/greens", or "FDA Class I Recall: Potential Listeria risk in pre-cut sweet potato spirals")
+        - In the 'recallAgency' field, specify "FDA" or "USDA-FSIS"
+        - In the 'recallSeverity' field, specify "Class I High Risk" or "Class II Alert"
+      * If the product has no recall notices on record, evaluate for household allergens; if no allergens, set status to "clear".
    - Flag all common food allergens in this product (e.g. gluten, wheat, milk, dairy, soy, peanuts, tree_nuts, eggs, fish, shellfish, sesame, corn, sulfites, yeast).
    - CRITICAL ADDITIVE SCREENING: Identify all scrutinized food additives, preservatives, emulsifiers, synthetic dyes, or dough conditioners commonly used in this commercial formulation.
      Examples:
@@ -585,6 +600,8 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
       "itemCode": "Receipt barcode or store item code printed on receipt line (e.g. '398511', '640511', or '08500248231')",
       "upc": "Receipt barcode, item code, or standard 12-digit UPC",
       "status": "clear", // 'clear', 'recalled', or 'allergen_alert'
+      "recallAgency": "FDA", // 'FDA' or 'USDA-FSIS' if recalled, otherwise null
+      "recallSeverity": "Class I High Risk", // 'Class I High Risk' if recalled, otherwise null
       "warning": "Brief warning explanation if recalled or allergen alert, otherwise null",
       "allergens": ["gluten", "dairy", "soy", "yeast"], // list of common allergen ids e.g. gluten, milk, soy, peanuts, tree_nuts, eggs, fish, shellfish, sesame, corn, sulfites, yeast
       "additives": [
