@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rakka-v65';
+const CACHE_NAME = 'rakka-v66';
 const ASSETS = [
   './index.html',
   './manifest.json',
@@ -74,5 +74,27 @@ self.addEventListener('fetch', event => {
   // 3. Network-first for external APIs (openFDA, etc.)
   event.respondWith(
     fetch(event.request).catch(() => caches.match(event.request))
+  );
+});
+
+// 4. Notification interaction handler: opens Watchlist tab when tapped
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  const targetUrl = (event.notification.data && event.notification.data.url) || './index.html?tab=watchlist';
+
+  event.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(windowClients => {
+      for (let client of windowClients) {
+        if (client.url.includes('index.html') && 'focus' in client) {
+          if ('navigate' in client) {
+            client.navigate(targetUrl);
+          }
+          return client.focus();
+        }
+      }
+      if (clients.openWindow) {
+        return clients.openWindow(targetUrl);
+      }
+    })
   );
 });

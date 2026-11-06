@@ -2789,7 +2789,35 @@
         </div>
       </div>
 
-      <!-- Sound & Haptic Options -->
+            <!-- DEVICE SYSTEM PUSH NOTIFICATIONS -->
+      <div class="space-y-2 text-xs">
+        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-cyan-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+          </svg>
+          <span>Recall Push Notifications</span>
+        </h3>
+
+        <div class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-950 border border-slate-800 gap-3 shadow-inner">
+          <div class="min-w-0 flex-1 space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="font-bold text-slate-100 block text-xs sm:text-sm">Watchlist Recall Alerts</span>
+              <span id="notifStatusBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700">Disabled</span>
+            </div>
+            <span class="text-[11px] text-slate-400 block leading-tight">Receive immediate system push notifications whenever a monitored grocery item triggers a federal FDA/USDA recall notice.</span>
+            <span id="notifPlatformNote" class="text-[10px] text-amber-400/90 font-medium block leading-tight hidden">Note: On iPhone, add Rakka to your Home Screen to enable web notifications.</span>
+          </div>
+          <button 
+            type="button" 
+            id="toggleRecallNotifBtn" 
+            class="min-h-[46px] px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-200 border border-slate-700 text-xs font-bold transition active:scale-95 shadow-sm shrink-0 cursor-pointer"
+          >
+            Enable Alerts
+          </button>
+        </div>
+      </div>
+
+<!-- Sound & Haptic Options -->
       <div class="space-y-2 text-xs">
         <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Audio & Vibration</h3>
 
@@ -10212,7 +10240,134 @@
     }
     window.removeGuardedItem = removeGuardedItem;
 
-        function auditPantryAgainstRecalls() {
+        
+    // ==========================================================
+    // WATCHLIST RECALL PUSH NOTIFICATIONS ENGINE
+    // ==========================================================
+    function isNotificationSupported() {
+      return ('Notification' in window) && ('serviceWorker' in navigator);
+    }
+
+    function isRecallNotificationActive() {
+      if (!isNotificationSupported()) return false;
+      return (localStorage.getItem('rakka_recall_notifications_enabled') === 'true') && (Notification.permission === 'granted');
+    }
+
+    function updateNotifUI() {
+      const badge = document.getElementById('notifStatusBadge');
+      const btn = document.getElementById('toggleRecallNotifBtn');
+      const note = document.getElementById('notifPlatformNote');
+
+      // Check iOS standalone PWA status
+      const isIos = /iphone|ipad|ipod/i.test(navigator.userAgent);
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+      if (note && isIos && !isStandalone) {
+        note.classList.remove('hidden');
+      }
+
+      const active = isRecallNotificationActive();
+      if (badge && btn) {
+        if (active) {
+          badge.textContent = "Active";
+          badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/40";
+          btn.textContent = "Enabled";
+          btn.className = "min-h-[46px] px-4 py-2 rounded-xl bg-cyan-600/30 text-cyan-200 border border-cyan-500/50 text-xs font-bold transition active:scale-95 shadow-sm shrink-0 cursor-pointer";
+        } else {
+          badge.textContent = "Disabled";
+          badge.className = "text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700";
+          btn.textContent = "Enable Alerts";
+          btn.className = "min-h-[46px] px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-750 text-slate-200 border border-slate-700 text-xs font-bold transition active:scale-95 shadow-sm shrink-0 cursor-pointer";
+        }
+      }
+    }
+
+    async function toggleRecallNotifications() {
+      triggerHaptic([30]);
+      if (!('Notification' in window)) {
+        showCustomizeToast("System notifications are not supported on this browser.");
+        return;
+      }
+
+      const currentlyActive = isRecallNotificationActive();
+
+      if (currentlyActive) {
+        localStorage.setItem('rakka_recall_notifications_enabled', 'false');
+        updateNotifUI();
+        showCustomizeToast("Recall push notifications disabled.");
+        return;
+      }
+
+      try {
+        const perm = await Notification.requestPermission();
+        if (perm === 'granted') {
+          localStorage.setItem('rakka_recall_notifications_enabled', 'true');
+          updateNotifUI();
+          if (typeof sound !== 'undefined' && sound.playClearChime) {
+            sound.playClearChime();
+          }
+          showCustomizeToast("✓ Recall push alerts enabled!");
+
+          // Fire instant verification notification
+          const welcomeTitle = "🛑 RAKKA Recall Sentinel Active";
+          const welcomeBody = "You will now receive immediate device alerts whenever a monitored grocery item triggers an FDA/USDA recall.";
+
+          if ('serviceWorker' in navigator && navigator.serviceWorker.ready) {
+            navigator.serviceWorker.ready.then(reg => {
+              reg.showNotification(welcomeTitle, {
+                body: welcomeBody,
+                icon: "./icon-192.png",
+                badge: "./favicon.png",
+                tag: "rakka-welcome-notif",
+                data: { url: "./index.html?tab=watchlist" }
+              });
+            }).catch(() => {
+              try { new Notification(welcomeTitle, { body: welcomeBody, icon: "./icon-192.png" }); } catch (_) {}
+            });
+          } else {
+            try { new Notification(welcomeTitle, { body: welcomeBody, icon: "./icon-192.png" }); } catch (_) {}
+          }
+        } else if (perm === 'denied') {
+          localStorage.setItem('rakka_recall_notifications_enabled', 'false');
+          updateNotifUI();
+          showCustomizeToast("Notification permission was denied in your browser settings.");
+        }
+      } catch (err) {
+        console.warn("Notification request error:", err);
+        showCustomizeToast("Unable to request notification permission.");
+      }
+    }
+
+    function dispatchRecallAlertNotification(item) {
+      if (!item || !isRecallNotificationActive()) return;
+
+      const hazardKey = String(item.activeRecallHazard || item.hazard || item.status || 'recalled');
+      if (item.lastNotifiedRecall === hazardKey) return;
+      item.lastNotifiedRecall = hazardKey;
+
+      const title = `🛑 RECALL ALERT: ${item.productName || item.product || item.name || 'Monitored Grocery'}`;
+      const body = `${item.recallAgency || 'FDA/USDA'} issued a recall: ${item.activeRecallHazard || item.hazard || 'Active public health risk'}. Tap to review safe actions.`;
+
+      if ('serviceWorker' in navigator && navigator.serviceWorker.ready) {
+        navigator.serviceWorker.ready.then(reg => {
+          reg.showNotification(title, {
+            body: body,
+            icon: './icon-192.png',
+            badge: './favicon.png',
+            tag: `recall-alert-${item.upc || item.id || Date.now()}`,
+            renotify: true,
+            data: { url: './index.html?tab=watchlist' }
+          });
+        }).catch(() => {
+          try { new Notification(title, { body: body, icon: './icon-192.png' }); } catch (_) {}
+        });
+      } else {
+        try { new Notification(title, { body: body, icon: './icon-192.png' }); } catch (_) {}
+      }
+    }
+    window.dispatchRecallAlertNotification = dispatchRecallAlertNotification;
+
+
+    function auditPantryAgainstRecalls() {
       if (!scanHistory || scanHistory.length === 0) {
         updatePantryAlertBanner([]);
         renderHistory();
@@ -10381,6 +10536,9 @@
           item.recallDate = match.recallDate || match.date || 'Recent';
           item.recallSeverity = match.severity || 'Class I Recall';
           recalledMatches.push({ item: item, recall: match });
+          if (typeof dispatchRecallAlertNotification === 'function') {
+            dispatchRecallAlertNotification(item);
+          }
         } else {
           item.recalledNow = false;
           if (item.status === 'recalled') {
@@ -11597,11 +11755,27 @@ function renderHistory() {
         keyInput.value = localStorage.getItem('rakka_gemini_key') || '';
       }
     }
+    
+      const toggleRecallNotifBtn = document.getElementById('toggleRecallNotifBtn');
+      if (toggleRecallNotifBtn) {
+        toggleRecallNotifBtn.addEventListener('click', toggleRecallNotifications);
+      }
+      updateNotifUI();
+
+      // Deep link tab handler (opens Watchlist when notification is tapped)
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const targetTab = urlParams.get('tab');
+        if (targetTab === 'watchlist' || targetTab === 'history') {
+          setTimeout(() => setNavTab('watchlist'), 150);
+        }
+      } catch (_) {}
+
     setTimeout(initEdgeSettingsInputs, 200);
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=65')
+        navigator.serviceWorker.register('./sw.js?v=66')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
