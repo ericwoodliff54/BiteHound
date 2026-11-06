@@ -3153,8 +3153,8 @@
 
     // Allergen Options (Full FDA Big 9 + Gluten, Corn, Sulfites & Yeast)
     const ALLERGEN_OPTIONS = [
-      { id: 'gluten', name: 'Gluten / Wheat', icon: 'gluten', desc: 'Wheat, barley, rye & flour' },
-      { id: 'dairy', name: 'Dairy / Milk', icon: 'dairy', desc: 'Milk, whey, cheese & butter' },
+      { id: 'gluten', name: 'Gluten', icon: 'gluten', desc: 'Wheat, barley, rye & flour' },
+      { id: 'dairy', name: 'Dairy', icon: 'dairy', desc: 'Milk, whey, cheese & butter' },
       { id: 'peanuts', name: 'Peanuts', icon: 'peanuts', desc: 'Peanuts, peanut butter & oils' },
       { id: 'treenuts', name: 'Tree Nuts', icon: 'treenuts', desc: 'Almonds, walnuts & cashews' },
       { id: 'soy', name: 'Soy', icon: 'soy', desc: 'Soy lecithin, soybeans & tofu' },
@@ -11616,7 +11616,7 @@ function renderHistory() {
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=71')
+        navigator.serviceWorker.register('./sw.js?v=72')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
