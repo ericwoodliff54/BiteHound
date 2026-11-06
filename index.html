@@ -6607,7 +6607,7 @@
         sound.playScanBeep();
 
         // Directly process uploaded barcode without populating manual search box
-        await processUPC(decodedText, 'scanner');
+        await processUPC(decodedText, 'upload');
       } catch (opticalErr) {
         console.warn("Optical barcode detection missed, trying Cloud Edge AI Packaging Vision:", opticalErr);
         
@@ -7467,7 +7467,7 @@
     }
 
     // REAL-TIME GROCERY PRODUCT RESOLUTION & ALLERGEN ANALYSIS
-    async function processUPC(rawCode, source = 'scanner') {
+    async function processUPC(rawCode, source = 'camera') {
       try {
         const code = String(rawCode).replace(/\D/g, '');
         if (!code) return;
@@ -8084,6 +8084,7 @@
 
         const resultData = {
           upc: code,
+          source: source,
           status: overallStatus,
           productName: productName,
           brand: brandName,
@@ -10032,6 +10033,7 @@
       // Prepend fresh scan with full details and timestamp
       scanHistory.unshift({
         upc: item.upc,
+        source: item.source || 'camera',
         status: item.status,
         productName: item.productName || item.upc,
         brand: item.brand || '',
@@ -10513,24 +10515,32 @@
 
     function deleteReceiptGroup(receiptKey) {
       triggerHaptic([40, 40]);
-      const matchingItems = scanHistory.filter(i => {
-        const k = i.receiptId || ('rcpt_' + (i.receiptStore || i.brand || 'store').replace(/[^a-zA-Z0-9]/g, '_') + '_' + (i.receiptDate || i.date || i.time || 'session').replace(/[^a-zA-Z0-9]/g, '_'));
-        return k === receiptKey;
-      });
+      const getGroupKey = (i) => {
+        let k = i.receiptId;
+        const isReceiptItem = Boolean(i.source === 'receipt' || (k && k.startsWith('rcpt_') && k !== 'rcpt_Direct_Barcode_Scans'));
+        const isUploadItem = Boolean(i.source === 'upload' || i.source === 'photo' || k === 'group_upload');
+        if (isReceiptItem) {
+          const store = i.receiptStore || i.brand || 'store';
+          return k || ('rcpt_' + String(store).replace(/[^a-zA-Z0-9]/g, '_'));
+        } else if (isUploadItem) {
+          return 'group_upload';
+        } else {
+          return 'group_camera';
+        }
+      };
+
+      const matchingItems = scanHistory.filter(i => getGroupKey(i) === receiptKey);
       const count = matchingItems.length;
       if (count === 0) return;
 
-      const storeName = matchingItems[0].receiptStore || matchingItems[0].brand || 'Grocery Receipt';
-      if (!confirm(`Discard all ${count} items from ${storeName}?`)) return;
+      const groupName = receiptKey === 'group_camera' ? 'Camera Scans' : (receiptKey === 'group_upload' ? 'UPC Uploads' : (matchingItems[0].receiptStore || matchingItems[0].brand || 'Grocery Receipt'));
+      if (!confirm(`Discard all ${count} items from ${groupName}?`)) return;
 
-      scanHistory = scanHistory.filter(i => {
-        const k = i.receiptId || ('rcpt_' + (i.receiptStore || i.brand || 'store').replace(/[^a-zA-Z0-9]/g, '_') + '_' + (i.receiptDate || i.date || i.time || 'session').replace(/[^a-zA-Z0-9]/g, '_'));
-        return k !== receiptKey;
-      });
+      scanHistory = scanHistory.filter(i => getGroupKey(i) !== receiptKey);
 
       delete collapsedReceiptGroups[receiptKey];
       saveHistory();
-      showCustomizeToast(`Removed ${storeName} receipt (${count} items)`);
+      showCustomizeToast(`Removed ${groupName} (${count} items)`);
     }
     window.deleteReceiptGroup = deleteReceiptGroup;
 
@@ -10587,18 +10597,25 @@ function renderHistory() {
             item.productName = item.product;
           }
           // Associate legacy items with receipt groupings
-          if (!item.receiptId) {
+          if (!item.receiptId || item.receiptId === 'direct_barcode') {
             const rawStore = item.receiptStore || item.brand || 'Grocery Store';
             const rawDate = item.receiptDate || item.date || item.time || 'Recent Scan';
-            const isBarcode = (item.source === 'barcode' || !item.source);
-            if (isBarcode) {
-              item.receiptId = 'direct_barcode';
-              item.receiptStore = 'Direct Barcode Scans';
-              item.receiptDate = rawDate;
-              item.receiptTimestamp = item.timestamp || (Date.now() - 86400000);
-            } else {
+            const isReceipt = (item.source === 'receipt');
+            const isUpload = (item.source === 'upload' || item.source === 'photo');
+
+            if (isReceipt) {
               item.receiptId = 'rcpt_' + String(rawStore).replace(/[^a-zA-Z0-9]/g, '_') + '_' + String(rawDate).split('•')[0].trim().replace(/[^a-zA-Z0-9]/g, '_');
               item.receiptStore = rawStore;
+              item.receiptDate = rawDate;
+              item.receiptTimestamp = item.timestamp || Date.now();
+            } else if (isUpload) {
+              item.receiptId = 'group_upload';
+              item.receiptStore = 'UPC Uploads';
+              item.receiptDate = rawDate;
+              item.receiptTimestamp = item.timestamp || Date.now();
+            } else {
+              item.receiptId = 'group_camera';
+              item.receiptStore = 'Camera Scans';
               item.receiptDate = rawDate;
               item.receiptTimestamp = item.timestamp || Date.now();
             }
@@ -10720,18 +10737,41 @@ function renderHistory() {
         return;
       }
 
-      // 3. Group filtered items into Receipts
+      // 3. Group filtered items into Receipts, Camera Scans, or UPC Uploads
       const receiptGroups = {};
       filteredItems.forEach(item => {
-        const rKey = item.receiptId || ('rcpt_' + (item.receiptStore || item.brand || 'store').replace(/[^a-zA-Z0-9]/g, '_') + '_' + (item.receiptDate || item.date || item.time || 'session').replace(/[^a-zA-Z0-9]/g, '_'));
+        let rKey = item.receiptId;
+        const isReceiptItem = Boolean(item.source === 'receipt' || (rKey && rKey.startsWith('rcpt_') && rKey !== 'rcpt_Direct_Barcode_Scans'));
+        const isUploadItem = Boolean(item.source === 'upload' || item.source === 'photo' || rKey === 'group_upload');
+
+        let groupType = 'camera';
+        let defaultStoreName = 'Camera Scans';
+        if (isReceiptItem) {
+          groupType = 'receipt';
+          defaultStoreName = item.receiptStore || item.brand || 'Grocery Store';
+          rKey = rKey || ('rcpt_' + String(defaultStoreName).replace(/[^a-zA-Z0-9]/g, '_'));
+        } else if (isUploadItem) {
+          groupType = 'upload';
+          defaultStoreName = 'UPC Uploads';
+          rKey = 'group_upload';
+        } else {
+          groupType = 'camera';
+          defaultStoreName = 'Camera Scans';
+          rKey = 'group_camera';
+        }
+
         if (!receiptGroups[rKey]) {
-          const isDirectBarcode = rKey === 'direct_barcode';
+          let storeName = defaultStoreName;
+          if (groupType === 'receipt') {
+            storeName = item.receiptStore || item.brand || 'Grocery Store';
+            if (storeName === 'Direct Barcode Scans') storeName = 'Camera Scans';
+          }
           receiptGroups[rKey] = {
             id: rKey,
-            store: isDirectBarcode ? 'Direct Barcode Scans' : (item.receiptStore || item.brand || 'Grocery Store'),
+            type: groupType, // 'receipt', 'camera', or 'upload'
+            store: storeName,
             date: item.receiptDate || item.date || item.time || 'Recent Scan',
             timestamp: item.receiptTimestamp || item.timestamp || 0,
-            isDirectBarcode: isDirectBarcode,
             items: []
           };
         }
@@ -11027,45 +11067,45 @@ function renderHistory() {
           return 0;
         });
 
-        // Clean, elegant store icon (no bouncing emojis, no flashing!)
-        let storeIconSvg = `<svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12l2-1 2 1 2-1 2 1 2-1 2 1V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>`;
-        let iconBg = 'bg-sky-950/80 border border-sky-500/30';
         let statusPill = `<span class="px-2 py-0.5 text-[10px] font-bold rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">Cleared</span>`;
 
         if (hasRecalls) {
           const recallCount = rcpt.items.filter(i => !isAldi746502Check(i) && Boolean(i.recalledNow || i.status === 'recalled' || i.status === 'recall_notice' || i.isRecalled || (i.activeRecallHazard && String(i.activeRecallHazard).trim().length > 0))).length;
-          storeIconSvg = `<svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`;
-          iconBg = 'bg-rose-950/80 border border-rose-500/40';
           statusPill = `<span class="px-2 py-0.5 text-[10px] font-bold rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40">${recallCount} Recall${recallCount > 1 ? 's' : ''}</span>`;
         } else if (hasAlerts) {
-          storeIconSvg = `<svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`;
-          iconBg = 'bg-amber-950/80 border border-amber-500/40';
           statusPill = `<span class="px-2 py-0.5 text-[10px] font-bold rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/40">Allergen Alert</span>`;
-        } else if (isDirectBarcode) {
-          storeIconSvg = `<svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>`;
-          iconBg = 'bg-sky-950/80 border border-sky-500/30';
         }
 
-        // Distinctly shaded receipt window (steel-slate header, clearly separate from products)
+        // Dedicated Group Tag Pill: RECEIPT for receipts, CAMERA for camera scans, UPLOAD for uploads
+        let tagText = 'RECEIPT';
+        let tagClasses = 'text-sky-400/90 bg-sky-950/80 border-sky-500/30';
+        if (rcpt.type === 'camera') {
+          tagText = 'CAMERA';
+          tagClasses = 'text-cyan-400/90 bg-cyan-950/80 border-cyan-500/30';
+        } else if (rcpt.type === 'upload') {
+          tagText = 'UPLOAD';
+          tagClasses = 'text-teal-400/90 bg-teal-950/80 border-teal-500/30';
+        } else {
+          tagText = 'RECEIPT';
+          tagClasses = 'text-sky-400/90 bg-sky-950/80 border-sky-500/30';
+        }
+        const groupTagPill = `<span class="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded border ${tagClasses}">${tagText}</span>`;
+
+        // Distinctly shaded group window without icons on the left
         finalHtml += `
           <div class="receipt-group rounded-2xl border border-slate-700/80 bg-slate-900 shadow-md overflow-hidden transition-all duration-200">
-            <!-- Receipt Header (Distinct Steel-Slate Header Bar) -->
+            <!-- Group Header Bar (No icon on the left, clean tags) -->
             <div class="receipt-header-bar p-3.5 sm:p-4 flex items-center justify-between gap-3 cursor-pointer select-none bg-slate-800 hover:bg-slate-750 transition" onclick="toggleReceiptGroup('${rcpt.id}')">
-              <div class="flex items-center gap-3 min-w-0">
-                <div class="w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center shrink-0">
-                  ${storeIconSvg}
+              <div class="min-w-0">
+                <div class="flex items-center gap-2 flex-wrap">
+                  ${groupTagPill}
+                  <h3 class="font-display font-bold text-white text-sm sm:text-base tracking-tight truncate">${rcpt.store}</h3>
+                  ${statusPill}
                 </div>
-                <div class="min-w-0">
-                  <div class="flex items-center gap-2 flex-wrap">
-                    <span class="text-[9px] font-black uppercase tracking-wider text-sky-400/90 px-1.5 py-0.5 rounded bg-sky-950/80 border border-sky-500/30">RECEIPT</span>
-                    <h3 class="font-display font-bold text-white text-sm sm:text-base tracking-tight truncate">${rcpt.store}</h3>
-                    ${statusPill}
-                  </div>
-                  <div class="flex items-center gap-2 text-[11px] text-slate-400 font-mono mt-0.5">
-                    <span>${rcpt.date}</span>
-                    <span>•</span>
-                    <span class="text-slate-300 font-sans">${rcpt.items.length} Item${rcpt.items.length === 1 ? '' : 's'}</span>
-                  </div>
+                <div class="flex items-center gap-2 text-[11px] text-slate-400 font-mono mt-0.5">
+                  <span>${rcpt.date}</span>
+                  <span>•</span>
+                  <span class="text-slate-300 font-sans">${rcpt.items.length} Item${rcpt.items.length === 1 ? '' : 's'}</span>
                 </div>
               </div>
 
@@ -11786,7 +11826,7 @@ function renderHistory() {
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=80')
+        navigator.serviceWorker.register('./sw.js?v=81')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
