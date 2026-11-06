@@ -1849,11 +1849,7 @@
       </div>
     </div>
 
-    <!-- RESULTS DISPLAY AREA (Reveals above scanner for seamless mobile view) -->
     <!-- RETROSPECTIVE PANTRY RECALL ALERT BANNER (Reveals when an item in pantry matches an active recall) -->
-    
-
-    <section id="scannerResultContainer" class="hidden transition-all duration-300 mb-4 scroll-mt-36" aria-live="polite"></section>
 
     <!-- SECTION 1: SCANNER PANEL WITH CLEAN SINGLE RETICLE (NO LASER, NO DUPLICATE FRAMES) -->
     <section id="scannerPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4">
@@ -2074,11 +2070,12 @@
         </div>
       </div>
 
+      <!-- 5. PRODUCT INFO WINDOW DISPLAY AREA (Loads at bottom of page below upload box) -->
+      <section id="scannerResultContainer" class="hidden transition-all duration-300 scroll-mt-36 space-y-4 pt-1" aria-live="polite"></section>
+      <section id="manualResultContainer" class="hidden transition-all duration-300 scroll-mt-36 space-y-4 pt-1" aria-live="polite"></section>
+
       <div id="scannerMessage" class="hidden text-xs p-3 rounded-xl border border-blue-500/30 bg-blue-950/40 text-blue-200"></div>
     </section>
-
-        <!-- SECTION 2: MANUAL UPC ENTRY RESULTS DISPLAY AREA (Presented above entry panel, mirroring scanner page layout) -->
-    <section id="manualResultContainer" class="hidden transition-all duration-300 mb-4 scroll-mt-36" aria-live="polite"></section>
 
     <!-- SECTION 2: MANUAL UPC ENTRY PANEL -->
     <!-- ==================== RECEIPTS PAGE ==================== -->
@@ -7499,7 +7496,7 @@
               <div class="p-3.5 rounded-2xl bg-slate-950/70 border border-white/[0.06] space-y-2">
                 <div class="flex items-center justify-between">
                   <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping shrink-0"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0 shadow-sm shadow-amber-500/50"></span>
                     <span class="text-xs font-semibold text-slate-200" id="scanProgressTitle">Auditing safety records & allergen shields...</span>
                   </div>
                   <span class="text-[10px] text-slate-400 font-medium">UPC: ${code}</span>
@@ -8512,7 +8509,6 @@
           ` : ''}
           <div class="flex items-start justify-between gap-3 border-b border-slate-800/80 pb-3">
             <div class="min-w-0">
-              <span class="text-[10px] font-mono tracking-widest text-sky-400 uppercase font-bold block mb-0.5">SCANNED PRODUCT IDENTIFIED</span>
               <h3 class="font-display text-base sm:text-lg font-bold text-white leading-snug">${data.productName}</h3>
               <p class="text-xs text-slate-300 mt-0.5">${data.brand} • <span class="font-mono text-slate-400">UPC: ${data.upc}</span></p>
               <div class="mt-2 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-950/70 text-emerald-300 border border-emerald-500/30">
@@ -11636,7 +11632,7 @@ function renderHistory() {
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=74')
+        navigator.serviceWorker.register('./sw.js?v=75')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
