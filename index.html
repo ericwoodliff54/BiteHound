@@ -1348,31 +1348,22 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
   <!-- APP STARTUP SPLASH SCREEN (Showcases Great Dane mascot with large, bold apple medall<!-- APP STARTUP SPLASH SCREEN (Showcases Great Dane mascot with clean sandstone aesthetic) -->
-  <div id="appSplashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 text-center select-none transition-opacity duration-700 cursor-pointer" style="background: radial-gradient(circle at center, #0a1122 0%, #050811 55%, #000000 100%); color: #f8fafc;">
+  <div id="appSplashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 text-center select-none transition-opacity duration-700 cursor-pointer" style="background: #000000; color: #f8fafc;">
     <div class="relative flex flex-col items-center animate-in fade-in zoom-in-95 duration-500 max-w-lg w-full">
-      <!-- Ambient Fjord-Turquoise Aura radiating behind mascot -->
-      <div class="absolute -top-6 w-72 h-72 sm:w-88 sm:h-88 bg-cyan-500/15 rounded-full blur-[90px] pointer-events-none -z-10"></div>
-      
-      <!-- Big Showcase Mascot with Turquoise Inlays -->
-      <div class="relative w-64 h-64 sm:w-76 sm:h-76 md:w-84 md:h-84 mb-3 flex items-center justify-center shrink-0">
+      <!-- Enlarged Great Dane Mascot with Turquoise Inlays -->
+      <div class="relative w-72 h-72 sm:w-88 sm:h-88 md:w-96 md:h-96 mb-3 flex items-center justify-center shrink-0">
         <img src="./logo-1024.png?v=16" alt="RAKKA Mascot" class="w-full h-full object-contain filter drop-shadow-[0_16px_36px_rgba(6,182,212,0.3)]">
       </div>
       
       <!-- Enlarged Brand Typography with Brilliant Turquoise Metallic Gradient -->
-      <h1 class="font-display font-black text-5xl sm:text-6xl md:text-7xl tracking-widest uppercase drop-shadow-[0_4px_22px_rgba(6,182,212,0.45)]" style="background: linear-gradient(180deg, #f0fdfa 0%, #67e8f9 30%, #06b6d4 70%, #0891b2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 3px 12px rgba(6,182,212,0.35));">
+      <h1 class="font-display font-black text-6xl sm:text-7xl md:text-8xl tracking-widest uppercase drop-shadow-[0_4px_24px_rgba(6,182,212,0.5)]" style="background: linear-gradient(180deg, #f0fdfa 0%, #67e8f9 30%, #06b6d4 70%, #0891b2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 16px rgba(6,182,212,0.4));">
         RAKKA
       </h1>
       
-      <!-- Enlarged Brand Tagline (Clean & crisp) -->
-      <p class="text-base sm:text-lg md:text-xl font-bold text-slate-200 mt-2.5 tracking-wide max-w-md text-center leading-snug drop-shadow-sm">
+      <!-- Brand Tagline (Clean & crisp) -->
+      <p class="text-base sm:text-lg md:text-xl font-bold text-slate-200 mt-3 tracking-wide max-w-md text-center leading-snug drop-shadow-sm">
         Sniffs Out Recalls. Verifies Every Bite.
       </p>
-
-      <!-- Elegant Sentinel Sub-Pill -->
-      <div class="mt-4 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/70 border border-cyan-500/30 text-cyan-300 text-xs font-semibold tracking-wider uppercase shadow-inner">
-        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
-        <span>Food Safety Sentinel</span>
-      </div>
     </div>
   </div>
 
@@ -10742,7 +10733,7 @@
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=54')
+        navigator.serviceWorker.register('./sw.js?v=55')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
@@ -10769,10 +10760,10 @@
       }
     }
 
-    // Keep splash on screen for ~3.8 seconds so user can see and enjoy the mascot
+    // Keep splash on screen for ~4.8 seconds so user can see and enjoy the mascot
     setTimeout(() => {
       dismissSplashScreen();
-    }, 3800);
+    }, 4800);
 
     // Tap splash to dismiss immediately if user is ready to scan
     const splashEl = document.getElementById('appSplashScreen');
@@ -10795,8 +10786,8 @@
           }, 600);
         }
       }
-      // Safety timeout: guaranteed to remove splash screen after 3.2 seconds
-      setTimeout(safeDismissSplash, 3200);
+      // Safety timeout: guaranteed to remove splash screen after 4.5 seconds
+      setTimeout(safeDismissSplash, 4500);
 
       // Tap-to-dismiss immediately
       var splashEl = document.getElementById('appSplashScreen');
