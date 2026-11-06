@@ -1998,37 +1998,6 @@
         
       </div>
 
-      <!-- Difficult Barcode Tips Drawer (Cans, Curved Bottles, Wrinkly Bags) -->
-        <div class="pt-1">
-          <button 
-            type="button" 
-            id="toggleScanTipsBtn" 
-            class="w-full py-2 px-3 rounded-xl bg-slate-950/70 border border-slate-800 text-[11px] text-sky-300 hover:text-sky-200 transition flex items-center justify-between active:scale-[0.99]"
-          >
-            <span class="flex items-center gap-1.5 font-medium">
-              <svg class="w-4 h-4 text-amber-300 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
-              <span>Scanning curved cans or bags? View Tips</span>
-            </span>
-            <span id="scanTipsArrow" class="text-xs text-slate-500">▼</span>
-          </button>
-          
-          <div id="scanTipsDrawer" class="hidden mt-2 p-3.5 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2">
-            <div class="flex items-start gap-2">
-              <span class="text-amber-400 font-bold">1.</span>
-              <p><strong class="text-white">Turn Cans Vertically:</strong> Rotate cans so barcode lines run up-and-down rather than wrapping around the curve. This prevents distortion.</p>
-            </div>
-            <div class="flex items-start gap-2">
-              <span class="text-amber-400 font-bold">2.</span>
-              <p><strong class="text-white">Flatten Wrinkled Bags:</strong> Pull the bag taut with two fingers or rest it against your grocery cart to straighten wavy barcode bars.</p>
-            </div>
-            <div class="flex items-start gap-2">
-              <span class="text-amber-400 font-bold">3.</span>
-              <p><strong class="text-white">Angle Away from Glare:</strong> Tilt shiny metal or glossy plastic 15° away from overhead lights, or tap <strong>Flashlight</strong> to even out contrast.</p>
-            </div>
-          </div>
-        </div>
-
-
       <!-- 2. UPLOAD & MANUAL ENTRY WINDOW -->
       <div id="manualUpcSection" class="p-4 sm:p-5 rounded-3xl bg-slate-950/80 border border-slate-800 space-y-3.5 shadow-lg">
         <div class="flex items-center justify-between">
@@ -2039,7 +2008,6 @@
               </svg>
               <span>Manual UPC Entry & Image Upload</span>
             </h3>
-            <p class="text-xs text-slate-400 mt-0.5">Type or paste barcode digits, or upload a photo of a barcode.</p>
           </div>
         </div>
 
@@ -2078,10 +2046,6 @@
                 <input type="file" id="barcodeFileInput" accept="image/*" class="hidden">
               </label>
             </div>
-            <p class="text-[11px] text-slate-500 mt-1.5 flex items-center gap-1">
-              <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-              <span>Type barcode digits or tap <strong>Upload UPC</strong> to detect from an image.</span>
-            </p>
           </div>
 
           <button 
@@ -2106,7 +2070,6 @@
             </svg>
             <span>Search by Food or Product Name</span>
           </label>
-          <span class="text-[10px] text-slate-400">Press Search or Enter</span>
         </div>
 
         <form id="brandSearchForm" class="flex items-center gap-2" onsubmit="event.preventDefault();">
@@ -11775,7 +11738,7 @@ function renderHistory() {
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=66')
+        navigator.serviceWorker.register('./sw.js?v=67')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
