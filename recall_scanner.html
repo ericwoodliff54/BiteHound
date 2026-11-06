@@ -3733,7 +3733,128 @@
         localStorage.setItem('safebite_active_profile_id', activeProfileId);
         localStorage.setItem('safebite_allergens', JSON.stringify(getActiveProfile().allergens));
       } catch (e) {}
+
+      // Automatically refresh all Watchlist items with the new allergen settings
+      if (typeof reevaluateWatchlistAllergens === 'function') {
+        reevaluateWatchlistAllergens();
+      }
     }
+
+    /**
+     * Detects common allergen IDs from a combined product title, brand, and ingredient string.
+     */
+    function extractAllergenIdsFromText(text = '') {
+      const t = text.toLowerCase();
+      const detected = [];
+
+      // 1. Gluten & Wheat
+      if (/gluten|wheat|barley|rye|malt|flour|bread|pasta|semolina|spelt|farro|graham|kamut|triticale|durum|couscous|einkorn|emmer/.test(t)) {
+        detected.push('gluten');
+      }
+      // 2. Dairy & Milk
+      const dairyClean = t.replace(/\b(?:cocoa|cacao|shea|apple|peanut|cookie|almond|cashew)\s*butters?\b/gi, '');
+      if (/\b(?:milk|dairy|lactose|cheese|whey|butter|cream|casein|caseinate|yogurt|ghee|curds|butterfat|buttermilk|lactalbumin|lactoglobulin)\b/i.test(dairyClean)) {
+        detected.push('dairy');
+      }
+      // 3. Peanuts
+      if (/peanut|arachis/.test(t)) {
+        detected.push('peanuts');
+      }
+      // 4. Tree Nuts
+      if (/almond|cashew|walnut|pecan|pistachio|hazelnut|filbert|macadamia|pine\s*nut|pignoli|chestnut|brazil\s*nut|praline/.test(t)) {
+        detected.push('treenuts');
+      }
+      // 5. Soy
+      if (/soy|soya|soybean|tofu|edamame|lecithin|tempeh|miso|tamari|shoyu|tvp/.test(t)) {
+        detected.push('soy');
+      }
+      // 6. Eggs
+      const eggClean = t.replace(/\beggplants?\b/gi, '');
+      if (/\b(?:eggs?|egg\s*whites?|egg\s*yolks?|albumin|ovalbumin|yolk|mayonnaise|mayo|lysozyme|meringue|ovomucin)\b/i.test(eggClean)) {
+        detected.push('eggs');
+      }
+      // 7. Shellfish
+      if (/shrimp|crab|lobster|prawn|clam|mussel|oyster|scallop|crustacean|crawfish|crayfish|krill/.test(t)) {
+        detected.push('shellfish');
+      }
+      // 8. Fish & Finfish
+      if (/fish|finfish|salmon|tuna|cod|tilapia|halibut|pollock|anchov|trout|haddock|sardine|mackerel|snapper|fish\s*sauce|worcestershire/.test(t)) {
+        detected.push('fish');
+      }
+      // 9. Sesame
+      if (/sesame|tahini|benne|sesamum|gingelly|halvah/.test(t)) {
+        detected.push('sesame');
+      }
+      // 10. Corn
+      const cornClean = t.replace(/\b(?:pepper|a|uni)corns?\b/gi, '');
+      if (/\b(?:corn|corns|cornstarch|cornmeal|cornflour|cornbread|cornflakes|corncob|cornsyrup|popcorn|sweetcorn|maize|dextrose|dextrin|maltodextrin|hfcs)\b|\bcorn\s+(?:starch|syrup|meal|flour|oil|bread|flakes|grain|gluten|chips?|tortillas?|cereal)\b|\bhigh[-_\s]*fructose[-_\s]*corn\b|\bzea\s*mays\b/i.test(cornClean)) {
+        detected.push('corn');
+      }
+      // 11. Sulfites
+      if (/sulfite|sulphite|sulfur\s*dioxide|bisulfite|metabisulfite/.test(t)) {
+        detected.push('sulfites');
+      }
+      // 12. Yeast
+      if (/\byeasts?\b|yeast\s*extract|autolyzed\s*yeast|hydrolyzed\s*yeast|saccharomyces|torula|\bmarmite\b|\bvegemite\b|\blevure\b|\blevain\b|\blevadura\b|\blievito\b|\bhefe\b|baker['’]?s\s*yeast|saf-instant|lesaffre|fleischmann|red\s*star\s*yeast|\bvecon\b/.test(t)) {
+        detected.push('yeast');
+      }
+
+      return detected;
+    }
+
+    /**
+     * Re-evaluates every item in the Watchlist against the latest profile allergens.
+     */
+    function reevaluateWatchlistAllergens() {
+      if (typeof scanHistory === 'undefined' || !Array.isArray(scanHistory) || scanHistory.length === 0) return;
+      if (typeof familyProfiles === 'undefined' || !Array.isArray(familyProfiles)) return;
+
+      let changed = false;
+
+      scanHistory.forEach(item => {
+        // 1. Never overwrite an active federal recall
+        if (item.isRecalled || item.status === 'recalled') return;
+
+        // 2. Gather existing detected allergens and parse text if needed
+        const existing = Array.isArray(item.detectedAllergens) ? item.detectedAllergens : [];
+        const textData = `${item.productName || item.product || ''} ${item.brand || ''} ${item.ingredients || ''}`;
+        const textAllergens = extractAllergenIdsFromText(textData);
+        const combinedAllergens = Array.from(new Set([...existing, ...textAllergens]));
+        item.detectedAllergens = combinedAllergens;
+
+        // 3. Match against current household family profiles
+        const triggeredMatches = [];
+        for (const prof of familyProfiles) {
+          const profAllergens = prof.allergens || [];
+          const matches = profAllergens.filter(a => combinedAllergens.includes(a));
+          if (matches.length > 0) {
+            triggeredMatches.push({
+              id: prof.id,
+              name: prof.name,
+              icon: prof.icon || 'user',
+              photo: prof.photo || null,
+              allergens: matches
+            });
+          }
+        }
+
+        item.familyMatches = triggeredMatches;
+
+        // 4. Update status dynamically
+        const newStatus = triggeredMatches.length > 0 ? 'allergen_alert' : 'clear';
+        if (item.status !== newStatus) {
+          item.status = newStatus;
+          changed = true;
+        }
+      });
+
+      if (changed) {
+        if (typeof saveHistory === 'function') saveHistory();
+        if (typeof renderHistory === 'function') renderHistory();
+      }
+    }
+    window.reevaluateWatchlistAllergens = reevaluateWatchlistAllergens;
+
 
     let isPlusActive = false;
     let plusStatusType = 'free'; // 'free', 'trial', 'paid', or 'expired'
