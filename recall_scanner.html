@@ -13,8 +13,8 @@
   <meta name="theme-color" content="#050811">
   <meta name="format-detection" content="telephone=no">
 
-  <link rel="icon" type="image/png" sizes="64x64" href="./favicon.png?v=16">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=16">
+  <link rel="icon" type="image/png" sizes="64x64" href="./favicon.png?v=17">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=17">
   <link rel="manifest" href="./manifest.json">
 
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
@@ -1348,20 +1348,20 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
   <!-- APP STARTUP SPLASH SCREEN (Showcases Great Dane mascot with large, bold apple medall<!-- APP STARTUP SPLASH SCREEN (Showcases Great Dane mascot with clean sandstone aesthetic) -->
-  <div id="appSplashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 text-center select-none transition-opacity duration-700 cursor-pointer" style="background: #000000; color: #f8fafc;">
+  <div id="appSplashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 text-center select-none transition-opacity duration-700 cursor-pointer bg-black" style="background-color: #000000 !important; color: #f8fafc;">
     <div class="relative flex flex-col items-center animate-in fade-in zoom-in-95 duration-500 max-w-lg w-full">
-      <!-- Enlarged Great Dane Mascot with Turquoise Inlays -->
-      <div class="relative w-72 h-72 sm:w-88 sm:h-88 md:w-96 md:h-96 mb-3 flex items-center justify-center shrink-0">
-        <img src="./logo-1024.png?v=16" alt="RAKKA Mascot" class="w-full h-full object-contain filter drop-shadow-[0_16px_36px_rgba(6,182,212,0.3)]">
+      <!-- Enlarged Great Dane Mascot with Pure Black Canvas (No Outer Glow / Box) -->
+      <div class="relative w-80 h-80 sm:w-96 sm:h-96 md:w-[420px] md:h-[420px] max-w-[88vw] max-h-[50vh] mb-2 flex items-center justify-center shrink-0">
+        <img src="./logo-1024.png?v=17" alt="RAKKA Mascot" class="w-full h-full object-contain">
       </div>
       
-      <!-- Enlarged Brand Typography with Brilliant Turquoise Metallic Gradient -->
-      <h1 class="font-display font-black text-6xl sm:text-7xl md:text-8xl tracking-widest uppercase drop-shadow-[0_4px_24px_rgba(6,182,212,0.5)]" style="background: linear-gradient(180deg, #f0fdfa 0%, #67e8f9 30%, #06b6d4 70%, #0891b2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 16px rgba(6,182,212,0.4));">
+      <!-- Brand Typography with Crisp Turquoise Gradient (No Drop Shadow or Glow Bleed) -->
+      <h1 class="font-display font-black text-6xl sm:text-7xl md:text-8xl tracking-widest uppercase mt-2" style="background: linear-gradient(180deg, #f0fdfa 0%, #67e8f9 30%, #06b6d4 70%, #0891b2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
         RAKKA
       </h1>
       
-      <!-- Brand Tagline (Clean & crisp) -->
-      <p class="text-base sm:text-lg md:text-xl font-bold text-slate-200 mt-3 tracking-wide max-w-md text-center leading-snug drop-shadow-sm">
+      <!-- Brand Tagline (Crisp & clean) -->
+      <p class="text-base sm:text-lg md:text-xl font-bold text-slate-300 mt-2 tracking-wide max-w-md text-center leading-snug">
         Sniffs Out Recalls. Verifies Every Bite.
       </p>
     </div>
@@ -10733,7 +10733,7 @@
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=55')
+        navigator.serviceWorker.register('./sw.js?v=56')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
