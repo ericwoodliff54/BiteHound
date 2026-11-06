@@ -1371,7 +1371,82 @@
     html.theme-light .recall-barcode-tile .barcode-val {
       color: #b45309 !important;
     }
-  </style>
+  
+    /* ==========================================================
+       WATCHLIST & RECEIPT ACCORDION LIGHT MODE STYLING
+       Eliminates dark boxes and establishes high-contrast UI
+       ========================================================== */
+    html.theme-light #historyPanel {
+      background: transparent !important;
+      color: #000000 !important;
+    }
+    html.theme-light #watchlistSearchContainer {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.06) !important;
+    }
+    html.theme-light #watchlistSearchInput {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      color: #000000 !important;
+    }
+    html.theme-light #clearWatchlistSearchBtn {
+      color: #64748b !important;
+    }
+    html.theme-light #clearWatchlistSearchBtn:hover {
+      color: #0f172a !important;
+    }
+    html.theme-light .receipt-group {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+    }
+    html.theme-light .receipt-header-bar {
+      background: #e2e8f0 !important;
+      border-color: #cbd5e1 !important;
+    }
+    html.theme-light .receipt-header-bar:hover {
+      background: #cbd5e1 !important;
+    }
+    html.theme-light .receipt-header-bar h3 {
+      color: #0f172a !important;
+    }
+    html.theme-light .receipt-header-bar span {
+      color: #334155 !important;
+    }
+    html.theme-light .receipt-drawer-well {
+      background: #f1f5f9 !important;
+      border-color: #e2e8f0 !important;
+    }
+    html.theme-light .watchlist-item-card {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+    }
+    html.theme-light .watchlist-item-card:hover {
+      border-color: #94a3b8 !important;
+    }
+    html.theme-light .watchlist-item-card h4 {
+      color: #0f172a !important;
+    }
+    html.theme-light .watchlist-item-card.is-recalled {
+      background: #fff1f2 !important;
+      border-color: #fca5a5 !important;
+    }
+    html.theme-light .watchlist-item-card.is-allergen {
+      background: #fffbeb !important;
+      border-color: #fcd34d !important;
+    }
+    html.theme-light .watchlist-drawer-content {
+      background: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+    html.theme-light .watchlist-drawer-content .bg-slate-900,
+    html.theme-light .watchlist-drawer-content .bg-slate-950 {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+    }
+</style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
   <!-- APP STARTUP SPLASH SCREEN (Showcases Great Dane mascot with large, bold apple medall<!-- APP STARTUP SPLASH SCREEN (Showcases Great Dane mascot with clean sandstone aesthetic) -->
@@ -2450,13 +2525,10 @@
           <button id="clearWatchlistSearchBtn" type="button" class="hidden absolute right-3 top-3 text-slate-400 hover:text-white text-xs font-bold p-1 transition" title="Clear search">✕</button>
         </div>
 
-        <!-- Filter Chips Row -->
-        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar text-xs">
-          <button type="button" class="watchlist-filter-chip active py-1.5 px-3 rounded-lg font-bold transition border cursor-pointer shrink-0" data-filter="all">All</button>
-          <button type="button" class="watchlist-filter-chip py-1.5 px-3 rounded-lg font-bold transition border cursor-pointer shrink-0" data-filter="recalls">🛑 Recalls</button>
-          <button type="button" class="watchlist-filter-chip py-1.5 px-3 rounded-lg font-bold transition border cursor-pointer shrink-0" data-filter="allergens">⚠️ Allergens</button>
-          <button type="button" class="watchlist-filter-chip py-1.5 px-3 rounded-lg font-bold transition border cursor-pointer shrink-0" data-filter="cleared">✓ Cleared</button>
-          <span id="watchlistMatchCount" class="hidden text-[11px] text-slate-400 font-mono ml-auto shrink-0 pl-1"></span>
+        <!-- Search Match Count Sub-bar (Filter chips removed per user request) -->
+        <div class="flex items-center justify-between text-xs px-1">
+          <span class="text-[11px] text-slate-400">All receipts & monitored grocery items</span>
+          <span id="watchlistMatchCount" class="hidden text-[11px] text-sky-400 font-mono font-semibold"></span>
         </div>
       </div>
 
@@ -10573,7 +10645,7 @@ function renderHistory() {
       // Update Match Count Badge in Search Bar
       const matchBadge = document.getElementById('watchlistMatchCount');
       if (matchBadge) {
-        if (q || watchlistActiveFilter !== 'all') {
+        if (q) {
           matchBadge.textContent = `${filteredItems.length} match${filteredItems.length === 1 ? '' : 'es'}`;
           matchBadge.classList.remove('hidden');
         } else {
@@ -10673,7 +10745,7 @@ function renderHistory() {
         const recallSeverity = item.recallSeverity || (item.recallRecord && item.recallRecord.severity) || 'Class I High Risk';
 
         return `
-          <div id="watchlist-card-${cardKey}" class="rounded-xl border ${cardBorder} text-xs transition-all duration-200 overflow-hidden shadow-sm">
+          <div id="watchlist-card-${cardKey}" class="watchlist-item-card ${isItemRecalled ? "is-recalled" : (isAlert ? "is-allergen" : "")} rounded-xl border ${cardBorder} text-xs transition-all duration-200 overflow-hidden shadow-sm">
             <div class="p-3.5 flex flex-col gap-2 cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
               <div class="flex items-center justify-between gap-2">
                 <div class="flex items-center gap-1.5 flex-wrap">
@@ -10803,8 +10875,9 @@ function renderHistory() {
         const hasAlerts = !hasRecalls && rcpt.items.some(i => i.status === 'allergen_alert' || (Array.isArray(i.familyMatches) && i.familyMatches.length > 0));
         const isAllClear = !hasRecalls && !hasAlerts;
 
-        // Auto-expand if recall detected, or searching, or first receipt
-        const isExpanded = (q.length > 0) || hasRecalls || (collapsedReceiptGroups[rcpt.id] === false) || (rcptIdx === 0 && collapsedReceiptGroups[rcpt.id] !== true);
+        // Receipts default to COLLAPSED upon opening the watchlist!
+        // Only expand if the user is actively searching (q.length > 0) or explicitly tapped to expand this receipt
+        const isExpanded = (q.length > 0) ? (collapsedReceiptGroups[rcpt.id] !== false) : (collapsedReceiptGroups[rcpt.id] === true);
 
         // Deduplicate identical items in this receipt and calculate quantities
         const itemCounts = {};
@@ -10855,9 +10928,9 @@ function renderHistory() {
 
         // Distinctly shaded receipt window (steel-slate header, clearly separate from products)
         finalHtml += `
-          <div class="receipt-group rounded-2xl border border-slate-750 bg-[#161c28] shadow-md overflow-hidden transition-all duration-200">
+          <div class="receipt-group rounded-2xl border border-slate-700/80 bg-slate-900 shadow-md overflow-hidden transition-all duration-200">
             <!-- Receipt Header (Distinct Steel-Slate Header Bar) -->
-            <div class="p-3.5 sm:p-4 flex items-center justify-between gap-3 cursor-pointer select-none bg-[#1e2536] hover:bg-[#252e42] transition" onclick="toggleReceiptGroup('${rcpt.id}')">
+            <div class="receipt-header-bar p-3.5 sm:p-4 flex items-center justify-between gap-3 cursor-pointer select-none bg-slate-800 hover:bg-slate-750 transition" onclick="toggleReceiptGroup('${rcpt.id}')">
               <div class="flex items-center gap-3 min-w-0">
                 <div class="w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center shrink-0">
                   ${storeIconSvg}
@@ -10886,7 +10959,7 @@ function renderHistory() {
             </div>
 
             <!-- Receipt Items Drawer (Distinct contrasting tray for child product cards) -->
-            <div id="receipt-drawer-${rcpt.id}" class="${isExpanded ? '' : 'hidden'} p-3 sm:p-3.5 space-y-2 border-t border-slate-700/70 bg-[#0c1017]">
+            <div id="receipt-drawer-${rcpt.id}" class="receipt-drawer-well ${isExpanded ? '' : 'hidden'} p-3 sm:p-3.5 space-y-2 border-t border-slate-800 bg-slate-950/70">
               ${uniqueItems.map(it => {
                 const key = (String(it.upc || '') + '::' + String(it.productName || it.product || '')).toLowerCase();
                 const qty = itemCounts[key] ? itemCounts[key].count : 1;
@@ -11528,7 +11601,7 @@ function renderHistory() {
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=63')
+        navigator.serviceWorker.register('./sw.js?v=64')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
