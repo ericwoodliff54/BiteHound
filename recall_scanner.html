@@ -10009,6 +10009,7 @@
         timestamp: Date.now(),
         isRecalled: Boolean(item.isRecalled),
         recallRecord: item.recallRecord || null,
+        terminatedNotice: item.terminatedNotice || (item.recallRecord && item.recallRecord.terminatedNotice) || null,
         detectedAllergens: item.detectedAllergens || [],
         detectedAdditives: item.detectedAdditives || []
       });
@@ -10163,6 +10164,12 @@
     function dispatchRecallAlertNotification(item) {
       if (!item || !isRecallNotificationActive()) return;
 
+      // HARD GUARD: Never dispatch recall notifications for cleared or terminated products!
+      const directRec = (typeof findRecallRecord === 'function') ? findRecallRecord(item.upc) : null;
+      if (item.isRecalled === false || item.status === 'clear' || item.terminatedNotice || (directRec && (directRec.isRecalled === false || directRec.terminatedNotice))) {
+        return;
+      }
+
       const hazardKey = String(item.activeRecallHazard || item.hazard || item.status || 'recalled');
       if (item.lastNotifiedRecall === hazardKey) return;
       item.lastNotifiedRecall = hazardKey;
@@ -10219,6 +10226,42 @@
           }
           historyNeedsSave = true;
           return;
+        }
+
+        // Terminated Recall & Curated Database Immunity:
+        // If an item is in RECALL_DATABASE as cleared (isRecalled === false), has a terminatedNotice,
+        // or is verified store-cleared, it is 100% IMMUNE from generic category fallback matching & recall alerts!
+        const directRec = (typeof findRecallRecord === 'function') ? findRecallRecord(code || cleanCode) : (
+          (typeof RECALL_DATABASE !== 'undefined') ? (
+            (code && RECALL_DATABASE[code]) || 
+            (cleanCode && RECALL_DATABASE[cleanCode]) || 
+            (cleanCode && RECALL_DATABASE[cleanCode.replace(/^0+/, '')]) ||
+            (cleanCode && RECALL_DATABASE[cleanCode.padStart(12, '0')]) ||
+            (cleanCode && RECALL_DATABASE[cleanCode.padStart(13, '0')])
+          ) : null
+        );
+
+        const isExplicitlyCleared = Boolean(
+          (directRec && (directRec.isRecalled === false || directRec.terminatedNotice || directRec.tag === 'Store Cleared' || directRec.severity === 'Terminated Notice on Record')) ||
+          item.terminatedNotice ||
+          (item.recallRecord && (item.recallRecord.isRecalled === false || item.recallRecord.terminatedNotice))
+        );
+
+        if (isExplicitlyCleared) {
+          item.recalledNow = false;
+          item.isRecalled = false;
+          delete item.activeRecallHazard;
+          delete item.recallAgency;
+          delete item.recallSeverity;
+          delete item.recallDate;
+          if (item.status === 'recalled' || item.status === 'recall_notice') {
+            item.status = (item.detectedAllergens && item.detectedAllergens.length > 0) ? 'allergen_alert' : 'clear';
+          }
+          if (directRec && directRec.terminatedNotice && !item.terminatedNotice) {
+            item.terminatedNotice = directRec.terminatedNotice;
+          }
+          historyNeedsSave = true;
+          return; // IMMUNE from category fallback matching & push alerts!
         }
 
         // 0. If item was already verified & flagged as recalled by receipt AI audit, PRESERVE IT!
@@ -10676,7 +10719,9 @@ function renderHistory() {
         const titleLower = String(item.productName || item.product || '').toLowerCase().trim();
         const isAldi746502 = (code === '746502' || cleanCode === '746502' || cleanCode === '0746502' || (brandLower.includes('aldi') && titleLower.includes('alfredo')));
 
-        const isItemRecalled = !isAldi746502 && Boolean(
+        const cardDirectRec = (typeof findRecallRecord === 'function') ? findRecallRecord(code || cleanCode) : null;
+        const isItemTerminated = Boolean(item.terminatedNotice || (item.recallRecord && item.recallRecord.terminatedNotice) || (cardDirectRec && cardDirectRec.terminatedNotice));
+        const isItemRecalled = !isAldi746502 && !isItemTerminated && Boolean(
           item.recalledNow ||
           item.status === 'recalled' ||
           item.status === 'recall_notice' ||
@@ -10715,6 +10760,9 @@ function renderHistory() {
         if (isItemRecalled) {
           cardBorder = 'border border-rose-500/50 bg-slate-900/90 hover:border-rose-400';
           statusPill = `<span class="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">Recall</span>`;
+        } else if (isItemTerminated) {
+          cardBorder = 'border border-teal-500/40 bg-slate-900/90 hover:border-teal-400';
+          statusPill = `<span class="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/40 flex items-center gap-1"><span>✓</span><span>Terminated Recall</span></span>`;
         } else if (isAlert) {
           cardBorder = 'border border-amber-500/50 bg-slate-900/90 hover:border-amber-400';
           if (isPlusActive) {
@@ -10788,6 +10836,18 @@ function renderHistory() {
                   </div>
                   <p class="text-xs text-rose-200/90 leading-relaxed font-medium">${recallReason}</p>
                   <p class="text-[10px] text-slate-400 pt-1 border-t border-rose-900/30">Action: Do not consume. Discard or return to store for full refund.</p>
+                </div>
+              ` : ''}
+
+              <!-- Terminated Notice Section (Cleared Store Inventory) -->
+              ${isItemTerminated ? `
+                <div class="p-3 rounded-xl bg-teal-950/40 border border-teal-500/40 space-y-1 text-xs">
+                  <div class="flex items-center justify-between">
+                    <span class="font-bold text-teal-300 text-xs">FDA Terminated & Resolved Notice</span>
+                    <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-teal-500/20 text-teal-300 border border-teal-500/30">Cleared Inventory</span>
+                  </div>
+                  <p class="text-xs text-teal-200/90 leading-relaxed font-medium">${(item.terminatedNotice && item.terminatedNotice.reason) || (item.recallRecord && item.recallRecord.terminatedNotice && item.recallRecord.terminatedNotice.reason) || (cardDirectRec && cardDirectRec.terminatedNotice && cardDirectRec.terminatedNotice.reason) || 'Past voluntary recall officially closed and terminated by the FDA. Current store inventory is unaffected and cleared.'}</p>
+                  <p class="text-[10px] text-slate-400 pt-1 border-t border-teal-900/40">Verified: Official FDA records confirm this recall is closed out. Current inventory is safe.</p>
                 </div>
               ` : ''}
 
@@ -11696,7 +11756,7 @@ function renderHistory() {
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=78')
+        navigator.serviceWorker.register('./sw.js?v=79')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
@@ -12229,11 +12289,16 @@ function renderHistory() {
 
         if (!isRecalledItem) {
           const directRec = (typeof findRecallRecord === 'function') ? findRecallRecord(resolvedUpc) : null;
-          if (directRec && directRec.isRecalled) {
-            isRecalledItem = true;
-            hazardText = directRec.hazard || 'Identified active recall on federal record';
-            recallAgencyText = directRec.agency || 'FDA / USDA';
-            recallSeverityText = directRec.severity || 'Class I High Risk';
+          if (directRec) {
+            if (directRec.isRecalled) {
+              isRecalledItem = true;
+              hazardText = directRec.hazard || 'Identified active recall on federal record';
+              recallAgencyText = directRec.agency || 'FDA / USDA';
+              recallSeverityText = directRec.severity || 'Class I High Risk';
+            } else if (directRec.terminatedNotice || directRec.tag === 'Store Cleared' || directRec.severity === 'Terminated Notice on Record') {
+              // Explicitly cleared or terminated recall - do NOT check category keywords!
+              isRecalledItem = false;
+            }
           } else {
             const lower = itemName.toLowerCase();
             if (lower.includes('spinach') && (lower.includes('baby') || lower.includes('organic') || lower.includes('5z') || lower.includes('5 oz'))) {
