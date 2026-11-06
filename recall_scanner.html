@@ -637,33 +637,7 @@
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
     }
 
-    /* Allergen Controls & Buttons in Light Mode */
-    html.theme-light #guardrailListHeaderNotice {
-      color: #000000 !important;
-      font-weight: 700 !important;
-    }
-    html.theme-light #selectAllergensBtn {
-      background-color: #0284c7 !important;
-      color: #ffffff !important;
-      border-color: #0284c7 !important;
-      font-weight: 700 !important;
-      box-shadow: 0 2px 4px rgba(2, 132, 199, 0.3) !important;
-    }
-    html.theme-light #selectAllergensBtn:hover {
-      background-color: #0369a1 !important;
-    }
-    html.theme-light #resetAllergensBtn {
-      background-color: #f1f5f9 !important;
-      border-color: #cbd5e1 !important;
-      color: #000000 !important;
-      font-weight: 700 !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
-    }
-    html.theme-light #resetAllergensBtn:hover {
-      background-color: #fee2e2 !important;
-      color: #b91c1c !important;
-      border-color: #fca5a5 !important;
-    }
+    /* Allergen action controls removed */
 
     /* Allergen Toggle Cards in Light Mode */
     html.theme-light .allergen-toggle-btn {
@@ -781,21 +755,7 @@
        TARGETED FIXES FOR REMAINING DARK PILLS & BUTTONS IN LIGHT MODE
        ========================================================== */
 
-    /* 1. UPC Entry Page: Upload UPC Button */
-    html.theme-light label[for="barcodeFileInput"] {
-      background-color: #ffffff !important;
-      border-color: #cbd5e1 !important;
-      color: #000000 !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
-    }
-    html.theme-light label[for="barcodeFileInput"]:hover {
-      background-color: #f8fafc !important;
-      border-color: #94a3b8 !important;
-    }
-    html.theme-light label[for="barcodeFileInput"] span {
-      color: #000000 !important;
-      font-weight: 700 !important;
-    }
+    /* Upload UPC Button uses unified Rakka turquoise gradient */
 
     /* 2. Active Recalls Page: Listed Retailers Pills */
     html.theme-light #bulletinFeedList span.bg-slate-800,
@@ -1115,20 +1075,7 @@
 
   
     
-    /* Receipt Modal Buttons in Light Mode */
-    html.theme-light #openReceiptUploadBtn {
-      background-color: #ffffff !important;
-      border-color: #cbd5e1 !important;
-      color: #0f172a !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
-    }
-    html.theme-light #openReceiptUploadBtn svg {
-      stroke: #0f172a !important;
-    }
-    html.theme-light #openReceiptUploadBtn:hover {
-      background-color: #f8fafc !important;
-      border-color: #94a3b8 !important;
-    }
+    /* Upload from Gallery uses unified Rakka turquoise gradient */
 
     
     
@@ -1986,7 +1933,7 @@
         <button 
           type="button" 
           id="toggleCameraBtn" 
-          class="w-full min-h-[52px] bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 px-4 rounded-2xl shadow-lg shadow-amber-950/30 transition flex items-center justify-center gap-2.5 text-sm sm:text-base active:scale-[0.98]"
+          class="w-full min-h-[52px] bg-gradient-to-r from-cyan-600 via-teal-500 to-cyan-500 hover:from-cyan-500 hover:to-teal-400 text-white font-bold py-3 px-4 rounded-2xl shadow-lg shadow-cyan-950/60 ring-1 ring-amber-400/40 transition flex items-center justify-center gap-2.5 text-sm sm:text-base active:scale-[0.98]"
         >
           <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
@@ -2036,10 +1983,10 @@
               <!-- Upload UPC Button next to Manual UPC Entry -->
               <label 
                 for="barcodeFileInput" 
-                class="cursor-pointer shrink-0 min-h-[52px] px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold border border-slate-700 flex items-center justify-center gap-2 text-xs sm:text-sm transition active:scale-95 shadow-sm"
+                class="cursor-pointer shrink-0 min-h-[52px] px-4 py-3 rounded-xl bg-gradient-to-r from-cyan-600 via-teal-500 to-cyan-500 hover:from-cyan-500 hover:to-teal-400 text-white font-bold shadow-lg shadow-cyan-950/60 ring-1 ring-amber-400/40 flex items-center justify-center gap-2 text-xs sm:text-sm transition active:scale-95"
                 title="Upload photo of a product barcode"
               >
-                <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                 </svg>
                 <span>Upload UPC</span>
@@ -2098,7 +2045,7 @@
           <button 
             type="submit" 
             id="executeSearchBtn" 
-            class="shrink-0 px-4 py-3 min-h-[50px] rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition active:scale-95 shadow-md shadow-sky-950/40"
+            class="shrink-0 px-5 py-3 min-h-[50px] rounded-xl bg-gradient-to-r from-cyan-600 via-teal-500 to-cyan-500 hover:from-cyan-500 hover:to-teal-400 text-white font-bold text-xs shadow-lg shadow-cyan-950/60 ring-1 ring-amber-400/40 flex items-center justify-center gap-1.5 transition active:scale-95"
             title="Search products and recalls"
           >
             <span>Search</span>
@@ -2164,9 +2111,9 @@
           <button 
             type="button" 
             id="openReceiptUploadBtn" 
-            class="cursor-pointer w-full py-4 px-5 min-h-[56px] rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-base border border-slate-700 shadow-md transition active:scale-[0.98] flex items-center justify-center gap-2.5"
+            class="cursor-pointer w-full py-4 px-5 min-h-[56px] rounded-2xl bg-gradient-to-r from-cyan-600 via-teal-500 to-cyan-500 hover:from-cyan-500 hover:to-teal-400 text-white font-bold text-base shadow-lg shadow-cyan-950/60 ring-1 ring-amber-400/40 transition active:scale-[0.98] flex items-center justify-center gap-2.5"
           >
-            <svg class="w-6 h-6 text-slate-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 text-white shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
             </svg>
             <span>Upload from Gallery</span>
@@ -2261,15 +2208,6 @@
         </div>
         <div class="flex items-center gap-2.5 overflow-x-auto pb-2 pt-0.5" id="familyProfilesBar"></div>
         <div id="activeProfileNotice" class="w-full"></div>
-      </div>
-
-      <!-- Quick Action Controls -->
-      <div class="flex items-center justify-between bg-slate-900/90 p-3 rounded-2xl border border-slate-800 shadow-sm gap-2">
-        <span id="guardrailListHeaderNotice" class="text-xs sm:text-sm font-medium text-slate-300">Tap to toggle active allergen guards:</span>
-        <div class="flex items-center gap-2 shrink-0">
-          <button type="button" id="selectAllergensBtn" class="text-xs font-bold text-cyan-300 hover:text-white bg-cyan-950/60 border border-cyan-500/40 hover:bg-cyan-900/60 px-3.5 py-2 rounded-xl transition min-h-[42px] flex items-center justify-center shadow-sm active:scale-95">Check All</button>
-          <button type="button" id="resetAllergensBtn" class="text-xs font-bold text-slate-300 hover:text-rose-300 bg-slate-800 border border-slate-700 hover:bg-slate-700 px-3.5 py-2 rounded-xl transition min-h-[42px] flex items-center justify-center shadow-sm active:scale-95">Clear All</button>
-        </div>
       </div>
 
       <!-- Allergen Tick Box Grid (FDA Big 9 + Gluten, Corn, Sulfites & Yeast) -->
@@ -3056,8 +2994,8 @@
             </button>
 
             <!-- Dedicated Upload / Gallery Button (Reliable fallback for folding phones and saved receipts) -->
-            <button type="button" id="openReceiptUploadBtn" class="cursor-pointer w-full py-3 px-3.5 min-h-[48px] rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs border border-slate-700 shadow-md transition active:scale-[0.98] flex items-center justify-center gap-2">
-              <svg class="w-4 h-4 text-slate-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <button type="button" id="openReceiptUploadBtn" class="cursor-pointer w-full py-3 px-3.5 min-h-[48px] rounded-xl bg-gradient-to-r from-cyan-600 via-teal-500 to-cyan-500 hover:from-cyan-500 hover:to-teal-400 text-white font-bold text-xs shadow-lg shadow-cyan-950/60 ring-1 ring-amber-400/40 transition active:scale-[0.98] flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 text-white shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
               <span>Upload from Gallery</span>
             </button>
 
@@ -6404,8 +6342,8 @@
             html5QrCode.resume();
             isCameraPaused = false;
             cameraBtnText.textContent = "Stop Camera";
-            toggleCameraBtn.classList.replace('from-blue-600', 'from-slate-700');
-            toggleCameraBtn.classList.replace('to-blue-500', 'to-slate-800');
+            toggleCameraBtn.classList.replace('from-cyan-600', 'from-slate-700');
+            toggleCameraBtn.classList.replace('to-cyan-500', 'to-slate-800');
             cameraPlaceholder.classList.add('hidden');
             if (toggleTorchBtn) toggleTorchBtn.classList.remove('hidden');
             return;
@@ -6537,8 +6475,8 @@
         isCameraRunning = true;
         isCameraPaused = false;
         cameraBtnText.textContent = "Stop Camera";
-        toggleCameraBtn.classList.replace('from-blue-600', 'from-slate-700');
-        toggleCameraBtn.classList.replace('to-blue-500', 'to-slate-800');
+        toggleCameraBtn.classList.replace('from-cyan-600', 'from-slate-700');
+        toggleCameraBtn.classList.replace('to-cyan-500', 'to-slate-800');
         cameraPlaceholder.classList.add('hidden');
         if (toggleTorchBtn) toggleTorchBtn.classList.remove('hidden');
       } catch (err) {
@@ -6581,8 +6519,8 @@
       if (camOverlay) camOverlay.classList.add('hidden');
 
       cameraBtnText.textContent = "Start Camera";
-      toggleCameraBtn.classList.replace('from-slate-700', 'from-blue-600');
-      toggleCameraBtn.classList.replace('to-slate-800', 'to-blue-500');
+      toggleCameraBtn.classList.replace('from-slate-700', 'from-cyan-600');
+      toggleCameraBtn.classList.replace('to-slate-800', 'to-cyan-500');
       cameraPlaceholder.classList.remove('hidden');
     }
 
@@ -7049,8 +6987,8 @@
             camOverlay.classList.remove('hidden');
           }
           cameraBtnText.textContent = "Scan Next Barcode";
-          toggleCameraBtn.classList.replace('from-slate-700', 'from-blue-600');
-          toggleCameraBtn.classList.replace('to-slate-800', 'to-blue-500');
+          toggleCameraBtn.classList.replace('from-slate-700', 'from-cyan-600');
+          toggleCameraBtn.classList.replace('to-slate-800', 'to-cyan-500');
         } catch (pauseErr) {
           console.warn("Could not pause camera:", pauseErr);
         }
@@ -7092,8 +7030,8 @@
               isCameraPaused = false;
             }
             cameraBtnText.textContent = "Stop Camera";
-            toggleCameraBtn.classList.replace('from-blue-600', 'from-slate-700');
-            toggleCameraBtn.classList.replace('to-blue-500', 'to-slate-800');
+            toggleCameraBtn.classList.replace('from-cyan-600', 'from-slate-700');
+            toggleCameraBtn.classList.replace('to-cyan-500', 'to-slate-800');
             cameraPlaceholder.classList.add('hidden');
           } catch (resumeErr) {
             console.warn("Camera resume failed, re-opening cleanly:", resumeErr);
@@ -9688,15 +9626,17 @@
       });
     }
 
-    resetAllergensBtn.addEventListener('click', () => {
-      triggerHaptic([40]);
-      const prof = getActiveProfile();
-      prof.allergens = [];
-      userAllergens = [];
-      saveFamilyProfiles();
-      sound.playScanBeep();
-      renderAllergensTab();
-    });
+    if (resetAllergensBtn) {
+      resetAllergensBtn.addEventListener('click', () => {
+        triggerHaptic([40]);
+        const prof = getActiveProfile();
+        prof.allergens = [];
+        userAllergens = [];
+        saveFamilyProfiles();
+        sound.playScanBeep();
+        renderAllergensTab();
+      });
+    }
 
     // Profile Add / Edit Modal & Live Photo Upload Handlers
     const addProfileModal = document.getElementById('addProfileModal');
@@ -11720,7 +11660,7 @@ function renderHistory() {
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=67')
+        navigator.serviceWorker.register('./sw.js?v=68')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
