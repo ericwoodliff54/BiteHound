@@ -6591,11 +6591,9 @@
 
         triggerHaptic([80, 40, 80]);
         sound.playScanBeep();
-        upcInput.value = decodedText;
-        clearBtn.classList.remove('hidden');
 
-        // Directly process uploaded barcode without being blocked by camera frame debouncing
-        await processUPC(decodedText, 'manual');
+        // Directly process uploaded barcode without populating manual search box
+        await processUPC(decodedText, 'scanner');
       } catch (opticalErr) {
         console.warn("Optical barcode detection missed, trying Cloud Edge AI Packaging Vision:", opticalErr);
         
@@ -6633,10 +6631,6 @@
 
                 const p = visionData.product;
                 const detectedCode = p.upc && p.upc !== 'VISION-DETECTED' ? p.upc : '';
-                if (detectedCode) {
-                  upcInput.value = detectedCode;
-                  clearBtn.classList.remove('hidden');
-                }
 
                 // Autonomous 1-Shot Lot Code & Recall Verification
                 if (p.lotCode) {
@@ -7469,14 +7463,15 @@
         const timeStr = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
         const timestamp = `${dateStr} • ${timeStr}`;
 
-        const targetContainer = (source === 'manual' && manualResultContainer) ? manualResultContainer : (scannerResultContainer || manualResultContainer);
-        const otherContainer = (targetContainer === manualResultContainer) ? scannerResultContainer : manualResultContainer;
-        if (otherContainer) {
-          otherContainer.classList.add('hidden');
-          otherContainer.innerHTML = '';
+        const targetContainer = scannerResultContainer || manualResultContainer;
+        if (manualResultContainer && manualResultContainer !== targetContainer) {
+          manualResultContainer.classList.add('hidden');
+          manualResultContainer.style.display = 'none';
+          manualResultContainer.innerHTML = '';
         }
         if (targetContainer) {
           targetContainer.classList.remove('hidden');
+          targetContainer.style.display = '';
           targetContainer.classList.add('animate-slide-up-spring');
           targetContainer.innerHTML = `
             <div class="rounded-3xl border border-white/10 bg-slate-900/95 p-5 shadow-2xl space-y-4 animate-slide-up-spring">
@@ -8437,14 +8432,15 @@
 
     function displayResult(data, source = 'scanner') {
       const activeSource = data.source || source;
-      const targetContainer = (activeSource === 'manual' && manualResultContainer) ? manualResultContainer : (scannerResultContainer || manualResultContainer);
+      const targetContainer = scannerResultContainer || manualResultContainer;
       if (!targetContainer) return;
-      const otherContainer = (targetContainer === manualResultContainer) ? scannerResultContainer : manualResultContainer;
-      if (otherContainer) {
-        otherContainer.classList.add('hidden');
-        otherContainer.innerHTML = '';
+      if (manualResultContainer && manualResultContainer !== targetContainer) {
+        manualResultContainer.classList.add('hidden');
+        manualResultContainer.style.display = 'none';
+        manualResultContainer.innerHTML = '';
       }
       targetContainer.classList.remove('hidden');
+      targetContainer.style.display = '';
       targetContainer.classList.add('animate-slide-up-spring');
 
       const isRecalled = Boolean(data.isRecalled && data.recallRecord);
@@ -11394,10 +11390,12 @@ function renderHistory() {
       triggerHaptic([30]);
       if (scannerResultContainer) {
         scannerResultContainer.classList.add('hidden');
+        scannerResultContainer.style.display = 'none';
         scannerResultContainer.innerHTML = '';
       }
       if (manualResultContainer) {
         manualResultContainer.classList.add('hidden');
+        manualResultContainer.style.display = 'none';
         manualResultContainer.innerHTML = '';
       }
       const upcInputEl = document.getElementById('upcInput');
@@ -11406,6 +11404,11 @@ function renderHistory() {
       if (clearBtnEl) clearBtnEl.classList.add('hidden');
       const fileInputEl = document.getElementById('barcodeFileInput');
       if (fileInputEl) fileInputEl.value = '';
+
+      // Reset scan debounce lock so subsequent uploads of same or new items display cleanly
+      isScanningLocked = false;
+      lastScannedCode = null;
+      lastScanTimestamp = 0;
 
       const targetPanel = document.getElementById('manualUpcSection') || document.getElementById('scannerPanel');
       if (targetPanel) {
@@ -11679,7 +11682,7 @@ function renderHistory() {
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=76')
+        navigator.serviceWorker.register('./sw.js?v=77')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
