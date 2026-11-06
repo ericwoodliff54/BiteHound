@@ -1036,7 +1036,30 @@
     }
 
   
-    /* Receipt Auditor in Light Mode */
+    
+    /* Receipts Page in Light Mode */
+    html.theme-light #receiptsPanel {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05) !important;
+    }
+    html.theme-light #receiptsPanel .bg-slate-950,
+    html.theme-light #receiptsPanel .from-slate-950 {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    html.theme-light #receiptsPanel h2,
+    html.theme-light #receiptsPanel h3,
+    html.theme-light #receiptsPanel span.text-white {
+      color: #0f172a !important;
+    }
+    html.theme-light #manualUpcSection {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+    }
+/* Receipt Auditor in Light Mode */
     html.theme-light #receiptAuditorModal > div > div {
       background: #ffffff !important;
       border-color: #cbd5e1 !important;
@@ -1418,6 +1441,7 @@
         type="button"
         id="tabScanner"
         class="nav-tab active-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-1 transition bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 text-white shadow-lg shadow-emerald-950/60 ring-2 ring-amber-400/40 active:scale-95 relative after:content-[''] after:w-1.5 after:h-1.5 after:rounded-full after:bg-amber-300 after:absolute after:bottom-1"
+        title="Barcodes - Camera UPC Scanner, Manual Entry & Search"
       >
         <div class="h-6 flex items-center justify-center shrink-0">
           <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1425,20 +1449,22 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
           </svg>
         </div>
-        <span class="leading-tight truncate max-w-full tracking-tight">Scanner</span>
+        <span class="leading-tight truncate max-w-full tracking-tight">Barcodes</span>
       </button>
 
       <button
         type="button"
-        id="tabManual"
+        id="tabReceipts"
+        data-alias="tabManual"
         class="nav-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1 transition active:scale-95 relative"
+        title="Receipts - Multi-Item Batch Grocery Receipt Auditor"
       >
         <div class="h-6 flex items-center justify-center shrink-0">
-          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-indigo-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM10 8h4m-4 4h4"/>
           </svg>
         </div>
-        <span class="leading-tight truncate max-w-full tracking-tight">Barcode</span>
+        <span class="leading-tight truncate max-w-full tracking-tight">Receipts</span>
       </button>
 
       <button
@@ -1808,10 +1834,10 @@
     <section id="scannerPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4">
       <div>
         <h2 class="font-display text-sm font-bold text-slate-100 flex items-center gap-2">
-          <span>Scan Product Barcode</span>
+          <span>Barcodes</span>
           <span class="w-2 h-2 rounded-full bg-sky-400 pulse-glow"></span>
         </h2>
-        <p class="text-xs text-slate-400 mt-0.5">Scan any grocery barcode or search by brand</p>
+        <p class="text-xs text-slate-400 mt-0.5">Live UPC barcode camera, manual barcode entry, and product search</p>
       </div>
 
       <!-- Camera Viewfinder Box (Apple-Style Aperture with Floating Glass Controls & Corner Reticle) -->
@@ -1924,25 +1950,72 @@
         </div>
 
 
-      <!-- BATCH GROCERY RECEIPT SCANNER CARD (Prominent Featured Feature) -->
-      <div id="receiptScannerCard" class="p-4 sm:p-5 rounded-3xl bg-gradient-to-r from-emerald-950/70 via-slate-900 to-teal-950/60 border-2 border-emerald-500/60 shadow-xl shadow-emerald-950/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3.5">
-        <div class="flex items-start sm:items-center gap-3.5 min-w-0">
-          <div class="receipt-icon-box w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/30 to-teal-500/20 border-2 border-emerald-400/50 flex items-center justify-center text-emerald-300 shrink-0 shadow-md mt-0.5 sm:mt-0">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-          </div>
-          <div class="min-w-0 flex-1">
-            <h3 class="font-display font-extrabold text-base sm:text-lg text-white leading-tight block tracking-tight">Receipt Scanner</h3>
-            <p class="text-xs sm:text-[13px] text-emerald-300/95 font-medium leading-normal mt-1">Scanned receipts automatically load all items into your watchlist.</p>
+      <!-- 2. UPLOAD & MANUAL ENTRY WINDOW -->
+      <div id="manualUpcSection" class="p-4 sm:p-5 rounded-3xl bg-slate-950/80 border border-slate-800 space-y-3.5 shadow-lg">
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="font-display text-sm font-bold text-slate-100 flex items-center gap-2">
+              <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+              </svg>
+              <span>Manual UPC Entry & Image Upload</span>
+            </h3>
+            <p class="text-xs text-slate-400 mt-0.5">Type or paste barcode digits, or upload a photo of a barcode.</p>
           </div>
         </div>
-        <button 
-          type="button" 
-          onclick="openReceiptAuditor()" 
-          class="w-full sm:w-auto shrink-0 px-5 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-black text-sm shadow-lg shadow-emerald-950/60 transition active:scale-95 flex items-center justify-center gap-2 cursor-pointer border border-emerald-300/40"
-        >
-          <svg class="w-4 h-4 text-slate-950 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
-          <span>Scan</span>
-        </button>
+
+        <form id="upcForm" class="space-y-3">
+          <div>
+            <label for="upcInput" class="block text-xs font-medium text-slate-300 mb-1.5">UPC Barcode Number</label>
+            <div class="flex items-center gap-2">
+              <div class="relative flex-1">
+                <input 
+                  type="text" 
+                  id="upcInput" 
+                  inputmode="numeric" 
+                  placeholder="e.g. 0-11110-81546-2 or 011110815462" 
+                  class="w-full min-h-[48px] px-4 py-3.5 rounded-xl border border-slate-700 bg-slate-950 text-white font-mono text-base focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition placeholder:text-slate-600"
+                >
+                <button 
+                  type="button" 
+                  id="clearBtn" 
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs font-medium px-2 py-1 bg-slate-800 rounded-lg hidden min-h-[36px]"
+                  aria-label="Clear input"
+                >
+                  Clear
+                </button>
+              </div>
+
+              <!-- Upload UPC Button next to Manual UPC Entry -->
+              <label 
+                for="barcodeFileInput" 
+                class="cursor-pointer shrink-0 min-h-[52px] px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold border border-slate-700 flex items-center justify-center gap-2 text-xs sm:text-sm transition active:scale-95 shadow-sm"
+                title="Upload photo of a product barcode"
+              >
+                <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <span>Upload UPC</span>
+                <input type="file" id="barcodeFileInput" accept="image/*" class="hidden">
+              </label>
+            </div>
+            <p class="text-[11px] text-slate-500 mt-1.5 flex items-center gap-1">
+              <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+              <span>Type barcode digits or tap <strong>Upload UPC</strong> to detect from an image.</span>
+            </p>
+          </div>
+
+          <button 
+            type="submit" 
+            id="checkBtn" 
+            class="w-full min-h-[52px] bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-emerald-950/60 ring-1 ring-amber-400/30 transition flex items-center justify-center gap-2 active:scale-[0.98] text-sm"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            <span>Verify Recall Status</span>
+          </button>
+        </form>
       </div>
 
       <!-- BRAND & PRODUCT NAME SEARCH BAR (Adaptive Search with Auto-Suggestions & Enter Search) -->
@@ -2000,66 +2073,131 @@
     <section id="manualResultContainer" class="hidden transition-all duration-300 mb-4 scroll-mt-36" aria-live="polite"></section>
 
     <!-- SECTION 2: MANUAL UPC ENTRY PANEL -->
-    <section id="manualPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4 hidden">
-      <div>
-        <h2 class="font-display text-sm font-bold text-slate-100">Manual UPC Entry</h2>
-        <p class="text-xs text-slate-400">Type or paste barcodes with or without hyphens and spaces.</p>
+    <!-- ==================== RECEIPTS PAGE ==================== -->
+    <div id="manualPanel" class="hidden" style="display:none;"></div>
+    <section id="receiptsPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-5 hidden">
+      <!-- Receipts Header -->
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800/80">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0 shadow-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM10 8h4m-4 4h4"/>
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h2 class="font-display text-base font-extrabold text-white">Receipts</h2>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 uppercase tracking-wider">AI Batch Sentinel</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-0.5">Snap paper grocery slips to auto-audit items and monitor recalls</p>
+          </div>
+        </div>
       </div>
 
-      <form id="upcForm" class="space-y-3">
-        <div>
-          <label for="upcInput" class="block text-xs font-medium text-slate-300 mb-1.5">UPC Barcode Number</label>
-          <div class="flex items-center gap-2">
-            <div class="relative flex-1">
-              <input 
-                type="text" 
-                id="upcInput" 
-                inputmode="numeric" 
-                placeholder="e.g. 0-11110-81546-2 or 011110815462" 
-                class="w-full min-h-[48px] px-4 py-3.5 rounded-xl border border-slate-700 bg-slate-950 text-white font-mono text-base focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition placeholder:text-slate-600"
-              >
-              <button 
-                type="button" 
-                id="clearBtn" 
-                class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs font-medium px-2 py-1 bg-slate-800 rounded-lg hidden min-h-[36px]"
-                aria-label="Clear input"
-              >
-                Clear
-              </button>
-            </div>
-
-            <!-- Upload UPC Button next to Manual UPC Entry -->
-            <label 
-              for="barcodeFileInput" 
-              class="cursor-pointer shrink-0 min-h-[52px] px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold border border-slate-700 flex items-center justify-center gap-2 text-xs sm:text-sm transition active:scale-95 shadow-sm"
-              title="Upload photo of a product barcode"
-            >
-              <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-              </svg>
-              <span>Upload UPC</span>
-              <input type="file" id="barcodeFileInput" accept="image/*" class="hidden">
-            </label>
-          </div>
-          <p class="text-[11px] text-slate-500 mt-1.5 flex items-center gap-1">
-            <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            <span>Type barcode digits or tap <strong>Upload UPC</strong> to detect from an image.</span>
-          </p>
+      <!-- Hero Capture / Upload Action Box -->
+      <div class="p-5 sm:p-6 rounded-3xl bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 border border-slate-800 shadow-xl text-center space-y-4">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500/20 to-teal-400/20 border border-emerald-500/40 flex items-center justify-center text-emerald-300 mx-auto shadow-inner">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+            <circle cx="12" cy="13" r="3"/>
+          </svg>
         </div>
 
-        <button 
-          type="submit" 
-          id="checkBtn" 
-          class="w-full min-h-[54px] bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-emerald-950/60 ring-1 ring-amber-400/30 transition flex items-center justify-center gap-2 active:scale-[0.98] text-sm sm:text-base"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-          </svg>
-          <span>Verify Recall Status</span>
-        </button>
-      </form>
+        <div>
+          <span class="font-display font-black text-white text-base sm:text-lg block tracking-tight">Snap or Upload Paper Receipt</span>
+          <span class="text-xs text-emerald-400 font-semibold block mt-1">Scanned receipts automatically load all items into your Watchlist</span>
+          <span class="text-[11px] text-slate-400 block mt-1">Works with Aldi, Kroger, Meijer, Walmart, Costco, Trader Joe's, Target, Giant Eagle & more</span>
+        </div>
 
-</section>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+          <!-- Dedicated Direct Camera Button -->
+          <button 
+            type="button" 
+            id="openReceiptCameraBtn" 
+            class="cursor-pointer w-full py-3.5 px-4 min-h-[52px] rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 hover:from-emerald-500 hover:to-teal-400 text-white font-bold text-sm shadow-lg shadow-emerald-950/60 ring-1 ring-amber-400/30 transition active:scale-[0.98] flex items-center justify-center gap-2"
+          >
+            <svg class="w-5 h-5 text-emerald-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+              <circle cx="12" cy="13" r="3"/>
+            </svg>
+            <span>Snap with Camera</span>
+          </button>
+
+          <!-- Dedicated Upload / Gallery Button -->
+          <button 
+            type="button" 
+            id="openReceiptUploadBtn" 
+            class="cursor-pointer w-full py-3.5 px-4 min-h-[52px] rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm border border-slate-700 shadow-md transition active:scale-[0.98] flex items-center justify-center gap-2"
+          >
+            <svg class="w-5 h-5 text-slate-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <span>Upload from Gallery</span>
+          </button>
+
+          <input type="file" id="receiptCameraInput" accept="image/*" capture="environment" class="hidden">
+          <input type="file" id="receiptUploadInput" accept="image/*" class="hidden">
+        </div>
+      </div>
+
+      <!-- Progress Indicator -->
+      <div id="receiptAuditLoadingBox" class="hidden p-6 rounded-3xl bg-slate-950 border border-slate-800 text-center space-y-3">
+        <div class="inline-block animate-spin rounded-full h-8 w-8 border-2 border-emerald-400 border-t-transparent"></div>
+        <p class="text-sm text-slate-200 font-semibold">Auditing receipt lines against FDA/USDA recall feeds & household allergens...</p>
+        <p class="text-xs text-slate-400">Extracting grocery names, matching product codes, and cross-referencing active safety registries</p>
+      </div>
+
+      <!-- Audit Results Container -->
+      <div id="receiptAuditResultsBox" class="hidden space-y-4 pt-1 animate-in fade-in duration-200">
+        <!-- Summary Header -->
+        <div class="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <div>
+              <span id="receiptStoreName" class="font-extrabold text-white text-base block">Store Name</span>
+              <span id="receiptPurchaseDate" class="text-xs text-slate-400 block font-mono mt-0.5">Date</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span id="receiptClearedBadge" class="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"></span>
+              <span id="receiptAlertBadge" class="hidden text-xs font-bold px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30"></span>
+            </div>
+          </div>
+          <p id="receiptExecutiveSummary" class="text-xs sm:text-sm text-slate-200 leading-relaxed pt-2 border-t border-slate-800/80"></p>
+        </div>
+
+        <!-- Itemized Breakdown List -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Audited Items Breakdown</span>
+            <span class="text-[11px] text-emerald-400 font-medium">Saved to Watchlist</span>
+          </div>
+          <div id="receiptItemsList" class="space-y-2 max-h-96 overflow-y-auto pr-1"></div>
+        </div>
+
+        <!-- Batch Import to Pantry Shield Button -->
+        <button 
+          type="button" 
+          id="batchImportPantryBtn" 
+          onclick="batchImportReceiptToPantry()" 
+          class="w-full py-3.5 px-4 min-h-[48px] rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 font-bold text-xs sm:text-sm border border-slate-700 flex items-center justify-center gap-2 transition active:scale-[0.98] shadow-sm cursor-pointer"
+        >
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
+          <span id="batchImportBtnText">Batch Import Items to Watchlist</span>
+        </button>
+      </div>
+
+      <!-- Receipt Tips & Scanning Guide Card -->
+      <div class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80 space-y-2 text-xs text-slate-400">
+        <div class="font-bold text-slate-300 flex items-center gap-2">
+          <span>💡</span>
+          <span>Receipt Scanning Tips</span>
+        </div>
+        <ul class="space-y-1 list-disc list-inside leading-relaxed text-[11px]">
+          <li>Lay the receipt flat on a dark surface in even lighting.</li>
+          <li>Capture from the store header down through the printed item lines.</li>
+          <li>All audited grocery items are automatically monitored in your Watchlist for 60 days.</li>
+        </ul>
+      </div>
+    </section>
 
     <!-- SECTION 3: ALLERGEN GUARD PANEL (ALLERGENS & FOOD ADDITIVES) -->
     <section id="allergensPanel" class="bg-slate-900/90 rounded-2xl p-5 border border-slate-800 shadow-xl space-y-4 hidden">
@@ -2277,20 +2415,13 @@
         </span>
       </div>
 
-      <!-- Action Toolbar (Batch Receipt Auditor CTA + Clear All) -->
+      <!-- Action Toolbar (Watchlist Status + Clear All) -->
       <div class="flex items-center justify-between gap-2 p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs">
-        <button 
-          type="button" 
-          onclick="openReceiptAuditor()" 
-          class="flex-1 py-2 px-3 rounded-lg bg-gradient-to-r from-emerald-600 via-teal-600 to-sky-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold transition active:scale-95 flex items-center justify-center gap-1.5 shadow-sm cursor-pointer"
-        >
-          <svg class="w-3.5 h-3.5 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="3"/></svg>
-          <span>Scan Receipt</span>
-        </button>
+        <span class="text-slate-400 font-medium">Automatic 60-day recall monitoring</span>
         <button 
           id="clearHistoryBtn" 
           type="button" 
-          class="py-2 px-3 rounded-lg bg-rose-950/40 hover:bg-rose-900/40 text-rose-300 font-semibold transition border border-rose-800/40 active:scale-95 shrink-0" 
+          class="py-2 px-3.5 rounded-lg bg-rose-950/40 hover:bg-rose-900/40 text-rose-300 font-semibold transition border border-rose-800/40 active:scale-95 shrink-0 cursor-pointer" 
           title="Clear all saved watchlist items"
         >
           Clear List
@@ -2302,7 +2433,7 @@
 
       <!-- Dynamic Itemized Watchlist (Expandable accordion drawer for each food) -->
       <div id="historyList" class="space-y-2.5">
-        <p class="text-xs text-slate-500 italic py-6 text-center">No foods monitored yet. Scan barcodes or snap an Aldi/Kroger receipt to begin 60-day monitoring.</p>
+        <p class="text-xs text-slate-500 italic py-6 text-center">No foods monitored yet. Scan barcodes or use the Receipts tab to begin 60-day monitoring.</p>
       </div>
     </section>
 
@@ -5541,8 +5672,11 @@
     function setNavTab(activeTab) {
       triggerHaptic([30]);
 
-      // Auto-stop camera when leaving scanner tab to save battery and prevent background streaming
-      if (activeTab !== 'scanner' && typeof isCameraRunning !== 'undefined' && isCameraRunning) {
+      const isBarcodes = (activeTab === 'barcodes' || activeTab === 'scanner');
+      const isReceipts = (activeTab === 'receipts' || activeTab === 'manual');
+
+      // Auto-stop camera when leaving Barcodes tab to save battery and prevent background streaming
+      if (!isBarcodes && typeof isCameraRunning !== 'undefined' && isCameraRunning) {
         if (typeof stopCamera === 'function') {
           stopCamera();
         }
@@ -5552,14 +5686,16 @@
       const inactiveClass = "nav-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1 transition active:scale-95 relative";
 
       const tabScanner = document.getElementById('tabScanner');
+      const tabReceipts = document.getElementById('tabReceipts') || document.getElementById('tabManual');
       const tabManual = document.getElementById('tabManual');
       const tabAllergens = document.getElementById('tabAllergens');
       const tabWatchlist = document.getElementById('tabWatchlist');
       const tabBulletins = document.getElementById('tabBulletins');
       const headerSettingsBtn = document.getElementById('headerSettingsBtn');
 
-      if (tabScanner) tabScanner.className = (activeTab === 'scanner') ? activeClass : inactiveClass;
-      if (tabManual) tabManual.className = (activeTab === 'manual') ? activeClass : inactiveClass;
+      if (tabScanner) tabScanner.className = isBarcodes ? activeClass : inactiveClass;
+      if (tabReceipts) tabReceipts.className = isReceipts ? activeClass : inactiveClass;
+      if (tabManual && tabManual !== tabReceipts) tabManual.className = isReceipts ? activeClass : inactiveClass;
       if (tabAllergens) tabAllergens.className = (activeTab === 'allergens') ? activeClass : inactiveClass;
       if (tabWatchlist) tabWatchlist.className = (activeTab === 'watchlist' || activeTab === 'history') ? activeClass : inactiveClass;
       if (tabBulletins) tabBulletins.className = (activeTab === 'bulletins') ? activeClass : inactiveClass;
@@ -5589,28 +5725,30 @@
       if (bulletinsPanel) bulletinsPanel.classList.toggle('hidden', activeTab !== 'bulletins');
       if (customizePanel) customizePanel.classList.toggle('hidden', !(activeTab === 'customize' || activeTab === 'settings'));
 
-      // Independent Result Visibility: Scanner results stay on Scanner page; Manual results stay on Manual Entry page
-      if (activeTab === 'scanner') {
-        if (scannerPanel) scannerPanel.classList.remove('hidden');
-        if (manualPanel) manualPanel.classList.add('hidden');
+      const scannerPanelEl = document.getElementById('scannerPanel');
+      const receiptsPanelEl = document.getElementById('receiptsPanel') || document.getElementById('manualPanel');
+      const manualPanelEl = document.getElementById('manualPanel');
+
+      if (isBarcodes) {
+        if (scannerPanelEl) scannerPanelEl.classList.remove('hidden');
+        if (receiptsPanelEl) receiptsPanelEl.classList.add('hidden');
+        if (manualPanelEl && manualPanelEl !== receiptsPanelEl) manualPanelEl.classList.add('hidden');
         if (scannerResultContainer && scannerResultContainer.innerHTML.trim() !== '') {
           scannerResultContainer.classList.remove('hidden');
         }
         if (manualResultContainer) {
           manualResultContainer.classList.add('hidden');
         }
-      } else if (activeTab === 'manual') {
-        if (manualPanel) manualPanel.classList.remove('hidden');
-        if (scannerPanel) scannerPanel.classList.add('hidden');
-        if (manualResultContainer && manualResultContainer.innerHTML.trim() !== '') {
-          manualResultContainer.classList.remove('hidden');
-        }
-        if (scannerResultContainer) {
-          scannerResultContainer.classList.add('hidden');
-        }
+      } else if (isReceipts) {
+        if (receiptsPanelEl) receiptsPanelEl.classList.remove('hidden');
+        if (manualPanelEl && manualPanelEl !== receiptsPanelEl) manualPanelEl.classList.remove('hidden');
+        if (scannerPanelEl) scannerPanelEl.classList.add('hidden');
+        if (scannerResultContainer) scannerResultContainer.classList.add('hidden');
+        if (manualResultContainer) manualResultContainer.classList.add('hidden');
       } else {
-        if (scannerPanel) scannerPanel.classList.add('hidden');
-        if (manualPanel) manualPanel.classList.add('hidden');
+        if (scannerPanelEl) scannerPanelEl.classList.add('hidden');
+        if (receiptsPanelEl) receiptsPanelEl.classList.add('hidden');
+        if (manualPanelEl && manualPanelEl !== receiptsPanelEl) manualPanelEl.classList.add('hidden');
         if (scannerResultContainer) scannerResultContainer.classList.add('hidden');
         if (manualResultContainer) manualResultContainer.classList.add('hidden');
       }
@@ -5619,13 +5757,15 @@
     // Attach Tab Event Listeners
     const tabScannerBtn = document.getElementById('tabScanner');
     const tabManualBtn = document.getElementById('tabManual');
+    const tabReceiptsBtn = document.getElementById('tabReceipts');
     const tabAllergensBtn = document.getElementById('tabAllergens');
     const tabWatchlistBtn = document.getElementById('tabWatchlist');
     const tabBulletinsBtn = document.getElementById('tabBulletins');
     const headerSettingsBtnEl = document.getElementById('headerSettingsBtn');
 
-    if (tabScannerBtn) tabScannerBtn.addEventListener('click', () => setNavTab('scanner'));
-    if (tabManualBtn) tabManualBtn.addEventListener('click', () => setNavTab('manual'));
+    if (tabScannerBtn) tabScannerBtn.addEventListener('click', () => setNavTab('barcodes'));
+    if (tabReceiptsBtn) tabReceiptsBtn.addEventListener('click', () => setNavTab('receipts'));
+    if (tabManualBtn) tabManualBtn.addEventListener('click', () => setNavTab('receipts'));
     if (tabAllergensBtn) tabAllergensBtn.addEventListener('click', () => setNavTab('allergens'));
     if (tabWatchlistBtn) tabWatchlistBtn.addEventListener('click', () => setNavTab('watchlist'));
     if (tabBulletinsBtn) tabBulletinsBtn.addEventListener('click', () => setNavTab('bulletins'));
@@ -6910,7 +7050,7 @@
         const timeStr = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
         const timestamp = `${dateStr} • ${timeStr}`;
 
-        const targetContainer = (source === 'manual') ? manualResultContainer : scannerResultContainer;
+        const targetContainer = scannerResultContainer || manualResultContainer;
         if (targetContainer) {
           targetContainer.classList.remove('hidden');
       targetContainer.classList.add('animate-slide-up-spring');
@@ -10989,38 +11129,10 @@
     }
 
     function openReceiptAuditor() {
-      checkPlusStatus();
-      const { freeCount, proDailyCount } = getReceiptUsageData();
-      const modal = document.getElementById('receiptAuditorModal');
-
-      // 1. Free Tier Check: 1 scan per month
-      if (!isPlusActive && freeCount >= 1) {
-        triggerHaptic([40, 40]);
-        openPaywall();
-        showCustomizeToast("Free monthly receipt scan used. Upgrade to RAKKA Pro for unlimited receipt auditing!");
-        return;
-      }
-
-      // 2. Pro Tier Fair-Use Check: 10 scans per day
-      if (isPlusActive && proDailyCount >= 100) {
-        triggerHaptic([40, 40]);
-        showCustomizeToast("Daily fair-use limit reached (100 receipts/day). Refreshes at midnight!");
-        return;
-      }
-
       triggerHaptic([30]);
-      if (receiptAuditResultsBox) receiptAuditResultsBox.classList.add('hidden');
-      if (receiptAuditLoadingBox) receiptAuditLoadingBox.classList.add('hidden');
+      setNavTab('receipts');
       if (receiptCameraInput) receiptCameraInput.value = '';
-      
-      // Permanent Subtitle as requested by user
-      const sub = document.getElementById('receiptAuditorSub');
-      if (sub) {
-        sub.textContent = "Scanned receipts automatically load all items into your watchlist.";
-      }
-
-      const targetModal = receiptAuditorModal || document.getElementById('receiptAuditorModal');
-      if (targetModal) targetModal.classList.remove('hidden');
+      if (receiptUploadInput) receiptUploadInput.value = '';
     }
 
     function closeReceiptAuditor() {
