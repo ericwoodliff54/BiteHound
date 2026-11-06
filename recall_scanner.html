@@ -7469,10 +7469,15 @@
         const timeStr = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
         const timestamp = `${dateStr} • ${timeStr}`;
 
-        const targetContainer = scannerResultContainer || manualResultContainer;
+        const targetContainer = (source === 'manual' && manualResultContainer) ? manualResultContainer : (scannerResultContainer || manualResultContainer);
+        const otherContainer = (targetContainer === manualResultContainer) ? scannerResultContainer : manualResultContainer;
+        if (otherContainer) {
+          otherContainer.classList.add('hidden');
+          otherContainer.innerHTML = '';
+        }
         if (targetContainer) {
           targetContainer.classList.remove('hidden');
-      targetContainer.classList.add('animate-slide-up-spring');
+          targetContainer.classList.add('animate-slide-up-spring');
           targetContainer.innerHTML = `
             <div class="rounded-3xl border border-white/10 bg-slate-900/95 p-5 shadow-2xl space-y-4 animate-slide-up-spring">
               <!-- Top Header Skeleton with Animated Shimmer -->
@@ -8432,8 +8437,13 @@
 
     function displayResult(data, source = 'scanner') {
       const activeSource = data.source || source;
-      const targetContainer = (activeSource === 'manual') ? manualResultContainer : scannerResultContainer;
+      const targetContainer = (activeSource === 'manual' && manualResultContainer) ? manualResultContainer : (scannerResultContainer || manualResultContainer);
       if (!targetContainer) return;
+      const otherContainer = (targetContainer === manualResultContainer) ? scannerResultContainer : manualResultContainer;
+      if (otherContainer) {
+        otherContainer.classList.add('hidden');
+        otherContainer.innerHTML = '';
+      }
       targetContainer.classList.remove('hidden');
       targetContainer.classList.add('animate-slide-up-spring');
 
@@ -8530,9 +8540,22 @@
                 </div>
               ` : ''}
             </div>
-            <span class="text-[10px] font-semibold text-slate-300 bg-slate-950 px-2 py-1 rounded-md border border-slate-800 shrink-0">
-              ${data.time}
-            </span>
+            <div class="flex items-center gap-2 shrink-0">
+              <span class="text-[10px] font-semibold text-slate-300 bg-slate-950 px-2.5 py-1 rounded-md border border-slate-800">
+                ${data.time}
+              </span>
+              <button 
+                type="button" 
+                onclick="clearCurrentProductResult()" 
+                class="w-8 h-8 rounded-xl bg-slate-800/90 hover:bg-rose-950/60 hover:text-rose-300 border border-slate-700/80 text-slate-400 flex items-center justify-center transition active:scale-90 cursor-pointer shadow-sm" 
+                title="Dismiss and close product details"
+                aria-label="Dismiss product details"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
+            </div>
           </div>
 
           <!-- Defining Category Status Pills (Click to Jump Directly to Window) -->
@@ -8944,28 +8967,26 @@
         </div>
       `;
 
-      // 6. ACTION BUTTON: Dedicated per page (Scan Next on Scanner; Look Up Another on Manual Entry)
-      const actionBtnHtml = (activeSource === 'scanner') ? `
-        <button 
-          type="button" 
-          class="scan-next-item-btn w-full py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 hover:from-blue-500 hover:to-sky-500 text-white font-bold text-sm shadow-xl shadow-blue-950/60 transition active:scale-[0.98] flex items-center justify-center gap-2"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-          </svg>
-          <span>Scan Next Item</span>
-        </button>
-      ` : `
-        <button 
-          type="button" 
-          class="lookup-another-btn w-full py-3.5 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-500 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-sm shadow-xl shadow-indigo-950/60 transition active:scale-[0.98] flex items-center justify-center gap-2"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-          </svg>
-          <span>Look Up Another Barcode</span>
-        </button>
+      // 6. ACTION BUTTONS: Clear & Dismiss or Scan Next
+      const actionBtnHtml = `
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+          <button 
+            type="button" 
+            onclick="clearCurrentProductResult()" 
+            class="w-full py-3.5 px-4 min-h-[48px] rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs border border-slate-700 transition active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+          >
+            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <span>Close & Dismiss Product</span>
+          </button>
+          <button 
+            type="button" 
+            onclick="${activeSource === 'scanner' ? 'resetAndScanNext()' : 'clearCurrentProductResult()'}" 
+            class="w-full py-3.5 px-4 min-h-[48px] rounded-xl bg-gradient-to-r from-cyan-600 via-teal-500 to-cyan-500 hover:from-cyan-500 hover:to-teal-400 text-white font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            <span>${activeSource === 'scanner' ? 'Scan Next Item' : 'Look Up Another Barcode'}</span>
+          </button>
+        </div>
       `;
 
       const dietaryContextCallout = `
@@ -11369,6 +11390,32 @@ function renderHistory() {
     }
 
     // Attach event listeners to dynamic "Scan Next Item" and "Look Up Another Barcode" buttons
+        function clearCurrentProductResult() {
+      triggerHaptic([30]);
+      if (scannerResultContainer) {
+        scannerResultContainer.classList.add('hidden');
+        scannerResultContainer.innerHTML = '';
+      }
+      if (manualResultContainer) {
+        manualResultContainer.classList.add('hidden');
+        manualResultContainer.innerHTML = '';
+      }
+      const upcInputEl = document.getElementById('upcInput');
+      if (upcInputEl) upcInputEl.value = '';
+      const clearBtnEl = document.getElementById('clearBtn');
+      if (clearBtnEl) clearBtnEl.classList.add('hidden');
+      const fileInputEl = document.getElementById('barcodeFileInput');
+      if (fileInputEl) fileInputEl.value = '';
+
+      const targetPanel = document.getElementById('manualUpcSection') || document.getElementById('scannerPanel');
+      if (targetPanel) {
+        const rect = targetPanel.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        window.scrollTo({ top: Math.max(0, scrollTop + rect.top - 90), behavior: 'smooth' });
+      }
+    }
+    window.clearCurrentProductResult = clearCurrentProductResult;
+
     function attachResultActionListeners() {
       document.querySelectorAll('.scan-next-item-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -11632,7 +11679,7 @@ function renderHistory() {
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=75')
+        navigator.serviceWorker.register('./sw.js?v=76')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
