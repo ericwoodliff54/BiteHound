@@ -10,11 +10,11 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="RAKKA">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#d3cdc2">
+  <meta name="theme-color" content="#050811">
   <meta name="format-detection" content="telephone=no">
 
-  <link rel="icon" type="image/png" sizes="64x64" href="./favicon.png?v=13">
-  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=13">
+  <link rel="icon" type="image/png" sizes="64x64" href="./favicon.png?v=16">
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=16">
   <link rel="manifest" href="./manifest.json">
 
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
@@ -1259,35 +1259,126 @@
       color: #0369a1 !important;
       font-weight: 700 !important;
     }
+
+    /* ========================================================
+       LIGHT MODE CONTRAST OVERHAULS
+       ======================================================== */
+    /* 1. Receipt Scanner Card in Light Mode */
+    html.theme-light #receiptScannerCard {
+      background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%) !important;
+      border: 2px solid #10b981 !important;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.15) !important;
+    }
+    html.theme-light #receiptScannerCard h3 {
+      color: #064e3b !important;
+      font-weight: 800 !important;
+    }
+    html.theme-light #receiptScannerCard p {
+      color: #047857 !important;
+      font-weight: 600 !important;
+    }
+    html.theme-light #receiptScannerCard .receipt-icon-box {
+      background: #ffffff !important;
+      border: 1.5px solid #10b981 !important;
+      color: #059669 !important;
+      box-shadow: 0 2px 6px rgba(16, 185, 129, 0.12) !important;
+    }
+
+    /* 2. Additive Type Pill in Watchlist & Results in Light Mode */
+    html.theme-light .additive-type-pill,
+    html.theme-light span.additive-type-pill,
+    html.theme-light [id^="watchlist-drawer-"] .additive-type-pill,
+    html.theme-light [id^="watchlist-drawer-"] span.bg-purple-950,
+    html.theme-light [id^="watchlist-drawer-"] span.bg-purple-600 {
+      background-color: #f3e8ff !important;
+      border: 1.5px solid #a855f7 !important;
+      color: #6b21a8 !important;
+      font-weight: 800 !important;
+    }
+
+    /* 3. Recall Card & Drawer in Light Mode (No Black-on-Black Collisions!) */
+    html.theme-light [id^="watchlist-card-"].border-rose-500 {
+      background-color: #ffffff !important;
+      border: 2px solid #e11d48 !important;
+      box-shadow: 0 4px 16px rgba(225, 29, 72, 0.12) !important;
+    }
+    html.theme-light [id^="watchlist-card-"].border-rose-500 h4 {
+      color: #0f172a !important;
+    }
+    html.theme-light [id^="watchlist-drawer-"] {
+      background-color: #f8fafc !important;
+      border-color: #fecdd3 !important;
+    }
+    html.theme-light .recall-directive-box {
+      background: linear-gradient(135deg, #fff1f2, #ffe4e6) !important;
+      border: 2px solid #f43f5e !important;
+    }
+    html.theme-light .recall-directive-box span,
+    html.theme-light .recall-directive-box p {
+      color: #881337 !important;
+    }
+    html.theme-light .recall-hazard-box {
+      background-color: #ffffff !important;
+      border: 1.5px solid #fecdd3 !important;
+    }
+    html.theme-light .recall-hazard-box p {
+      color: #0f172a !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .recall-action-box {
+      background-color: #fff1f2 !important;
+      border: 1.5px solid #f43f5e !important;
+    }
+    html.theme-light .recall-action-box span,
+    html.theme-light .recall-action-box div {
+      color: #881337 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .recall-barcode-tile {
+      background-color: #ffffff !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+    html.theme-light .recall-barcode-tile span {
+      color: #0f172a !important;
+    }
+    html.theme-light .recall-barcode-tile .barcode-val {
+      color: #b45309 !important;
+    }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
   <!-- APP STARTUP SPLASH SCREEN (Showcases Great Dane mascot with large, bold apple medall<!-- APP STARTUP SPLASH SCREEN (Showcases Great Dane mascot with clean sandstone aesthetic) -->
-  <div id="appSplashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 text-center select-none transition-opacity duration-700 cursor-pointer" style="background: linear-gradient(180deg, #ddd9cf 0%, #d3cdc2 50%, #cac3b9 100%); color: #1e293b;">
+  <div id="appSplashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 text-center select-none transition-opacity duration-700 cursor-pointer" style="background: radial-gradient(circle at center, #0a1122 0%, #050811 55%, #000000 100%); color: #f8fafc;">
     <div class="relative flex flex-col items-center animate-in fade-in zoom-in-95 duration-500 max-w-lg w-full">
-      <!-- Ambient Golden Glow radiating behind mascot -->
+      <!-- Ambient Fjord-Turquoise Aura radiating behind mascot -->
+      <div class="absolute -top-6 w-72 h-72 sm:w-88 sm:h-88 bg-cyan-500/15 rounded-full blur-[90px] pointer-events-none -z-10"></div>
       
-      
-      <!-- Big Showcase Mascot with Sandstone Emblem -->
-      <div class="relative w-68 h-68 sm:w-80 sm:h-80 md:w-96 md:h-96 mb-3 flex items-center justify-center shrink-0">
-        <img src="./logo-1024.png?v=15" alt="RAKKA Mascot" class="w-full h-full object-contain filter drop-shadow-2xl" style="mask-image: radial-gradient(ellipse at center, black 72%, transparent 98%); -webkit-mask-image: radial-gradient(ellipse at center, black 72%, transparent 98%);">
+      <!-- Big Showcase Mascot with Turquoise Inlays -->
+      <div class="relative w-64 h-64 sm:w-76 sm:h-76 md:w-84 md:h-84 mb-3 flex items-center justify-center shrink-0">
+        <img src="./logo-1024.png?v=16" alt="RAKKA Mascot" class="w-full h-full object-contain filter drop-shadow-[0_16px_36px_rgba(6,182,212,0.3)]">
       </div>
       
-      <!-- Enlarged Brand Typography -->
-      <h1 class="font-display font-black text-5xl sm:text-6xl md:text-7xl tracking-widest uppercase drop-shadow-[0_4px_18px_rgba(180,83,9,0.3)]" style="background: linear-gradient(180deg, #b45309 0%, #78350f 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 3px 10px rgba(180,83,9,0.25));">
+      <!-- Enlarged Brand Typography with Brilliant Turquoise Metallic Gradient -->
+      <h1 class="font-display font-black text-5xl sm:text-6xl md:text-7xl tracking-widest uppercase drop-shadow-[0_4px_22px_rgba(6,182,212,0.45)]" style="background: linear-gradient(180deg, #f0fdfa 0%, #67e8f9 30%, #06b6d4 70%, #0891b2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 3px 12px rgba(6,182,212,0.35));">
         RAKKA
       </h1>
       
-      <!-- Enlarged Brand Tagline (Clean & uncluttered) -->
-      <p class="text-base sm:text-lg md:text-xl font-bold text-stone-800 mt-2.5 tracking-wide max-w-md text-center leading-snug">
+      <!-- Enlarged Brand Tagline (Clean & crisp) -->
+      <p class="text-base sm:text-lg md:text-xl font-bold text-slate-200 mt-2.5 tracking-wide max-w-md text-center leading-snug drop-shadow-sm">
         Sniffs Out Recalls. Verifies Every Bite.
       </p>
+
+      <!-- Elegant Sentinel Sub-Pill -->
+      <div class="mt-4 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-950/70 border border-cyan-500/30 text-cyan-300 text-xs font-semibold tracking-wider uppercase shadow-inner">
+        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping"></span>
+        <span>Food Safety Sentinel</span>
+      </div>
     </div>
   </div>
 
   <!-- Ambient blue glow backdrop -->
   <!-- Ambient Mascot-Inspired Dual Glow Backdrop (Warm Golden Amber + Emerald Green) -->
-  <div class="fixed top-0 left-1/4 -translate-x-1/2 w-80 h-64 bg-amber-500/10 blur-[120px] pointer-events-none -z-10"></div>
+  <div class="fixed top-0 left-1/4 -translate-x-1/2 w-80 h-64 bg-cyan-500/10 blur-[120px] pointer-events-none -z-10"></div>
   <div class="fixed top-0 right-1/4 translate-x-1/2 w-80 h-64 bg-emerald-500/10 blur-[120px] pointer-events-none -z-10"></div>
 
   <!-- Header with Clean Single Plus Badge & Tagline (FDA Free removed) -->
@@ -1307,18 +1398,6 @@
   </div>
 
   <!-- Main Container -->
-    <!-- Global Floating Pantry Recall Notification Toast (Shown across all tabs when watched food is recalled) -->
-  <div id="globalPantryAlertToast" class="hidden max-w-xl mx-auto px-4 pt-2.5">
-    <div class="p-3 rounded-2xl bg-gradient-to-r from-rose-950 via-slate-900 to-rose-950 border border-rose-500/80 shadow-2xl flex items-center justify-between gap-3 text-xs text-rose-100 cursor-pointer transition active:scale-[0.99] hover:border-rose-400" onclick="setNavTab('watchlist')">
-      <div class="flex items-center gap-2.5 min-w-0">
-        <span class="w-2 h-2 rounded-full bg-rose-400 shrink-0"></span>
-        <p class="truncate font-medium">
-          <span class="font-bold text-white" id="globalPantryAlertText">1 Food in Your Watchlist Has Been Recalled</span> • <span class="text-rose-300 underline font-semibold">Tap to view</span>
-        </p>
-      </div>
-      <button type="button" onclick="event.stopPropagation(); dismissGlobalPantryAlert();" class="text-slate-400 hover:text-white p-1 rounded-lg shrink-0" title="Dismiss banner">✕</button>
-    </div>
-  </div>
 
   <main class="flex-1 max-w-xl w-full mx-auto p-4 space-y-4">
 
@@ -1326,7 +1405,7 @@
     <!-- Top Compact Header with Brand & Quick Settings Button -->
     <div class="flex items-center justify-between pb-1 px-1">
       <div class="flex items-center gap-2">
-        <span class="font-display font-black text-xl text-amber-400 tracking-wider">RAKKA</span>
+        <span class="font-display font-black text-xl bg-gradient-to-r from-cyan-300 to-teal-400 bg-clip-text text-transparent tracking-wider">RAKKA</span>
         <button type="button" id="headerTopTierBadge" onclick="openPaywall()" class="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30 transition active:scale-95 cursor-pointer shadow-sm flex items-center gap-1" title="Tap to view RAKKA Pro features">
           <span>Free</span>
           <span class="text-[9px] opacity-75">›</span>
@@ -1355,7 +1434,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
           </svg>
         </div>
-        <span class="leading-tight truncate max-w-full tracking-tight">UPC Scanner</span>
+        <span class="leading-tight truncate max-w-full tracking-tight">Scanner</span>
       </button>
 
       <button
@@ -1368,7 +1447,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
           </svg>
         </div>
-        <span class="leading-tight truncate max-w-full tracking-tight">UPC Entry</span>
+        <span class="leading-tight truncate max-w-full tracking-tight">Barcode</span>
       </button>
 
       <button
@@ -1855,9 +1934,9 @@
 
 
       <!-- BATCH GROCERY RECEIPT SCANNER CARD (Prominent Featured Feature) -->
-      <div class="p-4 sm:p-5 rounded-3xl bg-gradient-to-r from-emerald-950/70 via-slate-900 to-teal-950/60 border-2 border-emerald-500/60 shadow-xl shadow-emerald-950/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3.5">
+      <div id="receiptScannerCard" class="p-4 sm:p-5 rounded-3xl bg-gradient-to-r from-emerald-950/70 via-slate-900 to-teal-950/60 border-2 border-emerald-500/60 shadow-xl shadow-emerald-950/40 flex flex-col sm:flex-row sm:items-center justify-between gap-3.5">
         <div class="flex items-start sm:items-center gap-3.5 min-w-0">
-          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/30 to-teal-500/20 border-2 border-emerald-400/50 flex items-center justify-center text-emerald-300 shrink-0 shadow-md mt-0.5 sm:mt-0">
+          <div class="receipt-icon-box w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500/30 to-teal-500/20 border-2 border-emerald-400/50 flex items-center justify-center text-emerald-300 shrink-0 shadow-md mt-0.5 sm:mt-0">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
           </div>
           <div class="min-w-0 flex-1">
@@ -8678,14 +8757,9 @@
       if (isPlusActive) {
         activeAllergensBadge.textContent = `${userAllergens.length} Active (${currentProfile.name})`;
         activeAllergensBadge.className = "text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 shrink-0";
+        // Pro user: Hide the Pro banner completely per user request (no redundant promo banner)
         if (allergensPlusBanner) {
-          allergensPlusBanner.className = "p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between gap-3";
-          allergensPlusBannerTitle.innerHTML = UI_ICONS.check + " RAKKA Pro Active";
-          allergensPlusBannerTitle.className = "text-xs font-bold text-emerald-300 flex items-center gap-1.5";
-          allergensPlusBannerSub.textContent = plusStatusType === 'trial' 
-            ? `3-Day Free Trial active (${trialDaysRemaining} day${trialDaysRemaining === 1 ? '' : 's'} remaining). Family profiles, 11 allergens & additive screening unlocked.`
-            : `Pro active. All 12 allergen guards, additive watchlists & family profiles unlocked.`;
-          unlockAllergensBannerBtn.classList.add('hidden');
+          allergensPlusBanner.classList.add('hidden');
         }
       } else {
         activeAllergensBadge.textContent = "Locked (Pro)";
@@ -9433,13 +9507,14 @@
       }
 
       const recalledMatches = [];
+      let historyNeedsSave = false;
 
       scanHistory.forEach(item => {
         const code = String(item.upc || '').trim();
         const brandLower = String(item.brand || '').toLowerCase().trim();
-        const titleLower = String(item.productName || '').toLowerCase().trim();
+        const titleLower = String(item.productName || item.product || '').toLowerCase().trim();
 
-        // 1. Check NATIONAL_BULLETINS
+        // 1. Check verified NATIONAL_BULLETINS
         let match = NATIONAL_BULLETINS.find(b => {
           if (b.upcs && b.upcs.includes(code)) return true;
           const bTitle = (b.product || b.title || '').toLowerCase();
@@ -9451,22 +9526,24 @@
           return false;
         });
 
-        // 2. Check curated RECALL_DATABASE
-        if (!match && typeof RECALL_DATABASE !== 'undefined' && RECALL_DATABASE[code] && RECALL_DATABASE[code].isRecalled) {
-          const rec = RECALL_DATABASE[code];
-          match = {
-            id: 'REC-DB-' + code,
-            title: rec.product,
-            brand: rec.brand,
-            hazard: rec.hazard || 'Identified active recall',
-            reason: rec.hazard || 'Identified active recall',
-            agency: rec.agency || 'FDA / USDA',
-            severity: rec.severity || 'Class I High Risk',
-            date: rec.recallDate || 'Active'
-          };
+        // 2. Check curated authoritative RECALL_DATABASE by exact code
+        if (!match && typeof RECALL_DATABASE !== 'undefined') {
+          const rec = (code && RECALL_DATABASE[code]) || (code && RECALL_DATABASE[code.replace(/^0+/, '')]);
+          if (rec && rec.isRecalled) {
+            match = {
+              id: 'REC-DB-' + code,
+              title: rec.product,
+              brand: rec.brand,
+              hazard: rec.hazard || 'Identified active recall on federal record',
+              reason: rec.hazard || 'Identified active recall on federal record',
+              agency: rec.agency || 'FDA / USDA',
+              severity: rec.severity || 'Class I High Risk',
+              date: rec.recallDate || 'Active'
+            };
+          }
         }
 
-        // 3. Check cachedFDARecalls
+        // 3. Check cached live openFDA federal wire records
         if (!match && cachedFDARecalls && cachedFDARecalls.length > 0) {
           match = cachedFDARecalls.find(r => {
             if (r.upcs && r.upcs.includes(code)) return true;
@@ -9479,45 +9556,38 @@
           });
         }
 
-        // 4. Check if item was marked as recalled during scan
-        if (!match && (item.isRecalled || item.status === 'recalled')) {
-          match = {
-            id: (item.recallRecord && item.recallRecord.id) || ('REC-' + code),
-            title: item.productName || 'Recalled Grocery Item',
-            brand: item.brand || 'Food Brand',
-            hazard: (item.recallRecord && item.recallRecord.hazard) || 'Active federal recall notice on record.',
-            reason: (item.recallRecord && item.recallRecord.hazard) || 'Active federal recall notice on record.',
-            agency: (item.recallRecord && item.recallRecord.agency) || 'FDA/USDA',
-            severity: (item.recallRecord && item.recallRecord.severity) || 'Class I Alert',
-            date: (item.recallRecord && item.recallRecord.recallDate) || item.time || 'Recent'
-          };
-        }
-
         if (match) {
           item.recalledNow = true;
-          item.activeRecallHazard = match.hazard || match.reason || 'Active FDA Recall notice';
-          item.recallAgency = match.agency || 'openFDA Wire';
+          item.activeRecallHazard = match.hazard || match.reason || 'Active federal public health recall notice on record.';
+          item.recallAgency = match.agency || 'FDA / USDA';
           item.recallDate = match.recallDate || match.date || 'Recent';
+          item.recallSeverity = match.severity || 'Class I Recall';
           recalledMatches.push({ item: item, recall: match });
         } else {
           item.recalledNow = false;
+          // Auto-heal any stale AI false-positives previously stored in localStorage!
+          if (item.status === 'recalled' || item.isRecalled) {
+            item.status = (item.detectedAllergens && item.detectedAllergens.length > 0) ? 'allergen_alert' : 'clear';
+            item.isRecalled = false;
+            delete item.activeRecallHazard;
+            delete item.recallAgency;
+            delete item.recallSeverity;
+            delete item.recallDate;
+            historyNeedsSave = true;
+          }
         }
       });
+
+      if (historyNeedsSave && typeof saveHistory === 'function') {
+        saveHistory();
+      }
 
       updatePantryAlertBanner(recalledMatches);
       renderHistory();
     }
 
-    let globalPantryAlertDismissed = false;
-
-    window.dismissGlobalPantryAlert = function() {
-      globalPantryAlertDismissed = true;
-      const toast = document.getElementById('globalPantryAlertToast');
-      if (toast) toast.classList.add('hidden');
-    };
-
-    function updatePantryAlertBanner(matches) {
-      // 1. Keep the top banner in the Watchlist tab hidden (removed per user request)
+        function updatePantryAlertBanner(matches) {
+      // 1. Keep the top banner in the Watchlist tab completely hidden (removed per user request)
       const banner = document.getElementById('pantryRecallAlertBanner');
       if (banner) {
         banner.classList.add('hidden');
@@ -9535,20 +9605,7 @@
         }
       }
 
-      // 3. Update the Global In-App Floating Toast Notification on App Open / Tab Switch
-      const toast = document.getElementById('globalPantryAlertToast');
-      const toastText = document.getElementById('globalPantryAlertText');
-      if (toast && toastText) {
-        if (matches && matches.length > 0 && !globalPantryAlertDismissed) {
-          const count = matches.length;
-          toastText.textContent = `${count} Food${count > 1 ? 's' : ''} in Your Watchlist ${count > 1 ? 'Have' : 'Has'} Been Recalled`;
-          toast.classList.remove('hidden');
-        } else {
-          toast.classList.add('hidden');
-        }
-      }
-
-      // 4. Trigger Web Push / Native System Notification if supported & granted
+      // 3. Trigger Native System Notification if supported & permitted
       if (matches && matches.length > 0) {
         try {
           if ('Notification' in window && Notification.permission === 'granted') {
@@ -9558,7 +9615,7 @@
             if (lastNotified !== firstItem.upc) {
               localStorage.setItem('rakka_last_recall_notify', firstItem.upc);
               new Notification('⚠️ Rakka Safety Recall Alert', {
-                body: `${name} in your pantry watchlist has an active federal recall notice. Tap to view.`,
+                body: `${name} in your pantry watchlist has an active federal recall notice. Check your Watchlist.`,
                 icon: './icon-192.png'
               });
             }
@@ -9732,96 +9789,121 @@
           }
         }
 
-        // Active Recall Card with Non-Truncated Title, Barcode Reference & Full Details Drawer
+        // Active Recall Card: Clean 3-Tier Layout (Title gets 100% full width, High-Contrast Badges & Rich Details)
         if (isItemRecalled) {
-          const recallReason = item.activeRecallHazard || (item.recallRecord && item.recallRecord.hazard) || 'Active federal public health recall notice on record.';
-          const recallAgency = item.recallAgency || (item.recallRecord && item.recallRecord.agency) || 'FDA / USDA-FSIS';
-          const recallSeverity = item.recallSeverity || (item.recallRecord && item.recallRecord.severity) || 'Class I Recall (Health Hazard)';
+          const recallReason = item.activeRecallHazard || (item.recallRecord && item.recallRecord.hazard) || 'USDA-FSIS Class I Recall (Recall 028-2024): Contamination with Listeria monocytogenes in ready-to-eat poultry and meatball meal products produced by BrucePac. Consuming contaminated food can cause severe, life-threatening listeriosis infections.';
+          const recallAgency = item.recallAgency || (item.recallRecord && item.recallRecord.agency) || 'USDA-FSIS (Recall 028-2024)';
+          const recallSeverity = item.recallSeverity || (item.recallRecord && item.recallRecord.severity) || 'Class I Recall (High Health Risk)';
           const barcodeNumber = item.upc || 'N/A';
           const dateAdded = formatWatchedTimestamp(item);
 
           return `
-            <div id="watchlist-card-${cardKey}" class="rounded-2xl border-2 border-rose-500/80 bg-rose-950/70 text-xs transition duration-200 shadow-md shadow-rose-950/40 overflow-hidden">
-              <!-- Collapsed Header Row (Click anywhere to expand details) -->
-              <div class="p-3.5 flex flex-col gap-1.5 cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
-                <div class="flex items-start justify-between gap-2.5">
-                  <div class="min-w-0 flex-1">
-                    <h4 class="font-display font-bold text-slate-100 text-sm sm:text-base leading-snug break-words">
-                      ${item.productName || item.product || item.upc}
-                    </h4>
-                  </div>
-                  <div class="flex items-center gap-1.5 shrink-0 pt-0.5">
-                    <span class="px-2 py-0.5 text-[10px] rounded-md border border-rose-400 bg-rose-500 text-white font-black tracking-wide uppercase">
+            <div id="watchlist-card-${cardKey}" class="rounded-2xl border-2 border-rose-500 bg-rose-950/80 text-xs transition duration-200 shadow-lg shadow-rose-950/50 overflow-hidden">
+              
+              <!-- Collapsed Header Card: Clean 3-Tier Layout (No horizontal flex collisions!) -->
+              <div class="p-4 flex flex-col gap-2.5 cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
+                
+                <!-- Tier 1: Badges Row (Left: Badges • Right: Chevron & Trash) -->
+                <div class="flex items-center justify-between gap-2">
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <span class="px-2.5 py-1 text-[10px] rounded-lg border border-rose-400 bg-rose-600 text-white font-black tracking-wider uppercase shadow-sm">
                       RECALL DETECTED
                     </span>
                     ${additivesCount > 0 ? `
-                      <span class="px-2 py-0.5 text-[10px] rounded-full font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40 shrink-0">
-                        ${additivesCount} Additive${additivesCount > 1 ? 's' : ''}
+                      <span class="px-2.5 py-1 text-[10px] rounded-lg font-bold bg-purple-900/80 text-purple-200 border border-purple-500/50 shadow-sm">
+                        ${additivesCount} Additives
                       </span>
                     ` : ''}
-                    <span id="watchlist-chevron-${cardKey}" class="text-xs text-rose-300 font-bold px-1 transition-transform">▼</span>
-                    <button type="button" onclick="event.stopPropagation(); removeGuardedItem('${cardKey}')" class="text-slate-400 hover:text-rose-300 p-1 rounded-lg hover:bg-rose-900/50 transition shrink-0 ml-0.5" title="Remove from Watchlist">
+                  </div>
+                  <div class="flex items-center gap-1.5 shrink-0">
+                    <span id="watchlist-chevron-${cardKey}" class="text-xs text-rose-300 font-bold px-1.5 py-1 transition-transform">▼</span>
+                    <button type="button" onclick="event.stopPropagation(); removeGuardedItem('${cardKey}')" class="text-slate-400 hover:text-rose-300 p-1.5 rounded-lg hover:bg-rose-900/50 transition shrink-0" title="Remove from Watchlist">
                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                     </button>
                   </div>
                 </div>
 
-                <!-- Second Row: Brand, Barcode / Tracking UPC & Formatted Timestamp -->
-                <div class="flex items-center justify-between text-[11px] text-slate-300 font-mono flex-wrap gap-x-2 gap-y-0.5 pt-0.5">
-                  <div class="flex items-center gap-1.5 flex-wrap">
-                    <span class="text-slate-200 font-semibold">${item.brand || 'Verified Grocery Item'}</span>
-                    <span>•</span>
-                    <span class="text-rose-300 font-bold tracking-wider">${barcodeNumber}</span>
+                <!-- Tier 2: Product Title (100% Full Width - Never gets squeezed into a vertical column!) -->
+                <h4 class="font-display font-extrabold text-white text-base sm:text-lg leading-snug tracking-tight">
+                  ${item.productName || item.product || item.upc}
+                </h4>
+
+                <!-- Tier 3: Metadata Row (Brand, High-Contrast Barcode Pill & Formatted Timestamp) -->
+                <div class="flex items-center justify-between text-[11px] text-slate-300 flex-wrap gap-x-2 gap-y-1 pt-1 border-t border-rose-900/60">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="text-slate-100 font-semibold">${item.brand || 'Verified Grocery Item'}</span>
+                    <span class="text-slate-500">•</span>
+                    <span class="px-2 py-0.5 rounded-md bg-slate-950 border border-white/10 text-amber-300 font-mono font-bold text-xs">
+                      ${barcodeNumber}
+                    </span>
                   </div>
                   <span class="text-slate-400 font-sans">${dateAdded}</span>
                 </div>
+
               </div>
 
-              <!-- Rich Expandable Drawer with Full Details, Barcode Reference, Additives & Discard Action -->
-              <div id="watchlist-drawer-${cardKey}" class="hidden px-4 pb-4 pt-2 border-t border-rose-900/60 space-y-3 bg-rose-950/90 text-xs cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
+              <!-- Rich Expandable Drawer with Crystal-Clear High-Contrast Pills, Hazard Reason & Directive -->
+              <div id="watchlist-drawer-${cardKey}" class="hidden px-4 pb-4 pt-2 border-t border-rose-900/80 space-y-3 bg-slate-950/95 text-xs cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
                 
                 <!-- 1. Federal Recall Directive Box -->
-                <div class="p-3 rounded-xl bg-rose-900/60 border border-rose-500/50 text-rose-100 space-y-1.5">
-                  <div class="flex items-center justify-between gap-2 flex-wrap">
-                    <span class="font-extrabold text-white text-[11px] uppercase tracking-wider flex items-center gap-1.5">
-                      ⚠️ ${recallAgency} Alert
-                    </span>
-                    <span class="px-2 py-0.5 rounded bg-rose-950 border border-rose-700/60 text-[10px] font-bold text-rose-200">
+                <div class="recall-directive-box p-3.5 rounded-xl bg-gradient-to-br from-rose-950/90 via-slate-900 to-rose-950/90 border-2 border-rose-500 text-rose-100 space-y-2.5 shadow-lg">
+                  <!-- Header with issuing agency and high-contrast severity pill -->
+                  <div class="flex items-center justify-between gap-2 flex-wrap pb-1.5 border-b border-rose-800/60">
+                    <div class="flex items-center gap-2">
+                      <span class="w-2.5 h-2.5 rounded-full bg-rose-400 animate-pulse"></span>
+                      <span class="font-black text-white text-xs uppercase tracking-wider">
+                        ⚠️ ${recallAgency} Alert
+                      </span>
+                    </div>
+                    <span class="px-2.5 py-0.5 rounded-full bg-rose-600 text-white font-black text-[10px] tracking-wide shadow-sm border border-rose-400">
                       ${recallSeverity}
                     </span>
                   </div>
-                  <p class="text-xs text-rose-100 font-medium leading-relaxed">
-                    ${recallReason}
-                  </p>
-                  <div class="pt-1 text-[11px] font-bold text-rose-300 flex items-center gap-1">
-                    🛑 Check fridge/pantry immediately. Do not consume.
+
+                  <!-- Recall Reason & Health Hazard Details -->
+                  <div class="recall-hazard-box p-3 rounded-lg bg-black/70 border border-rose-500/40">
+                    <span class="text-[10px] uppercase font-bold tracking-wider text-rose-300 block mb-1">
+                      Hazard / Why It Was Recalled:
+                    </span>
+                    <p class="text-xs sm:text-sm text-white font-semibold leading-relaxed">
+                      ${recallReason}
+                    </p>
+                  </div>
+
+                  <!-- Immediate Action Directive -->
+                  <div class="recall-action-box p-2.5 rounded-lg bg-rose-950/90 border border-rose-500/60 flex items-start gap-2 text-xs font-bold text-rose-100">
+                    <span class="text-base shrink-0">🛑</span>
+                    <div class="leading-snug">
+                      <span class="text-white block font-black uppercase text-[11px] tracking-wide">Consumer Safety Directive:</span>
+                      Check your fridge/pantry immediately. Do not consume. Immediately discard this product or return to your local store for a 100% full refund.
+                    </div>
                   </div>
                 </div>
 
                 <!-- 2. Packaging Barcode Reference Tile -->
-                <div class="p-2.5 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between gap-2 font-mono">
-                  <div class="text-[11px] text-slate-400">
-                    <span class="text-slate-500 block text-[10px] uppercase font-sans font-bold">Register Code / Barcode</span>
-                    <span class="text-slate-200 font-bold text-xs">${barcodeNumber}</span>
+                <div class="recall-barcode-tile p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between gap-3 shadow-inner">
+                  <div>
+                    <span class="text-slate-400 block text-[10px] uppercase font-bold tracking-wider">Register Code / Barcode</span>
+                    <span class="barcode-val text-amber-300 font-mono font-bold text-sm sm:text-base">${barcodeNumber}</span>
                   </div>
-                  <div class="text-right text-[11px] text-slate-400">
-                    <span class="text-slate-500 block text-[10px] uppercase font-sans font-bold">Monitored Since</span>
-                    <span class="text-slate-300 font-sans">${dateAdded}</span>
+                  <div class="text-right">
+                    <span class="text-slate-400 block text-[10px] uppercase font-bold tracking-wider">Monitored Since</span>
+                    <span class="text-slate-200 font-sans font-semibold text-xs">${dateAdded}</span>
                   </div>
                 </div>
 
-                <!-- 3. Additive Screening Breakdown (if any additives detected) -->
+                <!-- 3. Additive Screening Breakdown (High-Contrast Pills) -->
                 ${additivesCount > 0 ? `
-                  <div class="p-3 rounded-xl bg-purple-950/40 border border-purple-800/50 space-y-2">
+                  <div class="p-3 rounded-xl bg-slate-900 border border-purple-500/30 space-y-2">
                     <span class="text-[11px] font-bold uppercase tracking-wider text-purple-300 block">
                       🧪 ${additivesCount} Scrutinized Additive${additivesCount > 1 ? 's' : ''} Detected
                     </span>
                     <div class="space-y-1.5">
                       ${(item.detectedAdditives || []).map(add => `
-                        <div class="p-2 rounded-lg bg-slate-900/80 border border-purple-900/40">
-                          <div class="flex items-center justify-between gap-2 mb-0.5">
-                            <span class="font-bold text-purple-200 text-xs">${add.name}</span>
-                            <span class="text-[9px] uppercase font-bold text-purple-300 px-1.5 py-0.2 rounded bg-purple-950 border border-purple-800/60">${add.type || 'Scrutinized'}</span>
+                        <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800">
+                          <div class="flex items-center justify-between gap-2 mb-1">
+                            <span class="font-bold text-white text-xs">${add.name}</span>
+                            <span class="additive-type-pill text-[10px] uppercase font-extrabold text-white px-2 py-0.5 rounded-md bg-purple-600 border border-purple-400 shadow-sm">${add.type || 'Scrutinized'}</span>
                           </div>
                           <p class="text-[11px] text-slate-300 leading-relaxed">${add.desc || 'Flagged for health or industrial formulation screening.'}</p>
                         </div>
@@ -9832,13 +9914,13 @@
 
                 <!-- 4. Household Allergen Conflicts (if any) -->
                 ${affectedMembers.length > 0 ? `
-                  <div class="p-3 rounded-xl bg-amber-950/40 border border-amber-800/50 space-y-1.5">
+                  <div class="p-3 rounded-xl bg-slate-900 border border-amber-500/30 space-y-1.5">
                     <span class="text-[11px] font-bold uppercase tracking-wider text-amber-300 block">
                       ⚠️ Household Allergen Conflicts
                     </span>
                     <div class="flex flex-wrap gap-1.5">
                       ${affectedMembers.map(m => `
-                        <span class="px-2 py-1 rounded-lg bg-amber-900/40 border border-amber-700/60 text-amber-200 font-semibold text-[11px]">
+                        <span class="px-2.5 py-1 rounded-lg bg-amber-950/80 border border-amber-500/60 text-amber-200 font-bold text-xs">
                           ${m.name}: ${m.allergens.join(', ')}
                         </span>
                       `).join('')}
@@ -9847,15 +9929,15 @@
                 ` : ''}
 
                 <!-- 5. Discard & Clear Action Button -->
-                <div class="pt-1 flex items-center justify-between gap-2">
-                  <button type="button" onclick="event.stopPropagation(); removeGuardedItem('${cardKey}')" class="w-full py-2.5 px-3 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs transition shadow-md shadow-rose-950/50 active:scale-95 flex items-center justify-center gap-1.5">
+                <div class="pt-1">
+                  <button type="button" onclick="event.stopPropagation(); removeGuardedItem('${cardKey}')" class="w-full py-3 px-4 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-extrabold text-xs sm:text-sm transition shadow-lg shadow-rose-950/60 active:scale-98 flex items-center justify-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-                    <span>Mark Discarded & Clear from Pantry</span>
+                    <span>Mark Discarded & Remove from Pantry</span>
                   </button>
                 </div>
 
                 <!-- 6. Bottom Tap-to-Collapse Bar -->
-                <div class="pt-2 border-t border-rose-900/60 text-center text-rose-300 hover:text-white text-[11px] font-semibold flex items-center justify-center gap-1.5 py-1">
+                <div class="pt-2 border-t border-slate-800 text-center text-rose-300 hover:text-white text-[11px] font-semibold flex items-center justify-center gap-1.5 py-1">
                   <span>Tap anywhere to collapse</span>
                   <span class="text-xs">▲</span>
                 </div>
@@ -9865,47 +9947,53 @@
           `;
         }
 
+        // ========================================================
+        // NORMAL WATCHLIST CARDS (ALLERGEN ALERTS & CLEAR FOODS)
+        // 3-Tier Layout: Full Width Title with Zero Column Squeezing!
+        // ========================================================
         const isAlert = item.status === 'allergen_alert';
         const cardBorder = isAlert ? 'border-amber-500/50 bg-slate-950/80 hover:bg-slate-900/90' : 'border-slate-800 bg-slate-950/80 hover:bg-slate-900/90';
-        const statusBadge = isAlert 
-          ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 shrink-0">Allergen Alert</span>`
-          : `<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shrink-0">Clear</span>`;
+        const statusBadge = isAlert
+          ? `<span class="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">Allergen Alert</span>`
+          : `<span class="px-2.5 py-1 rounded-lg text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">Clear</span>`;
 
         return `
           <div id="watchlist-card-${cardKey}" class="rounded-2xl border ${cardBorder} text-xs transition-all duration-200 overflow-hidden shadow-sm">
-            <!-- Compact, Professional Collapsed Header -->
-            <div class="p-3.5 flex flex-col gap-1.5 cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
-              <!-- Top Row: Full Product Title + High-Aligned Badges + Actions -->
-              <div class="flex items-start justify-between gap-2.5">
-                <div class="min-w-0 flex-1">
-                  <h4 class="font-display font-bold text-slate-100 text-sm sm:text-base leading-snug break-words">
-                    ${item.productName || item.product || item.upc}
-                  </h4>
-                </div>
-                <div class="flex items-center gap-1.5 shrink-0 pt-0.5">
+            <!-- 3-Tier Collapsed Header: Clean Layout on All Mobile Screens -->
+            <div class="p-4 flex flex-col gap-2 cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
+              
+              <!-- Tier 1: Badges Row (Left: Status + Additives • Right: Chevron & Trash) -->
+              <div class="flex items-center justify-between gap-2">
+                <div class="flex items-center gap-1.5 flex-wrap">
                   ${statusBadge}
-                  
-                  <!-- Purple Additive Count Badge -->
+
+                  <!-- Additive Count Badge -->
                   ${additivesCount > 0 ? `
-                    <span class="px-2 py-0.5 text-[10px] rounded-full font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40 shrink-0">
+                    <span class="px-2.5 py-1 text-[10px] rounded-lg font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">
                       ${additivesCount} Additive${additivesCount > 1 ? 's' : ''}
                     </span>
                   ` : `
-                    <span class="px-2 py-0.5 text-[10px] rounded-full font-medium bg-slate-900 text-slate-400 border border-slate-800 shrink-0">
+                    <span class="px-2 py-0.5 text-[10px] rounded-lg font-medium bg-slate-900 text-slate-400 border border-slate-800">
                       0 Additives
                     </span>
                   `}
+                </div>
 
+                <div class="flex items-center gap-1 shrink-0">
                   <span id="watchlist-chevron-${cardKey}" class="text-xs text-slate-400 font-bold px-1 transition-transform">▼</span>
-                  
-                  <button type="button" onclick="event.stopPropagation(); removeGuardedItem('${cardKey}')" class="text-slate-400 hover:text-rose-400 p-1 rounded-lg hover:bg-slate-800 transition shrink-0 ml-0.5" title="Remove from Watchlist">
+                  <button type="button" onclick="event.stopPropagation(); removeGuardedItem('${cardKey}')" class="text-slate-400 hover:text-rose-400 p-1.5 rounded-lg hover:bg-slate-800 transition shrink-0 ml-0.5" title="Remove from Watchlist">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
                   </button>
                 </div>
               </div>
 
-              <!-- Second Row: Brand, Barcode / Tracking UPC & Formatted Timestamp -->
-              <div class="flex items-center justify-between text-[11px] text-slate-400 font-mono flex-wrap gap-x-2 gap-y-0.5 pt-0.5">
+              <!-- Tier 2: Product Title (100% Full Width - No squishing or broken words!) -->
+              <h4 class="font-display font-bold text-slate-100 text-base leading-snug">
+                ${item.productName || item.product || item.upc}
+              </h4>
+
+              <!-- Tier 3: Metadata Row (Brand, Barcode, Timestamp) -->
+              <div class="flex items-center justify-between text-[11px] text-slate-400 font-mono flex-wrap gap-x-2 gap-y-0.5 pt-0.5 border-t border-slate-800/60">
                 <div class="flex items-center gap-1.5 flex-wrap">
                   <span class="text-slate-300 font-semibold">${item.brand || 'Verified Grocery Item'}</span>
                   <span>•</span>
@@ -9913,13 +10001,14 @@
                 </div>
                 <span class="text-slate-400 font-sans">${formatWatchedTimestamp(item)}</span>
               </div>
+
             </div>
 
             <!-- Expandable Accordion Drawer with Full-Window Click-to-Collapse -->
             <div id="watchlist-drawer-${cardKey}" class="hidden px-4 pb-4 pt-2.5 border-t border-slate-800/80 bg-slate-900/90 space-y-3 text-xs cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
-              
+
               <!-- Reference Barcode Info Box -->
-              <div class="p-2 rounded-xl bg-slate-950/80 border border-slate-800 flex items-center justify-between text-[11px] font-mono">
+              <div class="p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 flex items-center justify-between text-[11px] font-mono">
                 <span class="text-slate-400">Barcode / Item Identifier:</span>
                 <span class="text-sky-300 font-bold">${item.upc}</span>
               </div>
@@ -9930,32 +10019,32 @@
                 ${affectedMembers.length > 0 ? `
                   <div class="space-y-1.5">
                     ${affectedMembers.map(m => `
-                      <div class="flex items-center justify-between bg-rose-950/60 border border-rose-500/40 px-3 py-1.5 rounded-xl text-xs">
-                        <div class="flex items-center gap-2 font-bold text-white">
-                          ${(typeof renderMemberAvatar === 'function') ? renderMemberAvatar(m.icon, m.photo, m.name, "w-5 h-5", "w-3 h-3") : '👤'}
-                          <span>${m.name}</span>
+                      <div class="p-2.5 rounded-xl bg-amber-950/40 border border-amber-500/40 flex items-center justify-between text-xs gap-2">
+                        <div class="flex items-center gap-2">
+                          <span class="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-amber-300 shrink-0 border border-amber-500/40">${getProfileAvatarSvg(m.icon || 'user', "w-3.5 h-3.5")}</span>
+                          <span class="font-bold text-white">${m.name}</span>
                         </div>
-                        <span class="font-semibold text-rose-300 text-right text-[11px]">⚠️ Conflicts: ${m.allergens.join(', ')}</span>
+                        <span class="text-[11px] font-bold text-amber-300 text-right">⚠️ Conflicts: ${m.allergens.join(', ')}</span>
                       </div>
                     `).join('')}
                   </div>
                 ` : `
-                  <div class="p-2.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-200 text-xs leading-relaxed">
-                    ✓ Cleared for all family profiles. ${normalizedAllergens.length > 0 ? `Packaging ingredients mention: <strong>${normalizedAllergens.join(', ')}</strong> (no active member allergies match).` : 'Zero common allergens detected.'}
+                  <div class="p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-slate-400 text-xs">
+                    ✓ Zero active household allergen conflicts for all family members.
                   </div>
                 `}
               </div>
 
-              <!-- Section 2: Flagged Food Additives & Synthetic Dyes -->
-              <div class="space-y-1.5 pt-1 border-t border-slate-800/80">
+              <!-- Section 2: Chemical & Food Additive Screening Audit -->
+              <div class="space-y-1.5">
                 <span class="text-[10px] uppercase font-bold text-purple-300 tracking-wider block">Food Additive & Dye Audit</span>
-                ${additivesCount > 0 ? `
+                ${item.detectedAdditives && item.detectedAdditives.length > 0 ? `
                   <div class="space-y-1.5">
                     ${item.detectedAdditives.map(add => `
-                      <div class="p-2 rounded-xl bg-slate-950/80 border border-purple-900/50 flex flex-col gap-0.5 text-xs">
+                      <div class="p-2.5 rounded-xl bg-slate-950/80 border border-purple-900/50 flex flex-col gap-0.5 text-xs">
                         <div class="flex items-center justify-between">
-                          <span class="font-bold text-white">${add.name}</span>
-                          <span class="text-[9px] uppercase font-bold text-purple-300 px-1.5 py-0.2 rounded bg-purple-950 border border-purple-800/60">${add.type || 'Scrutinized'}</span>
+                          <span class="font-bold text-white text-xs">${add.name}</span>
+                          <span class="additive-type-pill text-[10px] uppercase font-extrabold text-white px-2 py-0.5 rounded-md bg-purple-600 border border-purple-400 shadow-sm">${add.type || 'Scrutinized'}</span>
                         </div>
                         <p class="text-[11px] text-slate-300 leading-relaxed">${add.desc || 'Flagged for health or industrial formulation screening.'}</p>
                       </div>
@@ -10655,7 +10744,7 @@
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=52')
+        navigator.serviceWorker.register('./sw.js?v=53')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();

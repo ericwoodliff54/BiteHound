@@ -1,16 +1,16 @@
-const CACHE_NAME = 'rakka-v52';
+const CACHE_NAME = 'rakka-v53';
 const ASSETS = [
   './index.html',
   './manifest.json',
   './icon-192.png',
-  './icon-192.png?v=15',
+  './icon-192.png?v=16',
   './icon-512.png',
   './apple-touch-icon.png',
-  './apple-touch-icon.png?v=15',
+  './apple-touch-icon.png?v=16',
   './favicon.png',
-  './favicon.png?v=15',
+  './favicon.png?v=16',
   './logo-1024.png',
-  './logo-1024.png?v=15',
+  './logo-1024.png?v=16',
   './staples_catalog.json'
 ];
 
