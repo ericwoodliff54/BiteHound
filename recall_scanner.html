@@ -2676,9 +2676,7 @@
               <span>Synced & Ready for Offline Use</span>
             </span>
           </div>
-          <p class="text-[11px] text-slate-400 leading-relaxed">
-            RAKKA automatically synchronizes federal openFDA recall notices in the background whenever you open the app on Wi-Fi or cellular data. All databases, search indices, and allergen guards remain cached locally on your device for scanning with zero cell reception.
-          </p>
+
           <button 
             type="button" 
             id="settingsSyncNowBtn" 
@@ -10744,7 +10742,7 @@
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=53')
+        navigator.serviceWorker.register('./sw.js?v=54')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
