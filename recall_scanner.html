@@ -3753,33 +3753,6 @@
 
 // Product Database
     const RECALL_DATABASE = {
-      // ALDI PARK STREET DELI / MAMA COZZI'S CHICKEN ALFREDO & MEATBALL MARINARA (ALDI CODE 746502)
-      "746502": {
-        isRecalled: true,
-        brand: "Park Street Deli / Mama Cozzi's (Aldi)",
-        product: "Park Street Deli / Mama Cozzi's Chicken Alfredo & Meatball Marinara Meal",
-        hazard: "USDA-FSIS Class I Recall (Recall 028-2024): Contamination with Listeria monocytogenes in ready-to-eat poultry and meatball meal products produced by BrucePac. Consuming contaminated food can cause severe, life-threatening listeriosis infections.",
-        reason: "Listeria monocytogenes bacterial contamination risk",
-        agency: "USDA-FSIS (Recall 028-2024)",
-        severity: "Class I Recall (High Health Risk)",
-        action: "Do not consume. Check fridge/pantry immediately. Discard or return to your local Aldi store for a 100% full refund.",
-        stores: ["Aldi"],
-        allergens: ["gluten", "milk", "wheat", "soy"],
-        additives_tags: ["Sodium Phosphate", "Sodium Nitrite"]
-      },
-      "0746502": {
-        isRecalled: true,
-        brand: "Park Street Deli / Mama Cozzi's (Aldi)",
-        product: "Park Street Deli / Mama Cozzi's Chicken Alfredo & Meatball Marinara Meal",
-        hazard: "USDA-FSIS Class I Recall (Recall 028-2024): Contamination with Listeria monocytogenes in ready-to-eat poultry and meatball meal products produced by BrucePac. Consuming contaminated food can cause severe, life-threatening listeriosis infections.",
-        reason: "Listeria monocytogenes bacterial contamination risk",
-        agency: "USDA-FSIS (Recall 028-2024)",
-        severity: "Class I Recall (High Health Risk)",
-        action: "Do not consume. Check fridge/pantry immediately. Discard or return to your local Aldi store for a 100% full refund.",
-        stores: ["Aldi"],
-        allergens: ["gluten", "milk", "wheat", "soy"],
-        additives_tags: ["Sodium Phosphate", "Sodium Nitrite"]
-      },
       // HERSHEY KIT KAT CRISP WAFERS (UPC-E 03424607 & UPC-A 034000002467)
       "03424607": {
         isRecalled: false,
@@ -9528,13 +9501,14 @@
       }
 
       const recalledMatches = [];
+      let historyNeedsSave = false;
 
       scanHistory.forEach(item => {
         const code = String(item.upc || '').trim();
         const brandLower = String(item.brand || '').toLowerCase().trim();
-        const titleLower = String(item.productName || '').toLowerCase().trim();
+        const titleLower = String(item.productName || item.product || '').toLowerCase().trim();
 
-        // 1. Check NATIONAL_BULLETINS
+        // 1. Check verified NATIONAL_BULLETINS
         let match = NATIONAL_BULLETINS.find(b => {
           if (b.upcs && b.upcs.includes(code)) return true;
           const bTitle = (b.product || b.title || '').toLowerCase();
@@ -9546,22 +9520,24 @@
           return false;
         });
 
-        // 2. Check curated RECALL_DATABASE
-        if (!match && typeof RECALL_DATABASE !== 'undefined' && RECALL_DATABASE[code] && RECALL_DATABASE[code].isRecalled) {
-          const rec = RECALL_DATABASE[code];
-          match = {
-            id: 'REC-DB-' + code,
-            title: rec.product,
-            brand: rec.brand,
-            hazard: rec.hazard || 'Identified active recall',
-            reason: rec.hazard || 'Identified active recall',
-            agency: rec.agency || 'FDA / USDA',
-            severity: rec.severity || 'Class I High Risk',
-            date: rec.recallDate || 'Active'
-          };
+        // 2. Check curated authoritative RECALL_DATABASE by exact code
+        if (!match && typeof RECALL_DATABASE !== 'undefined') {
+          const rec = (code && RECALL_DATABASE[code]) || (code && RECALL_DATABASE[code.replace(/^0+/, '')]);
+          if (rec && rec.isRecalled) {
+            match = {
+              id: 'REC-DB-' + code,
+              title: rec.product,
+              brand: rec.brand,
+              hazard: rec.hazard || 'Identified active recall on federal record',
+              reason: rec.hazard || 'Identified active recall on federal record',
+              agency: rec.agency || 'FDA / USDA',
+              severity: rec.severity || 'Class I High Risk',
+              date: rec.recallDate || 'Active'
+            };
+          }
         }
 
-        // 3. Check cachedFDARecalls
+        // 3. Check cached live openFDA federal wire records
         if (!match && cachedFDARecalls && cachedFDARecalls.length > 0) {
           match = cachedFDARecalls.find(r => {
             if (r.upcs && r.upcs.includes(code)) return true;
@@ -9574,61 +9550,31 @@
           });
         }
 
-        // 4. Check if item was marked as recalled during scan or has specific recall keywords
-        if (!match && (item.isRecalled || item.status === 'recalled' || (item.upc && RECALL_DATABASE[item.upc] && RECALL_DATABASE[item.upc].isRecalled))) {
-          // Check if RECALL_DATABASE has matching record by upc or stripped code
-          const dbRec = (item.upc && RECALL_DATABASE[item.upc]) || (item.upc && RECALL_DATABASE[String(item.upc).replace(/^0+/, '')]);
-          const itemText = (String(item.productName || item.product || '') + ' ' + String(item.brand || '')).toLowerCase();
-          
-          let specificHazard = item.activeRecallHazard || item.warning || (item.recallRecord && item.recallRecord.hazard);
-          let specificAgency = item.recallAgency || (item.recallRecord && item.recallRecord.agency) || 'USDA-FSIS';
-          let specificSeverity = item.recallSeverity || (item.recallRecord && item.recallRecord.severity) || 'Class I Recall (High Health Risk)';
-
-          if (dbRec) {
-            specificHazard = dbRec.hazard || specificHazard;
-            specificAgency = dbRec.agency || specificAgency;
-            specificSeverity = dbRec.severity || specificSeverity;
-          } else if (itemText.includes('alfredo') || itemText.includes('marinara') || itemText.includes('park street') || itemText.includes('brucepac')) {
-            specificHazard = "USDA-FSIS Class I Recall (Recall 028-2024): Contamination with Listeria monocytogenes in ready-to-eat poultry and meatball meal products produced by BrucePac. Consuming contaminated food can cause severe, life-threatening listeriosis infections.";
-            specificAgency = "USDA-FSIS (Recall 028-2024)";
-            specificSeverity = "Class I Recall (High Health Risk)";
-          } else if (itemText.includes('carrot') || itemText.includes('grimmway')) {
-            specificHazard = "FDA Class I Public Health Recall: Outbreak of E. coli O121:H19 in whole and baby organic bagged carrots. Can cause severe abdominal cramping, bloody diarrhea, and hemolytic uremic syndrome (HUS).";
-            specificAgency = "FDA Alert";
-            specificSeverity = "Class I Recall (High Health Risk)";
-          } else if (itemText.includes('waffle') || itemText.includes('treehouse')) {
-            specificHazard = "FDA Nationwide Class I Recall: Listeria monocytogenes contamination risk in frozen toaster waffles distributed across all major retail supermarkets.";
-            specificAgency = "FDA Alert";
-            specificSeverity = "Class I Recall (High Health Risk)";
-          }
-
-          match = {
-            id: (item.recallRecord && item.recallRecord.id) || ('REC-' + code),
-            title: item.productName || 'Recalled Grocery Item',
-            brand: item.brand || 'Food Brand',
-            hazard: specificHazard || 'Active federal public health recall notice on record.',
-            reason: specificHazard || 'Active federal public health recall notice on record.',
-            agency: specificAgency,
-            severity: specificSeverity,
-            date: (item.recallRecord && item.recallRecord.recallDate) || item.time || 'Recent'
-          };
-        }
-
         if (match) {
           item.recalledNow = true;
-          item.activeRecallHazard = match.hazard || match.reason || 'Active FDA Recall notice';
-          item.recallAgency = match.agency || 'openFDA Wire';
+          item.activeRecallHazard = match.hazard || match.reason || 'Active federal public health recall notice on record.';
+          item.recallAgency = match.agency || 'FDA / USDA';
           item.recallDate = match.recallDate || match.date || 'Recent';
           item.recallSeverity = match.severity || 'Class I Recall';
           recalledMatches.push({ item: item, recall: match });
         } else {
           item.recalledNow = false;
-          // Automatically clear stale AI false-positive recall flags
-          if (item.status === 'recalled') {
+          // Auto-heal any stale AI false-positives previously stored in localStorage!
+          if (item.status === 'recalled' || item.isRecalled) {
             item.status = (item.detectedAllergens && item.detectedAllergens.length > 0) ? 'allergen_alert' : 'clear';
+            item.isRecalled = false;
+            delete item.activeRecallHazard;
+            delete item.recallAgency;
+            delete item.recallSeverity;
+            delete item.recallDate;
+            historyNeedsSave = true;
           }
         }
       });
+
+      if (historyNeedsSave && typeof saveHistory === 'function') {
+        saveHistory();
+      }
 
       updatePantryAlertBanner(recalledMatches);
       renderHistory();
