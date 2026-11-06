@@ -8046,22 +8046,20 @@
         let triggeredFamilyMatches = [];
         let detectedAdditivesList = auditFoodAdditives(ingredientsSummary, productAdditivesTags, productName);
 
-        // Screen against active single profile in Free mode, or all family profiles in Pro mode
-        const targetAuditProfiles = (isPlusActive && Array.isArray(familyProfiles) && familyProfiles.length > 0)
-          ? familyProfiles
-          : [(typeof getActiveProfile === 'function' ? getActiveProfile() : (familyProfiles[0] || { id: 'me', name: 'Me', allergens: [] }))];
-
-        for (const prof of targetAuditProfiles) {
-          const matches = (prof.allergens || []).filter(a => detectedAllergenIds.includes(a));
-          if (matches.length > 0) {
-            const names = matches.map(id => formatAllergenName(id));
-            triggeredFamilyMatches.push({
-              id: prof.id,
-              name: prof.name,
-              icon: prof.icon || 'user',
-              photo: prof.photo || null,
-              allergens: names
-            });
+        // Screen against household profiles only in Pro mode (Free mode has allergen shields locked)
+        if (isPlusActive) {
+          for (const prof of familyProfiles) {
+            const matches = (prof.allergens || []).filter(a => detectedAllergenIds.includes(a));
+            if (matches.length > 0) {
+              const names = matches.map(id => formatAllergenName(id));
+              triggeredFamilyMatches.push({
+                id: prof.id,
+                name: prof.name,
+                icon: prof.icon || 'user',
+                photo: prof.photo || null,
+                allergens: names
+              });
+            }
           }
         }
 
@@ -9284,6 +9282,18 @@
     function renderAllergensTab() {
       checkPlusStatus();
 
+      // Free mode constraint: Single user ('me') defaults back to unchecked for all allergens
+      if (!isPlusActive) {
+        if (familyProfiles && familyProfiles.length === 1 && familyProfiles[0].id === 'me') {
+          familyProfiles[0].allergens = [];
+        }
+        const curProf = getActiveProfile();
+        if (curProf && curProf.id === 'me') {
+          curProf.allergens = [];
+        }
+        userAllergens = (curProf && curProf.allergens) || [];
+      }
+
       const allergensPlusBanner = document.getElementById('allergensPlusBanner');
       const allergensPlusBannerTitle = document.getElementById('allergensPlusBannerTitle');
       const allergensPlusBannerSub = document.getElementById('allergensPlusBannerSub');
@@ -9343,8 +9353,8 @@
           allergensPlusBanner.classList.add('hidden');
         }
       } else {
-        activeAllergensBadge.textContent = userAllergens.length > 0 ? `${userAllergens.length} Active (Free)` : "No Restrictions";
-        activeAllergensBadge.className = "text-xs font-bold px-2.5 py-1 rounded-full " + (userAllergens.length > 0 ? "bg-amber-500/20 text-amber-300 border border-amber-500/30" : "bg-slate-800 text-slate-300 border border-slate-700") + " shrink-0";
+        activeAllergensBadge.textContent = "Locked (Pro)";
+        activeAllergensBadge.className = "text-xs font-bold px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 shrink-0";
         if (allergensPlusBanner) {
           allergensPlusBanner.className = "p-3.5 rounded-2xl bg-gradient-to-r from-amber-500/20 via-amber-400/10 to-yellow-500/20 border border-amber-500/40 flex items-center justify-between gap-3";
           allergensPlusBannerTitle.innerHTML = UI_ICONS.star + " RAKKA Pro Required";
@@ -9487,27 +9497,41 @@
         }
       }
 
-      // Render 12 Allergen Guardrail Toggles (Default to unchecked for clean single profile)
+      // Render 12 Allergen Guardrail Toggles (Default to unchecked; locked in Free mode, customizable in Pro)
       allergenCheckboxesContainer.innerHTML = ALLERGEN_OPTIONS.map(opt => {
-        const isChecked = userAllergens.includes(opt.id);
+        const isChecked = isPlusActive && userAllergens.includes(opt.id);
         const activeBg = isChecked 
           ? 'bg-cyan-950/50 border-cyan-500/60 shadow-sm shadow-cyan-950/40 ring-1 ring-amber-400/30' 
           : 'bg-slate-950/60 border-slate-800 hover:border-slate-700';
 
-        const checkIcon = isChecked
-          ? `<div class="w-8 h-8 rounded-xl flex items-center justify-center bg-gradient-to-r from-cyan-600 to-teal-500 text-white shadow-md transition shrink-0">
+        let lockIcon = '';
+        if (!isPlusActive) {
+          lockIcon = `
+            <span class="text-xs font-bold px-3 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center gap-1.5 shrink-0 shadow-sm">
+              ${UI_ICONS.lock}
+              <span>PRO</span>
+            </span>
+          `;
+        } else if (isChecked) {
+          lockIcon = `
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center bg-gradient-to-r from-cyan-600 to-teal-500 text-white shadow-md transition shrink-0">
               <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
               </svg>
-            </div>`
-          : `<div class="w-8 h-8 rounded-xl border-2 border-slate-600 bg-slate-900/60 transition shrink-0"></div>`;
+            </div>
+          `;
+        } else {
+          lockIcon = `
+            <div class="w-8 h-8 rounded-xl border-2 border-slate-600 bg-slate-900/60 transition shrink-0"></div>
+          `;
+        }
 
         return `
           <button 
             type="button" 
             class="allergen-toggle-btn min-h-[64px] p-3.5 rounded-2xl border text-left flex items-center justify-between transition active:scale-[0.99] ${activeBg} gap-3 cursor-pointer"
             data-id="${opt.id}"
-            title="Tap to toggle ${opt.name}"
+            title="${isPlusActive ? `Tap to toggle ${opt.name}` : `RAKKA Pro Required to enable ${opt.name}`}"
           >
             <div class="flex items-center gap-3.5 min-w-0">
               <div class="w-10 h-10 rounded-xl bg-slate-800/80 border border-slate-700/80 flex items-center justify-center text-sky-400 shrink-0">
@@ -9518,7 +9542,7 @@
                 <span class="text-xs sm:text-sm text-slate-300 block leading-tight mt-0.5">${opt.desc}</span>
               </div>
             </div>
-            ${checkIcon}
+            ${lockIcon}
           </button>
         `;
       }).join('');
@@ -9526,6 +9550,12 @@
       document.querySelectorAll('.allergen-toggle-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
+          if (!isPlusActive) {
+            triggerHaptic([40, 40]);
+            openPaywall();
+            showCustomizeToast("RAKKA Pro required to customize allergen guards.");
+            return;
+          }
           triggerHaptic([30]);
           const id = btn.getAttribute('data-id');
 
@@ -10867,7 +10897,7 @@ function renderHistory() {
                   <div class="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 text-xs">
                     ✓ Zero active household allergen conflicts for all family members.
                   </div>
-                `) : (affectedMembers.length > 0 ? `
+                `) : (affectedMembers.length > 0 || item.status === 'allergen_alert' ? `
                   <div class="p-3 rounded-xl bg-amber-950/40 border border-amber-500/40 space-y-2">
                     <div class="flex items-center justify-between">
                       <span class="font-bold text-amber-300 text-xs flex items-center gap-1.5">
@@ -11756,7 +11786,7 @@ function renderHistory() {
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=79')
+        navigator.serviceWorker.register('./sw.js?v=80')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
