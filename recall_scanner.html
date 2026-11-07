@@ -8165,6 +8165,10 @@
         manualResultContainer.style.display = 'none';
       }
 
+      // Reset accordion state so returning to Watchlist ALWAYS defaults to collapsed
+      activeExpandedReceiptId = null;
+      activeExpandedCardKey = null;
+
       // Execute render routines strictly for the active tab
       if (isWatchlist && typeof renderHistory === 'function') {
         try {
@@ -12534,24 +12538,38 @@
       watchlistActiveFilter = f;
       renderHistory();
     };
+    let activeExpandedReceiptId = null;
     let collapsedReceiptGroups = {};
 
+    // Single Accordion Toggle for Receipt Groups (Guaranteed 1-touch open/close & auto-collapse of others)
     function toggleReceiptGroup(receiptKey) {
       triggerHaptic([20]);
-      collapsedReceiptGroups[receiptKey] = !collapsedReceiptGroups[receiptKey];
-      const drawer = document.getElementById(`receipt-drawer-${receiptKey}`);
-      const chevron = document.getElementById(`receipt-chevron-${receiptKey}`);
-      if (drawer) {
-        if (collapsedReceiptGroups[receiptKey]) {
-          drawer.classList.add('hidden');
-          if (chevron) chevron.textContent = '▼';
-        } else {
-          drawer.classList.remove('hidden');
-          if (chevron) chevron.textContent = '▲';
-        }
+      const targetDrawer = document.getElementById(`receipt-drawer-${receiptKey}`);
+      const targetChevron = document.getElementById(`receipt-chevron-${receiptKey}`);
+      if (!targetDrawer) return;
+
+      const isCurrentlyOpen = !targetDrawer.classList.contains('hidden');
+
+      // Collapse all other receipt group drawers (Single Accordion Rule)
+      document.querySelectorAll('[id^="receipt-drawer-"]').forEach(d => {
+        d.classList.add('hidden');
+      });
+      document.querySelectorAll('[id^="receipt-chevron-"]').forEach(c => {
+        c.textContent = '▼';
+      });
+
+      if (isCurrentlyOpen) {
+        targetDrawer.classList.add('hidden');
+        if (targetChevron) targetChevron.textContent = '▼';
+        activeExpandedReceiptId = null;
+      } else {
+        targetDrawer.classList.remove('hidden');
+        if (targetChevron) targetChevron.textContent = '▲';
+        activeExpandedReceiptId = receiptKey;
       }
     }
     window.toggleReceiptGroup = toggleReceiptGroup;
+    window.getActiveExpandedReceiptId = () => activeExpandedReceiptId;
 
     function deleteReceiptGroup(receiptKey) {
       triggerHaptic([40, 40]);
@@ -12617,20 +12635,37 @@
     }
     window.formatWatchedTimestamp = formatWatchedTimestamp;
 
-    // Toggle Expand/Collapse for individual item accordion drawer
+    let activeExpandedCardKey = null;
+
+    // Toggle Expand/Collapse for individual item accordion drawer (Single Accordion Rule)
     function toggleWatchlistItemDetails(cardKey) {
       triggerHaptic([20]);
-      const drawer = document.getElementById(`watchlist-drawer-${cardKey}`);
-      const chevron = document.getElementById(`watchlist-chevron-${cardKey}`);
-      if (drawer) {
-        const isHidden = drawer.classList.contains('hidden');
-        drawer.classList.toggle('hidden', !isHidden);
-        if (chevron) {
-          chevron.textContent = isHidden ? '▲' : '▼';
-        }
+      const targetDrawer = document.getElementById(`watchlist-drawer-${cardKey}`);
+      const targetChevron = document.getElementById(`watchlist-chevron-${cardKey}`);
+      if (!targetDrawer) return;
+
+      const isCurrentlyOpen = !targetDrawer.classList.contains('hidden');
+
+      // Collapse all other item detail drawers (Single Accordion Rule)
+      document.querySelectorAll('[id^="watchlist-drawer-"]').forEach(d => {
+        d.classList.add('hidden');
+      });
+      document.querySelectorAll('[id^="watchlist-chevron-"]').forEach(c => {
+        c.textContent = '▼';
+      });
+
+      if (isCurrentlyOpen) {
+        targetDrawer.classList.add('hidden');
+        if (targetChevron) targetChevron.textContent = '▼';
+        activeExpandedCardKey = null;
+      } else {
+        targetDrawer.classList.remove('hidden');
+        if (targetChevron) targetChevron.textContent = '▲';
+        activeExpandedCardKey = cardKey;
       }
     }
     window.toggleWatchlistItemDetails = toggleWatchlistItemDetails;
+    window.getActiveExpandedCardKey = () => activeExpandedCardKey;
 
 function renderHistory() {
       if (typeof auditWatchlistAllergens === 'function') {
@@ -12945,7 +12980,7 @@ function renderHistory() {
             </div>
 
             <!-- Expandable Drawer -->
-            <div id="watchlist-drawer-${cardKey}" class="hidden px-3.5 pb-3.5 pt-2.5 border-t border-slate-800/80 bg-slate-950 space-y-2.5 text-xs cursor-pointer" onclick="toggleWatchlistItemDetails('${cardKey}')">
+            <div id="watchlist-drawer-${cardKey}" class="hidden px-3.5 pb-3.5 pt-2.5 border-t border-slate-800/80 bg-slate-950 space-y-2.5 text-xs">
               <div class="p-2 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-[11px] font-mono">
                 <span class="text-slate-400">Barcode / Item Identifier:</span>
                 <span class="text-sky-300 font-bold">${item.upc}</span>
@@ -13089,9 +13124,9 @@ function renderHistory() {
         const hasAlerts = !hasRecalls && rcpt.items.some(i => i.status === 'allergen_alert' || (Array.isArray(i.familyMatches) && i.familyMatches.length > 0));
         const isAllClear = !hasRecalls && !hasAlerts;
 
-        // Receipts default to COLLAPSED upon opening the watchlist!
-        // Only expand if the user is actively searching (q.length > 0) or explicitly tapped to expand this receipt
-        const isExpanded = (q.length > 0) ? (collapsedReceiptGroups[rcpt.id] !== false) : (collapsedReceiptGroups[rcpt.id] === true);
+        // Receipts default to COLLAPSED upon opening/returning to watchlist!
+        // Only expand the single actively tapped receipt (Single Accordion Rule)
+        const isExpanded = (activeExpandedReceiptId === rcpt.id);
 
         // Deduplicate identical items in this receipt and calculate quantities
         const itemCounts = {};
@@ -13149,7 +13184,7 @@ function renderHistory() {
         finalHtml += `
           <div class="receipt-group rounded-2xl border border-slate-700/80 bg-slate-900 shadow-md overflow-hidden transition-all duration-200">
             <!-- Group Header Bar (No icon on the left, clean tags) -->
-            <div class="receipt-header-bar p-3.5 sm:p-4 flex items-center justify-between gap-3 cursor-pointer select-none bg-slate-800 hover:bg-slate-750 transition" onclick="toggleReceiptGroup('${rcpt.id}')">
+            <div class="receipt-header-bar p-3.5 sm:p-4 flex items-center justify-between gap-3 cursor-pointer select-none bg-slate-800 hover:bg-slate-750 active:bg-slate-700 transition" onclick="toggleReceiptGroup('${rcpt.id}')" role="button" tabindex="0">
               <div class="min-w-0">
                 <div class="flex items-center gap-2 flex-wrap">
                   ${groupTagPill}
