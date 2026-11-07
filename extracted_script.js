@@ -10137,11 +10137,65 @@ function renderHistory() {
     const openReceiptCameraBtn = document.getElementById('openReceiptCameraBtn');
     const openReceiptUploadBtn = document.getElementById('openReceiptUploadBtn');
     const receiptUploadInput = document.getElementById('receiptUploadInput');
+          // Helper: Stitch and deduplicate parallel top and bottom receipt segments (Recommendation 2)
+    function stitchReceiptAudits(topReceipt, bottomReceipt) {
+      if (!topReceipt && !bottomReceipt) throw new Error("No receipt data returned from inspection service");
+      if (!topReceipt) return bottomReceipt;
+      if (!bottomReceipt) return topReceipt;
 
-    // Helper: Resize and optimize receipt photo to ~1800-2400px JPEG
-    // Prevents mobile 12-50MP raw camera payloads from exceeding Cloudflare Workers 10MB body limits while keeping text ultra-sharp
+      const topItems = Array.isArray(topReceipt.items) ? topReceipt.items : [];
+      const bottomItems = Array.isArray(bottomReceipt.items) ? bottomReceipt.items : [];
+
+      function getItemKey(item) {
+        if (!item) return '';
+        const code = String(item.itemCode || item.upc || '').replace(/\D/g, '');
+        const name = String(item.cleanName || item.rawLine || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        return code ? `${code}_${name.slice(0, 8)}` : name;
+      }
+
+      // Suffix-prefix boundary overlap detector (checks up to 6 boundary items in the 14% seam)
+      let overlapCount = 0;
+      const maxOverlap = Math.min(6, topItems.length, bottomItems.length);
+
+      for (let k = maxOverlap; k >= 1; k--) {
+        const topSuffix = topItems.slice(-k).map(getItemKey);
+        const bottomPrefix = bottomItems.slice(0, k).map(getItemKey);
+        if (topSuffix.every((key, idx) => key === bottomPrefix[idx])) {
+          overlapCount = k;
+          break;
+        }
+      }
+
+      // Fallback: check if the first item of bottom matches any of the last 3 items of top
+      if (overlapCount === 0 && bottomItems.length > 0 && topItems.length > 0) {
+        const firstBottomKey = getItemKey(bottomItems[0]);
+        for (let i = topItems.length - 1; i >= Math.max(0, topItems.length - 3); i--) {
+          if (getItemKey(topItems[i]) === firstBottomKey) {
+            overlapCount = 1;
+            break;
+          }
+        }
+      }
+
+      const mergedItems = overlapCount > 0 
+        ? topItems.concat(bottomItems.slice(overlapCount))
+        : topItems.concat(bottomItems);
+
+      return {
+        id: 'rcpt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+        storeName: topReceipt.storeName || bottomReceipt.storeName || 'Grocery Store',
+        purchaseDate: topReceipt.purchaseDate || bottomReceipt.purchaseDate || 'Recent Trip',
+        totalFoodItems: mergedItems.length,
+        recalledCount: mergedItems.filter(i => i.status === 'recalled' || i.isRecalled).length,
+        allergenWarningCount: mergedItems.filter(i => i.status === 'allergen_alert').length,
+        items: mergedItems,
+        auditSummary: `${mergedItems.length} food items audited across dual parallel inspection passes.`
+      };
+    }
+    window.stitchReceiptAudits = stitchReceiptAudits;
+
+    // Helper: Resize and optimize receipt photo into single or dual-slice images
     async function prepareReceiptImageBase64(file) {
-      // Hardware-Accelerated Fast Path via createImageBitmap (avoids main-thread FileReader base64 string decoding)
       let img = null;
       let w = 0, h = 0;
       let isBitmap = false;
@@ -10171,12 +10225,7 @@ function renderHistory() {
         }
       }
 
-      // Receipt-Tailored Aspect Ratio Sizing:
-      // Receipts are tall vertical ribbons. Maintaining width at ~1000px ensures small 6-digit item codes
-      // and dot-matrix text remain razor-sharp while max height of 2600px prevents letter squishing.
-      // Optimized for Gemini Vision 768px tile boundaries:
-      // Clamping to 768px width fits cleanly into a 1x3 tile grid (774 tokens vs 2,064 tokens)
-      // while preserving 100% optical legibility on small 6-digit register text.
+      // Gemini Vision 768px tile boundary calibration
       const maxW = 768;
       const maxH = 2304;
       let scale = 1;
@@ -10193,7 +10242,6 @@ function renderHistory() {
       const ctx = canvas.getContext('2d');
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'medium';
-      // Contrast & brightness enhancement to make faint thermal ink pop crisp against off-white receipt paper
       if ('filter' in ctx) {
         ctx.filter = 'contrast(1.15) brightness(1.02)';
       }
@@ -10203,20 +10251,81 @@ function renderHistory() {
         img.close();
       }
 
-      // 0.72 JPEG quality cuts network upload payload by ~40% with zero loss on printed receipt text
+      // Check for tall receipt haul (>= 1200px) to trigger Parallel Dual-Slicing
+      if (targetH >= 1200) {
+        // Slice 1: Top 0% to 58%
+        const slice1H = Math.round(targetH * 0.58);
+        const canvas1 = document.createElement('canvas');
+        canvas1.width = targetW;
+        canvas1.height = slice1H;
+        const ctx1 = canvas1.getContext('2d');
+        ctx1.drawImage(canvas, 0, 0, targetW, slice1H, 0, 0, targetW, slice1H);
+
+        // Slice 2: Bottom 44% to 100% (creates 14% vertical overlap zone)
+        const slice2StartY = Math.round(targetH * 0.44);
+        const slice2H = targetH - slice2StartY;
+        const canvas2 = document.createElement('canvas');
+        canvas2.width = targetW;
+        canvas2.height = slice2H;
+        const ctx2 = canvas2.getContext('2d');
+        ctx2.drawImage(canvas, 0, slice2StartY, targetW, slice2H, 0, 0, targetW, slice2H);
+
+        return {
+          isDualSlice: true,
+          slices: [
+            { dataUrl: canvas1.toDataURL('image/jpeg', 0.72), mimeType: 'image/jpeg', label: 'Top Half' },
+            { dataUrl: canvas2.toDataURL('image/jpeg', 0.72), mimeType: 'image/jpeg', label: 'Bottom Half' }
+          ]
+        };
+      }
+
       const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.72);
-      return { dataUrl: compressedDataUrl, mimeType: 'image/jpeg' };
+      return {
+        isDualSlice: false,
+        slices: [
+          { dataUrl: compressedDataUrl, mimeType: 'image/jpeg', label: 'Full Receipt' }
+        ]
+      };
     }
 
     let isReceiptProcessing = false;
     let receiptWakeLockSentinel = null;
+
+    // Helper: Single segment fetcher
+    async function fetchReceiptSegment(hookUrl, sliceDataUrl, mimeType, activeAllergens, clientApiKey, segmentLabel) {
+      const res = await fetch(`${hookUrl.replace(/\/+$/, '')}/audit-receipt`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          imageBase64: sliceDataUrl,
+          mimeType: mimeType,
+          activeAllergens: activeAllergens,
+          clientApiKey: clientApiKey
+        })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.success && data.receipt) {
+          return data.receipt;
+        } else if (data && data.error) {
+          throw new Error(`${segmentLabel} Error: ${data.error}`);
+        }
+      }
+      let errMsg = `Server returned HTTP ${res.status}`;
+      try {
+        const errData = await res.json();
+        if (errData && errData.error) errMsg = errData.error;
+      } catch (_) {}
+      throw new Error(errMsg);
+    }
 
     async function processReceiptFile(file) {
       if (!file || isReceiptProcessing) return;
       isReceiptProcessing = true;
       triggerHaptic([40]);
 
-      // Acquire Screen Wake Lock to guarantee phone screen stays bright and never sleeps during scan
+      // Acquire Screen Wake Lock to keep display bright
       if (typeof navigator !== 'undefined' && 'wakeLock' in navigator) {
         try {
           receiptWakeLockSentinel = await navigator.wakeLock.request('screen');
@@ -10226,63 +10335,108 @@ function renderHistory() {
       if (receiptAuditLoadingBox) receiptAuditLoadingBox.classList.remove('hidden');
       if (receiptAuditResultsBox) receiptAuditResultsBox.classList.add('hidden');
 
-      // Dynamic engaging progress updates so user sees immediate live stages
+      // Live Incremental Progress Meter (Recommendation 3)
+      let elapsedSeconds = 0;
       let progressTimer = null;
-      const progressSteps = [
-        "Optimizing receipt image & camera focus...",
-        "Scanning grocery lines with AI Vision...",
-        "Auditing items against active FDA & USDA recalls...",
-        "Loading audited items into Watchlist..."
-      ];
-      let stepIdx = 0;
-      const statusP = receiptAuditLoadingBox ? receiptAuditLoadingBox.querySelector('p.font-semibold') : null;
-      if (statusP) {
-        statusP.textContent = progressSteps[0];
-        progressTimer = setInterval(() => {
-          stepIdx = (stepIdx + 1) % progressSteps.length;
-          if (statusP) statusP.textContent = progressSteps[stepIdx];
-        }, 1300);
+
+      const mainTitle = document.getElementById('receiptProgressMainTitle');
+      const subText = document.getElementById('receiptProgressSubText');
+      const barFill = document.getElementById('receiptProgressBarFill');
+      const percentText = document.getElementById('receiptProgressPercentText');
+
+      const step1 = document.getElementById('receiptStep1');
+      const step2 = document.getElementById('receiptStep2');
+      const step3 = document.getElementById('receiptStep3');
+      const step4 = document.getElementById('receiptStep4');
+
+      const step1Icon = document.getElementById('receiptStep1Icon');
+      const step2Icon = document.getElementById('receiptStep2Icon');
+      const step3Icon = document.getElementById('receiptStep3Icon');
+      const step4Icon = document.getElementById('receiptStep4Icon');
+
+      function updateProgressUI(pct, title, desc, stepIndex) {
+        if (barFill) barFill.style.width = `${pct}%`;
+        if (percentText) percentText.textContent = `${pct}%`;
+        if (mainTitle && title) mainTitle.textContent = title;
+        if (subText && desc) subText.textContent = desc;
+
+        const steps = [
+          { el: step1, icon: step1Icon, text: 'Image Calibration' },
+          { el: step2, icon: step2Icon, text: 'AI Optical Character Recognition' },
+          { el: step3, icon: step3Icon, text: 'FDA & USDA Class I/II Recall Screening' },
+          { el: step4, icon: step4Icon, text: 'Household Allergen Conflict Audit & Additive Shield' }
+        ];
+
+        steps.forEach((s, idx) => {
+          if (!s.el || !s.icon) return;
+          if (idx < stepIndex) {
+            // Completed step
+            s.el.className = "flex items-center gap-2 text-emerald-300 font-semibold";
+            s.icon.className = "w-4 h-4 rounded-full bg-emerald-500/20 border border-emerald-400/50 flex items-center justify-center text-[10px]";
+            s.icon.textContent = "✓";
+          } else if (idx === stepIndex) {
+            // Active step
+            s.el.className = "flex items-center gap-2 text-cyan-300 font-bold";
+            s.icon.className = "w-4 h-4 rounded-full bg-cyan-500/20 border border-cyan-400/50 flex items-center justify-center text-[10px] animate-pulse";
+            s.icon.textContent = String(idx + 1);
+          } else {
+            // Upcoming step
+            s.el.className = "flex items-center gap-2 text-slate-500";
+            s.icon.className = "w-4 h-4 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-[10px]";
+            s.icon.textContent = String(idx + 1);
+          }
+        });
       }
 
-      try {
-        const { dataUrl, mimeType } = await prepareReceiptImageBase64(file);
-        const hookUrl = (localStorage.getItem('rakka_cloudflare_hook') || DEFAULT_CLOUDFLARE_HOOK).trim();
+      // Initial state
+      updateProgressUI(15, "Auditing Grocery Trip", "Calibrating receipt image for AI vision...", 0);
 
-        // Pass active user allergens for cross-checking
+      progressTimer = setInterval(() => {
+        elapsedSeconds++;
+
+        // Progressive realistic time increments based on percentage
+        if (elapsedSeconds === 2) {
+          updateProgressUI(35, "Scanning Grocery Lines", "Reading store items with AI Optical Character Recognition...", 1);
+        } else if (elapsedSeconds === 8) {
+          updateProgressUI(60, "Auditing Federal Recalls", "Cross-referencing food items against active FDA & USDA alerts...", 2);
+        } else if (elapsedSeconds === 15) {
+          updateProgressUI(82, "Evaluating Household Shields", "Checking family allergen conflicts & scrutinized chemical additives...", 3);
+        } else if (elapsedSeconds >= 22 && elapsedSeconds < 35) {
+          const pseudoPct = Math.min(94, 82 + Math.floor((elapsedSeconds - 15) * 1.0));
+          if (barFill) barFill.style.width = `${pseudoPct}%`;
+          if (percentText) percentText.textContent = `${pseudoPct}%`;
+        }
+      }, 1000);
+
+      try {
+        const prep = await prepareReceiptImageBase64(file);
+        const hookUrl = (localStorage.getItem('rakka_cloudflare_hook') || DEFAULT_CLOUDFLARE_HOOK).trim();
         const activeProf = getActiveProfile();
         const activeAllergens = (activeProf && activeProf.allergens) ? activeProf.allergens : [];
+        const clientApiKey = (localStorage.getItem('rakka_gemini_key') || localStorage.getItem('gemini_api_key') || '').trim();
 
-        const res = await fetch(`${hookUrl.replace(/\/+$/, '')}/audit-receipt`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            imageBase64: dataUrl,
-            mimeType: mimeType,
-            activeAllergens: activeAllergens,
-            clientApiKey: (localStorage.getItem('rakka_gemini_key') || localStorage.getItem('gemini_api_key') || '').trim()
-          })
-        });
+        let receiptData = null;
 
-        if (res.ok) {
-          const data = await res.json();
-          if (data && data.success && data.receipt) {
-            recordReceiptScanUsage();
-            // 1. Immediately Auto-Load All Receipt Items directly into Watchlist!
-            autoImportReceiptDirectlyToWatchlist(data.receipt);
-            return;
-          } else if (data && data.error) {
-            if (receiptAuditLoadingBox) receiptAuditLoadingBox.classList.add('hidden');
-            console.warn("Backend receipt audit error:", data.error);
-            showCustomizeToast(`Receipt Error: ${data.error}`);
-            return;
-          }
+        if (prep.isDualSlice) {
+          // Dispatch both slices in parallel (cuts wait time in half!)
+          const [topAudit, bottomAudit] = await Promise.all([
+            fetchReceiptSegment(hookUrl, prep.slices[0].dataUrl, 'image/jpeg', activeAllergens, clientApiKey, 'Top Half'),
+            fetchReceiptSegment(hookUrl, prep.slices[1].dataUrl, 'image/jpeg', activeAllergens, clientApiKey, 'Bottom Half')
+          ]);
+
+          receiptData = stitchReceiptAudits(topAudit, bottomAudit);
+        } else {
+          receiptData = await fetchReceiptSegment(hookUrl, prep.slices[0].dataUrl, 'image/jpeg', activeAllergens, clientApiKey, 'Receipt');
         }
-        let errMsg = `Server returned HTTP ${res.status}`;
-        try {
-          const errData = await res.json();
-          if (errData && errData.error) errMsg = errData.error;
-        } catch (_) {}
-        throw new Error(errMsg);
+
+        if (receiptData) {
+          updateProgressUI(100, "Audit Complete!", `Successfully verified ${receiptData.totalFoodItems || 0} items! Loading into Watchlist...`, 4);
+          recordReceiptScanUsage();
+          setTimeout(() => {
+            autoImportReceiptDirectlyToWatchlist(receiptData);
+          }, 450);
+          return;
+        }
       } catch (err) {
         if (receiptAuditLoadingBox) receiptAuditLoadingBox.classList.add('hidden');
         console.warn("Receipt auditor error:", err);
