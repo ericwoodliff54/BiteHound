@@ -8056,9 +8056,14 @@
         localStorage.setItem('rakka_history', JSON.stringify(scanHistory)); 
         localStorage.setItem('safebite_history', JSON.stringify(scanHistory));
       } catch (e) {}
-      auditPantryAgainstRecalls();
+      if (typeof auditPantryAgainstRecalls === 'function') {
+        auditPantryAgainstRecalls();
+      }
       if (typeof updateWatchlistNavBadge === 'function') {
         updateWatchlistNavBadge();
+      }
+      if (typeof renderHistory === 'function') {
+        renderHistory();
       }
     }
     window.removeGuardedItem = removeGuardedItem;
@@ -8533,6 +8538,15 @@
 
       delete collapsedReceiptGroups[receiptKey];
       saveHistory();
+      if (typeof auditPantryAgainstRecalls === 'function') {
+        auditPantryAgainstRecalls();
+      }
+      if (typeof updateWatchlistNavBadge === 'function') {
+        updateWatchlistNavBadge();
+      }
+      if (typeof renderHistory === 'function') {
+        renderHistory();
+      }
       showCustomizeToast(`Removed ${groupName} (${count} items)`);
     }
     window.deleteReceiptGroup = deleteReceiptGroup;
