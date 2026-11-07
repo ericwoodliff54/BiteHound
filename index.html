@@ -989,14 +989,42 @@
     }
 
     /* Modals in Light Mode */
-    html.theme-light #plusPaywallModal > div > div,
-    html.theme-light #addProfileModal > div > div,
-    html.theme-light #safetyDisclaimerModal > div > div,
-    html.theme-light #installHelpModal > div > div {
+    html.theme-light #plusPaywallModal > div,
+    html.theme-light #addProfileModal > div,
+    html.theme-light #safetyDisclaimerModal > div,
+    html.theme-light #installHelpModal > div {
       background: #ffffff !important;
-      color: #000000 !important;
-      border-color: #cbd5e1 !important;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25) !important;
+      color: #0f172a !important;
+      border: 1.5px solid #cbd5e1 !important;
+      box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25) !important;
+    }
+    html.theme-light #safetyDisclaimerModal .legal-scroll-box {
+      background: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+      color: #334155 !important;
+    }
+    html.theme-light #safetyDisclaimerModal .legal-scroll-box > div {
+      background: #ffffff !important;
+      border-color: #e2e8f0 !important;
+    }
+    html.theme-light #safetyDisclaimerModal h3,
+    html.theme-light #safetyDisclaimerModal h4 {
+      color: #0f172a !important;
+    }
+    html.theme-light #safetyDisclaimerModal p,
+    html.theme-light #safetyDisclaimerModal span {
+      color: #334155 !important;
+    }
+    html.theme-light #safetyDisclaimerModal strong {
+      color: #0f172a !important;
+    }
+    html.theme-light #safetyDisclaimerModal #closeDisclaimerModalBtn {
+      background: #f1f5f9 !important;
+      color: #64748b !important;
+    }
+    html.theme-light #safetyDisclaimerModal #closeDisclaimerModalBtn:hover {
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
     }
     html.theme-light #plusPaywallModal label,
     html.theme-light #addProfileModal label {
@@ -2149,63 +2177,122 @@
       </div>
     </div>
 
-<!-- FOOD SAFETY & LEGAL DISCLAIMER MODAL SHEET -->
+<!-- USER AGREEMENT & FOOD SAFETY TERMS MODAL (Mandatory on First Launch & Accessible in Settings) -->
     <div id="safetyDisclaimerModal" class="hidden fixed inset-0 z-[60] bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
-      <div class="bg-slate-900 border-2 border-sky-500/50 max-w-lg w-full rounded-3xl p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto relative animate-in fade-in zoom-in-95 duration-200">
+      <div class="bg-slate-900 border-2 border-cyan-500/50 max-w-xl w-full rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4 max-h-[92vh] flex flex-col relative animate-in fade-in zoom-in-95 duration-200">
         
-        <button id="closeDisclaimerModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1.5 rounded-full bg-slate-800 text-xs" aria-label="Close">
+        <button id="closeDisclaimerModalBtn" class="absolute top-4 right-4 text-slate-400 hover:text-white p-2 rounded-full bg-slate-800 text-sm transition active:scale-95 cursor-pointer z-10" aria-label="Close user agreement">
           &times;
         </button>
 
-        <div class="flex items-center gap-3 border-b border-slate-800 pb-3 pr-6">
-          <div class="w-10 h-10 rounded-2xl bg-sky-500/20 border border-sky-500/40 flex items-center justify-center text-sky-400 shrink-0">
-            <svg class="w-4 h-4 text-sky-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="flex items-center gap-3 border-b border-slate-800 pb-3 pr-8 shrink-0">
+          <div class="w-10 h-10 rounded-2xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400 shrink-0 shadow-sm">
+            <svg class="w-5 h-5 text-cyan-400 shrink-0 inline-block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <div>
-            <h3 class="font-display text-base font-bold text-white leading-tight">Food Safety & Legal Notice</h3>
-            <p class="text-[11px] text-slate-400">Important consumer health & terms of use notice</p>
+            <h3 class="font-display text-base font-extrabold text-white leading-tight">User Agreement & Safety Terms</h3>
+            <p class="text-[11px] text-slate-400">Mandatory first-launch agreement • Also accessible in Settings</p>
           </div>
         </div>
 
-        <div class="space-y-3 text-xs text-slate-300 leading-relaxed max-h-64 overflow-y-auto pr-1 border border-slate-800/80 rounded-xl p-3.5 bg-slate-950/80">
-          <div class="space-y-1">
-            <h4 class="font-bold text-white flex items-center gap-1.5 text-xs">
-              <span class="text-sky-400">1.</span> Informational Convenience Tool Only
-            </h4>
-            <p class="text-[11px] text-slate-400 leading-normal">RAKKA is an independent consumer shopping aid designed to cross-reference public food safety data. This application does not provide medical, diagnostic, nutritional, or legal advice, and must never substitute for professional healthcare guidance or personal inspection.</p>
+        <div class="legal-scroll-box flex-1 space-y-4 text-xs text-slate-300 leading-relaxed max-h-[56vh] overflow-y-auto pr-2 border border-slate-800/80 rounded-2xl p-4 bg-slate-950/90 shadow-inner">
+          
+          <!-- SECTION 1 -->
+          <div class="space-y-1.5 p-3 rounded-xl bg-slate-900/60 border border-slate-800/70">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-sky-500/20 text-sky-300 border border-sky-500/40">Section 1</span>
+              <h4 class="font-bold text-white text-xs sm:text-sm">Not Medical Advice / No Healthcare Relationship</h4>
+            </div>
+            <p class="text-[10px] font-mono uppercase tracking-wider text-sky-400/90 font-bold">INFORMATIONAL PURPOSES ONLY; NO MEDICAL ADVICE.</p>
+            <p class="text-[11px] text-slate-300 leading-normal">
+              The services, features, content, barcode lookups, receipt extractions, and scanning outputs provided by the App are for general informational, educational, and reference purposes only. The App is not a medical device, does not provide clinical or medical diagnoses, and is not a substitute for professional medical advice, allergy testing, treatment, or judgment. Always consult a qualified healthcare professional or allergist regarding food allergies, dietary restrictions, anaphylaxis risks, or medical conditions. Never disregard or delay seeking professional medical advice because of information provided through the App. In the event of a suspected allergic reaction or medical emergency, immediately call emergency services (911 in the United States) or contact a local healthcare facility.
+            </p>
           </div>
 
-          <div class="space-y-1">
-            <h4 class="font-bold text-white flex items-center gap-1.5 text-xs">
-              <span class="text-amber-400">2.</span> Always Inspect Physical Packaging
-            </h4>
-            <p class="text-[11px] text-slate-400 leading-normal">Food manufacturers frequently alter recipes, production lines, and facility allergen protocols without advance notice. Cross-contamination may occur. You must always inspect the physical product package, printed ingredient list, lot codes, and allergen warnings before purchasing or consuming any food item.</p>
+          <!-- SECTION 2 -->
+          <div class="space-y-1.5 p-3 rounded-xl bg-slate-900/60 border border-slate-800/70">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">Section 2</span>
+              <h4 class="font-bold text-white text-xs sm:text-sm">Label Inspection & Inherent Scanning Limitations</h4>
+            </div>
+            <p class="text-[10px] font-mono uppercase tracking-wider text-amber-400/90 font-bold">MANDATORY PHYSICAL PACKAGE INSPECTION; SYSTEM LIMITATIONS.</p>
+            <p class="text-[11px] text-slate-300 leading-normal font-medium">You acknowledge and agree that:</p>
+            <div class="space-y-2 pl-2 border-l-2 border-amber-500/40 mt-1">
+              <p class="text-[11px] text-slate-300 leading-normal">
+                <strong class="text-white">1. Physical Label Controls:</strong> You must independently read, inspect, and verify the physical ingredient list, allergen warnings, and manufacturer statements directly on the physical packaging of every product prior to purchase, preparation, or consumption.
+              </p>
+              <p class="text-[11px] text-slate-300 leading-normal">
+                <strong class="text-white">2. Scanning and OCR Fallibility:</strong> Optical character recognition (OCR), artificial intelligence vision models, receipt parsing, and camera image captures are inherently imperfect. Factors including glare, lighting, distorted text, wrinkled packaging, low resolution, or damaged barcodes may cause inaccurate, incomplete, or omitted readings.
+              </p>
+              <p class="text-[11px] text-slate-300 leading-normal">
+                <strong class="text-white">3. Database Lags and Reformulation:</strong> Food manufacturers routinely reformulate recipes, change processing lines, alter facility allergen cross-contamination warnings, and modify packaging without notice. Product database entries, third-party API data, and automated feeds may be delayed, inaccurate, or out of date. We do not warrant that product data reflects the actual contents of the physical item in your hands.
+              </p>
+            </div>
           </div>
 
-          <div class="space-y-1">
-            <h4 class="font-bold text-white flex items-center gap-1.5 text-xs">
-              <span class="text-rose-400">3.</span> "As-Is" Data & Limitation of Liability
-            </h4>
-            <p class="text-[11px] text-slate-400 leading-normal">Recall data and product ingredients are aggregated from third-party public resources including Open Food Facts, the FDA, and the USDA. Data is provided strictly "AS IS" and "AS AVAILABLE" with no warranties of completeness, accuracy, or real-time availability. To the fullest extent permitted by law, Rakka and its creators assume no liability for allergic reactions, illness, injury, or damages arising from reliance on this application.</p>
+          <!-- SECTION 3 -->
+          <div class="space-y-1.5 p-3 rounded-xl bg-slate-900/60 border border-slate-800/70">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/40">Section 3</span>
+              <h4 class="font-bold text-white text-xs sm:text-sm">FDA & Regulatory Recalls</h4>
+            </div>
+            <p class="text-[10px] font-mono uppercase tracking-wider text-teal-400/90 font-bold">THIRD-PARTY RECALL DATA LIMITATIONS.</p>
+            <p class="text-[11px] text-slate-300 leading-normal">
+              The App aggregates publicly available recall, safety alert, and regulatory notice data (including feeds from the U.S. Food and Drug Administration (FDA) and the United States Department of Agriculture (USDA)). We do not originate, verify, or guarantee the completeness, timeliness, or accuracy of regulatory agency notifications. A product’s absence from the App’s recall alerts does not guarantee that the product has not been recalled, contaminated, or subject to safety warnings. Always confirm active recalls directly with official government agencies (fda.gov / recalls.gov) and the product manufacturer.
+            </p>
           </div>
 
-          <div class="space-y-1">
-            <h4 class="font-bold text-white flex items-center gap-1.5 text-xs">
-              <span class="text-emerald-400">4.</span> Non-Government Affiliation
-            </h4>
-            <p class="text-[11px] text-slate-400 leading-normal">RAKKA is an independent consumer tool. It is not affiliated with, sponsored by, authorized by, or an official product of the U.S. Food and Drug Administration (FDA), the U.S. Department of Agriculture (USDA), or any government body.</p>
+          <!-- SECTION 4 -->
+          <div class="space-y-1.5 p-3 rounded-xl bg-slate-900/60 border border-slate-800/70">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">Section 4</span>
+              <h4 class="font-bold text-white text-xs sm:text-sm">Limitation of Liability & Physical Injury Cap</h4>
+            </div>
+            <p class="text-[10px] font-mono uppercase tracking-wider text-rose-400/90 font-bold">LIMITATION OF LIABILITY.</p>
+            <p class="text-[11px] text-slate-300 leading-normal uppercase">
+              TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL THE COMPANY, ITS OFFICERS, DIRECTORS, EMPLOYEES, AFFILIATES, AGENTS, LICENSORS, OR SERVICE PROVIDERS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL, PUNITIVE, OR EXEMPLARY DAMAGES WHATSOEVER, INCLUDING WITHOUT LIMITATION DAMAGES FOR PERSONAL INJURY, BODILY HARM, ILLNESS, ANAPHYLACTIC SHOCK, EMOTIONAL DISTRESS, LOSS OF LIFE, MEDICAL EXPENSES, OR PROPERTY DAMAGE, ARISING OUT OF OR IN CONNECTION WITH:
+            </p>
+            <div class="space-y-1 pl-2 border-l-2 border-rose-500/40 mt-1 text-[11px] text-slate-300">
+              <p>1. YOUR USE OF OR INABILITY TO USE THE APP;</p>
+              <p>2. ANY INACCURATE, DEFECTIVE, DELAYED, OR OMITTED ALLERGEN, INGREDIENT, ADDITIVE, DYE, OR RECALL DATA;</p>
+              <p>3. ANY RELIANCE PLACED ON SCAN RESULTS, RECEIPT PARSING, OR DATABASE SEARCHES;</p>
+              <p>4. INGESTION, CONSUMPTION, OR EXPOSURE TO ANY ALLERGEN, PATHOGEN, OR HARMFUL SUBSTANCE.</p>
+            </div>
+            <p class="text-[11px] text-slate-300 leading-normal uppercase mt-1">
+              IF, NOTWITHSTANDING THE FOREGOING, THE COMPANY IS FOUND TO BE LIABLE TO YOU FOR ANY REASON, THE TOTAL AGGREGATE LIABILITY OF THE COMPANY SHALL NOT EXCEED THE GREATER OF: (A) THE TOTAL AMOUNT PAID BY YOU TO THE COMPANY FOR USE OF THE APP IN THE TWELVE (12) MONTHS IMMEDIATELY PRECEDING THE EVENT GIVING RISE TO THE CLAIM, OR (B) FIFTY UNITED STATES DOLLARS ($50.00).
+            </p>
           </div>
+
+          <!-- SECTION 5 -->
+          <div class="space-y-1.5 p-3 rounded-xl bg-slate-900/60 border border-slate-800/70">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40">Section 5</span>
+              <h4 class="font-bold text-white text-xs sm:text-sm">"As-Is" and "As-Available" Warranty Disclaimer</h4>
+            </div>
+            <p class="text-[10px] font-mono uppercase tracking-wider text-purple-400/90 font-bold">DISCLAIMER OF WARRANTIES.</p>
+            <p class="text-[11px] text-slate-300 leading-normal uppercase">
+              THE APP AND ALL ASSOCIATED SERVICES, FEATURES, AND CONTENT ARE PROVIDED STRICTLY ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS, IMPLIED, OR STATUTORY. THE COMPANY EXPRESSLY DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT, AND FREEDOM FROM ERROR, DEFECT, VIRUSES, OR INTERRUPTIONS. WE MAKE NO WARRANTY THAT THE APP WILL ACCURATELY DETECT ALL OR ANY ALLERGENS, DYES, PRESERVATIVES, OR RECALLED ITEMS.
+            </p>
+          </div>
+
+          <!-- SECTION 6 -->
+          <div class="space-y-1 p-3 rounded-xl bg-slate-900/40 border border-slate-800/60 text-[11px]">
+            <span class="font-bold text-slate-200">Non-Government Affiliation:</span>
+            <span class="text-slate-400">RAKKA is an independent consumer reference aid. It is not affiliated with, sponsored by, or an official agency product of the U.S. Food and Drug Administration (FDA) or U.S. Department of Agriculture (USDA).</span>
+          </div>
+
         </div>
 
-        <div class="pt-1">
+        <div class="pt-1 shrink-0">
           <button 
             type="button" 
             id="acceptDisclaimerBtn" 
-            class="w-full min-h-[48px] py-3 px-4 rounded-xl bg-gradient-to-r from-blue-600 via-sky-600 to-blue-700 hover:from-blue-500 hover:to-sky-600 text-white font-bold text-xs shadow-lg shadow-blue-900/40 transition active:scale-[0.98] flex items-center justify-center gap-2"
+            class="w-full min-h-[50px] py-3.5 px-4 rounded-2xl bg-gradient-to-r from-cyan-600 via-teal-500 to-cyan-500 hover:from-cyan-500 hover:to-teal-400 text-white font-bold text-sm shadow-lg shadow-cyan-950/50 transition active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer border border-cyan-400/40"
           >
+            <svg class="w-4 h-4 text-emerald-200 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
             <span>I Understand & Agree to Terms</span>
           </button>
-          <p class="text-[10px] text-slate-500 text-center mt-2 leading-tight">By continuing, you acknowledge that you will always verify printed labels on physical packaging before consumption.</p>
+          <p class="text-[10px] text-slate-400 text-center mt-2 leading-tight">By accepting, you agree to these Terms of Use and acknowledge that you will always verify printed labels directly on physical packaging prior to consumption.</p>
         </div>
       </div>
     </div>
