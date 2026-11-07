@@ -1,4 +1,3 @@
-// --- SCRIPT 2 ---
 
     // Audio Feedback Synthesizer
     // Sleek Acoustic Sound Engine (Warm, Filtered Harmonics — Zero Harsh 8-Bit Buzzers)
@@ -653,7 +652,7 @@
       // One-time default migration: Ensure single default profile ('me') defaults to UNCHECKED ([]), not all checked
       const hasCleanedDefaults = localStorage.getItem('rakka_allergens_unchecked_default_v1');
       if (!hasCleanedDefaults) {
-        if (familyProfiles && familyProfiles.length === 1 && familyProfiles[0].id === 'me') {
+        if (!savedProfiles && familyProfiles && familyProfiles.length === 1 && familyProfiles[0].id === 'me') {
           familyProfiles[0].allergens = [];
           if (typeof userAllergens !== 'undefined') userAllergens = [];
         }
@@ -856,6 +855,7 @@
         const activeAllergensJson = JSON.stringify(getActiveProfile().allergens || []);
         localStorage.setItem('rakka_family_profiles', profJson);
         localStorage.setItem('safebite_family_profiles', profJson);
+        localStorage.setItem('rakka_allergens_unchecked_default_v1', 'true');
         localStorage.setItem('rakka_active_profile_id', activeProfileId);
         localStorage.setItem('safebite_active_profile_id', activeProfileId);
         localStorage.setItem('rakka_allergens', activeAllergensJson);
@@ -3213,6 +3213,447 @@
       "ALDI"
     ],
     "isRecalled": false
+  },
+  "078742351866": {
+    "product": "Great Value Whole Pasteurized Vitamin D Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "category": "Dairy & Refrigerated",
+    "isRecalled": false,
+    "allergens": [
+      "dairy"
+    ],
+    "ingredients": "Grade A Milk, Vitamin D3.",
+    "additives": []
+  },
+  "78742351866": {
+    "product": "Great Value Whole Pasteurized Vitamin D Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "category": "Dairy & Refrigerated",
+    "isRecalled": false,
+    "allergens": [
+      "dairy"
+    ],
+    "ingredients": "Grade A Milk, Vitamin D3.",
+    "additives": []
+  },
+  "0078742351866": {
+    "product": "Great Value Whole Pasteurized Vitamin D Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "category": "Dairy & Refrigerated",
+    "isRecalled": false,
+    "allergens": [
+      "dairy"
+    ],
+    "ingredients": "Grade A Milk, Vitamin D3.",
+    "additives": [],
+    "upc": "0078742351866"
+  },
+  "078742371901": {
+    "product": "Great Value Whole Pasteurized Vitamin D Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "category": "Dairy & Refrigerated",
+    "isRecalled": false,
+    "allergens": [
+      "dairy"
+    ],
+    "ingredients": "Grade A Milk, Vitamin D3.",
+    "additives": []
+  },
+  "78742371901": {
+    "product": "Great Value Whole Pasteurized Vitamin D Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "category": "Dairy & Refrigerated",
+    "isRecalled": false,
+    "allergens": [
+      "dairy"
+    ],
+    "ingredients": "Grade A Milk, Vitamin D3.",
+    "additives": []
+  },
+  "078742050011": {
+    "product": "Great Value Whole Pasteurized Vitamin D Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "category": "Dairy & Refrigerated",
+    "isRecalled": false,
+    "allergens": [
+      "dairy"
+    ],
+    "ingredients": "Grade A Milk, Vitamin D3.",
+    "additives": []
+  },
+  "78742050011": {
+    "product": "Great Value Whole Pasteurized Vitamin D Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "category": "Dairy & Refrigerated",
+    "isRecalled": false,
+    "allergens": [
+      "dairy"
+    ],
+    "ingredients": "Grade A Milk, Vitamin D3.",
+    "additives": []
+  },
+  "078742351873": {
+    "product": "Great Value 2% Reduced Fat Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "category": "Dairy & Refrigerated",
+    "isRecalled": false,
+    "allergens": [
+      "dairy"
+    ],
+    "ingredients": "Reduced Fat Milk, Vitamin A Palmitate, Vitamin D3.",
+    "additives": []
+  },
+  "78742351873": {
+    "product": "Great Value 2% Reduced Fat Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "category": "Dairy & Refrigerated",
+    "isRecalled": false,
+    "allergens": [
+      "dairy"
+    ],
+    "ingredients": "Reduced Fat Milk, Vitamin A Palmitate, Vitamin D3.",
+    "additives": []
+  },
+  "078742351880": {
+    "product": "Great Value 1% Low Fat Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "category": "Dairy & Refrigerated",
+    "isRecalled": false,
+    "allergens": [
+      "dairy"
+    ],
+    "ingredients": "Lowfat Milk, Vitamin A Palmitate, Vitamin D3.",
+    "additives": []
+  },
+  "078742351897": {
+    "product": "Great Value Fat Free Skim Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "category": "Dairy & Refrigerated",
+    "isRecalled": false,
+    "allergens": [
+      "dairy"
+    ],
+    "ingredients": "Nonfat Milk, Vitamin A Palmitate, Vitamin D3.",
+    "additives": []
+  },
+  "4099100008506": {
+    "product": "Friendly Farms Whole Vitamin D Milk (1 Gallon / 128 fl oz)",
+    "brand": "Friendly Farms (Aldi)",
+    "category": "Dairy & Refrigerated",
+    "isRecalled": false,
+    "allergens": [
+      "dairy"
+    ],
+    "ingredients": "Grade A Milk, Vitamin D3.",
+    "additives": []
+  },
+  "041498111017": {
+    "product": "Friendly Farms Whole Vitamin D Milk (1 Gallon)",
+    "brand": "Friendly Farms (Aldi)",
+    "upc": "041498111017",
+    "ingredients": "Grade A Whole Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498111017": {
+    "product": "Friendly Farms Whole Vitamin D Milk (1 Gallon)",
+    "brand": "Friendly Farms (Aldi)",
+    "upc": "041498111017",
+    "ingredients": "Grade A Whole Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "041498111024": {
+    "product": "Friendly Farms 2% Reduced Fat Milk (1 Gallon)",
+    "brand": "Friendly Farms (Aldi)",
+    "upc": "041498111024",
+    "ingredients": "Grade A Reduced Fat Milk, Vitamin A Palmitate, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "0041498111024": {
+    "product": "Friendly Farms 2% Reduced Fat Milk (1 Gallon)",
+    "brand": "Friendly Farms (Aldi)",
+    "upc": "041498111024",
+    "ingredients": "Grade A Reduced Fat Milk, Vitamin A Palmitate, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "011110416003": {
+    "product": "Kroger Whole Vitamin D Milk (1 Gallon / 128 fl oz)",
+    "brand": "Kroger",
+    "category": "Dairy & Refrigerated",
+    "isRecalled": false,
+    "allergens": [
+      "dairy"
+    ],
+    "ingredients": "Grade A Milk, Vitamin D3.",
+    "additives": []
+  },
+  "011110401014": {
+    "product": "Kroger Grade A Whole Milk (1 Gallon)",
+    "brand": "Kroger",
+    "upc": "011110401014",
+    "ingredients": "Grade A Whole Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Kroger"
+    ],
+    "isRecalled": false
+  },
+  "0011110401014": {
+    "product": "Kroger Grade A Whole Milk (1 Gallon)",
+    "brand": "Kroger",
+    "upc": "011110401014",
+    "ingredients": "Grade A Whole Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Kroger"
+    ],
+    "isRecalled": false
+  },
+  "041250965002": {
+    "product": "Meijer Whole Vitamin D Milk (1 Gallon / 128 fl oz)",
+    "brand": "Meijer",
+    "category": "Dairy & Refrigerated",
+    "isRecalled": false,
+    "allergens": [
+      "dairy"
+    ],
+    "ingredients": "Grade A Milk, Vitamin D3.",
+    "additives": []
+  },
+  "886926010015": {
+    "product": "Meijer Grade A Whole Milk (1 Gallon)",
+    "brand": "Meijer",
+    "upc": "886926010015",
+    "ingredients": "Grade A Whole Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0886926010015": {
+    "product": "Meijer Grade A Whole Milk (1 Gallon)",
+    "brand": "Meijer",
+    "upc": "886926010015",
+    "ingredients": "Grade A Whole Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "030034001019": {
+    "product": "Giant Eagle Grade A Whole Milk (1 Gallon)",
+    "brand": "Giant Eagle",
+    "upc": "030034001019",
+    "ingredients": "Grade A Whole Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0030034001019": {
+    "product": "Giant Eagle Grade A Whole Milk (1 Gallon)",
+    "brand": "Giant Eagle",
+    "upc": "030034001019",
+    "ingredients": "Grade A Whole Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0742365264455": {
+    "product": "Horizon Organic Whole Milk (64 fl oz Half Gallon)",
+    "brand": "Horizon Organic",
+    "upc": "742365264455",
+    "ingredients": "Grade A Organic Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Giant Eagle",
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "742365264455": {
+    "product": "Horizon Organic Whole Milk (64 fl oz Half Gallon)",
+    "brand": "Horizon Organic",
+    "upc": "742365264455",
+    "ingredients": "Grade A Organic Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Giant Eagle",
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "856312002724": {
+    "product": "Fairlife Ultra-Filtered Whole Milk (52 fl oz Bottle)",
+    "brand": "Fairlife",
+    "upc": "856312002724",
+    "ingredients": "Ultra-Filtered Milk, Lactase Enzyme, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Giant Eagle",
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "0856312002724": {
+    "product": "Fairlife Ultra-Filtered Whole Milk (52 fl oz Bottle)",
+    "brand": "Fairlife",
+    "upc": "856312002724",
+    "ingredients": "Ultra-Filtered Milk, Lactase Enzyme, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Giant Eagle",
+      "Meijer",
+      "Kroger",
+      "Walmart",
+      "Target"
+    ],
+    "isRecalled": false
+  },
+  "856312002762": {
+    "product": "Fairlife Whole Ultra-Filtered Milk (52 fl oz)",
+    "brand": "Fairlife",
+    "upc": "856312002762",
+    "ingredients": "Ultra-Filtered Milk, Lactase Enzyme, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0856312002762": {
+    "product": "Fairlife Whole Ultra-Filtered Milk (52 fl oz)",
+    "brand": "Fairlife",
+    "upc": "856312002762",
+    "ingredients": "Ultra-Filtered Milk, Lactase Enzyme, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "856312002779": {
+    "product": "Fairlife 2% Reduced Fat Ultra-Filtered Milk (52 fl oz)",
+    "brand": "Fairlife",
+    "upc": "856312002779",
+    "ingredients": "Reduced Fat Ultra-Filtered Milk, Lactase Enzyme, Vitamin A Palmitate, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
+  },
+  "0856312002779": {
+    "product": "Fairlife 2% Reduced Fat Ultra-Filtered Milk (52 fl oz)",
+    "brand": "Fairlife",
+    "upc": "856312002779",
+    "ingredients": "Reduced Fat Ultra-Filtered Milk, Lactase Enzyme, Vitamin A Palmitate, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Giant Eagle",
+      "Meijer"
+    ],
+    "isRecalled": false
   }
 };
     let STAPLES_CATALOG = Object.assign({}, STAPLES_CATALOG_EMBEDDED);
@@ -3259,23 +3700,41 @@
         hydrateStaplesItems(STAPLES_CATALOG);
 
         // 2. Asynchronously load the full catalog from local staples_catalog.json
-        fetch('./staples_catalog.json')
-          .then(r => r.ok ? r.json() : null)
-          .then(fullData => {
-            if (fullData && typeof fullData === 'object') {
-              Object.assign(STAPLES_CATALOG, fullData);
-              hydrateStaplesItems(fullData);
-            }
-          })
-          .catch(e => {
-            console.warn("Staples catalog JSON fetch fallback:", e);
-          });
+        if (typeof fetch === "function") {
+          fetch("./staples_catalog.json")
+            .then(r => r.ok ? r.json() : null)
+            .then(fullData => {
+              if (fullData && typeof fullData === "object") {
+                Object.assign(STAPLES_CATALOG, fullData);
+                hydrateStaplesItems(fullData);
+              }
+            })
+            .catch(e => {
+              if (typeof require === "function") {
+                try {
+                  const fs = require("fs");
+                  const path = require("path");
+                  const candidates = [
+                    path.resolve("rakka_workspace/staples_catalog.json"),
+                    path.resolve("staples_catalog.json")
+                  ];
+                  for (const c of candidates) {
+                    if (fs.existsSync(c)) {
+                      const fullData = JSON.parse(fs.readFileSync(c, "utf8"));
+                      Object.assign(STAPLES_CATALOG, fullData);
+                      hydrateStaplesItems(fullData);
+                      break;
+                    }
+                  }
+                } catch (nodeErr) {}
+              }
+            });
+        }
       } catch (e) {
         console.warn("Staples catalog hydration fallback:", e);
       }
     }
 
-    
     // UPC-E to UPC-A Barcode Expansion Engine (Translates 8-digit compact barcodes e.g. Kit Kat 03424607 -> 034000002467)
     function expandUPCE(upce) {
       if (!upce) return null;
@@ -6014,12 +6473,33 @@
         let triggeredFamilyMatches = [];
         let detectedAdditivesList = auditFoodAdditives(ingredientsSummary, productAdditivesTags, productName);
 
-        // Screen against household profiles only in Pro mode (Free mode has allergen shields locked)
+        // Fresh Dairy Fluid Milk & Pure Cream Heuristic
+        if (!ingredientsSummary && productName && !productName.startsWith('Retail Grocery Item')) {
+          const lowerProd = (productName + ' ' + brandName).toLowerCase();
+          const dairyClean = lowerProd.replace(/\b(?:almond|oat|soy|coconut|cashew|rice|hemp|flax|plant[-_\s]*based)\s*milks?\b/gi, '');
+          if (/\b(?:whole\s*milk|2%\s*milk|1%\s*milk|skim\s*milk|fat\s*free\s*milk|vitamin\s*d\s*milk|half\s*(?:and|&)\s*half|heavy\s*(?:whipping\s*)?cream|buttermilk|pasteurized\s*milk|dairy\s*milk)\b/.test(dairyClean)) {
+            ingredientsSummary = 'Grade A Pasteurized Milk, Vitamin D3';
+            if (!detectedAllergenIds.includes('dairy')) detectedAllergenIds.push('dairy');
+          }
+        }
+
+        // Standardize & resolve allergens using central detection engine (normalizes OpenFoodFacts 'en:milk' -> 'dairy')
+        const resolvedAllergens = detectAllergensFromProduct({
+          productName: productName,
+          cleanName: productName,
+          brand: brandName,
+          ingredients: ingredientsSummary,
+          allergens: detectedAllergenIds
+        });
+        detectedAllergenIds = resolvedAllergens;
+
+        // Screen against household profiles (normalize both sides so 'dairy', 'Dairy', 'en:milk', 'Milk' always align perfectly)
         if (isPlusActive) {
           for (const prof of familyProfiles) {
-            const matches = (prof.allergens || []).filter(a => detectedAllergenIds.includes(a));
+            const profAllergens = (prof.allergens || []).map(normalizeAllergenId).filter(Boolean);
+            const matches = profAllergens.filter(a => detectedAllergenIds.includes(a));
             if (matches.length > 0) {
-              const names = matches.map(id => formatAllergenName(id));
+              const names = Array.from(new Set(matches.map(id => formatAllergenName(id))));
               triggeredFamilyMatches.push({
                 id: prof.id,
                 name: prof.name,
@@ -6260,7 +6740,80 @@
         `;
       }
 
-      // CASE C: Pro Mode - Unindexed Ingredients Warning
+      // CASE C: Pro Mode - Allergen Conflicts Detected (Takes absolute top priority over unindexed ingredients!)
+      if (hasFamilyMatches) {
+        return `
+          <div class="family-verdict-card rounded-2xl border-2 border-rose-500 bg-gradient-to-b from-rose-950/80 via-slate-900 to-slate-900 p-4 shadow-xl shadow-rose-950/50 space-y-3">
+            <div class="flex items-center justify-between pb-2.5 border-b border-rose-900/50">
+              <div class="flex items-center gap-2">
+                <span class="p-1.5 rounded-xl bg-rose-500/20 text-rose-300 border border-rose-500/40 shrink-0">
+                  ${UI_ICONS.alertTriangle}
+                </span>
+                <div>
+                  <span class="text-xs font-bold text-white uppercase tracking-wider block">Household Allergen Guard</span>
+                  <span class="text-[11px] text-rose-300 font-semibold">
+                    Unsafe for ${conflictingMembers.length} Household Member${conflictingMembers.length > 1 ? 's' : ''}
+                  </span>
+                </div>
+              </div>
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-rose-500 text-white shadow-sm shrink-0">
+                Allergen Conflict
+              </span>
+            </div>
+
+            <!-- Section 1: Unsafe for these Members -->
+            <div class="space-y-1.5">
+              <span class="text-[10px] uppercase tracking-wider font-bold text-rose-400 flex items-center gap-1">
+                <span>⚠️ Allergen Alert (${conflictingMembers.length}):</span>
+              </span>
+              <div class="space-y-1.5">
+                ${conflictingMembers.map(m => `
+                  <div class="flex items-center justify-between bg-rose-950/60 border border-rose-500/40 px-3 py-1.5 rounded-xl text-xs">
+                    <div class="flex items-center gap-2 font-bold text-white">
+                      ${renderMemberAvatar(m.icon, m.photo, m.name, "w-6 h-6", "w-3.5 h-3.5")}
+                      <span>${m.name}</span>
+                    </div>
+                    <span class="font-semibold text-rose-300 text-right text-[11px]">Contains ${m.allergens.join(', ')}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Section 2: Safe for these Members -->
+            ${safeMembers.length > 0 ? `
+              <div class="pt-2 border-t border-slate-800/80 space-y-1.5">
+                <span class="text-[10px] uppercase tracking-wider font-bold text-emerald-400 flex items-center gap-1">
+                  <span>✓ Safe For (${safeMembers.length}):</span>
+                </span>
+                <div class="flex flex-wrap gap-1.5">
+                  ${safeMembers.map(p => `
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-950/70 text-emerald-300 border border-emerald-500/30">
+                      ${renderMemberAvatar(p.icon, p.photo, p.name, "w-4 h-4", "w-3 h-3")}
+                      <span>${p.name}</span>
+                    </span>
+                  `).join('')}
+                </div>
+              </div>
+            ` : `
+              <div class="pt-1.5 border-t border-slate-800/80 text-[11px] text-rose-300 italic">
+                All screened household profiles have matching allergen alerts for this item.
+              </div>
+            `}
+
+            <!-- Section 3: Additives & Total Allergens -->
+            <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-300">
+              <span class="text-slate-400">
+                ${hasAdditives ? `<span class="text-purple-300 font-medium">${additivesCount} additive${additivesCount > 1 ? 's' : ''} flagged</span>` : '<span class="text-emerald-400 font-medium">Clean formulation</span>'}
+              </span>
+              <span class="text-[10px] font-mono text-slate-400">
+                Total Allergens: ${data.detectedAllergens ? data.detectedAllergens.length : 0}
+              </span>
+            </div>
+          </div>
+        `;
+      }
+
+      // CASE D: Pro Mode - Unindexed Ingredients Warning (Only if NO conflict was detected)
       if (!hasIndexedIngredients) {
         return `
           <div class="family-verdict-card rounded-2xl border border-slate-700 bg-slate-900/95 p-4 shadow-xl space-y-2.5">
@@ -6285,119 +6838,46 @@
         `;
       }
 
-      // CASE D: Pro Mode - All Profiles Cleared (100% Safe for Household)
-      if (!hasFamilyMatches) {
-        return `
-          <div class="family-verdict-card rounded-2xl border-2 border-emerald-500/80 bg-gradient-to-b from-emerald-950/60 via-slate-900 to-slate-900 p-4 shadow-xl shadow-emerald-950/40 space-y-3">
-            <div class="flex items-center justify-between pb-2.5 border-b border-emerald-900/50">
-              <div class="flex items-center gap-2">
-                <span class="p-1.5 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 shrink-0">
-                  ${UI_ICONS.shieldCheck}
-                </span>
-                <div>
-                  <span class="text-xs font-bold text-white uppercase tracking-wider block">Household Allergen Guard</span>
-                  <span class="text-[11px] text-emerald-300 font-semibold">Cleared for All Family Profiles (${familyProfiles.length} Screened)</span>
-                </div>
-              </div>
-              <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-500 text-white shadow-sm shrink-0">
-                All Cleared
-              </span>
-            </div>
-
-            <!-- Member Safe Badges Grid -->
-            <div>
-              <span class="text-[10px] uppercase tracking-wider font-bold text-emerald-300 block mb-1.5">
-                Screened & Cleared (${familyProfiles.length} Member${familyProfiles.length > 1 ? 's' : ''}):
-              </span>
-              <div class="flex flex-wrap gap-1.5">
-                ${familyProfiles.map(p => `
-                  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 shadow-sm">
-                    ${renderMemberAvatar(p.icon, p.photo, p.name, "w-4 h-4", "w-3 h-3")}
-                    <span>${p.name}</span>
-                    <span class="text-emerald-400 text-[10px]">✓</span>
-                  </span>
-                `).join('')}
-              </div>
-            </div>
-
-            <!-- Additive / Chemical Transparency Note -->
-            <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-300">
-              <span class="flex items-center gap-1 text-slate-400">
-                ${hasAdditives ? `${UI_ICONS.flask} <span class="text-purple-300 font-semibold">${additivesCount} scrutinized additive${additivesCount > 1 ? 's' : ''} detected</span>` : `${UI_ICONS.checkCircle} <span class="text-emerald-300 font-medium">Clean formulation (zero petroleum dyes)</span>`}
-              </span>
-              <span class="text-[10px] font-semibold text-emerald-400">0 Allergens</span>
-            </div>
-          </div>
-        `;
-      }
-
-      // CASE E: Pro Mode - Allergen Conflicts Detected (Split Safe vs Unsafe)
+      // CASE E: Pro Mode - All Profiles Cleared (100% Safe for Household)
       return `
-        <div class="family-verdict-card rounded-2xl border-2 border-amber-500 bg-gradient-to-b from-amber-950/70 via-slate-900 to-slate-900 p-4 shadow-xl shadow-amber-950/50 space-y-3">
-          <div class="flex items-center justify-between pb-2.5 border-b border-amber-900/50">
+        <div class="family-verdict-card rounded-2xl border-2 border-emerald-500/80 bg-gradient-to-b from-emerald-950/60 via-slate-900 to-slate-900 p-4 shadow-xl shadow-emerald-950/40 space-y-3">
+          <div class="flex items-center justify-between pb-2.5 border-b border-emerald-900/50">
             <div class="flex items-center gap-2">
-              <span class="p-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 shrink-0">
-                ${UI_ICONS.alertTriangle}
+              <span class="p-1.5 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 shrink-0">
+                ${UI_ICONS.shieldCheck}
               </span>
               <div>
                 <span class="text-xs font-bold text-white uppercase tracking-wider block">Household Allergen Guard</span>
-                <span class="text-[11px] text-amber-300 font-semibold">
-                  Unsafe for ${conflictingMembers.length} Household Member${conflictingMembers.length > 1 ? 's' : ''}
-                </span>
+                <span class="text-[11px] text-emerald-300 font-semibold">Cleared for All Family Profiles (${familyProfiles.length} Screened)</span>
               </div>
             </div>
-            <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-500 text-slate-950 shadow-sm shrink-0">
-              Partial Match
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-500 text-white shadow-sm shrink-0">
+              All Cleared
             </span>
           </div>
 
-          <!-- Section 1: Unsafe for these Members -->
-          <div class="space-y-1.5">
-            <span class="text-[10px] uppercase tracking-wider font-bold text-rose-400 flex items-center gap-1">
-              <span>⚠️ Allergen Alert (${conflictingMembers.length}):</span>
+          <!-- Member Safe Badges Grid -->
+          <div>
+            <span class="text-[10px] uppercase tracking-wider font-bold text-emerald-300 block mb-1.5">
+              Screened & Cleared (${familyProfiles.length} Member${familyProfiles.length > 1 ? 's' : ''}):
             </span>
-            <div class="space-y-1.5">
-              ${conflictingMembers.map(m => `
-                <div class="flex items-center justify-between bg-rose-950/60 border border-rose-500/40 px-3 py-1.5 rounded-xl text-xs">
-                  <div class="flex items-center gap-2 font-bold text-white">
-                    ${renderMemberAvatar(m.icon, m.photo, m.name, "w-6 h-6", "w-3.5 h-3.5")}
-                    <span>${m.name}</span>
-                  </div>
-                  <span class="font-semibold text-rose-300 text-right text-[11px]">Contains ${m.allergens.join(', ')}</span>
-                </div>
+            <div class="flex flex-wrap gap-1.5">
+              ${familyProfiles.map(p => `
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-950/80 text-emerald-300 border border-emerald-500/40 shadow-sm">
+                  ${renderMemberAvatar(p.icon, p.photo, p.name, "w-4 h-4", "w-3 h-3")}
+                  <span>${p.name}</span>
+                  <span class="text-emerald-400 text-[10px]">✓</span>
+                </span>
               `).join('')}
             </div>
           </div>
 
-          <!-- Section 2: Safe for these Members -->
-          ${safeMembers.length > 0 ? `
-            <div class="pt-2 border-t border-slate-800/80 space-y-1.5">
-              <span class="text-[10px] uppercase tracking-wider font-bold text-emerald-400 flex items-center gap-1">
-                <span>✓ Safe For (${safeMembers.length}):</span>
-              </span>
-              <div class="flex flex-wrap gap-1.5">
-                ${safeMembers.map(p => `
-                  <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-950/70 text-emerald-300 border border-emerald-500/30">
-                    ${renderMemberAvatar(p.icon, p.photo, p.name, "w-4 h-4", "w-3 h-3")}
-                    <span>${p.name}</span>
-                  </span>
-                `).join('')}
-              </div>
-            </div>
-          ` : `
-            <div class="pt-1.5 border-t border-slate-800/80 text-[11px] text-rose-300 italic">
-              All screened household profiles have matching allergen alerts for this item.
-            </div>
-          `}
-
-          <!-- Section 3: Additives & Total Allergens -->
+          <!-- Additive / Chemical Transparency Note -->
           <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-300">
-            <span class="text-slate-400">
-              ${hasAdditives ? `<span class="text-purple-300 font-medium">${additivesCount} additive${additivesCount > 1 ? 's' : ''} flagged</span>` : '<span class="text-emerald-400 font-medium">Clean formulation</span>'}
+            <span class="flex items-center gap-1 text-slate-400">
+              ${hasAdditives ? `${UI_ICONS.flask} <span class="text-purple-300 font-semibold">${additivesCount} scrutinized additive${additivesCount > 1 ? 's' : ''} detected</span>` : `${UI_ICONS.checkCircle} <span class="text-emerald-300 font-medium">Clean formulation (zero petroleum dyes)</span>`}
             </span>
-            <span class="text-[10px] font-mono text-slate-400">
-              Total Allergens: ${data.detectedAllergens ? data.detectedAllergens.length : 0}
-            </span>
+            <span class="text-[10px] font-semibold text-emerald-400">0 Allergens</span>
           </div>
         </div>
       `;
@@ -9896,7 +10376,7 @@ function renderHistory() {
     }
 
 
-// --- SCRIPT 3 ---
+
 
     (function() {
       function safeDismissSplash() {
