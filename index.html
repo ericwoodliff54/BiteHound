@@ -1777,6 +1777,48 @@
       background-color: #ffffff !important;
       border-color: #cbd5e1 !important;
     }
+
+    /* Product Information Page Safety Notice (Larger font, high-vis yellow in Dark Mode, solid black in Light Mode) */
+    .product-safety-notice,
+    #productSafetyNoticeText {
+      color: #fde047 !important;
+      font-size: 0.8125rem !important;
+      line-height: 1.45 !important;
+    }
+    .product-safety-notice strong,
+    #productSafetyNoticeText strong {
+      color: #facc15 !important;
+      font-weight: 800 !important;
+    }
+    .product-safety-notice svg,
+    #productSafetyNoticeText svg,
+    .product-safety-notice-icon svg {
+      color: #facc15 !important;
+    }
+    html.theme-light .product-safety-notice,
+    html.theme-light #productSafetyNoticeText,
+    html.theme-light #scannerResultContainer .product-safety-notice,
+    html.theme-light #manualResultContainer .product-safety-notice {
+      color: #000000 !important;
+    }
+    html.theme-light .product-safety-notice strong,
+    html.theme-light #productSafetyNoticeText strong,
+    html.theme-light #scannerResultContainer .product-safety-notice strong,
+    html.theme-light #manualResultContainer .product-safety-notice strong {
+      color: #000000 !important;
+      font-weight: 800 !important;
+    }
+    html.theme-light .product-safety-notice span,
+    html.theme-light #productSafetyNoticeText span,
+    html.theme-light #scannerResultContainer .product-safety-notice span,
+    html.theme-light #manualResultContainer .product-safety-notice span {
+      color: #000000 !important;
+    }
+    html.theme-light .product-safety-notice svg,
+    html.theme-light #productSafetyNoticeText svg,
+    html.theme-light .product-safety-notice-icon svg {
+      color: #000000 !important;
+    }
 </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
@@ -10390,9 +10432,11 @@
       `;
 
       const microNotice = `
-        <div class="pt-2 text-center">
-          <p class="text-[10px] text-slate-500 leading-tight">
-            ${UI_ICONS.alertCircle} <strong>Safety Notice:</strong> Formulations and lot batches change. Always verify printed packaging labels before consuming. Not affiliated with FDA or USDA.
+        <div class="pt-2.5 pb-1 text-center">
+          <p id="productSafetyNoticeText" class="product-safety-notice text-xs sm:text-[13px] font-medium leading-normal flex items-center justify-center gap-1.5 flex-wrap">
+            <span class="product-safety-notice-icon inline-flex items-center shrink-0">${UI_ICONS.alertCircle}</span>
+            <strong class="font-bold">Safety Notice:</strong>
+            <span>Formulations and lot batches change. Always verify printed packaging labels before consuming. Not affiliated with FDA or USDA.</span>
           </p>
         </div>
       `;

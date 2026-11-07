@@ -6965,9 +6965,11 @@
       `;
 
       const microNotice = `
-        <div class="pt-2 text-center">
-          <p class="text-[10px] text-slate-500 leading-tight">
-            ${UI_ICONS.alertCircle} <strong>Safety Notice:</strong> Formulations and lot batches change. Always verify printed packaging labels before consuming. Not affiliated with FDA or USDA.
+        <div class="pt-2.5 pb-1 text-center">
+          <p id="productSafetyNoticeText" class="product-safety-notice text-xs sm:text-[13px] font-medium leading-normal flex items-center justify-center gap-1.5 flex-wrap">
+            <span class="product-safety-notice-icon inline-flex items-center shrink-0">${UI_ICONS.alertCircle}</span>
+            <strong class="font-bold">Safety Notice:</strong>
+            <span>Formulations and lot batches change. Always verify printed packaging labels before consuming. Not affiliated with FDA or USDA.</span>
           </p>
         </div>
       `;
