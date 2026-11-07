@@ -4,6 +4,28 @@
  * 100% Private: Zero PII, Zero User Accounts, Zero Tracking
  */
 
+// Master Embedded Key (Optional: Paste Gemini API key here in Cloudflare Quick Edit to bypass dashboard variables)
+const EMBEDDED_GEMINI_KEY = "";
+
+function resolveGeminiApiKey(env, body) {
+  if (typeof EMBEDDED_GEMINI_KEY === 'string' && EMBEDDED_GEMINI_KEY.trim().length > 0) {
+    return { key: EMBEDDED_GEMINI_KEY.trim().replace(/^[\"\']|[\"\']$/g, ''), source: 'embedded_code' };
+  }
+  const envAliases = ['GEMINI_API_KEY', 'gemini_api_key', 'GEMINI_KEY', 'gemini_key', 'GOOGLE_API_KEY', 'google_api_key', 'API_KEY', 'api_key'];
+  if (env && typeof env === 'object') {
+    for (const alias of envAliases) {
+      if (typeof env[alias] === 'string' && env[alias].trim().length > 0) {
+        return { key: env[alias].trim().replace(/^[\"\']|[\"\']$/g, ''), source: `cloudflare_env (${alias})` };
+      }
+    }
+  }
+  const bodyKey = body && (body.clientApiKey || body.apiKey);
+  if (typeof bodyKey === 'string' && bodyKey.trim().length > 0) {
+    return { key: bodyKey.trim().replace(/^[\"\']|[\"\']$/g, ''), source: 'client_payload' };
+  }
+  return { key: '', source: 'none' };
+}
+
 export default {
   async fetch(request, env, ctx) {
     // 1. CORS Preflight
@@ -28,7 +50,7 @@ export default {
     // 2. Health check / status
         // Diagnostic: Query Google ModelService.ListModels to see exactly which models this API key is allowed to use
     if (url.pathname === '/models' || url.pathname === '/api/models') {
-      const apiKey = (env && env.GEMINI_API_KEY) || url.searchParams.get('key');
+      const apiKey = resolveGeminiApiKey(env).key || url.searchParams.get('key');
       if (!apiKey) {
         return new Response(JSON.stringify({ error: 'No API key provided. Pass ?key= or configure GEMINI_API_KEY.' }), { status: 400, headers: corsHeaders });
       }
@@ -52,13 +74,16 @@ export default {
     }
 
     if (url.pathname === '/' || url.pathname === '/health') {
-      const hasKey = Boolean(env && env.GEMINI_API_KEY && String(env.GEMINI_API_KEY).trim().length > 0);
+      const { key, source } = resolveGeminiApiKey(env);
+      const hasKey = Boolean(key && key.length > 0);
       return new Response(JSON.stringify({
         status: 'online',
         service: 'RAKKA Cloud Edge Hook',
-        version: '1.4.0',
+        version: '1.4.1',
         ai_vision_key_configured: hasKey,
-        key_preview: hasKey ? `${env.GEMINI_API_KEY.slice(0, 6)}...` : 'NONE',
+        key_source: source,
+        key_preview: hasKey ? `${key.slice(0, 6)}...` : 'NONE',
+        detected_env_keys: env ? Object.keys(env) : [],
         timestamp: new Date().toISOString()
       }), { headers: corsHeaders });
     }
@@ -333,7 +358,7 @@ export default {
 
         const cleanBase64 = body.imageBase64.replace(/^data:image\/\w+;base64,/, '');
         const mimeType = body.mimeType || 'image/jpeg';
-        const apiKey = env && env.GEMINI_API_KEY;
+        const apiKey = resolveGeminiApiKey(env, body).key;
 
         if (!apiKey) {
           return new Response(JSON.stringify({ 
@@ -448,7 +473,7 @@ Extract and return STRICTLY a JSON object with this exact schema (no markdown, n
       try {
         const body = await request.json();
         // Support either server-side Cloudflare secret OR client-provided key
-        const apiKey = (env && env.GEMINI_API_KEY) || (body && body.clientApiKey);
+        const apiKey = resolveGeminiApiKey(env, body).key;
 
         if (!apiKey) {
           return new Response(JSON.stringify({ 
@@ -531,7 +556,7 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
       try {
         const body = await request.json();
         // Support either server-side Cloudflare secret OR client-provided key
-        const apiKey = (env && env.GEMINI_API_KEY) || (body && body.clientApiKey);
+        const apiKey = resolveGeminiApiKey(env, body).key;
 
         if (!apiKey) {
           return new Response(JSON.stringify({ 
