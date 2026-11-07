@@ -13776,8 +13776,8 @@ function renderHistory() {
         img.close();
       }
 
-      // Check for tall receipt haul (>= 1200px) to trigger Parallel Dual-Slicing
-      if (targetH >= 1200) {
+      // Check for tall receipt haul (>= 800px on standard 4:3 or vertical phone captures) to trigger Parallel Dual-Slicing
+      if (targetH >= 800 || (h > w && targetH >= 700)) {
         // Slice 1: Top 0% to 58%
         const slice1H = Math.round(targetH * 0.58);
         const canvas1 = document.createElement('canvas');
@@ -13914,20 +13914,22 @@ function renderHistory() {
       }
 
       // Initial state
-      updateProgressUI(15, "Auditing Grocery Trip", "Calibrating receipt image for AI vision...", 0);
+      updateProgressUI(15, "Auditing Grocery Trip", "Calibrating receipt image...", 0);
 
       progressTimer = setInterval(() => {
         elapsedSeconds++;
 
-        // Progressive realistic time increments based on percentage
-        if (elapsedSeconds === 2) {
-          updateProgressUI(35, "Scanning Grocery Lines", "Reading store items with AI Optical Character Recognition...", 1);
-        } else if (elapsedSeconds === 8) {
-          updateProgressUI(60, "Auditing Federal Recalls", "Cross-referencing food items against active FDA & USDA alerts...", 2);
-        } else if (elapsedSeconds === 15) {
-          updateProgressUI(82, "Evaluating Household Shields", "Checking family allergen conflicts & scrutinized chemical additives...", 3);
-        } else if (elapsedSeconds >= 22 && elapsedSeconds < 35) {
-          const pseudoPct = Math.min(94, 82 + Math.floor((elapsedSeconds - 15) * 1.0));
+        // Realistic pacing matched to the parallel AI extraction lifecycle
+        if (elapsedSeconds === 3) {
+          updateProgressUI(30, "AI Optical Character Recognition", "Reading grocery lines in parallel across receipt slices...", 1);
+        } else if (elapsedSeconds === 9) {
+          updateProgressUI(50, "AI Optical Character Recognition", "Decoding store shorthand, prices, and register PLUs...", 1);
+        } else if (elapsedSeconds === 16) {
+          updateProgressUI(72, "Auditing Federal Recalls", "Cross-referencing food items against active FDA & USDA safety feeds...", 2);
+        } else if (elapsedSeconds === 22) {
+          updateProgressUI(88, "Evaluating Household Shields", "Applying family allergen conflicts & scrutinized additive screening...", 3);
+        } else if (elapsedSeconds >= 24 && elapsedSeconds < 45) {
+          const pseudoPct = Math.min(95, 88 + Math.floor((elapsedSeconds - 22) * 0.5));
           if (barFill) barFill.style.width = `${pseudoPct}%`;
           if (percentText) percentText.textContent = `${pseudoPct}%`;
         }
