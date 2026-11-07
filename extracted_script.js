@@ -10296,37 +10296,49 @@ function renderHistory() {
         img.close();
       }
 
-      // Check for tall receipt haul (>= 800px on standard 4:3 or vertical phone captures) to trigger Parallel Dual-Slicing
+      // 3-Slice Parallel Engine: For tall receipt hauls (>= 800px or vertical captures)
+      // Slices into Top (0-38%), Middle (31-69%), and Bottom (62-100%) with 7% overlap seams
+      // Each slice handles only ~15-18 items, allowing Gemini to finish in ~15-18s concurrently!
       if (targetH >= 800 || (h > w && targetH >= 700)) {
-        // Slice 1: Top 0% to 58%
-        const slice1H = Math.round(targetH * 0.58);
-        const canvas1 = document.createElement('canvas');
-        canvas1.width = targetW;
-        canvas1.height = slice1H;
-        const ctx1 = canvas1.getContext('2d');
-        ctx1.drawImage(canvas, 0, 0, targetW, slice1H, 0, 0, targetW, slice1H);
+        // Slice 1: Top 0% to 38%
+        const s1H = Math.round(targetH * 0.38);
+        const c1 = document.createElement('canvas');
+        c1.width = targetW;
+        c1.height = s1H;
+        const ctx1 = c1.getContext('2d');
+        ctx1.drawImage(canvas, 0, 0, targetW, s1H, 0, 0, targetW, s1H);
 
-        // Slice 2: Bottom 44% to 100% (creates 14% vertical overlap zone)
-        const slice2StartY = Math.round(targetH * 0.44);
-        const slice2H = targetH - slice2StartY;
-        const canvas2 = document.createElement('canvas');
-        canvas2.width = targetW;
-        canvas2.height = slice2H;
-        const ctx2 = canvas2.getContext('2d');
-        ctx2.drawImage(canvas, 0, slice2StartY, targetW, slice2H, 0, 0, targetW, slice2H);
+        // Slice 2: Middle 31% to 69% (7% overlap with top, 7% overlap with bottom)
+        const s2StartY = Math.round(targetH * 0.31);
+        const s2H = Math.round(targetH * 0.38);
+        const c2 = document.createElement('canvas');
+        c2.width = targetW;
+        c2.height = s2H;
+        const ctx2 = c2.getContext('2d');
+        ctx2.drawImage(canvas, 0, s2StartY, targetW, s2H, 0, 0, targetW, s2H);
+
+        // Slice 3: Bottom 62% to 100%
+        const s3StartY = Math.round(targetH * 0.62);
+        const s3H = targetH - s3StartY;
+        const c3 = document.createElement('canvas');
+        c3.width = targetW;
+        c3.height = s3H;
+        const ctx3 = c3.getContext('2d');
+        ctx3.drawImage(canvas, 0, s3StartY, targetW, s3H, 0, 0, targetW, s3H);
 
         return {
-          isDualSlice: true,
+          sliceCount: 3,
           slices: [
-            { dataUrl: canvas1.toDataURL('image/jpeg', 0.72), mimeType: 'image/jpeg', label: 'Top Half' },
-            { dataUrl: canvas2.toDataURL('image/jpeg', 0.72), mimeType: 'image/jpeg', label: 'Bottom Half' }
+            { dataUrl: c1.toDataURL('image/jpeg', 0.72), mimeType: 'image/jpeg', label: 'Top Slice' },
+            { dataUrl: c2.toDataURL('image/jpeg', 0.72), mimeType: 'image/jpeg', label: 'Middle Slice' },
+            { dataUrl: c3.toDataURL('image/jpeg', 0.72), mimeType: 'image/jpeg', label: 'Bottom Slice' }
           ]
         };
       }
 
       const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.72);
       return {
-        isDualSlice: false,
+        sliceCount: 1,
         slices: [
           { dataUrl: compressedDataUrl, mimeType: 'image/jpeg', label: 'Full Receipt' }
         ]
@@ -10464,14 +10476,16 @@ function renderHistory() {
 
         let receiptData = null;
 
-        if (prep.isDualSlice) {
-          // Dispatch both slices in parallel (cuts wait time in half!)
-          const [topAudit, bottomAudit] = await Promise.all([
-            fetchReceiptSegment(hookUrl, prep.slices[0].dataUrl, 'image/jpeg', activeAllergens, clientApiKey, 'Top Half'),
-            fetchReceiptSegment(hookUrl, prep.slices[1].dataUrl, 'image/jpeg', activeAllergens, clientApiKey, 'Bottom Half')
+        if (prep.sliceCount === 3) {
+          // 3-Slice Parallel Engine: Dispatches Top, Mid, and Bottom slices concurrently!
+          const [topAudit, midAudit, bottomAudit] = await Promise.all([
+            fetchReceiptSegment(hookUrl, prep.slices[0].dataUrl, 'image/jpeg', activeAllergens, clientApiKey, 'Top Slice'),
+            fetchReceiptSegment(hookUrl, prep.slices[1].dataUrl, 'image/jpeg', activeAllergens, clientApiKey, 'Middle Slice'),
+            fetchReceiptSegment(hookUrl, prep.slices[2].dataUrl, 'image/jpeg', activeAllergens, clientApiKey, 'Bottom Slice')
           ]);
 
-          receiptData = stitchReceiptAudits(topAudit, bottomAudit);
+          const topMid = stitchReceiptAudits(topAudit, midAudit);
+          receiptData = stitchReceiptAudits(topMid, bottomAudit);
         } else {
           receiptData = await fetchReceiptSegment(hookUrl, prep.slices[0].dataUrl, 'image/jpeg', activeAllergens, clientApiKey, 'Receipt');
         }
