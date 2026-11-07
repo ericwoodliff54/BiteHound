@@ -98,38 +98,38 @@
     "isRecalled": false
   },
   "051500241776": {
-    "product": "Jif Creamy Peanut Butter (28 oz Jar)",
-    "brand": "Jif",
     "upc": "051500241776",
-    "ingredients": "Roasted Peanuts, Sugar, Contains 2% or Less of: Molasses, Fully Hydrogenated Vegetable Oils (Rapeseed and Soybean), Mono and Diglycerides, Salt.",
+    "product": "Crisco Pure Vegetable Oil (48 fl oz Bottle)",
+    "brand": "Crisco",
+    "ingredients": "Soybean Oil.",
     "allergens": [
-      "peanuts",
       "soy"
     ],
     "additives_tags": [],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
     ],
     "isRecalled": false
   },
   "0051500241776": {
-    "product": "Jif Creamy Peanut Butter (28 oz Jar)",
-    "brand": "Jif",
     "upc": "051500241776",
-    "ingredients": "Roasted Peanuts, Sugar, Contains 2% or Less of: Molasses, Fully Hydrogenated Vegetable Oils (Rapeseed and Soybean), Mono and Diglycerides, Salt.",
+    "product": "Crisco Pure Vegetable Oil (48 fl oz Bottle)",
+    "brand": "Crisco",
+    "ingredients": "Soybean Oil.",
     "allergens": [
-      "peanuts",
       "soy"
     ],
     "additives_tags": [],
     "stores": [
-      "Meijer",
-      "Kroger",
       "Walmart",
-      "Target"
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
     ],
     "isRecalled": false
   },
@@ -6198,34 +6198,34 @@
     "isRecalled": false
   },
   "025317005400": {
-    "product": "Applegate Naturals Uncured Turkey Bacon (8 oz Pack)",
-    "brand": "Applegate",
     "upc": "025317005400",
-    "ingredients": "Turkey, Water. Contains Less than 2% of: Sea Salt, Celery Powder, Cane Sugar, Onion Powder.",
+    "product": "Applegate Naturals Uncured Sunday Bacon (8 oz Package)",
+    "brand": "Applegate",
+    "ingredients": "Pork, Water, Sea Salt. Contains Less Than 2% of: Cane Sugar, Celery Powder.",
     "allergens": [],
     "additives_tags": [],
     "stores": [
-      "Giant Eagle",
-      "Meijer",
-      "Kroger",
       "Target",
-      "Whole Foods Market"
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market",
+      "Walmart"
     ],
     "isRecalled": false
   },
   "0025317005400": {
-    "product": "Applegate Naturals Uncured Turkey Bacon (8 oz Pack)",
-    "brand": "Applegate",
     "upc": "025317005400",
-    "ingredients": "Turkey, Water. Contains Less than 2% of: Sea Salt, Celery Powder, Cane Sugar, Onion Powder.",
+    "product": "Applegate Naturals Uncured Sunday Bacon (8 oz Package)",
+    "brand": "Applegate",
+    "ingredients": "Pork, Water, Sea Salt. Contains Less Than 2% of: Cane Sugar, Celery Powder.",
     "allergens": [],
     "additives_tags": [],
     "stores": [
-      "Giant Eagle",
-      "Meijer",
-      "Kroger",
       "Target",
-      "Whole Foods Market"
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market",
+      "Walmart"
     ],
     "isRecalled": false
   },
@@ -12177,8 +12177,8 @@
   },
   "074570004007": {
     "upc": "074570004007",
-    "product": "H\u00e4agen-Dazs All Natural Vanilla Ice Cream (14 fl oz)",
-    "brand": "H\u00e4agen-Dazs",
+    "product": "Häagen-Dazs All Natural Vanilla Ice Cream (14 fl oz)",
+    "brand": "Häagen-Dazs",
     "ingredients": "Cream, Skim Milk, Cane Sugar, Egg Yolks, Vanilla Extract.",
     "allergens": [
       "dairy",
@@ -12196,8 +12196,8 @@
   },
   "74570004007": {
     "upc": "074570004007",
-    "product": "H\u00e4agen-Dazs All Natural Vanilla Ice Cream (14 fl oz)",
-    "brand": "H\u00e4agen-Dazs",
+    "product": "Häagen-Dazs All Natural Vanilla Ice Cream (14 fl oz)",
+    "brand": "Häagen-Dazs",
     "ingredients": "Cream, Skim Milk, Cane Sugar, Egg Yolks, Vanilla Extract.",
     "allergens": [
       "dairy",
@@ -12215,8 +12215,8 @@
   },
   "0074570004007": {
     "upc": "074570004007",
-    "product": "H\u00e4agen-Dazs All Natural Vanilla Ice Cream (14 fl oz)",
-    "brand": "H\u00e4agen-Dazs",
+    "product": "Häagen-Dazs All Natural Vanilla Ice Cream (14 fl oz)",
+    "brand": "Häagen-Dazs",
     "ingredients": "Cream, Skim Milk, Cane Sugar, Egg Yolks, Vanilla Extract.",
     "allergens": [
       "dairy",
@@ -12558,8 +12558,8 @@
   },
   "4099100005239": {
     "upc": "4099100005239",
-    "product": "Deutsche K\u00fcche (Aldi) German Style Traditional Sauerkraut (24 oz Jar)",
-    "brand": "Deutsche K\u00fcche",
+    "product": "Deutsche Küche (Aldi) German Style Traditional Sauerkraut (24 oz Jar)",
+    "brand": "Deutsche Küche",
     "ingredients": "White Cabbage, Salt.",
     "allergens": [],
     "additives_tags": [],
@@ -14460,5 +14460,3128 @@
     "states": [
       "ALL"
     ]
+  },
+  "762111813137": {
+    "upc": "762111813137",
+    "product": "Starbucks Pike Place Roast Medium Roast Ground Coffee (12 oz Bag)",
+    "brand": "Starbucks",
+    "ingredients": "100% Arabica Ground Coffee.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Costco",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0762111813137": {
+    "upc": "762111813137",
+    "product": "Starbucks Pike Place Roast Medium Roast Ground Coffee (12 oz Bag)",
+    "brand": "Starbucks",
+    "ingredients": "100% Arabica Ground Coffee.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Costco",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "881334000010": {
+    "upc": "881334000010",
+    "product": "Dunkin' Original Blend Medium Roast Ground Coffee (12 oz Bag)",
+    "brand": "Dunkin'",
+    "ingredients": "100% Arabica Coffee.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0881334000010": {
+    "upc": "881334000010",
+    "product": "Dunkin' Original Blend Medium Roast Ground Coffee (12 oz Bag)",
+    "brand": "Dunkin'",
+    "ingredients": "100% Arabica Coffee.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "025500000115": {
+    "upc": "025500000115",
+    "product": "Folgers Classic Roast Medium Roast Ground Coffee (30.5 oz Canister)",
+    "brand": "Folgers",
+    "ingredients": "100% Pure Coffee.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "25500000115": {
+    "upc": "025500000115",
+    "product": "Folgers Classic Roast Medium Roast Ground Coffee (30.5 oz Canister)",
+    "brand": "Folgers",
+    "ingredients": "100% Pure Coffee.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0025500000115": {
+    "upc": "025500000115",
+    "product": "Folgers Classic Roast Medium Roast Ground Coffee (30.5 oz Canister)",
+    "brand": "Folgers",
+    "ingredients": "100% Pure Coffee.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "070177062402": {
+    "upc": "070177062402",
+    "product": "Twinings of London English Breakfast Black Tea (20 Tea Bags Box)",
+    "brand": "Twinings",
+    "ingredients": "100% Pure Black Tea.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "70177062402": {
+    "upc": "070177062402",
+    "product": "Twinings of London English Breakfast Black Tea (20 Tea Bags Box)",
+    "brand": "Twinings",
+    "ingredients": "100% Pure Black Tea.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "0070177062402": {
+    "upc": "070177062402",
+    "product": "Twinings of London English Breakfast Black Tea (20 Tea Bags Box)",
+    "brand": "Twinings",
+    "ingredients": "100% Pure Black Tea.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "072310001007": {
+    "upc": "072310001007",
+    "product": "Bigelow Green Tea with Antioxidants (20 Individually Wrapped Tea Bags)",
+    "brand": "Bigelow",
+    "ingredients": "Green Tea.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "72310001007": {
+    "upc": "072310001007",
+    "product": "Bigelow Green Tea with Antioxidants (20 Individually Wrapped Tea Bags)",
+    "brand": "Bigelow",
+    "ingredients": "Green Tea.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0072310001007": {
+    "upc": "072310001007",
+    "product": "Bigelow Green Tea with Antioxidants (20 Individually Wrapped Tea Bags)",
+    "brand": "Bigelow",
+    "ingredients": "Green Tea.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "015700052029": {
+    "upc": "015700052029",
+    "product": "Swiss Miss Milk Chocolate Flavor Hot Cocoa Mix (8 Envelopes / 11.04 oz)",
+    "brand": "Swiss Miss",
+    "ingredients": "Sugar, Corn Syrup, Modified Whey, Cocoa (Processed with Alkali), Hydrogenated Coconut Oil, Nonfat Milk, Calcium Carbonate, Less Than 2% Of: Salt, Dipotassium Phosphate, Mono- and Diglycerides, Artificial Flavor, Carrageenan.",
+    "allergens": [
+      "dairy",
+      "corn"
+    ],
+    "additives_tags": [
+      "Corn Syrup",
+      "Dipotassium Phosphate",
+      "Monoglycerides",
+      "Diglycerides",
+      "Carrageenan",
+      "Artificial Flavor"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "15700052029": {
+    "upc": "015700052029",
+    "product": "Swiss Miss Milk Chocolate Flavor Hot Cocoa Mix (8 Envelopes / 11.04 oz)",
+    "brand": "Swiss Miss",
+    "ingredients": "Sugar, Corn Syrup, Modified Whey, Cocoa (Processed with Alkali), Hydrogenated Coconut Oil, Nonfat Milk, Calcium Carbonate, Less Than 2% Of: Salt, Dipotassium Phosphate, Mono- and Diglycerides, Artificial Flavor, Carrageenan.",
+    "allergens": [
+      "dairy",
+      "corn"
+    ],
+    "additives_tags": [
+      "Corn Syrup",
+      "Dipotassium Phosphate",
+      "Monoglycerides",
+      "Diglycerides",
+      "Carrageenan",
+      "Artificial Flavor"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0015700052029": {
+    "upc": "015700052029",
+    "product": "Swiss Miss Milk Chocolate Flavor Hot Cocoa Mix (8 Envelopes / 11.04 oz)",
+    "brand": "Swiss Miss",
+    "ingredients": "Sugar, Corn Syrup, Modified Whey, Cocoa (Processed with Alkali), Hydrogenated Coconut Oil, Nonfat Milk, Calcium Carbonate, Less Than 2% Of: Salt, Dipotassium Phosphate, Mono- and Diglycerides, Artificial Flavor, Carrageenan.",
+    "allergens": [
+      "dairy",
+      "corn"
+    ],
+    "additives_tags": [
+      "Corn Syrup",
+      "Dipotassium Phosphate",
+      "Monoglycerides",
+      "Diglycerides",
+      "Carrageenan",
+      "Artificial Flavor"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "079080000013": {
+    "upc": "079080000013",
+    "product": "Duke's Real Mayonnaise Smooth & Creamy (32 fl oz Jar)",
+    "brand": "Duke's",
+    "ingredients": "Soybean Oil, Eggs, Water, Distilled and Cider Vinegar, Salt, Oleoresin Paprika, Natural Flavors, Calcium Disodium EDTA Added to Protect Flavor.",
+    "allergens": [
+      "eggs",
+      "soy"
+    ],
+    "additives_tags": [
+      "Calcium Disodium EDTA"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "79080000013": {
+    "upc": "079080000013",
+    "product": "Duke's Real Mayonnaise Smooth & Creamy (32 fl oz Jar)",
+    "brand": "Duke's",
+    "ingredients": "Soybean Oil, Eggs, Water, Distilled and Cider Vinegar, Salt, Oleoresin Paprika, Natural Flavors, Calcium Disodium EDTA Added to Protect Flavor.",
+    "allergens": [
+      "eggs",
+      "soy"
+    ],
+    "additives_tags": [
+      "Calcium Disodium EDTA"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0079080000013": {
+    "upc": "079080000013",
+    "product": "Duke's Real Mayonnaise Smooth & Creamy (32 fl oz Jar)",
+    "brand": "Duke's",
+    "ingredients": "Soybean Oil, Eggs, Water, Distilled and Cider Vinegar, Salt, Oleoresin Paprika, Natural Flavors, Calcium Disodium EDTA Added to Protect Flavor.",
+    "allergens": [
+      "eggs",
+      "soy"
+    ],
+    "additives_tags": [
+      "Calcium Disodium EDTA"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "021000026722": {
+    "upc": "021000026722",
+    "product": "Miracle Whip Original Dressing (30 fl oz Jar)",
+    "brand": "Miracle Whip",
+    "ingredients": "Water, Soybean Oil, High Fructose Corn Syrup, Vinegar, Modified Cornstarch, Eggs, Salt, Natural Flavor, Mustard Flour, Potassium Sorbate as a Preservative, Paprika, Spice, Dried Garlic.",
+    "allergens": [
+      "eggs",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "High Fructose Corn Syrup",
+      "Modified Cornstarch",
+      "Potassium Sorbate"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "21000026722": {
+    "upc": "021000026722",
+    "product": "Miracle Whip Original Dressing (30 fl oz Jar)",
+    "brand": "Miracle Whip",
+    "ingredients": "Water, Soybean Oil, High Fructose Corn Syrup, Vinegar, Modified Cornstarch, Eggs, Salt, Natural Flavor, Mustard Flour, Potassium Sorbate as a Preservative, Paprika, Spice, Dried Garlic.",
+    "allergens": [
+      "eggs",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "High Fructose Corn Syrup",
+      "Modified Cornstarch",
+      "Potassium Sorbate"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0021000026722": {
+    "upc": "021000026722",
+    "product": "Miracle Whip Original Dressing (30 fl oz Jar)",
+    "brand": "Miracle Whip",
+    "ingredients": "Water, Soybean Oil, High Fructose Corn Syrup, Vinegar, Modified Cornstarch, Eggs, Salt, Natural Flavor, Mustard Flour, Potassium Sorbate as a Preservative, Paprika, Spice, Dried Garlic.",
+    "allergens": [
+      "eggs",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "High Fructose Corn Syrup",
+      "Modified Cornstarch",
+      "Potassium Sorbate"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "052100001005": {
+    "upc": "052100001005",
+    "product": "McCormick Pure Ground Black Pepper (3 oz Tin)",
+    "brand": "McCormick",
+    "ingredients": "Black Pepper.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "52100001005": {
+    "upc": "052100001005",
+    "product": "McCormick Pure Ground Black Pepper (3 oz Tin)",
+    "brand": "McCormick",
+    "ingredients": "Black Pepper.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0052100001005": {
+    "upc": "052100001005",
+    "product": "McCormick Pure Ground Black Pepper (3 oz Tin)",
+    "brand": "McCormick",
+    "ingredients": "Black Pepper.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "052100002484": {
+    "upc": "052100002484",
+    "product": "McCormick Garlic Powder (5.37 oz Shaker)",
+    "brand": "McCormick",
+    "ingredients": "Garlic Powder.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "52100002484": {
+    "upc": "052100002484",
+    "product": "McCormick Garlic Powder (5.37 oz Shaker)",
+    "brand": "McCormick",
+    "ingredients": "Garlic Powder.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0052100002484": {
+    "upc": "052100002484",
+    "product": "McCormick Garlic Powder (5.37 oz Shaker)",
+    "brand": "McCormick",
+    "ingredients": "Garlic Powder.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "052100002156": {
+    "upc": "052100002156",
+    "product": "McCormick Ground Cinnamon (2.37 oz Bottle)",
+    "brand": "McCormick",
+    "ingredients": "Ground Cinnamon.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "52100002156": {
+    "upc": "052100002156",
+    "product": "McCormick Ground Cinnamon (2.37 oz Bottle)",
+    "brand": "McCormick",
+    "ingredients": "Ground Cinnamon.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0052100002156": {
+    "upc": "052100002156",
+    "product": "McCormick Ground Cinnamon (2.37 oz Bottle)",
+    "brand": "McCormick",
+    "ingredients": "Ground Cinnamon.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "052100004006": {
+    "upc": "052100004006",
+    "product": "McCormick Pure Vanilla Extract (2 fl oz Bottle)",
+    "brand": "McCormick",
+    "ingredients": "Vanilla Bean Extractives in Water, Alcohol (35%).",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "52100004006": {
+    "upc": "052100004006",
+    "product": "McCormick Pure Vanilla Extract (2 fl oz Bottle)",
+    "brand": "McCormick",
+    "ingredients": "Vanilla Bean Extractives in Water, Alcohol (35%).",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0052100004006": {
+    "upc": "052100004006",
+    "product": "McCormick Pure Vanilla Extract (2 fl oz Bottle)",
+    "brand": "McCormick",
+    "ingredients": "Vanilla Bean Extractives in Water, Alcohol (35%).",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "041300001006": {
+    "upc": "041300001006",
+    "product": "Frank's RedHot Original Cayenne Pepper Hot Sauce (12 fl oz)",
+    "brand": "Frank's RedHot",
+    "ingredients": "Aged Cayenne Red Peppers, Distilled Vinegar, Water, Salt and Garlic Powder.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "41300001006": {
+    "upc": "041300001006",
+    "product": "Frank's RedHot Original Cayenne Pepper Hot Sauce (12 fl oz)",
+    "brand": "Frank's RedHot",
+    "ingredients": "Aged Cayenne Red Peppers, Distilled Vinegar, Water, Salt and Garlic Powder.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0041300001006": {
+    "upc": "041300001006",
+    "product": "Frank's RedHot Original Cayenne Pepper Hot Sauce (12 fl oz)",
+    "brand": "Frank's RedHot",
+    "ingredients": "Aged Cayenne Red Peppers, Distilled Vinegar, Water, Salt and Garlic Powder.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "011210000025": {
+    "upc": "011210000025",
+    "product": "Tabasco Brand Pepper Sauce Original Red (5 fl oz Bottle)",
+    "brand": "Tabasco",
+    "ingredients": "Distilled Vinegar, Red Pepper, Salt.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "11210000025": {
+    "upc": "011210000025",
+    "product": "Tabasco Brand Pepper Sauce Original Red (5 fl oz Bottle)",
+    "brand": "Tabasco",
+    "ingredients": "Distilled Vinegar, Red Pepper, Salt.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0011210000025": {
+    "upc": "011210000025",
+    "product": "Tabasco Brand Pepper Sauce Original Red (5 fl oz Bottle)",
+    "brand": "Tabasco",
+    "ingredients": "Distilled Vinegar, Red Pepper, Salt.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "054400000057": {
+    "upc": "054400000057",
+    "product": "A.1. Original Steak Sauce (10 oz Bottle)",
+    "brand": "A.1.",
+    "ingredients": "Tomato Puree (Water, Tomato Paste), Vinegar, Corn Syrup, Salt, Raisin Paste, Crushed Orange Puree, Spice, Dried Garlic, Caramel Color, Dried Onions, Potassium Sorbate (to Preserve Freshness), Xanthan Gum, Celery Seed.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Corn Syrup",
+      "Caramel Color",
+      "Potassium Sorbate",
+      "Xanthan Gum"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "54400000057": {
+    "upc": "054400000057",
+    "product": "A.1. Original Steak Sauce (10 oz Bottle)",
+    "brand": "A.1.",
+    "ingredients": "Tomato Puree (Water, Tomato Paste), Vinegar, Corn Syrup, Salt, Raisin Paste, Crushed Orange Puree, Spice, Dried Garlic, Caramel Color, Dried Onions, Potassium Sorbate (to Preserve Freshness), Xanthan Gum, Celery Seed.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Corn Syrup",
+      "Caramel Color",
+      "Potassium Sorbate",
+      "Xanthan Gum"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0054400000057": {
+    "upc": "054400000057",
+    "product": "A.1. Original Steak Sauce (10 oz Bottle)",
+    "brand": "A.1.",
+    "ingredients": "Tomato Puree (Water, Tomato Paste), Vinegar, Corn Syrup, Salt, Raisin Paste, Crushed Orange Puree, Spice, Dried Garlic, Caramel Color, Dried Onions, Potassium Sorbate (to Preserve Freshness), Xanthan Gum, Celery Seed.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Corn Syrup",
+      "Caramel Color",
+      "Potassium Sorbate",
+      "Xanthan Gum"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "051600000013": {
+    "upc": "051600000013",
+    "product": "Lea & Perrins The Original Worcestershire Sauce (10 fl oz Bottle)",
+    "brand": "Lea & Perrins",
+    "ingredients": "Distilled White Vinegar, Molasses, Sugar, Water, Salt, Onions, Anchovies, Garlic, Cloves, Tamarind Extract, Natural Flavorings, Chili Pepper Extract.",
+    "allergens": [
+      "fish"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "51600000013": {
+    "upc": "051600000013",
+    "product": "Lea & Perrins The Original Worcestershire Sauce (10 fl oz Bottle)",
+    "brand": "Lea & Perrins",
+    "ingredients": "Distilled White Vinegar, Molasses, Sugar, Water, Salt, Onions, Anchovies, Garlic, Cloves, Tamarind Extract, Natural Flavorings, Chili Pepper Extract.",
+    "allergens": [
+      "fish"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0051600000013": {
+    "upc": "051600000013",
+    "product": "Lea & Perrins The Original Worcestershire Sauce (10 fl oz Bottle)",
+    "brand": "Lea & Perrins",
+    "ingredients": "Distilled White Vinegar, Molasses, Sugar, Water, Salt, Onions, Anchovies, Garlic, Cloves, Tamarind Extract, Natural Flavorings, Chili Pepper Extract.",
+    "allergens": [
+      "fish"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "041790001600": {
+    "upc": "041790001600",
+    "product": "Bertolli Extra Virgin Olive Oil Original Rich Taste (16.9 fl oz Bottle)",
+    "brand": "Bertolli",
+    "ingredients": "Extra Virgin Olive Oil.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "41790001600": {
+    "upc": "041790001600",
+    "product": "Bertolli Extra Virgin Olive Oil Original Rich Taste (16.9 fl oz Bottle)",
+    "brand": "Bertolli",
+    "ingredients": "Extra Virgin Olive Oil.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0041790001600": {
+    "upc": "041790001600",
+    "product": "Bertolli Extra Virgin Olive Oil Original Rich Taste (16.9 fl oz Bottle)",
+    "brand": "Bertolli",
+    "ingredients": "Extra Virgin Olive Oil.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "51500241776": {
+    "upc": "051500241776",
+    "product": "Crisco Pure Vegetable Oil (48 fl oz Bottle)",
+    "brand": "Crisco",
+    "ingredients": "Soybean Oil.",
+    "allergens": [
+      "soy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "064144030613": {
+    "upc": "064144030613",
+    "product": "Pam Original 100% Canola Oil No-Stick Cooking Spray (6 oz Can)",
+    "brand": "Pam",
+    "ingredients": "Canola Oil, Palm Oil, Coconut Oil, Lecithin from Soybeans (Prevents Sticking), Dimethyl Silicone (for Anti-Foaming), Rosemary Extract (Preservative). Also Contains Propellant.",
+    "allergens": [
+      "soy",
+      "treenuts"
+    ],
+    "additives_tags": [
+      "Soy Lecithin",
+      "Dimethyl Silicone"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "64144030613": {
+    "upc": "064144030613",
+    "product": "Pam Original 100% Canola Oil No-Stick Cooking Spray (6 oz Can)",
+    "brand": "Pam",
+    "ingredients": "Canola Oil, Palm Oil, Coconut Oil, Lecithin from Soybeans (Prevents Sticking), Dimethyl Silicone (for Anti-Foaming), Rosemary Extract (Preservative). Also Contains Propellant.",
+    "allergens": [
+      "soy",
+      "treenuts"
+    ],
+    "additives_tags": [
+      "Soy Lecithin",
+      "Dimethyl Silicone"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0064144030613": {
+    "upc": "064144030613",
+    "product": "Pam Original 100% Canola Oil No-Stick Cooking Spray (6 oz Can)",
+    "brand": "Pam",
+    "ingredients": "Canola Oil, Palm Oil, Coconut Oil, Lecithin from Soybeans (Prevents Sticking), Dimethyl Silicone (for Anti-Foaming), Rosemary Extract (Preservative). Also Contains Propellant.",
+    "allergens": [
+      "soy",
+      "treenuts"
+    ],
+    "additives_tags": [
+      "Soy Lecithin",
+      "Dimethyl Silicone"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "722252100900": {
+    "upc": "722252100900",
+    "product": "Clif Bar Energy Bar Chocolate Chip (6 count / 2.4 oz Bars)",
+    "brand": "Clif Bar",
+    "ingredients": "Organic Brown Rice Syrup, Organic Rolled Oats, Soy Protein Isolate, Organic Cane Syrup, Organic Roasted Soybeans, Rice Flour, Cane Sugar, Unsweetened Chocolate, Organic Oat Fiber, Organic Soy Flour, Cocoa Butter, Organic Sunflower Oil, Salt, Barley Malt Extract, Green Tea Extract (Contains Caffeine), Mixed Tocopherols (Antioxidant).",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy"
+    ],
+    "additives_tags": [
+      "Soy Protein Isolate",
+      "Mixed Tocopherols"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "0722252100900": {
+    "upc": "722252100900",
+    "product": "Clif Bar Energy Bar Chocolate Chip (6 count / 2.4 oz Bars)",
+    "brand": "Clif Bar",
+    "ingredients": "Organic Brown Rice Syrup, Organic Rolled Oats, Soy Protein Isolate, Organic Cane Syrup, Organic Roasted Soybeans, Rice Flour, Cane Sugar, Unsweetened Chocolate, Organic Oat Fiber, Organic Soy Flour, Cocoa Butter, Organic Sunflower Oil, Salt, Barley Malt Extract, Green Tea Extract (Contains Caffeine), Mixed Tocopherols (Antioxidant).",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy"
+    ],
+    "additives_tags": [
+      "Soy Protein Isolate",
+      "Mixed Tocopherols"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "016000264601": {
+    "upc": "016000264601",
+    "product": "Nature Valley Crunchy Granola Bars Oats 'n Honey (12 Bars / 8.94 oz Box)",
+    "brand": "Nature Valley",
+    "ingredients": "Whole Grain Oats, Sugar, Canola and/or Sunflower Oil, Rice Flour, Honey, Brown Sugar Syrup, Salt, Baking Soda, Soy Lecithin, Natural Flavor.",
+    "allergens": [
+      "soy"
+    ],
+    "additives_tags": [
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "16000264601": {
+    "upc": "016000264601",
+    "product": "Nature Valley Crunchy Granola Bars Oats 'n Honey (12 Bars / 8.94 oz Box)",
+    "brand": "Nature Valley",
+    "ingredients": "Whole Grain Oats, Sugar, Canola and/or Sunflower Oil, Rice Flour, Honey, Brown Sugar Syrup, Salt, Baking Soda, Soy Lecithin, Natural Flavor.",
+    "allergens": [
+      "soy"
+    ],
+    "additives_tags": [
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "0016000264601": {
+    "upc": "016000264601",
+    "product": "Nature Valley Crunchy Granola Bars Oats 'n Honey (12 Bars / 8.94 oz Box)",
+    "brand": "Nature Valley",
+    "ingredients": "Whole Grain Oats, Sugar, Canola and/or Sunflower Oil, Rice Flour, Honey, Brown Sugar Syrup, Salt, Baking Soda, Soy Lecithin, Natural Flavor.",
+    "allergens": [
+      "soy"
+    ],
+    "additives_tags": [
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "857777004249": {
+    "upc": "857777004249",
+    "product": "RXBAR Protein Bar Chocolate Sea Salt (4 count / 1.83 oz Bars)",
+    "brand": "RXBAR",
+    "ingredients": "Dates, Egg Whites, Almonds, Cashews, Chocolate, Cocoa, Natural Flavors, Sea Salt.",
+    "allergens": [
+      "eggs",
+      "treenuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Target",
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "0857777004249": {
+    "upc": "857777004249",
+    "product": "RXBAR Protein Bar Chocolate Sea Salt (4 count / 1.83 oz Bars)",
+    "brand": "RXBAR",
+    "ingredients": "Dates, Egg Whites, Almonds, Cashews, Chocolate, Cocoa, Natural Flavors, Sea Salt.",
+    "allergens": [
+      "eggs",
+      "treenuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Target",
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "029000016033": {
+    "upc": "029000016033",
+    "product": "Planters Deluxe Whole Cashews Roasted & Salted (8.5 oz Can)",
+    "brand": "Planters",
+    "ingredients": "Cashews, Peanut Oil, Sea Salt.",
+    "allergens": [
+      "treenuts",
+      "peanuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "29000016033": {
+    "upc": "029000016033",
+    "product": "Planters Deluxe Whole Cashews Roasted & Salted (8.5 oz Can)",
+    "brand": "Planters",
+    "ingredients": "Cashews, Peanut Oil, Sea Salt.",
+    "allergens": [
+      "treenuts",
+      "peanuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0029000016033": {
+    "upc": "029000016033",
+    "product": "Planters Deluxe Whole Cashews Roasted & Salted (8.5 oz Can)",
+    "brand": "Planters",
+    "ingredients": "Cashews, Peanut Oil, Sea Salt.",
+    "allergens": [
+      "treenuts",
+      "peanuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "029000073258": {
+    "upc": "029000073258",
+    "product": "Planters Dry Roasted Peanuts Salted (16 oz Jar)",
+    "brand": "Planters",
+    "ingredients": "Peanuts, Contains 2% or Less of: Sea Salt, Spices (Contains Celery), Dried Onion, Dried Garlic, Paprika, Natural Flavor, Sugar, Gelatin, Torula Yeast, Cornstarch, Dried Corn Syrup, Maltodextrin.",
+    "allergens": [
+      "peanuts",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "Maltodextrin",
+      "Corn Syrup Solids"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "29000073258": {
+    "upc": "029000073258",
+    "product": "Planters Dry Roasted Peanuts Salted (16 oz Jar)",
+    "brand": "Planters",
+    "ingredients": "Peanuts, Contains 2% or Less of: Sea Salt, Spices (Contains Celery), Dried Onion, Dried Garlic, Paprika, Natural Flavor, Sugar, Gelatin, Torula Yeast, Cornstarch, Dried Corn Syrup, Maltodextrin.",
+    "allergens": [
+      "peanuts",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "Maltodextrin",
+      "Corn Syrup Solids"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "0029000073258": {
+    "upc": "029000073258",
+    "product": "Planters Dry Roasted Peanuts Salted (16 oz Jar)",
+    "brand": "Planters",
+    "ingredients": "Peanuts, Contains 2% or Less of: Sea Salt, Spices (Contains Celery), Dried Onion, Dried Garlic, Paprika, Natural Flavor, Sugar, Gelatin, Torula Yeast, Cornstarch, Dried Corn Syrup, Maltodextrin.",
+    "allergens": [
+      "peanuts",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "Maltodextrin",
+      "Corn Syrup Solids"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "041570054703": {
+    "upc": "041570054703",
+    "product": "Wonderful Pistachios Roasted and Salted (8 oz Pouch)",
+    "brand": "Wonderful Pistachios",
+    "ingredients": "Pistachios, Sea Salt.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "41570054703": {
+    "upc": "041570054703",
+    "product": "Wonderful Pistachios Roasted and Salted (8 oz Pouch)",
+    "brand": "Wonderful Pistachios",
+    "ingredients": "Pistachios, Sea Salt.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "0041570054703": {
+    "upc": "041570054703",
+    "product": "Wonderful Pistachios Roasted and Salted (8 oz Pouch)",
+    "brand": "Wonderful Pistachios",
+    "ingredients": "Pistachios, Sea Salt.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "041570056349": {
+    "upc": "041570056349",
+    "product": "Wonderful Pistachios No Shells Roasted & Salted (6 oz Pouch)",
+    "brand": "Wonderful Pistachios",
+    "ingredients": "Pistachios, Sea Salt.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "41570056349": {
+    "upc": "041570056349",
+    "product": "Wonderful Pistachios No Shells Roasted & Salted (6 oz Pouch)",
+    "brand": "Wonderful Pistachios",
+    "ingredients": "Pistachios, Sea Salt.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "0041570056349": {
+    "upc": "041570056349",
+    "product": "Wonderful Pistachios No Shells Roasted & Salted (6 oz Pouch)",
+    "brand": "Wonderful Pistachios",
+    "ingredients": "Pistachios, Sea Salt.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "041143001007": {
+    "upc": "041143001007",
+    "product": "Blue Diamond Almonds Whole Natural (6 oz Can)",
+    "brand": "Blue Diamond",
+    "ingredients": "Whole Natural Almonds.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "41143001007": {
+    "upc": "041143001007",
+    "product": "Blue Diamond Almonds Whole Natural (6 oz Can)",
+    "brand": "Blue Diamond",
+    "ingredients": "Whole Natural Almonds.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0041143001007": {
+    "upc": "041143001007",
+    "product": "Blue Diamond Almonds Whole Natural (6 oz Can)",
+    "brand": "Blue Diamond",
+    "ingredients": "Whole Natural Almonds.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "041143003001": {
+    "upc": "041143003001",
+    "product": "Blue Diamond Almonds Smokehouse Flavored (6 oz Can)",
+    "brand": "Blue Diamond",
+    "ingredients": "Almonds, Vegetable Oil (Canola and/or Safflower), Salt, Corn Maltodextrin, Natural Hickory Smoke Flavor, Yeast, Hydrolyzed Corn and Soy Protein.",
+    "allergens": [
+      "treenuts",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "Maltodextrin"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "41143003001": {
+    "upc": "041143003001",
+    "product": "Blue Diamond Almonds Smokehouse Flavored (6 oz Can)",
+    "brand": "Blue Diamond",
+    "ingredients": "Almonds, Vegetable Oil (Canola and/or Safflower), Salt, Corn Maltodextrin, Natural Hickory Smoke Flavor, Yeast, Hydrolyzed Corn and Soy Protein.",
+    "allergens": [
+      "treenuts",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "Maltodextrin"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0041143003001": {
+    "upc": "041143003001",
+    "product": "Blue Diamond Almonds Smokehouse Flavored (6 oz Can)",
+    "brand": "Blue Diamond",
+    "ingredients": "Almonds, Vegetable Oil (Canola and/or Safflower), Salt, Corn Maltodextrin, Natural Hickory Smoke Flavor, Yeast, Hydrolyzed Corn and Soy Protein.",
+    "allergens": [
+      "treenuts",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "Maltodextrin"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "041148005123": {
+    "upc": "041148005123",
+    "product": "Sun-Maid California Sun-Dried Raisins (6-pack / 1.5 oz Boxes)",
+    "brand": "Sun-Maid",
+    "ingredients": "California Seedless Raisins.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "41148005123": {
+    "upc": "041148005123",
+    "product": "Sun-Maid California Sun-Dried Raisins (6-pack / 1.5 oz Boxes)",
+    "brand": "Sun-Maid",
+    "ingredients": "California Seedless Raisins.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0041148005123": {
+    "upc": "041148005123",
+    "product": "Sun-Maid California Sun-Dried Raisins (6-pack / 1.5 oz Boxes)",
+    "brand": "Sun-Maid",
+    "ingredients": "California Seedless Raisins.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "031200021645": {
+    "upc": "031200021645",
+    "product": "Ocean Spray Craisins Original Dried Cranberries (5 oz Pouch)",
+    "brand": "Ocean Spray",
+    "ingredients": "Cranberries, Sugar.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "31200021645": {
+    "upc": "031200021645",
+    "product": "Ocean Spray Craisins Original Dried Cranberries (5 oz Pouch)",
+    "brand": "Ocean Spray",
+    "ingredients": "Cranberries, Sugar.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "0031200021645": {
+    "upc": "031200021645",
+    "product": "Ocean Spray Craisins Original Dried Cranberries (5 oz Pouch)",
+    "brand": "Ocean Spray",
+    "ingredients": "Cranberries, Sugar.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "017082000029": {
+    "upc": "017082000029",
+    "product": "Jack Link's Original Beef Jerky (3.25 oz Bag)",
+    "brand": "Jack Link's",
+    "ingredients": "Beef, Water, Sugar, Brown Sugar, Contains 2% or Less of Sea Salt, Salt, Soy Sauce (Wheat, Soybeans, Salt), Hydrolyzed Corn Protein, Yeast Extract, Flavors, Meat Stock, Monosodium Glutamate, Citric Acid, Sodium Nitrite.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "Monosodium Glutamate (MSG)",
+      "Citric Acid",
+      "Sodium Nitrite"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "17082000029": {
+    "upc": "017082000029",
+    "product": "Jack Link's Original Beef Jerky (3.25 oz Bag)",
+    "brand": "Jack Link's",
+    "ingredients": "Beef, Water, Sugar, Brown Sugar, Contains 2% or Less of Sea Salt, Salt, Soy Sauce (Wheat, Soybeans, Salt), Hydrolyzed Corn Protein, Yeast Extract, Flavors, Meat Stock, Monosodium Glutamate, Citric Acid, Sodium Nitrite.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "Monosodium Glutamate (MSG)",
+      "Citric Acid",
+      "Sodium Nitrite"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0017082000029": {
+    "upc": "017082000029",
+    "product": "Jack Link's Original Beef Jerky (3.25 oz Bag)",
+    "brand": "Jack Link's",
+    "ingredients": "Beef, Water, Sugar, Brown Sugar, Contains 2% or Less of Sea Salt, Salt, Soy Sauce (Wheat, Soybeans, Salt), Hydrolyzed Corn Protein, Yeast Extract, Flavors, Meat Stock, Monosodium Glutamate, Citric Acid, Sodium Nitrite.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "Monosodium Glutamate (MSG)",
+      "Citric Acid",
+      "Sodium Nitrite"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "041196910757": {
+    "upc": "041196910757",
+    "product": "Progresso Traditional Chicken Noodle Soup (19 oz Can)",
+    "brand": "Progresso",
+    "ingredients": "Chicken Broth, Carrots, Cooked White Meat Chicken, Egg Noodle (Semolina Wheat, Egg), Celery. Contains Less Than 2% Of: Modified Food Starch, Corn Protein, Salt, Chicken Fat, Potassium Chloride, Egg White, Carrot Puree, Onion Powder, Sugar, Soy Protein Isolate, Sodium Phosphate, Tomato Extract, Garlic Powder, Parsley, Natural Flavor, Beta Carotene (Color).",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "eggs",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "Modified Food Starch",
+      "Sodium Phosphate",
+      "Soy Protein Isolate"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "41196910757": {
+    "upc": "041196910757",
+    "product": "Progresso Traditional Chicken Noodle Soup (19 oz Can)",
+    "brand": "Progresso",
+    "ingredients": "Chicken Broth, Carrots, Cooked White Meat Chicken, Egg Noodle (Semolina Wheat, Egg), Celery. Contains Less Than 2% Of: Modified Food Starch, Corn Protein, Salt, Chicken Fat, Potassium Chloride, Egg White, Carrot Puree, Onion Powder, Sugar, Soy Protein Isolate, Sodium Phosphate, Tomato Extract, Garlic Powder, Parsley, Natural Flavor, Beta Carotene (Color).",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "eggs",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "Modified Food Starch",
+      "Sodium Phosphate",
+      "Soy Protein Isolate"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0041196910757": {
+    "upc": "041196910757",
+    "product": "Progresso Traditional Chicken Noodle Soup (19 oz Can)",
+    "brand": "Progresso",
+    "ingredients": "Chicken Broth, Carrots, Cooked White Meat Chicken, Egg Noodle (Semolina Wheat, Egg), Celery. Contains Less Than 2% Of: Modified Food Starch, Corn Protein, Salt, Chicken Fat, Potassium Chloride, Egg White, Carrot Puree, Onion Powder, Sugar, Soy Protein Isolate, Sodium Phosphate, Tomato Extract, Garlic Powder, Parsley, Natural Flavor, Beta Carotene (Color).",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "eggs",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "Modified Food Starch",
+      "Sodium Phosphate",
+      "Soy Protein Isolate"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "041196910085": {
+    "upc": "041196910085",
+    "product": "Progresso Rich & Hearty New England Clam Chowder (18.5 oz Can)",
+    "brand": "Progresso",
+    "ingredients": "Clam Broth, Potatoes, Clams, Soybean Oil, Modified Food Starch, Onions. Contains Less Than 2% Of: Soy Protein Concentrate, Sugar, Salt, Potassium Chloride, Butter, Sodium Phosphate, Titanium Dioxide (Color), Dried Parsley, Yeast Extract, Natural Flavor.",
+    "allergens": [
+      "shellfish",
+      "dairy",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "Modified Food Starch",
+      "Soy Protein Concentrate",
+      "Sodium Phosphate",
+      "Titanium Dioxide"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "41196910085": {
+    "upc": "041196910085",
+    "product": "Progresso Rich & Hearty New England Clam Chowder (18.5 oz Can)",
+    "brand": "Progresso",
+    "ingredients": "Clam Broth, Potatoes, Clams, Soybean Oil, Modified Food Starch, Onions. Contains Less Than 2% Of: Soy Protein Concentrate, Sugar, Salt, Potassium Chloride, Butter, Sodium Phosphate, Titanium Dioxide (Color), Dried Parsley, Yeast Extract, Natural Flavor.",
+    "allergens": [
+      "shellfish",
+      "dairy",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "Modified Food Starch",
+      "Soy Protein Concentrate",
+      "Sodium Phosphate",
+      "Titanium Dioxide"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0041196910085": {
+    "upc": "041196910085",
+    "product": "Progresso Rich & Hearty New England Clam Chowder (18.5 oz Can)",
+    "brand": "Progresso",
+    "ingredients": "Clam Broth, Potatoes, Clams, Soybean Oil, Modified Food Starch, Onions. Contains Less Than 2% Of: Soy Protein Concentrate, Sugar, Salt, Potassium Chloride, Butter, Sodium Phosphate, Titanium Dioxide (Color), Dried Parsley, Yeast Extract, Natural Flavor.",
+    "allergens": [
+      "shellfish",
+      "dairy",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "Modified Food Starch",
+      "Soy Protein Concentrate",
+      "Sodium Phosphate",
+      "Titanium Dioxide"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "037600104620": {
+    "upc": "037600104620",
+    "product": "Hormel Chili with Beans (15 oz Can)",
+    "brand": "Hormel",
+    "ingredients": "Water, Beef and Pork, Beans, Concentrated Crushed Tomatoes, Contains 2% or Less of Modified Cornstarch, Textured Soy Flour, Corn Flour, Salt, Chili Powder, Sugar, Flavoring, Hydrolyzed Soy Protein, Spices.",
+    "allergens": [
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "Modified Cornstarch"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "37600104620": {
+    "upc": "037600104620",
+    "product": "Hormel Chili with Beans (15 oz Can)",
+    "brand": "Hormel",
+    "ingredients": "Water, Beef and Pork, Beans, Concentrated Crushed Tomatoes, Contains 2% or Less of Modified Cornstarch, Textured Soy Flour, Corn Flour, Salt, Chili Powder, Sugar, Flavoring, Hydrolyzed Soy Protein, Spices.",
+    "allergens": [
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "Modified Cornstarch"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0037600104620": {
+    "upc": "037600104620",
+    "product": "Hormel Chili with Beans (15 oz Can)",
+    "brand": "Hormel",
+    "ingredients": "Water, Beef and Pork, Beans, Concentrated Crushed Tomatoes, Contains 2% or Less of Modified Cornstarch, Textured Soy Flour, Corn Flour, Salt, Chili Powder, Sugar, Flavoring, Hydrolyzed Soy Protein, Spices.",
+    "allergens": [
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "Modified Cornstarch"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "027000388151": {
+    "upc": "027000388151",
+    "product": "Hunt's 100% Natural Diced Tomatoes in Rich Tomato Juice (14.5 oz Can)",
+    "brand": "Hunt's",
+    "ingredients": "Diced Tomatoes, Tomato Juice, Less Than 2% Of: Salt, Calcium Chloride, Citric Acid.",
+    "allergens": [],
+    "additives_tags": [
+      "Calcium Chloride",
+      "Citric Acid"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "27000388151": {
+    "upc": "027000388151",
+    "product": "Hunt's 100% Natural Diced Tomatoes in Rich Tomato Juice (14.5 oz Can)",
+    "brand": "Hunt's",
+    "ingredients": "Diced Tomatoes, Tomato Juice, Less Than 2% Of: Salt, Calcium Chloride, Citric Acid.",
+    "allergens": [],
+    "additives_tags": [
+      "Calcium Chloride",
+      "Citric Acid"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0027000388151": {
+    "upc": "027000388151",
+    "product": "Hunt's 100% Natural Diced Tomatoes in Rich Tomato Juice (14.5 oz Can)",
+    "brand": "Hunt's",
+    "ingredients": "Diced Tomatoes, Tomato Juice, Less Than 2% Of: Salt, Calcium Chloride, Citric Acid.",
+    "allergens": [],
+    "additives_tags": [
+      "Calcium Chloride",
+      "Citric Acid"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "027000390147": {
+    "upc": "027000390147",
+    "product": "Hunt's 100% Natural Tomato Sauce (8 oz Can)",
+    "brand": "Hunt's",
+    "ingredients": "Tomato Puree (Water, Tomato Paste), Water, Less Than 2% Of: Salt, Citric Acid, Spices, Garlic Powder, Natural Flavor.",
+    "allergens": [],
+    "additives_tags": [
+      "Citric Acid"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "27000390147": {
+    "upc": "027000390147",
+    "product": "Hunt's 100% Natural Tomato Sauce (8 oz Can)",
+    "brand": "Hunt's",
+    "ingredients": "Tomato Puree (Water, Tomato Paste), Water, Less Than 2% Of: Salt, Citric Acid, Spices, Garlic Powder, Natural Flavor.",
+    "allergens": [],
+    "additives_tags": [
+      "Citric Acid"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0027000390147": {
+    "upc": "027000390147",
+    "product": "Hunt's 100% Natural Tomato Sauce (8 oz Can)",
+    "brand": "Hunt's",
+    "ingredients": "Tomato Puree (Water, Tomato Paste), Water, Less Than 2% Of: Salt, Citric Acid, Spices, Garlic Powder, Natural Flavor.",
+    "allergens": [],
+    "additives_tags": [
+      "Citric Acid"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "041331023203": {
+    "upc": "041331023203",
+    "product": "Goya Black Beans Frijoles Negros Prime Premium (15.5 oz Can)",
+    "brand": "Goya",
+    "ingredients": "Black Beans, Water, Salt, Calcium Chloride (Firming Agent).",
+    "allergens": [],
+    "additives_tags": [
+      "Calcium Chloride"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "41331023203": {
+    "upc": "041331023203",
+    "product": "Goya Black Beans Frijoles Negros Prime Premium (15.5 oz Can)",
+    "brand": "Goya",
+    "ingredients": "Black Beans, Water, Salt, Calcium Chloride (Firming Agent).",
+    "allergens": [],
+    "additives_tags": [
+      "Calcium Chloride"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0041331023203": {
+    "upc": "041331023203",
+    "product": "Goya Black Beans Frijoles Negros Prime Premium (15.5 oz Can)",
+    "brand": "Goya",
+    "ingredients": "Black Beans, Water, Salt, Calcium Chloride (Firming Agent).",
+    "allergens": [],
+    "additives_tags": [
+      "Calcium Chloride"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "045300000088": {
+    "upc": "045300000088",
+    "product": "Green Giant Cut Green Beans (14.5 oz Can)",
+    "brand": "Green Giant",
+    "ingredients": "Green Beans, Water, Sea Salt.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "45300000088": {
+    "upc": "045300000088",
+    "product": "Green Giant Cut Green Beans (14.5 oz Can)",
+    "brand": "Green Giant",
+    "ingredients": "Green Beans, Water, Sea Salt.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0045300000088": {
+    "upc": "045300000088",
+    "product": "Green Giant Cut Green Beans (14.5 oz Can)",
+    "brand": "Green Giant",
+    "ingredients": "Green Beans, Water, Sea Salt.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "024000163185": {
+    "upc": "024000163185",
+    "product": "Del Monte Sliced Yellow Cling Peaches in 100% Real Fruit Juice (15.25 oz Can)",
+    "brand": "Del Monte",
+    "ingredients": "Peaches, Peach Juice, Pear Juice, Natural Flavor, Ascorbic Acid (to Protect Color), Citric Acid.",
+    "allergens": [],
+    "additives_tags": [
+      "Citric Acid"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "24000163185": {
+    "upc": "024000163185",
+    "product": "Del Monte Sliced Yellow Cling Peaches in 100% Real Fruit Juice (15.25 oz Can)",
+    "brand": "Del Monte",
+    "ingredients": "Peaches, Peach Juice, Pear Juice, Natural Flavor, Ascorbic Acid (to Protect Color), Citric Acid.",
+    "allergens": [],
+    "additives_tags": [
+      "Citric Acid"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0024000163185": {
+    "upc": "024000163185",
+    "product": "Del Monte Sliced Yellow Cling Peaches in 100% Real Fruit Juice (15.25 oz Can)",
+    "brand": "Del Monte",
+    "ingredients": "Peaches, Peach Juice, Pear Juice, Natural Flavor, Ascorbic Acid (to Protect Color), Citric Acid.",
+    "allergens": [],
+    "additives_tags": [
+      "Citric Acid"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "016000104105": {
+    "upc": "016000104105",
+    "product": "Gold Medal All Purpose Enriched Bleached Flour (5 lb Bag)",
+    "brand": "Gold Medal",
+    "ingredients": "Bleached Wheat Flour, Niacin (a B Vitamin), Iron, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid (a B Vitamin).",
+    "allergens": [
+      "gluten",
+      "wheat"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "16000104105": {
+    "upc": "016000104105",
+    "product": "Gold Medal All Purpose Enriched Bleached Flour (5 lb Bag)",
+    "brand": "Gold Medal",
+    "ingredients": "Bleached Wheat Flour, Niacin (a B Vitamin), Iron, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid (a B Vitamin).",
+    "allergens": [
+      "gluten",
+      "wheat"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0016000104105": {
+    "upc": "016000104105",
+    "product": "Gold Medal All Purpose Enriched Bleached Flour (5 lb Bag)",
+    "brand": "Gold Medal",
+    "ingredients": "Bleached Wheat Flour, Niacin (a B Vitamin), Iron, Thiamin Mononitrate (Vitamin B1), Riboflavin (Vitamin B2), Folic Acid (a B Vitamin).",
+    "allergens": [
+      "gluten",
+      "wheat"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "071012010505": {
+    "upc": "071012010505",
+    "product": "King Arthur Unbleached All-Purpose Flour (5 lb Bag)",
+    "brand": "King Arthur",
+    "ingredients": "Unbleached Hard Red Wheat Flour, Malted Barley Flour.",
+    "allergens": [
+      "gluten",
+      "wheat"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Target",
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "71012010505": {
+    "upc": "071012010505",
+    "product": "King Arthur Unbleached All-Purpose Flour (5 lb Bag)",
+    "brand": "King Arthur",
+    "ingredients": "Unbleached Hard Red Wheat Flour, Malted Barley Flour.",
+    "allergens": [
+      "gluten",
+      "wheat"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Target",
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "0071012010505": {
+    "upc": "071012010505",
+    "product": "King Arthur Unbleached All-Purpose Flour (5 lb Bag)",
+    "brand": "King Arthur",
+    "ingredients": "Unbleached Hard Red Wheat Flour, Malted Barley Flour.",
+    "allergens": [
+      "gluten",
+      "wheat"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Target",
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "049200045006": {
+    "upc": "049200045006",
+    "product": "Domino Premium Pure Cane Granulated Sugar (4 lb Bag)",
+    "brand": "Domino",
+    "ingredients": "Sugar.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "49200045006": {
+    "upc": "049200045006",
+    "product": "Domino Premium Pure Cane Granulated Sugar (4 lb Bag)",
+    "brand": "Domino",
+    "ingredients": "Sugar.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0049200045006": {
+    "upc": "049200045006",
+    "product": "Domino Premium Pure Cane Granulated Sugar (4 lb Bag)",
+    "brand": "Domino",
+    "ingredients": "Sugar.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "033200011101": {
+    "upc": "033200011101",
+    "product": "Arm & Hammer Pure Baking Soda (16 oz / 1 lb Box)",
+    "brand": "Arm & Hammer",
+    "ingredients": "Sodium Bicarbonate.",
+    "allergens": [],
+    "additives_tags": [
+      "Sodium Bicarbonate"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "33200011101": {
+    "upc": "033200011101",
+    "product": "Arm & Hammer Pure Baking Soda (16 oz / 1 lb Box)",
+    "brand": "Arm & Hammer",
+    "ingredients": "Sodium Bicarbonate.",
+    "allergens": [],
+    "additives_tags": [
+      "Sodium Bicarbonate"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0033200011101": {
+    "upc": "033200011101",
+    "product": "Arm & Hammer Pure Baking Soda (16 oz / 1 lb Box)",
+    "brand": "Arm & Hammer",
+    "ingredients": "Sodium Bicarbonate.",
+    "allergens": [],
+    "additives_tags": [
+      "Sodium Bicarbonate"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "041733000041": {
+    "upc": "041733000041",
+    "product": "Rumford Non-GMO Aluminum-Free Baking Powder (8.1 oz Canister)",
+    "brand": "Rumford",
+    "ingredients": "Cornstarch, Sodium Bicarbonate, Monocalcium Phosphate.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Monocalcium Phosphate",
+      "Sodium Bicarbonate"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "41733000041": {
+    "upc": "041733000041",
+    "product": "Rumford Non-GMO Aluminum-Free Baking Powder (8.1 oz Canister)",
+    "brand": "Rumford",
+    "ingredients": "Cornstarch, Sodium Bicarbonate, Monocalcium Phosphate.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Monocalcium Phosphate",
+      "Sodium Bicarbonate"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "0041733000041": {
+    "upc": "041733000041",
+    "product": "Rumford Non-GMO Aluminum-Free Baking Powder (8.1 oz Canister)",
+    "brand": "Rumford",
+    "ingredients": "Cornstarch, Sodium Bicarbonate, Monocalcium Phosphate.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Monocalcium Phosphate",
+      "Sodium Bicarbonate"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "040100001099": {
+    "upc": "040100001099",
+    "product": "Fleischmann's Active Dry All Natural Yeast (3 Packets / 0.75 oz Strip)",
+    "brand": "Fleischmann's",
+    "ingredients": "Yeast, Sorbitan Monostearate.",
+    "allergens": [
+      "yeast"
+    ],
+    "additives_tags": [
+      "Sorbitan Monostearate"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "40100001099": {
+    "upc": "040100001099",
+    "product": "Fleischmann's Active Dry All Natural Yeast (3 Packets / 0.75 oz Strip)",
+    "brand": "Fleischmann's",
+    "ingredients": "Yeast, Sorbitan Monostearate.",
+    "allergens": [
+      "yeast"
+    ],
+    "additives_tags": [
+      "Sorbitan Monostearate"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0040100001099": {
+    "upc": "040100001099",
+    "product": "Fleischmann's Active Dry All Natural Yeast (3 Packets / 0.75 oz Strip)",
+    "brand": "Fleischmann's",
+    "ingredients": "Yeast, Sorbitan Monostearate.",
+    "allergens": [
+      "yeast"
+    ],
+    "additives_tags": [
+      "Sorbitan Monostearate"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "028000214800": {
+    "upc": "028000214800",
+    "product": "Nestlé Toll House Semi-Sweet Chocolate Morsels (12 oz Bag)",
+    "brand": "Nestlé Toll House",
+    "ingredients": "Semi-Sweet Chocolate (Sugar, Chocolate, Cocoa Butter, Milkfat, Soy Lecithin, Natural Flavors).",
+    "allergens": [
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "28000214800": {
+    "upc": "028000214800",
+    "product": "Nestlé Toll House Semi-Sweet Chocolate Morsels (12 oz Bag)",
+    "brand": "Nestlé Toll House",
+    "ingredients": "Semi-Sweet Chocolate (Sugar, Chocolate, Cocoa Butter, Milkfat, Soy Lecithin, Natural Flavors).",
+    "allergens": [
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "0028000214800": {
+    "upc": "028000214800",
+    "product": "Nestlé Toll House Semi-Sweet Chocolate Morsels (12 oz Bag)",
+    "brand": "Nestlé Toll House",
+    "ingredients": "Semi-Sweet Chocolate (Sugar, Chocolate, Cocoa Butter, Milkfat, Soy Lecithin, Natural Flavors).",
+    "allergens": [
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "034000052002": {
+    "upc": "034000052002",
+    "product": "Hershey's 100% Cacao Natural Unsweetened Cocoa Powder (8 oz Tub)",
+    "brand": "Hershey's",
+    "ingredients": "Cocoa.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "34000052002": {
+    "upc": "034000052002",
+    "product": "Hershey's 100% Cacao Natural Unsweetened Cocoa Powder (8 oz Tub)",
+    "brand": "Hershey's",
+    "ingredients": "Cocoa.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0034000052002": {
+    "upc": "034000052002",
+    "product": "Hershey's 100% Cacao Natural Unsweetened Cocoa Powder (8 oz Tub)",
+    "brand": "Hershey's",
+    "ingredients": "Cocoa.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "043000200025": {
+    "upc": "043000200025",
+    "product": "Jell-O Strawberry Gelatin Dessert (3 oz Box)",
+    "brand": "Jell-O",
+    "ingredients": "Sugar, Gelatin, Adipic Acid, Contains Less Than 2% Of Disodium Phosphate, Sodium Citrate, Fumaric Acid, Natural and Artificial Flavor, Red 40.",
+    "allergens": [],
+    "additives_tags": [
+      "Adipic Acid",
+      "Disodium Phosphate",
+      "Sodium Citrate",
+      "Fumaric Acid",
+      "Red 40"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "43000200025": {
+    "upc": "043000200025",
+    "product": "Jell-O Strawberry Gelatin Dessert (3 oz Box)",
+    "brand": "Jell-O",
+    "ingredients": "Sugar, Gelatin, Adipic Acid, Contains Less Than 2% Of Disodium Phosphate, Sodium Citrate, Fumaric Acid, Natural and Artificial Flavor, Red 40.",
+    "allergens": [],
+    "additives_tags": [
+      "Adipic Acid",
+      "Disodium Phosphate",
+      "Sodium Citrate",
+      "Fumaric Acid",
+      "Red 40"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0043000200025": {
+    "upc": "043000200025",
+    "product": "Jell-O Strawberry Gelatin Dessert (3 oz Box)",
+    "brand": "Jell-O",
+    "ingredients": "Sugar, Gelatin, Adipic Acid, Contains Less Than 2% Of Disodium Phosphate, Sodium Citrate, Fumaric Acid, Natural and Artificial Flavor, Red 40.",
+    "allergens": [],
+    "additives_tags": [
+      "Adipic Acid",
+      "Disodium Phosphate",
+      "Sodium Citrate",
+      "Fumaric Acid",
+      "Red 40"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "043000204368": {
+    "upc": "043000204368",
+    "product": "Jell-O Chocolate Flavor Instant Pudding & Pie Filling (3.9 oz Box)",
+    "brand": "Jell-O",
+    "ingredients": "Sugar, Modified Cornstarch, Cocoa Processed with Alkali, Sodium Phosphate, Tetrasodium Pyrophosphate, Contains Less Than 2% Of Salt, Mono- and Diglycerides, Artificial Color, Caramel Color.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Modified Cornstarch",
+      "Sodium Phosphate",
+      "Tetrasodium Pyrophosphate",
+      "Monoglycerides",
+      "Diglycerides",
+      "Caramel Color"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "43000204368": {
+    "upc": "043000204368",
+    "product": "Jell-O Chocolate Flavor Instant Pudding & Pie Filling (3.9 oz Box)",
+    "brand": "Jell-O",
+    "ingredients": "Sugar, Modified Cornstarch, Cocoa Processed with Alkali, Sodium Phosphate, Tetrasodium Pyrophosphate, Contains Less Than 2% Of Salt, Mono- and Diglycerides, Artificial Color, Caramel Color.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Modified Cornstarch",
+      "Sodium Phosphate",
+      "Tetrasodium Pyrophosphate",
+      "Monoglycerides",
+      "Diglycerides",
+      "Caramel Color"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0043000204368": {
+    "upc": "043000204368",
+    "product": "Jell-O Chocolate Flavor Instant Pudding & Pie Filling (3.9 oz Box)",
+    "brand": "Jell-O",
+    "ingredients": "Sugar, Modified Cornstarch, Cocoa Processed with Alkali, Sodium Phosphate, Tetrasodium Pyrophosphate, Contains Less Than 2% Of Salt, Mono- and Diglycerides, Artificial Color, Caramel Color.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Modified Cornstarch",
+      "Sodium Phosphate",
+      "Tetrasodium Pyrophosphate",
+      "Monoglycerides",
+      "Diglycerides",
+      "Caramel Color"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "018000001859": {
+    "upc": "018000001859",
+    "product": "Pillsbury Grands! Homestyle Buttermilk Biscuits (8 count / 16.3 oz Can)",
+    "brand": "Pillsbury",
+    "ingredients": "Enriched Flour Bleached (Wheat Flour, Niacin, Ferrous Sulfate, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Soybean and Palm Oil, Sugar, Hydrogenated Palm Oil, Baking Powder (Sodium Acid Pyrophosphate, Baking Soda, Sodium Aluminum Phosphate). Contains 2% or Less of: Salt, Potassium Chloride, Dextrose, Wheat Starch, Natural and Artificial Flavor, Mono- and Diglycerides, Xanthan Gum, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy",
+      "dairy"
+    ],
+    "additives_tags": [
+      "Sodium Acid Pyrophosphate",
+      "Sodium Aluminum Phosphate",
+      "Monoglycerides",
+      "Diglycerides",
+      "Xanthan Gum",
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "18000001859": {
+    "upc": "018000001859",
+    "product": "Pillsbury Grands! Homestyle Buttermilk Biscuits (8 count / 16.3 oz Can)",
+    "brand": "Pillsbury",
+    "ingredients": "Enriched Flour Bleached (Wheat Flour, Niacin, Ferrous Sulfate, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Soybean and Palm Oil, Sugar, Hydrogenated Palm Oil, Baking Powder (Sodium Acid Pyrophosphate, Baking Soda, Sodium Aluminum Phosphate). Contains 2% or Less of: Salt, Potassium Chloride, Dextrose, Wheat Starch, Natural and Artificial Flavor, Mono- and Diglycerides, Xanthan Gum, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy",
+      "dairy"
+    ],
+    "additives_tags": [
+      "Sodium Acid Pyrophosphate",
+      "Sodium Aluminum Phosphate",
+      "Monoglycerides",
+      "Diglycerides",
+      "Xanthan Gum",
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0018000001859": {
+    "upc": "018000001859",
+    "product": "Pillsbury Grands! Homestyle Buttermilk Biscuits (8 count / 16.3 oz Can)",
+    "brand": "Pillsbury",
+    "ingredients": "Enriched Flour Bleached (Wheat Flour, Niacin, Ferrous Sulfate, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Soybean and Palm Oil, Sugar, Hydrogenated Palm Oil, Baking Powder (Sodium Acid Pyrophosphate, Baking Soda, Sodium Aluminum Phosphate). Contains 2% or Less of: Salt, Potassium Chloride, Dextrose, Wheat Starch, Natural and Artificial Flavor, Mono- and Diglycerides, Xanthan Gum, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy",
+      "dairy"
+    ],
+    "additives_tags": [
+      "Sodium Acid Pyrophosphate",
+      "Sodium Aluminum Phosphate",
+      "Monoglycerides",
+      "Diglycerides",
+      "Xanthan Gum",
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "018000001552": {
+    "upc": "018000001552",
+    "product": "Pillsbury Original Crescent Rolls (8 count / 8 oz Can)",
+    "brand": "Pillsbury",
+    "ingredients": "Enriched Flour Bleached (Wheat Flour, Niacin, Ferrous Sulfate, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Palm and Soybean Oil, Sugar, Hydrogenated Palm Oil, Baking Powder (Sodium Acid Pyrophosphate, Baking Soda). Contains 2% or Less of: Dextrose, Salt, Potassium Chloride, Mono- and Diglycerides, Xanthan Gum, Natural and Artificial Flavor, Yellow 5, Yellow 6.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy"
+    ],
+    "additives_tags": [
+      "Sodium Acid Pyrophosphate",
+      "Monoglycerides",
+      "Diglycerides",
+      "Xanthan Gum",
+      "Yellow 5",
+      "Yellow 6"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "18000001552": {
+    "upc": "018000001552",
+    "product": "Pillsbury Original Crescent Rolls (8 count / 8 oz Can)",
+    "brand": "Pillsbury",
+    "ingredients": "Enriched Flour Bleached (Wheat Flour, Niacin, Ferrous Sulfate, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Palm and Soybean Oil, Sugar, Hydrogenated Palm Oil, Baking Powder (Sodium Acid Pyrophosphate, Baking Soda). Contains 2% or Less of: Dextrose, Salt, Potassium Chloride, Mono- and Diglycerides, Xanthan Gum, Natural and Artificial Flavor, Yellow 5, Yellow 6.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy"
+    ],
+    "additives_tags": [
+      "Sodium Acid Pyrophosphate",
+      "Monoglycerides",
+      "Diglycerides",
+      "Xanthan Gum",
+      "Yellow 5",
+      "Yellow 6"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0018000001552": {
+    "upc": "018000001552",
+    "product": "Pillsbury Original Crescent Rolls (8 count / 8 oz Can)",
+    "brand": "Pillsbury",
+    "ingredients": "Enriched Flour Bleached (Wheat Flour, Niacin, Ferrous Sulfate, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Palm and Soybean Oil, Sugar, Hydrogenated Palm Oil, Baking Powder (Sodium Acid Pyrophosphate, Baking Soda). Contains 2% or Less of: Dextrose, Salt, Potassium Chloride, Mono- and Diglycerides, Xanthan Gum, Natural and Artificial Flavor, Yellow 5, Yellow 6.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy"
+    ],
+    "additives_tags": [
+      "Sodium Acid Pyrophosphate",
+      "Monoglycerides",
+      "Diglycerides",
+      "Xanthan Gum",
+      "Yellow 5",
+      "Yellow 6"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "077900115830": {
+    "upc": "077900115830",
+    "product": "Jimmy Dean Regular Premium Pork Sausage Roll (16 oz / 1 lb)",
+    "brand": "Jimmy Dean",
+    "ingredients": "Pork, Water, Contains 2% or Less of: Salt, Spices, Dextrose, Sugar, Natural Flavors, Monosodium Glutamate.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Monosodium Glutamate (MSG)"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "77900115830": {
+    "upc": "077900115830",
+    "product": "Jimmy Dean Regular Premium Pork Sausage Roll (16 oz / 1 lb)",
+    "brand": "Jimmy Dean",
+    "ingredients": "Pork, Water, Contains 2% or Less of: Salt, Spices, Dextrose, Sugar, Natural Flavors, Monosodium Glutamate.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Monosodium Glutamate (MSG)"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0077900115830": {
+    "upc": "077900115830",
+    "product": "Jimmy Dean Regular Premium Pork Sausage Roll (16 oz / 1 lb)",
+    "brand": "Jimmy Dean",
+    "ingredients": "Pork, Water, Contains 2% or Less of: Salt, Spices, Dextrose, Sugar, Natural Flavors, Monosodium Glutamate.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Monosodium Glutamate (MSG)"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "044700010334": {
+    "upc": "044700010334",
+    "product": "Oscar Mayer Classic Wieners Hot Dogs (16 oz / 10 count)",
+    "brand": "Oscar Mayer",
+    "ingredients": "Mechanically Separated Turkey, Mechanically Separated Chicken, Pork, Water, Corn Syrup, Contains Less than 2% of Salt, Ground Mustard Seed, Sodium Phosphates, Potassium Chloride, Sodium Propionate, Sodium Diacetate, Sodium Benzoate, Flavor, Sodium Ascorbate, Sodium Nitrite, Extractives of Paprika, Oleoresin Celery Seed.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Corn Syrup",
+      "Sodium Phosphates",
+      "Sodium Propionate",
+      "Sodium Diacetate",
+      "Sodium Benzoate",
+      "Sodium Ascorbate",
+      "Sodium Nitrite"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "44700010334": {
+    "upc": "044700010334",
+    "product": "Oscar Mayer Classic Wieners Hot Dogs (16 oz / 10 count)",
+    "brand": "Oscar Mayer",
+    "ingredients": "Mechanically Separated Turkey, Mechanically Separated Chicken, Pork, Water, Corn Syrup, Contains Less than 2% of Salt, Ground Mustard Seed, Sodium Phosphates, Potassium Chloride, Sodium Propionate, Sodium Diacetate, Sodium Benzoate, Flavor, Sodium Ascorbate, Sodium Nitrite, Extractives of Paprika, Oleoresin Celery Seed.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Corn Syrup",
+      "Sodium Phosphates",
+      "Sodium Propionate",
+      "Sodium Diacetate",
+      "Sodium Benzoate",
+      "Sodium Ascorbate",
+      "Sodium Nitrite"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0044700010334": {
+    "upc": "044700010334",
+    "product": "Oscar Mayer Classic Wieners Hot Dogs (16 oz / 10 count)",
+    "brand": "Oscar Mayer",
+    "ingredients": "Mechanically Separated Turkey, Mechanically Separated Chicken, Pork, Water, Corn Syrup, Contains Less than 2% of Salt, Ground Mustard Seed, Sodium Phosphates, Potassium Chloride, Sodium Propionate, Sodium Diacetate, Sodium Benzoate, Flavor, Sodium Ascorbate, Sodium Nitrite, Extractives of Paprika, Oleoresin Celery Seed.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Corn Syrup",
+      "Sodium Phosphates",
+      "Sodium Propionate",
+      "Sodium Diacetate",
+      "Sodium Benzoate",
+      "Sodium Ascorbate",
+      "Sodium Nitrite"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "044500001124": {
+    "upc": "044500001124",
+    "product": "Hillshire Farm Ultra Thin Sliced Honey Ham Deli Lunch Meat (9 oz Tub)",
+    "brand": "Hillshire Farm",
+    "ingredients": "Ham Cured with Water, Honey, Contains 2% or Less of: Salt, Potassium Lactate, Dextrose, Sodium Phosphate, Sodium Diacetate, Sodium Erythorbate, Sodium Nitrite.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Potassium Lactate",
+      "Sodium Phosphate",
+      "Sodium Diacetate",
+      "Sodium Erythorbate",
+      "Sodium Nitrite"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "44500001124": {
+    "upc": "044500001124",
+    "product": "Hillshire Farm Ultra Thin Sliced Honey Ham Deli Lunch Meat (9 oz Tub)",
+    "brand": "Hillshire Farm",
+    "ingredients": "Ham Cured with Water, Honey, Contains 2% or Less of: Salt, Potassium Lactate, Dextrose, Sodium Phosphate, Sodium Diacetate, Sodium Erythorbate, Sodium Nitrite.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Potassium Lactate",
+      "Sodium Phosphate",
+      "Sodium Diacetate",
+      "Sodium Erythorbate",
+      "Sodium Nitrite"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0044500001124": {
+    "upc": "044500001124",
+    "product": "Hillshire Farm Ultra Thin Sliced Honey Ham Deli Lunch Meat (9 oz Tub)",
+    "brand": "Hillshire Farm",
+    "ingredients": "Ham Cured with Water, Honey, Contains 2% or Less of: Salt, Potassium Lactate, Dextrose, Sodium Phosphate, Sodium Diacetate, Sodium Erythorbate, Sodium Nitrite.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Potassium Lactate",
+      "Sodium Phosphate",
+      "Sodium Diacetate",
+      "Sodium Erythorbate",
+      "Sodium Nitrite"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "25317005400": {
+    "upc": "025317005400",
+    "product": "Applegate Naturals Uncured Sunday Bacon (8 oz Package)",
+    "brand": "Applegate",
+    "ingredients": "Pork, Water, Sea Salt. Contains Less Than 2% of: Cane Sugar, Celery Powder.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market",
+      "Walmart"
+    ],
+    "isRecalled": false
   }
 }
