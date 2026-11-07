@@ -660,7 +660,7 @@ Instructions for parsing this receipt:
      * Processed meats (Kielbasa, Sausage, Pepperoni): Sodium Nitrite, Sodium Erythorbate, BHA/BHT, Sodium Phosphate.
      * Commercial baked goods / sweet loaf cakes / cookies: Artificial Flavors (Vanillin), High Fructose Corn Syrup, Polysorbate 60, Titanium Dioxide.
      * Confections & flavored snacks / chips / soda / energy drinks: Red 40, Yellow 5/6, Blue 1, Caramel Color, Sucralose, Acesulfame K, Citric Acid preservative.
-     Return an array of objects: [{"name": "Calcium Propionate", "type": "Chemical Preservative", "desc": "Antifungal preservative common in factory breads to prevent mold growth."}, {"name": "DATEM / Monoglycerides", "type": "Dough Conditioner", "desc": "Industrial emulsifier used to increase loaf volume and artificial softness."}]
+     Return an array of concise objects: [{"name": "Calcium Propionate", "type": "Chemical Preservative"}, {"name": "DATEM", "type": "Dough Conditioner"}]
 5. CRITICAL RECEIPT BARCODE / ITEM CODE EXTRACTION:
    - For every item on the receipt, extract the exact printed barcode number, UPC, or store item code printed on the receipt line (e.g. 6-digit ALDI code like "398511" or "640511", or 8-to-12 digit standard UPC/SKU).
    - If identical products appear multiple times on the receipt (such as 3 cans of Poppi Prebiotic Soda), ensure that their printed itemCode and upc are IDENTICAL across all lines, matching the physical receipt tape.
@@ -689,8 +689,7 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
       "additives": [
         {
           "name": "Calcium Propionate",
-          "type": "Chemical Preservative",
-          "desc": "Antifungal bread preservative used to extend commercial shelf life."
+          "type": "Chemical Preservative"
         }
       ]
     }
@@ -703,9 +702,7 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
         // If static names fail, dynamically discover which model this key is permitted to call!
         const candidateModels = [
           'gemini-2.0-flash',
-          'gemini-2.5-flash',
-          'gemini-2.0-flash-exp',
-          'gemini-1.5-flash-latest',
+          'gemini-1.5-flash',
           'gemini-flash-latest'
         ];
 
