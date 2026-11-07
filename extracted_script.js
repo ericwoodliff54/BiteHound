@@ -7872,6 +7872,7 @@
     function renderCustomizeTab() {
       if (typeof renderHistory === "function") renderHistory();
       renderThemeControls();
+      if (typeof initEdgeSettingsInputs === "function") initEdgeSettingsInputs();
       prefSoundBtn.textContent = sound.enabled ? 'Enabled' : 'Muted';
       prefSoundBtn.className = sound.enabled 
         ? 'min-h-[40px] px-3.5 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold active:scale-95'
