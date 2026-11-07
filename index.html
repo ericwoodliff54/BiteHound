@@ -1819,29 +1819,43 @@
     html.theme-light .product-safety-notice-icon svg {
       color: #000000 !important;
     }
+
+    /* Splash Screen Slogan & Disclaimer (Guaranteed high visibility in all themes) */
+    #appSplashScreen p,
+    #appSplashScreen span,
+    #appSplashScreen .splash-slogan,
+    html.theme-light #appSplashScreen p,
+    html.theme-light #appSplashScreen span,
+    html.theme-light #appSplashScreen .splash-slogan {
+      color: #f1f5f9 !important;
+    }
+    #appSplashScreen .splash-disclaimer,
+    html.theme-light #appSplashScreen .splash-disclaimer {
+      color: #cbd5e1 !important;
+    }
 </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-blue-500 selection:text-white">
-  <!-- APP STARTUP SPLASH SCREEN (Showcases Great Dane mascot with large, bold apple medall<!-- APP STARTUP SPLASH SCREEN (Showcases Great Dane mascot with clean sandstone aesthetic) -->
-  <div id="appSplashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 text-center select-none transition-opacity duration-700 cursor-pointer bg-black" style="background-color: #000000 !important; color: #f8fafc;">
-    <div class="relative flex flex-col items-center animate-in fade-in zoom-in-95 duration-500 max-w-lg w-full">
-      <!-- Enlarged Great Dane Mascot with Pure Black Canvas (No Outer Glow / Box) -->
-      <div class="relative w-80 h-80 sm:w-96 sm:h-96 md:w-[420px] md:h-[420px] max-w-[88vw] max-h-[50vh] mb-2 flex items-center justify-center shrink-0">
+    <!-- RAKKA BRAND SPLASH SCREEN (Mascot with responsive mobile layout and guaranteed text visibility) -->
+  <div id="appSplashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 sm:p-6 text-center select-none transition-opacity duration-700 cursor-pointer bg-black overflow-y-auto" style="background-color: #000000 !important; color: #f8fafc;">
+    <div class="relative flex flex-col items-center animate-in fade-in zoom-in-95 duration-500 max-w-lg w-full my-auto">
+      <!-- Responsive Great Dane Mascot with Pure Black Canvas -->
+      <div class="relative w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 max-w-[85vw] max-h-[38vh] mb-2 flex items-center justify-center shrink-0">
         <img src="./logo-1024.png?v=17" alt="RAKKA Mascot" class="w-full h-full object-contain">
       </div>
       
-      <!-- Brand Typography with Crisp Turquoise Gradient (No Drop Shadow or Glow Bleed) -->
-      <h1 class="font-display font-black text-6xl sm:text-7xl md:text-8xl tracking-widest uppercase mt-2" style="background: linear-gradient(180deg, #f0fdfa 0%, #67e8f9 30%, #06b6d4 70%, #0891b2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+      <!-- Brand Typography with Crisp Turquoise Gradient -->
+      <h1 class="font-display font-black text-5xl sm:text-6xl md:text-7xl tracking-widest uppercase mt-1 shrink-0" style="background: linear-gradient(180deg, #f0fdfa 0%, #67e8f9 30%, #06b6d4 70%, #0891b2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
         RAKKA
       </h1>
       
-      <!-- Brand Tagline (Crisp & clean) -->
-      <p class="text-base sm:text-lg md:text-xl font-bold text-slate-300 mt-2 tracking-wide max-w-md text-center leading-snug">
+      <!-- Brand Tagline (Crisp & clean, guaranteed visible in both light and dark mode) -->
+      <p class="splash-slogan text-sm sm:text-base md:text-lg font-bold mt-2 tracking-wide max-w-md text-center leading-snug shrink-0" style="color: #f1f5f9 !important;">
         Sniffs Out Recalls. Verifies Every Bite.
       </p>
 
       <!-- Reference Tool & Label Advisory Notice -->
-      <p class="text-xs sm:text-sm font-medium text-slate-400 mt-2.5 max-w-md text-center leading-relaxed">
+      <p class="splash-disclaimer text-xs sm:text-[13px] font-medium mt-2 max-w-sm sm:max-w-md text-center leading-relaxed shrink-0" style="color: #cbd5e1 !important;">
         RAKKA is a reference tool, not a medical device. Always read packaging and labels.
       </p>
     </div>
@@ -13040,7 +13054,9 @@ function renderHistory() {
     // Food Safety & Legal Disclaimer Logic (First Launch Agreement & On-Demand Settings Review)
     function checkDisclaimerStatus(isManualOpen = false) {
       try {
-        const accepted = localStorage.getItem('safebite_disclaimer_accepted') || localStorage.getItem('recall_radar_disclaimer_accepted');
+        const accepted = localStorage.getItem('rakka_disclaimer_accepted') || 
+                         localStorage.getItem('safebite_disclaimer_accepted') || 
+                         localStorage.getItem('recall_radar_disclaimer_accepted');
         if (isManualOpen) {
           // Opened voluntarily from Settings: show 'X' button so user can dismiss anytime
           if (closeDisclaimerModalBtn) closeDisclaimerModalBtn.classList.remove('hidden');
@@ -13050,12 +13066,16 @@ function renderHistory() {
           if (closeDisclaimerModalBtn) closeDisclaimerModalBtn.classList.add('hidden');
           safetyDisclaimerModal.classList.remove('hidden');
         }
-      } catch (e) {}
+      } catch (e) {
+        console.warn("checkDisclaimerStatus error:", e);
+      }
     }
+    window.checkDisclaimerStatus = checkDisclaimerStatus;
 
     acceptDisclaimerBtn.addEventListener('click', () => {
       triggerHaptic([40]);
       try {
+        localStorage.setItem('rakka_disclaimer_accepted', 'true');
         localStorage.setItem('safebite_disclaimer_accepted', 'true');
       } catch (e) {}
       safetyDisclaimerModal.classList.add('hidden');
@@ -13303,24 +13323,36 @@ function renderHistory() {
       });
     }
   
-    // App Startup Splash Screen Dismissal
+        // App Startup Splash Screen Dismissal
     function dismissSplashScreen() {
       const splash = document.getElementById('appSplashScreen');
       if (splash && !splash.classList.contains('pointer-events-none')) {
         splash.style.opacity = '0';
         splash.classList.add('pointer-events-none');
         setTimeout(() => {
-          if (splash.parentNode) splash.remove();
+          if (splash && splash.parentNode) splash.remove();
           // Seamlessly present legal & safety disclaimer right after opening screen on first install
-          checkDisclaimerStatus(false);
-        }, 750);
+          if (typeof window.checkDisclaimerStatus === 'function') {
+            window.checkDisclaimerStatus(false);
+          }
+        }, 550);
       }
     }
 
-    // Keep splash on screen for ~4.8 seconds so user can see and enjoy the mascot
+    // Keep splash on screen for ~3.8 seconds so user can see and enjoy the mascot
     setTimeout(() => {
       dismissSplashScreen();
-    }, 4800);
+    }, 3800);
+
+    // First install safety guard: ensure User Agreement opens after 2.5s if not yet accepted
+    setTimeout(() => {
+      try {
+        const accepted = localStorage.getItem('rakka_disclaimer_accepted') || localStorage.getItem('safebite_disclaimer_accepted');
+        if (accepted !== 'true' && typeof window.checkDisclaimerStatus === 'function') {
+          window.checkDisclaimerStatus(false);
+        }
+      } catch (_) {}
+    }, 2500);
 
     // Tap splash to dismiss immediately if user is ready to scan
     const splashEl = document.getElementById('appSplashScreen');
@@ -13340,11 +13372,14 @@ function renderHistory() {
           splash.classList.add('pointer-events-none');
           setTimeout(function() {
             if (splash && splash.parentNode) splash.remove();
-          }, 600);
+            if (typeof window.checkDisclaimerStatus === 'function') {
+              window.checkDisclaimerStatus(false);
+            }
+          }, 550);
         }
       }
-      // Safety timeout: guaranteed to remove splash screen after 4.5 seconds
-      setTimeout(safeDismissSplash, 4500);
+      // Safety timeout: guaranteed to remove splash screen after 4.2 seconds
+      setTimeout(safeDismissSplash, 4200);
 
       // Tap-to-dismiss immediately
       var splashEl = document.getElementById('appSplashScreen');

@@ -1,3 +1,4 @@
+// --- SCRIPT 2 ---
 
     // Audio Feedback Synthesizer
     // Sleek Acoustic Sound Engine (Warm, Filtered Harmonics — Zero Harsh 8-Bit Buzzers)
@@ -9573,7 +9574,9 @@ function renderHistory() {
     // Food Safety & Legal Disclaimer Logic (First Launch Agreement & On-Demand Settings Review)
     function checkDisclaimerStatus(isManualOpen = false) {
       try {
-        const accepted = localStorage.getItem('safebite_disclaimer_accepted') || localStorage.getItem('recall_radar_disclaimer_accepted');
+        const accepted = localStorage.getItem('rakka_disclaimer_accepted') || 
+                         localStorage.getItem('safebite_disclaimer_accepted') || 
+                         localStorage.getItem('recall_radar_disclaimer_accepted');
         if (isManualOpen) {
           // Opened voluntarily from Settings: show 'X' button so user can dismiss anytime
           if (closeDisclaimerModalBtn) closeDisclaimerModalBtn.classList.remove('hidden');
@@ -9583,12 +9586,16 @@ function renderHistory() {
           if (closeDisclaimerModalBtn) closeDisclaimerModalBtn.classList.add('hidden');
           safetyDisclaimerModal.classList.remove('hidden');
         }
-      } catch (e) {}
+      } catch (e) {
+        console.warn("checkDisclaimerStatus error:", e);
+      }
     }
+    window.checkDisclaimerStatus = checkDisclaimerStatus;
 
     acceptDisclaimerBtn.addEventListener('click', () => {
       triggerHaptic([40]);
       try {
+        localStorage.setItem('rakka_disclaimer_accepted', 'true');
         localStorage.setItem('safebite_disclaimer_accepted', 'true');
       } catch (e) {}
       safetyDisclaimerModal.classList.add('hidden');
@@ -9836,24 +9843,36 @@ function renderHistory() {
       });
     }
   
-    // App Startup Splash Screen Dismissal
+        // App Startup Splash Screen Dismissal
     function dismissSplashScreen() {
       const splash = document.getElementById('appSplashScreen');
       if (splash && !splash.classList.contains('pointer-events-none')) {
         splash.style.opacity = '0';
         splash.classList.add('pointer-events-none');
         setTimeout(() => {
-          if (splash.parentNode) splash.remove();
+          if (splash && splash.parentNode) splash.remove();
           // Seamlessly present legal & safety disclaimer right after opening screen on first install
-          checkDisclaimerStatus(false);
-        }, 750);
+          if (typeof window.checkDisclaimerStatus === 'function') {
+            window.checkDisclaimerStatus(false);
+          }
+        }, 550);
       }
     }
 
-    // Keep splash on screen for ~4.8 seconds so user can see and enjoy the mascot
+    // Keep splash on screen for ~3.8 seconds so user can see and enjoy the mascot
     setTimeout(() => {
       dismissSplashScreen();
-    }, 4800);
+    }, 3800);
+
+    // First install safety guard: ensure User Agreement opens after 2.5s if not yet accepted
+    setTimeout(() => {
+      try {
+        const accepted = localStorage.getItem('rakka_disclaimer_accepted') || localStorage.getItem('safebite_disclaimer_accepted');
+        if (accepted !== 'true' && typeof window.checkDisclaimerStatus === 'function') {
+          window.checkDisclaimerStatus(false);
+        }
+      } catch (_) {}
+    }, 2500);
 
     // Tap splash to dismiss immediately if user is ready to scan
     const splashEl = document.getElementById('appSplashScreen');
@@ -9862,6 +9881,7 @@ function renderHistory() {
     }
 
 
+// --- SCRIPT 3 ---
 
     (function() {
       function safeDismissSplash() {
@@ -9872,11 +9892,14 @@ function renderHistory() {
           splash.classList.add('pointer-events-none');
           setTimeout(function() {
             if (splash && splash.parentNode) splash.remove();
-          }, 600);
+            if (typeof window.checkDisclaimerStatus === 'function') {
+              window.checkDisclaimerStatus(false);
+            }
+          }, 550);
         }
       }
-      // Safety timeout: guaranteed to remove splash screen after 4.5 seconds
-      setTimeout(safeDismissSplash, 4500);
+      // Safety timeout: guaranteed to remove splash screen after 4.2 seconds
+      setTimeout(safeDismissSplash, 4200);
 
       // Tap-to-dismiss immediately
       var splashEl = document.getElementById('appSplashScreen');
