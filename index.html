@@ -123,14 +123,14 @@
       color: #000000 !important;
     }
 
-    /* Navigation Bar - High-Contrast Light Mode */
+    /* Navigation Bar - High-Contrast Light Mode matching Dark Mode Palette */
     html.theme-light nav {
       background: rgba(255, 255, 255, 0.98) !important;
       border-color: #cbd5e1 !important;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
     }
     html.theme-light .nav-tab {
-      color: #334155 !important;
+      color: #475569 !important;
       font-weight: 700 !important;
       background: transparent !important;
     }
@@ -142,16 +142,21 @@
       color: #0f172a !important;
     }
     html.theme-light .nav-tab.active-tab {
-      background: #0f172a !important;
-      border-color: #0f172a !important;
-      box-shadow: 0 3px 6px rgba(15, 23, 42, 0.25) !important;
+      background: linear-gradient(to right, #0891b2, #14b8a6, #06b6d4) !important;
+      color: #ffffff !important;
+      border: 2px solid rgba(245, 158, 11, 0.6) !important;
+      box-shadow: 0 4px 14px rgba(8, 145, 178, 0.35) !important;
     }
-    html.theme-light .nav-tab.active-tab span {
+    html.theme-light .nav-tab.active-tab span,
+    html.theme-light .nav-tab.active-tab svg {
       color: #ffffff !important;
       font-weight: 800 !important;
     }
+    .nav-tab::after,
+    .nav-tab.active-tab::after,
     html.theme-light .nav-tab.active-tab::after {
-      background-color: #fbbf24 !important;
+      display: none !important;
+      content: none !important;
     }
 
     /* Main Panels & Containers */
@@ -302,8 +307,6 @@
       color: #d97706 !important;
     }
 
-    /* Camera Viewfinder in Light Mode */
-    html.theme-light #scannerPanel .bg-slate-950,
     /* Floating Flashlight / Torch Control in Viewfinder (Dark Mode) */
     #toggleTorchBtn {
       background: rgba(15, 23, 42, 0.85);
@@ -336,34 +339,43 @@
       color: #fde68a !important;
     }
 
-    /* Floating Flashlight / Torch Control in Viewfinder (Light Mode - Crisp High Contrast) */
-    html.theme-light #toggleTorchBtn {
+    /* Floating Flashlight / Torch Control in Viewfinder (Light Mode - Crisp High Contrast White Button) */
+    html.theme-light #toggleTorchBtn,
+    html.theme-light #scannerPanel #toggleTorchBtn,
+    html.theme-light .bg-slate-950 #toggleTorchBtn {
       background: #ffffff !important;
-      border: 1.5px solid #cbd5e1 !important;
+      border: 2px solid #cbd5e1 !important;
       color: #0f172a !important;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12) !important;
+      font-weight: 800 !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35) !important;
     }
-    html.theme-light #toggleTorchBtn:hover {
+    html.theme-light #toggleTorchBtn:hover,
+    html.theme-light #scannerPanel #toggleTorchBtn:hover {
       background: #f8fafc !important;
       border-color: #94a3b8 !important;
     }
-    html.theme-light #toggleTorchBtn #torchBtnText {
+    html.theme-light #toggleTorchBtn #torchBtnText,
+    html.theme-light #scannerPanel #toggleTorchBtn #torchBtnText {
       color: #0f172a !important;
-      font-weight: 700 !important;
+      font-weight: 800 !important;
     }
-    html.theme-light #toggleTorchBtn #torchIcon {
+    html.theme-light #toggleTorchBtn #torchIcon,
+    html.theme-light #scannerPanel #toggleTorchBtn #torchIcon {
       color: #d97706 !important;
     }
-    html.theme-light #toggleTorchBtn.torch-active {
+    html.theme-light #toggleTorchBtn.torch-active,
+    html.theme-light #scannerPanel #toggleTorchBtn.torch-active {
       background: #fef3c7 !important;
-      border-color: #f59e0b !important;
-      box-shadow: 0 0 14px rgba(245, 158, 11, 0.3) !important;
+      border: 2px solid #f59e0b !important;
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.45) !important;
     }
-    html.theme-light #toggleTorchBtn.torch-active #torchBtnText {
+    html.theme-light #toggleTorchBtn.torch-active #torchBtnText,
+    html.theme-light #scannerPanel #toggleTorchBtn.torch-active #torchBtnText {
       color: #92400e !important;
       font-weight: 800 !important;
     }
-    html.theme-light #toggleTorchBtn.torch-active #torchIcon {
+    html.theme-light #toggleTorchBtn.torch-active #torchIcon,
+    html.theme-light #scannerPanel #toggleTorchBtn.torch-active #torchIcon {
       color: #b45309 !important;
     }
 
@@ -681,23 +693,124 @@
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05) !important;
     }
 
-    /* Family Profiles Bar in Light Mode */
-    html.theme-light .family-profile-pill:not(.bg-gradient-to-r) {
+    /* Receipts Window in Light Mode - High Contrast Crisp Cards */
+    html.theme-light #receiptHeroActionCard,
+    html.theme-light #receiptsPanel .rounded-3xl.bg-gradient-to-b,
+    html.theme-light #receiptsPanel .bg-slate-950,
+    html.theme-light #receiptAuditLoadingBox,
+    html.theme-light #receiptAuditResultsBox > div {
       background: #ffffff !important;
-      border-color: #cbd5e1 !important;
-      color: #000000 !important;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      border: 1.5px solid #cbd5e1 !important;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06) !important;
     }
-    html.theme-light .family-profile-pill:not(.bg-gradient-to-r) span {
-      color: #000000 !important;
+    html.theme-light #receiptsPanel h2,
+    html.theme-light #receiptHeroActionCard span.font-display,
+    html.theme-light #receiptsPanel .font-display.font-black,
+    html.theme-light #receiptsPanel span.font-black.text-white {
+      color: #0f172a !important;
+      font-weight: 800 !important;
+    }
+    html.theme-light #receiptHeroActionCard p,
+    html.theme-light #receiptsPanel p.text-cyan-300\/90,
+    html.theme-light #receiptsPanel p {
+      color: #334155 !important;
+      font-weight: 500 !important;
+    }
+    html.theme-light #receiptHeroIconBox,
+    html.theme-light #receiptsPanel .w-16.h-16.rounded-2xl {
+      background: #f0fdfa !important;
+      border: 1.5px solid #99f6e4 !important;
+      color: #0d9488 !important;
+      box-shadow: none !important;
+    }
+    html.theme-light #receiptHeroIconBox svg,
+    html.theme-light #receiptsPanel .w-16.h-16.rounded-2xl svg {
+      color: #0d9488 !important;
+    }
+    html.theme-light #receiptStoreName {
+      color: #0f172a !important;
+      font-weight: 800 !important;
+    }
+    html.theme-light #receiptPurchaseDate {
+      color: #64748b !important;
+    }
+    html.theme-light #receiptExecutiveSummary {
+      color: #334155 !important;
+      border-top-color: #e2e8f0 !important;
+    }
+    html.theme-light #batchImportPantryBtn {
+      background: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    html.theme-light #batchImportPantryBtn:hover {
+      background: #e2e8f0 !important;
+    }
+
+    /* Family Profiles Bar in Light Mode - High Contrast */
+    html.theme-light .family-profile-pill,
+    html.theme-light #familyProfilesBar .family-profile-pill {
+      background: #ffffff !important;
+      border: 1.5px solid #cbd5e1 !important;
+      color: #0f172a !important;
+      box-shadow: 0 2px 4px rgba(15, 23, 42, 0.05) !important;
+    }
+    html.theme-light .family-profile-pill:hover {
+      border-color: #94a3b8 !important;
+      background: #f8fafc !important;
+    }
+    html.theme-light .family-profile-pill span {
+      color: #0f172a !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .family-profile-pill .w-10.h-10 {
+      background: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    html.theme-light .family-profile-pill .w-10.h-10 svg {
+      color: #0284c7 !important;
+    }
+    /* Active Profile Pill in Light Mode */
+    html.theme-light .family-profile-pill.bg-gradient-to-r,
+    html.theme-light #familyProfilesBar .family-profile-pill.bg-gradient-to-r {
+      background: linear-gradient(to right, #0891b2, #14b8a6) !important;
+      border: 2px solid #06b6d4 !important;
+      color: #ffffff !important;
+      box-shadow: 0 4px 12px rgba(8, 145, 178, 0.35) !important;
+    }
+    html.theme-light .family-profile-pill.bg-gradient-to-r span {
+      color: #ffffff !important;
+      font-weight: 800 !important;
+    }
+    html.theme-light .family-profile-pill.bg-gradient-to-r .w-10.h-10 {
+      background: rgba(255, 255, 255, 0.25) !important;
+      border-color: #ffffff !important;
+      color: #ffffff !important;
+    }
+    html.theme-light .family-profile-pill.bg-gradient-to-r .w-10.h-10 svg {
+      color: #ffffff !important;
     }
 
     /* Active Family Guard Card in Light Mode */
     html.theme-light #activeProfileNotice > div {
       background: #ffffff !important;
+      border: 1.5px solid #cbd5e1 !important;
+      color: #0f172a !important;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06) !important;
+    }
+    html.theme-light #activeProfileNotice span,
+    html.theme-light #activeProfileNotice p {
+      color: #0f172a !important;
+    }
+    html.theme-light #activeProfileNotice .text-slate-400,
+    html.theme-light #activeProfileNotice .text-slate-300 {
+      color: #475569 !important;
+    }
+    html.theme-light #activeProfileNotice .w-10.h-10 {
+      background: #f1f5f9 !important;
       border-color: #cbd5e1 !important;
-      color: #000000 !important;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+      color: #0284c7 !important;
     }
 
     /* Allergen action controls removed */
@@ -1406,38 +1519,143 @@
     html.theme-light #clearWatchlistSearchBtn:hover {
       color: #0f172a !important;
     }
-    html.theme-light .receipt-group {
+    html.theme-light #historyPanel {
       background: #ffffff !important;
       border-color: #cbd5e1 !important;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+    }
+    html.theme-light #historyPanel h2,
+    html.theme-light #historyPanel h3,
+    html.theme-light #historyPanel h4 {
+      color: #0f172a !important;
+    }
+    html.theme-light #historyPanel p,
+    html.theme-light #historyPanel span.text-slate-400,
+    html.theme-light #historyPanel span.text-slate-300 {
+      color: #475569 !important;
+    }
+    html.theme-light #historyPanel .bg-slate-950\/80,
+    html.theme-light #historyPanel .bg-slate-950 {
+      background: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+    html.theme-light #watchlistSearchInput {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    html.theme-light #clearHistoryBtn {
+      background: #fff1f2 !important;
+      color: #e11d48 !important;
+      border-color: #fecdd3 !important;
+    }
+    html.theme-light .receipt-group {
+      background: #ffffff !important;
+      border: 1.5px solid #cbd5e1 !important;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05) !important;
     }
     html.theme-light .receipt-header-bar {
-      background: #e2e8f0 !important;
-      border-color: #cbd5e1 !important;
+      background: #f8fafc !important;
+      border-color: #e2e8f0 !important;
     }
     html.theme-light .receipt-header-bar:hover {
-      background: #cbd5e1 !important;
+      background: #f1f5f9 !important;
     }
     html.theme-light .receipt-header-bar h3 {
       color: #0f172a !important;
+      font-weight: 800 !important;
     }
     html.theme-light .receipt-header-bar span {
-      color: #334155 !important;
+      color: #475569 !important;
+    }
+    html.theme-light .group-tag-pill {
+      font-weight: 800 !important;
+    }
+    html.theme-light .group-tag-pill.tag-receipt,
+    html.theme-light .text-sky-400\/90.bg-sky-950\/80 {
+      background: #e0f2fe !important;
+      color: #0369a1 !important;
+      border-color: #7dd3fc !important;
+    }
+    html.theme-light .group-tag-pill.tag-camera,
+    html.theme-light .text-cyan-400\/90.bg-cyan-950\/80 {
+      background: #ecfeff !important;
+      color: #0e7490 !important;
+      border-color: #a5f3fc !important;
+    }
+    html.theme-light .group-tag-pill.tag-upload,
+    html.theme-light .text-teal-400\/90.bg-teal-950\/80 {
+      background: #f0fdf4 !important;
+      color: #15803d !important;
+      border-color: #bbf7d0 !important;
     }
     html.theme-light .receipt-drawer-well {
-      background: #f1f5f9 !important;
+      background: #f8fafc !important;
       border-color: #e2e8f0 !important;
     }
     html.theme-light .watchlist-item-card {
       background: #ffffff !important;
-      border-color: #cbd5e1 !important;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+      border: 1.5px solid #cbd5e1 !important;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04) !important;
     }
     html.theme-light .watchlist-item-card:hover {
       border-color: #94a3b8 !important;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08) !important;
     }
     html.theme-light .watchlist-item-card h4 {
       color: #0f172a !important;
+      font-weight: 800 !important;
+    }
+    html.theme-light .watchlist-item-card span {
+      color: #475569 !important;
+    }
+    html.theme-light .watchlist-item-card span.text-slate-300 {
+      color: #334155 !important;
+      font-weight: 700 !important;
+    }
+    html.theme-light .watchlist-item-card span.text-slate-400 {
+      color: #475569 !important;
+    }
+    html.theme-light .watchlist-item-card .bg-slate-950 {
+      background: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #475569 !important;
+    }
+    html.theme-light .watchlist-item-card .border-t {
+      border-top-color: #e2e8f0 !important;
+    }
+    html.theme-light [id^="watchlist-drawer-"] {
+      background: #f8fafc !important;
+      border-top-color: #e2e8f0 !important;
+    }
+    html.theme-light [id^="watchlist-drawer-"] > div {
+      background: #ffffff !important;
+      border-color: #cbd5e1 !important;
+    }
+    html.theme-light [id^="watchlist-drawer-"] span.text-slate-400 {
+      color: #475569 !important;
+    }
+    html.theme-light [id^="watchlist-drawer-"] span.text-sky-300 {
+      color: #0284c7 !important;
+      font-weight: 800 !important;
+    }
+    html.theme-light [id^="watchlist-chevron-"],
+    html.theme-light [id^="receipt-chevron-"] {
+      color: #475569 !important;
+      font-weight: 800 !important;
+    }
+    html.theme-light .watchlist-item-card button[title="Remove from Watchlist"] {
+      color: #64748b !important;
+    }
+    html.theme-light .watchlist-item-card button[title="Remove from Watchlist"]:hover {
+      color: #e11d48 !important;
+      background: #fee2e2 !important;
+    }
+    html.theme-light button[title="Delete this receipt"] {
+      color: #64748b !important;
+    }
+    html.theme-light button[title="Delete this receipt"]:hover {
+      color: #e11d48 !important;
+      background: #fee2e2 !important;
     }
     html.theme-light .watchlist-item-card.is-recalled {
       background: #fff1f2 !important;
@@ -1524,15 +1742,15 @@
     </div>
 
     <!-- 5 Clean Navigation Tabs: Scanner | Manual | Allergens | Watchlist | Recalls -->
-    <nav class="bg-slate-900/95 p-2 rounded-2xl border border-slate-800 grid grid-cols-5 gap-1.5 sm:gap-2 shadow-xl text-center sticky top-2 z-20 backdrop-blur-md">
+    <nav class="bg-slate-900/95 p-2 sm:p-2.5 rounded-2xl border border-slate-800 grid grid-cols-5 gap-1.5 sm:gap-2.5 shadow-xl text-center sticky top-2 z-20 backdrop-blur-md">
       <button
         type="button"
         id="tabScanner"
-        class="nav-tab active-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-1 transition bg-gradient-to-r from-cyan-600 via-teal-500 to-cyan-500 text-white shadow-lg shadow-cyan-950/60 ring-2 ring-amber-400/50 active:scale-95 relative after:content-[''] after:w-1.5 after:h-1.5 after:rounded-full after:bg-amber-300 after:absolute after:bottom-1"
+        class="nav-tab active-tab py-3 px-1.5 min-h-[72px] sm:min-h-[76px] rounded-2xl text-xs sm:text-sm font-bold flex flex-col items-center justify-center gap-1.5 transition bg-gradient-to-r from-cyan-600 via-teal-500 to-cyan-500 text-white shadow-lg shadow-cyan-950/60 ring-2 ring-amber-400/50 active:scale-95 relative"
         title="Barcodes - Camera UPC Scanner, Manual Entry & Search"
       >
-        <div class="h-6 flex items-center justify-center shrink-0">
-          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="h-7 sm:h-8 flex items-center justify-center shrink-0">
+          <svg class="w-6 h-6 sm:w-6.5 sm:h-6.5 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
           </svg>
@@ -1544,11 +1762,11 @@
         type="button"
         id="tabReceipts"
         data-alias="tabManual"
-        class="nav-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1 transition active:scale-95 relative"
+        class="nav-tab py-3 px-1.5 min-h-[72px] sm:min-h-[76px] rounded-2xl text-xs sm:text-sm font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95 relative"
         title="Receipts - Multi-Item Batch Grocery Receipt Auditor"
       >
-        <div class="h-6 flex items-center justify-center shrink-0">
-          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="h-7 sm:h-8 flex items-center justify-center shrink-0">
+          <svg class="w-6 h-6 sm:w-6.5 sm:h-6.5 text-cyan-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM10 8h4m-4 4h4"/>
           </svg>
         </div>
@@ -1558,10 +1776,10 @@
       <button
         type="button"
         id="tabAllergens"
-        class="nav-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1 transition active:scale-95 relative"
+        class="nav-tab py-3 px-1.5 min-h-[72px] sm:min-h-[76px] rounded-2xl text-xs sm:text-sm font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95 relative"
       >
-        <div class="h-6 flex items-center justify-center shrink-0">
-          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="h-7 sm:h-8 flex items-center justify-center shrink-0">
+          <svg class="w-6 h-6 sm:w-6.5 sm:h-6.5 text-amber-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
           </svg>
         </div>
@@ -1571,11 +1789,11 @@
       <button
         type="button"
         id="tabWatchlist"
-        class="nav-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1 transition active:scale-95 relative"
+        class="nav-tab py-3 px-1.5 min-h-[72px] sm:min-h-[76px] rounded-2xl text-xs sm:text-sm font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95 relative"
       >
         <span id="watchlistNavRecallBadge" class="hidden absolute -top-1 right-2 min-w-[18px] h-[18px] px-1 rounded-full bg-rose-500 text-white font-black text-[10px] leading-none shadow-md border border-slate-900 z-10 flex items-center justify-center">0</span>
-        <div class="h-6 flex items-center justify-center shrink-0">
-          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-teal-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="h-7 sm:h-8 flex items-center justify-center shrink-0">
+          <svg class="w-6 h-6 sm:w-6.5 sm:h-6.5 text-teal-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
           </svg>
         </div>
@@ -1585,10 +1803,10 @@
       <button
         type="button"
         id="tabBulletins"
-        class="nav-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1 transition active:scale-95 relative"
+        class="nav-tab py-3 px-1.5 min-h-[72px] sm:min-h-[76px] rounded-2xl text-xs sm:text-sm font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95 relative"
       >
-        <div class="h-6 flex items-center justify-center shrink-0">
-          <svg class="w-5 h-5 sm:w-6 sm:h-6 text-rose-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="h-7 sm:h-8 flex items-center justify-center shrink-0">
+          <svg class="w-6 h-6 sm:w-6.5 sm:h-6.5 text-rose-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
           </svg>
         </div>
@@ -2159,8 +2377,8 @@
       </div>
 
       <!-- Hero Capture / Upload Action Box (Expanded for High Readability) -->
-      <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 border border-slate-800 shadow-xl text-center space-y-5">
-        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-500/20 to-teal-400/20 border border-cyan-500/40 flex items-center justify-center text-cyan-300 mx-auto shadow-inner">
+      <div id="receiptHeroActionCard" class="p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 border border-slate-800 shadow-xl text-center space-y-5">
+        <div id="receiptHeroIconBox" class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-500/20 to-teal-400/20 border border-cyan-500/40 flex items-center justify-center text-cyan-300 mx-auto shadow-inner">
           <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
             <circle cx="12" cy="13" r="3"/>
@@ -6147,8 +6365,8 @@
         }
       }
 
-      const activeClass = "nav-tab active-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold flex flex-col items-center justify-center gap-1 transition bg-gradient-to-r from-cyan-600 via-teal-500 to-cyan-500 text-white shadow-lg shadow-cyan-950/60 ring-2 ring-amber-400/50 active:scale-95 relative after:content-[''] after:w-1.5 after:h-1.5 after:rounded-full after:bg-amber-300 after:absolute after:bottom-1";
-      const inactiveClass = "nav-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1 transition active:scale-95 relative";
+      const activeClass = "nav-tab active-tab py-3 px-1.5 min-h-[72px] sm:min-h-[76px] rounded-2xl text-xs sm:text-sm font-bold flex flex-col items-center justify-center gap-1.5 transition bg-gradient-to-r from-cyan-600 via-teal-500 to-cyan-500 text-white shadow-lg shadow-cyan-950/60 ring-2 ring-amber-400/50 active:scale-95 relative";
+      const inactiveClass = "nav-tab py-3 px-1.5 min-h-[72px] sm:min-h-[76px] rounded-2xl text-xs sm:text-sm font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1.5 transition active:scale-95 relative";
 
       const tabScanner = document.getElementById('tabScanner');
       const tabReceipts = document.getElementById('tabReceipts') || document.getElementById('tabManual');
@@ -11183,18 +11401,18 @@ function renderHistory() {
 
         // Dedicated Group Tag Pill: RECEIPT for receipts, CAMERA for camera scans, UPLOAD for uploads
         let tagText = 'RECEIPT';
-        let tagClasses = 'text-sky-400/90 bg-sky-950/80 border-sky-500/30';
+        let tagClasses = 'group-tag-pill tag-receipt text-sky-400/90 bg-sky-950/80 border-sky-500/30';
         if (rcpt.type === 'camera') {
           tagText = 'CAMERA';
-          tagClasses = 'text-cyan-400/90 bg-cyan-950/80 border-cyan-500/30';
+          tagClasses = 'group-tag-pill tag-camera text-cyan-400/90 bg-cyan-950/80 border-cyan-500/30';
         } else if (rcpt.type === 'upload') {
           tagText = 'UPLOAD';
-          tagClasses = 'text-teal-400/90 bg-teal-950/80 border-teal-500/30';
+          tagClasses = 'group-tag-pill tag-upload text-teal-400/90 bg-teal-950/80 border-teal-500/30';
         } else {
           tagText = 'RECEIPT';
-          tagClasses = 'text-sky-400/90 bg-sky-950/80 border-sky-500/30';
+          tagClasses = 'group-tag-pill tag-receipt text-sky-400/90 bg-sky-950/80 border-sky-500/30';
         }
-        const groupTagPill = `<span class="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded border ${tagClasses}">${tagText}</span>`;
+        const groupTagPill = `<span class="group-tag-pill text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded border ${tagClasses}">${tagText}</span>`;
 
         // Distinctly shaded group window without icons on the left
         finalHtml += `
