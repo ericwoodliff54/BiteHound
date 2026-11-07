@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rakka-v82';
+const CACHE_NAME = 'rakka-v76';
 const ASSETS = [
   './index.html',
   './manifest.json',
@@ -86,8 +86,8 @@ self.addEventListener('notificationclick', event => {
     clients.matchAll({ type: 'window', includeUncontrolled: true }).then(windowClients => {
       for (let client of windowClients) {
         if (client.url.includes('index.html') && 'focus' in client) {
-          if ('postMessage' in client) {
-            client.postMessage({ type: 'NAVIGATE_TAB', tab: 'watchlist' });
+          if ('navigate' in client) {
+            client.navigate(targetUrl);
           }
           return client.focus();
         }

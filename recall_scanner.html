@@ -1510,7 +1510,7 @@
         id="tabWatchlist"
         class="nav-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1 transition active:scale-95 relative"
       >
-        <span id="watchlistNavRecallBadge" class="hidden absolute -top-1 right-2 min-w-[18px] h-[18px] px-1 rounded-full bg-rose-500 text-white font-black text-[10px] leading-none shadow-md border border-slate-900 z-10 flex items-center justify-center">0</span>
+        <span id="watchlistNavRecallBadge" class="hidden absolute -top-1 right-1.5 px-1.5 py-0.2 rounded-full bg-rose-500 text-white font-black text-[9px] shadow-md border border-slate-900 z-10 ">0</span>
         <div class="h-6 flex items-center justify-center shrink-0">
           <svg class="w-5 h-5 sm:w-6 sm:h-6 text-teal-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
@@ -3624,20 +3624,6 @@
       const savedActive = localStorage.getItem('safebite_active_profile_id');
       if (savedActive && familyProfiles.some(p => p.id === savedActive)) {
         activeProfileId = savedActive;
-      }
-
-      // One-time default migration: Ensure single default profile ('me') defaults to UNCHECKED ([]), not all checked
-      const hasCleanedDefaults = localStorage.getItem('rakka_allergens_unchecked_default_v1');
-      if (!hasCleanedDefaults) {
-        if (familyProfiles && familyProfiles.length === 1 && familyProfiles[0].id === 'me') {
-          familyProfiles[0].allergens = [];
-          if (typeof userAllergens !== 'undefined') userAllergens = [];
-        }
-        localStorage.setItem('rakka_allergens_unchecked_default_v1', 'true');
-        try {
-          localStorage.setItem('safebite_family_profiles', JSON.stringify(familyProfiles));
-          localStorage.setItem('safebite_allergens', JSON.stringify(familyProfiles[0].allergens || []));
-        } catch (_) {}
       }
     } catch (e) {}
 
@@ -6111,11 +6097,6 @@
         }
       }
 
-      // Real-time synchronization of red recall badge on Watchlist tab
-      if (typeof updateWatchlistNavBadge === 'function') {
-        updateWatchlistNavBadge();
-      }
-
       // Panel Elements
       const scannerPanelEl = document.getElementById('scannerPanel');
       const receiptsPanelEl = document.getElementById('receiptsPanel');
@@ -6610,9 +6591,11 @@
 
         triggerHaptic([80, 40, 80]);
         sound.playScanBeep();
+        upcInput.value = decodedText;
+        clearBtn.classList.remove('hidden');
 
-        // Directly process uploaded barcode without populating manual search box
-        await processUPC(decodedText, 'upload');
+        // Directly process uploaded barcode without being blocked by camera frame debouncing
+        await processUPC(decodedText, 'manual');
       } catch (opticalErr) {
         console.warn("Optical barcode detection missed, trying Cloud Edge AI Packaging Vision:", opticalErr);
         
@@ -6650,6 +6633,10 @@
 
                 const p = visionData.product;
                 const detectedCode = p.upc && p.upc !== 'VISION-DETECTED' ? p.upc : '';
+                if (detectedCode) {
+                  upcInput.value = detectedCode;
+                  clearBtn.classList.remove('hidden');
+                }
 
                 // Autonomous 1-Shot Lot Code & Recall Verification
                 if (p.lotCode) {
@@ -7472,7 +7459,7 @@
     }
 
     // REAL-TIME GROCERY PRODUCT RESOLUTION & ALLERGEN ANALYSIS
-    async function processUPC(rawCode, source = 'camera') {
+    async function processUPC(rawCode, source = 'scanner') {
       try {
         const code = String(rawCode).replace(/\D/g, '');
         if (!code) return;
@@ -7482,15 +7469,14 @@
         const timeStr = now.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
         const timestamp = `${dateStr} • ${timeStr}`;
 
-        const targetContainer = scannerResultContainer || manualResultContainer;
-        if (manualResultContainer && manualResultContainer !== targetContainer) {
-          manualResultContainer.classList.add('hidden');
-          manualResultContainer.style.display = 'none';
-          manualResultContainer.innerHTML = '';
+        const targetContainer = (source === 'manual' && manualResultContainer) ? manualResultContainer : (scannerResultContainer || manualResultContainer);
+        const otherContainer = (targetContainer === manualResultContainer) ? scannerResultContainer : manualResultContainer;
+        if (otherContainer) {
+          otherContainer.classList.add('hidden');
+          otherContainer.innerHTML = '';
         }
         if (targetContainer) {
           targetContainer.classList.remove('hidden');
-          targetContainer.style.display = '';
           targetContainer.classList.add('animate-slide-up-spring');
           targetContainer.innerHTML = `
             <div class="rounded-3xl border border-white/10 bg-slate-900/95 p-5 shadow-2xl space-y-4 animate-slide-up-spring">
@@ -8051,7 +8037,6 @@
         let triggeredFamilyMatches = [];
         let detectedAdditivesList = auditFoodAdditives(ingredientsSummary, productAdditivesTags, productName);
 
-        // Screen against household profiles only in Pro mode (Free mode has allergen shields locked)
         if (isPlusActive) {
           for (const prof of familyProfiles) {
             const matches = (prof.allergens || []).filter(a => detectedAllergenIds.includes(a));
@@ -8089,7 +8074,6 @@
 
         const resultData = {
           upc: code,
-          source: source,
           status: overallStatus,
           productName: productName,
           brand: brandName,
@@ -8453,15 +8437,14 @@
 
     function displayResult(data, source = 'scanner') {
       const activeSource = data.source || source;
-      const targetContainer = scannerResultContainer || manualResultContainer;
+      const targetContainer = (activeSource === 'manual' && manualResultContainer) ? manualResultContainer : (scannerResultContainer || manualResultContainer);
       if (!targetContainer) return;
-      if (manualResultContainer && manualResultContainer !== targetContainer) {
-        manualResultContainer.classList.add('hidden');
-        manualResultContainer.style.display = 'none';
-        manualResultContainer.innerHTML = '';
+      const otherContainer = (targetContainer === manualResultContainer) ? scannerResultContainer : manualResultContainer;
+      if (otherContainer) {
+        otherContainer.classList.add('hidden');
+        otherContainer.innerHTML = '';
       }
       targetContainer.classList.remove('hidden');
-      targetContainer.style.display = '';
       targetContainer.classList.add('animate-slide-up-spring');
 
       const isRecalled = Boolean(data.isRecalled && data.recallRecord);
@@ -9288,18 +9271,6 @@
     function renderAllergensTab() {
       checkPlusStatus();
 
-      // Free mode constraint: Single user ('me') defaults back to unchecked for all allergens
-      if (!isPlusActive) {
-        if (familyProfiles && familyProfiles.length === 1 && familyProfiles[0].id === 'me') {
-          familyProfiles[0].allergens = [];
-        }
-        const curProf = getActiveProfile();
-        if (curProf && curProf.id === 'me') {
-          curProf.allergens = [];
-        }
-        userAllergens = (curProf && curProf.allergens) || [];
-      }
-
       const allergensPlusBanner = document.getElementById('allergensPlusBanner');
       const allergensPlusBannerTitle = document.getElementById('allergensPlusBannerTitle');
       const allergensPlusBannerSub = document.getElementById('allergensPlusBannerSub');
@@ -9503,7 +9474,7 @@
         }
       }
 
-      // Render 12 Allergen Guardrail Toggles (Default to unchecked; locked in Free mode, customizable in Pro)
+      // Render 12 Allergen Guardrail Toggles
       allergenCheckboxesContainer.innerHTML = ALLERGEN_OPTIONS.map(opt => {
         const isChecked = isPlusActive && userAllergens.includes(opt.id);
         const activeBg = isChecked 
@@ -9537,7 +9508,6 @@
             type="button" 
             class="allergen-toggle-btn min-h-[64px] p-3.5 rounded-2xl border text-left flex items-center justify-between transition active:scale-[0.99] ${activeBg} gap-3 cursor-pointer"
             data-id="${opt.id}"
-            title="${isPlusActive ? `Tap to toggle ${opt.name}` : `RAKKA Pro Required to enable ${opt.name}`}"
           >
             <div class="flex items-center gap-3.5 min-w-0">
               <div class="w-10 h-10 rounded-xl bg-slate-800/80 border border-slate-700/80 flex items-center justify-center text-sky-400 shrink-0">
@@ -10036,12 +10006,8 @@
       scanHistory = scanHistory.filter(i => i.upc !== item.upc);
       
       // Prepend fresh scan with full details and timestamp
-      const scanTimestamp = Date.now();
-      const uniqueItemId = item.id || ('item_' + String(item.upc || 'upc').replace(/[^a-zA-Z0-9_-]/g, '_') + '_' + scanTimestamp);
       scanHistory.unshift({
-        id: uniqueItemId,
         upc: item.upc,
-        source: item.source || 'camera',
         status: item.status,
         productName: item.productName || item.upc,
         brand: item.brand || '',
@@ -10049,7 +10015,6 @@
         timestamp: Date.now(),
         isRecalled: Boolean(item.isRecalled),
         recallRecord: item.recallRecord || null,
-        terminatedNotice: item.terminatedNotice || (item.recallRecord && item.recallRecord.terminatedNotice) || null,
         detectedAllergens: item.detectedAllergens || [],
         detectedAdditives: item.detectedAdditives || []
       });
@@ -10092,25 +10057,15 @@
       } catch (e) {}
 
       auditPantryAgainstRecalls();
-      if (typeof updateWatchlistNavBadge === 'function') {
-        updateWatchlistNavBadge();
-      }
     }
 
     function removeGuardedItem(key) {
-      scanHistory = scanHistory.filter(i => {
-        if (i.id && i.id === key) return false;
-        if (i.upc && (i.upc === key || key.startsWith(String(i.upc)) || String(i.upc).startsWith(key))) return false;
-        return true;
-      });
+      scanHistory = scanHistory.filter(i => (i.id ? i.id !== key : i.upc !== key));
       try {
         localStorage.setItem('rakka_history', JSON.stringify(scanHistory)); 
         localStorage.setItem('safebite_history', JSON.stringify(scanHistory));
       } catch (e) {}
       auditPantryAgainstRecalls();
-      if (typeof updateWatchlistNavBadge === 'function') {
-        updateWatchlistNavBadge();
-      }
     }
     window.removeGuardedItem = removeGuardedItem;
 
@@ -10214,12 +10169,6 @@
     function dispatchRecallAlertNotification(item) {
       if (!item || !isRecallNotificationActive()) return;
 
-      // HARD GUARD: Never dispatch recall notifications for cleared or terminated products!
-      const directRec = (typeof findRecallRecord === 'function') ? findRecallRecord(item.upc) : null;
-      if (item.isRecalled === false || item.status === 'clear' || item.terminatedNotice || (directRec && (directRec.isRecalled === false || directRec.terminatedNotice))) {
-        return;
-      }
-
       const hazardKey = String(item.activeRecallHazard || item.hazard || item.status || 'recalled');
       if (item.lastNotifiedRecall === hazardKey) return;
       item.lastNotifiedRecall = hazardKey;
@@ -10278,44 +10227,8 @@
           return;
         }
 
-        // Terminated Recall & Curated Database Immunity:
-        // If an item is in RECALL_DATABASE as cleared (isRecalled === false), has a terminatedNotice,
-        // or is verified store-cleared, it is 100% IMMUNE from generic category fallback matching & recall alerts!
-        const directRec = (typeof findRecallRecord === 'function') ? findRecallRecord(code || cleanCode) : (
-          (typeof RECALL_DATABASE !== 'undefined') ? (
-            (code && RECALL_DATABASE[code]) || 
-            (cleanCode && RECALL_DATABASE[cleanCode]) || 
-            (cleanCode && RECALL_DATABASE[cleanCode.replace(/^0+/, '')]) ||
-            (cleanCode && RECALL_DATABASE[cleanCode.padStart(12, '0')]) ||
-            (cleanCode && RECALL_DATABASE[cleanCode.padStart(13, '0')])
-          ) : null
-        );
-
-        const isExplicitlyCleared = Boolean(
-          (directRec && (directRec.isRecalled === false || directRec.terminatedNotice || directRec.tag === 'Store Cleared' || directRec.severity === 'Terminated Notice on Record')) ||
-          item.terminatedNotice ||
-          (item.recallRecord && (item.recallRecord.isRecalled === false || item.recallRecord.terminatedNotice))
-        );
-
-        if (isExplicitlyCleared) {
-          item.recalledNow = false;
-          item.isRecalled = false;
-          delete item.activeRecallHazard;
-          delete item.recallAgency;
-          delete item.recallSeverity;
-          delete item.recallDate;
-          if (item.status === 'recalled' || item.status === 'recall_notice') {
-            item.status = (item.detectedAllergens && item.detectedAllergens.length > 0) ? 'allergen_alert' : 'clear';
-          }
-          if (directRec && directRec.terminatedNotice && !item.terminatedNotice) {
-            item.terminatedNotice = directRec.terminatedNotice;
-          }
-          historyNeedsSave = true;
-          return; // IMMUNE from category fallback matching & push alerts!
-        }
-
-        // 0. If item was already verified & flagged as recalled (by camera scan, upload, or receipt AI audit), PRESERVE IT!
-        if ((item.status === 'recalled' || item.isRecalled) && item.activeRecallHazard) {
+        // 0. If item was already verified & flagged as recalled by receipt AI audit, PRESERVE IT!
+        if (item.source === 'receipt' && (item.status === 'recalled' || item.isRecalled) && item.activeRecallHazard) {
           item.recalledNow = true;
           item.status = 'recalled';
           item.isRecalled = true;
@@ -10480,40 +10393,6 @@
       renderHistory();
     }
 
-    function updateWatchlistNavBadge() {
-      const navBadge = document.getElementById('watchlistNavRecallBadge');
-      if (!navBadge) return;
-
-      const isAldi746502Check = (item) => {
-        const code = String(item.upc || '').trim();
-        const cleanCode = code.replace(/\D/g, '');
-        const brandLower = String(item.brand || item.receiptStore || '').toLowerCase().trim();
-        const titleLower = String(item.productName || item.product || '').toLowerCase().trim();
-        return (code === '746502' || cleanCode === '746502' || cleanCode === '0746502' || (brandLower.includes('aldi') && titleLower.includes('alfredo')));
-      };
-
-      const count = Array.isArray(scanHistory) ? scanHistory.filter(item => {
-        if (isAldi746502Check(item)) return false;
-        if (item.terminatedNotice || (item.recallRecord && item.recallRecord.terminatedNotice)) return false;
-        return Boolean(
-          item.recalledNow ||
-          item.status === 'recalled' ||
-          item.status === 'recall_notice' ||
-          item.isRecalled ||
-          (item.activeRecallHazard && String(item.activeRecallHazard).trim().length > 0)
-        );
-      }).length : 0;
-
-      if (count > 0) {
-        navBadge.textContent = String(count);
-        navBadge.classList.remove('hidden');
-      } else {
-        navBadge.textContent = '0';
-        navBadge.classList.add('hidden');
-      }
-    }
-    window.updateWatchlistNavBadge = updateWatchlistNavBadge;
-
     function updatePantryAlertBanner(matches) {
       // 1. Keep the top banner in the Watchlist tab completely hidden (removed per user request)
       const banner = document.getElementById('pantryRecallAlertBanner');
@@ -10522,8 +10401,16 @@
         banner.innerHTML = '';
       }
 
-      // 2. Update the persistent red alert badge on the Watchlist navigation tab in real time
-      updateWatchlistNavBadge();
+      // 2. Update the persistent red alert badge on the Watchlist navigation tab
+      const navBadge = document.getElementById('watchlistNavRecallBadge');
+      if (navBadge) {
+        if (matches && matches.length > 0) {
+          navBadge.textContent = matches.length;
+          navBadge.classList.remove('hidden');
+        } else {
+          navBadge.classList.add('hidden');
+        }
+      }
     }
 
 
@@ -10559,32 +10446,24 @@
 
     function deleteReceiptGroup(receiptKey) {
       triggerHaptic([40, 40]);
-      const getGroupKey = (i) => {
-        let k = i.receiptId;
-        const isReceiptItem = Boolean(i.source === 'receipt' || (k && k.startsWith('rcpt_') && k !== 'rcpt_Direct_Barcode_Scans'));
-        const isUploadItem = Boolean(i.source === 'upload' || i.source === 'photo' || k === 'group_upload');
-        if (isReceiptItem) {
-          const store = i.receiptStore || i.brand || 'store';
-          return k || ('rcpt_' + String(store).replace(/[^a-zA-Z0-9]/g, '_'));
-        } else if (isUploadItem) {
-          return 'group_upload';
-        } else {
-          return 'group_camera';
-        }
-      };
-
-      const matchingItems = scanHistory.filter(i => getGroupKey(i) === receiptKey);
+      const matchingItems = scanHistory.filter(i => {
+        const k = i.receiptId || ('rcpt_' + (i.receiptStore || i.brand || 'store').replace(/[^a-zA-Z0-9]/g, '_') + '_' + (i.receiptDate || i.date || i.time || 'session').replace(/[^a-zA-Z0-9]/g, '_'));
+        return k === receiptKey;
+      });
       const count = matchingItems.length;
       if (count === 0) return;
 
-      const groupName = receiptKey === 'group_camera' ? 'Camera Scans' : (receiptKey === 'group_upload' ? 'UPC Uploads' : (matchingItems[0].receiptStore || matchingItems[0].brand || 'Grocery Receipt'));
-      if (!confirm(`Discard all ${count} items from ${groupName}?`)) return;
+      const storeName = matchingItems[0].receiptStore || matchingItems[0].brand || 'Grocery Receipt';
+      if (!confirm(`Discard all ${count} items from ${storeName}?`)) return;
 
-      scanHistory = scanHistory.filter(i => getGroupKey(i) !== receiptKey);
+      scanHistory = scanHistory.filter(i => {
+        const k = i.receiptId || ('rcpt_' + (i.receiptStore || i.brand || 'store').replace(/[^a-zA-Z0-9]/g, '_') + '_' + (i.receiptDate || i.date || i.time || 'session').replace(/[^a-zA-Z0-9]/g, '_'));
+        return k !== receiptKey;
+      });
 
       delete collapsedReceiptGroups[receiptKey];
       saveHistory();
-      showCustomizeToast(`Removed ${groupName} (${count} items)`);
+      showCustomizeToast(`Removed ${storeName} receipt (${count} items)`);
     }
     window.deleteReceiptGroup = deleteReceiptGroup;
 
@@ -10641,25 +10520,18 @@ function renderHistory() {
             item.productName = item.product;
           }
           // Associate legacy items with receipt groupings
-          if (!item.receiptId || item.receiptId === 'direct_barcode') {
+          if (!item.receiptId) {
             const rawStore = item.receiptStore || item.brand || 'Grocery Store';
             const rawDate = item.receiptDate || item.date || item.time || 'Recent Scan';
-            const isReceipt = (item.source === 'receipt');
-            const isUpload = (item.source === 'upload' || item.source === 'photo');
-
-            if (isReceipt) {
+            const isBarcode = (item.source === 'barcode' || !item.source);
+            if (isBarcode) {
+              item.receiptId = 'direct_barcode';
+              item.receiptStore = 'Direct Barcode Scans';
+              item.receiptDate = rawDate;
+              item.receiptTimestamp = item.timestamp || (Date.now() - 86400000);
+            } else {
               item.receiptId = 'rcpt_' + String(rawStore).replace(/[^a-zA-Z0-9]/g, '_') + '_' + String(rawDate).split('•')[0].trim().replace(/[^a-zA-Z0-9]/g, '_');
               item.receiptStore = rawStore;
-              item.receiptDate = rawDate;
-              item.receiptTimestamp = item.timestamp || Date.now();
-            } else if (isUpload) {
-              item.receiptId = 'group_upload';
-              item.receiptStore = 'UPC Uploads';
-              item.receiptDate = rawDate;
-              item.receiptTimestamp = item.timestamp || Date.now();
-            } else {
-              item.receiptId = 'group_camera';
-              item.receiptStore = 'Camera Scans';
               item.receiptDate = rawDate;
               item.receiptTimestamp = item.timestamp || Date.now();
             }
@@ -10692,11 +10564,6 @@ function renderHistory() {
             }
           }
         });
-      }
-
-      // Synchronize Watchlist Tab Recall Badge
-      if (typeof updateWatchlistNavBadge === 'function') {
-        updateWatchlistNavBadge();
       }
 
       // Update Pantry Guard Monitored Cap Badge
@@ -10786,41 +10653,18 @@ function renderHistory() {
         return;
       }
 
-      // 3. Group filtered items into Receipts, Camera Scans, or UPC Uploads
+      // 3. Group filtered items into Receipts
       const receiptGroups = {};
       filteredItems.forEach(item => {
-        let rKey = item.receiptId;
-        const isReceiptItem = Boolean(item.source === 'receipt' || (rKey && rKey.startsWith('rcpt_') && rKey !== 'rcpt_Direct_Barcode_Scans'));
-        const isUploadItem = Boolean(item.source === 'upload' || item.source === 'photo' || rKey === 'group_upload');
-
-        let groupType = 'camera';
-        let defaultStoreName = 'Camera Scans';
-        if (isReceiptItem) {
-          groupType = 'receipt';
-          defaultStoreName = item.receiptStore || item.brand || 'Grocery Store';
-          rKey = rKey || ('rcpt_' + String(defaultStoreName).replace(/[^a-zA-Z0-9]/g, '_'));
-        } else if (isUploadItem) {
-          groupType = 'upload';
-          defaultStoreName = 'UPC Uploads';
-          rKey = 'group_upload';
-        } else {
-          groupType = 'camera';
-          defaultStoreName = 'Camera Scans';
-          rKey = 'group_camera';
-        }
-
+        const rKey = item.receiptId || ('rcpt_' + (item.receiptStore || item.brand || 'store').replace(/[^a-zA-Z0-9]/g, '_') + '_' + (item.receiptDate || item.date || item.time || 'session').replace(/[^a-zA-Z0-9]/g, '_'));
         if (!receiptGroups[rKey]) {
-          let storeName = defaultStoreName;
-          if (groupType === 'receipt') {
-            storeName = item.receiptStore || item.brand || 'Grocery Store';
-            if (storeName === 'Direct Barcode Scans') storeName = 'Camera Scans';
-          }
+          const isDirectBarcode = rKey === 'direct_barcode';
           receiptGroups[rKey] = {
             id: rKey,
-            type: groupType, // 'receipt', 'camera', or 'upload'
-            store: storeName,
+            store: isDirectBarcode ? 'Direct Barcode Scans' : (item.receiptStore || item.brand || 'Grocery Store'),
             date: item.receiptDate || item.date || item.time || 'Recent Scan',
             timestamp: item.receiptTimestamp || item.timestamp || 0,
+            isDirectBarcode: isDirectBarcode,
             items: []
           };
         }
@@ -10838,9 +10682,7 @@ function renderHistory() {
         const titleLower = String(item.productName || item.product || '').toLowerCase().trim();
         const isAldi746502 = (code === '746502' || cleanCode === '746502' || cleanCode === '0746502' || (brandLower.includes('aldi') && titleLower.includes('alfredo')));
 
-        const cardDirectRec = (typeof findRecallRecord === 'function') ? findRecallRecord(code || cleanCode) : null;
-        const isItemTerminated = Boolean(item.terminatedNotice || (item.recallRecord && item.recallRecord.terminatedNotice) || (cardDirectRec && cardDirectRec.terminatedNotice));
-        const isItemRecalled = !isAldi746502 && !isItemTerminated && Boolean(
+        const isItemRecalled = !isAldi746502 && Boolean(
           item.recalledNow ||
           item.status === 'recalled' ||
           item.status === 'recall_notice' ||
@@ -10879,9 +10721,6 @@ function renderHistory() {
         if (isItemRecalled) {
           cardBorder = 'border border-rose-500/50 bg-slate-900/90 hover:border-rose-400';
           statusPill = `<span class="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">Recall</span>`;
-        } else if (isItemTerminated) {
-          cardBorder = 'border border-teal-500/40 bg-slate-900/90 hover:border-teal-400';
-          statusPill = `<span class="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-teal-500/20 text-teal-300 border border-teal-500/40 flex items-center gap-1"><span>✓</span><span>Terminated Recall</span></span>`;
         } else if (isAlert) {
           cardBorder = 'border border-amber-500/50 bg-slate-900/90 hover:border-amber-400';
           if (isPlusActive) {
@@ -10958,18 +10797,6 @@ function renderHistory() {
                 </div>
               ` : ''}
 
-              <!-- Terminated Notice Section (Cleared Store Inventory) -->
-              ${isItemTerminated ? `
-                <div class="p-3 rounded-xl bg-teal-950/40 border border-teal-500/40 space-y-1 text-xs">
-                  <div class="flex items-center justify-between">
-                    <span class="font-bold text-teal-300 text-xs">FDA Terminated & Resolved Notice</span>
-                    <span class="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-teal-500/20 text-teal-300 border border-teal-500/30">Cleared Inventory</span>
-                  </div>
-                  <p class="text-xs text-teal-200/90 leading-relaxed font-medium">${(item.terminatedNotice && item.terminatedNotice.reason) || (item.recallRecord && item.recallRecord.terminatedNotice && item.recallRecord.terminatedNotice.reason) || (cardDirectRec && cardDirectRec.terminatedNotice && cardDirectRec.terminatedNotice.reason) || 'Past voluntary recall officially closed and terminated by the FDA. Current store inventory is unaffected and cleared.'}</p>
-                  <p class="text-[10px] text-slate-400 pt-1 border-t border-teal-900/40">Verified: Official FDA records confirm this recall is closed out. Current inventory is safe.</p>
-                </div>
-              ` : ''}
-
               <!-- Allergen Breakdown -->
               <div class="space-y-1">
                 <span class="text-[10px] uppercase font-bold text-amber-300 tracking-wider block">Household Allergen Analysis</span>
@@ -10986,7 +10813,7 @@ function renderHistory() {
                   <div class="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 text-xs">
                     ✓ Zero active household allergen conflicts for all family members.
                   </div>
-                `) : (affectedMembers.length > 0 || item.status === 'allergen_alert' ? `
+                `) : (affectedMembers.length > 0 ? `
                   <div class="p-3 rounded-xl bg-amber-950/40 border border-amber-500/40 space-y-2">
                     <div class="flex items-center justify-between">
                       <span class="font-bold text-amber-300 text-xs flex items-center gap-1.5">
@@ -11116,45 +10943,45 @@ function renderHistory() {
           return 0;
         });
 
+        // Clean, elegant store icon (no bouncing emojis, no flashing!)
+        let storeIconSvg = `<svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12l2-1 2 1 2-1 2 1 2-1 2 1V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>`;
+        let iconBg = 'bg-sky-950/80 border border-sky-500/30';
         let statusPill = `<span class="px-2 py-0.5 text-[10px] font-bold rounded-lg bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">Cleared</span>`;
 
         if (hasRecalls) {
           const recallCount = rcpt.items.filter(i => !isAldi746502Check(i) && Boolean(i.recalledNow || i.status === 'recalled' || i.status === 'recall_notice' || i.isRecalled || (i.activeRecallHazard && String(i.activeRecallHazard).trim().length > 0))).length;
+          storeIconSvg = `<svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`;
+          iconBg = 'bg-rose-950/80 border border-rose-500/40';
           statusPill = `<span class="px-2 py-0.5 text-[10px] font-bold rounded-lg bg-rose-500/20 text-rose-300 border border-rose-500/40">${recallCount} Recall${recallCount > 1 ? 's' : ''}</span>`;
         } else if (hasAlerts) {
+          storeIconSvg = `<svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`;
+          iconBg = 'bg-amber-950/80 border border-amber-500/40';
           statusPill = `<span class="px-2 py-0.5 text-[10px] font-bold rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/40">Allergen Alert</span>`;
+        } else if (isDirectBarcode) {
+          storeIconSvg = `<svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>`;
+          iconBg = 'bg-sky-950/80 border border-sky-500/30';
         }
 
-        // Dedicated Group Tag Pill: RECEIPT for receipts, CAMERA for camera scans, UPLOAD for uploads
-        let tagText = 'RECEIPT';
-        let tagClasses = 'text-sky-400/90 bg-sky-950/80 border-sky-500/30';
-        if (rcpt.type === 'camera') {
-          tagText = 'CAMERA';
-          tagClasses = 'text-cyan-400/90 bg-cyan-950/80 border-cyan-500/30';
-        } else if (rcpt.type === 'upload') {
-          tagText = 'UPLOAD';
-          tagClasses = 'text-teal-400/90 bg-teal-950/80 border-teal-500/30';
-        } else {
-          tagText = 'RECEIPT';
-          tagClasses = 'text-sky-400/90 bg-sky-950/80 border-sky-500/30';
-        }
-        const groupTagPill = `<span class="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded border ${tagClasses}">${tagText}</span>`;
-
-        // Distinctly shaded group window without icons on the left
+        // Distinctly shaded receipt window (steel-slate header, clearly separate from products)
         finalHtml += `
           <div class="receipt-group rounded-2xl border border-slate-700/80 bg-slate-900 shadow-md overflow-hidden transition-all duration-200">
-            <!-- Group Header Bar (No icon on the left, clean tags) -->
+            <!-- Receipt Header (Distinct Steel-Slate Header Bar) -->
             <div class="receipt-header-bar p-3.5 sm:p-4 flex items-center justify-between gap-3 cursor-pointer select-none bg-slate-800 hover:bg-slate-750 transition" onclick="toggleReceiptGroup('${rcpt.id}')">
-              <div class="min-w-0">
-                <div class="flex items-center gap-2 flex-wrap">
-                  ${groupTagPill}
-                  <h3 class="font-display font-bold text-white text-sm sm:text-base tracking-tight truncate">${rcpt.store}</h3>
-                  ${statusPill}
+              <div class="flex items-center gap-3 min-w-0">
+                <div class="w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center shrink-0">
+                  ${storeIconSvg}
                 </div>
-                <div class="flex items-center gap-2 text-[11px] text-slate-400 font-mono mt-0.5">
-                  <span>${rcpt.date}</span>
-                  <span>•</span>
-                  <span class="text-slate-300 font-sans">${rcpt.items.length} Item${rcpt.items.length === 1 ? '' : 's'}</span>
+                <div class="min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="text-[9px] font-black uppercase tracking-wider text-sky-400/90 px-1.5 py-0.5 rounded bg-sky-950/80 border border-sky-500/30">RECEIPT</span>
+                    <h3 class="font-display font-bold text-white text-sm sm:text-base tracking-tight truncate">${rcpt.store}</h3>
+                    ${statusPill}
+                  </div>
+                  <div class="flex items-center gap-2 text-[11px] text-slate-400 font-mono mt-0.5">
+                    <span>${rcpt.date}</span>
+                    <span>•</span>
+                    <span class="text-slate-300 font-sans">${rcpt.items.length} Item${rcpt.items.length === 1 ? '' : 's'}</span>
+                  </div>
                 </div>
               </div>
 
@@ -11567,12 +11394,10 @@ function renderHistory() {
       triggerHaptic([30]);
       if (scannerResultContainer) {
         scannerResultContainer.classList.add('hidden');
-        scannerResultContainer.style.display = 'none';
         scannerResultContainer.innerHTML = '';
       }
       if (manualResultContainer) {
         manualResultContainer.classList.add('hidden');
-        manualResultContainer.style.display = 'none';
         manualResultContainer.innerHTML = '';
       }
       const upcInputEl = document.getElementById('upcInput');
@@ -11581,11 +11406,6 @@ function renderHistory() {
       if (clearBtnEl) clearBtnEl.classList.add('hidden');
       const fileInputEl = document.getElementById('barcodeFileInput');
       if (fileInputEl) fileInputEl.value = '';
-
-      // Reset scan debounce lock so subsequent uploads of same or new items display cleanly
-      isScanningLocked = false;
-      lastScannedCode = null;
-      lastScanTimestamp = 0;
 
       const targetPanel = document.getElementById('manualUpcSection') || document.getElementById('scannerPanel');
       if (targetPanel) {
@@ -11852,30 +11672,14 @@ function renderHistory() {
         const targetTab = urlParams.get('tab');
         if (targetTab === 'watchlist' || targetTab === 'history') {
           setTimeout(() => setNavTab('watchlist'), 150);
-          // Clean URL query immediately so browser refresh reloads default Barcodes tab
-          if (window.history && window.history.replaceState) {
-            const cleanUrl = window.location.pathname + (window.location.hash || '');
-            window.history.replaceState({}, document.title, cleanUrl);
-          }
         }
       } catch (_) {}
-
-      // Listen for background tab navigation messages from Service Worker
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.addEventListener('message', event => {
-          if (event.data && event.data.type === 'NAVIGATE_TAB') {
-            if (typeof setNavTab === 'function') {
-              setNavTab(event.data.tab);
-            }
-          }
-        });
-      }
 
     setTimeout(initEdgeSettingsInputs, 200);
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=82')
+        navigator.serviceWorker.register('./sw.js?v=76')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
@@ -12408,16 +12212,11 @@ function renderHistory() {
 
         if (!isRecalledItem) {
           const directRec = (typeof findRecallRecord === 'function') ? findRecallRecord(resolvedUpc) : null;
-          if (directRec) {
-            if (directRec.isRecalled) {
-              isRecalledItem = true;
-              hazardText = directRec.hazard || 'Identified active recall on federal record';
-              recallAgencyText = directRec.agency || 'FDA / USDA';
-              recallSeverityText = directRec.severity || 'Class I High Risk';
-            } else if (directRec.terminatedNotice || directRec.tag === 'Store Cleared' || directRec.severity === 'Terminated Notice on Record') {
-              // Explicitly cleared or terminated recall - do NOT check category keywords!
-              isRecalledItem = false;
-            }
+          if (directRec && directRec.isRecalled) {
+            isRecalledItem = true;
+            hazardText = directRec.hazard || 'Identified active recall on federal record';
+            recallAgencyText = directRec.agency || 'FDA / USDA';
+            recallSeverityText = directRec.severity || 'Class I High Risk';
           } else {
             const lower = itemName.toLowerCase();
             if (lower.includes('spinach') && (lower.includes('baby') || lower.includes('organic') || lower.includes('5z') || lower.includes('5 oz'))) {
@@ -12497,12 +12296,6 @@ function renderHistory() {
       if (typeof auditWatchlistAllergens === 'function') {
         auditWatchlistAllergens();
       }
-      if (typeof auditPantryAgainstRecalls === 'function') {
-        auditPantryAgainstRecalls();
-      }
-      if (typeof updateWatchlistNavBadge === 'function') {
-        updateWatchlistNavBadge();
-      }
       saveHistory();
 
       // Show brief confirmation state in loading box before gliding to Watchlist
@@ -12552,7 +12345,6 @@ function renderHistory() {
       }, 700);
     }
 
-    window.autoImportReceiptDirectlyToWatchlist = autoImportReceiptDirectlyToWatchlist;
     function renderReceiptAuditResults(receipt) {
       if (!receiptAuditResultsBox) return;
       receiptAuditResultsBox.classList.remove('hidden');
