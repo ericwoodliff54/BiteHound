@@ -8218,8 +8218,9 @@
         const brandLower = String(item.brand || item.receiptStore || '').toLowerCase().trim();
         const titleLower = String(item.productName || item.product || '').toLowerCase().trim();
 
-        // Safe staple immunity: Aldi 746502 (Chicken Alfredo / Meatball Marinara) - NEVER recalled
-        if (code === '746502' || cleanCode === '746502' || cleanCode === '0746502' || (brandLower.includes('aldi') && titleLower.includes('alfredo'))) {
+        // Safe staple immunity: Aldi 746502 (Alfredo/Meatball) & Aldi 344974 (Millville Soft Baked / Chewy Bars) - NEVER recalled
+        if (code === '746502' || cleanCode === '746502' || cleanCode === '0746502' || (brandLower.includes('aldi') && titleLower.includes('alfredo')) ||
+            code === '344974' || cleanCode === '344974' || cleanCode === '0344974' || (brandLower.includes('millville') && (titleLower.includes('soft baked') || titleLower.includes('granola') || titleLower.includes('chewy')))) {
           item.recalledNow = false;
           item.isRecalled = false;
           delete item.activeRecallHazard;
@@ -8291,13 +8292,19 @@
         let match = NATIONAL_BULLETINS.find(b => {
           if (b.upcs && (b.upcs.includes(code) || b.upcs.includes(cleanCode) || b.upcs.includes(cleanCode.replace(/^0+/, '')))) return true;
           
+          const brandMatch = (b.brand && brandLower && (brandLower.includes(b.brand.toLowerCase()) || b.brand.toLowerCase().includes(brandLower))) ||
+                             (Array.isArray(b.brands) && b.brands.some(br => brandLower.includes(br.toLowerCase()) || titleLower.includes(br.toLowerCase())));
+
+          // Keyword match REQUIRES brand alignment for brand-specific recalls (prevents Quaker/TreeHouse from falsely flagging Millville, Kellogg's, etc.)
           if (Array.isArray(b.keywords) && b.keywords.some(kw => titleLower.includes(kw))) {
+            if (b.brand || (Array.isArray(b.brands) && b.brands.length > 0)) {
+              if (brandMatch) return true;
+              return false; // Keyword matched, but brand is different!
+            }
             return true;
           }
 
           const bTitle = (b.product || b.title || '').toLowerCase();
-          const brandMatch = (b.brand && brandLower && (brandLower.includes(b.brand.toLowerCase()) || b.brand.toLowerCase().includes(brandLower))) ||
-                             (Array.isArray(b.brands) && b.brands.some(br => brandLower.includes(br.toLowerCase())));
           if (brandMatch && bTitle && titleLower && (titleLower.includes(bTitle) || bTitle.includes(titleLower))) {
             return true;
           }
@@ -10604,7 +10611,9 @@ function renderHistory() {
 
         // RECALL CROSS-CHECK INTELLIGENCE
         let isRecalledItem = item.status === 'recalled' || Boolean(item.isRecalled);
-        if (resolvedUpc === '746502' || resolvedUpc === '0746502' || (String(receiptStore).toLowerCase().includes('aldi') && itemName.toLowerCase().includes('alfredo'))) {
+        if (resolvedUpc === '746502' || resolvedUpc === '0746502' || resolvedUpc === '344974' || resolvedUpc === '0344974' ||
+            (String(receiptStore).toLowerCase().includes('aldi') && itemName.toLowerCase().includes('alfredo')) ||
+            (itemName.toLowerCase().includes('millville') && (itemName.toLowerCase().includes('soft baked') || itemName.toLowerCase().includes('granola') || itemName.toLowerCase().includes('chewy')))) {
           isRecalledItem = false;
           item.status = 'clear';
           item.isRecalled = false;
