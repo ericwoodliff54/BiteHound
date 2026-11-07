@@ -12231,5 +12231,2234 @@
       "Costco"
     ],
     "isRecalled": false
+  },
+  "00599998": {
+    "upc": "00599998",
+    "product": "Trader Joe's Everything But the Bagel Sesame Seasoning Blend (2.3 oz)",
+    "brand": "Trader Joe's",
+    "ingredients": "Sesame Seeds, Sea Salt Flakes, Dried Minced Garlic, Dried Minced Onion, Black Sesame Seeds, Poppy Seeds.",
+    "allergens": [
+      "sesame"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "599998": {
+    "upc": "00599998",
+    "product": "Trader Joe's Everything But the Bagel Sesame Seasoning Blend (2.3 oz)",
+    "brand": "Trader Joe's",
+    "ingredients": "Sesame Seeds, Sea Salt Flakes, Dried Minced Garlic, Dried Minced Onion, Black Sesame Seeds, Poppy Seeds.",
+    "allergens": [
+      "sesame"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "00507139": {
+    "upc": "00507139",
+    "product": "Trader Joe's Speculoos Cookie Butter (14.1 oz Jar)",
+    "brand": "Trader Joe's",
+    "ingredients": "Speculoos 57% (Wheat Flour, Sugar, Vegetable Oils [Palm Oil from Sustainable and Certified Plantations, Canola Oil], Candy Sugar Syrup, Raising Agent [Sodium Hydrogen Carbonate], Soy Flour, Salt, Cinnamon), Canola Oil, Sugar, Emulsifier (Soy Lecithin), Citric Acid.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy"
+    ],
+    "additives_tags": [
+      "Soy Lecithin",
+      "Citric Acid"
+    ],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "507139": {
+    "upc": "00507139",
+    "product": "Trader Joe's Speculoos Cookie Butter (14.1 oz Jar)",
+    "brand": "Trader Joe's",
+    "ingredients": "Speculoos 57% (Wheat Flour, Sugar, Vegetable Oils [Palm Oil from Sustainable and Certified Plantations, Canola Oil], Candy Sugar Syrup, Raising Agent [Sodium Hydrogen Carbonate], Soy Flour, Salt, Cinnamon), Canola Oil, Sugar, Emulsifier (Soy Lecithin), Citric Acid.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy"
+    ],
+    "additives_tags": [
+      "Soy Lecithin",
+      "Citric Acid"
+    ],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "00645607": {
+    "upc": "00645607",
+    "product": "Trader Joe's Chili Onion Crunch (6 oz Jar)",
+    "brand": "Trader Joe's",
+    "ingredients": "Olive Oil, Dried Onion, Dried Garlic, Crushed Chili Peppers, Dried Bell Peppers, Sea Salt.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "645607": {
+    "upc": "00645607",
+    "product": "Trader Joe's Chili Onion Crunch (6 oz Jar)",
+    "brand": "Trader Joe's",
+    "ingredients": "Olive Oil, Dried Onion, Dried Garlic, Crushed Chili Peppers, Dried Bell Peppers, Sea Salt.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "00539871": {
+    "upc": "00539871",
+    "product": "Trader Joe's Green Dragon Hot Sauce (18 fl oz Bottle)",
+    "brand": "Trader Joe's",
+    "ingredients": "Jalapeno Pepper Puree (Jalapeno Peppers, Salt, Acetic Acid), Water, Cane Sugar, Distilled Vinegar, Tomatillo Puree (Tomatillos, Citric Acid), Garlic Puree, Cilantro, Salt, Lime Juice Concentrate, Spinach Powder, Habanero Powder.",
+    "allergens": [],
+    "additives_tags": [
+      "Citric Acid"
+    ],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "539871": {
+    "upc": "00539871",
+    "product": "Trader Joe's Green Dragon Hot Sauce (18 fl oz Bottle)",
+    "brand": "Trader Joe's",
+    "ingredients": "Jalapeno Pepper Puree (Jalapeno Peppers, Salt, Acetic Acid), Water, Cane Sugar, Distilled Vinegar, Tomatillo Puree (Tomatillos, Citric Acid), Garlic Puree, Cilantro, Salt, Lime Juice Concentrate, Spinach Powder, Habanero Powder.",
+    "allergens": [],
+    "additives_tags": [
+      "Citric Acid"
+    ],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "00938743": {
+    "upc": "00938743",
+    "product": "Trader Joe's Dark Chocolate Peanut Butter Cups (16 oz Tub)",
+    "brand": "Trader Joe's",
+    "ingredients": "Dark Chocolate (Cane Sugar, Cocoa Mass, Cocoa Butter, Soy Lecithin, Natural Vanilla Flavor), Peanut Butter (Dry Roasted Peanuts, Salt), Cane Sugar, Cocoa Butter, Sea Salt.",
+    "allergens": [
+      "peanuts",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "938743": {
+    "upc": "00938743",
+    "product": "Trader Joe's Dark Chocolate Peanut Butter Cups (16 oz Tub)",
+    "brand": "Trader Joe's",
+    "ingredients": "Dark Chocolate (Cane Sugar, Cocoa Mass, Cocoa Butter, Soy Lecithin, Natural Vanilla Flavor), Peanut Butter (Dry Roasted Peanuts, Salt), Cane Sugar, Cocoa Butter, Sea Salt.",
+    "allergens": [
+      "peanuts",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "00501861": {
+    "upc": "00501861",
+    "product": "Trader Joe's Mandarin Orange Chicken (22 oz Frozen Bag)",
+    "brand": "Trader Joe's",
+    "ingredients": "Chicken (Dark Meat Chicken, Water, Cornstarch, Enriched Bleached Wheat Flour, Egg Whites, Salt, Sodium Phosphates), Sauce (Sugar, Water, Distilled Vinegar, Soy Sauce [Water, Wheat, Soybeans, Salt], Orange Juice Concentrate, Modified Cornstarch, Garlic, Chili Paste, Green Onion, Sesame Oil).",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "eggs",
+      "soy",
+      "sesame",
+      "corn"
+    ],
+    "additives_tags": [
+      "Sodium Phosphates",
+      "Modified Cornstarch"
+    ],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "501861": {
+    "upc": "00501861",
+    "product": "Trader Joe's Mandarin Orange Chicken (22 oz Frozen Bag)",
+    "brand": "Trader Joe's",
+    "ingredients": "Chicken (Dark Meat Chicken, Water, Cornstarch, Enriched Bleached Wheat Flour, Egg Whites, Salt, Sodium Phosphates), Sauce (Sugar, Water, Distilled Vinegar, Soy Sauce [Water, Wheat, Soybeans, Salt], Orange Juice Concentrate, Modified Cornstarch, Garlic, Chili Paste, Green Onion, Sesame Oil).",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "eggs",
+      "soy",
+      "sesame",
+      "corn"
+    ],
+    "additives_tags": [
+      "Sodium Phosphates",
+      "Modified Cornstarch"
+    ],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "00494477": {
+    "upc": "00494477",
+    "product": "Trader Joe's Unexpected Cheddar Cheese (7 oz Block)",
+    "brand": "Trader Joe's",
+    "ingredients": "Cultured Pasteurized Milk, Salt, Enzymes.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "494477": {
+    "upc": "00494477",
+    "product": "Trader Joe's Unexpected Cheddar Cheese (7 oz Block)",
+    "brand": "Trader Joe's",
+    "ingredients": "Cultured Pasteurized Milk, Salt, Enzymes.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "00004128": {
+    "upc": "00004128",
+    "product": "Trader Joe's Organic Creamy Salted Peanut Butter (16 oz Jar)",
+    "brand": "Trader Joe's",
+    "ingredients": "Organic Dry Roasted Peanuts, Sea Salt.",
+    "allergens": [
+      "peanuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "4128": {
+    "upc": "00004128",
+    "product": "Trader Joe's Organic Creamy Salted Peanut Butter (16 oz Jar)",
+    "brand": "Trader Joe's",
+    "ingredients": "Organic Dry Roasted Peanuts, Sea Salt.",
+    "allergens": [
+      "peanuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "4099100047321": {
+    "upc": "4099100047321",
+    "product": "Specially Selected (Aldi) Sliced Brioche Buns (4 count / 7 oz)",
+    "brand": "Specially Selected",
+    "ingredients": "Wheat Flour, Eggs, Sugar, Butter (Cream), Canola Oil, Invert Sugar, Yeast, Skim Milk, Salt, Natural Flavor, Mono- and Diglycerides, Wheat Gluten, Beta Carotene (Color).",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "eggs",
+      "dairy",
+      "yeast"
+    ],
+    "additives_tags": [
+      "Monoglycerides",
+      "Diglycerides"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4099100034451": {
+    "upc": "4099100034451",
+    "product": "Park Street Deli (Aldi) Roasted Garlic Hummus (8 oz)",
+    "brand": "Park Street Deli",
+    "ingredients": "Cooked Chickpeas (Water, Chickpeas), Tahini (Ground Sesame), Soybean Oil, Roasted Garlic, Water, Garlic, Sea Salt, Citric Acid, Potassium Sorbate (Preservative).",
+    "allergens": [
+      "sesame",
+      "soy"
+    ],
+    "additives_tags": [
+      "Citric Acid",
+      "Potassium Sorbate"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4099100062485": {
+    "upc": "4099100062485",
+    "product": "Earth Grown (Aldi) Vegan Classic Meatless Meatballs (16 oz Frozen)",
+    "brand": "Earth Grown",
+    "ingredients": "Water, Soy Protein Concentrate, Canola Oil, Wheat Gluten, Methylcellulose, Yeast Extract, Spices, Salt, Onion Powder, Garlic Powder, Natural Flavors.",
+    "allergens": [
+      "soy",
+      "gluten",
+      "wheat",
+      "yeast"
+    ],
+    "additives_tags": [
+      "Methylcellulose"
+    ],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4099100038879": {
+    "upc": "4099100038879",
+    "product": "Simply Nature (Aldi) Organic Black Chia Seeds (12 oz Pouch)",
+    "brand": "Simply Nature",
+    "ingredients": "Organic Black Chia Seeds.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "4099100005239": {
+    "upc": "4099100005239",
+    "product": "Deutsche K\u00fcche (Aldi) German Style Traditional Sauerkraut (24 oz Jar)",
+    "brand": "Deutsche K\u00fcche",
+    "ingredients": "White Cabbage, Salt.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "ALDI"
+    ],
+    "isRecalled": false
+  },
+  "024463061163": {
+    "upc": "024463061163",
+    "product": "Huy Fong Sriracha Hot Chili Sauce (28 oz Squeeze Bottle)",
+    "brand": "Huy Fong",
+    "ingredients": "Chili, Sugar, Salt, Garlic, Distilled Vinegar, Potassium Sorbate, Contains Sodium Bisulfite as Preservatives, Xanthan Gum.",
+    "allergens": [
+      "sulfites"
+    ],
+    "additives_tags": [
+      "Potassium Sorbate",
+      "Sodium Bisulfite",
+      "Xanthan Gum"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Costco",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "24463061163": {
+    "upc": "024463061163",
+    "product": "Huy Fong Sriracha Hot Chili Sauce (28 oz Squeeze Bottle)",
+    "brand": "Huy Fong",
+    "ingredients": "Chili, Sugar, Salt, Garlic, Distilled Vinegar, Potassium Sorbate, Contains Sodium Bisulfite as Preservatives, Xanthan Gum.",
+    "allergens": [
+      "sulfites"
+    ],
+    "additives_tags": [
+      "Potassium Sorbate",
+      "Sodium Bisulfite",
+      "Xanthan Gum"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Costco",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0024463061163": {
+    "upc": "024463061163",
+    "product": "Huy Fong Sriracha Hot Chili Sauce (28 oz Squeeze Bottle)",
+    "brand": "Huy Fong",
+    "ingredients": "Chili, Sugar, Salt, Garlic, Distilled Vinegar, Potassium Sorbate, Contains Sodium Bisulfite as Preservatives, Xanthan Gum.",
+    "allergens": [
+      "sulfites"
+    ],
+    "additives_tags": [
+      "Potassium Sorbate",
+      "Sodium Bisulfite",
+      "Xanthan Gum"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Costco",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "6902985112117": {
+    "upc": "6902985112117",
+    "product": "Lao Gan Ma Spicy Chili Crisp Hot Sauce (7.41 oz Jar)",
+    "brand": "Lao Gan Ma",
+    "ingredients": "Soybean Oil, Chili, Onion, Fermented Soybeans (Soybeans, Water, Salt), Monosodium Glutamate, Sichuan Pepper, Sugar, Salt.",
+    "allergens": [
+      "soy"
+    ],
+    "additives_tags": [
+      "Monosodium Glutamate (MSG)"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Target",
+      "Asian Grocery"
+    ],
+    "isRecalled": false
+  },
+  "074052000010": {
+    "upc": "074052000010",
+    "product": "S&B Golden Curry Sauce Mix Medium Hot (7.8 oz Box)",
+    "brand": "S&B",
+    "ingredients": "Wheat Flour, Vegetable Oils (Palm Oil, Hydrogenated Rapeseed Oil), Salt, Curry Powder, Sugar, Monosodium Glutamate, Caramel Color, Malic Acid, Disodium Guanylate, Disodium Inosinate.",
+    "allergens": [
+      "gluten",
+      "wheat"
+    ],
+    "additives_tags": [
+      "Monosodium Glutamate (MSG)",
+      "Caramel Color",
+      "Malic Acid",
+      "Disodium Guanylate",
+      "Disodium Inosinate"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Asian Grocery"
+    ],
+    "isRecalled": false
+  },
+  "74052000010": {
+    "upc": "074052000010",
+    "product": "S&B Golden Curry Sauce Mix Medium Hot (7.8 oz Box)",
+    "brand": "S&B",
+    "ingredients": "Wheat Flour, Vegetable Oils (Palm Oil, Hydrogenated Rapeseed Oil), Salt, Curry Powder, Sugar, Monosodium Glutamate, Caramel Color, Malic Acid, Disodium Guanylate, Disodium Inosinate.",
+    "allergens": [
+      "gluten",
+      "wheat"
+    ],
+    "additives_tags": [
+      "Monosodium Glutamate (MSG)",
+      "Caramel Color",
+      "Malic Acid",
+      "Disodium Guanylate",
+      "Disodium Inosinate"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Asian Grocery"
+    ],
+    "isRecalled": false
+  },
+  "0074052000010": {
+    "upc": "074052000010",
+    "product": "S&B Golden Curry Sauce Mix Medium Hot (7.8 oz Box)",
+    "brand": "S&B",
+    "ingredients": "Wheat Flour, Vegetable Oils (Palm Oil, Hydrogenated Rapeseed Oil), Salt, Curry Powder, Sugar, Monosodium Glutamate, Caramel Color, Malic Acid, Disodium Guanylate, Disodium Inosinate.",
+    "allergens": [
+      "gluten",
+      "wheat"
+    ],
+    "additives_tags": [
+      "Monosodium Glutamate (MSG)",
+      "Caramel Color",
+      "Malic Acid",
+      "Disodium Guanylate",
+      "Disodium Inosinate"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Asian Grocery"
+    ],
+    "isRecalled": false
+  },
+  "078895120034": {
+    "upc": "078895120034",
+    "product": "Lee Kum Kee Premium Oyster Sauce (18 oz Bottle)",
+    "brand": "Lee Kum Kee",
+    "ingredients": "Oyster Extract (Oysters, Water, Salt), Sugar, Water, Monosodium Glutamate, Salt, Modified Corn Starch, Wheat Flour, Caramel Color.",
+    "allergens": [
+      "shellfish",
+      "gluten",
+      "wheat",
+      "corn"
+    ],
+    "additives_tags": [
+      "Monosodium Glutamate (MSG)",
+      "Modified Corn Starch",
+      "Caramel Color"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "78895120034": {
+    "upc": "078895120034",
+    "product": "Lee Kum Kee Premium Oyster Sauce (18 oz Bottle)",
+    "brand": "Lee Kum Kee",
+    "ingredients": "Oyster Extract (Oysters, Water, Salt), Sugar, Water, Monosodium Glutamate, Salt, Modified Corn Starch, Wheat Flour, Caramel Color.",
+    "allergens": [
+      "shellfish",
+      "gluten",
+      "wheat",
+      "corn"
+    ],
+    "additives_tags": [
+      "Monosodium Glutamate (MSG)",
+      "Modified Corn Starch",
+      "Caramel Color"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0078895120034": {
+    "upc": "078895120034",
+    "product": "Lee Kum Kee Premium Oyster Sauce (18 oz Bottle)",
+    "brand": "Lee Kum Kee",
+    "ingredients": "Oyster Extract (Oysters, Water, Salt), Sugar, Water, Monosodium Glutamate, Salt, Modified Corn Starch, Wheat Flour, Caramel Color.",
+    "allergens": [
+      "shellfish",
+      "gluten",
+      "wheat",
+      "corn"
+    ],
+    "additives_tags": [
+      "Monosodium Glutamate (MSG)",
+      "Modified Corn Starch",
+      "Caramel Color"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "041789001215": {
+    "upc": "041789001215",
+    "product": "Maruchan Ramen Noodle Soup Chicken Flavor (3 oz Pillow Pack)",
+    "brand": "Maruchan",
+    "ingredients": "Enriched Wheat Flour, Vegetable Oil (Canola, Cottonseed, Palm with TBHQ), Salt, Contains Less Than 2% Of: Monosodium Glutamate, Hydrolyzed Corn, Wheat and Soy Protein, Sugar, Spices, Dehydrated Vegetables, Autolyzed Yeast Extract, Sodium Carbonate, Sodium Hexametaphosphate, Sodium Tripolyphosphate, Monopotassium Phosphate, Caramel Color, Disodium Guanylate, Disodium Inosinate.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "TBHQ",
+      "Monosodium Glutamate (MSG)",
+      "Sodium Carbonate",
+      "Sodium Hexametaphosphate",
+      "Sodium Tripolyphosphate",
+      "Monopotassium Phosphate",
+      "Caramel Color",
+      "Disodium Guanylate",
+      "Disodium Inosinate"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "41789001215": {
+    "upc": "041789001215",
+    "product": "Maruchan Ramen Noodle Soup Chicken Flavor (3 oz Pillow Pack)",
+    "brand": "Maruchan",
+    "ingredients": "Enriched Wheat Flour, Vegetable Oil (Canola, Cottonseed, Palm with TBHQ), Salt, Contains Less Than 2% Of: Monosodium Glutamate, Hydrolyzed Corn, Wheat and Soy Protein, Sugar, Spices, Dehydrated Vegetables, Autolyzed Yeast Extract, Sodium Carbonate, Sodium Hexametaphosphate, Sodium Tripolyphosphate, Monopotassium Phosphate, Caramel Color, Disodium Guanylate, Disodium Inosinate.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "TBHQ",
+      "Monosodium Glutamate (MSG)",
+      "Sodium Carbonate",
+      "Sodium Hexametaphosphate",
+      "Sodium Tripolyphosphate",
+      "Monopotassium Phosphate",
+      "Caramel Color",
+      "Disodium Guanylate",
+      "Disodium Inosinate"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0041789001215": {
+    "upc": "041789001215",
+    "product": "Maruchan Ramen Noodle Soup Chicken Flavor (3 oz Pillow Pack)",
+    "brand": "Maruchan",
+    "ingredients": "Enriched Wheat Flour, Vegetable Oil (Canola, Cottonseed, Palm with TBHQ), Salt, Contains Less Than 2% Of: Monosodium Glutamate, Hydrolyzed Corn, Wheat and Soy Protein, Sugar, Spices, Dehydrated Vegetables, Autolyzed Yeast Extract, Sodium Carbonate, Sodium Hexametaphosphate, Sodium Tripolyphosphate, Monopotassium Phosphate, Caramel Color, Disodium Guanylate, Disodium Inosinate.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy",
+      "corn",
+      "yeast"
+    ],
+    "additives_tags": [
+      "TBHQ",
+      "Monosodium Glutamate (MSG)",
+      "Sodium Carbonate",
+      "Sodium Hexametaphosphate",
+      "Sodium Tripolyphosphate",
+      "Monopotassium Phosphate",
+      "Caramel Color",
+      "Disodium Guanylate",
+      "Disodium Inosinate"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "049733081014": {
+    "upc": "049733081014",
+    "product": "Cholula Original Hot Sauce (5 fl oz Wooden Cap Bottle)",
+    "brand": "Cholula",
+    "ingredients": "Water, Peppers (Arbol and Piquin), Salt, Vinegar, Garlic Powder, Spices, Xanthan Gum.",
+    "allergens": [],
+    "additives_tags": [
+      "Xanthan Gum"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Costco",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "49733081014": {
+    "upc": "049733081014",
+    "product": "Cholula Original Hot Sauce (5 fl oz Wooden Cap Bottle)",
+    "brand": "Cholula",
+    "ingredients": "Water, Peppers (Arbol and Piquin), Salt, Vinegar, Garlic Powder, Spices, Xanthan Gum.",
+    "allergens": [],
+    "additives_tags": [
+      "Xanthan Gum"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Costco",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0049733081014": {
+    "upc": "049733081014",
+    "product": "Cholula Original Hot Sauce (5 fl oz Wooden Cap Bottle)",
+    "brand": "Cholula",
+    "ingredients": "Water, Peppers (Arbol and Piquin), Salt, Vinegar, Garlic Powder, Spices, Xanthan Gum.",
+    "allergens": [],
+    "additives_tags": [
+      "Xanthan Gum"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Costco",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "737628010507": {
+    "upc": "737628010507",
+    "product": "Valentina Mexican Salsa Picante Hot Sauce (12.5 fl oz Bottle)",
+    "brand": "Valentina",
+    "ingredients": "Water, Chili Peppers, Vinegar, Salt, Spices, 0.1% Sodium Benzoate (as a Preservative).",
+    "allergens": [],
+    "additives_tags": [
+      "Sodium Benzoate"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0737628010507": {
+    "upc": "737628010507",
+    "product": "Valentina Mexican Salsa Picante Hot Sauce (12.5 fl oz Bottle)",
+    "brand": "Valentina",
+    "ingredients": "Water, Chili Peppers, Vinegar, Salt, Spices, 0.1% Sodium Benzoate (as a Preservative).",
+    "allergens": [],
+    "additives_tags": [
+      "Sodium Benzoate"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "041331020479": {
+    "upc": "041331020479",
+    "product": "Goya Discos Para Empanadas Dough Rounds (14 oz Frozen)",
+    "brand": "Goya",
+    "ingredients": "Enriched Wheat Flour (Wheat Flour, Niacin, Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Vegetable Shortening (Palm Oil), Salt, Calcium Propionate and Potassium Sorbate as Preservatives.",
+    "allergens": [
+      "gluten",
+      "wheat"
+    ],
+    "additives_tags": [
+      "Calcium Propionate",
+      "Potassium Sorbate"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "41331020479": {
+    "upc": "041331020479",
+    "product": "Goya Discos Para Empanadas Dough Rounds (14 oz Frozen)",
+    "brand": "Goya",
+    "ingredients": "Enriched Wheat Flour (Wheat Flour, Niacin, Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Vegetable Shortening (Palm Oil), Salt, Calcium Propionate and Potassium Sorbate as Preservatives.",
+    "allergens": [
+      "gluten",
+      "wheat"
+    ],
+    "additives_tags": [
+      "Calcium Propionate",
+      "Potassium Sorbate"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0041331020479": {
+    "upc": "041331020479",
+    "product": "Goya Discos Para Empanadas Dough Rounds (14 oz Frozen)",
+    "brand": "Goya",
+    "ingredients": "Enriched Wheat Flour (Wheat Flour, Niacin, Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Vegetable Shortening (Palm Oil), Salt, Calcium Propionate and Potassium Sorbate as Preservatives.",
+    "allergens": [
+      "gluten",
+      "wheat"
+    ],
+    "additives_tags": [
+      "Calcium Propionate",
+      "Potassium Sorbate"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "041390000207": {
+    "upc": "041390000207",
+    "product": "Kikkoman Less Sodium Soy Sauce (15 fl oz Bottle)",
+    "brand": "Kikkoman",
+    "ingredients": "Water, Wheat, Soybeans, Salt, Lactic Acid, Sodium Benzoate (Less than 1/10 of 1% as a Preservative).",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy"
+    ],
+    "additives_tags": [
+      "Lactic Acid",
+      "Sodium Benzoate"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "41390000207": {
+    "upc": "041390000207",
+    "product": "Kikkoman Less Sodium Soy Sauce (15 fl oz Bottle)",
+    "brand": "Kikkoman",
+    "ingredients": "Water, Wheat, Soybeans, Salt, Lactic Acid, Sodium Benzoate (Less than 1/10 of 1% as a Preservative).",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy"
+    ],
+    "additives_tags": [
+      "Lactic Acid",
+      "Sodium Benzoate"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "0041390000207": {
+    "upc": "041390000207",
+    "product": "Kikkoman Less Sodium Soy Sauce (15 fl oz Bottle)",
+    "brand": "Kikkoman",
+    "ingredients": "Water, Wheat, Soybeans, Salt, Lactic Acid, Sodium Benzoate (Less than 1/10 of 1% as a Preservative).",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy"
+    ],
+    "additives_tags": [
+      "Lactic Acid",
+      "Sodium Benzoate"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Giant Eagle"
+    ],
+    "isRecalled": false
+  },
+  "039978005204": {
+    "upc": "039978005204",
+    "product": "Bob's Red Mill 1-to-1 Baking Flour Gluten Free (22 oz Bag)",
+    "brand": "Bob's Red Mill",
+    "ingredients": "Sweet White Rice Flour, Whole Grain Brown Rice Flour, Potato Starch, Whole Grain Sorghum Flour, Tapioca Flour, Xanthan Gum.",
+    "allergens": [],
+    "additives_tags": [
+      "Xanthan Gum"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "39978005204": {
+    "upc": "039978005204",
+    "product": "Bob's Red Mill 1-to-1 Baking Flour Gluten Free (22 oz Bag)",
+    "brand": "Bob's Red Mill",
+    "ingredients": "Sweet White Rice Flour, Whole Grain Brown Rice Flour, Potato Starch, Whole Grain Sorghum Flour, Tapioca Flour, Xanthan Gum.",
+    "allergens": [],
+    "additives_tags": [
+      "Xanthan Gum"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "0039978005204": {
+    "upc": "039978005204",
+    "product": "Bob's Red Mill 1-to-1 Baking Flour Gluten Free (22 oz Bag)",
+    "brand": "Bob's Red Mill",
+    "ingredients": "Sweet White Rice Flour, Whole Grain Brown Rice Flour, Potato Starch, Whole Grain Sorghum Flour, Tapioca Flour, Xanthan Gum.",
+    "allergens": [],
+    "additives_tags": [
+      "Xanthan Gum"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "039978007406": {
+    "upc": "039978007406",
+    "product": "Bob's Red Mill Nutritional Yeast Flakes (8 oz Bag)",
+    "brand": "Bob's Red Mill",
+    "ingredients": "Inactive Nutritional Yeast (Dried Yeast, Niacin, Pyridoxine Hydrochloride, Riboflavin, Thiamin Hydrochloride, Folic Acid, Vitamin B12).",
+    "allergens": [
+      "yeast"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "39978007406": {
+    "upc": "039978007406",
+    "product": "Bob's Red Mill Nutritional Yeast Flakes (8 oz Bag)",
+    "brand": "Bob's Red Mill",
+    "ingredients": "Inactive Nutritional Yeast (Dried Yeast, Niacin, Pyridoxine Hydrochloride, Riboflavin, Thiamin Hydrochloride, Folic Acid, Vitamin B12).",
+    "allergens": [
+      "yeast"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "0039978007406": {
+    "upc": "039978007406",
+    "product": "Bob's Red Mill Nutritional Yeast Flakes (8 oz Bag)",
+    "brand": "Bob's Red Mill",
+    "ingredients": "Inactive Nutritional Yeast (Dried Yeast, Niacin, Pyridoxine Hydrochloride, Riboflavin, Thiamin Hydrochloride, Folic Acid, Vitamin B12).",
+    "allergens": [
+      "yeast"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "692752100033": {
+    "upc": "692752100033",
+    "product": "Nutiva Organic Cold-Pressed Virgin Coconut Oil (15 fl oz Jar)",
+    "brand": "Nutiva",
+    "ingredients": "Organic, Unrefined, Cold-Pressed Virgin Coconut Oil.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "0692752100033": {
+    "upc": "692752100033",
+    "product": "Nutiva Organic Cold-Pressed Virgin Coconut Oil (15 fl oz Jar)",
+    "brand": "Nutiva",
+    "ingredients": "Organic, Unrefined, Cold-Pressed Virgin Coconut Oil.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "074305001161": {
+    "upc": "074305001161",
+    "product": "Bragg Organic Raw Unfiltered Apple Cider Vinegar with The Mother (16 fl oz)",
+    "brand": "Bragg",
+    "ingredients": "Certified Organic Raw Apple Cider Vinegar and Purified Water. Diluted to 5% Acidity.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "74305001161": {
+    "upc": "074305001161",
+    "product": "Bragg Organic Raw Unfiltered Apple Cider Vinegar with The Mother (16 fl oz)",
+    "brand": "Bragg",
+    "ingredients": "Certified Organic Raw Apple Cider Vinegar and Purified Water. Diluted to 5% Acidity.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "0074305001161": {
+    "upc": "074305001161",
+    "product": "Bragg Organic Raw Unfiltered Apple Cider Vinegar with The Mother (16 fl oz)",
+    "brand": "Bragg",
+    "ingredients": "Certified Organic Raw Apple Cider Vinegar and Purified Water. Diluted to 5% Acidity.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "856924005001": {
+    "upc": "856924005001",
+    "product": "Miyoko's Creamery European Style Cultured Vegan Butter Salted (8 oz)",
+    "brand": "Miyoko's Creamery",
+    "ingredients": "Organic Coconut Oil, Organic Cultured Cashew Milk (Filtered Water, Organic Cashews, Cultures), Filtered Water, Organic Sunflower Oil, Sunflower Lecithin, Sea Salt.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [
+      "Sunflower Lecithin"
+    ],
+    "stores": [
+      "Target",
+      "Kroger",
+      "Whole Foods Market",
+      "Meijer",
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "0856924005001": {
+    "upc": "856924005001",
+    "product": "Miyoko's Creamery European Style Cultured Vegan Butter Salted (8 oz)",
+    "brand": "Miyoko's Creamery",
+    "ingredients": "Organic Coconut Oil, Organic Cultured Cashew Milk (Filtered Water, Organic Cashews, Cultures), Filtered Water, Organic Sunflower Oil, Sunflower Lecithin, Sea Salt.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [
+      "Sunflower Lecithin"
+    ],
+    "stores": [
+      "Target",
+      "Kroger",
+      "Whole Foods Market",
+      "Meijer",
+      "Trader Joe's"
+    ],
+    "isRecalled": false
+  },
+  "871459000018": {
+    "upc": "871459000018",
+    "product": "Daiya Cutting Board Collection Shreds Mozzarella Style (7.1 oz Pouch)",
+    "brand": "Daiya",
+    "ingredients": "Filtered Water, Tapioca Starch, Coconut Oil, Expeller Pressed: Canola and/or Safflower Oil, Vegan Natural Flavors, Chickpea Protein, Salt, Potato Protein, Tricalcium Phosphate, Lactic Acid (Vegan), Konjac Gum, Xanthan Gum, Yeast Extract.",
+    "allergens": [
+      "yeast"
+    ],
+    "additives_tags": [
+      "Tricalcium Phosphate",
+      "Lactic Acid",
+      "Konjac Gum",
+      "Xanthan Gum"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "0871459000018": {
+    "upc": "871459000018",
+    "product": "Daiya Cutting Board Collection Shreds Mozzarella Style (7.1 oz Pouch)",
+    "brand": "Daiya",
+    "ingredients": "Filtered Water, Tapioca Starch, Coconut Oil, Expeller Pressed: Canola and/or Safflower Oil, Vegan Natural Flavors, Chickpea Protein, Salt, Potato Protein, Tricalcium Phosphate, Lactic Acid (Vegan), Konjac Gum, Xanthan Gum, Yeast Extract.",
+    "allergens": [
+      "yeast"
+    ],
+    "additives_tags": [
+      "Tricalcium Phosphate",
+      "Lactic Acid",
+      "Konjac Gum",
+      "Xanthan Gum"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "856069005086": {
+    "upc": "856069005086",
+    "product": "Simple Mills Fine Ground Sea Salt Almond Flour Crackers (4.25 oz Box)",
+    "brand": "Simple Mills",
+    "ingredients": "Nut and Seed Flour Blend (Almonds, Sunflower Seeds, Flax Seeds), Tapioca Starch, Cassava Flour, Organic Sunflower Oil, Sea Salt, Organic Rosemary Extract (for Freshness).",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "0856069005086": {
+    "upc": "856069005086",
+    "product": "Simple Mills Fine Ground Sea Salt Almond Flour Crackers (4.25 oz Box)",
+    "brand": "Simple Mills",
+    "ingredients": "Nut and Seed Flour Blend (Almonds, Sunflower Seeds, Flax Seeds), Tapioca Starch, Cassava Flour, Organic Sunflower Oil, Sea Salt, Organic Rosemary Extract (for Freshness).",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "856727005118": {
+    "upc": "856727005118",
+    "product": "Siete Grain Free Cassava Flour Tortillas (8 count / 7 oz)",
+    "brand": "Siete",
+    "ingredients": "Cassava Flour, Water, Coconut Flour, Tapioca Flour, Coconut Oil, Extra Virgin Olive Oil, Sea Salt, Xanthan Gum.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [
+      "Xanthan Gum"
+    ],
+    "stores": [
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "0856727005118": {
+    "upc": "856727005118",
+    "product": "Siete Grain Free Cassava Flour Tortillas (8 count / 7 oz)",
+    "brand": "Siete",
+    "ingredients": "Cassava Flour, Water, Coconut Flour, Tapioca Flour, Coconut Oil, Extra Virgin Olive Oil, Sea Salt, Xanthan Gum.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [
+      "Xanthan Gum"
+    ],
+    "stores": [
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market",
+      "Costco"
+    ],
+    "isRecalled": false
+  },
+  "852909003507": {
+    "upc": "852909003507",
+    "product": "Califia Farms Almond Milk Unsweetened Barista Blend (32 fl oz)",
+    "brand": "Califia Farms",
+    "ingredients": "Almondmilk (Water, Almonds), Calcium Carbonate, Sunflower Lecithin, Sea Salt, Potassium Citrate, Locust Bean Gum, Gellan Gum.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [
+      "Sunflower Lecithin",
+      "Potassium Citrate",
+      "Locust Bean Gum",
+      "Gellan Gum"
+    ],
+    "stores": [
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "0852909003507": {
+    "upc": "852909003507",
+    "product": "Califia Farms Almond Milk Unsweetened Barista Blend (32 fl oz)",
+    "brand": "Califia Farms",
+    "ingredients": "Almondmilk (Water, Almonds), Calcium Carbonate, Sunflower Lecithin, Sea Salt, Potassium Citrate, Locust Bean Gum, Gellan Gum.",
+    "allergens": [
+      "treenuts"
+    ],
+    "additives_tags": [
+      "Sunflower Lecithin",
+      "Potassium Citrate",
+      "Locust Bean Gum",
+      "Gellan Gum"
+    ],
+    "stores": [
+      "Target",
+      "Kroger",
+      "Meijer",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "722430222019": {
+    "upc": "722430222019",
+    "product": "GT's Living Foods Synergy Organic Kombucha Trilogy (16 fl oz Bottle)",
+    "brand": "GT's Living Foods",
+    "ingredients": "GT's Kombucha (Organically Produced Raw Kombucha, Organic Cane Sugar, Organic Black Tea, Organic Green Tea, Pure Active Kombucha Culture), Organic Raspberry Puree, Organic Lemon Juice, Organic Fresh Pressed Ginger Juice.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "0722430222019": {
+    "upc": "722430222019",
+    "product": "GT's Living Foods Synergy Organic Kombucha Trilogy (16 fl oz Bottle)",
+    "brand": "GT's Living Foods",
+    "ingredients": "GT's Kombucha (Organically Produced Raw Kombucha, Organic Cane Sugar, Organic Black Tea, Organic Green Tea, Pure Active Kombucha Culture), Organic Raspberry Puree, Organic Lemon Juice, Organic Fresh Pressed Ginger Juice.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "851764007011": {
+    "upc": "851764007011",
+    "product": "Liquid I.V. Hydration Multiplier Electrolyte Drink Mix Lemon Lime (16 Packet Box)",
+    "brand": "Liquid I.V.",
+    "ingredients": "Pure Cane Sugar, Dextrose, Citric Acid, Salt, Potassium Citrate, Sodium Citrate, Dipotassium Phosphate, Silicon Dioxide, Rebaudioside-A (Stevia Leaf Extract), Vitamin C (Ascorbic Acid), Natural Flavor, Vitamin B3 (Niacinamide), Vitamin B5 (D-Calcium Pantothenate), Vitamin B6 (Pyridoxine Hydrochloride), Vitamin B12 (Cyanocobalamin).",
+    "allergens": [],
+    "additives_tags": [
+      "Citric Acid",
+      "Potassium Citrate",
+      "Sodium Citrate",
+      "Dipotassium Phosphate",
+      "Silicon Dioxide",
+      "Stevia Extract"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Costco",
+      "Kroger",
+      "CVS",
+      "Walgreens"
+    ],
+    "isRecalled": false
+  },
+  "0851764007011": {
+    "upc": "851764007011",
+    "product": "Liquid I.V. Hydration Multiplier Electrolyte Drink Mix Lemon Lime (16 Packet Box)",
+    "brand": "Liquid I.V.",
+    "ingredients": "Pure Cane Sugar, Dextrose, Citric Acid, Salt, Potassium Citrate, Sodium Citrate, Dipotassium Phosphate, Silicon Dioxide, Rebaudioside-A (Stevia Leaf Extract), Vitamin C (Ascorbic Acid), Natural Flavor, Vitamin B3 (Niacinamide), Vitamin B5 (D-Calcium Pantothenate), Vitamin B6 (Pyridoxine Hydrochloride), Vitamin B12 (Cyanocobalamin).",
+    "allergens": [],
+    "additives_tags": [
+      "Citric Acid",
+      "Potassium Citrate",
+      "Sodium Citrate",
+      "Dipotassium Phosphate",
+      "Silicon Dioxide",
+      "Stevia Extract"
+    ],
+    "stores": [
+      "Walmart",
+      "Target",
+      "Costco",
+      "Kroger",
+      "CVS",
+      "Walgreens"
+    ],
+    "isRecalled": false
+  },
+  "850232005088": {
+    "upc": "850232005088",
+    "product": "Vital Proteins Collagen Peptides Powder Unflavored (20 oz Canister)",
+    "brand": "Vital Proteins",
+    "ingredients": "Bovine Hide Collagen Peptides.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Costco",
+      "Target",
+      "Walmart",
+      "Kroger",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "0850232005088": {
+    "upc": "850232005088",
+    "product": "Vital Proteins Collagen Peptides Powder Unflavored (20 oz Canister)",
+    "brand": "Vital Proteins",
+    "ingredients": "Bovine Hide Collagen Peptides.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Costco",
+      "Target",
+      "Walmart",
+      "Kroger",
+      "Whole Foods Market"
+    ],
+    "isRecalled": false
+  },
+  "078742058031": {
+    "upc": "078742058031",
+    "product": "Great Value Homestyle Frozen Waffles (10 count / 12.3 oz)",
+    "brand": "Great Value",
+    "ingredients": "Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Vegetable Oil (Soybean and/or Canola), Eggs, Contains 2% or Less of: Leavening (Baking Soda, Sodium Aluminum Phosphate, Monocalcium Phosphate), Sugar, Salt, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "eggs",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [
+      "Sodium Aluminum Phosphate",
+      "Monocalcium Phosphate",
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Walmart"
+    ],
+    "isRecalled": true,
+    "recallDate": "Oct 22, 2024",
+    "hazard": "FDA Class I Nationwide Public Health Recall: TreeHouse Foods voluntary recall due to potential contamination with Listeria monocytogenes.",
+    "action": "Do not consume. Discard immediately or return to Walmart for a full refund.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "78742058031": {
+    "upc": "078742058031",
+    "product": "Great Value Homestyle Frozen Waffles (10 count / 12.3 oz)",
+    "brand": "Great Value",
+    "ingredients": "Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Vegetable Oil (Soybean and/or Canola), Eggs, Contains 2% or Less of: Leavening (Baking Soda, Sodium Aluminum Phosphate, Monocalcium Phosphate), Sugar, Salt, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "eggs",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [
+      "Sodium Aluminum Phosphate",
+      "Monocalcium Phosphate",
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Walmart"
+    ],
+    "isRecalled": true,
+    "recallDate": "Oct 22, 2024",
+    "hazard": "FDA Class I Nationwide Public Health Recall: TreeHouse Foods voluntary recall due to potential contamination with Listeria monocytogenes.",
+    "action": "Do not consume. Discard immediately or return to Walmart for a full refund.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "0078742058031": {
+    "upc": "078742058031",
+    "product": "Great Value Homestyle Frozen Waffles (10 count / 12.3 oz)",
+    "brand": "Great Value",
+    "ingredients": "Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Vegetable Oil (Soybean and/or Canola), Eggs, Contains 2% or Less of: Leavening (Baking Soda, Sodium Aluminum Phosphate, Monocalcium Phosphate), Sugar, Salt, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "eggs",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [
+      "Sodium Aluminum Phosphate",
+      "Monocalcium Phosphate",
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Walmart"
+    ],
+    "isRecalled": true,
+    "recallDate": "Oct 22, 2024",
+    "hazard": "FDA Class I Nationwide Public Health Recall: TreeHouse Foods voluntary recall due to potential contamination with Listeria monocytogenes.",
+    "action": "Do not consume. Discard immediately or return to Walmart for a full refund.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "085239128038": {
+    "upc": "085239128038",
+    "product": "Good & Gather Homestyle Frozen Waffles (10 count / 12.3 oz)",
+    "brand": "Good & Gather",
+    "ingredients": "Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Vegetable Oil (Soybean, Canola), Eggs, Leavening (Baking Soda, Sodium Aluminum Phosphate, Monocalcium Phosphate), Sugar, Salt, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "eggs",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [
+      "Sodium Aluminum Phosphate",
+      "Monocalcium Phosphate",
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Target"
+    ],
+    "isRecalled": true,
+    "recallDate": "Oct 22, 2024",
+    "hazard": "FDA Class I Nationwide Public Health Recall: TreeHouse Foods voluntary recall due to potential contamination with Listeria monocytogenes.",
+    "action": "Do not consume. Discard immediately or return to Target for a full refund.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "85239128038": {
+    "upc": "085239128038",
+    "product": "Good & Gather Homestyle Frozen Waffles (10 count / 12.3 oz)",
+    "brand": "Good & Gather",
+    "ingredients": "Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Vegetable Oil (Soybean, Canola), Eggs, Leavening (Baking Soda, Sodium Aluminum Phosphate, Monocalcium Phosphate), Sugar, Salt, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "eggs",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [
+      "Sodium Aluminum Phosphate",
+      "Monocalcium Phosphate",
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Target"
+    ],
+    "isRecalled": true,
+    "recallDate": "Oct 22, 2024",
+    "hazard": "FDA Class I Nationwide Public Health Recall: TreeHouse Foods voluntary recall due to potential contamination with Listeria monocytogenes.",
+    "action": "Do not consume. Discard immediately or return to Target for a full refund.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "0085239128038": {
+    "upc": "085239128038",
+    "product": "Good & Gather Homestyle Frozen Waffles (10 count / 12.3 oz)",
+    "brand": "Good & Gather",
+    "ingredients": "Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Thiamin Mononitrate, Riboflavin, Folic Acid), Water, Vegetable Oil (Soybean, Canola), Eggs, Leavening (Baking Soda, Sodium Aluminum Phosphate, Monocalcium Phosphate), Sugar, Salt, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "eggs",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [
+      "Sodium Aluminum Phosphate",
+      "Monocalcium Phosphate",
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Target"
+    ],
+    "isRecalled": true,
+    "recallDate": "Oct 22, 2024",
+    "hazard": "FDA Class I Nationwide Public Health Recall: TreeHouse Foods voluntary recall due to potential contamination with Listeria monocytogenes.",
+    "action": "Do not consume. Discard immediately or return to Target for a full refund.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "011110860882": {
+    "upc": "011110860882",
+    "product": "Kroger Homestyle Waffles (10 count / 12.3 oz)",
+    "brand": "Kroger",
+    "ingredients": "Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Vitamin B1 [Thiamin Mononitrate], Vitamin B2 [Riboflavin], Folic Acid), Water, Soybean and/or Canola Oil, Eggs, Sugar, Leavening (Baking Soda, Sodium Aluminum Phosphate, Monocalcium Phosphate), Salt, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "eggs",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [
+      "Sodium Aluminum Phosphate",
+      "Monocalcium Phosphate",
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Kroger"
+    ],
+    "isRecalled": true,
+    "recallDate": "Oct 22, 2024",
+    "hazard": "FDA Class I Nationwide Public Health Recall: TreeHouse Foods voluntary recall due to potential contamination with Listeria monocytogenes.",
+    "action": "Do not consume. Discard immediately or return to Kroger for a full refund.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "11110860882": {
+    "upc": "011110860882",
+    "product": "Kroger Homestyle Waffles (10 count / 12.3 oz)",
+    "brand": "Kroger",
+    "ingredients": "Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Vitamin B1 [Thiamin Mononitrate], Vitamin B2 [Riboflavin], Folic Acid), Water, Soybean and/or Canola Oil, Eggs, Sugar, Leavening (Baking Soda, Sodium Aluminum Phosphate, Monocalcium Phosphate), Salt, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "eggs",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [
+      "Sodium Aluminum Phosphate",
+      "Monocalcium Phosphate",
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Kroger"
+    ],
+    "isRecalled": true,
+    "recallDate": "Oct 22, 2024",
+    "hazard": "FDA Class I Nationwide Public Health Recall: TreeHouse Foods voluntary recall due to potential contamination with Listeria monocytogenes.",
+    "action": "Do not consume. Discard immediately or return to Kroger for a full refund.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "0011110860882": {
+    "upc": "011110860882",
+    "product": "Kroger Homestyle Waffles (10 count / 12.3 oz)",
+    "brand": "Kroger",
+    "ingredients": "Enriched Flour (Wheat Flour, Niacin, Reduced Iron, Vitamin B1 [Thiamin Mononitrate], Vitamin B2 [Riboflavin], Folic Acid), Water, Soybean and/or Canola Oil, Eggs, Sugar, Leavening (Baking Soda, Sodium Aluminum Phosphate, Monocalcium Phosphate), Salt, Soy Lecithin.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "eggs",
+      "dairy",
+      "soy"
+    ],
+    "additives_tags": [
+      "Sodium Aluminum Phosphate",
+      "Monocalcium Phosphate",
+      "Soy Lecithin"
+    ],
+    "stores": [
+      "Kroger"
+    ],
+    "isRecalled": true,
+    "recallDate": "Oct 22, 2024",
+    "hazard": "FDA Class I Nationwide Public Health Recall: TreeHouse Foods voluntary recall due to potential contamination with Listeria monocytogenes.",
+    "action": "Do not consume. Discard immediately or return to Kroger for a full refund.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "030000311826": {
+    "upc": "030000311826",
+    "product": "Quaker Chewy Granola Bars Chocolate Chip (8 count / 6.7 oz Box)",
+    "brand": "Quaker",
+    "ingredients": "Granola (Whole Grain Rolled Oats, Brown Sugar, Crisp Rice, Whole Grain Rolled Wheat, Soybean Oil, Whole Wheat Flour, Sodium Bicarbonate, Soy Lecithin, Caramel Color), Semisweet Chocolate Chips (Sugar, Chocolate Liquor, Cocoa Butter, Soy Lecithin, Vanilla Extract), Corn Syrup, Brown Rice Crisp, Invert Sugar, Sugar, Corn Syrup Solids, Glycerin, Soybean Oil. Contains 2% or Less of Calcium Carbonate, Sorbitol, Salt, Soy Lecithin, Tocopherols.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "Soy Lecithin",
+      "Caramel Color",
+      "Corn Syrup",
+      "Glycerin",
+      "Sorbitol"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Costco",
+      "Giant Eagle"
+    ],
+    "isRecalled": true,
+    "recallDate": "Dec 15, 2023",
+    "hazard": "FDA Class I Nationwide Public Health Recall: Potential contamination with Salmonella enterica at the Danville, Illinois production facility.",
+    "action": "Do not consume. Discard immediately or contact Quaker Consumer Relations at 1-800-492-9322 for a product voucher or reimbursement.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "30000311826": {
+    "upc": "030000311826",
+    "product": "Quaker Chewy Granola Bars Chocolate Chip (8 count / 6.7 oz Box)",
+    "brand": "Quaker",
+    "ingredients": "Granola (Whole Grain Rolled Oats, Brown Sugar, Crisp Rice, Whole Grain Rolled Wheat, Soybean Oil, Whole Wheat Flour, Sodium Bicarbonate, Soy Lecithin, Caramel Color), Semisweet Chocolate Chips (Sugar, Chocolate Liquor, Cocoa Butter, Soy Lecithin, Vanilla Extract), Corn Syrup, Brown Rice Crisp, Invert Sugar, Sugar, Corn Syrup Solids, Glycerin, Soybean Oil. Contains 2% or Less of Calcium Carbonate, Sorbitol, Salt, Soy Lecithin, Tocopherols.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "Soy Lecithin",
+      "Caramel Color",
+      "Corn Syrup",
+      "Glycerin",
+      "Sorbitol"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Costco",
+      "Giant Eagle"
+    ],
+    "isRecalled": true,
+    "recallDate": "Dec 15, 2023",
+    "hazard": "FDA Class I Nationwide Public Health Recall: Potential contamination with Salmonella enterica at the Danville, Illinois production facility.",
+    "action": "Do not consume. Discard immediately or contact Quaker Consumer Relations at 1-800-492-9322 for a product voucher or reimbursement.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "0030000311826": {
+    "upc": "030000311826",
+    "product": "Quaker Chewy Granola Bars Chocolate Chip (8 count / 6.7 oz Box)",
+    "brand": "Quaker",
+    "ingredients": "Granola (Whole Grain Rolled Oats, Brown Sugar, Crisp Rice, Whole Grain Rolled Wheat, Soybean Oil, Whole Wheat Flour, Sodium Bicarbonate, Soy Lecithin, Caramel Color), Semisweet Chocolate Chips (Sugar, Chocolate Liquor, Cocoa Butter, Soy Lecithin, Vanilla Extract), Corn Syrup, Brown Rice Crisp, Invert Sugar, Sugar, Corn Syrup Solids, Glycerin, Soybean Oil. Contains 2% or Less of Calcium Carbonate, Sorbitol, Salt, Soy Lecithin, Tocopherols.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "Soy Lecithin",
+      "Caramel Color",
+      "Corn Syrup",
+      "Glycerin",
+      "Sorbitol"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Costco",
+      "Giant Eagle"
+    ],
+    "isRecalled": true,
+    "recallDate": "Dec 15, 2023",
+    "hazard": "FDA Class I Nationwide Public Health Recall: Potential contamination with Salmonella enterica at the Danville, Illinois production facility.",
+    "action": "Do not consume. Discard immediately or contact Quaker Consumer Relations at 1-800-492-9322 for a product voucher or reimbursement.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "030000311840": {
+    "upc": "030000311840",
+    "product": "Quaker Chewy Granola Bars Peanut Butter Chocolate Chip (8 count / 6.7 oz Box)",
+    "brand": "Quaker",
+    "ingredients": "Granola (Whole Grain Rolled Oats, Brown Sugar, Crisp Rice, Whole Grain Rolled Wheat, Soybean Oil, Whole Wheat Flour, Sodium Bicarbonate, Soy Lecithin, Caramel Color), Corn Syrup, Semisweet Chocolate Chips, Peanut Butter (Peanuts, Sugar, Hydrogenated Vegetable Oil, Salt), Brown Rice Crisp, Peanut Butter Flavored Chips, Invert Sugar, Corn Syrup Solids, Glycerin.",
+    "allergens": [
+      "peanuts",
+      "gluten",
+      "wheat",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "Soy Lecithin",
+      "Caramel Color",
+      "Corn Syrup",
+      "Glycerin"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Costco",
+      "Giant Eagle"
+    ],
+    "isRecalled": true,
+    "recallDate": "Dec 15, 2023",
+    "hazard": "FDA Class I Nationwide Public Health Recall: Potential contamination with Salmonella enterica in Quaker Chewy Granola Bar lines.",
+    "action": "Do not consume. Discard immediately or contact Quaker Consumer Relations for a full refund voucher.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "30000311840": {
+    "upc": "030000311840",
+    "product": "Quaker Chewy Granola Bars Peanut Butter Chocolate Chip (8 count / 6.7 oz Box)",
+    "brand": "Quaker",
+    "ingredients": "Granola (Whole Grain Rolled Oats, Brown Sugar, Crisp Rice, Whole Grain Rolled Wheat, Soybean Oil, Whole Wheat Flour, Sodium Bicarbonate, Soy Lecithin, Caramel Color), Corn Syrup, Semisweet Chocolate Chips, Peanut Butter (Peanuts, Sugar, Hydrogenated Vegetable Oil, Salt), Brown Rice Crisp, Peanut Butter Flavored Chips, Invert Sugar, Corn Syrup Solids, Glycerin.",
+    "allergens": [
+      "peanuts",
+      "gluten",
+      "wheat",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "Soy Lecithin",
+      "Caramel Color",
+      "Corn Syrup",
+      "Glycerin"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Costco",
+      "Giant Eagle"
+    ],
+    "isRecalled": true,
+    "recallDate": "Dec 15, 2023",
+    "hazard": "FDA Class I Nationwide Public Health Recall: Potential contamination with Salmonella enterica in Quaker Chewy Granola Bar lines.",
+    "action": "Do not consume. Discard immediately or contact Quaker Consumer Relations for a full refund voucher.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "0030000311840": {
+    "upc": "030000311840",
+    "product": "Quaker Chewy Granola Bars Peanut Butter Chocolate Chip (8 count / 6.7 oz Box)",
+    "brand": "Quaker",
+    "ingredients": "Granola (Whole Grain Rolled Oats, Brown Sugar, Crisp Rice, Whole Grain Rolled Wheat, Soybean Oil, Whole Wheat Flour, Sodium Bicarbonate, Soy Lecithin, Caramel Color), Corn Syrup, Semisweet Chocolate Chips, Peanut Butter (Peanuts, Sugar, Hydrogenated Vegetable Oil, Salt), Brown Rice Crisp, Peanut Butter Flavored Chips, Invert Sugar, Corn Syrup Solids, Glycerin.",
+    "allergens": [
+      "peanuts",
+      "gluten",
+      "wheat",
+      "soy",
+      "corn"
+    ],
+    "additives_tags": [
+      "Soy Lecithin",
+      "Caramel Color",
+      "Corn Syrup",
+      "Glycerin"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Costco",
+      "Giant Eagle"
+    ],
+    "isRecalled": true,
+    "recallDate": "Dec 15, 2023",
+    "hazard": "FDA Class I Nationwide Public Health Recall: Potential contamination with Salmonella enterica in Quaker Chewy Granola Bar lines.",
+    "action": "Do not consume. Discard immediately or contact Quaker Consumer Relations for a full refund voucher.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "030000065224": {
+    "upc": "030000065224",
+    "product": "Cap'n Crunch's Crunch Berries Cereal (11.7 oz Box)",
+    "brand": "Cap'n Crunch",
+    "ingredients": "Corn Flour, Sugar, Oat Flour, Brown Sugar, Palm and/or Coconut Oil, Salt, Sodium Citrate, Natural and Artificial Flavor, Malic Acid, Red 40, Blue 1, Reduced Iron, Yellow 5, Niacinamide, Thiamin Mononitrate, BHT (Preservative), Pyridoxine Hydrochloride, Riboflavin, Folic Acid.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Sodium Citrate",
+      "Malic Acid",
+      "Red 40",
+      "Blue 1",
+      "Yellow 5",
+      "BHT"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Giant Eagle"
+    ],
+    "isRecalled": true,
+    "recallDate": "Jan 11, 2024",
+    "hazard": "FDA Class I Expanded Public Health Recall: Potential Salmonella enterica risk identified during Quaker Oats cereal manufacturing investigation.",
+    "action": "Do not consume. Dispose of product safely or contact Quaker Consumer Relations for a replacement.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "30000065224": {
+    "upc": "030000065224",
+    "product": "Cap'n Crunch's Crunch Berries Cereal (11.7 oz Box)",
+    "brand": "Cap'n Crunch",
+    "ingredients": "Corn Flour, Sugar, Oat Flour, Brown Sugar, Palm and/or Coconut Oil, Salt, Sodium Citrate, Natural and Artificial Flavor, Malic Acid, Red 40, Blue 1, Reduced Iron, Yellow 5, Niacinamide, Thiamin Mononitrate, BHT (Preservative), Pyridoxine Hydrochloride, Riboflavin, Folic Acid.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Sodium Citrate",
+      "Malic Acid",
+      "Red 40",
+      "Blue 1",
+      "Yellow 5",
+      "BHT"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Giant Eagle"
+    ],
+    "isRecalled": true,
+    "recallDate": "Jan 11, 2024",
+    "hazard": "FDA Class I Expanded Public Health Recall: Potential Salmonella enterica risk identified during Quaker Oats cereal manufacturing investigation.",
+    "action": "Do not consume. Dispose of product safely or contact Quaker Consumer Relations for a replacement.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "0030000065224": {
+    "upc": "030000065224",
+    "product": "Cap'n Crunch's Crunch Berries Cereal (11.7 oz Box)",
+    "brand": "Cap'n Crunch",
+    "ingredients": "Corn Flour, Sugar, Oat Flour, Brown Sugar, Palm and/or Coconut Oil, Salt, Sodium Citrate, Natural and Artificial Flavor, Malic Acid, Red 40, Blue 1, Reduced Iron, Yellow 5, Niacinamide, Thiamin Mononitrate, BHT (Preservative), Pyridoxine Hydrochloride, Riboflavin, Folic Acid.",
+    "allergens": [
+      "corn"
+    ],
+    "additives_tags": [
+      "Sodium Citrate",
+      "Malic Acid",
+      "Red 40",
+      "Blue 1",
+      "Yellow 5",
+      "BHT"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Meijer",
+      "Target",
+      "Giant Eagle"
+    ],
+    "isRecalled": true,
+    "recallDate": "Jan 11, 2024",
+    "hazard": "FDA Class I Expanded Public Health Recall: Potential Salmonella enterica risk identified during Quaker Oats cereal manufacturing investigation.",
+    "action": "Do not consume. Dispose of product safely or contact Quaker Consumer Relations for a replacement.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "850005703051": {
+    "upc": "850005703051",
+    "product": "WanaBana Apple Cinnamon Fruit Puree Pouches (3-pack / 2.5 oz)",
+    "brand": "WanaBana",
+    "ingredients": "Apple Puree, Banana Puree, Cinnamon.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Dollar Tree",
+      "Amazon",
+      "Online Retailers"
+    ],
+    "isRecalled": true,
+    "recallDate": "Oct 28, 2023",
+    "hazard": "FDA Class I High Hazard Outbreak Alert: Extremely elevated lead and chromium concentrations detected in cinnamon ingredient.",
+    "action": "DO NOT CONSUME. Hazardous lead levels poses serious toxicity risk. Discard immediately and consult a pediatrician/physician for lead screening.",
+    "severity": "Class I Recall (Severe Public Health Hazard)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "0850005703051": {
+    "upc": "850005703051",
+    "product": "WanaBana Apple Cinnamon Fruit Puree Pouches (3-pack / 2.5 oz)",
+    "brand": "WanaBana",
+    "ingredients": "Apple Puree, Banana Puree, Cinnamon.",
+    "allergens": [],
+    "additives_tags": [],
+    "stores": [
+      "Dollar Tree",
+      "Amazon",
+      "Online Retailers"
+    ],
+    "isRecalled": true,
+    "recallDate": "Oct 28, 2023",
+    "hazard": "FDA Class I High Hazard Outbreak Alert: Extremely elevated lead and chromium concentrations detected in cinnamon ingredient.",
+    "action": "DO NOT CONSUME. Hazardous lead levels poses serious toxicity risk. Discard immediately and consult a pediatrician/physician for lead screening.",
+    "severity": "Class I Recall (Severe Public Health Hazard)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "00674251": {
+    "upc": "00674251",
+    "product": "Trader Joe's Lemon Chicken & Orzo Soup (16 oz Container)",
+    "brand": "Trader Joe's",
+    "ingredients": "Chicken Broth (Water, Chicken Bones, Carrots, Onions, Celery, Spices), Cooked Chicken (Chicken Breast Meat with Rib Meat, Water, Salt, Sodium Phosphate), Orzo Pasta (Semolina Wheat Flour), Carrots, Celery, Onions, Spinach, Lemon Juice Concentrate, Olive Oil, Cornstarch, Garlic, Salt, Spices.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "corn"
+    ],
+    "additives_tags": [
+      "Sodium Phosphate"
+    ],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": true,
+    "recallDate": "Oct 12, 2024",
+    "hazard": "USDA-FSIS Class I Public Health Recall: 11.8M lb BrucePac ready-to-eat poultry recall due to positive Listeria monocytogenes findings.",
+    "action": "Do not consume. Discard immediately or return to any Trader Joe's store for a full cash refund.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "USDA-FSIS",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "674251": {
+    "upc": "00674251",
+    "product": "Trader Joe's Lemon Chicken & Orzo Soup (16 oz Container)",
+    "brand": "Trader Joe's",
+    "ingredients": "Chicken Broth (Water, Chicken Bones, Carrots, Onions, Celery, Spices), Cooked Chicken (Chicken Breast Meat with Rib Meat, Water, Salt, Sodium Phosphate), Orzo Pasta (Semolina Wheat Flour), Carrots, Celery, Onions, Spinach, Lemon Juice Concentrate, Olive Oil, Cornstarch, Garlic, Salt, Spices.",
+    "allergens": [
+      "gluten",
+      "wheat",
+      "corn"
+    ],
+    "additives_tags": [
+      "Sodium Phosphate"
+    ],
+    "stores": [
+      "Trader Joe's"
+    ],
+    "isRecalled": true,
+    "recallDate": "Oct 12, 2024",
+    "hazard": "USDA-FSIS Class I Public Health Recall: 11.8M lb BrucePac ready-to-eat poultry recall due to positive Listeria monocytogenes findings.",
+    "action": "Do not consume. Discard immediately or return to any Trader Joe's store for a full cash refund.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "USDA-FSIS",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "727242000021": {
+    "upc": "727242000021",
+    "product": "Don Francisco Queso Fresco Mexican Style Fresh Cheese (12 oz Package)",
+    "brand": "Don Francisco",
+    "ingredients": "Pasteurized Milk, Sea Salt, Calcium Chloride, Enzymes, Lactic Acid.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "Calcium Chloride",
+      "Lactic Acid"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Target",
+      "Latin Markets"
+    ],
+    "isRecalled": true,
+    "recallDate": "Feb 05, 2024",
+    "hazard": "FDA Class I Multi-Year Outbreak Investigation: Rizo-López Foods nationwide recall of dairy products linked to Listeria monocytogenes outbreak.",
+    "action": "Do not consume. Dispose of immediately and clean and sanitize any surfaces that touched the cheese.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "0727242000021": {
+    "upc": "727242000021",
+    "product": "Don Francisco Queso Fresco Mexican Style Fresh Cheese (12 oz Package)",
+    "brand": "Don Francisco",
+    "ingredients": "Pasteurized Milk, Sea Salt, Calcium Chloride, Enzymes, Lactic Acid.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "Calcium Chloride",
+      "Lactic Acid"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Target",
+      "Latin Markets"
+    ],
+    "isRecalled": true,
+    "recallDate": "Feb 05, 2024",
+    "hazard": "FDA Class I Multi-Year Outbreak Investigation: Rizo-López Foods nationwide recall of dairy products linked to Listeria monocytogenes outbreak.",
+    "action": "Do not consume. Dispose of immediately and clean and sanitize any surfaces that touched the cheese.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "727242001400": {
+    "upc": "727242001400",
+    "product": "Rizo Bros Mexican Style Cotija Cheese Grated (8 oz Tub)",
+    "brand": "Rizo Bros",
+    "ingredients": "Pasteurized Milk, Salt, Enzymes, Culture, Powdered Cellulose (Added to Prevent Caking).",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "Powdered Cellulose"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Target",
+      "Latin Markets"
+    ],
+    "isRecalled": true,
+    "recallDate": "Feb 05, 2024",
+    "hazard": "FDA Class I Nationwide Outbreak Recall: Rizo-López Foods cotija cheese contaminated with Listeria monocytogenes.",
+    "action": "Do not consume. Discard product immediately and sanitize pantry and refrigerator contact surfaces.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
+  },
+  "0727242001400": {
+    "upc": "727242001400",
+    "product": "Rizo Bros Mexican Style Cotija Cheese Grated (8 oz Tub)",
+    "brand": "Rizo Bros",
+    "ingredients": "Pasteurized Milk, Salt, Enzymes, Culture, Powdered Cellulose (Added to Prevent Caking).",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [
+      "Powdered Cellulose"
+    ],
+    "stores": [
+      "Walmart",
+      "Kroger",
+      "Target",
+      "Latin Markets"
+    ],
+    "isRecalled": true,
+    "recallDate": "Feb 05, 2024",
+    "hazard": "FDA Class I Nationwide Outbreak Recall: Rizo-López Foods cotija cheese contaminated with Listeria monocytogenes.",
+    "action": "Do not consume. Discard product immediately and sanitize pantry and refrigerator contact surfaces.",
+    "severity": "Class I Recall (High Health Risk)",
+    "agency": "FDA Food Safety Wire",
+    "tag": "Active Class I Recall",
+    "states": [
+      "ALL"
+    ]
   }
 }
