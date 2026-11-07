@@ -1510,7 +1510,7 @@
         id="tabWatchlist"
         class="nav-tab py-2.5 px-1 min-h-[62px] rounded-2xl text-[11px] sm:text-xs font-bold text-slate-400 hover:text-white flex flex-col items-center justify-center gap-1 transition active:scale-95 relative"
       >
-        <span id="watchlistNavRecallBadge" class="hidden absolute -top-1 right-1.5 px-1.5 py-0.2 rounded-full bg-rose-500 text-white font-black text-[9px] shadow-md border border-slate-900 z-10 ">0</span>
+        <span id="watchlistNavRecallBadge" class="hidden absolute -top-1 right-2 min-w-[18px] h-[18px] px-1 rounded-full bg-rose-500 text-white font-black text-[10px] leading-none shadow-md border border-slate-900 z-10 flex items-center justify-center">0</span>
         <div class="h-6 flex items-center justify-center shrink-0">
           <svg class="w-5 h-5 sm:w-6 sm:h-6 text-teal-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
@@ -6111,6 +6111,11 @@
         }
       }
 
+      // Real-time synchronization of red recall badge on Watchlist tab
+      if (typeof updateWatchlistNavBadge === 'function') {
+        updateWatchlistNavBadge();
+      }
+
       // Panel Elements
       const scannerPanelEl = document.getElementById('scannerPanel');
       const receiptsPanelEl = document.getElementById('receiptsPanel');
@@ -10031,7 +10036,10 @@
       scanHistory = scanHistory.filter(i => i.upc !== item.upc);
       
       // Prepend fresh scan with full details and timestamp
+      const scanTimestamp = Date.now();
+      const uniqueItemId = item.id || ('item_' + String(item.upc || 'upc').replace(/[^a-zA-Z0-9_-]/g, '_') + '_' + scanTimestamp);
       scanHistory.unshift({
+        id: uniqueItemId,
         upc: item.upc,
         source: item.source || 'camera',
         status: item.status,
@@ -10084,15 +10092,25 @@
       } catch (e) {}
 
       auditPantryAgainstRecalls();
+      if (typeof updateWatchlistNavBadge === 'function') {
+        updateWatchlistNavBadge();
+      }
     }
 
     function removeGuardedItem(key) {
-      scanHistory = scanHistory.filter(i => (i.id ? i.id !== key : i.upc !== key));
+      scanHistory = scanHistory.filter(i => {
+        if (i.id && i.id === key) return false;
+        if (i.upc && (i.upc === key || key.startsWith(String(i.upc)) || String(i.upc).startsWith(key))) return false;
+        return true;
+      });
       try {
         localStorage.setItem('rakka_history', JSON.stringify(scanHistory)); 
         localStorage.setItem('safebite_history', JSON.stringify(scanHistory));
       } catch (e) {}
       auditPantryAgainstRecalls();
+      if (typeof updateWatchlistNavBadge === 'function') {
+        updateWatchlistNavBadge();
+      }
     }
     window.removeGuardedItem = removeGuardedItem;
 
@@ -10296,8 +10314,8 @@
           return; // IMMUNE from category fallback matching & push alerts!
         }
 
-        // 0. If item was already verified & flagged as recalled by receipt AI audit, PRESERVE IT!
-        if (item.source === 'receipt' && (item.status === 'recalled' || item.isRecalled) && item.activeRecallHazard) {
+        // 0. If item was already verified & flagged as recalled (by camera scan, upload, or receipt AI audit), PRESERVE IT!
+        if ((item.status === 'recalled' || item.isRecalled) && item.activeRecallHazard) {
           item.recalledNow = true;
           item.status = 'recalled';
           item.isRecalled = true;
@@ -10462,6 +10480,40 @@
       renderHistory();
     }
 
+    function updateWatchlistNavBadge() {
+      const navBadge = document.getElementById('watchlistNavRecallBadge');
+      if (!navBadge) return;
+
+      const isAldi746502Check = (item) => {
+        const code = String(item.upc || '').trim();
+        const cleanCode = code.replace(/\D/g, '');
+        const brandLower = String(item.brand || item.receiptStore || '').toLowerCase().trim();
+        const titleLower = String(item.productName || item.product || '').toLowerCase().trim();
+        return (code === '746502' || cleanCode === '746502' || cleanCode === '0746502' || (brandLower.includes('aldi') && titleLower.includes('alfredo')));
+      };
+
+      const count = Array.isArray(scanHistory) ? scanHistory.filter(item => {
+        if (isAldi746502Check(item)) return false;
+        if (item.terminatedNotice || (item.recallRecord && item.recallRecord.terminatedNotice)) return false;
+        return Boolean(
+          item.recalledNow ||
+          item.status === 'recalled' ||
+          item.status === 'recall_notice' ||
+          item.isRecalled ||
+          (item.activeRecallHazard && String(item.activeRecallHazard).trim().length > 0)
+        );
+      }).length : 0;
+
+      if (count > 0) {
+        navBadge.textContent = String(count);
+        navBadge.classList.remove('hidden');
+      } else {
+        navBadge.textContent = '0';
+        navBadge.classList.add('hidden');
+      }
+    }
+    window.updateWatchlistNavBadge = updateWatchlistNavBadge;
+
     function updatePantryAlertBanner(matches) {
       // 1. Keep the top banner in the Watchlist tab completely hidden (removed per user request)
       const banner = document.getElementById('pantryRecallAlertBanner');
@@ -10470,16 +10522,8 @@
         banner.innerHTML = '';
       }
 
-      // 2. Update the persistent red alert badge on the Watchlist navigation tab
-      const navBadge = document.getElementById('watchlistNavRecallBadge');
-      if (navBadge) {
-        if (matches && matches.length > 0) {
-          navBadge.textContent = matches.length;
-          navBadge.classList.remove('hidden');
-        } else {
-          navBadge.classList.add('hidden');
-        }
-      }
+      // 2. Update the persistent red alert badge on the Watchlist navigation tab in real time
+      updateWatchlistNavBadge();
     }
 
 
@@ -10648,6 +10692,11 @@ function renderHistory() {
             }
           }
         });
+      }
+
+      // Synchronize Watchlist Tab Recall Badge
+      if (typeof updateWatchlistNavBadge === 'function') {
+        updateWatchlistNavBadge();
       }
 
       // Update Pantry Guard Monitored Cap Badge
@@ -11826,7 +11875,7 @@ function renderHistory() {
 
 
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=81')
+        navigator.serviceWorker.register('./sw.js?v=82')
           .then(reg => {
             console.log('Rakka SW registered:', reg.scope);
             if (typeof reg.update === 'function') reg.update();
@@ -12448,6 +12497,12 @@ function renderHistory() {
       if (typeof auditWatchlistAllergens === 'function') {
         auditWatchlistAllergens();
       }
+      if (typeof auditPantryAgainstRecalls === 'function') {
+        auditPantryAgainstRecalls();
+      }
+      if (typeof updateWatchlistNavBadge === 'function') {
+        updateWatchlistNavBadge();
+      }
       saveHistory();
 
       // Show brief confirmation state in loading box before gliding to Watchlist
@@ -12497,6 +12552,7 @@ function renderHistory() {
       }, 700);
     }
 
+    window.autoImportReceiptDirectlyToWatchlist = autoImportReceiptDirectlyToWatchlist;
     function renderReceiptAuditResults(receipt) {
       if (!receiptAuditResultsBox) return;
       receiptAuditResultsBox.classList.remove('hidden');
