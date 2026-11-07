@@ -605,7 +605,7 @@
               <p class="text-[11px] text-slate-300 leading-normal">
                 RAKKA identified potential synthetic dyes or chemical additives in this product formulation. Unlock Pro to view the exact detected additives and activate personalized allergen guards.
               </p>
-              <button type="button" class="open-paywall-trigger w-full py-2 rounded-lg bg-gradient-to-r from-purple-600 via-indigo-600 to-sky-600 hover:from-purple-500 hover:to-sky-500 text-white font-bold text-xs shadow-md transition active:scale-95 flex items-center justify-center gap-1.5">
+              <button type="button" class="open-paywall-trigger unlock-additive-btn w-full py-2 rounded-lg bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs shadow-md shadow-purple-950/40 transition active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer">
                 <span class="flex items-center gap-1.5">${UI_ICONS.star}<span>Unlock Pro Additive & Allergen Guard</span></span>
               </button>
             </div>
@@ -614,10 +614,10 @@
           return `
             <div class="mt-2 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px]">
               <span class="text-slate-400 flex items-center gap-1.5">
-                ${UI_ICONS.lock}
-                <span>Allergen & Additive Guard: <strong class="text-amber-300">Locked</strong></span>
+                <span class="text-purple-400">${UI_ICONS.lock}</span>
+                <span>Allergen & Additive Guard: <strong class="text-purple-300">Locked</strong></span>
               </span>
-              <button type="button" class="open-paywall-trigger px-2.5 py-1 rounded-lg bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-[10px] transition shrink-0">
+              <button type="button" class="open-paywall-trigger unlock-additive-btn px-2.5 py-1 rounded-lg bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-[10px] shadow-sm shadow-purple-950/30 transition shrink-0 cursor-pointer">
                 Unlock Pro
               </button>
             </div>
@@ -5580,7 +5580,7 @@
               <button 
                 type="button" 
                 onclick="clearCurrentProductResult()" 
-                class="w-8 h-8 rounded-xl bg-slate-800/90 hover:bg-rose-950/60 hover:text-rose-300 border border-slate-700/80 text-slate-400 flex items-center justify-center transition active:scale-90 cursor-pointer shadow-sm" 
+                class="dismiss-card-btn w-8 h-8 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center justify-center transition active:scale-90 cursor-pointer shadow-sm" 
                 title="Dismiss and close product details"
                 aria-label="Dismiss product details"
               >
@@ -5947,31 +5947,31 @@
               <p class="text-xs text-slate-300 leading-normal">
                 RAKKA detected <strong>${additivesCount} scrutinized food additive${additivesCount > 1 ? 's' : ''} or synthetic dye${additivesCount > 1 ? 's' : ''}</strong> in this product. Unlock Pro to view the exact chemicals and EU health advisories.
               </p>
-              <button type="button" class="open-paywall-trigger w-full mt-1 py-2 px-3 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-sky-600 hover:from-purple-500 hover:to-sky-500 text-white font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-1.5">
+              <button type="button" class="open-paywall-trigger unlock-additive-btn w-full mt-1 py-2 px-3 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs shadow-md shadow-purple-950/40 transition active:scale-[0.98] flex items-center justify-center gap-1.5 cursor-pointer">
                 <span class="flex items-center gap-1.5">${UI_ICONS.star}<span>Unlock Pro Additive Audit</span></span>
               </button>
             </div>
           `;
         } else {
           additiveWindowHtml = `
-            <div class="rounded-2xl border border-slate-800 bg-slate-900/90 p-4 shadow-xl space-y-2">
-              <div class="flex items-center justify-between pb-2 border-b border-slate-800/80">
+            <div class="rounded-2xl border border-purple-500/50 bg-gradient-to-r from-purple-950/70 via-slate-900 to-indigo-950/70 p-4 shadow-xl space-y-2">
+              <div class="flex items-center justify-between pb-2 border-b border-purple-900/40">
                 <div class="flex items-center gap-2">
-                  <span class="p-1.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/30 shrink-0">${UI_ICONS.lock}</span>
+                  <span class="p-1.5 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/30 shrink-0">${UI_ICONS.lock}</span>
                   <div>
-                    <span class="text-xs font-bold text-slate-200 uppercase tracking-wider block">Food Additive & Dye Guard</span>
-                    <span class="text-[11px] text-slate-400">Automatic Screening Locked</span>
+                    <span class="text-xs font-bold text-purple-200 uppercase tracking-wider block">Food Additive & Dye Guard</span>
+                    <span class="text-[11px] text-purple-300">Automatic Screening Locked</span>
                   </div>
                 </div>
-                <span class="text-[10px] font-bold text-amber-300 bg-amber-500/20 border border-amber-500/30 px-2 py-0.5 rounded-md">
+                <span class="text-[10px] font-bold text-purple-300 bg-purple-950/80 border border-purple-500/40 px-2 py-0.5 rounded-md">
                   Pro Feature
                 </span>
               </div>
-              <p class="text-xs text-slate-400 leading-normal">
+              <p class="text-xs text-slate-300 leading-normal">
                 Automatic chemical additive and synthetic petroleum dye screening requires RAKKA Pro.
               </p>
-              <button type="button" class="open-paywall-trigger w-full mt-1 py-2 px-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs transition active:scale-[0.98] flex items-center justify-center gap-1.5">
-                <span>Unlock Pro</span>
+              <button type="button" class="open-paywall-trigger unlock-additive-btn w-full mt-1 py-2 px-3 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs shadow-md shadow-purple-950/40 transition active:scale-[0.98] flex items-center justify-center gap-1.5 cursor-pointer">
+                <span class="flex items-center gap-1.5">${UI_ICONS.star}<span>Unlock Pro Additive Screening</span></span>
               </button>
             </div>
           `;
@@ -6006,15 +6006,15 @@
           <button 
             type="button" 
             onclick="clearCurrentProductResult()" 
-            class="w-full py-3.5 px-4 min-h-[48px] rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs border border-slate-700 transition active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+            class="close-dismiss-product-btn w-full py-3.5 px-4 min-h-[48px] rounded-xl bg-gradient-to-r from-cyan-600 via-teal-500 to-cyan-500 hover:from-cyan-500 hover:to-teal-400 text-white font-bold text-xs shadow-md shadow-cyan-950/40 border border-cyan-400/40 transition active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
           >
-            <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
             <span>Close & Dismiss Product</span>
           </button>
           <button 
             type="button" 
             onclick="${activeSource === 'scanner' ? 'resetAndScanNext()' : 'clearCurrentProductResult()'}" 
-            class="w-full py-3.5 px-4 min-h-[48px] rounded-xl bg-gradient-to-r from-cyan-600 via-teal-500 to-cyan-500 hover:from-cyan-500 hover:to-teal-400 text-white font-bold text-xs shadow-md transition active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
+            class="scan-next-item-btn w-full py-3.5 px-4 min-h-[48px] rounded-xl bg-gradient-to-r from-cyan-600 via-teal-500 to-cyan-500 hover:from-cyan-500 hover:to-teal-400 text-white font-bold text-xs shadow-md shadow-cyan-950/40 border border-cyan-400/40 transition active:scale-[0.98] flex items-center justify-center gap-2 cursor-pointer"
           >
             <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             <span>${activeSource === 'scanner' ? 'Scan Next Item' : 'Look Up Another Barcode'}</span>
@@ -8057,7 +8057,7 @@ function renderHistory() {
                     <p class="text-[11px] text-slate-300 leading-relaxed">
                       RAKKA Pro screens 37 European- and California-flagged chemical dyes, emulsifiers, and preservatives. Upgrade to see full ingredient ratings.
                     </p>
-                    <button type="button" onclick="event.stopPropagation(); openPaywall();" class="w-full py-2 px-3 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-500 text-white font-bold text-xs shadow-md transition active:scale-95 cursor-pointer">
+                    <button type="button" onclick="event.stopPropagation(); openPaywall();" class="unlock-additive-btn w-full py-2 px-3 rounded-lg bg-gradient-to-r from-purple-600 via-indigo-600 to-purple-700 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs shadow-md shadow-purple-950/40 transition active:scale-95 cursor-pointer">
                       Unlock Chemical Additive Directory
                     </button>
                   </div>
