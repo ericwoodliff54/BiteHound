@@ -10153,40 +10153,78 @@ function renderHistory() {
       const topItems = Array.isArray(topReceipt.items) ? topReceipt.items : [];
       const bottomItems = Array.isArray(bottomReceipt.items) ? bottomReceipt.items : [];
 
-      function getItemKey(item) {
-        if (!item) return '';
-        const code = String(item.itemCode || item.upc || '').replace(/\D/g, '');
-        const name = String(item.cleanName || item.rawLine || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-        return code ? `${code}_${name.slice(0, 8)}` : name;
+      if (topItems.length === 0) return bottomReceipt;
+      if (bottomItems.length === 0) return topItems;
+
+      function getItemCode(item) {
+        return String(item.itemCode || item.upc || '').replace(/\D/g, '');
       }
 
-      // Suffix-prefix boundary overlap detector (checks up to 6 boundary items in the 14% seam)
-      let overlapCount = 0;
-      const maxOverlap = Math.min(6, topItems.length, bottomItems.length);
+      function getNormalizedName(item) {
+        return String(item.cleanName || item.rawLine || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      }
 
-      for (let k = maxOverlap; k >= 1; k--) {
-        const topSuffix = topItems.slice(-k).map(getItemKey);
-        const bottomPrefix = bottomItems.slice(0, k).map(getItemKey);
-        if (topSuffix.every((key, idx) => key === bottomPrefix[idx])) {
-          overlapCount = k;
-          break;
+      function itemsMatch(itemA, itemB) {
+        const codeA = getItemCode(itemA);
+        const codeB = getItemCode(itemB);
+        // If both items have store item codes or barcodes, code comparison is definitive
+        if (codeA && codeB && codeA.length >= 5 && codeB.length >= 5) {
+          return codeA === codeB;
         }
+        const nameA = getNormalizedName(itemA);
+        const nameB = getNormalizedName(itemB);
+        if (!nameA || !nameB) return false;
+        if (nameA === nameB) return true;
+        // Substring match only if one full name contains the other
+        if (nameA.length >= 8 && nameB.length >= 8) {
+          if (nameA.includes(nameB) || nameB.includes(nameA)) {
+            return true;
+          }
+        }
+        return false;
       }
 
-      // Fallback: check if the first item of bottom matches any of the last 3 items of top
-      if (overlapCount === 0 && bottomItems.length > 0 && topItems.length > 0) {
-        const firstBottomKey = getItemKey(bottomItems[0]);
-        for (let i = topItems.length - 1; i >= Math.max(0, topItems.length - 3); i--) {
-          if (getItemKey(topItems[i]) === firstBottomKey) {
-            overlapCount = 1;
-            break;
+      // Anchored Seam Alignment:
+      // The overlap zone is the TAIL of topItems that matches consecutive items starting at/near the HEAD of bottomItems.
+      let bestTopIdx = -1;
+      let bestBottomIdx = -1;
+      let maxMatchedLen = 0;
+
+      const searchStart = Math.max(0, topItems.length - 25);
+
+      for (let bIdx = 0; bIdx < Math.min(8, bottomItems.length); bIdx++) {
+        for (let tIdx = topItems.length - 1; tIdx >= searchStart; tIdx--) {
+          if (itemsMatch(topItems[tIdx], bottomItems[bIdx])) {
+            let matchLen = 1;
+            while (
+              tIdx + matchLen < topItems.length &&
+              bIdx + matchLen < bottomItems.length &&
+              itemsMatch(topItems[tIdx + matchLen], bottomItems[bIdx + matchLen])
+            ) {
+              matchLen++;
+            }
+
+            // Seam constraint: The overlap must anchor to the end of topItems!
+            const reachesEndOfTop = (tIdx + matchLen === topItems.length);
+
+            if (reachesEndOfTop && matchLen > maxMatchedLen) {
+              maxMatchedLen = matchLen;
+              bestTopIdx = tIdx;
+              bestBottomIdx = bIdx;
+            }
           }
         }
       }
 
-      const mergedItems = overlapCount > 0 
-        ? topItems.concat(bottomItems.slice(overlapCount))
-        : topItems.concat(bottomItems);
+      let mergedItems = [];
+      if (maxMatchedLen >= 1 && bestTopIdx !== -1) {
+        // High-confidence seam alignment: take top up to bestTopIdx, then continue with bottom from bestBottomIdx
+        mergedItems = topItems.slice(0, bestTopIdx).concat(bottomItems.slice(bestBottomIdx));
+        console.log(`[RAKKA] Anchored seam confirmed! Deduped ${topItems.length - bestTopIdx} boundary items across slices.`);
+      } else {
+        console.log("[RAKKA] Distinct receipt halves with zero boundary duplicates detected.");
+        mergedItems = topItems.concat(bottomItems);
+      }
 
       return {
         id: 'rcpt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
