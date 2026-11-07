@@ -603,7 +603,7 @@ Instructions for parsing this receipt:
      * Processed meats (Kielbasa, Sausage, Pepperoni): Sodium Nitrite, Sodium Erythorbate, BHA/BHT, Sodium Phosphate.
      * Commercial baked goods / sweet loaf cakes / cookies: Artificial Flavors (Vanillin), High Fructose Corn Syrup, Polysorbate 60, Titanium Dioxide.
      * Confections & flavored snacks / chips / soda / energy drinks: Red 40, Yellow 5/6, Blue 1, Caramel Color, Sucralose, Acesulfame K, Citric Acid preservative.
-     Return an array of concise objects: [{"name": "Calcium Propionate", "type": "Chemical Preservative"}, {"name": "DATEM", "type": "Dough Conditioner"}]
+     Return a clean array of additive names: ["Calcium Propionate", "DATEM"] (the client app enriches chemical descriptions locally).
 5. CRITICAL RECEIPT BARCODE / ITEM CODE EXTRACTION:
    - For every item on the receipt, extract the exact printed barcode number, UPC, or store item code printed on the receipt line (e.g. 6-digit ALDI code like "398511" or "640511", or 8-to-12 digit standard UPC/SKU).
    - If identical products appear multiple times on the receipt (such as 3 cans of Poppi Prebiotic Soda), ensure that their printed itemCode and upc are IDENTICAL across all lines, matching the physical receipt tape.
@@ -628,13 +628,8 @@ Respond STRICTLY with a valid JSON object matching this schema (raw JSON only, n
       "recallAgency": "FDA", // 'FDA' or 'USDA-FSIS' if recalled, otherwise null
       "recallSeverity": "Class I High Risk", // 'Class I High Risk' if recalled, otherwise null
       "warning": "Brief warning explanation if recalled or allergen alert, otherwise null",
-      "allergens": ["gluten", "dairy", "soy", "yeast"], // list of common allergen ids e.g. gluten, milk, soy, peanuts, tree_nuts, eggs, fish, shellfish, sesame, corn, sulfites, yeast
-      "additives": [
-        {
-          "name": "Calcium Propionate",
-          "type": "Chemical Preservative"
-        }
-      ]
+      "allergens": ["gluten", "dairy", "soy"], // list of common allergen ids
+      "additives": ["Calcium Propionate", "DATEM"] // compact array of chemical names (client auto-enriches full health descriptions)
     }
   ],
   "auditSummary": "1-2 sentence executive safety summary"
