@@ -852,9 +852,14 @@
 
     function saveFamilyProfiles() {
       try {
-        localStorage.setItem('safebite_family_profiles', JSON.stringify(familyProfiles));
+        const profJson = JSON.stringify(familyProfiles);
+        const activeAllergensJson = JSON.stringify(getActiveProfile().allergens || []);
+        localStorage.setItem('rakka_family_profiles', profJson);
+        localStorage.setItem('safebite_family_profiles', profJson);
+        localStorage.setItem('rakka_active_profile_id', activeProfileId);
         localStorage.setItem('safebite_active_profile_id', activeProfileId);
-        localStorage.setItem('safebite_allergens', JSON.stringify(getActiveProfile().allergens));
+        localStorage.setItem('rakka_allergens', activeAllergensJson);
+        localStorage.setItem('safebite_allergens', activeAllergensJson);
       } catch (e) {}
 
       if (typeof auditWatchlistAllergens === 'function') {
@@ -7237,18 +7242,6 @@
     function renderAllergensTab() {
       checkPlusStatus();
 
-      // Free mode constraint: Single user ('me') defaults back to unchecked for all allergens
-      if (!isPlusActive) {
-        if (familyProfiles && familyProfiles.length === 1 && familyProfiles[0].id === 'me') {
-          familyProfiles[0].allergens = [];
-        }
-        const curProf = getActiveProfile();
-        if (curProf && curProf.id === 'me') {
-          curProf.allergens = [];
-        }
-        userAllergens = (curProf && curProf.allergens) || [];
-      }
-
       const allergensPlusBanner = document.getElementById('allergensPlusBanner');
       const allergensPlusBannerTitle = document.getElementById('allergensPlusBannerTitle');
       const allergensPlusBannerSub = document.getElementById('allergensPlusBannerSub');
@@ -10775,30 +10768,15 @@ function renderHistory() {
       }
       saveHistory();
 
-      // Show brief confirmation state in loading box before gliding to Watchlist
+      // Leave high-engagement live progress meter at 100% complete for smooth confirmation
       const loadingBox = document.getElementById('receiptAuditLoadingBox');
-      if (loadingBox) {
-        loadingBox.innerHTML = `
-          <div class="space-y-2 py-2">
-            <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center mx-auto text-lg font-bold">✓</div>
-            <p class="text-sm font-bold text-white">Audited & Grouped ${importedCount} Items in Watchlist!</p>
-            <p class="text-xs text-slate-300">Switching to Watchlist now...</p>
-          </div>
-        `;
-        loadingBox.classList.remove('hidden');
-      }
 
       setTimeout(() => {
         closeReceiptAuditor();
 
-        // Stop and hide the loading box so the scanner does NOT continue spinning
+        // Hide loading box without destroying progress meter DOM structure
         if (loadingBox) {
           loadingBox.classList.add('hidden');
-          loadingBox.innerHTML = `
-            <div class="inline-block animate-spin rounded-full h-8 w-8 border-2 border-cyan-400 border-t-transparent"></div>
-            <p class="text-sm text-slate-200 font-semibold">Auditing receipt lines against FDA/USDA recall feeds & household allergens...</p>
-            <p class="text-xs text-slate-400">Extracting grocery names, matching product codes, and cross-referencing active safety registries</p>
-          `;
         }
 
         const resultsBox = document.getElementById('receiptAuditResultsBox');
