@@ -20574,5 +20574,47 @@
     ],
     "ingredients": "Grade A Milk, Vitamin D3.",
     "additives": []
+  },
+  "078742651865": {
+    "product": "Great Value Whole Pasteurized Vitamin D Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "upc": "078742651865",
+    "ingredients": "Grade A Pasteurized Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart"
+    ],
+    "isRecalled": false
+  },
+  "78742651865": {
+    "product": "Great Value Whole Pasteurized Vitamin D Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "upc": "78742651865",
+    "ingredients": "Grade A Pasteurized Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart"
+    ],
+    "isRecalled": false
+  },
+  "0078742651865": {
+    "product": "Great Value Whole Pasteurized Vitamin D Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "upc": "0078742651865",
+    "ingredients": "Grade A Pasteurized Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart"
+    ],
+    "isRecalled": false
   }
 }

@@ -7173,6 +7173,48 @@
       "Meijer"
     ],
     "isRecalled": false
+  },
+  "078742651865": {
+    "product": "Great Value Whole Pasteurized Vitamin D Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "upc": "078742651865",
+    "ingredients": "Grade A Pasteurized Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart"
+    ],
+    "isRecalled": false
+  },
+  "78742651865": {
+    "product": "Great Value Whole Pasteurized Vitamin D Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "upc": "78742651865",
+    "ingredients": "Grade A Pasteurized Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart"
+    ],
+    "isRecalled": false
+  },
+  "0078742651865": {
+    "product": "Great Value Whole Pasteurized Vitamin D Milk (1 Gallon / 128 fl oz)",
+    "brand": "Great Value (Walmart)",
+    "upc": "0078742651865",
+    "ingredients": "Grade A Pasteurized Milk, Vitamin D3.",
+    "allergens": [
+      "dairy"
+    ],
+    "additives_tags": [],
+    "stores": [
+      "Walmart"
+    ],
+    "isRecalled": false
   }
 };
     let STAPLES_CATALOG = Object.assign({}, STAPLES_CATALOG_EMBEDDED);
@@ -10262,37 +10304,37 @@
       // CASE C: Pro Mode - Allergen Conflicts Detected (Takes absolute top priority over unindexed ingredients!)
       if (hasFamilyMatches) {
         return `
-          <div class="family-verdict-card rounded-2xl border-2 border-rose-500 bg-gradient-to-b from-rose-950/80 via-slate-900 to-slate-900 p-4 shadow-xl shadow-rose-950/50 space-y-3">
-            <div class="flex items-center justify-between pb-2.5 border-b border-rose-900/50">
+          <div class="family-verdict-card rounded-2xl border-2 border-amber-500/80 bg-gradient-to-b from-amber-950/70 via-slate-900 to-slate-900 p-4 shadow-xl shadow-amber-950/40 space-y-3">
+            <div class="flex items-center justify-between pb-2.5 border-b border-amber-900/50">
               <div class="flex items-center gap-2">
-                <span class="p-1.5 rounded-xl bg-rose-500/20 text-rose-300 border border-rose-500/40 shrink-0">
+                <span class="p-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 shrink-0">
                   ${UI_ICONS.alertTriangle}
                 </span>
                 <div>
                   <span class="text-xs font-bold text-white uppercase tracking-wider block">Household Allergen Guard</span>
-                  <span class="text-[11px] text-rose-300 font-semibold">
+                  <span class="text-[11px] text-amber-300 font-semibold">
                     Unsafe for ${conflictingMembers.length} Household Member${conflictingMembers.length > 1 ? 's' : ''}
                   </span>
                 </div>
               </div>
-              <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-rose-500 text-white shadow-sm shrink-0">
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-500 text-slate-950 shadow-sm shrink-0">
                 Allergen Conflict
               </span>
             </div>
 
             <!-- Section 1: Unsafe for these Members -->
             <div class="space-y-1.5">
-              <span class="text-[10px] uppercase tracking-wider font-bold text-rose-400 flex items-center gap-1">
+              <span class="text-[10px] uppercase tracking-wider font-bold text-amber-400 flex items-center gap-1">
                 <span>⚠️ Allergen Alert (${conflictingMembers.length}):</span>
               </span>
               <div class="space-y-1.5">
                 ${conflictingMembers.map(m => `
-                  <div class="flex items-center justify-between bg-rose-950/60 border border-rose-500/40 px-3 py-1.5 rounded-xl text-xs">
+                  <div class="flex items-center justify-between bg-amber-950/60 border border-amber-500/40 px-3 py-1.5 rounded-xl text-xs">
                     <div class="flex items-center gap-2 font-bold text-white">
                       ${renderMemberAvatar(m.icon, m.photo, m.name, "w-6 h-6", "w-3.5 h-3.5")}
                       <span>${m.name}</span>
                     </div>
-                    <span class="font-semibold text-rose-300 text-right text-[11px]">Contains ${m.allergens.join(', ')}</span>
+                    <span class="font-semibold text-amber-200 text-right text-[11px]">Contains ${m.allergens.join(', ')}</span>
                   </div>
                 `).join('')}
               </div>
@@ -10314,7 +10356,7 @@
                 </div>
               </div>
             ` : `
-              <div class="pt-1.5 border-t border-slate-800/80 text-[11px] text-rose-300 italic">
+              <div class="pt-1.5 border-t border-slate-800/80 text-[11px] text-amber-300/90 italic">
                 All screened household profiles have matching allergen alerts for this item.
               </div>
             `}
@@ -10705,7 +10747,7 @@
                         : `<span class="w-7 h-7 rounded-full bg-amber-900/60 border border-amber-400/50 flex items-center justify-center text-sm shrink-0">${m.icon}</span>`}
                       <span>${m.name}</span>
                     </span>
-                    <span class="font-semibold text-rose-300 text-right">Contains: ${m.allergens.join(', ')}</span>
+                    <span class="font-semibold text-amber-300 text-right">Contains: ${m.allergens.join(', ')}</span>
                   </div>
                 `).join('')}
               </div>
